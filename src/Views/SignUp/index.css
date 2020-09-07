@@ -1,4 +1,4 @@
-/*login*/
+/*Register*/
 .text{
     position: static;
     width: 312px;
@@ -14,13 +14,14 @@
     display: flex;
     align-items: center;
 }
+
 .form-container{
     margin-top: 40px;
     margin-left: 0px !important;
     margin-right: 0px !important;
-} 
+}
 .wrapper{
-    margin: 0px !important;
+    margin-left: 0px !important;
 } 
 .style-input-email{
     font-family: 'Raleway', sans-serif;
@@ -30,40 +31,55 @@
     width: 312px;
     height: 53px;
     color: #979797;
+
 }
 .style-input-password{
     font-family: 'Raleway', sans-serif;
-    margin-top: 24px;
+    margin-top: px;
     font-size: 16px;
     font-weight: bold;
     line-height: 19px;
     width: 312px;
     height: 53px;
     color: #979797;
-    margin-right: 0 !important;
+}
+.style-input-error{
+/* Hay un error */
+position: static;
+width: 250px;
+height: 10px;
+left: 0px;
+top: 30px;
+/* Helper-text */
+font-family: Raleway;
+font-style: normal;
+font-weight: bold;
+font-size: 10px;
+line-height: 100%;
+/* identical to box height, or 10px */
+display: flex;
+align-items: center;
+color: #ED1D40;
+
 }
 .style-placeholder{
     font-family: 'Raleway', sans-serif;
     font-size: 12px;
     font-weight: normal;
+    display: flex;
+    justify-content: center;
     color: #979797;
 }
-.space-span{
-    margin-top: 12px;
-    margin-bottom: 12px;
+.input-icono {
+    background-image: url(../../assets/icons/verification.svg);
+    background-repeat: no-repeat;
+    background-position: 98%;
+    background-size: 20px;
+    color: green;
 }
-.span{
-    font-family: 'Raleway', sans-serif;
-    font-size: 12px;
-    line-height: 130%;
-}
-.span-login{
-    font-family: 'Raleway', sans-serif;
-    font-size: 12px;
-    line-height: 130%;
- 
-}
+
 .container-buttons{
+    margin-top: 12px;
     margin-bottom: 12px;
 }
 .btn-cancel-register{
@@ -75,13 +91,13 @@
     top: 0px;
     border: 1px solid #979797;
     color: #B9B9BA;
-    box-sizing: border-box;
+    box-sizing: border-box;   
 }
 .btn-register{
     position: static;
     width: 150px;
     height: 40px;
-    left: 0px;
+    left: 0;
     top: 0;
     /* primary */
     background: #ED1D40;
@@ -89,4 +105,8 @@
     box-sizing: border-box;
 }
 
-
+.span-login{
+    font-family: 'Raleway', sans-serif;
+    font-size: 12px;
+    line-height: 130%;  
+}
