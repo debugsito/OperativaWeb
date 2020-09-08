@@ -2,111 +2,83 @@ import React from "react";
 import './index.css';
 import { Link, withRouter } from 'react-router-dom';
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
-// import { GoVerified, GoX } from "react-icons/go"
-// import LogoVerified from "../../assets/icons/verification.svg"
+import { useForm } from "react-hook-form";
 
 const Register= (props) => {
-    const [email, setEmail] = React.useState('');
-    const [password, setPassword] = React.useState('');
-    const [error, setError] = React.useState(null);
-    
     const [modalTerms, setModalTerms] = React.useState(false);
+    const { handleSubmit, register, errors} = useForm();
 
-    const procesarDatos = e => {
-        e.preventDefault()
-        if (!email.trim()) {
-            console.log('Ingrese Email')
-            setError('Ingrese Email')
-            return
-        }
-        if (!validateEmail(email)) {
-            console.log('Ingrese Email valido')
-            setError('Ingrese Email válido')
-            return
-        }
-        if (!password.trim()) {
-            console.log('Ingrese Contraseña')
-            setError('Ingrese Contraseña')
-            return
-        }
-        console.log('Pasando todas las validaciones')
-        if (password.length < 6) {
-            console.log('6 o más carácteres')
-            setError('Contraseña de 6 o más carácteres')
-            return
-        }
-        console.log('pasando todas las validaciones')
-        setError(null);
+    const onSubmit = (values) => { 
+        console.log(values);
         props.history.push('/inicio-sesion')
-    }
+    } 
 
-    const validateEmail= (email) =>{
-        
-        const expReg = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
-        if(expReg.test(email)){
-            return true
-            
-        }else {
-            return false
-        }
-    }
     return (
         <div className='container-fluid'>
             <div className="row justify-content-center">
                 <div className="col-12 col-sm-8 col-md-6 col-xl-4">
                     <h1 className='h1-custom'>REGISTRATE EN OPERATIVA</h1>
-                    <form onSubmit= { procesarDatos } className='form-container'>
+                    <form onSubmit= { handleSubmit(onSubmit)} className='form-container'>
                         <label className="label-form">
                             Correo Electrónico
                             <input
-                                id='email'
-                                type="text"
-                                className="form-control placeholder input-icono" 
-                                alt=''
                                 placeholder ="mail@ejemplo.com" 
-                                onChange={e => setEmail(e.target.value)}
-                                value={email}
+                                className=
+                                {  errors? (
+                                    "form-control placeholder input-icono"
+                                ): (
+                                    "form-control placeholder"
+                                )
+                                }
+                                id="email"
+                                name='email'
+                                type="text"
+                                autoComplete="off"
+                                ref={register({
+                                    required: "Este campo es requerido",
+                                    pattern: {
+                                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                      message: "Coloque un email valido"
+                                    }
+                                  })}
                                 />
-                                
                         </label>
-                        {/* <img src= {LogoVerified} alt=''/> */}
-                        {/* {
-                            validateEmail ? 
-                            (
-                                <GoVerified
-                                color= 'green'
-                                size= '20px'
-                                />
-                            ) : (
-                                <GoX
-                                color= 'red'
-                                size= '20px'
-                                />
-                            )
-                    }  */}
+                        <span className="input-error">
+                            {errors.email && errors.email.message}
+                        </span>
                         <label className="label-form">
                             Contraseña
                             <input
-                                id='password'
-                                type="password"
-                                className="form-control placeholder mb-2 input-icono"
                                 placeholder=".........."
-                                onChange={e => setPassword(e.target.value)}
-                                value={password}
+                                className="form-control placeholder mb-2 input-icono"
+                                name='password'
+                                type="password"
+                                ref={register({
+                                    required: "Este campo es requerido",
+                                    minLength: { value: 6, message: "Debe contener mínimo 6 caracteres" },
+                                    maxLength: { value: 12, message: "Debe contener máximo 12 caracteres" }
+                                    }
+                                )}
                             />
                         </label>
-                        {
-                            error && (
-                                <div className="input-error">
-                                    {error}
-                                </div>
-                            )
-                        }
+                        <span className="input-error">
+                            {errors.password && errors.password.message}
+                        </span>
                         <label>
-                            <input className="terms-checkbox" type="checkbox"
+                            <input 
+                            className="terms-checkbox"
+                            name="terms" 
+                            type="checkbox" 
+                            ref={register({
+                                required: "Debe aceptar los términos y condiciones",
+                                }
+                            )}
                             />
                             <span className="info-form ml-2">Acepto <a href="#" onClick={e => setModalTerms(!modalTerms)}>términos y condiciones</a></span>
                         </label>
+                        <span className="input-error">
+                            {errors.terms && errors.terms.message}
+                        </span>
                         <section  className="container-buttons">
                             <Link
                                 className="btn-cancel-register btn" 
@@ -116,9 +88,9 @@ const Register= (props) => {
                                 CANCELAR  
                             </Link> 
                             <button 
-                                className="btn-register btn" 
+                                className="btn-register btn"
                                 type= 'submit'
-                                // to="/welcome"
+
                                 >
                                 REGISTRARME
                             </button>

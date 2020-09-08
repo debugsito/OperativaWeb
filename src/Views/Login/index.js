@@ -1,41 +1,68 @@
 import React from "react";
 import { Link, withRouter } from 'react-router-dom'
 import './index.css';
+import { useForm } from "react-hook-form";
 
 const Login= (props) => {
-     
-    const handleSubmit = e => {
-        e.preventDefault();
-        props.history.push('/inicio')
+    const { handleSubmit, register, errors } = useForm();
+    
+    const onSubmit = (values) => { 
+        console.log(values);
+        props.history.push('/inicio') 
     }
     return (
         <div className='container-fluid'>
             <div className="row justify-content-center">
                 <div className="col-12 col-sm-8 col-md-6 col-xl-4">
                     <h1 className='h1-custom'>INICIA SESIÓN EN OPERATIVA</h1>
-                    <form className='form-container' onSubmit= {handleSubmit}>
+                    <form onSubmit= { handleSubmit(onSubmit) } className='form-container'>
                         <label className="label-form">
                             Correo Electrónico
                             <input
+                                placeholder ="mail@ejemplo.com" 
+                                className=                                
+                                {   errors.email ? (
+                                    "form-control placeholder"
+                                ): (
+                                    "form-control placeholder input-icono "
+                                )
+                                }
                                 id='email'
-                                type="email"
-                                className="form-control placeholder"
-                                placeholder="mail@ejemplo.com"
-                                // onChange={e => setEmail(e.target.value)}
-                                // value={email}
+                                name='usuario'
+                                type="text"
+                                autoComplete="off"
+                                ref={register({
+                                    required: "Este campo es requerido",
+                                    pattern: {
+                                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                      message: "Coloque un email valido"
+                                    }
+
+                                  })}
                             />
                         </label>
+                        <span className="input-error">
+                            {errors.usuario && errors.usuario.message}
+                        </span>
                         <label className="label-form">
                             Contraseña
                             <input
-                                id='password'
-                                type="password"
-                                className="form-control placeholder mb-2 "
                                 placeholder=".........."
-                                // onChange={e => setPass(e.target.value)}
-                                // value={pass}..
+                                className="form-control placeholder mb-2 input-icono"
+                                id='password'
+                                name='password'
+                                type="password"
+                                ref={register({
+                                    required: "Este campo es requerido",
+                                    minLength: { value: 6, message: "Debe contener mínimo 6 caracteres" },
+                                    maxLength: { value: 12, message: "Debe contener máximo 12 caracteres" }
+                                    }
+                                )}
                             />
-                        </label>                        
+                        </label>
+                        <span className="input-error">
+                            {errors.password && errors.password.message}
+                        </span>                       
                         <section  className="container-buttons">
                             <Link
                                 className="btn-cancel-register btn" 
