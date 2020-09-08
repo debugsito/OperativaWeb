@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import * as ROUTES from '../Constant/routes';
 // Views
-import Home from '../Views/Home';
+// import Home from '../Views/Home';
 import Register from '../Views/SignUp/index'
 import Login from "../Views/Login/index"
 import Welcome from '../Views/Welcome/Welcome'
@@ -14,7 +14,7 @@ function router() {
     return (
         <BrowserRouter>
             <Switch>
-                <ClientRoute exact path={ROUTES.HOME} component={Home} />
+                {/* <ClientRoute exact path={ROUTES.HOME} component={Home} /> */}
                 <ClientRoute path={ROUTES.LOGIN} component={Login} />
                 <ClientRoute path={ROUTES.WELCOME} component={Welcome} />
                 <ClientRoute path={ROUTES.REGISTER} component={Register} />

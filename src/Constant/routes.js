@@ -1,5 +1,5 @@
 
-export const HOME = '/'
-export const REGISTER = '/registro'
+// export const HOME = '/'
+export const REGISTER = '/'
 export const LOGIN = '/inicio-sesion'
 export const WELCOME = '/inicio'

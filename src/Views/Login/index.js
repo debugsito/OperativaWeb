@@ -20,13 +20,7 @@ const Login= (props) => {
                             Correo Electrónico
                             <input
                                 placeholder ="mail@ejemplo.com" 
-                                className=                                
-                                {   errors.email ? (
-                                    "form-control placeholder"
-                                ): (
-                                    "form-control placeholder input-icono "
-                                )
-                                }
+                                className="form-control placeholder input-icono"                               
                                 id='email'
                                 name='usuario'
                                 type="text"
@@ -34,10 +28,9 @@ const Login= (props) => {
                                 ref={register({
                                     required: "Este campo es requerido",
                                     pattern: {
-                                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                                      message: "Coloque un email valido"
+                                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                        message: "Coloque un email valido"
                                     }
-
                                   })}
                             />
                         </label>
@@ -74,7 +67,6 @@ const Login= (props) => {
                             <button 
                                 className="btn-login btn" 
                                 type= 'submit'
-                                // to="/welcome"
                                 >
                                 INICIAR SESIÓN
                             </button>

@@ -10,9 +10,8 @@ const Register= (props) => {
 
     const onSubmit = (values) => { 
         console.log(values);
-        props.history.push('/inicio-sesion')
+        props.history.push('/inicio')
     } 
-
     return (
         <div className='container-fluid'>
             <div className="row justify-content-center">
@@ -23,13 +22,7 @@ const Register= (props) => {
                             Correo Electrónico
                             <input
                                 placeholder ="mail@ejemplo.com" 
-                                className=
-                                {  errors? (
-                                    "form-control placeholder input-icono"
-                                ): (
-                                    "form-control placeholder"
-                                )
-                                }
+                                className="form-control placeholder input-icono"
                                 id="email"
                                 name='email'
                                 type="text"
@@ -90,7 +83,6 @@ const Register= (props) => {
                             <button 
                                 className="btn-register btn"
                                 type= 'submit'
-
                                 >
                                 REGISTRARME
                             </button>
@@ -103,7 +95,7 @@ const Register= (props) => {
             </div>
             <Modal isOpen={modalTerms}>
                 <ModalHeader>
-                    Terminos y condiciones.
+                    Términos y condiciones.
                 </ModalHeader>
                 <ModalBody>
                     <p>
