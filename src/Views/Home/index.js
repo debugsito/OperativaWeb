@@ -12,7 +12,7 @@ export default function Home() {
                     <Link 
                         className="button-sign-up btn"
                         type='submit'
-                        to="/register"
+                        to="/registro"
                         >
                         REGISTRATE
                     </Link> 

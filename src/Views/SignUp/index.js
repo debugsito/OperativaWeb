@@ -37,7 +37,7 @@ const Register= (props) => {
         }
         console.log('pasando todas las validaciones')
         setError(null);
-        props.history.push('/login')
+        props.history.push('/inicio-sesion')
     }
 
     const validateEmail= (email) =>{
@@ -124,7 +124,7 @@ const Register= (props) => {
                             </button>
                         </section>
                         <div>
-                            <span className="info-form">Si ya tienes una cuenta <a href="/login">inicia sesión aquí</a></span>
+                            <span className="info-form">Si ya tienes una cuenta <a href="/inicio-sesion">inicia sesión aquí</a></span>
                         </div>
                     </form>
                 </div>

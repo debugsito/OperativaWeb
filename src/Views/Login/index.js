@@ -6,7 +6,7 @@ const Login= (props) => {
      
     const handleSubmit = e => {
         e.preventDefault();
-        props.history.push('/welcome')
+        props.history.push('/inicio')
     }
     return (
         <div className='container-fluid'>
@@ -53,7 +53,7 @@ const Login= (props) => {
                             </button>
                         </section>
                         <div>
-                            <span className="info-form">Si aún no tienes una cuenta <a href="/register">registrate aquí</a></span>
+                            <span className="info-form">Si aún no tienes una cuenta <a href="/registro">registrate aquí</a></span>
                         </div>
                     </form>
                 </div>
