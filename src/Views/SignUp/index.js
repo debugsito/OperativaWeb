@@ -52,62 +52,60 @@ const Register= (props) => {
     }
     return (
         <div className='container-fluid'>
-            <div className="row justify-content-center wrapper">
+            <div className="row justify-content-center">
                 <div className="col-12 col-sm-8 col-md-6 col-xl-4">
-                    <h1 className='text'>REGISTRATE EN OPERATIVA</h1>
+                    <h1 className='h1-custom'>REGISTRATE EN OPERATIVA</h1>
                     <form onSubmit= { procesarDatos } className='form-container'>
-                        <section className="">
-                            <label className="style-input-email">
-                                Correo Electrónico
-                                <input
-                                    id='email'
-                                    type="text"
-                                    className="form-control style-placeholder input-icono" 
-                                    alt=''
-                                    placeholder ="mail@ejemplo.com" 
-                                    onChange={e => setEmail(e.target.value)}
-                                    value={email}
-                                    />
-                                    
-                            </label>
-                            {/* <img src= {LogoVerified} alt=''/> */}
-                            {/* {
-                                validateEmail ? 
-                                (
-                                    <GoVerified
-                                    color= 'green'
-                                    size= '20px'
-                                    />
-                                ) : (
-                                    <GoX
-                                    color= 'red'
-                                    size= '20px'
-                                    />
-                                )
-                        }  */}
-                            <label className="style-input-password ">
-                                Contraseña
-                                <input
-                                    id='password'
-                                    type="password"
-                                    className="form-control style-placeholder mb-2 input-icono"
-                                    placeholder=".........."
-                                    onChange={e => setPassword(e.target.value)}
-                                    value={password}
+                        <label className="label-form">
+                            Correo Electrónico
+                            <input
+                                id='email'
+                                type="text"
+                                className="form-control placeholder input-icono" 
+                                alt=''
+                                placeholder ="mail@ejemplo.com" 
+                                onChange={e => setEmail(e.target.value)}
+                                value={email}
                                 />
-                            </label>
-                            {
-                                error && (
-                                    <div className="style-input-error">
-                                        {error}
-                                    </div>
-                                )
-                            }
-                        </section>
-                        <label className='space-span' >
-                            <input className= "" type="checkbox"
+                                
+                        </label>
+                        {/* <img src= {LogoVerified} alt=''/> */}
+                        {/* {
+                            validateEmail ? 
+                            (
+                                <GoVerified
+                                color= 'green'
+                                size= '20px'
+                                />
+                            ) : (
+                                <GoX
+                                color= 'red'
+                                size= '20px'
+                                />
+                            )
+                    }  */}
+                        <label className="label-form">
+                            Contraseña
+                            <input
+                                id='password'
+                                type="password"
+                                className="form-control placeholder mb-2 input-icono"
+                                placeholder=".........."
+                                onChange={e => setPassword(e.target.value)}
+                                value={password}
                             />
-                            <span className="span ml-2">Acepto <a href="#" onClick={e => setModalTerms(!modalTerms)}>términos y condiciones</a></span>
+                        </label>
+                        {
+                            error && (
+                                <div className="input-error">
+                                    {error}
+                                </div>
+                            )
+                        }
+                        <label>
+                            <input className="terms-checkbox" type="checkbox"
+                            />
+                            <span className="info-form ml-2">Acepto <a href="#" onClick={e => setModalTerms(!modalTerms)}>términos y condiciones</a></span>
                         </label>
                         <section  className="container-buttons">
                             <Link
@@ -118,7 +116,7 @@ const Register= (props) => {
                                 CANCELAR  
                             </Link> 
                             <button 
-                                className="btn-register btn ml-4" 
+                                className="btn-register btn" 
                                 type= 'submit'
                                 // to="/welcome"
                                 >
@@ -126,7 +124,7 @@ const Register= (props) => {
                             </button>
                         </section>
                         <div>
-                            <span className="span-login">Si ya tienes una cuenta <a href="/login">inicia sesión aquí</a></span>
+                            <span className="info-form">Si ya tienes una cuenta <a href="/login">inicia sesión aquí</a></span>
                         </div>
                     </form>
                 </div>

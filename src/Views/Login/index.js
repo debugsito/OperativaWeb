@@ -10,34 +10,33 @@ const Login= (props) => {
     }
     return (
         <div className='container-fluid'>
-            <div className="row justify-content-center wrapper">
+            <div className="row justify-content-center">
                 <div className="col-12 col-sm-8 col-md-6 col-xl-4">
-                    <h1 className='text'>INICIA SESIÓN EN OPERATIVA</h1>
+                    <h1 className='h1-custom'>INICIA SESIÓN EN OPERATIVA</h1>
                     <form className='form-container' onSubmit= {handleSubmit}>
-                        <section className="">
-                            <label className="style-input-email">
-                                Correo Electrónico
-                                <input
-                                    id='email'
-                                    type="email"
-                                    className="form-control style-placeholder"
-                                    placeholder="mail@ejemplo.com"
-                                    // onChange={e => setEmail(e.target.value)}
-                                    // value={email}
-                                />
-                            </label>
-                            <label className="style-input-password ">
-                                Contraseña
-                                <input
-                                    id='password'
-                                    type="password"
-                                    className="form-control style-placeholder mb-2 "
-                                    placeholder=".........."
-                                    // onChange={e => setPass(e.target.value)}
-                                    // value={pass}..
-                                />
-                            </label>                        
-                            <section  className="container-buttons">
+                        <label className="label-form">
+                            Correo Electrónico
+                            <input
+                                id='email'
+                                type="email"
+                                className="form-control placeholder"
+                                placeholder="mail@ejemplo.com"
+                                // onChange={e => setEmail(e.target.value)}
+                                // value={email}
+                            />
+                        </label>
+                        <label className="label-form">
+                            Contraseña
+                            <input
+                                id='password'
+                                type="password"
+                                className="form-control placeholder mb-2 "
+                                placeholder=".........."
+                                // onChange={e => setPass(e.target.value)}
+                                // value={pass}..
+                            />
+                        </label>                        
+                        <section  className="container-buttons">
                             <Link
                                 className="btn-cancel-register btn" 
                                 type= 'submit' 
@@ -46,16 +45,15 @@ const Login= (props) => {
                                 CANCELAR  
                             </Link> 
                             <button 
-                                className="btn-register btn ml-4" 
+                                className="btn-login btn" 
                                 type= 'submit'
                                 // to="/welcome"
                                 >
                                 INICIAR SESIÓN
                             </button>
                         </section>
-                        </section>
                         <div>
-                            <span className="span-login">Si aún no tienes una cuenta <a href="/register">registrate aquí</a></span>
+                            <span className="info-form">Si aún no tienes una cuenta <a href="/register">registrate aquí</a></span>
                         </div>
                     </form>
                 </div>

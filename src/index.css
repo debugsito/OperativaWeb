@@ -11,3 +11,152 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* Forms */
+.h1-custom {
+  position: static;
+  width: 312px;
+  height: 62px;
+  margin-top: 118px;
+  margin-left: 0 !important;
+  font-family: 'Raleway', sans-serif;
+  font-weight: bold;
+  font-size: 24px;
+  font-style: normal;
+  color: #000000;
+  line-height: 130%;
+  display: flex;
+  align-items: center;
+
+}.h1-custom-home {
+  position: static;
+  width: 312px;
+  height: 62px;
+  font-family: 'Raleway', sans-serif;
+  font-weight: bold;
+  font-size: 24px;
+  font-style: normal;
+  color: #000000;
+  line-height: 130%;
+  display: flex;
+  align-items: center;
+}
+
+
+.form-container{
+  margin-top: 40px;
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
+.label-form{
+  font-family: 'Raleway', sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 19px;
+  width: 100%;
+  height: 53px;
+  color: #979797;
+  text-align: left;
+}
+.input-error {
+/* Hay un error */
+position: static;
+width: 250px;
+height: 10px;
+left: 0px;
+top: 30px;
+/* Helper-text */
+font-family: Raleway;
+font-style: normal;
+font-weight: bold;
+font-size: 10px;
+line-height: 100%;
+/* identical to box height, or 10px */
+display: flex;
+align-items: center;
+color: #ED1D40;
+
+}
+.placeholder {
+  font-family: 'Raleway', sans-serif;
+  font-size: 12px;
+  font-weight: normal;
+  display: flex;
+  justify-content: center;
+  color: #979797;
+}
+.input-icono {
+  background-image: url(./assets/icons/verification.svg);
+  background-repeat: no-repeat;
+  background-position: 98%;
+  background-size: 20px;
+  color: green;
+}
+.container-buttons{
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+.btn-cancel-register{
+  /* button/secondary */
+  position: static;
+  width: 46%;
+  height: 40px;
+  left: 0px;
+  top: 0px;
+  border: 1px solid #979797;
+  color: #B9B9BA;
+  box-sizing: border-box;   
+}
+.btn-register{
+  position: static;
+  width: 46%;
+  height: 40px;
+  left: 0;
+  top: 0;
+  /* primary */
+  background: #ED1D40;
+  color: #FFFFFF;
+  box-sizing: border-box;
+  margin-left: 8%;
+}
+.btn-login {
+  position: static;
+  width: 48%;
+  height: 40px;
+  left: 0;
+  top: 0;
+  /* primary */
+  background: #ED1D40;
+  color: #FFFFFF;
+  box-sizing: border-box;
+  margin-left: 6%;
+}
+.button-sign-up {
+  width: 100%;
+  height: 40px;
+  background: #ED1D40;
+  font-family: 'Raleway', sans-serif;
+  font-size: 14px;
+  line-height: 16px;
+  align-items: center;
+  padding: 12px 30px;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  margin-top: calc(100vh - 130px);
+}
+
+.info-form{
+  font-family: 'Raleway', sans-serif;
+  font-size: 12px;
+  line-height: 130%;  
+}
+
+.terms-checkbox {
+  width: 15px;
+  height: 15px;
+  vertical-align: middle;
+}
+
+@media only screen and (max-width: 600px) {
+
+}
