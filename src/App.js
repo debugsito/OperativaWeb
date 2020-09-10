@@ -1,8 +1,12 @@
 import React from 'react';
 import Router from './Router/router';
 
-export default function App() {
+const App = () => {
     return (
-        <Router/>
+        <div className="container-fluid">
+            <Router/>
+        </div>
     )
 }
+
+export default App

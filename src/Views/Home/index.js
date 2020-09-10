@@ -1,11 +1,11 @@
-// import React from "react";
+// import React, {Fragment} from "react";
 // import { Link } from 'react-router-dom'
 // import './index.css';
 
-// export default function Home() {
+// const Home= () => {
 
 //     return (
-//         <div className='container-fluid'>
+//         <Fragment>
 //             <div className="row justify-content-center">
 //                 <div className="col-12 col-sm-8 col-md-6 col-xl-4">
 //                     <h1 className='h1-custom-home'>OPERATIVA</h1>
@@ -18,6 +18,7 @@
 //                     </Link> 
 //                 </div>
 //             </div>
-//         </div>
+//      </Fragment>
 //     )
 // } 
+// export default Home

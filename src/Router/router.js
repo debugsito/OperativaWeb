@@ -6,8 +6,9 @@ import * as ROUTES from '../Constant/routes';
 import Register from '../Views/SignUp/index'
 import Login from "../Views/Login/index"
 import Welcome from '../Views/Welcome/Welcome'
+import ProfileInfo from '../Views/Profile/ProfileInfo'
 //Header & Footer
-import Header from "../Components/Header";
+
 import Footer from '../Components/Footer';
 
 function router() {
@@ -17,7 +18,8 @@ function router() {
                 {/* <ClientRoute exact path={ROUTES.HOME} component={Home} /> */}
                 <ClientRoute path={ROUTES.LOGIN} component={Login} />
                 <ClientRoute path={ROUTES.WELCOME} component={Welcome} />
-                <ClientRoute path={ROUTES.REGISTER} component={Register} />
+                <ClientRoute path={ROUTES.INFO} component={ProfileInfo} />
+                <ClientRoute exact path={ROUTES.REGISTER} component={Register} />
             </Switch>
         </BrowserRouter>
     )
@@ -28,11 +30,12 @@ function router() {
                 {...rest}
                 render={props =>
                     <div>
-                        <Header/>
+
                         <div className="">
                             <Component {...props}/>
                         </div>
                         <Footer/>
+                        
                     </div>
                 }
             />

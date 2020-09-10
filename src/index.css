@@ -11,6 +11,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.react-datepicker__input-container {
+  position: absoluta !important;
+  display: inline-block;
+  width: 100%;
+}
 
 /* Forms */
 .h1-custom {
@@ -33,6 +38,7 @@ code {
   width: 312px;
   height: 62px;
   font-family: 'Raleway', sans-serif;
+  font-style: normal;
   font-weight: bold;
   font-size: 24px;
   font-style: normal;
@@ -47,31 +53,118 @@ code {
   width: 312px;
   height: 62px;
   font-family: 'Raleway', sans-serif;
+  font-style: normal;
   font-weight: bold;
   font-size: 24px;
   font-style: normal;
   color: #000000;
   line-height: 130%;
   display: flex;
-  justify-content: start;
+  justify-content: center;
   margin-top: 128px;
   margin-left: 24px;
 }
-
+.h1-title-form {
+  position: absolute;
+  width: 312px;
+  height: 84px;
+  left: 24px;
+  top: 112px;
+  /* Heading 1 */
+  font-family: 'Raleway', sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 32px;
+  line-height: 130%;
+  /* or 42px */
+  text-transform: uppercase;
+  /* darker-gray */
+  color: #373737;
+}
+.h1-form{
+  position: absolute;
+  width: 312px;
+  height: 37px;
+  left: 24px;
+  top: 246px;
+  /* Heading 1 */
+  font-family: 'Raleway', sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 28px;
+  display: flex;
+  align-items: center;
+  color: #000000;
+ /* Inside Auto Layout */
+ flex: none;
+ order: 0;
+ align-self: flex-start;
+}
 .form-container{
   margin-top: 40px;
   margin-left: 0px !important;
   margin-right: 0px !important;
 }
+.form-container-info{
+  margin-top: 294px;
+  margin-left:12px;
+  margin-right: 12px;
+}
+.form-container-select{
+  margin-top: -40px;
+}
+
 .label-form{
   font-family: 'Raleway', sans-serif;
   font-size: 16px;
   font-weight: bold;
   line-height: 19px;
-  width: 100%;
+  width: 100%!important;
   height: 53px;
   color: #979797;
   text-align: left;
+
+}
+.input-container {
+  position: absoluta !important;
+  display: inline-block;
+  width: 100%;
+}
+.label-form-calen{
+  display: flex;
+  flex-direction: column;
+  padding: 12px 8px;
+  height: 48px;
+  top: 23px;
+  border: 0.5px solid #AAAAAA;
+  box-sizing: border-box;
+  /* Inside Auto Layout */
+  flex: none;
+  order: 1;
+  align-self: flex-start;
+  font-family: 'Raleway', sans-serif;
+  font-size: 13px;
+  font-weight: normal;
+  color: #979797;
+  position: absoluta !important;
+  width: 100% !important;
+}
+.label-form-text{
+  font-family: 'Raleway', sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 19px;
+  width: 100%;
+  height: 19px;
+  color: #979797;
+  text-align: left;
+}
+.form-text-check{
+  font-family: MuseoSans;
+  font-size: 16px;
+  line-height: 19px;
+  color: #373737;
 }
 .input-error {
 /* Hay un error */
@@ -106,7 +199,12 @@ color: #ED1D40;
   background-position: 98%;
   background-size: 20px;
 }
-
+.icon-calendar {
+  background-image: url(./assets/icons/date.svg);
+  background-repeat: no-repeat;
+  background-position: 98%;
+  background-size: 32px;
+}
 .container-buttons{
   margin-top: 12px;
   margin-bottom: 12px;
@@ -159,7 +257,23 @@ color: #ED1D40;
   color: #FFFFFF;
   margin-top: calc(90vh - 130px);
 }
-
+.button-continue{
+  position: static;
+  left: 0%;
+  right: 32.52%;
+  top: 16.67%;
+  bottom: 16.67%;
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  text-transform: uppercase;
+  color:#46A9D4;
+}
 .info-form{
   font-family: 'Raleway', sans-serif;
   font-size: 12px;

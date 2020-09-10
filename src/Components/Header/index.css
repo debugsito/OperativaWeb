@@ -1,0 +1,50 @@
+.sign-up-text{
+    width: auto;
+    height: 19px;
+    right: 50px;
+    top: 30px;
+    font-family: MuseoSans;
+    font-size: 16px;
+    line-height: 19px;
+    /* identical to box height */
+    position: absolute;
+    color: #FFFFFF;
+    mix-blend-mode: normal;
+    opacity: 0.4;
+}
+.info-email{
+position: absolute;
+width: 147px;
+height: 20px;
+right: 50px;
+top: 20px;
+font-family: MuseoSans;
+font-size: 16.6667px;
+line-height: 20px;
+/* identical to box height */
+display: flex;
+align-items: flex-end;
+color: #FFFFFF;
+/* Inside Auto Layout */
+flex: none;
+order: 0;
+align-self: flex-end;
+margin: 0px 0px;
+}
+.icon-img{
+    width: 54px;
+    height: 51px;
+    right: 8px;
+    top: 12px;
+    bottom: 0px;
+    font-family: MuseoSans;
+    position: fixed;
+    mix-blend-mode: normal;
+    box-shadow: inset 0px 1px 20px rgba(0, 0, 0, 0.724836);
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}
+

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import './index.css';
 import { Link, withRouter } from 'react-router-dom';
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
@@ -13,7 +13,7 @@ const Register= (props) => {
         props.history.push('/inicio')
     } 
     return (
-        <div className='container-fluid'>
+        <Fragment>
             <div className="row justify-content-center">
                 <div className="col-12 col-sm-8 col-md-6 col-xl-4">
                     <h1 className='h1-custom'>REGISTRATE EN OPERATIVA</h1>
@@ -114,7 +114,7 @@ const Register= (props) => {
                     <buttom className="btn btn-danger" onClick={e => setModalTerms(!modalTerms)}> Cerrar </buttom>
                 </ModalFooter>
             </Modal>
-        </div>
+        </Fragment>
     )
 }
 export default withRouter(Register) 

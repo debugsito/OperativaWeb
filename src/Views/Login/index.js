@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Link, withRouter } from 'react-router-dom'
 import './index.css';
 import { useForm } from "react-hook-form";
@@ -11,7 +11,7 @@ const Login= (props) => {
         props.history.push('/inicio') 
     }
     return (
-        <div className='container-fluid'>
+        <Fragment>
             <div className="row justify-content-center">
                 <div className="col-12 col-sm-8 col-md-6 col-xl-4">
                     <h1 className='h1-custom'>INICIA SESIÓN EN OPERATIVA</h1>
@@ -72,12 +72,12 @@ const Login= (props) => {
                             </button>
                         </section>
                         <div>
-                            <span className="info-form">Si aún no tienes una cuenta <a href="/registro">registrate aquí</a></span>
+                            <span className="info-form">Si aún no tienes una cuenta <a href="/">registrate aquí</a></span>
                         </div>
                     </form>
                 </div>
             </div>
-        </div>
+        </Fragment>
     )
 }
 export default withRouter(Login)
