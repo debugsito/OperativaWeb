@@ -54,6 +54,7 @@ const ProfileInfo = (props) => {
                             id='lastName'
                             name='lastName'
                             type="text"
+                            autoComplete="off"
                             requerid=""
                         />
                     </label>
@@ -65,6 +66,7 @@ const ProfileInfo = (props) => {
                              name="doc" 
                              id="dni" 
                              value="option1"
+                             autoComplete="off"
                              checked/>
                             <label class="form-text-check mb-2" for="exampleRadios1">
                                 Dni
@@ -77,6 +79,7 @@ const ProfileInfo = (props) => {
                              id="carnet" 
                              value="option2"
                              required=""
+                             autoComplete="off"
                              checked/>
                             <label class="form-text-check" for="exampleRadios1">
                                 Carnet de Extranjería
@@ -89,6 +92,7 @@ const ProfileInfo = (props) => {
                              id="pasaporte" 
                              value="option3"
                              required=""
+                             autoComplete="off"
                              checked/>
                             <label class="form-text-check" for="exampleRadios1">
                                 Pasaporte
@@ -104,6 +108,7 @@ const ProfileInfo = (props) => {
                             id='document'
                             name='document'
                             type="text"
+                            autoComplete="off"
                             onKeyPress={e =>{onlyNumbers(e)}} 
                         />
                     </label>
@@ -117,7 +122,8 @@ const ProfileInfo = (props) => {
                             type="text"
                             pattern="[0-9]+"
                             requerid=""
-                            selected={startDate} 
+                            selected={startDate}
+                            autoComplete="off" 
                             onChange={date => setStartDate(date)}
                             placeholderText="DD/MM/AAAA"
                             locale="es"
