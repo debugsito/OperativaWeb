@@ -1,22 +1,58 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import Header from "../../Components/Header/index"
 import { Link } from 'react-router-dom'
-import DatePicker,{registerLocale}from "react-datepicker"
-import 'react-datepicker/dist/react-datepicker.css'
-import es from 'date-fns/locale/es';
 import './index.css';
-
-registerLocale("es", es);
 
 const onlyNumbers= (e)=> {
     let key = window.event ? e.which : e.keyCode;
         if (key < 48 || key > 57) {
         e.preventDefault();
-}
-}
+}}
+
 const ProfileAdress = () => { 
-    const [startDate, setStartDate] = React.useState('');
+
+    const useDepartment= () => {
+        const [listDepartament, SetListDepartament]= useState([])
+        useEffect(() => {
+            fetch('json/departamentos.json')
+                .then(response => response.json())
+                    .then(datos => {
+                        SetListDepartament(datos)
+                    })
+        }, [])
+        return listDepartament
+    }
     
+    const useProvince= () => {
+        const [listProvince, SetListProvince]= useState([])
+        
+        useEffect(() => {
+            fetch('json/provincias.json')
+                .then(response => response.json())
+                    .then(datos => {
+                        SetListProvince(datos)
+                    })
+        }, [])
+        return listProvince
+    }
+    
+    const useDistrict= () => {
+        const [listDistrict, SetListDistrict]= useState([])
+        
+        useEffect(() => {
+            fetch('json/distritos.json')
+                .then(response => response.json())
+                    .then(datos => {
+                        SetListDistrict(datos)
+                    })
+        }, [])
+        return listDistrict
+    }
+
+    const listDepartament= useDepartment();
+    const listProvince= useProvince()
+    const listDistrict= useDistrict()
+
     return (
         <Fragment>
             <div className="row justify-content-center">
@@ -41,39 +77,45 @@ const ProfileAdress = () => {
                         Departamento
                         <select 
                             class="form-control form-text-check-adress"
-                            id="department"
+                            id=""
+                            
+                            // onClick={()=>{handleSearch()}}
                             >
-                            <option>option</option>
-                            <option>option</option>
-                            <option>option</option>
-                            <option>option</option>
-                            <option>option</option>
+                                <option value={-1}>Option</option>
+                            {
+                                listDepartament.map(item =>(
+                                    <option >{item.name}</option>
+                                ))
+                            }
                         </select>
                     </label>                   
                      <label className="label-form" >
                         Provincia
                         <select 
                             class="form-control form-text-check-adress"
-                            id="province"
+                            id=""
                             >
-                            <option>option</option>
-                            <option>option</option>
-                            <option>option</option>
-                            <option>option</option>
-                            <option>option</option>
+                                <option value={-1}>Option</option>
+                            {
+                                listProvince.map(item =>(
+                                    <option >{item.name}</option>
+                                ))
+                            }
+                            
                         </select>
                     </label>
                     <label className="label-form" >
                         Distrito
                         <select 
                             class="form-control form-text-check-adress"
-                            id="district"
+                            id=""
                             >
-                            <option>option</option>
-                            <option>option</option>
-                            <option>option</option>
-                            <option>option</option>
-                            <option>option</option>
+                                <option value={-1}>Option</option>
+                            {
+                                listDistrict.map((item, ) =>(
+                                    <option>{item.name}</option>
+                                ))
+                            }
                         </select>
                     </label>
                     <label className="label-form mt-2">
