@@ -166,6 +166,19 @@ code {
   line-height: 19px;
   color: #373737;
 }
+.form-text-check-adress{
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 14px;
+  /* identical to box height */
+  
+  display: flex;
+  align-items: center;
+  
+  color: #979797;
+}
 .input-error {
 /* Hay un error */
 position: static;
@@ -261,8 +274,8 @@ color: #ED1D40;
   position: static;
   left: 0%;
   right: 32.52%;
-  top: 16.67%;
-  bottom: 16.67%;
+  margin-top: 24px;
+  margin-bottom: 157px;
   font-family: Raleway;
   font-style: normal;
   font-weight: 500;

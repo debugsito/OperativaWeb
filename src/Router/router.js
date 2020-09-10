@@ -7,6 +7,7 @@ import Register from '../Views/SignUp/index'
 import Login from "../Views/Login/index"
 import Welcome from '../Views/Welcome/Welcome'
 import ProfileInfo from '../Views/Profile/ProfileInfo'
+import ProfileAdress from '../Views/Profile/ProfileAdress'
 //Header & Footer
 
 import Footer from '../Components/Footer';
@@ -19,6 +20,7 @@ function router() {
                 <ClientRoute path={ROUTES.LOGIN} component={Login} />
                 <ClientRoute path={ROUTES.WELCOME} component={Welcome} />
                 <ClientRoute path={ROUTES.INFO} component={ProfileInfo} />
+                <ClientRoute path={ROUTES.INFOADRESS} component={ProfileAdress} />
                 <ClientRoute exact path={ROUTES.REGISTER} component={Register} />
             </Switch>
         </BrowserRouter>

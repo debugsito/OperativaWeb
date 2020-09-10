@@ -57,6 +57,9 @@ const Register= (props) => {
                         <span className="input-error">
                             {errors.password && errors.password.message}
                         </span>
+                        <span className="input-error">
+                            {errors.dni && errors.dni.message}
+                        </span>
                         <label>
                             <input 
                             className="terms-checkbox"
