@@ -57,6 +57,9 @@ const Login= (props) => {
                         <span className="input-error">
                             {errors.password && errors.password.message}
                         </span>                       
+                        <div>
+                            <span className="info-form"><a href="/">Restablecer contraseña</a></span>
+                        </div>
                         <section  className="container-buttons">
                             <Link
                                 className="btn-cancel-register btn" 
@@ -73,7 +76,7 @@ const Login= (props) => {
                             </button>
                         </section>
                         <div>
-                            <span className="info-form">Si aún no tienes una cuenta <a href="/">registrate aquí</a></span>
+                            <span className="info-form">Si aún no tienes una cuenta <a href="/registro">registrate aquí</a></span>
                         </div>
                     </form>
                 </div>
