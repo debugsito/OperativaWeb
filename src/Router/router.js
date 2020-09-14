@@ -2,12 +2,14 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import * as ROUTES from '../Constant/routes';
 // Views
-// import Home from '../Views/Home';
+import Home from '../Views/Home';
 import Register from '../Views/SignUp/index'
 import Login from "../Views/Login/index"
 import Welcome from '../Views/Welcome/Welcome'
 import ProfileInfo from '../Views/Profile/ProfileInfo'
 import ProfileAdress from '../Views/Profile/ProfileAdress'
+import ProfileExperience from '../Views/Profile/ProfileExperience'
+import ProfileProfessional from '../Views/Profile/ProfileProfessional'
 //Header & Footer
 
 import Footer from '../Components/Footer';
@@ -16,12 +18,14 @@ function router() {
     return (
         <BrowserRouter>
             <Switch>
-                {/* <ClientRoute exact path={ROUTES.HOME} component={Home} /> */}
+                <ClientRoute path={ROUTES.REGISTER} component={Register} />
                 <ClientRoute path={ROUTES.LOGIN} component={Login} />
                 <ClientRoute path={ROUTES.WELCOME} component={Welcome} />
                 <ClientRoute path={ROUTES.INFO} component={ProfileInfo} />
                 <ClientRoute path={ROUTES.INFOADRESS} component={ProfileAdress} />
-                <ClientRoute exact path={ROUTES.REGISTER} component={Register} />
+                <ClientRoute path={ROUTES.INFOEXPERIENCE} component={ProfileExperience} /> 
+                <ClientRoute path={ROUTES.INFOPROFESSIONAL} component={ProfileProfessional} /> 
+                <ClientRoute exact path={ROUTES.HOME} component={Home} />
             </Switch>
         </BrowserRouter>
     )

@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import Header from "../../Components/Header/index"
+import NavBar from "../../Components/MenuUser/index"
 import { Link, withRouter } from 'react-router-dom'
 import DatePicker,{registerLocale}from "react-datepicker"
 import 'react-datepicker/dist/react-datepicker.css'
@@ -11,11 +11,12 @@ registerLocale("es", es);
 
 const ProfileInfo = (props) => { 
     const [startDate, setStartDate] = React.useState('');
-    const { handleSubmit, register, errors} = useForm();
+
+    const { handleSubmit} = useForm();
 
     const onSubmit = (values) => { 
         console.log(values);
-        props.history.push('/inicio-sesion')
+        props.history.push('/info-direccion')
     } 
 
     const onlyNumbers= (e)=> {
@@ -67,7 +68,8 @@ const ProfileInfo = (props) => {
                              id="dni" 
                              value="option1"
                              autoComplete="off"
-                             checked/>
+                             checked
+                             />
                             <label class="form-text-check mb-2" for="exampleRadios1">
                                 Dni
                             </label>
@@ -80,7 +82,8 @@ const ProfileInfo = (props) => {
                              value="option2"
                              required=""
                              autoComplete="off"
-                             checked/>
+                             checked
+                             />
                             <label class="form-text-check" for="exampleRadios1">
                                 Carnet de Extranjería
                             </label>
@@ -93,7 +96,8 @@ const ProfileInfo = (props) => {
                              value="option3"
                              required=""
                              autoComplete="off"
-                             checked/>
+                             checked
+                             />
                             <label class="form-text-check" for="exampleRadios1">
                                 Pasaporte
                             </label>
@@ -143,7 +147,7 @@ const ProfileInfo = (props) => {
                     </form>
                 </div>
             </div>
-            <Header/>
+            <NavBar/>
         </Fragment>
     )
 }

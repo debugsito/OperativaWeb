@@ -48,3 +48,16 @@ margin: 0px 0px;
     -o-border-radius: 50%;
 }
 
+.icon-img-logo{
+    display: flex;
+    flex-direction: row;
+    padding: 0px;
+    position: fixed;
+    width: 54px;
+    height: 51px;
+    left: 12px;
+    flex: none;
+    order: 0;
+    align-self: center;
+    top: 12px;
+}

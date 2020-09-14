@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import NavBarOperativa from "../../Components/MenuOperativa";
 
 
 const Welcome= () => {
@@ -9,6 +10,7 @@ const Welcome= () => {
                     <h1 className='h1-custom-init'>BIENVENIDO</h1>
                     </div>
                 </div>
+                <NavBarOperativa/>
             </Fragment>
     )
 }

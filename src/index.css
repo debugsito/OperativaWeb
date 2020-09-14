@@ -111,6 +111,11 @@ code {
   margin-left:12px;
   margin-right: 12px;
 }
+.form-container-components{
+  margin-top: 0px;
+  margin-left:12px;
+  margin-right: 12px;
+}
 .form-container-select{
   margin-top: -40px;
 }
@@ -129,6 +134,12 @@ code {
 .input-container {
   position: absoluta !important;
   display: inline-block;
+  width: 100%;
+}
+.input-container-select{
+  position: absoluta !important;
+  display: flex;
+  justify-content: space-between;
   width: 100%;
 }
 .label-form-calen{
@@ -165,6 +176,8 @@ code {
   font-size: 16px;
   line-height: 19px;
   color: #373737;
+  display: flex;
+  align-items: center;
 }
 .form-text-check-adress{
   font-family: Raleway;
@@ -298,7 +311,50 @@ color: #ED1D40;
   height: 15px;
   vertical-align: middle;
 }
+.box-style{
+  margin-top: 12px;
+  margin-bottom: 12px;
+  border-radius: 0%;
+  height: 102px;
+}
+.text-experience{
+  position: static;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
 
+font-family: Raleway;
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 16px;
+display: flex;
+align-items: center;
+text-decoration-line: underline;
+text-transform: uppercase;
+color: #46A9D4;
+}
+.icon-img-logo{
+  display: flex;
+  flex-direction: row;
+  padding: 0px;
+  position: fixed;
+  width: 54px;
+  height: 51px;
+  left: 12px;
+  flex: none;
+  order: 0;
+  align-self: center;
+  top: 12px;
+}
+.icon-container{
+  background-image: url('./assets/logos/logo-container-operativa.svg');
+  width: 187.36px;
+  height: 48px;
+  left: 0px;
+  top: 1.52px;
+}
 @media only screen and (max-width: 600px) {
 
 }

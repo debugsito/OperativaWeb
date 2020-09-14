@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import { Link, withRouter } from 'react-router-dom'
 import './index.css';
 import { useForm } from "react-hook-form";
+import NavBarOperativa from "../../Components/MenuOperativa";
 
 const Login= (props) => {
     const { handleSubmit, register, errors } = useForm();
@@ -77,6 +78,7 @@ const Login= (props) => {
                     </form>
                 </div>
             </div>
+            <NavBarOperativa/>
         </Fragment>
     )
 }

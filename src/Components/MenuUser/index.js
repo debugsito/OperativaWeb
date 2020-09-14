@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
 import {withRouter, NavLink} from 'react-router-dom'
 import Gwyneth from "../../assets/images/Gwyneth.png"
+import LogoMedio from "../../assets/logos/logo-medio.svg"
 import './index.css'
 
 const NavBar = (props) => {
@@ -29,7 +30,11 @@ const NavBar = (props) => {
                                 Cerrar Sesión
                             </NavLink>
                             <div className="">
-                                <img src= { Gwyneth } className='icon-img redondo mb-2' alt=""/>
+                                <img src= { LogoMedio} className='icon-img-logo' alt=""
+                                style={{
+
+                                }}/>
+                                <img src= { Gwyneth } className='icon-img mb-2' alt=""/>
                             </div>
                     </nav>
                 </div>

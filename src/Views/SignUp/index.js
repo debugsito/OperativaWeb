@@ -3,6 +3,7 @@ import './index.css';
 import { Link, withRouter } from 'react-router-dom';
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 import { useForm } from "react-hook-form";
+import NavBarOperativa from "../../Components/MenuOperativa";
 
 const Register= (props) => {
     const [modalTerms, setModalTerms] = React.useState(false);
@@ -117,6 +118,7 @@ const Register= (props) => {
                     <buttom className="btn btn-danger" onClick={e => setModalTerms(!modalTerms)}> Cerrar </buttom>
                 </ModalFooter>
             </Modal>
+            <NavBarOperativa/>
         </Fragment>
     )
 }

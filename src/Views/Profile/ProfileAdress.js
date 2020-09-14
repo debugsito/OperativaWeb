@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
-import Header from "../../Components/Header/index"
+import NavBar from "../../Components/MenuUser/index"
 import { Link } from 'react-router-dom'
+import { useForm } from "react-hook-form";
 import './index.css';
 
 const onlyNumbers= (e)=> {
@@ -8,42 +9,46 @@ const onlyNumbers= (e)=> {
         if (key < 48 || key > 57) {
         e.preventDefault();
 }}
-
-const ProfileAdress = () => { 
-
+const ProfileAdress = (props) => { 
+    
+    const { handleSubmit} = useForm();
+    
+    const onSubmit = (values) => { 
+        console.log(values);
+    } 
     const useDepartment= () => {
-        const [listDepartament, SetListDepartament]= useState([])
+        const [listDepartament, setListDepartament]= useState([])
         useEffect(() => {
             fetch('json/departamentos.json')
                 .then(response => response.json())
                     .then(datos => {
-                        SetListDepartament(datos)
+                        setListDepartament(datos)
                     })
         }, [])
         return listDepartament
     }
     
     const useProvince= () => {
-        const [listProvince, SetListProvince]= useState([])
+        const [listProvince, setListProvince]= useState([])
         
         useEffect(() => {
             fetch('json/provincias.json')
                 .then(response => response.json())
                     .then(datos => {
-                        SetListProvince(datos)
+                        setListProvince(datos)
                     })
         }, [])
         return listProvince
     }
     
     const useDistrict= () => {
-        const [listDistrict, SetListDistrict]= useState([])
+        const [listDistrict, setListDistrict]= useState([])
         
         useEffect(() => {
             fetch('json/distritos.json')
                 .then(response => response.json())
                     .then(datos => {
-                        SetListDistrict(datos)
+                        setListDistrict(datos)
                     })
         }, [])
         return listDistrict
@@ -61,7 +66,7 @@ const ProfileAdress = () => {
                     <h1 className='h1-title-form'>COMPLETA TU REGISTRO</h1>
                 </div>
                 <h1 className='h1-form'>Completa tu registro</h1>
-                <form className='form-container-info'>
+                <form name="myForm" onSubmit= { handleSubmit(onSubmit)} className='form-container-info'>
                     <label className="label-form">
                         Dirección
                         <input
@@ -78,8 +83,6 @@ const ProfileAdress = () => {
                         <select 
                             class="form-control form-text-check-adress"
                             id=""
-                            
-                            // onClick={()=>{handleSearch()}}
                             >
                                 <option value={-1}>Option</option>
                             {
@@ -184,7 +187,7 @@ const ProfileAdress = () => {
                         <Link
                             className="button-continue btn" 
                             type= 'submit' 
-                            to="/"
+                            to="/info-experiencia"
                             >
                             CONTINUAR {">"}
                         </Link> 
@@ -192,7 +195,7 @@ const ProfileAdress = () => {
                     </form>
                 </div>
             </div>
-            <Header/>
+            <NavBar/>
         </Fragment>
     )
 }
