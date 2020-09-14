@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 import { useForm } from "react-hook-form";
 import './index.css';
 
+
+
 const onlyNumbers= (e)=> {
     let key = window.event ? e.which : e.keyCode;
         if (key < 48 || key > 57) {
@@ -16,47 +18,58 @@ const ProfileAdress = (props) => {
     const onSubmit = (values) => { 
         console.log(values);
     } 
-    const useDepartment= () => {
-        const [listDepartament, setListDepartament]= useState([])
+    
+    const [listDepartament, setListDepartament]= useState([])
+    const [listProvince, setListProvince]= useState([])
+    const [listDistrict, setListDistrict]= useState([])
+        
         useEffect(() => {
             fetch('json/departamentos.json')
                 .then(response => response.json())
                     .then(datos => {
                         setListDepartament(datos)
                     })
+                    return listDepartament
         }, [])
-        return listDepartament
-    }
-    
-    const useProvince= () => {
-        const [listProvince, setListProvince]= useState([])
-        
+
+        const [listprovinciaBase, setListprovinciaBase]= useState([])
         useEffect(() => {
             fetch('json/provincias.json')
                 .then(response => response.json())
                     .then(datos => {
                         setListProvince(datos)
+                        setListprovinciaBase(datos)
                     })
+                    return listProvince
         }, [])
-        return listProvince
-    }
-    
-    const useDistrict= () => {
-        const [listDistrict, setListDistrict]= useState([])
-        
+        const [listdistritoBase, setListdistritoBase]= useState([])
         useEffect(() => {
             fetch('json/distritos.json')
                 .then(response => response.json())
                     .then(datos => {
                         setListDistrict(datos)
+                        setListdistritoBase(datos)
                     })
+                    return listDistrict
         }, [])
-        return listDistrict
-    }
 
-    const listDepartament= useDepartment();
-    const listProvince= useProvince()
-    const listDistrict= useDistrict()
+            //BOTTON:
+            const handlerdepartamento = function(e){
+            let id = e.target.value;
+            setListProvince([])
+            setListDistrict([])
+            let filterProvinceData = listprovinciaBase.filter(item => item.department_id === id) 
+            setListProvince(filterProvinceData)
+            }
+
+            //BOTTON:
+            const handlerProvincia = function(e){
+            let id = e.target.value;
+            setListDistrict([])
+            let filterDistritoData = listdistritoBase.filter(item => item.province_id === id) 
+            setListDistrict(filterDistritoData)
+
+}
 
     return (
         <Fragment>
@@ -83,12 +96,17 @@ const ProfileAdress = (props) => {
                         <select 
                             class="form-control form-text-check-adress"
                             id=""
-                            >
-                                <option value={-1}>Option</option>
+                            onChange={handlerdepartamento}>
+                            
+                            <option value={-1}>Option</option>
                             {
-                                listDepartament.map(item =>(
-                                    <option >{item.name}</option>
-                                ))
+                                listDepartament.map((item) => (
+                                <option key={item.id}
+                                 value={item.id}
+                                 >
+                                    {item.name}
+                                </option>
+                            ))
                             }
                         </select>
                     </label>                   
@@ -96,29 +114,34 @@ const ProfileAdress = (props) => {
                         Provincia
                         <select 
                             class="form-control form-text-check-adress"
-                            id=""
+                            onChange={handlerProvincia}
                             >
                                 <option value={-1}>Option</option>
                             {
-                                listProvince.map(item =>(
-                                    <option >{item.name}</option>
-                                ))
+                                listProvince.map((item) => (
+                                <option key={item.id} value={item.id}>
+                                    {item.name}
+                                </option>
+                            ))
                             }
-                            
                         </select>
                     </label>
                     <label className="label-form" >
                         Distrito
                         <select 
                             class="form-control form-text-check-adress"
-                            id=""
+                            
                             >
                                 <option value={-1}>Option</option>
-                            {
-                                listDistrict.map((item, ) =>(
-                                    <option>{item.name}</option>
-                                ))
-                            }
+                                {
+                                    listDistrict.map((item) => (
+                                    <option key={item.id} 
+                                    value={item.id}
+                                    >
+                                        {item.name}
+                                    </option>
+                                    ))
+                                }
                         </select>
                     </label>
                     <label className="label-form mt-2">

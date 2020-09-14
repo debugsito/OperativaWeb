@@ -192,7 +192,7 @@ code {
   
   color: #979797;
 }
-.input-error {
+.input-error:focus {
 /* Hay un error */
 position: static;
 width: 250px;
@@ -209,7 +209,15 @@ line-height: 100%;
 display: flex;
 align-items: center;
 color: #ED1D40;
-
+}
+.red-input:focus {
+border-color: #ED1D40;
+box-shadow: 2px 1px 1px 1px rgba(237,29,64,0.43);
+-webkit-box-shadow: 2px 1px 1px 1px rgba(237,29,64,0.43);
+-moz-box-shadow: 2px 1px 1px 1px rgba(237,29,64,0.43);
+}
+.border-error{
+  border: 1px solid #ED1D40;
 }
 .placeholder {
   font-family: 'Raleway', sans-serif;

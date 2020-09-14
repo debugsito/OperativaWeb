@@ -23,7 +23,8 @@ const Register= (props) => {
                             Correo Electrónico
                             <input
                                 placeholder ="mail@ejemplo.com" 
-                                className="form-control placeholder input-icono"
+                                className={errors.usuario ? "border-error form-control placeholder red-input" : "form-control placeholder"} 
+                           
                                 id="email"
                                 name='email'
                                 type="text"
@@ -44,7 +45,8 @@ const Register= (props) => {
                             Contraseña
                             <input
                                 placeholder=".........."
-                                className="form-control placeholder mb-2 input-icono"
+                                className={errors.password ? "border-error form-control placeholder red-input" : "form-control placeholder"} 
+                           
                                 name='password'
                                 type="password"
                                 ref={register({
