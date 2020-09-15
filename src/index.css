@@ -192,6 +192,24 @@ code {
   
   color: #979797;
 }
+.span-error{
+  /* Hay un error */
+position: static;
+width: 250px;
+height: 10px;
+left: 0px;
+top: 30px;
+/* Helper-text */
+font-family: Raleway;
+font-style: normal;
+font-weight: bold;
+font-size: 10px;
+line-height: 100%;
+/* identical to box height, or 10px */
+display: flex;
+align-items: center;
+color: #ED1D40;
+}
 .input-error:focus {
 /* Hay un error */
 position: static;

@@ -19,33 +19,32 @@ const Register= (props) => {
                 <div className="col-12 col-sm-8 col-md-6 col-xl-4">
                     <h1 className='h1-custom'>REGISTRATE EN OPERATIVA</h1>
                     <form onSubmit= { handleSubmit(onSubmit)} className='form-container'>
-                        <label className="label-form">
+                    <label className="label-form">
                             Correo Electrónico
                             <input
                                 placeholder ="mail@ejemplo.com" 
-                                className={errors.usuario ? "border-error form-control placeholder red-input" : "form-control placeholder"} 
-                           
+                                className= {errors.usuario ? "form-control placeholder border-error red-input" : "form-control placeholder"} 
                                 id="email"
-                                name='email'
+                                name="usuario"
                                 type="text"
                                 autoComplete="off"
                                 ref={register({
                                     required: "Este campo es requerido",
                                     pattern: {
-                                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                                      message: "Coloque un email valido"
+                                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                        message: "Coloque un email valido"
                                     }
                                   })}
-                                />
+                            />
                         </label>
-                        <span className="input-error">
-                            {errors.email && errors.email.message}
+                        <span className="span-error">
+                            {errors.usuario && errors.usuario.message}
                         </span>
                         <label className="label-form">
                             Contraseña
                             <input
                                 placeholder=".........."
-                                className={errors.password ? "border-error form-control placeholder red-input" : "form-control placeholder"} 
+                                className={errors.password ? "form-control placeholder border-error red-input": "form-control placeholder"}  
                            
                                 name='password'
                                 type="password"
@@ -57,15 +56,15 @@ const Register= (props) => {
                                 )}
                             />
                         </label>
-                        <span className="input-error">
+                        <span className="span-error">
                             {errors.password && errors.password.message}
                         </span>
-                        <span className="input-error">
+                        <span className="span-error">
                             {errors.dni && errors.dni.message}
                         </span>
-                        <label>
+                        <label className="mt-2">
                             <input 
-                            className="terms-checkbox"
+                            className="terms-checkbox "
                             name="terms" 
                             type="checkbox" 
                             ref={register({
@@ -75,7 +74,7 @@ const Register= (props) => {
                             />
                             <span className="info-form ml-2">Acepto <a href="#" onClick={e => setModalTerms(!modalTerms)}>términos y condiciones</a></span>
                         </label>
-                        <span className="input-error">
+                        <span className="span-error">
                             {errors.terms && errors.terms.message}
                         </span>
                         <section  className="container-buttons">

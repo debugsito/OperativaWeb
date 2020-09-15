@@ -21,9 +21,9 @@ const Login= (props) => {
                             Correo Electrónico
                             <input
                                 placeholder ="mail@ejemplo.com" 
-                                className= {errors.usuario ? "border-error form-control placeholder red-input" : "form-control placeholder"} 
-                                id='email'
-                                name='usuario'
+                                className= {errors.usuario ? "form-control placeholder border-error red-input" : "form-control placeholder"} 
+                                id="email"
+                                name="usuario"
                                 type="text"
                                 autoComplete="off"
                                 ref={register({
@@ -35,14 +35,14 @@ const Login= (props) => {
                                   })}
                             />
                         </label>
-                        <span className="input-error">
+                        <span className="span-error">
                             {errors.usuario && errors.usuario.message}
                         </span>
                         <label className="label-form">
                             Contraseña
                             <input
                                 placeholder=".........."
-                                className={errors.password ? "border-error form-control placeholder red-input": "form-control placeholder"} 
+                                className={errors.password ? "form-control placeholder border-error red-input": "form-control placeholder"} 
                                 // "form-control placeholder mb-2 input-icono"
                                 id='password'
                                 name='password'
@@ -55,7 +55,7 @@ const Login= (props) => {
                                 )}
                             />
                         </label>
-                        <span className="input-error">
+                        <span className="span-error">
                             {errors.password && errors.password.message}
                         </span>                       
                         <div>
