@@ -7,6 +7,20 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.container-no-padding{
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+}
+.container-padding{
+  padding-right: 15px !important;
+  padding-left: 15px !important;
+}
+
+.row-no-magin {
+  margin-right: 0;
+  margin-left: 0;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -33,21 +47,7 @@ code {
   display: flex;
   align-items: center;
 
-}.h1-custom-home {
-  position: static;
-  width: 312px;
-  height: 62px;
-  font-family: 'Raleway', sans-serif;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 24px;
-  font-style: normal;
-  color: #000000;
-  line-height: 130%;
-  display: flex;
-  align-items: center;
 }
-
 .h1-custom-init {
   position: static;
   width: 312px;
@@ -62,7 +62,6 @@ code {
   display: flex;
   justify-content: center;
   margin-top: 128px;
-  margin-left: 24px;
 }
 .h1-title-form {
   position: absolute;
@@ -257,6 +256,12 @@ box-shadow: 2px 1px 1px 1px rgba(237,29,64,0.43);
   background-position: 98%;
   background-size: 32px;
 }
+.customDatePickerWidth, 
+.customDatePickerWidth > div.react-datepicker-wrapper, 
+.customDatePickerWidth > div > div.react-datepicker__input-container
+.customDatePickerWidth > div > div.react-datepicker__input-container input {
+   width: 100%;
+}
 .container-buttons{
   margin-top: 12px;
   margin-bottom: 12px;
@@ -349,7 +354,6 @@ left: 0%;
 right: 0%;
 top: 0%;
 bottom: 0%;
-
 font-family: Raleway;
 font-style: normal;
 font-weight: 500;

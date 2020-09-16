@@ -13,7 +13,7 @@ const Login= (props) => {
     }
     return (
         <Fragment>
-            <div className="row justify-content-center">
+            <div className="row justify-content-center container-padding row-no-magin">
                 <div className="col-12 col-sm-8 col-md-6 col-xl-4">
                     <h1 className='h1-custom'>INICIA SESIÓN EN OPERATIVA</h1>
                     <form onSubmit= { handleSubmit(onSubmit) } className='form-container'>

@@ -28,7 +28,8 @@ const ProfileInfo = (props) => {
 
     return (
         <Fragment>
-            <div className="row justify-content-center">
+            <NavBar/>
+            <div className="row justify-content-center row-no-magin">
                 <div className="col-12 col-sm-8 col-md-6 col-xl-4">
                 <div>
                     <h1 className='h1-title-form'>COMPLETA TU REGISTRO</h1>
@@ -120,7 +121,7 @@ const ProfileInfo = (props) => {
                     for= "nombre"
                     className=" label-form mt-3">
                         Fecha de nacimiento
-                        <div className="contenedor">
+                        <div className="customDatePickerWidth">
                             <DatePicker 
                             name='dateOfBirth'
                             type="text"
@@ -147,7 +148,6 @@ const ProfileInfo = (props) => {
                     </form>
                 </div>
             </div>
-            <NavBar/>
         </Fragment>
     )
 }

@@ -3,7 +3,7 @@ import Router from './Router/router';
 
 const App = () => {
     return (
-        <div className="container-fluid">
+        <div className="container-fluid container-no-padding">
             <Router/>
         </div>
     )
