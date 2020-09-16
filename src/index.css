@@ -179,7 +179,7 @@ code {
   align-items: center;
 }
 .form-text-check-adress{
-  font-family: Raleway;
+  font-family: 'Raleway', sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
@@ -199,7 +199,7 @@ height: 10px;
 left: 0px;
 top: 30px;
 /* Helper-text */
-font-family: Raleway;
+font-family: 'Raleway', sans-serif;
 font-style: normal;
 font-weight: bold;
 font-size: 10px;
@@ -217,7 +217,7 @@ height: 10px;
 left: 0px;
 top: 30px;
 /* Helper-text */
-font-family: Raleway;
+font-family: 'Raleway', sans-serif;
 font-style: normal;
 font-weight: bold;
 font-size: 10px;
@@ -320,7 +320,7 @@ box-shadow: 2px 1px 1px 1px rgba(237,29,64,0.43);
   right: 32.52%;
   margin-top: 24px;
   margin-bottom: 157px;
-  font-family: Raleway;
+  font-family: 'Raleway', sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
@@ -354,7 +354,7 @@ left: 0%;
 right: 0%;
 top: 0%;
 bottom: 0%;
-font-family: Raleway;
+font-family: 'Raleway', sans-serif;
 font-style: normal;
 font-weight: 500;
 font-size: 14px;

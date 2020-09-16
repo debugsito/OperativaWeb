@@ -50,32 +50,33 @@ const Home= () => {
                         Más de 600 empresas reclutan a través de Operativa.
                     </p>
                 </div>
-                <div className="col-4">
-                    <img alt='' src= {IconProduction} className="icon-image-rubros" />
-                    <p className="text-icon-rubros">Producción</p>
-                </div>
-                <div className="col-4">
-                    <img alt='' src= {IconMaintenance} className="icon-image-rubros" />
-                    <p className="text-icon-rubros">Mantenimiento</p>
-                    
-                </div>
-                <div className="col-4">
-                    <img alt='' src= {IconDistribution} className="icon-image-rubros" />
-                    <p className="text-icon-rubros">Distribución</p>
-                </div>
-                <div className="col-4">
-                    <img alt='' src= {IconCallCenter} className="icon-image-rubros" />
-                    <p className="text-icon-rubros">
-                        Call Center y Ventas
-                    </p>
-                </div>
-                <div className="col-4">
-                    <img alt='' src= {IconConstruction} className="icon-image-rubros" />
-                    <p className="text-icon-rubros">Construcción</p>
-                </div>
-                <div className="col-4">
+                    <div className="col-4">
+                        <img alt='' src= {IconProduction} className="icon-image-rubros" />
+                        <p className="text-icon-rubros">Producción</p>
+                    </div>
+                    <div className="col-4">
+                        <img alt='' src= {IconMaintenance} className="icon-image-rubros" />
+                        <p className="text-icon-rubros">Mantenimiento</p>
+                        
+                    </div>
+                    <div className="col-4">
+                        <img alt='' src= {IconDistribution} className="icon-image-rubros" />
+                        <p className="text-icon-rubros">Distribución</p>
+                    </div>
+                    <div className="col-4">
+                        <img alt='' src= {IconCallCenter} className="icon-image-rubros" />
+                        <p className="text-icon-rubros">
+                            Call Center y Ventas
+                        </p>
+                    </div>
+                    <div className="col-4">
+                        <img alt='' src= {IconConstruction} className="icon-image-rubros" />
+                        <p className="text-icon-rubros">Construcción</p>
+                    </div>
+                    <div className="col-4">
                     <img alt='' src= {IconOperaction} className="icon-image-rubros" />
                     <p className="text-icon-rubros">Operaciones</p>
+                </div>
                 </div>
                 <div className="row row-no-magin container-no-padding">
                     <div className="col-12">
@@ -99,7 +100,7 @@ const Home= () => {
                         </div>
                     </div>
                 </div>
-                <div className="row box-container-title-three container-no-padding p-2">
+                <div className="row box-container-title-three row-no-magin">
                     <div className="col-12 ">
                         <h1 className='h1-tittle-box '>Cómo inscribirte</h1>
                     </div>
@@ -120,8 +121,6 @@ const Home= () => {
                         </div>
                     </div>
                 </div>
-                 
-            </div>           
      </Fragment>
     )
 } 

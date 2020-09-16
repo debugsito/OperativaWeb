@@ -3,7 +3,7 @@
     height: 19px;
     right: 50px;
     top: 30px;
-    font-family: MuseoSans;
+    font-family: 'Museo Sans';
     font-size: 16px;
     line-height: 19px;
     /* identical to box height */
@@ -13,23 +13,23 @@
     opacity: 0.4;
 }
 .info-email{
-position: absolute;
-width: 147px;
-height: 20px;
-right: 50px;
-top: 20px;
-font-family: MuseoSans;
-font-size: 16.6667px;
-line-height: 20px;
-/* identical to box height */
-display: flex;
-align-items: flex-end;
-color: #FFFFFF;
-/* Inside Auto Layout */
-flex: none;
-order: 0;
-align-self: flex-end;
-margin: 0px 0px;
+    position: absolute;
+    width: 147px;
+    height: 20px;
+    right: 50px;
+    top: 20px;
+    font-family: 'Museo Sans';
+    font-size: 16.6667px;
+    line-height: 20px;
+    /* identical to box height */
+    display: flex;
+    align-items: flex-end;
+    color: #FFFFFF;
+    /* Inside Auto Layout */
+    flex: none;
+    order: 0;
+    align-self: flex-end;
+    margin: 0px 0px;
 }
 .icon-img{
     width: 54px;
@@ -37,7 +37,7 @@ margin: 0px 0px;
     right: 8px;
     top: 12px;
     bottom: 0px;
-    font-family: MuseoSans;
+    font-family: 'Museo Sans';
     position: fixed;
     mix-blend-mode: normal;
     box-shadow: inset 0px 1px 20px rgba(0, 0, 0, 0.724836);
