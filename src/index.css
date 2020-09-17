@@ -46,7 +46,21 @@ code {
   line-height: 130%;
   display: flex;
   align-items: center;
-
+}
+.h1-custom-restore{
+  position: static;
+  width: 312px;
+  height: 62px;
+  margin-top: 178px;
+  margin-left: 0 !important;
+  font-family: 'Raleway', sans-serif;
+  font-weight: bold;
+  font-size: 24px;
+  font-style: normal;
+  color: #000000;
+  line-height: 130%;
+  display: flex;
+  align-items: center;
 }
 .h1-custom-init {
   position: static;
@@ -62,6 +76,21 @@ code {
   display: flex;
   justify-content: center;
   margin-top: 128px;
+}
+.h1-custom-notification{
+  position: static;
+  width: 301px;
+  height: 93px;
+  font-family: 'Raleway', sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  font-style: normal;
+  color: #000000;
+  line-height: 130%;
+  display: flex;
+  justify-content: center;
+  margin-top: 244px;
 }
 .h1-title-form {
   position: absolute;
@@ -277,12 +306,24 @@ box-shadow: 2px 1px 1px 1px rgba(237,29,64,0.43);
   color: #B9B9BA;
   box-sizing: border-box;   
 }
+.btn-cancel-pr{
+  /* button/secondary */
+  min-width: 150px;
+  height: 40px;
+  border: 1px solid #979797;
+  color: #B9B9BA;
+  box-sizing: border-box;
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  padding: 12px;   
+}
 .btn-register{
   position: static;
   width: 46%;
   height: 40px;
-  left: 0;
-  top: 0;
   /* primary */
   background: #ED1D40;
   color: #FFFFFF;
@@ -293,8 +334,6 @@ box-shadow: 2px 1px 1px 1px rgba(237,29,64,0.43);
   position: static;
   width: 48%;
   height: 40px;
-  left: 0;
-  top: 0;
   /* primary */
   background: #ED1D40;
   color: #FFFFFF;
@@ -315,9 +354,6 @@ box-shadow: 2px 1px 1px 1px rgba(237,29,64,0.43);
   margin-top: calc(90vh - 130px);
 }
 .button-continue{
-  position: static;
-  left: 0%;
-  right: 32.52%;
   margin-top: 24px;
   margin-bottom: 157px;
   font-family: 'Raleway', sans-serif;
@@ -330,6 +366,32 @@ box-shadow: 2px 1px 1px 1px rgba(237,29,64,0.43);
   justify-content: flex-end;
   text-transform: uppercase;
   color:#46A9D4;
+}
+.button-continue-restore{
+  font-family: 'Raleway, sans-serif';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  text-transform: uppercase;
+  color:#46A9D4;
+}
+.button-continue-notification{
+  display: flex;
+  justify-content: flex-end;
+  font-family: 'Raleway, sans-serif';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  text-transform: uppercase;
+  color:#46A9D4;
+  margin-top: 48px;
+}
+.icon-next{
+    background-image: url(./assets/icons/icon-next.svg);
+    background-repeat: no-repeat;
+    background-position: 98%;
+    background-size: 20px;
+    padding: 8px 24px;
 }
 .info-form{
   font-family: 'Raleway', sans-serif;

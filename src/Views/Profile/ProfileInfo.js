@@ -25,7 +25,6 @@ const ProfileInfo = (props) => {
             e.preventDefault();
     }
   }
-
     return (
         <Fragment>
             <NavBar/>
@@ -62,20 +61,20 @@ const ProfileInfo = (props) => {
                     </label>
                     <label className="label-form mt-1">         
                         Tipo de Documento
-                        <div class="form-check my-2">
-                            <input class="form-check-input"
+                        <div className="form-check my-2">
+                            <input className="form-check-input"
                              type="radio" 
                              name="doc" 
                              id="dni" 
                              value="option1"
                              autoComplete="off"
                              />
-                            <label class="form-text-check mb-2" for="exampleRadios1">
+                            <label className="form-text-check mb-2">
                                 Dni
                             </label>
                         </div>
-                        <div class="form-check mb-3">
-                            <input class="form-check-input"
+                        <div className="form-check mb-3">
+                            <input className="form-check-input"
                              type="radio" 
                              name="doc" 
                              id="carnet" 
@@ -83,12 +82,12 @@ const ProfileInfo = (props) => {
                              required=""
                              autoComplete="off"
                              />
-                            <label class="form-text-check" for="exampleRadios1">
+                            <label className="form-text-check">
                                 Carnet de Extranjería
                             </label>
                         </div>
-                        <div class="form-check mb-3">
-                            <input class="form-check-input"
+                        <div className="form-check mb-3">
+                            <input className="form-check-input"
                              type="radio" 
                              name="doc" 
                              id="pasaporte" 
@@ -96,7 +95,7 @@ const ProfileInfo = (props) => {
                              required=""
                              autoComplete="off"
                              />
-                            <label class="form-text-check" for="exampleRadios1">
+                            <label className="form-text-check">
                                 Pasaporte
                             </label>
                         </div>
@@ -115,8 +114,8 @@ const ProfileInfo = (props) => {
                         />
                     </label>
                     <label 
-                    for= "nombre"
-                    className=" label-form mt-3">
+                        for= "nombre"
+                        className=" label-form mt-3">
                         Fecha de nacimiento
                         <div className="customDatePickerWidth">
                             <DatePicker 
@@ -135,11 +134,11 @@ const ProfileInfo = (props) => {
                     </label>
                     <section  className="container-buttons">
                         <Link
-                            className="button-continue btn" 
+                            className="button-continue btn icon-next" 
                             type= 'submit' 
                             to="/info-direccion"
                             >
-                            CONTINUAR {">"}
+                            CONTINUAR 
                         </Link> 
                     </section>                      
                     </form>

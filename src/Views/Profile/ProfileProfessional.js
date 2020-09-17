@@ -61,7 +61,7 @@ const ProfileProfesional = (props) => {
                     <label className="label-form" >
                         Rubro de interés
                         <select 
-                            class="form-control form-text-check-adress mt-2"
+                            className="form-control form-text-check-adress mt-2"
                             id=""
                             >
                                 <option value={-1}>Logística</option>
@@ -132,11 +132,11 @@ const ProfileProfesional = (props) => {
                             AGREGAR OTRA EXPERIENCIA
                         </Link> 
                         <Link
-                            className="button-continue btn" 
+                            className="button-continue btn icon-next" 
                             type= 'submit' 
                             to="/inicio"
                             >
-                            CONTINUAR {">"}
+                            CONTINUAR
                         </Link>                    
                     </form>
                 <NavBar/>

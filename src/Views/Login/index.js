@@ -59,7 +59,7 @@ const Login= (props) => {
                             {errors.password && errors.password.message}
                         </span>                       
                         <div>
-                            <span className="info-form"><a href="/">Restablecer contraseña</a></span>
+                            <span className="info-form"><a href="/restablecer-contraseña">Restablecer contraseña</a></span>
                         </div>
                         <section  className="container-buttons">
                             <Link

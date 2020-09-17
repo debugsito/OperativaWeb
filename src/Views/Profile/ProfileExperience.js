@@ -24,21 +24,22 @@ const ProfileAdress = (props) => {
     }
     const useHeadings = () => {
         const [listHeadings , setListHeadings] = React.useState([])
-
+        
         useEffect(() => {
             fetch('json/rubros.json')
-                .then(response => response.json())
+            .then(response => response.json())
                     .then(datos => {
                         setListHeadings(datos)
                     })
         }, [])
         return listHeadings
     }  
-
-        const listHeadings= useHeadings();
+    
+    const listHeadings= useHeadings();
     return (
         <Fragment>
             <div className="row justify-content-center row-no-magin">
+        <NavBar/>
                 <div className="col-12 col-sm-8 col-md-6 col-xl-4">
                 <div>
                     <h1 className='h1-title-form'>COMPLETA TU REGISTRO</h1>
@@ -48,8 +49,8 @@ const ProfileAdress = (props) => {
                     <label className="label-form mt-2 mb-2">         
                         Expericia laboral
                         <div className= "input-container-select mt-2">
-                            <div class="form-check">
-                                <input class="form-check-input"
+                            <div name="form-check">
+                                <input className="form-check-input"
                                 type="radio" 
                                 name="family" 
                                 id="single" 
@@ -57,12 +58,12 @@ const ProfileAdress = (props) => {
                                 onClick= {()=> {handleExperience(false) }}
                                 checked={!experienceBuss ? 'checked': '' }
                                 />
-                                <label class="form-text-check" for="exampleRadios1">
+                                <label className="form-text-check">
                                     Sin experiencia
                                 </label>
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input"
+                            <div className="form-check">
+                                <input className="form-check-input"
                                 type="radio" 
                                 name="family" 
                                 id="married" 
@@ -71,7 +72,7 @@ const ProfileAdress = (props) => {
                                 onClick= {()=> {handleExperience(true) }}
                                 checked={experienceBuss ? 'checked': '' }
                                 />
-                                <label class="form-text-check" for="exampleRadios1">
+                                <label className="form-text-check">
                                     Con experiencia
                                 </label>
                             </div>
@@ -84,7 +85,7 @@ const ProfileAdress = (props) => {
                         <label className="label-form" >
                             Rubro de interés
                             <select 
-                                class="form-control form-text-check-adress mt-2"
+                                className="form-control form-text-check-adress mt-2"
                                 id=""
                                 >
                                     <option value={-1}>Option</option>
@@ -106,11 +107,11 @@ const ProfileAdress = (props) => {
                         </section>                
                         <section  className="container-buttons">
                             <Link
-                                className="button-continue btn" 
+                                className="button-continue btn icon-next" 
                                 type= 'submit' 
-                                to="/inicio"
+                                to="/info-con-experiencia-profesional"
                                 >
-                                CONTINUAR {">"}
+                                CONTINUAR
                             </Link> 
                         </section>                      
                     </> 
@@ -119,7 +120,6 @@ const ProfileAdress = (props) => {
                     </form>
                 </div>
             </div>
-            <NavBar/>
         </Fragment>
     )
 }

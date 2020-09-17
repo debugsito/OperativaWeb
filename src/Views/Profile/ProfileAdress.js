@@ -1,22 +1,22 @@
 import React, { Fragment, useEffect, useState } from "react";
 import NavBar from "../../Components/MenuUser/index"
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { useForm } from "react-hook-form";
 import './index.css';
-
-
 
 const onlyNumbers= (e)=> {
     let key = window.event ? e.which : e.keyCode;
         if (key < 48 || key > 57) {
         e.preventDefault();
 }}
+
 const ProfileAdress = (props) => { 
     
     const { handleSubmit} = useForm();
     
     const onSubmit = (values) => { 
         console.log(values);
+        props.history.push('/info-experiencia')
     } 
     
     const [listDepartament, setListDepartament]= useState([])
@@ -53,26 +53,26 @@ const ProfileAdress = (props) => {
                     return listDistrict
         }, [])
 
-            //BOTTON:
-            const handlerdepartamento = function(e){
-            let id = e.target.value;
+    //BOTTON:
+    const handlerdepartamento = (e) =>{
+        let id = e.target.value;
             setListProvince([])
             setListDistrict([])
             let filterProvinceData = listprovinciaBase.filter(item => item.department_id === id) 
             setListProvince(filterProvinceData)
-            }
-
-            //BOTTON:
-            const handlerProvincia = function(e){
+        }
+        
+        //BOTTON:
+        const handlerProvincia = function(e){
             let id = e.target.value;
             setListDistrict([])
             let filterDistritoData = listdistritoBase.filter(item => item.province_id === id) 
             setListDistrict(filterDistritoData)
-
-}
-
-    return (
-        <Fragment>
+        }
+        
+        return (
+            <Fragment>
+            <NavBar/>
             <div className="row justify-content-center row-no-magin">
                 <div className="col-12 col-sm-8 col-md-6 col-xl-4">
                 <div>
@@ -94,15 +94,15 @@ const ProfileAdress = (props) => {
                     <label className="label-form" >
                         Departamento
                         <select 
-                            class="form-control form-text-check-adress"
+                            className="form-control form-text-check-adress"
                             id=""
                             onChange={handlerdepartamento}>
                             
                             <option value={-1}>Option</option>
                             {
                                 listDepartament.map((item) => (
-                                <option key={item.id}
-                                 value={item.id}
+                                <option key= {item.id}
+                                 value= {item.id}
                                  >
                                     {item.name}
                                 </option>
@@ -113,13 +113,13 @@ const ProfileAdress = (props) => {
                      <label className="label-form" >
                         Provincia
                         <select 
-                            class="form-control form-text-check-adress"
+                            className="form-control form-text-check-adress"
                             onChange={handlerProvincia}
                             >
                                 <option value={-1}>Option</option>
                             {
                                 listProvince.map((item) => (
-                                <option key={item.id} value={item.id}>
+                                <option key= {item.id} value= {item.id}>
                                     {item.name}
                                 </option>
                             ))
@@ -129,14 +129,14 @@ const ProfileAdress = (props) => {
                     <label className="label-form" >
                         Distrito
                         <select 
-                            class="form-control form-text-check-adress"
+                            className="form-control form-text-check-adress"
                             
                             >
                                 <option value={-1}>Option</option>
                                 {
                                     listDistrict.map((item) => (
-                                    <option key={item.id} 
-                                    value={item.id}
+                                    <option key= {item.id} 
+                                    value= {item.id}
                                     >
                                         {item.name}
                                     </option>
@@ -158,69 +158,68 @@ const ProfileAdress = (props) => {
                     </label>
                     <label className="label-form mt-2">         
                         Situación familiar
-                        <div class="form-check my-2">
-                            <input class="form-check-input"
+                        <div className="form-check my-2">
+                            <input className="form-check-input"
                              type="radio" 
                              name="family" 
                              id="single" 
                              value="option1"
                              />
-                            <label class="form-text-check mb-2" for="exampleRadios1">
+                            <label className="form-text-check mb-2">
                                 Soltero
                             </label>
                         </div>
-                        <div class="form-check mb-3">
-                            <input class="form-check-input"
+                        <div className="form-check mb-3">
+                            <input className="form-check-input"
                              type="radio" 
                              name="family" 
                              id="married" 
                              value="option2"
                              required=""
                              />
-                            <label class="form-text-check" for="exampleRadios1">
+                            <label className="form-text-check" >
                                 Casado
                             </label>
                         </div>
-                        <div class="form-check mb-3">
-                            <input class="form-check-input"
+                        <div className="form-check mb-3">
+                            <input className="form-check-input"
                              type="radio" 
                              name="family" 
                              id="divorced" 
                              value="option3"
                              required=""
                              />
-                            <label class="form-text-check" for="exampleRadios1">
+                            <label className="form-text-check">
                                 Divorciado
                             </label>
                         </div>
-                        <div class="form-check mb-3">
-                            <input class="form-check-input"
+                        <div className="form-check mb-3">
+                            <input className="form-check-input"
                              type="radio" 
                              name="family" 
                              id="cohabiting" 
                              value="option2"
                              required=""
                              />
-                            <label class="form-text-check" for="exampleRadios1">
+                            <label className="form-text-check" >
                                 Conviviente
                             </label>
                         </div>
                     </label>
                     <section  className="container-buttons">
                         <Link
-                            className="button-continue btn" 
+                            className="button-continue btn icon-next" 
                             type= 'submit' 
                             to="/info-experiencia"
                             >
-                            CONTINUAR {">"}
+                            CONTINUAR 
                         </Link> 
                     </section>                      
                     </form>
                 </div>
             </div>
-            <NavBar/>
         </Fragment>
     )
 }
 
-export default ProfileAdress
+export default withRouter(ProfileAdress)

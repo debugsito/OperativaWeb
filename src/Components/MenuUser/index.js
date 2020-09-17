@@ -5,10 +5,11 @@ import LogoMedio from "../../assets/logos/logo-medio.svg"
 import './index.css'
 
 const NavBar = (props) => {
+    
     const cerrarSesion= () =>{
         console.log()
             .then(()=>{
-                props.history.push('/login')
+                props.history.push('/inicio-sesion')
             })
     }
     return (
