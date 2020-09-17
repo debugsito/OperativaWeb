@@ -1,0 +1,453 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.container-no-padding{
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+}
+.container-padding{
+  padding-right: 15px !important;
+  padding-left: 15px !important;
+}
+
+.row-no-magin {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+.react-datepicker__input-container {
+  position: absoluta !important;
+  display: inline-block;
+  width: 100%;
+}
+
+/* Forms */
+.h1-custom {
+  position: static;
+  width: 312px;
+  height: 62px;
+  margin-top: 118px;
+  margin-left: 0 !important;
+  font-family: 'Raleway', sans-serif;
+  font-weight: bold;
+  font-size: 24px;
+  font-style: normal;
+  color: #000000;
+  line-height: 130%;
+  display: flex;
+  align-items: center;
+}
+.h1-custom-restore{
+  position: static;
+  width: 312px;
+  height: 62px;
+  margin-top: 178px;
+  margin-left: 0 !important;
+  font-family: 'Raleway', sans-serif;
+  font-weight: bold;
+  font-size: 24px;
+  font-style: normal;
+  color: #000000;
+  line-height: 130%;
+  display: flex;
+  align-items: center;
+}
+.h1-custom-init {
+  position: static;
+  width: 312px;
+  height: 62px;
+  font-family: 'Raleway', sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  font-style: normal;
+  color: #000000;
+  line-height: 130%;
+  display: flex;
+  justify-content: center;
+  margin-top: 128px;
+}
+.h1-custom-notification{
+  position: static;
+  width: 301px;
+  height: 93px;
+  font-family: 'Raleway', sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  font-style: normal;
+  color: #000000;
+  line-height: 130%;
+  display: flex;
+  justify-content: center;
+  margin-top: 244px;
+}
+.h1-title-form {
+  position: absolute;
+  width: 312px;
+  height: 84px;
+  left: 24px;
+  top: 112px;
+  /* Heading 1 */
+  font-family: 'Raleway', sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 32px;
+  line-height: 130%;
+  /* or 42px */
+  text-transform: uppercase;
+  /* darker-gray */
+  color: #373737;
+}
+.h1-form{
+  position: absolute;
+  width: 312px;
+  height: 37px;
+  left: 24px;
+  top: 246px;
+  /* Heading 1 */
+  font-family: 'Raleway', sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 28px;
+  display: flex;
+  align-items: center;
+  color: #000000;
+ /* Inside Auto Layout */
+ flex: none;
+ order: 0;
+ align-self: flex-start;
+}
+.form-container{
+  margin-top: 40px;
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
+.form-container-info{
+  margin-top: 294px;
+  margin-left:12px;
+  margin-right: 12px;
+}
+.form-container-components{
+  margin-top: 0px;
+  margin-left:12px;
+  margin-right: 12px;
+}
+.form-container-select{
+  margin-top: -40px;
+}
+
+.label-form{
+  font-family: 'Raleway', sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 19px;
+  width: 100%!important;
+  height: 53px;
+  color: #979797;
+  text-align: left;
+
+}
+.input-container {
+  position: absoluta !important;
+  display: inline-block;
+  width: 100%;
+}
+.input-container-select{
+  position: absoluta !important;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-left: 24px;
+}
+.label-form-calen{
+  display: flex;
+  flex-direction: column;
+  padding: 12px 8px;
+  height: 48px;
+  top: 23px;
+  border: 0.5px solid #AAAAAA;
+  box-sizing: border-box;
+  /* Inside Auto Layout */
+  flex: none;
+  order: 1;
+  align-self: flex-start;
+  font-family: 'Raleway', sans-serif;
+  font-size: 13px;
+  font-weight: normal;
+  color: #979797;
+  position: absoluta !important;
+  width: 100% !important;
+}
+.label-form-text{
+  font-family: 'Raleway', sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 19px;
+  width: 100%;
+  height: 19px;
+  color: #979797;
+  text-align: left;
+}
+.form-text-check{
+  font-family: MuseoSans;
+  font-size: 16px;
+  line-height: 19px;
+  color: #373737;
+  display: flex;
+  align-items: center;
+}
+.form-text-check-adress{
+  font-family: 'Raleway', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 14px;
+  /* identical to box height */
+  
+  display: flex;
+  align-items: center;
+  
+  color: #979797;
+}
+.span-error{
+  /* Hay un error */
+position: static;
+width: 250px;
+height: 10px;
+left: 0px;
+top: 30px;
+/* Helper-text */
+font-family: 'Raleway', sans-serif;
+font-style: normal;
+font-weight: bold;
+font-size: 10px;
+line-height: 100%;
+/* identical to box height, or 10px */
+display: flex;
+align-items: center;
+color: #ED1D40;
+}
+.input-error:focus {
+/* Hay un error */
+position: static;
+width: 250px;
+height: 10px;
+left: 0px;
+top: 30px;
+/* Helper-text */
+font-family: 'Raleway', sans-serif;
+font-style: normal;
+font-weight: bold;
+font-size: 10px;
+line-height: 100%;
+/* identical to box height, or 10px */
+display: flex;
+align-items: center;
+color: #ED1D40;
+}
+.red-input:focus {
+border-color: #ED1D40;
+box-shadow: 2px 1px 1px 1px rgba(237,29,64,0.43);
+-webkit-box-shadow: 2px 1px 1px 1px rgba(237,29,64,0.43);
+-moz-box-shadow: 2px 1px 1px 1px rgba(237,29,64,0.43);
+}
+.border-error{
+  border: 1px solid #ED1D40;
+}
+.placeholder {
+  font-family: 'Raleway', sans-serif;
+  font-size: 12px;
+  font-weight: normal;
+  display: flex;
+  justify-content: center;
+  color: #979797;
+}
+.input-icono {
+  background-image: url(./assets/icons/verification.svg);
+  background-repeat: no-repeat;
+  background-position: 98%;
+  background-size: 20px;
+}
+.icon-calendar {
+  background-image: url(./assets/icons/date.svg);
+  background-repeat: no-repeat;
+  background-position: 98%;
+  background-size: 32px;
+}
+.customDatePickerWidth, 
+.customDatePickerWidth > div.react-datepicker-wrapper, 
+.customDatePickerWidth > div > div.react-datepicker__input-container
+.customDatePickerWidth > div > div.react-datepicker__input-container input {
+   width: 100%;
+}
+.container-buttons{
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+.btn-cancel-register{
+  /* button/secondary */
+  position: static;
+  width: 46%;
+  height: 40px;
+  left: 0px;
+  top: 0px;
+  border: 1px solid #979797;
+  color: #B9B9BA;
+  box-sizing: border-box;   
+}
+.btn-cancel-pr{
+  /* button/secondary */
+  min-width: 150px;
+  height: 40px;
+  border: 1px solid #979797;
+  color: #B9B9BA;
+  box-sizing: border-box;
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  padding: 12px;   
+}
+.btn-register{
+  position: static;
+  width: 46%;
+  height: 40px;
+  /* primary */
+  background: #ED1D40;
+  color: #FFFFFF;
+  box-sizing: border-box;
+  margin-left: 8%;
+}
+.btn-login {
+  position: static;
+  width: 48%;
+  height: 40px;
+  /* primary */
+  background: #ED1D40;
+  color: #FFFFFF;
+  box-sizing: border-box;
+  margin-left: 6%;
+}
+.button-sign-up {
+  width: 100%;
+  height: 40px;
+  background: #ED1D40;
+  font-family: 'Raleway', sans-serif;
+  font-size: 14px;
+  line-height: 16px;
+  align-items: center;
+  padding: 12px 30px;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  margin-top: calc(90vh - 130px);
+}
+.button-continue{
+  margin-top: 24px;
+  margin-bottom: 157px;
+  font-family: 'Raleway', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  text-transform: uppercase;
+  color:#46A9D4;
+}
+.button-continue-restore{
+  font-family: 'Raleway, sans-serif';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  text-transform: uppercase;
+  color:#46A9D4;
+}
+.button-continue-notification{
+  display: flex;
+  justify-content: flex-end;
+  font-family: 'Raleway, sans-serif';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  text-transform: uppercase;
+  color:#46A9D4;
+  margin-top: 48px;
+}
+.icon-next{
+    background-image: url(./assets/icons/icon-next.svg);
+    background-repeat: no-repeat;
+    background-position: 98%;
+    background-size: 20px;
+    padding: 8px 24px;
+}
+.info-form{
+  font-family: 'Raleway', sans-serif;
+  font-size: 12px;
+  line-height: 130%;  
+}
+
+.terms-checkbox {
+  width: 15px;
+  height: 15px;
+  vertical-align: middle;
+}
+.box-style{
+  margin-top: 12px;
+  margin-bottom: 12px;
+  border-radius: 0%;
+  height: 102px;
+}
+.text-experience{
+  position: static;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+font-family: 'Raleway', sans-serif;
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 16px;
+display: flex;
+align-items: center;
+text-decoration-line: underline;
+text-transform: uppercase;
+color: #46A9D4;
+}
+.icon-img-logo{
+  display: flex;
+  flex-direction: row;
+  padding: 0px;
+  position: fixed;
+  width: 54px;
+  height: 51px;
+  left: 12px;
+  flex: none;
+  order: 0;
+  align-self: center;
+  top: 12px;
+}
+.icon-container{
+  background-image: url('./assets/logos/logo-container-operativa.svg');
+  width: 187.36px;
+  height: 48px;
+  left: 0px;
+  top: 1.52px;
+}
+@media only screen and (max-width: 600px) {
+
+}
