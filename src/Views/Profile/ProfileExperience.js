@@ -15,7 +15,7 @@ const ProfileAdress = (props) => {
 
     const onSubmit = (values) => { 
         console.log(values);
-        props.history.push('/info-con-experiencia-profesional')
+        props.history.push('/inicio')
     } 
 
     const handleExperience= (e)=>{
@@ -38,8 +38,8 @@ const ProfileAdress = (props) => {
     const listHeadings= useHeadings();
     return (
         <Fragment>
-            <div className="row justify-content-center row-no-magin">
         <NavBar/>
+            <div className="row justify-content-center row-no-magin">
                 <div className="col-12 col-sm-8 col-md-6 col-xl-4">
                 <div>
                     <h1 className='h1-title-form'>COMPLETA TU REGISTRO</h1>
@@ -109,7 +109,7 @@ const ProfileAdress = (props) => {
                             <Link
                                 className="button-continue btn icon-next" 
                                 type= 'submit' 
-                                to="/info-con-experiencia-profesional"
+                                to="/inicio"
                                 >
                                 CONTINUAR
                             </Link> 

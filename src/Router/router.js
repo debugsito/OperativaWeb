@@ -29,8 +29,7 @@ function router() {
                 <ClientRoute path={ROUTES.WELCOME} component={Welcome} />
                 <ClientRoute path={ROUTES.INFO} component={ProfileInfo} />
                 <ClientRoute path={ROUTES.INFOADRESS} component={ProfileAdress} />
-                <ClientRoute path={ROUTES.INFOEXPERIENCE} component={ProfileExperience} /> 
-                <ClientRoute path={ROUTES.INFOPROFESSIONAL} component={ProfileProfessional} /> 
+                <ClientRoute path={ROUTES.INFOEXPERIENCE} component={ProfileExperience} />  
                 <ClientRoute exact path={ROUTES.HOME} component={Home} />
             </Switch>
         </BrowserRouter>
