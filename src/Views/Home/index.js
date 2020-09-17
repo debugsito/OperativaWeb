@@ -9,8 +9,27 @@ import IconDistribution from "../../assets/icons/icon-distribution.svg"
 import IconCallCenter from "../../assets/icons/icon-call-center.svg"
 import IconConstruction from "../../assets/icons/icon-construction.svg"
 import IconOperaction from "../../assets/icons/icon-operaction.svg"
-import Gloria from "../../assets/images/gloria.png"
-import Neptunia from "../../assets/images/neptunia.png"
+import Gloria from "../../assets/logos/1.png"
+import Talma from "../../assets/logos/2.png"
+import Manpower from "../../assets/logos/3.png"
+import G4S from "../../assets/logos/4.png"
+import Eulen from "../../assets/logos/5.png"
+import Ngl from "../../assets/logos/6.png"
+import Chinalco from "../../assets/logos/7.png"
+import Neptunia from "../../assets/logos/8.png"
+import Rokis from "../../assets/logos/9.png"
+import Central from "../../assets/logos/10.png"
+import Arato from "../../assets/logos/11.png"
+import Autopista from "../../assets/logos/12.png"
+import Gold from "../../assets/logos/13.png"
+import IqFarma from "../../assets/logos/14.png"
+import Adex from "../../assets/logos/15.png"
+import CasaPalca from "../../assets/logos/16.png"
+import CampoSol from "../../assets/logos/17.png"
+import Antapaccay from "../../assets/logos/18.png"
+import SunFrama from "../../assets/logos/19.png"
+import haug from "../../assets/logos/20.png"
+import Cipsa from "../../assets/logos/21.png"
 import './index.css';
 
 const Home= () => {
@@ -85,16 +104,44 @@ const Home= () => {
                 </div >
                 <div className="row row-no-magin container-no-padding">
                     <div className="col-12">
-                        <div id="carouselExampleSlidesOnly" className="carousel slide" data-ride="carousel">
+                        <div id="carouselExampleSlidesOnly" className="carousel slide" data-ride="carousel"
+                            data-interval="2000" data-pause="hover" data-wrap="true">
+                            <ol className="carousel-indicators">
+                                <li data-target="#carouselExampleSlidesOnly" data-slide-to="0" className="active"></li>
+                                <li data-target="#carouselExampleSlidesOnly" data-slide-to="1"></li>
+                            </ol>
                             <div className="carousel-inner">
-                                <div className="carousel-item active">
-                                    <img src={Gloria} className="d-block w-100" alt="..."/>
+                                <div className="item active">
+                                    <div className="row w-100 mx-auto">
+                                        <div className="col-sm-6">
+                                            <img src={Gloria} className="img-fluid mx-auto d-block" alt="..."/>
+                                        </div>
+                                        <div className="col-sm-6">
+                                            <img src={Talma} className="img-fluid mx-auto d-block" alt="..."/>
+                                        </div>
+                                        <div className="col-sm-6">
+                                            <img src={Manpower} className="img-fluid mx-auto d-block" alt="..."/>
+                                        </div>
+                                        <div className="col-sm-6">
+                                            <img src={G4S} className="img-fluid mx-auto d-block" alt="..."/>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="carousel-item">
-                                    <img src={Neptunia} className="d-block w-100" alt="..."/>
-                                </div>
-                                <div className="carousel-item">
-                                    <img src={Gloria} className="d-block w-100" alt="..."/>
+                                <div className="item">
+                                    <div className="row">
+                                        <div className="col-sm-6">
+                                            <img src={Eulen} className="img-fluid mx-auto d-block" alt="..."/>
+                                        </div>
+                                        <div className="col-sm-6">
+                                            <img src={Ngl} className="img-fluid mx-auto d-block" alt="..."/>
+                                        </div>
+                                        <div className="col-sm-6">
+                                            <img src={Chinalco} className="img-fluid mx-auto d-block" alt="..."/>
+                                        </div>
+                                        <div className="col-sm-6">
+                                            <img src={Neptunia} className="img-fluid mx-auto d-block" alt="..."/>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
