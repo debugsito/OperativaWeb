@@ -4,6 +4,9 @@ import * as ROUTES from '../Constant/routes';
 // Views
 import Home from '../Views/Home';
 import Register from '../Views/SignUp/index'
+import RestorePass from "../Views/SignUp/RestorePass"
+import NotificationReset from "../Views/SignUp/NotificationReset"
+import NewPassword from "../Views/SignUp/NewPassword"
 import Login from "../Views/Login/index"
 import Welcome from '../Views/Welcome/Welcome'
 import ProfileInfo from '../Views/Profile/ProfileInfo'
@@ -19,6 +22,9 @@ function router() {
         <BrowserRouter>
             <Switch>
                 <ClientRoute path={ROUTES.REGISTER} component={Register} />
+                <ClientRoute path={ROUTES.RESTOREPASS} component={RestorePass} />
+                <ClientRoute path={ROUTES.NOTIFICATIONPASS} component={NotificationReset} />
+                <ClientRoute path={ROUTES.NEWPASSWORD} component={NewPassword} />
                 <ClientRoute path={ROUTES.LOGIN} component={Login} />
                 <ClientRoute path={ROUTES.WELCOME} component={Welcome} />
                 <ClientRoute path={ROUTES.INFO} component={ProfileInfo} />
