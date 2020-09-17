@@ -69,7 +69,6 @@ const ProfileInfo = (props) => {
                              id="dni" 
                              value="option1"
                              autoComplete="off"
-                             checked
                              />
                             <label class="form-text-check mb-2" for="exampleRadios1">
                                 Dni
@@ -83,7 +82,6 @@ const ProfileInfo = (props) => {
                              value="option2"
                              required=""
                              autoComplete="off"
-                             checked
                              />
                             <label class="form-text-check" for="exampleRadios1">
                                 Carnet de Extranjería
@@ -97,7 +95,6 @@ const ProfileInfo = (props) => {
                              value="option3"
                              required=""
                              autoComplete="off"
-                             checked
                              />
                             <label class="form-text-check" for="exampleRadios1">
                                 Pasaporte

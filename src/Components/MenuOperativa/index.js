@@ -13,7 +13,8 @@ const NavBarOperativa = () => {
                             width: "100%",
                             height:"70px",
                             background: '#F7F7F7',
-                            padding: "0px"
+                            padding: "0px",
+                            
                         }}
                     >
                         <Link className="navbar-brand  icon-container ml-3 " to="/"></Link>
@@ -33,7 +34,7 @@ const NavBarOperativa = () => {
                             <span>
                                 <img src= { iconoMenuDark } className='' alt=""/>
                                 
-                            </span>
+                            </span> 
                         </button>
                     </nav>
                 </div>

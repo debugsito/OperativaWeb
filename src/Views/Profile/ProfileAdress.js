@@ -37,7 +37,7 @@ const ProfileAdress = (props) => {
             fetch('json/provincias.json')
                 .then(response => response.json())
                     .then(datos => {
-                        setListProvince(datos)
+                        
                         setListprovinciaBase(datos)
                     })
                     return listProvince
@@ -47,7 +47,7 @@ const ProfileAdress = (props) => {
             fetch('json/distritos.json')
                 .then(response => response.json())
                     .then(datos => {
-                        setListDistrict(datos)
+                       
                         setListdistritoBase(datos)
                     })
                     return listDistrict
@@ -164,7 +164,7 @@ const ProfileAdress = (props) => {
                              name="family" 
                              id="single" 
                              value="option1"
-                             checked/>
+                             />
                             <label class="form-text-check mb-2" for="exampleRadios1">
                                 Soltero
                             </label>
@@ -176,7 +176,7 @@ const ProfileAdress = (props) => {
                              id="married" 
                              value="option2"
                              required=""
-                             checked/>
+                             />
                             <label class="form-text-check" for="exampleRadios1">
                                 Casado
                             </label>
@@ -188,7 +188,7 @@ const ProfileAdress = (props) => {
                              id="divorced" 
                              value="option3"
                              required=""
-                             checked/>
+                             />
                             <label class="form-text-check" for="exampleRadios1">
                                 Divorciado
                             </label>
@@ -200,7 +200,7 @@ const ProfileAdress = (props) => {
                              id="cohabiting" 
                              value="option2"
                              required=""
-                             checked/>
+                             />
                             <label class="form-text-check" for="exampleRadios1">
                                 Conviviente
                             </label>
