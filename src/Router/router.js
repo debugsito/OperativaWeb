@@ -12,7 +12,7 @@ import Welcome from '../Views/Welcome/Welcome'
 import ProfileInfo from '../Views/Profile/ProfileInfo'
 import ProfileAdress from '../Views/Profile/ProfileAdress'
 import ProfileExperience from '../Views/Profile/ProfileExperience'
-import ProfileProfessional from '../Views/Profile/ProfileProfessional'
+
 //Header & Footer
 
 import Footer from '../Components/Footer';
