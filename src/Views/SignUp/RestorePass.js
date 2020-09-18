@@ -7,7 +7,8 @@ import NavBarOperativa from "../../Components/MenuOperativa";
 
 const RestorePassword= (props) => {
 
-    const { handleSubmit, register, errors } = useForm();
+    const { handleSubmit, register, errors, formState} = useForm();
+    const { isSubmitted } = formState;
     
     const onSubmit = (values) => { 
         console.log(values);
@@ -24,7 +25,17 @@ const RestorePassword= (props) => {
                         Ingresa tu correo electrónico
                         <input
                             placeholder ="mail@ejemplo.com" 
-                            className= {errors.usuario ? "form-control placeholder border-error red-input" : "form-control placeholder input-icono "} 
+                            className={`form-control placeholder
+                                            ${
+                                                isSubmitted ? 
+                                                    !errors.usuario ?
+                                                    "input-icono"
+                                                    : 
+                                                    "border-error red-input" 
+                                                    
+                                                : ''
+                                            }
+                                        `} 
                             id="email"
                             name="usuario"
                             type="text"

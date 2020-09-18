@@ -7,7 +7,8 @@ import NavBarOperativa from "../../Components/MenuOperativa";
 
 const Register= (props) => {
     const [modalTerms, setModalTerms] = React.useState(false);
-    const { handleSubmit, register, errors} = useForm();
+    const { handleSubmit, register, errors, formState} = useForm();
+    const { isSubmitted } = formState;
 
     const onSubmit = (values) => { 
         console.log(values);
@@ -22,8 +23,18 @@ const Register= (props) => {
                     <label className="label-form">
                             Correo Electrónico
                             <input
-                                placeholder ="mail@ejemplo.com" 
-                                className= {errors.usuario ? "form-control placeholder border-error red-input" : "form-control placeholder"} 
+                                placeholder ="mail@ejemplo.com"
+                                className={`form-control placeholder
+                                    ${
+                                        isSubmitted ? 
+                                            !errors.usuario ?
+                                            "input-icono"
+                                            : 
+                                            "border-error red-input" 
+                                            
+                                        : ''
+                                    }
+                                `}   
                                 id="email"
                                 name="usuario"
                                 type="text"
@@ -44,8 +55,17 @@ const Register= (props) => {
                             Contraseña
                             <input
                                 placeholder=".........."
-                                className={errors.password ? "form-control placeholder border-error red-input": "form-control placeholder"}  
-                           
+                                className={`form-control placeholder
+                                    ${
+                                        isSubmitted ? 
+                                            !errors.password ?
+                                            "input-icono"
+                                            : 
+                                            "border-error red-input" 
+                                            
+                                        : ''
+                                    }
+                                `}   
                                 name='password'
                                 type="password"
                                 ref={register({

@@ -30,6 +30,15 @@ import Antapaccay from "../../assets/logos/18.png"
 import SunFrama from "../../assets/logos/19.png"
 import haug from "../../assets/logos/20.png"
 import Cipsa from "../../assets/logos/21.png"
+import Db from "../../assets/logos/22.png"
+import Cruz from "../../assets/logos/23.png"
+import Latina from "../../assets/logos/24.png"
+import Shakaska from "../../assets/logos/25.png"
+import Ares from "../../assets/logos/26.png"
+import Tata from "../../assets/logos/27.png"
+import Sgs from "../../assets/logos/28.png"
+import Tailoy from "../../assets/logos/29.jpg"
+import Viva from "../../assets/logos/30.png"
 import './index.css';
 
 const Home= () => {
@@ -102,58 +111,145 @@ const Home= () => {
                         <h1 className='h1-tittle-carousel'>Trabajamos con las mejores empresas del país</h1>
                     </div>
                 </div >
-                <div className="row row-no-magin container-no-padding">
-                    <div className="col-12">
-                        <div id="carouselExampleSlidesOnly" className="carousel slide" data-ride="carousel"
-                            data-interval="2000" data-pause="hover" data-wrap="true">
-                            <ol className="carousel-indicators">
-                                <li data-target="#carouselExampleSlidesOnly" data-slide-to="0" className="active"></li>
-                                <li data-target="#carouselExampleSlidesOnly" data-slide-to="1"></li>
-                            </ol>
-                            <div className="carousel-inner">
-                                <div className="item active">
-                                    <div className="row w-100 mx-auto">
-                                        <div className="col-sm-6">
-                                            <img src={Gloria} className="img-fluid mx-auto d-block" alt="..."/>
-                                        </div>
-                                        <div className="col-sm-6">
-                                            <img src={Talma} className="img-fluid mx-auto d-block" alt="..."/>
-                                        </div>
-                                        <div className="col-sm-6">
-                                            <img src={Manpower} className="img-fluid mx-auto d-block" alt="..."/>
-                                        </div>
-                                        <div className="col-sm-6">
-                                            <img src={G4S} className="img-fluid mx-auto d-block" alt="..."/>
-                                        </div>
-                                    </div>
+                <div id="carouselExampleSlidesOnly" 
+                        className="carousel slide my-0" 
+                        width="100"  
+                        data-interval="2500" data-ride="carousel"
+                        data-item="4"
+                        data-xlscreen="6"
+                        >                
+                    <div className="carousel-inner h-slide-custom">
+                        <div className="carousel-item active">
+                            <div className="row w-100 mx-auto">
+                                <div className="col-6 col-sm-6 col-md-6 mt-1">
+                                    <img className="img-fluid d-block  img-slite-custom " src={Gloria}  alt="First slide"/>
                                 </div>
-                                <div className="item">
-                                    <div className="row">
-                                        <div className="col-sm-6">
-                                            <img src={Eulen} className="img-fluid mx-auto d-block" alt="..."/>
-                                        </div>
-                                        <div className="col-sm-6">
-                                            <img src={Ngl} className="img-fluid mx-auto d-block" alt="..."/>
-                                        </div>
-                                        <div className="col-sm-6">
-                                            <img src={Chinalco} className="img-fluid mx-auto d-block" alt="..."/>
-                                        </div>
-                                        <div className="col-sm-6">
-                                            <img src={Neptunia} className="img-fluid mx-auto d-block" alt="..."/>
-                                        </div>
-                                    </div>
+                                <div className="col-6 col-sm-6 col-md-6  ">
+                                    <img className="img-fluid d-block  img-slite-custom" src={Rokis} alt="First slide"/>
                                 </div>
+                                <div className="col-6 col-sm-6 col-md-6 ">
+                                    <img className="img-fluid d-block  img-slite-custom" src={Arato}  alt="First slide"/>
+                                </div>
+                                <div className="col-6 col-sm-6 col-md-6">
+                                    <img className="img-fluid d-block  img-slite-custom" src={Autopista} alt="First slide"/>
+                                </div>                                                                              
                             </div>
                         </div>
-                    </div>
-                </div>
+                        <div className="carousel-item">
+                            <div className="row w-100 mx-auto">
+                                <div className="col-6 col-sm-6 col-md-6">
+                                    <img className="img-fluid d-block mt-4 img-slite-custom" src={Eulen} alt="First slide"/>
+                                </div>
+                                <div className="col-6 col-sm-6 col-md-6">
+                                    <img className="img-fluid d-block mt-4 img-slite-custom" src={Ngl} alt="First slide"/>
+                                </div>
+                                <div className="col-6 col-sm-6 col-md-6">
+                                    <img className="img-fluid d-block mt-4 img-slite-custom" src={Chinalco}  alt="First slide"/>
+                                </div>
+                                <div className="col-6 col-sm-6 col-md-6 mt-2">
+                                    <img className="img-fluid d-block mt-4 img-slite-custom" src={Neptunia}   alt="First slide"/>
+                                </div>                                      
+                            </div>
+                        </div>                                                                                                                                    
+                        <div className="carousel-item">
+                            <div className="row w-100 mx-auto">
+                                <div className="col-6 col-sm-6 col-md-6">
+                                    <img className="img-fluid d-block  img-slite-custom" src={IqFarma} alt="First slide"/>
+                                </div>
+                                <div className="col-6 col-sm-6 col-md-6 mt-4">
+                                    <img className="img-fluid d-block  img-slite-custom" src={Central} alt="First slide"/>
+                                </div>
+                                <div className="col-6 col-sm-6 col-md-6">
+                                    <img className="img-fluid d-block  img-slite-custom" src={Manpower}  alt="First slide"/>
+                                </div>
+                                <div className="col-6 col-sm-6 col-md-6 mt-2">
+                                    <img className="img-fluid d-block  img-slite-custom" src={G4S} alt="First slide"/>
+                                </div>                                      
+                            </div>
+                        </div>     
+                        <div className="carousel-item">
+                            <div className="row w-100 mx-auto">
+                                <div className="col-6 col-sm-6 col-md-6">
+                                    <img className="img-fluid d-block  img-slite-custom" src={Gold} alt="First slide"/>
+                                </div>
+                                <div className="col-6 col-sm-6 col-md-6">
+                                    <img className="img-fluid d-block  img-slite-custom" src={CampoSol} alt="First slide"/>
+                                </div>
+                                <div className="col-6 col-sm-6 col-md-6 mt-4">
+                                    <img className="img-fluid d-block  img-slite-custom" src={Adex}  alt="First slide"/>
+                                </div>
+                                <div className="col-6 col-sm-6 col-md-6 mt-3">
+                                    <img className="img-fluid d-block  img-slite-custom" src={CasaPalca} alt="First slide"/>
+                                </div>                                      
+                            </div>
+                        </div>    
+                        <div className="carousel-item">
+                            <div className="row w-100 mx-auto">
+                                <div className="col-6 col-sm-6 col-md-6 mt-3">
+                                    <img className="img-fluid d-block  img-slite-custom" src={Db} alt="First slide"/>
+                                </div>
+                                <div className="col-6 col-sm-6 col-md-6 mt-3">
+                                    <img className="img-fluid d-block  img-slite-custom" src={Shakaska} alt="First slide"/>
+                                </div>
+                                <div className="col-6 col-sm-6 col-md-6 mt-2 ">
+                                    <img className="img-fluid d-block  img-slite-custom" src={Tata}  alt="First slide"/>
+                                </div>
+                                <div className="col-6 col-sm-6 col-md-6 mt-2">
+                                    <img className="img-fluid d-block  img-slite-custom" src={Tailoy} alt="First slide"/>
+                                </div>                                      
+                            </div>
+                        </div>      
+                        <div className="carousel-item">
+                            <div className="row w-100 mx-auto">
+                                <div className="col-6 col-sm-6 col-md-6 mt-4">
+                                    <img className="img-fluid d-block  img-slite-custom" src={Cipsa} alt="First slide"/>
+                                </div>
+                                <div className="col-6 col-sm-6 col-md-6 mt-3">
+                                    <img className="img-fluid d-block  img-slite-custom" src={Talma} alt="First slide"/>
+                                </div>
+                                <div className="col-6 col-sm-6 col-md-6 mt-5">
+                                    <img className="img-fluid d-block  img-slite-custom" src={Cruz}  alt="First slide"/>
+                                </div>
+                                <div className="col-6 col-sm-6 col-md-6 mt-5">
+                                    <img className="img-fluid d-block  img-slite-custom" src={haug} alt="First slide"/>
+                                </div>                                      
+                            </div>
+                        </div>  
+                        <div className="carousel-item">
+                            <div className="row w-100 mx-auto">
+                                <div className="col-6 col-sm-6 col-md-6">
+                                    <img className="img-fluid d-block  img-slite-custom" src={Antapaccay} alt="First slide"/>
+                                </div>
+                                <div className="col-6 col-sm-6 col-md-6 mt-2">
+                                    <img className="img-fluid d-block  img-slite-custom" src={Ares} alt="First slide"/>
+                                </div>
+                                <div className="col-6 col-sm-6 col-md-6 mt-5">
+                                    <img className="img-fluid d-block  img-slite-custom" src={Viva}  alt="First slide"/>
+                                </div>
+                                <div className="col-6 col-sm-6 col-md-6 mt-5">
+                                    <img className="img-fluid d-block  img-slite-custom" src={Sgs} alt="First slide"/>
+                                </div>                                      
+                            </div>
+                        </div>     
+                        <div className="carousel-item">
+                            <div className="row w-100 mx-auto">
+                                <div className="col-6 col-sm-6 col-md-6 mt-2">
+                                    <img className="img-fluid d-block  img-slite-custom" src={Latina} alt="First slide"/>
+                                </div>
+                                <div className="col-6 col-sm-6 col-md-6 mt-2">
+                                    <img className="img-fluid d-block  img-slite-custom" src={SunFrama} alt="First slide"/>
+                                </div>                                                                              
+                            </div>
+                        </div>                     
+                    </div>     
+                </div>     
                 <div className="row box-container-title-three row-no-magin">
                     <div className="col-12 ">
                         <h1 className='h1-tittle-box '>Cómo inscribirte</h1>
                     </div>
-                      <div className="col-6">
-                      <img alt='conexion' src= {Ilustracion} className="icon-ilustracion" />
-                      </div>
+                    <div className="col-6">
+                        <img alt='conexion' src= {Ilustracion} className="icon-ilustracion" />
+                    </div>
                     <div className="col-5 container-no-padding">
                         <span className="text-box-three">Inscribete completando el formulario con tus datos.
                         </span>
@@ -168,7 +264,7 @@ const Home= () => {
                         </div>
                     </div>
                 </div>
-     </Fragment>
+        </Fragment>
     )
 } 
 export default Home;

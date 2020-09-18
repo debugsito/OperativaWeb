@@ -7,8 +7,8 @@ import NavBarOperativa from "../../Components/MenuOperativa";
 
 const NewPassword= (props) => {
 
-    const { handleSubmit, register, errors } = useForm();
-    
+    const { handleSubmit, register, errors, formState} = useForm();
+    const { isSubmitted } = formState;
     const onSubmit = (values) => { 
         console.log(values);
         props.history.push('/inicio') 
@@ -24,7 +24,17 @@ const NewPassword= (props) => {
                         Contraseña
                         <input
                             placeholder=".........."
-                            className={errors.password ? "form-control placeholder border-error red-input": "form-control placeholder input-icono"} 
+                            className={`form-control placeholder
+                                            ${
+                                                isSubmitted ? 
+                                                    !errors.password ?
+                                                    "input-icono"
+                                                    : 
+                                                    "border-error red-input" 
+                                                    
+                                                : ''
+                                            }
+                                        `}
                             id='password'
                             name='password'
                             type="password"

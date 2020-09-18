@@ -3,25 +3,62 @@ import { Link, withRouter } from 'react-router-dom'
 import './index.css';
 import { useForm } from "react-hook-form";
 import NavBarOperativa from "../../Components/MenuOperativa";
+import axios from "axios";
 
 const Login= (props) => {
-    const { handleSubmit, register, errors } = useForm();
+    const { handleSubmit, register, errors, formState} = useForm();
+    const { isSubmitted } = formState;
+    const baseUrl="http://3.136.22.230:5000/auth/login";
     
+
     const onSubmit = (values) => { 
         console.log(values);
-        props.history.push('/inicio') 
+        axios.post(baseUrl, { 
+            params: {
+                    email: values.usuario, 
+                    password: values.password 
+                    }
+        }).then(response=>{
+            if(response.status === 200) {
+                // Guardar el tocken que devuelve el api en el local storage
+                localStorage.setItem('token');
+                props.history.push('/inicio') 
+
+            } else if(response.staus === 401) {
+                alert(response.message);
+            }
+            else {
+                alert("Ha ocurrido un error interno.");
+                console.log(response.data);
+            }
+        }).catch(error=>{
+            alert("Ha ocurrido un error interno con el api");
+            console.log(error);
+        })
     }
     return (
         <Fragment>
+        <NavBarOperativa/>
             <div className="row justify-content-center container-padding row-no-magin">
                 <div className="col-12 col-sm-8 col-md-6 col-xl-4">
                     <h1 className='h1-custom'>INICIA SESIÓN EN OPERATIVA</h1>
-                    <form onSubmit= { handleSubmit(onSubmit) } className='form-container'>
+                    <form  className='form-container' onSubmit= { handleSubmit(onSubmit) } >
                         <label className="label-form">
                             Correo Electrónico
                             <input
                                 placeholder ="mail@ejemplo.com" 
-                                className= {errors.usuario ? "form-control placeholder border-error red-input" : "form-control placeholder"} 
+                                
+                                className={`form-control placeholder
+                                                ${
+                                                    isSubmitted ? 
+                                                        !errors.usuario ?
+                                                        "input-icono"
+                                                        : 
+                                                        "border-error red-input" 
+                                                        
+                                                    : ''
+                                                }
+                                            `}
                                 id="email"
                                 name="usuario"
                                 type="text"
@@ -42,8 +79,17 @@ const Login= (props) => {
                             Contraseña
                             <input
                                 placeholder=".........."
-                                className={errors.password ? "form-control placeholder border-error red-input": "form-control placeholder"} 
-                                // "form-control placeholder mb-2 input-icono"
+                                className={`form-control placeholder
+                                    ${
+                                        isSubmitted ? 
+                                            !errors.password ?
+                                            "input-icono"
+                                            : 
+                                            "border-error red-input" 
+                                            
+                                        : ''
+                                    }
+                                `} 
                                 id='password'
                                 name='password'
                                 type="password"
@@ -82,7 +128,6 @@ const Login= (props) => {
                     </form>
                 </div>
             </div>
-            <NavBarOperativa/>
         </Fragment>
     )
 }
