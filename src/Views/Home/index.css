@@ -26,7 +26,6 @@
     font-style: normal;
     font-weight: bold;
     font-size: 20px;
-    line-height: 130%;
     letter-spacing: 0.15px;
     color: #000000;
 }
@@ -46,7 +45,7 @@
     height: 207px;
     margin-left: 24px;
     margin-right: 24px;
-    padding-top: 24px;
+    padding-top: 12px;
 }
 .box-container-title-two{
     margin-top: 24px;
@@ -77,31 +76,33 @@
     line-height: 120%;
     letter-spacing: 0.25px;
     color: #000000;
+    margin-right: 0px;
 }
 .btn-operativa{
     background: #ED1D40;
-    font-family: 'Raleway', sans-serif;;
+    font-family: 'Raleway', sans-serif;
     font-style: normal;
     font-weight: 500;
     font-size: 14px;
     text-transform: uppercase;
     color: #FFFFFF;
-    border-radius: 0px ;
-    width: 126px;
-    height: 23px;
-    padding: 2px 0px;
-    margin-top: 8px
+    border-radius: 0px;
+    width: 134px;
+    padding: 5px 0px;
+    margin-top: 12px;
+    margin-right: 0px;
 }
 .icon-image-conexion{
     width: 110px;
-    margin:0 auto;
+    margin: 0 auto;
+    margin-top: 12px;
+    padding: 2px;
 }
 .icon-ilustracion{
-    width: 148px;
+    width: 140px;
     background: #F7F7F7;
     border-radius: 8px;
     margin:0 auto;
-    
 }
 .icon-image-rubros{
     width: 80px;
@@ -139,7 +140,6 @@ line-height: 130%;
 letter-spacing: 0.15px;
 color: #000000;
 padding-top: 20px;
-margin-top: 16px;
 }
 .h-slide-custom {
     min-height: 242px !important;

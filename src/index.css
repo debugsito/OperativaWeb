@@ -215,10 +215,8 @@ code {
   font-size: 12px;
   line-height: 14px;
   /* identical to box height */
-  
   display: flex;
   align-items: center;
-  
   color: #979797;
 }
 .span-error{
@@ -285,6 +283,12 @@ box-shadow: 2px 1px 1px 1px rgba(237,29,64,0.43);
   background-repeat: no-repeat;
   background-position: 98%;
   background-size: 32px;
+}
+.input-icoerror {
+  background-image: url(./assets/icons/Error.svg);
+  background-repeat: no-repeat;
+  background-position: 98%;  
+  background-size: 20px;
 }
 .customDatePickerWidth, 
 .customDatePickerWidth > div.react-datepicker-wrapper, 
@@ -449,7 +453,33 @@ color: #46A9D4;
   top: 1.52px;
 }
 
-
+.icon-see-container{
+  display: flex;
+  justify-content: flex-end;
+}
+.see-pass
+{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 12px;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    z-index: -1;
+}
+.space-icon-see{
+  position: absolute !important;
+  margin-left: 82% !important;
+  margin-top: 1% !important;
+  width: 22px !important;
+  height: 22px !important;
+  margin-right: 0 auto;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-right: 5px;
+}
 
 @media only screen and (max-width: 600px) {
 

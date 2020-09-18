@@ -56,7 +56,7 @@ const Home= () => {
                     <span className="text-box-one">Encuentra el trabajo que buscabas desde tu celular.
                         Más de 600 empresas reclutan a través de Operativa.
                     </span>
-                    <div className="mt-2">
+                    <div className="d-flex justify-content-start">
                         <Link 
                             className="btn btn-operativa btn-sm"
                             type='submit'
@@ -77,6 +77,8 @@ const Home= () => {
                         Encuentra el trabajo que buscabas desde tu celular.
                         Más de 600 empresas reclutan a través de Operativa.
                     </p>
+                </div>
+                <div className= "d-flex justify-content-center">
                 </div>
                     <div className="col-4">
                         <img alt='' src= {IconProduction} className="icon-image-rubros" />
@@ -114,9 +116,7 @@ const Home= () => {
                 <div id="carouselExampleSlidesOnly" 
                         className="carousel slide my-0" 
                         width="100"  
-                        data-interval="2500" data-ride="carousel"
-                        data-item="4"
-                        data-xlscreen="6"
+                        data-interval="3500" data-ride="carousel"
                         >                
                     <div className="carousel-inner h-slide-custom">
                         <div className="carousel-item active">
@@ -248,12 +248,15 @@ const Home= () => {
                         <h1 className='h1-tittle-box '>Cómo inscribirte</h1>
                     </div>
                     <div className="col-6">
-                        <img alt='conexion' src= {Ilustracion} className="icon-ilustracion" />
+                            <img alt='conexion' src= {Ilustracion} className="icon-ilustracion" />
+
                     </div>
                     <div className="col-5 container-no-padding">
+                        <div className="ml-2">
                         <span className="text-box-three">Inscribete completando el formulario con tus datos.
                         </span>
-                        <div className="">
+                        </div>
+                        <div className="d-flex justify-content-start ml-2">
                             <Link 
                                 className="btn btn-operativa btn-sm"
                                 type='submit'

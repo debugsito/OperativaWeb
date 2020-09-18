@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import { Link, withRouter } from 'react-router-dom'
 import './index.css';
 import { useForm } from "react-hook-form";
+import { IoIosEye, IoIosEyeOff } from 'react-icons/io';
 import NavBarOperativa from "../../Components/MenuOperativa";
 
 
@@ -9,9 +10,16 @@ const NewPassword= (props) => {
 
     const { handleSubmit, register, errors, formState} = useForm();
     const { isSubmitted } = formState;
+
     const onSubmit = (values) => { 
         console.log(values);
         props.history.push('/inicio') 
+    }
+
+    const [see, setSee] = React.useState(false)
+    const seePass = () =>
+    {
+        setSee(!see)        
     }
     return (
         <Fragment>
@@ -22,13 +30,21 @@ const NewPassword= (props) => {
                 <form onSubmit= { handleSubmit(onSubmit) } className='form-container'>
                     <label className="label-form">
                         Contraseña
+                        <div className="icon-see-container">
+                            {see 
+                                ? 
+                                <IoIosEye className="space-icon-see" onClick={seePass}/> 
+                                :
+                                <IoIosEyeOff className="space-icon-see" onClick={seePass}/>
+                            }
+                        </div>
                         <input
                             placeholder=".........."
                             className={`form-control placeholder
                                             ${
                                                 isSubmitted ? 
                                                     !errors.password ?
-                                                    "input-icono"
+                                                    ""
                                                     : 
                                                     "border-error red-input" 
                                                     
@@ -37,7 +53,7 @@ const NewPassword= (props) => {
                                         `}
                             id='password'
                             name='password'
-                            type="password"
+                            type={!see ? 'password' : 'text'} 
                             ref={register({
                                 required: "Este campo es requerido",
                                 minLength: { value: 6, message: "Debe contener mínimo 6 caracteres" },

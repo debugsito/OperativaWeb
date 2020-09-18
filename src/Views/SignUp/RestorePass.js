@@ -31,7 +31,7 @@ const RestorePassword= (props) => {
                                                     !errors.usuario ?
                                                     "input-icono"
                                                     : 
-                                                    "border-error red-input" 
+                                                    "border-error red-input input-icoerror" 
                                                     
                                                 : ''
                                             }
@@ -63,13 +63,11 @@ const RestorePassword= (props) => {
                             </Link> 
                         </div>
                         <div className="col-6">
-                            <Link
-                                    className="button-continue-restore btn icon-next" 
-                                    type= 'submit' 
-                                    to="/notificacion-contraseña"
-                                    >
+                            <button className="button-continue-restore btn icon-next" 
+                            type= 'submit' >
                                     RESTAURAR
-                            </Link> 
+                            </button>
+
                         </div>
                     </section>
                 </form>

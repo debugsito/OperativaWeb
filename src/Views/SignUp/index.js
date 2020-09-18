@@ -3,12 +3,19 @@ import './index.css';
 import { Link, withRouter } from 'react-router-dom';
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 import { useForm } from "react-hook-form";
+import { IoIosEye, IoIosEyeOff } from 'react-icons/io';
 import NavBarOperativa from "../../Components/MenuOperativa";
 
 const Register= (props) => {
     const [modalTerms, setModalTerms] = React.useState(false);
+    const [see, setSee] = React.useState(false)
     const { handleSubmit, register, errors, formState} = useForm();
     const { isSubmitted } = formState;
+    
+    const seePass = () =>
+    {
+        setSee(!see)        
+    }
 
     const onSubmit = (values) => { 
         console.log(values);
@@ -30,7 +37,7 @@ const Register= (props) => {
                                             !errors.usuario ?
                                             "input-icono"
                                             : 
-                                            "border-error red-input" 
+                                            "border-error red-input input-icoerror" 
                                             
                                         : ''
                                     }
@@ -53,13 +60,21 @@ const Register= (props) => {
                         </span>
                         <label className="label-form">
                             Contraseña
+                            <div className="icon-see-container">
+                                {see 
+                                    ? 
+                                    <IoIosEye className="space-icon-see" onClick={seePass}/> 
+                                    :
+                                    <IoIosEyeOff className="space-icon-see" onClick={seePass}/>
+                                }
+                            </div>
                             <input
                                 placeholder=".........."
                                 className={`form-control placeholder
                                     ${
                                         isSubmitted ? 
                                             !errors.password ?
-                                            "input-icono"
+                                            ""
                                             : 
                                             "border-error red-input" 
                                             
@@ -67,7 +82,7 @@ const Register= (props) => {
                                     }
                                 `}   
                                 name='password'
-                                type="password"
+                                type={!see ? 'password' : 'text'} 
                                 ref={register({
                                     required: "Este campo es requerido",
                                     minLength: { value: 6, message: "Debe contener mínimo 6 caracteres" },
