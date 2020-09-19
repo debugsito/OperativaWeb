@@ -9,6 +9,7 @@ import axios from "axios";
 const Login= (props) => {
     const { handleSubmit, register, errors, formState} = useForm();
     const { isSubmitted } = formState;
+    
     const baseUrl="http://3.136.22.230:5000/auth/login";
     
     const [see, setSee] = React.useState(false)
@@ -25,18 +26,19 @@ const Login= (props) => {
                     password: values.password 
                     }
         }).then(response=>{
-            if(response.status === 200) {
-                // Guardar el tocken que devuelve el api en el local storage
-                localStorage.setItem('token');
-                props.history.push('/inicio') 
+            console.log(values)
+            // if(response.status === 200) {
+            //     // Guardar el tocken que devuelve el api en el local storage
+            //     localStorage.setItem('token');
+            //     props.history.push('/inicio') 
 
-            } else if(response.staus === 401) {
-                alert(response.message);
-            }
-            else {
-                alert("Ha ocurrido un error interno.");
-                console.log(response.data);
-            }
+            // } else if(response.staus === 401) {
+            //     alert(response.message);
+            // }
+            // else {
+            //     alert("Ha ocurrido un error interno.");
+            //     console.log(response.data);
+            // }
         }).catch(error=>{
             alert("Ha ocurrido un error interno con el api");
             console.log(error);
