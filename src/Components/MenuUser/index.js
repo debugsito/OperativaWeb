@@ -1,17 +1,17 @@
 import React, { Fragment } from 'react'
-import {withRouter, NavLink} from 'react-router-dom'
+import { withRouter} from 'react-router-dom'
 import Gwyneth from "../../assets/images/Gwyneth.png"
 import LogoMedio from "../../assets/logos/logo-medio.svg"
 import './index.css'
 
-const NavBar = (props) => {
-    
-    const cerrarSesion= () =>{
-        console.log()
-            .then(()=>{
-                props.history.push('/inicio-sesion')
-            })
+//cerrar Sesion
+const NavBar = (props) => {  
+   const cerrarSesion= () =>{
+        localStorage.removeItem('token')
+        localStorage.removeItem('email')
+        props.history.push('/')    
     }
+const email = localStorage.getItem('email')
     return (
     <Fragment>
             <div className="col-12 col-sm-8 col-md-6 col-xl-4">
@@ -23,20 +23,18 @@ const NavBar = (props) => {
                             background: '#373737',
                         }}
                         >
-                            <span className="info-email mr-2">mail@example.com </span>
-                            <NavLink className="btn sign-up-text mr-2 "
-                                to='/inicio-sesion'
-                                onclick= {() => cerrarSesion()}
-                            >
-                                Cerrar Sesión
-                            </NavLink>
-                            <div className="">
-                                <img src= { LogoMedio} className='icon-img-logo' alt=""
+                        <span className="info-email mr-2">{email}</span>
+                        <button className="btn sign-up-text mr-2 "
+                            onClick= {() => cerrarSesion()}
+                        >
+                            Cerrar Sesión
+                        </button>
+                        <div className="">
+                            <img src= { LogoMedio} className='icon-img-logo' alt=""
                                 style={{
-
                                 }}/>
-                                <img src= { Gwyneth } className='icon-img mb-2' alt=""/>
-                            </div>
+                            <img src= { Gwyneth } className='icon-img mb-2' alt=""/>
+                        </div>
                     </nav>
                 </div>
             </div>
@@ -44,3 +42,4 @@ const NavBar = (props) => {
     )
 }
 export default withRouter(NavBar)
+

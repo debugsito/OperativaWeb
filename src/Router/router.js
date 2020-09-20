@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import * as ROUTES from '../Constant/routes';
 // Views
 import Home from '../Views/Home';
@@ -13,41 +13,48 @@ import ProfileInfo from '../Views/Profile/ProfileInfo'
 import ProfileAdress from '../Views/Profile/ProfileAdress'
 import ProfileExperience from '../Views/Profile/ProfileExperience'
 
-//Header & Footer
 
-import Footer from '../Components/Footer';
 
-function router() {
+//Guardar Token
+    const isAuth = () => {
+        if(localStorage.getItem('token') !== null) {
+            return true
+        }
+            return false
+};
+    function router() {
     return (
         <BrowserRouter>
-            <Switch>
-                <ClientRoute path={ROUTES.REGISTER} component={Register} />
-                <ClientRoute path={ROUTES.RESTOREPASS} component={RestorePass} />
-                <ClientRoute path={ROUTES.NOTIFICATIONPASS} component={NotificationReset} />
-                <ClientRoute path={ROUTES.NEWPASSWORD} component={NewPassword} />
-                <ClientRoute path={ROUTES.LOGIN} component={Login} />
-                <ClientRoute path={ROUTES.WELCOME} component={Welcome} />
-                <ClientRoute path={ROUTES.INFO} component={ProfileInfo} />
-                <ClientRoute path={ROUTES.INFOADRESS} component={ProfileAdress} />
-                <ClientRoute path={ROUTES.INFOEXPERIENCE} component={ProfileExperience} />  
-                <ClientRoute exact path={ROUTES.HOME} component={Home} />
+            <Switch>  
+                {/* cambio de Privados y Publicos */}
+                <Route exact path={ROUTES.HOME} component={Home} />
+                <Route path={ROUTES.LOGIN} component={Login} />
+                <Route path={ROUTES.REGISTER} component={Register} />
+                <Route path={ROUTES.RESTOREPASS} component={RestorePass} />
+                <Route path={ROUTES.NOTIFICATIONPASS} component={NotificationReset} />
+                <Route path={ROUTES.NEWPASSWORD} component={NewPassword} />              
+                <PrivateRoute path={ROUTES.WELCOME} component={Welcome} />
+                <PrivateRoute path={ROUTES.INFO} component={ProfileInfo} />
+                <PrivateRoute path={ROUTES.INFOADRESS} component={ProfileAdress} />
+                <PrivateRoute path={ROUTES.INFOEXPERIENCE} component={ProfileExperience} />  
             </Switch>
         </BrowserRouter>
     )
 
-    function ClientRoute({ component: Component, ...rest }) {
+    function PrivateRoute({ component: Component, ...rest }) {
         return (
             <Route
                 {...rest}
-                render={props =>
-                    <div>
-
-                        <div className="">
-                            <Component {...props}/>
-                        </div>
-                        <Footer/>
-                        
-                    </div>
+                render={props => 
+                    isAuth() ? (
+                        <Component {...props}/>
+                    ): (
+                        <Redirect 
+                          to= {{
+                           path: '/inicio'
+                         }}
+                        />
+                    )   
                 }
             />
         )
