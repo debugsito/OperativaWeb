@@ -383,7 +383,7 @@ box-shadow: 2px 1px 1px 1px rgba(237,29,64,0.43);
 .button-continue-notification{
   display: flex;
   justify-content: flex-end;
-  font-family: 'Raleway, sans-serif';
+  font-family: 'Raleway', sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
