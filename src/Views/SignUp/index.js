@@ -13,7 +13,7 @@ const Register= (props) => {
     const { handleSubmit, register, errors, formState} = useForm();
     const { isSubmitted } = formState;
     const [see, setSee] = React.useState(false)
-    const baseUrl="https://3.136.22.230:5000/";
+    const baseUrl="https://reqres.in/api/";
     const [error, setError] = React.useState(null)
 
     //mostrar Contraseña:
@@ -41,7 +41,7 @@ const Register= (props) => {
                         console.log(response.data)
                         console.log(response.data.token)
                         localStorage.setItem('token', response.data.token);
-                        axios.get(baseUrl+'auth/login')
+                        axios.get(baseUrl+'users/2')
                         .then((response) => {   
                             console.log(response.data.data) 
                             //Guardar Email
