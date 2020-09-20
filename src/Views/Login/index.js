@@ -27,7 +27,7 @@ const Login= (props) => {
             "email": values.usuario, 
             "password": values.password 
         }
-        axios.post(baseUrl+'login', datafield)
+        axios.post(baseUrl, datafield)
         .then((response) => {
             if(response.status === 200) {
                 console.log(response.data)
