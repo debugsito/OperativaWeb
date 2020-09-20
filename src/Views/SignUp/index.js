@@ -13,7 +13,7 @@ const Register= (props) => {
     const { handleSubmit, register, errors, formState} = useForm();
     const { isSubmitted } = formState;
     const [see, setSee] = React.useState(false)
-    const baseUrl="https://3.136.22.230:5000/user/";
+    const baseUrl="https://3.136.22.230:5000/";
     const [error, setError] = React.useState(null)
 
     //mostrar Contraseña:

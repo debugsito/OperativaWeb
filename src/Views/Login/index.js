@@ -12,7 +12,7 @@ const Login= (props) => {
     const { handleSubmit, register, errors, formState} = useForm();
     const { isSubmitted } = formState;
     // const baseUrl="https://reqres.in/api/";
-  const baseUrl="https://3.136.22.230:5000/";
+  const baseUrl="https://3.136.22.230:5000/auth/login";
     
    const [error, setError] = React.useState(null)
     const [see, setSee] = React.useState(false)
@@ -33,7 +33,7 @@ const Login= (props) => {
                 console.log(response.data)
                 console.log(response.data.token)
                 localStorage.setItem('token', response.data.token);
-                axios.get(baseUrl+'auth/login')
+                axios.get(baseUrl)
                 .then((response) => {   
                     console.log(response.data.data) 
                     //Guardar Email
