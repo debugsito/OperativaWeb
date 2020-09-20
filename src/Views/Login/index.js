@@ -12,7 +12,7 @@ const Login= (props) => {
     const { handleSubmit, register, errors, formState} = useForm();
     const { isSubmitted } = formState;
     // const baseUrl="https://reqres.in/api/";
-  const baseUrl="https://3.136.22.230:5000/auth/login";
+  const baseUrl="https://3.136.22.230:5000/";
     
    const [error, setError] = React.useState(null)
     const [see, setSee] = React.useState(false)
