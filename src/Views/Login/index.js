@@ -11,8 +11,8 @@ import { IoIosEye, IoIosEyeOff } from 'react-icons/io';
 const Login= (props) => {
     const { handleSubmit, register, errors, formState} = useForm();
     const { isSubmitted } = formState;
-    const baseUrl="https://reqres.in/api/";
- // const baseUrl="http://3.136.22.230:5000/auth/login";
+    // const baseUrl="https://reqres.in/api/";
+  const baseUrl="https://3.136.22.230:5000/auth/login";
     
    const [error, setError] = React.useState(null)
     const [see, setSee] = React.useState(false)
@@ -33,7 +33,7 @@ const Login= (props) => {
                 console.log(response.data)
                 console.log(response.data.token)
                 localStorage.setItem('token', response.data.token);
-                axios.get(baseUrl+'users/2')
+                axios.get(baseUrl+'auth/login')
                 .then((response) => {   
                     console.log(response.data.data) 
                     //Guardar Email
