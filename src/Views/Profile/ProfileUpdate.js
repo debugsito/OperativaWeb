@@ -1,15 +1,15 @@
 import React from "react";
 import NavbarOperativa from "../../Components/MenuOperativa/index"
 import {withRouter} from 'react-router-dom'
-import Ilustracion from "../../assets/images/ilustracion.svg"
+import Ilustracion from "../../assets/images/hight-five.svg"
 import './index.css';
 
 
-const Welcome= (props) => {
+const ProfileUpdate= (props) => {
     
     const onSubmit = (values) => { 
         console.log(values);
-        props.history.push('/info');
+        props.history.push('/inicio');
     }
     return (
 
@@ -20,13 +20,12 @@ const Welcome= (props) => {
                     <div className="card box-card" 
                         >
                         <div className="card-body">
+                            <h1 className='h1-title-card'>TUS DATOS SE COMPLETARON CON EXITO</h1>
+                            <p className="text-one-card">Has dado el primer paso para conseguir el trabajo que tanto anhelas.</p>
                             <img src= {Ilustracion} className="icon-ilustracion-welcome" alt="..."/>
-                            <h1 className='h1-title-card'>BIENVENIDO A OPERATIVA</h1>
-                            <p className="text-one-card">Para poder conectarte con tu trabajo ideal, necesitamos que completes tu perfil..</p>
-                            <p className="text-one-card">Llenar tus datos te tomará aproximadamente 5 minutos.</p>
                         <div className="d-flex justify-content-center">
                         <button
-                            className="btn-primary text-button-next icon-next-button-blue" 
+                            className="btn-primary text-button-next icon-next-small-button-blue" 
                             type= 'submit' 
                             onClick= {onSubmit}
                             >
@@ -40,4 +39,4 @@ const Welcome= (props) => {
         </>  
         )
 }
-export default withRouter(Welcome)
+export default withRouter(ProfileUpdate)

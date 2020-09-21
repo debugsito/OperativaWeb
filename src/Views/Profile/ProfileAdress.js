@@ -96,7 +96,7 @@ const ProfileAdress = (props) => {
                         <select 
                             className="form-control form-text-check-adress"
                             id=""
-                            onChange={handlerdepartamento}>
+                            onChange={e => handlerdepartamento()}>
                             
                             <option value={-1}>Option</option>
                             {
@@ -114,7 +114,7 @@ const ProfileAdress = (props) => {
                         Provincia
                         <select 
                             className="form-control form-text-check-adress"
-                            onChange={handlerProvincia}
+                            onChange={e => handlerProvincia()}
                             >
                                 <option value={-1}>Option</option>
                             {
