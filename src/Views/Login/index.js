@@ -11,33 +11,69 @@ import './index.css';
 const Login= (props) => {
     const { handleSubmit, register, errors, formState} = useForm();
     const { isSubmitted } = formState;
-    const baseUrl="https://reqres.in/api/";
- // const baseUrl="http://3.136.22.230:5000/auth/login";
+    const baseUrl="https://3.136.22.230:5000";
     
-   const [error, setError] = React.useState(null)
+    const [error, setError] = React.useState(null)
     const [see, setSee] = React.useState(false)
-
+    
     const seePass = () => {
         setSee(!see)        
     }
+    
+    // const baseUrl="https://reqres.in/api/";
+    // const onSubmit = (values) => { 
+    //     console.log(values);
+    //     let datafield = {
+    //         "email": values.usuario, 
+    //         "password": values.password 
+    //     }
+    //     axios.post(baseUrl+'login', datafield)
+    //     .then((response) => {
+    //         if(response.status === 200) {
+    //             console.log(response.data)
+    //             console.log(response.data.token)
+    //             localStorage.setItem('token', response.data.token);
+    //             axios.get(baseUrl+'users/2')
+    //             .then((response) => {   
+    //                 console.log(response.data.data) 
+    //                 //Guardar Email
+    //                 localStorage.setItem('email', response.data.data.email);
+    //                 props.history.push('/inicio');
 
+    //             })
+    //             .catch(function(error) {
+    //                 console.log()
+    //             })             
+    //         } else if(response.status === 401) {
+    //                 alert(response.message);
+    //         } else {
+    //             alert("Ha ocurrido un error interno.");
+    //             console.log(response.data);
+    //         }
+    //     })
+    //     .catch(function(error) {
+    //         console.log(error.status)
+    //         setError('Usuario y contraseña Incorrecta')
+    //         return
+    //     })
+    // }
     const onSubmit = (values) => { 
         console.log(values);
         let datafield = {
             "email": values.usuario, 
             "password": values.password 
         }
-        axios.post(baseUrl+'login', datafield)
+        axios.post(baseUrl+'/auth/login', datafield)
         .then((response) => {
             if(response.status === 200) {
-                console.log(response.data)
-                console.log(response.data.token)
-                localStorage.setItem('token', response.data.token);
+                console.log(response)
+                console.log(response.token)
+                localStorage.setItem('token', response.token);
                 axios.get(baseUrl+'users/2')
                 .then((response) => {   
-                    console.log(response.data.data) 
+                    console.log(response) 
                     //Guardar Email
-                    localStorage.setItem('email', response.data.data.email);
+                    localStorage.setItem('email', response.email);
                     props.history.push('/inicio');
 
                 })
@@ -48,7 +84,7 @@ const Login= (props) => {
                     alert(response.message);
             } else {
                 alert("Ha ocurrido un error interno.");
-                console.log(response.data);
+                console.log(response);
             }
         })
         .catch(function(error) {
