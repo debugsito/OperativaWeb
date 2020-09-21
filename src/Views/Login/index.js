@@ -6,13 +6,10 @@ import axios from "axios";
 import { IoIosEye, IoIosEyeOff } from 'react-icons/io';
 import './index.css';
 
-
-
 const Login= (props) => {
     const { handleSubmit, register, errors, formState} = useForm();
     const { isSubmitted } = formState;
-    const baseUrl="https://3.136.22.230:5000";
-    
+
     const [error, setError] = React.useState(null)
     const [see, setSee] = React.useState(false)
     
@@ -20,60 +17,24 @@ const Login= (props) => {
         setSee(!see)        
     }
     
-    // const baseUrl="https://reqres.in/api/";
-    // const onSubmit = (values) => { 
-    //     console.log(values);
-    //     let datafield = {
-    //         "email": values.usuario, 
-    //         "password": values.password 
-    //     }
-    //     axios.post(baseUrl+'login', datafield)
-    //     .then((response) => {
-    //         if(response.status === 200) {
-    //             console.log(response.data)
-    //             console.log(response.data.token)
-    //             localStorage.setItem('token', response.data.token);
-    //             axios.get(baseUrl+'users/2')
-    //             .then((response) => {   
-    //                 console.log(response.data.data) 
-    //                 //Guardar Email
-    //                 localStorage.setItem('email', response.data.data.email);
-    //                 props.history.push('/inicio');
-
-    //             })
-    //             .catch(function(error) {
-    //                 console.log()
-    //             })             
-    //         } else if(response.status === 401) {
-    //                 alert(response.message);
-    //         } else {
-    //             alert("Ha ocurrido un error interno.");
-    //             console.log(response.data);
-    //         }
-    //     })
-    //     .catch(function(error) {
-    //         console.log(error.status)
-    //         setError('Usuario y contraseña Incorrecta')
-    //         return
-    //     })
-    // }
+    const baseUrl="https://reqres.in/api/";
     const onSubmit = (values) => { 
         console.log(values);
         let datafield = {
             "email": values.usuario, 
             "password": values.password 
         }
-        axios.post(baseUrl+'/auth/login', datafield)
+        axios.post(baseUrl+'login', datafield)
         .then((response) => {
             if(response.status === 200) {
-                console.log(response)
-                console.log(response.token)
-                localStorage.setItem('token', response.token);
-                axios.get(baseUrl+'/user/')
+                console.log(response.data)
+                console.log(response.data.token)
+                localStorage.setItem('token', response.data.token);
+                axios.get(baseUrl+'users/2')
                 .then((response) => {   
-                    console.log(response) 
+                    console.log(response.data.data) 
                     //Guardar Email
-                    localStorage.setItem('email', response.email);
+                    localStorage.setItem('email', response.data.data.email);
                     props.history.push('/inicio');
 
                 })
@@ -84,7 +45,7 @@ const Login= (props) => {
                     alert(response.message);
             } else {
                 alert("Ha ocurrido un error interno.");
-                console.log(response);
+                console.log(response.data);
             }
         })
         .catch(function(error) {
@@ -93,6 +54,50 @@ const Login= (props) => {
             return
         })
     }
+
+    // const baseUrl="https://3.136.22.230:5000";
+
+    // const onSubmit = (values) => { 
+    //     console.log(values);
+    //     let datafield = {
+    //         "email": values.usuario, 
+    //         "password": values.password 
+    //     }
+
+    //     let options = {
+    //         headers:{
+    //             'Content-Type': 'application/x-www-form-urlencoded',
+    //             'Accept': 'application/json'           }
+    //     }
+    //     axios.post(baseUrl+'/auth/login', datafield, options)
+    //     .then((response) => {
+    //         if(response.status === 200) {
+    //             console.log(response)
+    //             console.log(response.token)
+    //             localStorage.setItem('token', response.token);
+    //             axios.get(baseUrl+'/user/'+ values.usuario)
+    //             .then((response) => {   
+    //                 console.log(response) 
+    //                 //Guardar Email
+    //                 // localStorage.setItem('email', response.email);
+    //                 // props.history.push('/inicio');
+    //             })
+    //             .catch(function(error) {
+    //                 console.log()
+    //             })             
+    //         } else if(response.status === 401) {
+    //                 alert(response.message);
+    //         } else {
+    //             alert("Ha ocurrido un error interno.");
+    //             console.log(response);
+    //         }
+    //     })
+    //     .catch(function(error) {
+    //         console.log(error.status)
+    //         setError('Usuario y contraseña Incorrecta')
+    //         return
+    //     })
+    // }
     return (
         <Fragment>
         <NavBarOperativa/>

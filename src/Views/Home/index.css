@@ -118,6 +118,7 @@
     /* identical to box height, or 17px */
     letter-spacing: 0.25px;
     color: #373737;
+    margin: 0 auto;
 }
 .box-container-align{
     margin-left: 24px;
