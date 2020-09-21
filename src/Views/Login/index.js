@@ -69,7 +69,7 @@ const Login= (props) => {
                 console.log(response)
                 console.log(response.token)
                 localStorage.setItem('token', response.token);
-                axios.get(baseUrl+'users/2')
+                axios.get(baseUrl+'/user/')
                 .then((response) => {   
                     console.log(response) 
                     //Guardar Email
