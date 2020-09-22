@@ -167,9 +167,8 @@ code {
 .input-container-select{
   position: absoluta !important;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   width: 100%;
-  margin-left: 24px;
 }
 .label-form-calen{
   display: flex;
@@ -444,6 +443,13 @@ color: #46A9D4;
   order: 0;
   align-self: center;
   top: 12px;
+}
+.icon-container{
+  background-image: url('./assets/logos/logo-container-operativa.svg');
+  width: 187.36px;
+  height: 48px;
+  left: 0px;
+  top: 1.52px;
 }
 .icon-container{
   background-image: url('./assets/logos/logo-container-operativa.svg');

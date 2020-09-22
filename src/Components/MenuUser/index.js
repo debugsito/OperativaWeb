@@ -20,7 +20,7 @@ const email = localStorage.getItem('email')
                         style= {{
                             width: "100%",
                             height:"70px",
-                            background: '#373737',
+                            background: '#F7F7F7',
                         }}
                         >
                         <span className="info-email mr-2">{email}</span>
