@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { Link, withRouter } from 'react-router-dom'
 import './index.css';
 import { useForm } from "react-hook-form";
-import NavBarOperativa from "../../Components/MenuOperativa";
+import NavBar from "../../Components/MenuUser/index"
 import axios from 'axios';
 
 const baseUrl="https://reqres.in/api/";
@@ -43,7 +43,7 @@ const RestorePassword= (props) => {
        
     return (
       <Fragment>
-        <NavBarOperativa />
+        <NavBar/>
         <div className="row justify-content-center container-padding row-no-magin">
           <div className="col-12 col-sm-8 col-md-6 col-xl-4">
             <h1 className="h1-custom-restore">RECUPERA TU CONTRASEÑA</h1>

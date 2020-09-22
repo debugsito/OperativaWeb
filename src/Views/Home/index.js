@@ -1,6 +1,6 @@
 import React, {Fragment} from "react";
 import { Link } from 'react-router-dom'
-import NavBarOperativa from "../../Components/MenuOperativa";
+import NavBar from "../../Components/MenuUser/index";
 import ImageConexion from "../../assets/images/image-conexion.svg"
 import Ilustracion from "../../assets/images/ilustracion.svg"
 import IconProduction from "../../assets/icons/icon-production.svg"
@@ -45,7 +45,7 @@ const Home= () => {
 
     return (
         <Fragment>
-        <NavBarOperativa/>
+        <NavBar/>
             <div className="row row-no-magin container-no-padding">
                 <div className="col-12 col-md-6 offset-md-3 container-no-padding">
                     <div className="row m-nav row-no-magin container-no-padding">

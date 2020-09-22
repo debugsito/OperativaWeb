@@ -1,45 +1,73 @@
-import React, { Fragment } from 'react'
-import { withRouter} from 'react-router-dom'
-import Gwyneth from "../../assets/images/Gwyneth.png"
-import LogoMedio from "../../assets/logos/logo-medio.svg"
-import './index.css'
+import React, { useState } from 'react';
+import * as FaIcons from 'react-icons/fa';
+import * as AiIcons from 'react-icons/ai';
+import { Link, withRouter } from 'react-router-dom';
+import './index.css';
+import { IconContext } from 'react-icons';
+import LogoMedio from '../../assets/logos/logo-container-operativa.svg'
 
-//cerrar Sesion
-const NavBar = (props) => {  
-   const cerrarSesion= () =>{
-        localStorage.removeItem('token')
-        localStorage.removeItem('email')
-        props.history.push('/')    
+
+function Navbar(props) {
+  const [sidebar, setSidebar] = useState(false);
+
+  const showSidebar = () => setSidebar(!sidebar);
+
+  const isAuth = () => {
+    if(localStorage.getItem('token') !== null) {
+        return true
     }
-const email = localStorage.getItem('email')
-    return (
-    <Fragment>
-            <div className="col-12 col-sm-8 col-md-6 col-xl-4">
-                <div className="d-flex">
-                    <nav className="navbar fixed-top navbar-light"
-                        style= {{
-                            width: "100%",
-                            height:"70px",
-                            background: '#F7F7F7',
-                        }}
-                        >
-                        <span className="info-email mr-2">{email}</span>
-                        <button className="btn sign-up-text mr-2 "
-                            onClick= {() => cerrarSesion()}
-                        >
-                            Cerrar Sesión
-                        </button>
-                        <div className="">
-                            <img src= { LogoMedio} className='icon-img-logo' alt=""
-                                style={{
-                                }}/>
-                            <img src= { Gwyneth } className='icon-img mb-2' alt=""/>
-                        </div>
-                    </nav>
-                </div>
+        return false
+};
+
+    const cerrarSesion= () =>{
+         localStorage.removeItem('token')
+         localStorage.removeItem('email')
+         props.history.push('/')    
+     }
+  return (
+    <>
+      <IconContext.Provider value={{ color: 'white' }}>
+        <div className='navbar2 fixed-top'>
+        <div className="">
+                <img src= {LogoMedio} className="icon-img-logo"  alt=""/>                
+        </div>
+            <div>
+                <Link to='#' className='menu-bars '>
+                    <FaIcons.FaBars onClick={showSidebar} 
+                    style={{
+                        color:"black"
+                    }}/>
+                </Link>
             </div>
-    </Fragment>
-    )
+        </div>
+        <nav className={sidebar ? 'nav-menu active' : 'nav-menu '}>
+          <ul  className='nav-menu-items ul-sidebar' onClick={showSidebar}>
+              {
+                 isAuth() ? (
+                   
+                    <li className ="nav-text">
+                    <Link onClick= {() => cerrarSesion()}><FaIcons.FaUserCircle/>
+                    <span>Cerrar Sesion</span>  
+                    </Link>
+                </li>
+                  ): (  
+                    <li className ="nav-text">
+                    <Link to="/inicio-sesion"><FaIcons.FaUserCircle/>
+                    <span>Iniciar Sesion</span>  
+                    </Link>
+                    </li>
+                   
+                  )
+              }
+                
+              
+          </ul>
+        </nav>
+      </IconContext.Provider>
+    </>
+  );
 }
-export default withRouter(NavBar)
+
+export default withRouter (Navbar);
+
 

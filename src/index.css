@@ -432,17 +432,17 @@ text-transform: uppercase;
 color: #46A9D4;
 }
 .icon-img-logo{
-  display: flex;
-  flex-direction: row;
-  padding: 0px;
-  position: fixed;
-  width: 54px;
-  height: 51px;
-  left: 12px;
-  flex: none;
-  order: 0;
-  align-self: center;
-  top: 12px;
+  display: flex !important;
+  width: 187.36px !important;
+  height: 48px !important;
+  flex-direction: row !important;
+  padding: 0px !important;
+  left: 12px !important;
+  flex: none !important;
+  order: 0 !important;
+  align-self: center !important;
+  margin-top: 12px!important;
+  float: left !important;
 }
 .icon-container{
   background-image: url('./assets/logos/logo-container-operativa.svg');
