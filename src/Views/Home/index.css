@@ -69,6 +69,7 @@
     line-height: 120%;
     letter-spacing: 0.25px;
     color: #000000;
+    margin-left: 0 !important;
 }
 .text-box-three{
     font-family: 'Museo Sans';
