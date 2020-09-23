@@ -23,7 +23,6 @@
     top: 80px;
     right: -100%;
     transition: 850ms;
-    border: blue 2px solid;
     z-index: 2;
 }
   .nav-menu.active {

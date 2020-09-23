@@ -15,29 +15,76 @@
     line-height: 130%;
     letter-spacing: 0.15px;
     color: #000000;
-    margin-left: 12px;
+    margin-left: 24px;
     margin-top: 24px;
     margin-bottom: 10px;
+    padding: 0 !important;
 }
 .h1-tittle-box{
+    margin-top: 24px;
+    margin-left: 24px;
+    font-family: 'Raleway', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 19px;
+    letter-spacing: 0.15px;
+    color: #000000;
+}
+.h1-tittle-carousel{
+    font-family: 'Raleway', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 130%;
+    letter-spacing: 0.15px;
+    color: #000000;
+    padding-top: 20px;
+    margin-left: 24px;
+    }
+.h1-text-ilustracion-box{
     margin-top: 24px;
     margin-bottom: 0;
     font-family: 'Raleway', sans-serif;
     font-style: normal;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 19px;
     letter-spacing: 0.15px;
     color: #000000;
+    margin-left: 24px;
 }
-.text-tittle-p{
-    /* Regular text */
+.text-box-one{
     font-family: 'Museo Sans';
     font-size: 14px;
     line-height: 120%;
-    /* or 17px */
     letter-spacing: 0.25px;
     color: #000000;
+    margin-left: 12px;
+    text-align: left;
+    display: flex;
+    margin-top: 12px;
+    letter-spacing: 0.25px;
+}
+.text-box-two{
+    font-family: 'Museo Sans';
+    font-size: 14px;
+    line-height: 120%;
+    letter-spacing: 1.25px;
+    color: #000000;
     padding: 10px 0px;
+    margin-left: 24px;
+    margin-right: 24px;
+    margin-bottom: 0px !important;
+    margin-top:0px !important;
+}
+.text-box-three{
+    font-family: 'Museo Sans';
+    font-size: 14px;
+    line-height: 120%;
+    letter-spacing: 1.25px;
+    color: #000000;
+    margin-left: 0!important;
+    margin-right: 0px;
+    display: flex;
 }
 .box-container-title{
     background: #F7F7F7;
@@ -52,46 +99,43 @@
     background:  #EBEBEB;
     height: 403px;
 }
-.box-container-align-two{
-    margin-top: 10px;
-    padding: 10px 0px;
-}
 .box-container-title-three{
     margin-top: 24px;
     margin-bottom: 216px;
     background:  #EBEBEB;
     height: 245px;
-    
 }
-.text-box-one{
-    font-family: 'Museo Sans';
-    font-size: 14px;
-    line-height: 120%;
-    letter-spacing: 0.25px;
-    color: #000000;
-    margin-left: 0 !important;
-}
-.text-box-three{
-    font-family: 'Museo Sans';
-    font-size: 14px;
-    line-height: 120%;
-    letter-spacing: 0.25px;
-    color: #000000;
-    margin-right: 0px;
+.box-container-align-two{
+    margin-top: 10px;
+    padding: 10px 0px;
 }
 .btn-operativa{
     background: #ED1D40;
     font-family: 'Raleway', sans-serif;
     font-style: normal;
     font-weight: 500;
-    font-size: 14px;
+    font-size: 12px;
     text-transform: uppercase;
     color: #FFFFFF;
     border-radius: 0px;
     width: 134px;
     padding: 5px 0px;
-    margin-top: 12px;
+    margin-top: 16px;
+    margin-left: 12px;
     margin-right: 0px;
+}
+.btn-ilustracion-operativa {
+    background: #ED1D40;
+    font-family: 'Raleway', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    border-radius: 0px;
+    width: 134px;
+    padding: 5px 0px;
+    margin-top: 16px;
 }
 .icon-image-conexion{
     width: 110px;
@@ -103,7 +147,7 @@
     width: 140px;
     background: #F7F7F7;
     border-radius: 8px;
-    margin:0 auto;
+    margin-left: 24px;
 }
 .icon-image-rubros{
     width: 80px;
@@ -112,11 +156,9 @@
 }
 .text-icon-rubros{
     width: 80px;
-    /* Regular text */
     font-family: 'Museo Sans';
     font-size: 14px;
     line-height: 120%;
-    /* identical to box height, or 17px */
     letter-spacing: 0.25px;
     color: #373737;
     margin: 0 auto;
@@ -133,16 +175,7 @@
     margin-top: 0px
 }
 
-.h1-tittle-carousel{
-font-family: 'Raleway', sans-serif;;
-font-style: normal;
-font-weight: bold;
-font-size: 20px;
-line-height: 130%;
-letter-spacing: 0.15px;
-color: #000000;
-padding-top: 20px;
-}
+
 .h-slide-custom {
     min-height: 242px !important;
 }

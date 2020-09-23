@@ -49,12 +49,12 @@ const Home= () => {
             <div className="row row-no-magin container-no-padding">
                 <div className="col-12 col-md-6 offset-md-3 container-no-padding">
                     <div className="row m-nav row-no-magin container-no-padding">
-                        <div className="col-12 col-sm-12 col-md-6 col-xl-4">
+                        <div className="col-12 col-sm-12 col-md-6 col-xl-4 container-no-padding">
                             <h1 className='h1-tittle-Home'>Bienvenido a Operativa</h1>
                         </div>
                     </div >
                     <div className="row box-container-title">
-                        <div className="col-7">
+                        <div className="col-7 container-no-padding">
                             <span className="text-box-one">Encuentra el trabajo que buscabas desde tu celular.
                                 Más de 600 empresas reclutan a través de Operativa.
                             </span>
@@ -72,10 +72,10 @@ const Home= () => {
                             <img alt='conexion' src= {ImageConexion} className="icon-image-conexion" />
                         </div>
                     </div>
-                    <div className="row box-container-title-two box-container-align-rubros row-no-magin">
-                        <div className="col-12">
+                    <div className="row box-container-title-two box-container-align-rubros row-no-magin container-no-padding">
+                        <div className="col-12 container-no-padding">
                             <h1 className='h1-tittle-box'>Los sectores más productivos</h1>
-                            <p className='text-tittle-p'>
+                            <p className='text-box-two'>
                                 Encuentra el trabajo que buscabas desde tu celular.
                                 Más de 600 empresas reclutan a través de Operativa.
                             </p>
@@ -108,10 +108,10 @@ const Home= () => {
                             <div className="col-4 text-center">
                             <img alt='' src= {IconOperaction} className="icon-image-rubros" />
                             <p className="text-icon-rubros">Operaciones</p>
-                        </div>
+                            </div>
                         </div>
                         <div className="row row-no-magin container-no-padding">
-                            <div className="col-12">
+                            <div className="col-12 container-no-padding">
                                 <h1 className='h1-tittle-carousel'>Trabajamos con las mejores empresas del país</h1>
                             </div>
                         </div >
@@ -245,13 +245,12 @@ const Home= () => {
                                 </div>                     
                             </div>     
                         </div>     
-                        <div className="row box-container-title-three row-no-magin">
-                            <div className="col-12 ">
-                                <h1 className='h1-tittle-box '>Cómo inscribirte</h1>
+                        <div className="row box-container-title-three row-no-magin container-no-padding">
+                            <div className="col-12 container-no-padding">
+                                <h1 className='h1-text-ilustracion-box'>Cómo inscribirte</h1>
                             </div>
-                            <div className="col-6">
+                            <div className="col-6 container-no-padding">
                                     <img alt='conexion' src= {Ilustracion} className="icon-ilustracion" />
-
                             </div>
                             <div className="col-5 container-no-padding">
                                 <div className="ml-2">
@@ -260,7 +259,7 @@ const Home= () => {
                                 </div>
                                 <div className="d-flex justify-content-start ml-2">
                                     <Link 
-                                        className="btn btn-operativa btn-sm"
+                                        className="btn btn-ilustracion-operativa btn-sm"
                                         type='submit'
                                         to="/registro"
                                         >
