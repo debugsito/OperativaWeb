@@ -28,16 +28,29 @@ function Navbar(props) {
     <>
       <IconContext.Provider value={{ color: 'white' }}>
         <div className='navbar2 fixed-top'>
-        <div className="">
-                <img src= {LogoMedio} className="icon-img-logo"  alt=""/>                
+        <div className="">                
+                <a href="/" ><img src= {LogoMedio} className="icon-img-logo"  alt="" /></a>            
         </div>
             <div>
-                <Link to='#' className='menu-bars '>
-                    <FaIcons.FaBars onClick={showSidebar} 
-                    style={{
-                        color:"black"
-                    }}/>
-                </Link>
+              {
+                sidebar ? (
+                  (
+                    <Link to='#' className='menu-bars'>
+                        <AiIcons.AiOutlineClose onClick={showSidebar} 
+                        style={{
+                            color:"black"
+                        }}/>
+                    </Link>
+                  )              
+                  ): (
+                    <Link to='#' className='menu-bars'>
+                      <FaIcons.FaBars onClick={showSidebar} 
+                      style={{
+                          color:"black"
+                      }}/>
+                    </Link>
+                )
+              }
             </div>
         </div>
         <nav className={sidebar ? 'nav-menu active' : 'nav-menu '}>
@@ -56,7 +69,6 @@ function Navbar(props) {
                     <span>Iniciar Sesion</span>  
                     </Link>
                     </li>
-                   
                   )
               }
                 
