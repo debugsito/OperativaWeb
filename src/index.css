@@ -20,6 +20,9 @@ body {
   margin-right: 0;
   margin-left: 0;
 }
+.m-nav {
+  margin-top: 100px;
+}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
