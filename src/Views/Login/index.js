@@ -191,10 +191,10 @@ const Login= (props) => {
                                 className="btn-login btn" 
                                 type= 'submit'
                                 >
-                                INICIAR SESIÓN
+                                SOLICITAR
                             </button>
                         </section>
-                        <div>
+                        <div className="space-spam-login-register">
                             <span className="info-form">Si aún no tienes una cuenta <a href="/registro">registrate aquí</a></span>
                         </div>
                     </form>

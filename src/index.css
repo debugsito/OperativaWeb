@@ -37,7 +37,7 @@ code {
 /* Forms */
 .h1-custom {
   position: static;
-  width: 312px;
+  /* width: 312px; */
   height: 62px;
   margin-top: 118px;
   margin-left: 0 !important;
@@ -303,19 +303,22 @@ box-shadow: 2px 1px 1px 1px rgba(237,29,64,0.43);
   margin-bottom: 12px;
 }
 .btn-cancel-register{
-  /* button/secondary */
-  position: static;
+  /*button/secondary*/position: static;
   width: 46%;
   height: 40px;
   left: 0px;
   top: 0px;
   border: 1px solid #979797;
   color: #B9B9BA;
-  box-sizing: border-box;   
+  box-sizing: border-box;
+  border-radius: 0px;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  -ms-border-radius: 0px;
+  -o-border-radius: 0px;
 }
 .btn-cancel-pr{
-  /* button/secondary */
-  min-width: 150px;
+  /*button/secondary*/min-width: 150px;
   height: 40px;
   border: 1px solid #979797;
   color: #B9B9BA;
@@ -325,27 +328,40 @@ box-shadow: 2px 1px 1px 1px rgba(237,29,64,0.43);
   font-weight: 500;
   font-size: 14px;
   line-height: 16px;
-  padding: 12px;   
+  padding: 12px;
+  border-radius: 0px !important;
+  -webkit-border-radius: 0px !important;
+  -moz-border-radius: 0px !important;
+  -ms-border-radius: 0px !important;
+  -o-border-radius: 0px !important;
 }
 .btn-register{
   position: static;
   width: 46%;
   height: 40px;
-  /* primary */
-  background: #ED1D40;
+  /*primary*/background: #ED1D40;
   color: #FFFFFF;
   box-sizing: border-box;
   margin-left: 8%;
+  border-radius: 0px ;
+  -webkit-border-radius: 0px ;
+  -moz-border-radius: 0px ;
+  -ms-border-radius: 0px ;
+  -o-border-radius: 0px ;
 }
 .btn-login {
   position: static;
   width: 48%;
   height: 40px;
-  /* primary */
-  background: #ED1D40;
+  /*primary*/background: #ED1D40;
   color: #FFFFFF;
   box-sizing: border-box;
   margin-left: 6%;
+  border-radius: 0px !important ;
+  -webkit-border-radius: 0px !important ;
+  -moz-border-radius: 0px !important ;
+  -ms-border-radius: 0px !important ;
+  -o-border-radius: 0px !important ;
 }
 .button-sign-up {
   width: 100%;
@@ -403,7 +419,16 @@ box-shadow: 2px 1px 1px 1px rgba(237,29,64,0.43);
 .info-form{
   font-family: 'Raleway', sans-serif;
   font-size: 12px;
-  line-height: 130%;  
+  line-height: 130%; 
+  margin-left: 0 !important; 
+}.info-form-term{
+  font-family: 'Raleway', sans-serif;
+  font-size: 12px;
+  line-height: 130%; 
+  margin-left: 4px; 
+}
+.space-spam-login-register{
+  margin-top: 24px;
 }
 
 .terms-checkbox {

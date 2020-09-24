@@ -165,7 +165,7 @@ const Register= (props) => {
                         <span className="span-error">
                             {errors.dni && errors.dni.message}
                         </span>
-                    <label className="mt-2">
+                    <label className="">
                         <input
                           className="terms-checkbox "
                           name="terms"
@@ -174,7 +174,7 @@ const Register= (props) => {
                             required: "Debe aceptar los términos y condiciones",
                           })}
                         />
-                        <span className="info-form ml-2">
+                        <span className="info-form-term">
                             Acepto{" "}
                             <a href="#" onClick={(e) => setModalTerms(!modalTerms)}>
                               términos y condiciones
@@ -189,10 +189,10 @@ const Register= (props) => {
                           CANCELAR
                         </Link>
                         <button className="btn-register btn" type="submit">
-                            REGISTRARME
+                            SOLICITAR
                         </button>
                     </section>
-                    <div>
+                    <div className="space-spam-login-register">
                         <span className="info-form">
                             Si ya tienes una cuenta{" "}
                             <a href="/inicio-sesion">inicia sesión aquí</a>

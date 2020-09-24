@@ -16,27 +16,28 @@ const RestorePassword= (props) => {
     
     const onSubmit = (values) => { 
         console.log(values);
-        let datafield = {
-          "email": values.usuario
-        }
-          axios.post(baseUrl+'reset', datafield)
-              .then((response) => {
-              if(response.status === 200) {
-                  console.log(response.data)
-                  console.log(response.data.token)            
-              } else if(response.status === 401) {
-                      alert(response.message);
-              } else {
-                  alert("Ha ocurrido un error interno.");
-                  console.log(response.data);
-              }
-              props.history.push('/notificacion-contraseña')
-          })
-          .catch(function(error) {
-              console.log(error.status)
-              setError('Usuario y contraseña Incorrecta')
-              return
-          })
+      props.history.push('/notificacion-contraseña')
+        // let datafield = {
+        //   "email": values.usuario
+        // }
+        //   axios.post(baseUrl+'reset', datafield)
+        //       .then((response) => {
+        //       if(response.status === 200) {
+        //           console.log(response.data)
+        //           console.log(response.data.token)            
+        //       } else if(response.status === 401) {
+        //               alert(response.message);
+        //       } else {
+        //           alert("Ha ocurrido un error interno.");
+        //           console.log(response.data);
+        //       }
+        //       props.history.push('/notificacion-contraseña')
+        //   })
+        //   .catch(function(error) {
+        //       console.log(error.status)
+        //       setError('Usuario y contraseña Incorrecta')
+        //       return
+        //   })
       }
          
     
@@ -88,13 +89,13 @@ const RestorePassword= (props) => {
                   </Link>
                 </div>
                 <div className="col-6">
-                  <Link
+                  <button
                     className="button-continue-restore btn icon-next"
                     type="submit"
                     to="/notificacion-contraseña"
                   >
-                    RESTAURAR
-                  </Link>
+                    CONTINUAR
+                  </button>
                 </div>
               </section>
             </form>

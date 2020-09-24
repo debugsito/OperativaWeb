@@ -15,28 +15,29 @@ const NewPassword= (props) => {
 
     const onSubmit = (values) => { 
         console.log(values);
-        let datafield = {
-            "password": values.password,
-            "token": props.match.params.token
-          }
-            axios.post(baseUrl+'resetpassword', datafield)
-            .then((response) => {
-                if(response.status === 200) {
-                    console.log(response.data)
-                    console.log(response.data.token)            
-                } else if(response.status === 401) {
-                        alert(response.message);
-                } else {
-                    alert("Ha ocurrido un error interno.");
-                    console.log(response.data);
-                }
-                props.history.push('/iniciar-sesion')
-            })
-            .catch(function(error) {
-                console.log(error.status)
-                setError('Usuario y contraseña Incorrecta')
-                return
-            })
+        props.history.push('/inicio-sesion')
+        // let datafield = {
+        //     "password": values.password,
+        //     "token": props.match.params.token
+        //   }
+        //     axios.post(baseUrl+'resetpassword', datafield)
+        //     .then((response) => {
+        //         if(response.status === 200) {
+        //             console.log(response.data)
+        //             console.log(response.data.token)            
+        //         } else if(response.status === 401) {
+        //                 alert(response.message);
+        //         } else {
+        //             alert("Ha ocurrido un error interno.");
+        //             console.log(response.data);
+        //         }
+        //         props.history.push('/iniciar-sesion')
+        //     })
+        //     .catch(function(error) {
+        //         console.log(error.status)
+        //         setError('Usuario y contraseña Incorrecta')
+        //         return
+        //     })
         }          
     const [see, setSee] = React.useState(false)
     const seePass = () =>
@@ -66,7 +67,7 @@ const NewPassword= (props) => {
                                     ${
                                         isSubmitted ? 
                                             !errors.password ?
-                                            "input-icono"
+                                            ""
                                             : 
                                             "border-error red-input"                                            
                                         : ''
@@ -99,7 +100,7 @@ const NewPassword= (props) => {
                             className="btn-login btn" 
                             type= 'submit'
                             >
-                            CREAR
+                            SOLICITAR
                         </button>
                     </section>
                 </form>
