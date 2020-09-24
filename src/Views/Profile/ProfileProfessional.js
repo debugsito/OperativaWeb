@@ -129,13 +129,21 @@ const ProfileProfesional = (props) => {
                                 >
                                 AGREGAR OTRA EXPERIENCIA
                             </Link> 
-                            <Link
-                                className="button-continue btn icon-next" 
-                                type= 'submit' 
-                                to='/informacion-completada-con-exito'
-                                >
-                                CONTINUAR
-                            </Link>                    
+                    <section  className="container-buttons-form">
+                        <Link
+                            className="btn-cancel-form btn" 
+                            type= 'submit' 
+                            to='/inicio'
+                            >
+                            CANCELAR
+                        </Link> 
+                        <button
+                            className="button-continue btn icon-next" 
+                            type= 'submit' 
+                            >
+                            CONTINUAR 
+                        </button> 
+                    </section>                           
                     </form>
                 </Fragment>
     )

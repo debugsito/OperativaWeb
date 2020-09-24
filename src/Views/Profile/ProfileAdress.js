@@ -206,15 +206,21 @@ const ProfileAdress = (props) => {
                             </label>
                         </div>
                     </label>
-                    <section  className="container-buttons">
+                    <section  className="container-buttons-form">
                         <Link
+                            className="btn-cancel-form btn" 
+                            type= 'submit' 
+                            to='/inicio'
+                            >
+                            CANCELAR
+                        </Link> 
+                        <button
                             className="button-continue btn icon-next" 
                             type= 'submit' 
-                            to="/info-experiencia"
                             >
                             CONTINUAR 
-                        </Link> 
-                    </section>                      
+                        </button> 
+                    </section>                             
                     </form>
                 </div>
             </div>
