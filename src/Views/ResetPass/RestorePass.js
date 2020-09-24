@@ -1,9 +1,9 @@
 import React, { Fragment } from "react";
 import { Link, withRouter } from 'react-router-dom'
-import './index.css';
 import { useForm } from "react-hook-form";
 import NavBar from "../../Components/MenuUser/index"
 import axios from 'axios';
+import './index.css';
 
 const baseUrl="https://reqres.in/api/";
 

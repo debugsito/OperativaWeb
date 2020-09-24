@@ -4,14 +4,13 @@ import * as ROUTES from '../Constant/routes';
 // Views
 import Home from '../Views/Home';
 import Register from '../Views/SignUp/index'
-import RestorePass from "../Views/SignUp/RestorePass"
-import NotificationReset from "../Views/SignUp/NotificationReset"
-import NewPassword from "../Views/SignUp/NewPassword"
+import RestorePass from "../Views/ResetPass/RestorePass"
+import NotificationReset from "../Views/Notificaciones/NotificationReset"
+import NewPassword from "../Views/ResetPass/NewPassword"
 import Login from "../Views/Login/index"
 import Welcome from '../Views/Welcome/Welcome'
 import ProfileInfo from '../Views/Profile/ProfileInfo'
 import ProfileAdress from '../Views/Profile/ProfileAdress'
-
 import ProfileAcademic from '../Views/Profile/ProfileAcademic'
 import ProfileExperience from '../Views/Profile/ProfileExperience'
 // import ProfileProfesional from '../Views/Profile/ProfileProfesional'
