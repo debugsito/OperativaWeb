@@ -17,8 +17,7 @@ const Welcome= (props) => {
             <NavBar/>
             <div className="row justify-content-center row-no-magin">
                 <div className="col-12 col-sm-8 col-md-6 col-xl-4">
-                    <div className="card box-card" 
-                        >
+                    <div className="card box-card" >
                         <div className="card-body">
                             <img src= {Ilustracion} className="icon-ilustracion-welcome" alt="..."/>
                             <h1 className='h1-title-card'>BIENVENIDO A OPERATIVA</h1>

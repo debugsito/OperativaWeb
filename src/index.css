@@ -144,15 +144,13 @@ code {
 }
 .form-container-components{
   margin-top: 0px;
-  margin-left:12px;
-  margin-right: 12px;
 }
 .form-container-select{
   margin-top: -40px;
 }
 
 .label-form{
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Open Sans';
   font-size: 16px;
   font-weight: bold;
   line-height: 19px;
@@ -203,7 +201,7 @@ code {
   text-align: left;
 }
 .form-text-check{
-  font-family: MuseoSans;
+  font-family: 'MuseoSans';
   font-size: 16px;
   line-height: 19px;
   color: #373737;
@@ -535,6 +533,17 @@ color: #46A9D4;
   justify-content: flex-end;
   align-items: center;
   margin-right: 5px;
+}
+
+.text-form-academic{
+  height: 38px;
+  margin-left: 0px;
+  margin-top: 40px;
+  font-family: 'MuseoSans';
+  font-size: 16px;
+  line-height: 19px;
+  color: #000000;
+
 }
 
 @media only screen and (max-width: 600px) {

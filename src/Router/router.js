@@ -11,6 +11,8 @@ import Login from "../Views/Login/index"
 import Welcome from '../Views/Welcome/Welcome'
 import ProfileInfo from '../Views/Profile/ProfileInfo'
 import ProfileAdress from '../Views/Profile/ProfileAdress'
+
+import ProfileAcademic from '../Views/Profile/ProfileAcademic'
 import ProfileExperience from '../Views/Profile/ProfileExperience'
 // import ProfileProfesional from '../Views/Profile/ProfileProfesional'
 import ProfileUpdate from '../Views/Profile/ProfileUpdate'
@@ -38,6 +40,7 @@ import ProfileUpdate from '../Views/Profile/ProfileUpdate'
                 <PrivateRoute path={ROUTES.WELCOME} component={Welcome} />
                 <PrivateRoute path={ROUTES.INFO} component={ProfileInfo} />
                 <PrivateRoute path={ROUTES.INFOADRESS} component={ProfileAdress} />
+                <PrivateRoute path={ROUTES.INFOACADEMIC} component={ProfileAcademic} />
                 <PrivateRoute path={ROUTES.INFOEXPERIENCE} component={ProfileExperience} />
                 {/* <PrivateRoute path={ROUTES.INFOEXPERIENCEPRO} component={ProfileProfesional} />   */}
                 <PrivateRoute path={ROUTES.PROFILEUPDATESUCCESSFUL} component={ProfileUpdate} />   
