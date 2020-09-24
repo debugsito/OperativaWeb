@@ -97,7 +97,7 @@ code {
 }
 .h1-title-form {
   position: absolute;
-  width: 312px;
+  /* width: 312px; */
   height: 84px;
   left: 24px;
   top: 112px;
@@ -114,7 +114,7 @@ code {
 }
 .h1-form{
   position: absolute;
-  width: 312px;
+  /* width: 312px; */
   height: 37px;
   left: 24px;
   top: 246px;
