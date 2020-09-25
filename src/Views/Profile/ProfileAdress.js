@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import NavBar from "../../Components/MenuUser/index"
 import { Link, withRouter } from 'react-router-dom'
 import { useForm } from "react-hook-form";
+import Stepper from "./Stepper";
 import './index.css';
 
 const onlyNumbers= (e)=> {
@@ -16,7 +17,7 @@ const ProfileAdress = (props) => {
     
     const onSubmit = (values) => { 
         console.log(values);
-        props.history.push('/info-experiencia')
+        props.history.push('/informacion-academica')
     } 
     
     const [listDepartament, setListDepartament]= useState([])
@@ -73,13 +74,24 @@ const ProfileAdress = (props) => {
         return (
             <Fragment>
             <NavBar/>
-            <div className="row justify-content-center row-no-magin">
+            {/* <div className="row justify-content-center row-no-magin">
                 <div className="col-12 col-sm-8 col-md-6 col-xl-4">
                 <div>
                     <h1 className='h1-title-form'>COMPLETA TU REGISTRO</h1>
                 </div>
-                <h1 className='h1-form'>Completa tu registro</h1>
-                <form name="myForm" onSubmit= { handleSubmit(onSubmit)} className='form-container-info'>
+                <h1 className='h1-form'>Completa tu registro</h1> */}
+                <div className="row row-no-magin padding-container">
+                    <div className="col-12 col-md-6 offset-md-3 container-no-padding m-nav-form">
+                        <h1 className='h1-title-form'>COMPLETA TU REGISTRO</h1>
+                    </div>
+                    <div className="col-12 col-md-6 offset-md-3 container-no-padding mt-stepper">
+                        <Stepper current = {1} />
+                    </div>
+                    <div className="col-12 col-md-6 offset-md-3 container-no-padding">
+                        <h1 className='h1-form'>Completa tu registro</h1>
+                    </div>
+                    <div className="col-12  col-md-6 offset-md-3 container-no-padding">
+                    <form name="myForm" onSubmit= { handleSubmit(onSubmit)} className='form-container-info'>
                     <label className="label-form">
                         Dirección
                         <input
@@ -222,8 +234,8 @@ const ProfileAdress = (props) => {
                         </button> 
                     </section>                             
                     </form>
+                    </div>
                 </div>
-            </div>
         </Fragment>
     )
 }

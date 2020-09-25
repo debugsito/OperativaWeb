@@ -5,6 +5,7 @@ import DatePicker,{registerLocale}from "react-datepicker"
 import 'react-datepicker/dist/react-datepicker.css'
 import es from 'date-fns/locale/es';
 import { useForm } from "react-hook-form";
+import Stepper from "./Stepper";
 import './index.css';
 
 registerLocale("es", es);
@@ -16,7 +17,7 @@ const ProfileAcademic = (props) => {
 
     const onSubmit = (values) => { 
         console.log(values);
-        props.history.push('/')
+        props.history.push('/info-experiencia')
     } 
 
     const onlyNumbers= (e)=> {
@@ -28,14 +29,19 @@ const ProfileAcademic = (props) => {
     return (
         <Fragment>
             <NavBar/>
-            <div className="row justify-content-center row-no-magin">
-                <div className="col-12 col-sm-8 col-md-6 col-xl-4">
-                <div>
+            <div className="row row-no-magin padding-container">
+                <div className="col-12 col-md-6 offset-md-3 container-no-padding m-nav-form">
                     <h1 className='h1-title-form'>COMPLETA TU REGISTRO</h1>
                 </div>
-                <h1 className='h1-form'>Estudios</h1>
-                <form name="myForm" onSubmit= { handleSubmit(onSubmit)} className='form-container-info'>
-                    <p className= "text-form-academic">Ingresa los datos del último nivel de estudios que alcanzaste.</p>
+                <div className="col-12 col-md-6 offset-md-3 container-no-padding mt-stepper">
+                    <Stepper current = {2} />
+                </div>
+                <div className="col-12 col-md-6 offset-md-3 container-no-padding">
+                    <h1 className='h1-form'>Estudios</h1>
+                </div>
+                <div className="col-12  col-md-6 offset-md-3 container-no-padding">
+                <form name="myForm" onSubmit= { handleSubmit(onSubmit)} className=''>
+                    <p className="text-form-academic">Ingresa los datos del último nivel de estudios que alcanzaste.</p>
                 <label className="label-form mt-1">         
                         Nivel máximo alcanzado
                         <div className="form-check my-2">

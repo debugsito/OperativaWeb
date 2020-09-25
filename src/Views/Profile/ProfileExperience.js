@@ -2,8 +2,9 @@ import React, { Fragment, useEffect} from "react";
 import NavBar from "../../Components/MenuUser/index"
 import { Link, withRouter } from 'react-router-dom'
 import { useForm } from "react-hook-form";
-import './index.css';
+import Stepper from "./Stepper";
 import ProfileProfessional from "./ProfileProfessional";
+import './index.css';
 
 const ProfileAdress = (props) => { 
 
@@ -37,13 +38,24 @@ const ProfileAdress = (props) => {
     return (
         <Fragment>
         <NavBar/>
-            <div className="row justify-content-center row-no-magin">
+            {/* <div className="row justify-content-center row-no-magin">
                 <div className="col-12 col-sm-8 col-md-6 col-xl-4">
                 <div>
                     <h1 className='h1-title-form'>COMPLETA TU REGISTRO</h1>
                 </div>
-                <h1 className='h1-form'>Completa tu experiencia profesional</h1>
-                <form name="myForm" onSubmit= { handleSubmit(onSubmit)} className='form-container-info'>
+                <h1 className='h1-form'>Completa tu experiencia profesional</h1> */}
+            <div className="row row-no-magin padding-container">
+                <div className="col-12 col-md-6 offset-md-3 container-no-padding m-nav-form">
+                    <h1 className='h1-title-form'>COMPLETA TU REGISTRO</h1>
+                </div>
+                <div className="col-12 col-md-6 offset-md-3 container-no-padding mt-stepper">
+                    <Stepper current = {3} />
+                </div>
+                <div className="col-12 col-md-6 offset-md-3 container-no-padding">
+                    <h1 className='h1-form'>Completa tu experiencia profesional</h1>
+                </div>
+                <div className="col-12  col-md-6 offset-md-3 container-no-padding">
+                <form name="myForm" onSubmit= { handleSubmit(onSubmit)} className=''>
                     <label className="label-form mt-2 mb-2">         
                         Expericia laboral
                         <div className= "input-container-select mt-2">

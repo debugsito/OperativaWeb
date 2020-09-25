@@ -33,7 +33,8 @@ const ProfileProfesional = (props) => {
             const listHeadings= useHeadings();
             return (
                 <Fragment>
-                    <form name="myForm" onSubmit= { handleSubmit(onSubmit)} className='form-container-components'>
+                    <div className="col-12  col-md-6 offset-md-3 container-no-padding">
+                        <form name="myForm" onSubmit= { handleSubmit(onSubmit)} className='form-container-components'>
                         <label className="label-form">
                             Cargo
                             <input
@@ -145,7 +146,9 @@ const ProfileProfesional = (props) => {
                         </button> 
                     </section>                           
                     </form>
+                    </div>
                 </Fragment>
+
     )
 }
 export default withRouter(ProfileProfesional) 

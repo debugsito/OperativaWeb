@@ -23,7 +23,17 @@ body {
 .m-nav {
   margin-top: 100px;
 }
-
+.m-nav-form {
+    margin-top: 80px;
+}
+.mt-stepper{
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.padding-container {
+  padding-right: 24px !important;
+  padding-left: 24px !important;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -96,11 +106,12 @@ code {
   margin-top: 244px;
 }
 .h1-title-form {
-  position: absolute;
+  /* position: absolute; */
   /* width: 312px; */
   height: 84px;
+  margin-top:37px;
   left: 24px;
-  top: 112px;
+  /* mtop: 112px; */
   /* Heading 1 */
   font-family: 'Raleway', sans-serif;
   font-style: normal;
@@ -111,13 +122,14 @@ code {
   text-transform: uppercase;
   /* darker-gray */
   color: #373737;
+  margin-bottom:0;  
 }
 .h1-form{
-  position: absolute;
+  /* position: absolute; */
   /* width: 312px; */
-  height: 37px;
+  /* height: 37px; */
   left: 24px;
-  top: 246px;
+  margin-top: 12px;
   /* Heading 1 */
   font-family: 'Raleway', sans-serif;
   font-style: normal;
@@ -136,11 +148,6 @@ code {
   margin-top: 40px;
   margin-left: 0px !important;
   margin-right: 0px !important;
-}
-.form-container-info{
-  margin-top: 294px;
-  margin-left:12px;
-  margin-right: 12px;
 }
 .form-container-components{
   margin-top: 0px;
@@ -387,12 +394,12 @@ box-shadow: 2px 1px 1px 1px rgba(237,29,64,0.43);
   font-weight: 500;
   font-size: 14px;
   line-height: 16px;
-  display: flex;
+  /* display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: flex-end; */
   text-transform: uppercase;
   color: #373737;
-  margin: auto;
+  /* margin: auto; */
 }
 .button-continue-restore{
   font-family: 'Raleway, sans-serif';
@@ -537,8 +544,8 @@ color: #46A9D4;
 
 .text-form-academic{
   height: 38px;
-  margin-left: 0px;
-  margin-top: 40px;
+  /* margin-left: 0px;
+  margin-top: 40px; */
   font-family: 'MuseoSans';
   font-size: 16px;
   line-height: 19px;

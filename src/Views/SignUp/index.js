@@ -77,10 +77,6 @@ const Register= (props) => {
             return
         })
     }
-
-
-
-
     return (
       <Fragment>
           <NavBar/>
