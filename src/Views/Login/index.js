@@ -64,37 +64,37 @@ const Login= (props) => {
             "password": values.password 
         }
 
-        let options = {
-            headers:{
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Accept': 'application/json'           }
-        }
-        axios.post(baseUrl+'/auth/login', datafield, options)
-            console.log(baseUrl)
+        // let options = {
+        //     headers:{
+        //         'Content-Type': 'application/x-www-form-urlencoded',
+        //         'Accept': 'application/json'           }
+        // }
+        axios.post(baseUrl+'/auth/login', datafield)
         .then((response) => {
-            if(response.status === 200) {
-                console.log(response)
-                console.log(response.token)
-                localStorage.setItem('token', response.token);
-                axios.get(baseUrl+'/user/'+ values.usuario)
-                .then((response) => {   
-                    console.log(response) 
-                    //Guardar Email
-                    // localStorage.setItem('email', response.email);
-                    // props.history.push('/inicio');
-                })
-                .catch(function(error) {
-                    console.log()
-                })             
-            } else if(response.status === 401) {
-                    alert(response.message);
-            } else {
-                alert("Ha ocurrido un error interno.");
-                console.log(response);
-            }
+            console.log(response)
+            // if(response.status === 200) {
+            //     console.log(response)
+            //     console.log(response.token)
+            //     localStorage.setItem('token', response.token);
+            //     axios.get(baseUrl+'/user/'+ values.usuario)
+            //     .then((response) => {   
+            //         console.log(response) 
+            //         //Guardar Email
+            //         // localStorage.setItem('email', response.email);
+            //         // props.history.push('/inicio');
+            //     })
+            //     .catch(function(error) {
+            //         console.log(error)
+            //     })             
+            // } else if(response.status === 401) {
+            //         alert(response.message);
+            // } else {
+            //     alert("Ha ocurrido un error interno.");
+            //     console.log(response);
+            // }
         })
         .catch(function(error) {
-            console.log(error.status)
+            console.log(error)
             setError('Usuario y contraseña Incorrecta')
             return
         })
