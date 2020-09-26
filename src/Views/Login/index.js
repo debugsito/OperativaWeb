@@ -55,7 +55,7 @@ const Login= (props) => {
     //     })
     // }
 
-    const baseUrl="https://www.operativaapi.tk:8080/";
+    const baseUrl="https://www.operativaapi.tk:8080";
 
     const onSubmit = (values) => { 
         console.log(values);
@@ -69,7 +69,7 @@ const Login= (props) => {
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'Accept': 'application/json'           }
         }
-        axios.post(baseUrl+'/auth/login', datafield, options)
+        axios.post(baseUrl+'auth/login', datafield, options)
         .then((response) => {
             if(response.status === 200) {
                 console.log(response)
