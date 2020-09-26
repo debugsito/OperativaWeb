@@ -69,7 +69,8 @@ const Login= (props) => {
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'Accept': 'application/json'           }
         }
-        axios.post(baseUrl+'auth/login', datafield, options)
+        axios.post(baseUrl+'/auth/login', datafield, options)
+            console.log(baseUrl)
         .then((response) => {
             if(response.status === 200) {
                 console.log(response)
