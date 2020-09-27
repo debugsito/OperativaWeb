@@ -17,87 +17,87 @@ const Login= (props) => {
         setSee(!see)        
     }
     
-    const baseUrl="https://reqres.in/api/";
+//     const baseUrl="https://reqres.in/api/";
 
+//     const onSubmit = (values) => { 
+//         console.log(values);
+//         let datafield = {
+//             "email": values.usuario, 
+//             "password": values.password 
+//         }
+//         axios.post(baseUrl+'login', datafield)
+//         .then((response) => {
+//             if(response.status === 200) {
+//                 console.log(response.data)
+//                 console.log(response.data.token)
+//                 localStorage.setItem('token', response.data.token);
+//                 axios.get(baseUrl+'users/2')
+//                 .then((response) => {   
+//                     console.log(response.data.data) 
+//                     //Guardar Email
+//                     localStorage.setItem('email', response.data.data.email);
+//                     props.history.push('/inicio');
+//                 })
+//                 .catch(function(error) {
+//                     console.log()
+//                 })             
+//             } else if(response.status === 401) {
+//                     alert(response.message);
+//             } else {
+//                 alert("Ha ocurrido un error interno.");
+//                 console.log(response.data);
+//             }
+//         })
+//         .catch(function(error) {
+//             console.log(error.status)
+//             setError('Usuario y contraseña Incorrecta')
+//             return
+//         })
+//     }
+
+    const baseUrl="https://www.operativaapi.tk:8080/";
     const onSubmit = (values) => { 
         console.log(values);
         let datafield = {
             "email": values.usuario, 
             "password": values.password 
         }
-        axios.post(baseUrl+'login', datafield)
+        let options = {
+            headers:{
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Accept': 'application/json'
+            }
+        }
+        axios.post(baseUrl+'auth/login', datafield, options)
         .then((response) => {
+            console.log(response)
             if(response.status === 200) {
-                console.log(response.data)
-                console.log(response.data.token)
-                localStorage.setItem('token', response.data.token);
-                axios.get(baseUrl+'users/2')
+                console.log(response)
+                console.log(response.token)
+                localStorage.setItem('token', response.token);
+                axios.get(baseUrl+'/user/'+ values.usuario)
                 .then((response) => {   
-                    console.log(response.data.data) 
+                    console.log(response) 
                     //Guardar Email
-                    localStorage.setItem('email', response.data.data.email);
+                    localStorage.setItem('email', response.email);
                     props.history.push('/inicio');
                 })
                 .catch(function(error) {
-                    console.log()
+                    console.log(error)
                 })             
             } else if(response.status === 401) {
                     alert(response.message);
             } else {
                 alert("Ha ocurrido un error interno.");
-                console.log(response.data);
+                console.log(response);
             }
         })
         .catch(function(error) {
-            console.log(error.status)
+            console.log(error)
             setError('Usuario y contraseña Incorrecta')
             return
         })
     }
-
-    // const baseUrl="https://www.operativaapi.tk:8080/";
-    // const onSubmit = (values) => { 
-    //     console.log(values);
-    //     let datafield = {
-    //         "email": values.usuario, 
-    //         "password": values.password 
-    //     }
-    //     let options = {
-    //         headers:{
-    //             'Content-Type': 'application/x-www-form-urlencoded',
-    //             'Accept': 'application/json'
-    //         }
-    //     }
-    //     axios.post(baseUrl+'auth/login', datafield, options)
-    //     .then((response) => {
-    //         console.log(response)
-    //         if(response.status === 200) {
-    //             console.log(response)
-    //             console.log(response.token)
-    //             localStorage.setItem('token', response.token);
-    //             axios.get(baseUrl+'/user/'+ values.usuario)
-    //             .then((response) => {   
-    //                 console.log(response) 
-    //                 //Guardar Email
-    //                 localStorage.setItem('email', response.email);
-    //                 props.history.push('/inicio');
-    //             })
-    //             .catch(function(error) {
-    //                 console.log(error)
-    //             })             
-    //         } else if(response.status === 401) {
-    //                 alert(response.message);
-    //         } else {
-    //             alert("Ha ocurrido un error interno.");
-    //             console.log(response);
-    //         }
-    //     })
-    //     .catch(function(error) {
-    //         console.log(error)
-    //         setError('Usuario y contraseña Incorrecta')
-    //         return
-    //     })
-    // }
     return (
         <Fragment>
         <NavBar/>
