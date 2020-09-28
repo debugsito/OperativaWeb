@@ -13,7 +13,6 @@ const Register= (props) => {
     const { handleSubmit, register, errors, formState} = useForm();
     const { isSubmitted } = formState;
     const [see, setSee] = React.useState(false)
-    const baseUrl="https://reqres.in/api/";
     const [error, setError] = React.useState(null)
 
     //mostrar Contraseña:
@@ -21,49 +20,48 @@ const Register= (props) => {
     {
         setSee(!see)        
     }
-
+    const baseUrl="https://www.operativaapi.tk:8080/";
     const onSubmit = (values) => { 
         console.log(values);
         let datafield = {
             "email": values.usuario, 
             "password": values.password 
         }
-        axios.post(baseUrl+'register', datafield)
+        let options = {
+            headers:{
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+        }
+        axios.post(baseUrl+'user/', datafield, options)
         .then((response) => {
-            if(response.status === 200) {
+            if(response.status === 201) {
                 console.log(response.data)
-                console.log(response.data.token)
-                localStorage.setItem('token', response.data.token);
-               
-                axios.post(baseUrl+'login', datafield)
+                axios.post(baseUrl+'auth/login', datafield, options)
                 .then((response) => {
                     if(response.status === 200) {
-                        console.log(response.data)
-                        console.log(response.data.token)
-                        localStorage.setItem('token', response.data.token);
-                        axios.get(baseUrl+'users/2')
+                        localStorage.setItem('token', response.data.Authorization);
+                        axios.get(baseUrl+'user/'+ values.usuario)
                         .then((response) => {   
-                            console.log(response.data.data) 
                             //Guardar Email
-                            localStorage.setItem('email', response.data.data.email);
+                            localStorage.setItem('email', response.data.email);
                             props.history.push('/inicio');
-        
                         })
                         .catch(function(error) {
-                            console.log()
+                            console.log(error)
                         })             
                     } else if(response.status === 401) {
-                            alert(response.message);
+                            alert(response.data.message);
                     } else {
                         alert("Ha ocurrido un error interno.");
-                        console.log(response.data);
+                        console.log(response);
                     }
                 })
                 .catch(function(error) {
-                    console.log(error.status)
+                    console.log(error)
                     setError('Usuario y contraseña Incorrecta')
                     return
-                })             
+                })           
             } else if(response.status === 401) {
                     alert(response.message);
             } else {
@@ -77,6 +75,63 @@ const Register= (props) => {
             return
         })
     }
+
+    // const baseUrl="https://reqres.in/api/";
+    // const onSubmit = (values) => { 
+    //     console.log(values);
+    //     let datafield = {
+    //         "email": values.usuario, 
+    //         "password": values.password 
+    //     }
+    //     axios.post(baseUrl+'register', datafield)
+    //     .then((response) => {
+    //         if(response.status === 200) {
+    //             console.log(response.data)
+    //             console.log(response.data.token)
+    //             localStorage.setItem('token', response.data.token);
+               
+    //             axios.post(baseUrl+'login', datafield)
+    //             .then((response) => {
+    //                 if(response.status === 200) {
+    //                     console.log(response.data)
+    //                     console.log(response.data.token)
+    //                     localStorage.setItem('token', response.data.token);
+    //                     axios.get(baseUrl+'users/2')
+    //                     .then((response) => {   
+    //                         console.log(response.data.data) 
+    //                         //Guardar Email
+    //                         localStorage.setItem('email', response.data.data.email);
+    //                         props.history.push('/inicio');
+        
+    //                     })
+    //                     .catch(function(error) {
+    //                         console.log()
+    //                     })             
+    //                 } else if(response.status === 401) {
+    //                         alert(response.message);
+    //                 } else {
+    //                     alert("Ha ocurrido un error interno.");
+    //                     console.log(response.data);
+    //                 }
+    //             })
+    //             .catch(function(error) {
+    //                 console.log(error.status)
+    //                 setError('Usuario y contraseña Incorrecta')
+    //                 return
+    //             })             
+    //         } else if(response.status === 401) {
+    //                 alert(response.message);
+    //         } else {
+    //             alert("Ha ocurrido un error interno.");
+    //             console.log(response.data);
+    //         }
+    //     })
+    //     .catch(function(error) {
+    //         console.log(error.status)
+    //         setError('Usuario ya registrado')
+    //         return
+    //     })
+    // }
     return (
       <Fragment>
           <NavBar/>

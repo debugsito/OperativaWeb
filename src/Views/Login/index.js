@@ -64,29 +64,25 @@ const Login= (props) => {
         }
         let options = {
             headers:{
-                'Content-Type': 'application/x-www-form-urlencoded',
+                'Content-Type': 'application/json',
                 'Accept': 'application/json'
             }
         }
         axios.post(baseUrl+'auth/login', datafield, options)
         .then((response) => {
-            console.log(response)
             if(response.status === 200) {
-                console.log(response)
-                console.log(response.token)
-                localStorage.setItem('token', response.token);
-                axios.get(baseUrl+'/user/'+ values.usuario)
+                localStorage.setItem('token', response.data.Authorization);
+                axios.get(baseUrl+'user/'+ values.usuario)
                 .then((response) => {   
-                    console.log(response) 
                     //Guardar Email
-                    localStorage.setItem('email', response.email);
+                    localStorage.setItem('email', response.data.email);
                     props.history.push('/inicio');
                 })
                 .catch(function(error) {
                     console.log(error)
                 })             
             } else if(response.status === 401) {
-                    alert(response.message);
+                    alert(response.data.message);
             } else {
                 alert("Ha ocurrido un error interno.");
                 console.log(response);
