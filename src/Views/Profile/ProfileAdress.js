@@ -12,9 +12,7 @@ const onlyNumbers= (e)=> {
 }}
 
 const ProfileAdress = (props) => { 
-    
-    const { handleSubmit} = useForm();
-    
+    const { handleSubmit, register, errors} = useForm();
     const onSubmit = (values) => { 
         console.log(values);
         props.history.push('/informacion-academica')
@@ -31,27 +29,28 @@ const ProfileAdress = (props) => {
                         setListDepartament(datos)
                     })
                     return listDepartament
+                    // eslint-disable-next-line react-hooks/exhaustive-deps
         }, [])
 
         const [listprovinciaBase, setListprovinciaBase]= useState([])
         useEffect(() => {
             fetch('json/provincias.json')
                 .then(response => response.json())
-                    .then(datos => {
-                        
+                    .then(datos => {    
                         setListprovinciaBase(datos)
                     })
                     return listProvince
+                    // eslint-disable-next-line react-hooks/exhaustive-deps
         }, [])
         const [listdistritoBase, setListdistritoBase]= useState([])
         useEffect(() => {
             fetch('json/distritos.json')
                 .then(response => response.json())
                     .then(datos => {
-                       
                         setListdistritoBase(datos)
                     })
                     return listDistrict
+                    // eslint-disable-next-line react-hooks/exhaustive-deps
         }, [])
 
     //BOTTON:
@@ -74,12 +73,6 @@ const ProfileAdress = (props) => {
         return (
             <Fragment>
             <NavBar/>
-            {/* <div className="row justify-content-center row-no-magin">
-                <div className="col-12 col-sm-8 col-md-6 col-xl-4">
-                <div>
-                    <h1 className='h1-title-form'>COMPLETA TU REGISTRO</h1>
-                </div>
-                <h1 className='h1-form'>Completa tu registro</h1> */}
                 <div className="row row-no-magin padding-container">
                     <div className="col-12 col-md-6 offset-md-3 container-no-padding m-nav-form">
                         <h1 className='h1-title-form'>COMPLETA TU REGISTRO</h1>
@@ -91,148 +84,190 @@ const ProfileAdress = (props) => {
                         <h1 className='h1-form'>Completa tu registro</h1>
                     </div>
                     <div className="col-12  col-md-6 offset-md-3 container-no-padding">
-                    <form name="myForm" onSubmit= { handleSubmit(onSubmit)} className='form-container-info'>
-                    <label className="label-form">
-                        Dirección
-                        <input
-                            placeholder ="Av. Grau 123" 
-                            className="form-control placeholder"                               
-                            id='register-adress'
-                            name='register-adress'
-                            type="text"
-                            autoComplete="off"
-                        />
-                    </label>
-                    <label className="label-form" >
-                        Departamento
-                        <select 
-                            className="form-control form-text-check-adress"
-                            id=""
-                            onChange= {handlerdepartamento}>
-                            
-                            <option value={-1}>Option</option>
-                            {
-                                listDepartament.map((item) => (
-                                <option key= {item.id}
-                                 value= {item.id}
-                                 >
-                                    {item.name}
-                                </option>
-                            ))
-                            }
-                        </select>
-                    </label>                   
-                     <label className="label-form" >
-                        Provincia
-                        <select 
-                            className="form-control form-text-check-adress"
-                            onChange={handlerProvincia}
-                            >
-                                <option value={-1}>Option</option>
-                            {
-                                listProvince.map((item) => (
-                                <option key= {item.id} value= {item.id}>
-                                    {item.name}
-                                </option>
-                            ))
-                            }
-                        </select>
-                    </label>
-                    <label className="label-form" >
-                        Distrito
-                        <select 
-                            className="form-control form-text-check-adress"
-                            
-                            >
-                                <option value={-1}>Option</option>
+                    <form name="myForm" onSubmit={handleSubmit(onSubmit)} className='form-container-info'>
+                        <label htmlFor="registerAdress" className="label-form">
+                            Dirección
+                            <input
+                                placeholder ="Av. Grau 123" 
+                                className="form-control placeholder"                               
+                                id='registerAdress'
+                                name='registerAdress'
+                                type="text"
+                                autoComplete="off"
+                                ref={register({
+                                    required: {value: true, message: "Este campo es requerido"}
+                                })}
+                            />
+                        </label>
+                        <span className="span-error">
+                                { errors.registerAdress && errors.registerAdress.message}
+                        </span>
+                        <label  htmlFor="departamentAdress" className="label-form" >
+                            Departamento
+                            <select 
+                                className="form-control form-text-check-adress"
+                                id=""
+                                name="departamentAdress"
+                                onChange= {handlerdepartamento}
+                                ref={register({ required: {value: true, message: "Seleccione una opción"} })}
+                                > 
+                                <option value="">Option</option>
                                 {
-                                    listDistrict.map((item) => (
-                                    <option key= {item.id} 
+                                    listDepartament.map((item) => (
+                                    <option key= {item.id}
                                     value= {item.id}
                                     >
                                         {item.name}
                                     </option>
-                                    ))
+                                ))
                                 }
-                        </select>
-                    </label>
-                    <label className="label-form mt-2">
-                        Teléfono
-                        <input
-                            placeholder="123 123 123"
-                            className="form-control placeholder mb-2"
-                            id='lastName'
-                            name='lastName'
-                            type="text"
-                            autoComplete="off"
-                            onKeyPress={e =>{onlyNumbers(e)}} 
-                        />
-                    </label>
-                    <label className="label-form mt-2">         
-                        Situación familiar
-                        <div className="form-check my-2">
-                            <input className="form-check-input"
-                             type="radio" 
-                             name="family" 
-                             id="single" 
-                             value="option1"
-                             />
-                            <label className="form-text-check mb-2">
-                                Soltero
-                            </label>
-                        </div>
-                        <div className="form-check mb-3">
-                            <input className="form-check-input"
-                             type="radio" 
-                             name="family" 
-                             id="married" 
-                             value="option2"
-                             required=""
-                             />
-                            <label className="form-text-check" >
-                                Casado
-                            </label>
-                        </div>
-                        <div className="form-check mb-3">
-                            <input className="form-check-input"
-                             type="radio" 
-                             name="family" 
-                             id="divorced" 
-                             value="option3"
-                             required=""
-                             />
-                            <label className="form-text-check">
-                                Divorciado
-                            </label>
-                        </div>
-                        <div className="form-check mb-3">
-                            <input className="form-check-input"
-                             type="radio" 
-                             name="family" 
-                             id="cohabiting" 
-                             value="option2"
-                             required=""
-                             />
-                            <label className="form-text-check" >
-                                Conviviente
-                            </label>
-                        </div>
-                    </label>
-                    <section  className="container-buttons-form">
-                        <Link
-                            className="btn-cancel-form btn" 
-                            type= 'submit' 
-                            to='/inicio'
-                            >
-                            CANCELAR
-                        </Link> 
-                        <button
-                            className="button-continue btn icon-next" 
-                            type= 'submit' 
-                            >
-                            CONTINUAR 
-                        </button> 
-                    </section>                             
+                            </select>
+                  
+                        </label>
+                        <span className="span-error">
+                            { errors.departamentAdress && errors.departamentAdress.message}
+                        </span>
+                        <label htmlFor="provinceAdress" className="label-form" >
+                            Provincia
+                            <select
+                                name="provinceAdress"
+                                className="form-control form-text-check-adress"
+                                onChange={handlerProvincia}
+                                ref={register({ required: {value: true, message: "Seleccione una opción"} })}
+                                >
+                                    <option value="">Option</option>
+                                {
+                                    listProvince.map((item) => (
+                                    <option key= {item.id} value= {item.id}>
+                                        {item.name}
+                                    </option>
+                                ))
+                                }
+                            </select>
+                        </label>
+                        <span className="span-error">
+                            { errors.provinceAdress && errors.provinceAdress.message}
+                        </span>
+                        <label htmlFor="districtAdress" className="label-form" >
+                            Distrito
+                            <select
+                                name="districtAdress"
+                                className="form-control form-text-check-adress"
+                                ref={register({ required: {value: true, message: "Seleccione una opción"} })}
+                                >
+                                    <option value="">Option</option>
+                                    {
+                                        listDistrict.map((item) => (
+                                        <option key= {item.id} 
+                                        value= {item.id}
+                                        >
+                                            {item.name}
+                                        </option>
+                                        ))
+                                    }
+                            </select>
+                        </label>
+                        <span className="span-error">
+                            { errors.districtAdress && errors.districtAdress.message}
+                        </span>
+                        <label htmlFor="phoneDate" className="label-form mt-2">
+                            Teléfono
+                            <input
+                                maxLength="9"
+                                placeholder="123 123 123"
+                                className="form-control placeholder mb-2"
+                                id='phoneDate'
+                                name='phoneDate'
+                                type="text"
+                                autoComplete="off"
+                                onKeyPress={e =>{onlyNumbers(e)}} 
+                                ref={register({
+                                    required: "Este campo es requerido",
+                                        maxLength : {
+                                            value: 9,
+                                            message: 'Coloque un número telefónico válido' 
+                                        },
+                                        minLength: {
+                                            value: 9,
+                                            message: 'Coloque un número telefónico válido' 
+                                        }
+                                  })} 
+                            />
+                        </label>
+                        <span className="span-error">
+                                { errors.phoneDate && errors.phoneDate.message}
+                        </span> 
+                        <label htmlFor="family" className="label-form mt-2">         
+                            Situación familiar
+                            <div className="form-check my-2">
+                                <input className="form-check-input"
+                                type="radio" 
+                                name="family" 
+                                id="single" 
+                                value="option1"
+                                ref={register}
+                                />
+                                <label className="form-text-check mb-2">
+                                    Soltero
+                                </label>
+                            </div>
+                            <div className="form-check mb-3">
+                                <input className="form-check-input"
+                                type="radio" 
+                                name="family" 
+                                id="married" 
+                                value="option2"
+                                ref={register}
+                                />
+                                <label className="form-text-check" >
+                                    Casado
+                                </label>
+                            </div>
+                            <div className="form-check mb-3">
+                                <input className="form-check-input"
+                                type="radio" 
+                                name="family" 
+                                id="divorced" 
+                                value="option3"
+                                ref={register}
+                                />
+                                <label className="form-text-check">
+                                    Divorciado
+                                </label>
+                            </div>
+                            <div className="form-check mb-3">
+                                <input className="form-check-input"
+                                type="radio" 
+                                name="family" 
+                                id="cohabiting" 
+                                value="option2"
+                                ref={
+                                    register({
+                                        required: "Seleccione una opción",
+                                    })}
+                                />
+                                <label className="form-text-check" >
+                                    Conviviente
+                                </label>
+                            </div>
+                            <span className="span-error">
+                            { errors.family && errors.family.message}
+                        </span>
+                        </label>
+                        <section  className="container-buttons-form">
+                            <Link
+                                className="btn-cancel-form btn" 
+                                to='/inicio'
+                                >
+                                CANCELAR
+                            </Link> 
+                            <button
+                                className="button-continue btn icon-next" 
+                                type= 'submit' 
+                                >
+                                CONTINUAR 
+                            </button> 
+                        </section>                             
                     </form>
                     </div>
                 </div>

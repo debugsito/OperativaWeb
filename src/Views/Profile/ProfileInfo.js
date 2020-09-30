@@ -12,10 +12,9 @@ registerLocale("es", es);
 
 const ProfileInfo = (props) => { 
     const [startDate, setStartDate] = React.useState('');
+    const { handleSubmit, register, errors} = useForm();
 
-    const { handleSubmit} = useForm();
-
-    const onSubmit = (values) => { 
+    const onSubmit = (values, e) => { 
         console.log(values);
         props.history.push('/info-direccion')
     } 
@@ -40,8 +39,8 @@ const ProfileInfo = (props) => {
                     <h1 className='h1-form'>Datos Personales</h1>
                 </div>
                 <div className="col-12  col-md-6 offset-md-3 container-no-padding">
-                    <form name="myForm" onSubmit= { handleSubmit(onSubmit)} className='form-container-info'>
-                        <label className="label-form">
+                    <form name="myForm" onSubmit={handleSubmit(onSubmit)}  className='form-container-info'>
+                        <label htmlFor="firstName" className="label-form">
                             Nombres
                             <input
                                 placeholder ="Maria" 
@@ -50,10 +49,19 @@ const ProfileInfo = (props) => {
                                 name='firstName'
                                 type="text"
                                 autoComplete="off"
-                                requerid=""
+                                ref={register({
+                                    required: "Este campo es requerido",
+                                    pattern: {
+                                        value:  /[A-Za-z]{3}/,
+                                        message: "Coloque un Nombre valido",
+                                      },
+                                  })}
                             />
                         </label>
-                        <label className="label-form mt-1">
+                        <span className="span-error">
+                            { errors.firstName && errors.firstName.message}
+                        </span>
+                        <label htmlFor="lastName" className="label-form mt-1">
                             Apellidos
                             <input
                                 placeholder="Pérez"
@@ -62,10 +70,19 @@ const ProfileInfo = (props) => {
                                 name='lastName'
                                 type="text"
                                 autoComplete="off"
-                                requerid=""
+                                ref={register({
+                                    required: "Este campo es requerido",
+                                    pattern: {
+                                        value:  /[A-Za-z]{3}/,
+                                        message: "Coloque un Nombre valido",
+                                      },
+                                  })}
                             />
                         </label>
-                        <label className="label-form mt-1">         
+                        <span className="span-error">
+                            { errors.lastName && errors.lastName.message}
+                        </span>
+                        <label htmlFor="doc" className="label-form mt-1">         
                             Tipo de Documento
                             <div className="form-check my-2">
                                 <input className="form-check-input"
@@ -74,6 +91,7 @@ const ProfileInfo = (props) => {
                                 id="dni" 
                                 value="option1"
                                 autoComplete="off"
+                                ref={register}
                                 />
                                 <label className="form-text-check mb-2">
                                     Dni
@@ -87,6 +105,7 @@ const ProfileInfo = (props) => {
                                 value="option2"
                                 required=""
                                 autoComplete="off"
+                                ref={register}
                                 />
                                 <label className="form-text-check">
                                     Carnet de Extranjería
@@ -100,14 +119,20 @@ const ProfileInfo = (props) => {
                                 value="option3"
                                 required=""
                                 autoComplete="off"
+                                ref={
+                                    register({
+                                        required: "Seleccione un tipo de documento",
+                                    })}
                                 />
                                 <label className="form-text-check">
                                     Pasaporte
                                 </label>
                             </div>
+                        <span className="span-error">
+                            { errors.doc && errors.doc.message}
+                        </span>
                         </label>
-                        <label for="document"
-                            className="label-form mt-3">
+                        <label  htmlFor="document" className="label-form mt-3">
                             Número de documento
                             <input
                                 placeholder="90627452"
@@ -116,32 +141,46 @@ const ProfileInfo = (props) => {
                                 name='document'
                                 type="text"
                                 autoComplete="off"
-                                onKeyPress={e =>{onlyNumbers(e)}} 
+                                onKeyPress={e =>{onlyNumbers(e)}}
+                                ref={register({
+                                    required: "Este campo es requerido",
+                                        maxLength : {
+                                            value: 12,
+                                            message: 'Coloque un documento válido' 
+                                        },
+                                        minLength: {
+                                            value: 8,
+                                            message: 'Coloque un documento válido' 
+                                        }
+                                  })} 
                             />
                         </label>
-                        <label 
-                            for= "nombre"
-                            className=" label-form mt-3">
+                        <span className="span-error">
+                            { errors.document && errors.document.message}
+                        </span>
+                        <label htmlFor="dateOfBirth" className=" label-form mt-3" >
                             Fecha de nacimiento
                             <div className="customDatePickerWidth">
-                                <DatePicker 
-                                name='dateOfBirth'
-                                type="text"
-                                pattern="[0-9]+"
-                                requerid=""
-                                selected={startDate}
-                                autoComplete="off" 
-                                onChange={date => setStartDate(date)}
-                                placeholderText="DD/MM/AAAA"
-                                locale="es"
-                                className="form-control label-form-calen icon-calendar" 
-                            />
-                            </div>
+                                    <DatePicker 
+                                    type="text"
+                                    pattern="[0-9]+"
+                                    name='dateOfBirth'
+                                    selected={startDate}
+                                    autoComplete="off" 
+                                    dateFormat="dd/MM/yyyy"
+                                    showYearDropdown
+                                    placeholderText="DD/MM/AAAA"
+                                    locale="es"
+                                    className="form-control label-form-calen icon-calendar"
+                                    ref={register({ required: true, message:"Agrega"})}
+                                    onChange={date => setStartDate(date)}
+                                    />
+                            </div> 
+                                <span className="span-error">{ errors.dateOfBirth && errors.dateOfBirth.message}</span>
                         </label>
                         <section className="container-buttons-form">
                             <Link
                                 className="btn-cancel-form btn" 
-                                type= 'submit' 
                                 to='/inicio'
                                 >
                                 CANCELAR

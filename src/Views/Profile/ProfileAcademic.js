@@ -12,20 +12,12 @@ registerLocale("es", es);
 
 const ProfileAcademic = (props) => { 
     const [startDate, setStartDate] = React.useState('');
+    const { handleSubmit, register, errors} = useForm();
 
-    const { handleSubmit} = useForm();
-
-    const onSubmit = (values) => { 
+    const onSubmit = (values, e) => { 
         console.log(values);
         props.history.push('/info-experiencia')
     } 
-
-    const onlyNumbers= (e)=> {
-        let key = window.event ? e.which : e.keyCode;
-            if (key < 48 || key > 57) {
-            e.preventDefault();
-    }
-  }
     return (
         <Fragment>
             <NavBar/>
@@ -40,17 +32,18 @@ const ProfileAcademic = (props) => {
                     <h1 className='h1-form'>Estudios</h1>
                 </div>
                 <div className="col-12  col-md-6 offset-md-3 container-no-padding">
-                <form name="myForm" onSubmit= { handleSubmit(onSubmit)} className=''>
+                <form name="myForm" onSubmit={handleSubmit(onSubmit)} className=''>
                     <p className="text-form-academic">Ingresa los datos del último nivel de estudios que alcanzaste.</p>
-                <label className="label-form mt-1">         
+                    <label htmlFor="registerStudies" className="label-form mt-1">         
                         Nivel máximo alcanzado
                         <div className="form-check my-2">
                             <input className="form-check-input"
                              type="radio" 
-                             name="doc" 
-                             id="dni" 
+                             name="registerStudies" 
+                             id="registerStudiesPrimary" 
                              value="option1"
                              autoComplete="off"
+                             ref={register}
                              />
                             <label className="form-text-check mb-2">
                                 Primaria completa
@@ -59,11 +52,11 @@ const ProfileAcademic = (props) => {
                         <div className="form-check mb-3">
                             <input className="form-check-input"
                              type="radio" 
-                             name="doc" 
-                             id="carnet" 
+                             name="registerStudies" 
+                             id="registerStudiesSecundary" 
                              value="option2"
-                             required=""
                              autoComplete="off"
+                             ref={register}
                              />
                             <label className="form-text-check">
                                 Secundaria completa
@@ -72,11 +65,11 @@ const ProfileAcademic = (props) => {
                         <div className="form-check mb-3">
                             <input className="form-check-input"
                              type="radio" 
-                             name="doc" 
-                             id="pasaporte" 
+                             name="registerStudies" 
+                             id="registerStudiesTechnical" 
                              value="option3"
-                             required=""
                              autoComplete="off"
+                             ref={register}
                              />
                             <label className="form-text-check">
                                 Estudios técnicos
@@ -85,48 +78,68 @@ const ProfileAcademic = (props) => {
                         <div className="form-check mb-3">
                             <input className="form-check-input"
                              type="radio" 
-                             name="doc" 
-                             id="pasaporte" 
+                             name="registerStudies" 
+                             id="registerStudiesUniversity" 
                              value="option3"
-                             required=""
                              autoComplete="off"
+                             ref={
+                                register({
+                                    required: "Seleccione una opción",
+                                })}
                              />
                             <label className="form-text-check">
                                 Estudios universitarios
                             </label>
                         </div>
+                        <span className="span-error">
+                            { errors.registerStudies && errors.registerStudies.message}
+                        </span>
                     </label>
-                    <label className="label-form mt-4">
+                    <label htmlFor="educationalInstitution" className="label-form mt-4">
                         Institución educativa
                         <input
-                            placeholder ="Maria" 
+                            placeholder ="Colegio Fé y Alegría" 
                             className="form-control placeholder"                               
-                            id='firstName'
-                            name='firstName'
+                            id='educationalInstitution'
+                            name='educationalInstitution'
                             type="text"
                             autoComplete="off"
-                            requerid=""
+                            ref={register({
+                                required: {value: true, message: "Este campo es requerido"}
+                            })}
                         />
                     </label>
-                    <label className="label-form mt-1">
+                    <span className="span-error">
+                        { errors.educationalInstitution && errors.educationalInstitution.message}
+                    </span>
+                    <label htmlFor="specialty" className="label-form mt-1">
                         Especialidad
                         <input
-                            placeholder="Pérez"
+                            placeholder="Derecho Tributario"
                             className="form-control placeholder mb-2"
-                            id='lastName'
-                            name='lastName'
+                            id='specialty'
+                            name='specialty'
                             type="text"
                             autoComplete="off"
-                            requerid=""
+                            ref={register({
+                                required: "Este campo es requerido",
+                                pattern: {
+                                    value:  /[A-Za-z]{3}/,
+                                    message: "Coloque un Nombre valido",
+                                  },
+                              })}
                         />
                     </label>
+                    <span className="span-error">
+                        { errors.specialty && errors.specialty.message}
+                    </span>
                     <label 
-                        for= "nombre"
+                        htmlFor="startDate"
                         className=" label-form mt-1">
                         Fecha de inicio
                         <div className="customDatePickerWidth">
                             <DatePicker 
-                            name='dateOfBirth'
+                            name='startDate'
                             type="text"
                             pattern="[0-9]+"
                             requerid=""
@@ -140,12 +153,12 @@ const ProfileAcademic = (props) => {
                         </div>
                     </label>
                     <label 
-                        for= "nombre"
+                         htmlFor="endDate"
                         className=" label-form mt-3">
                         Fecha de fin
                         <div className="customDatePickerWidth">
                             <DatePicker 
-                            name='dateOfBirth'
+                            name='endDate'
                             type="text"
                             pattern="[0-9]+"
                             requerid=""
@@ -161,7 +174,6 @@ const ProfileAcademic = (props) => {
                     <section  className="container-buttons-form">
                         <Link
                             className="btn-cancel-form btn" 
-                            type= 'submit' 
                             to='/inicio'
                             >
                             CANCELAR
