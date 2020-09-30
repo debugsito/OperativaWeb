@@ -7,9 +7,9 @@
     z-index: 2;
 }
   .menu-bars {
-    margin-top: 24px;
+    margin-top: 0px;
     margin-right: 1rem;
-    font-size: 2rem;
+    font-size: 1.5rem;
     background: none;
     display: flex;
     justify-content: space-between;
@@ -48,9 +48,9 @@
     padding: 0 16px;
     background-color: #E20613;
 }
-.nav-text a:hover {
+/* .nav-text a:hover {
     background-color: #1a83ff;
-}
+} */
 .nav-menu-items {
     width: 100%;
 }

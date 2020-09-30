@@ -514,7 +514,7 @@ color: #46A9D4;
   flex: none !important;
   order: 0 !important;
   align-self: center !important;
-  margin-top: 12px!important;
+  /* margin-top: 12px!important; */
   float: left !important;
 }
 .icon-container{
