@@ -179,10 +179,11 @@ const ProfileAcademic = (props) => {
                             CANCELAR
                         </Link> 
                         <button
-                            className="button-continue btn icon-next" 
-                            type= 'submit' 
-                            >
-                            CONTINUAR 
+                            className="button-continue-restore btn"
+                            type="submit"
+                        >
+                            <span className= "text-button-continue-restore">CONTINUAR</span>
+                            <span className="icon-next"></span>
                         </button> 
                     </section>                      
                     </form>
