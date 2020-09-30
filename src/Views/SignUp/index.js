@@ -236,7 +236,7 @@ const Register= (props) => {
                             {errors.terms && errors.terms.message}
                         </span>
                     <section className="container-buttons">
-                        <Link className="btn-cancel-register btn" type="submit" to="/">
+                        <Link className="btn-cancel-register btn" to="/">
                           CANCELAR
                         </Link>
                         <button className="btn-register btn" type="submit">

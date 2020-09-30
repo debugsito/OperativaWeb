@@ -1,18 +1,19 @@
 import React, { Fragment } from "react";
 import { Link, withRouter } from 'react-router-dom'
 import { useForm } from "react-hook-form";
+import Icono from "../../assets/icons/icon-next.svg"
 import NavBar from "../../Components/MenuUser/index"
-import axios from 'axios';
+// import axios from 'axios';
 import './index.css';
 
-const baseUrl="https://reqres.in/api/";
+// const baseUrl="https://reqres.in/api/";
 
 
 const RestorePassword= (props) => {
 
     const { handleSubmit, register, errors, formState} = useForm();
     const { isSubmitted } = formState;
-    const [error, setError] = React.useState(null)
+    // const [error, setError] = React.useState(null)
     
     const onSubmit = (values) => { 
         console.log(values);
@@ -39,14 +40,11 @@ const RestorePassword= (props) => {
         //       return
         //   })
       }
-         
-    
-       
     return (
       <Fragment>
         <NavBar/>
-        <div className="row justify-content-center container-padding row-no-magin">
-          <div className="col-12 col-sm-8 col-md-6 col-xl-4">
+        <div className="row justify-content-center padding-container row-no-magin">
+          <div className="col-12 col-sm-8 col-md-6 col-xl-4 container-no-padding">
             <h1 className="h1-custom-restore">RECUPERA TU CONTRASEÑA</h1>
             <form onSubmit={handleSubmit(onSubmit)} className="form-container">
               <label className="label-form">
@@ -78,25 +76,20 @@ const RestorePassword= (props) => {
               <span className="span-error">
                 {errors.usuario && errors.usuario.message}
               </span>
-              <section className="row container-buttons">
-                <div className="col-6">
+              <section className="container-buttons-continue">
                   <Link
                     className="btn-cancel-pr btn"
-                    type="submit"
                     to="/registro"
                   >
                     CANCELAR
                   </Link>
-                </div>
-                <div className="col-6">
                   <button
-                    className="button-continue-restore btn icon-next"
+                    className="button-continue-restore btn"
                     type="submit"
-                    to="/notificacion-contraseña"
                   >
-                    CONTINUAR
+                    <span className= "text-button-continue-restore">CONTINUAR</span>
+                    <span className="icon-next"></span>
                   </button>
-                </div>
               </section>
             </form>
           </div>

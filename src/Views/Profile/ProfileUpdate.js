@@ -25,11 +25,12 @@ const ProfileUpdate= (props) => {
                             <img src= {Ilustracion} className="icon-ilustracion-welcome" alt="..."/>
                         <div className="d-flex justify-content-center">
                         <button
-                            className="btn-primary text-button-next icon-next-small-button-blue" 
+                            className="btn-primary text-button-next " 
                             type= 'submit' 
                             onClick= {onSubmit}
                             >
-                            CONTINUAR 
+                            <span className="text-button-continue-restore">Explora Operativa</span>
+                            <span className="icon-next-button-blue"></span>
                         </button> 
                         </div>
                         </div>

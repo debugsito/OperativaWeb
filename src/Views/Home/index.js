@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom'
 import NavBar from "../../Components/MenuUser/index";
 import ImageConexion from "../../assets/images/image-conexion.svg"
 import Ilustracion from "../../assets/images/ilustracion.svg"
-import IconProduction from "../../assets/icons/icon-production.svg"
-import IconMaintenance from "../../assets/icons/icon-maintenance.svg"
-import IconDistribution from "../../assets/icons/icon-distribution.svg"
-import IconCallCenter from "../../assets/icons/icon-call-center.svg"
-import IconConstruction from "../../assets/icons/icon-construction.svg"
-import IconOperaction from "../../assets/icons/icon-operaction.svg"
+import ImgProduction from "../../assets/icons/1.jpg"
+import ImgMaintenance from "../../assets/icons/2.jpg"
+import ImgDistribution from "../../assets/icons/3.jpg"
+import ImgCallCenter from "../../assets/icons/4.jpg"
+import ImgConstruction from "../../assets/icons/5.jpg"
+import ImgOperaction from "../../assets/icons/6.jpg"
 import Gloria from "../../assets/logos/1.png"
 import Talma from "../../assets/logos/2.png"
 import Manpower from "../../assets/logos/3.png"
@@ -50,31 +50,29 @@ const Home= () => {
                 <div className="col-12 col-md-6 offset-md-3 container-no-padding">
                     <div className="row m-nav row-no-magin container-no-padding">
                         <div className="col-12 col-sm-12 col-md-6 col-xl-4 container-no-padding">
-                            <h1 className='h1-tittle-Home'>Bienvenido a Operativa</h1>
+                            <h1 className='h1-tittle-Home'>BIENVENIDO A OPERATIVA</h1>
                         </div>
                     </div >
                     <div className="row box-container-title">
-                        <div className="col-7 container-no-padding">
-                            <span className="text-box-one">Encuentra el trabajo que buscabas desde tu celular.
-                                Más de 600 empresas reclutan a través de Operativa.
+                        <div className="col-6 container-no-padding">
+                            <span className="text-box-one">Encuentra el trabajo que buscabas
                             </span>
                             <div className="d-flex justify-content-start">
                                 <Link 
                                     className="btn btn-operativa btn-sm"
-                                    type='submit'
                                     to="/registro"
                                     >
                                     REGISTRATE AQUÍ
                                 </Link> 
                             </div>
                         </div>
-                        <div className="col-5 container-no-padding">
+                        <div className="col-6 container-no-padding">
                             <img alt='conexion' src= {ImageConexion} className="icon-image-conexion" />
                         </div>
                     </div>
                     <div className="row box-container-title-two box-container-align-rubros row-no-magin container-no-padding">
                         <div className="col-12 container-no-padding">
-                            <h1 className='h1-tittle-box'>Los sectores más productivos</h1>
+                            <h1 className='h1-tittle-box'>LOS SECTORES MÁS PRODUCTIVOS</h1>
                             <p className='text-box-two'>
                                 Encuentra el trabajo que buscabas desde tu celular.
                                 Más de 600 empresas reclutan a través de Operativa.
@@ -83,36 +81,36 @@ const Home= () => {
                         <div className= "d-flex justify-content-center">
                         </div>
                             <div className="col-4 text-center">
-                                <img alt='' src= {IconProduction} className="icon-image-rubros" />
-                                <p className="text-icon-rubros">Producción</p>
+                                <img alt='' src= {ImgProduction} className="icon-image-rubros" />
+                                <p className="text-icon-rubros">Producción y operaciones</p>
                             </div>
                             <div className="col-4 text-center">
-                                <img alt='' src= {IconMaintenance} className="icon-image-rubros" />
-                                <p className="text-icon-rubros">Mantenimiento</p>
+                                <img alt='' src= {ImgMaintenance} className="icon-image-rubros" />
+                                <p className="text-icon-rubros">Mantenimiento y limpieza</p>
                                 
                             </div>
                             <div className="col-4 text-center">
-                                <img alt='' src= {IconDistribution} className="icon-image-rubros" />
-                                <p className="text-icon-rubros">Distribución</p>
+                                <img alt='' src= {ImgDistribution} className="icon-image-rubros" />
+                                <p className="text-icon-rubros">Almacén y transporte</p>
                             </div>
                             <div className="col-4 text-center">
-                                <img alt='' src= {IconCallCenter} className="icon-image-rubros" />
+                                <img alt='' src= {ImgCallCenter} className="icon-image-rubros" />
                                 <p className="text-icon-rubros">
-                                    Call Center y Ventas
+                                    Call-center y Ventas
                                 </p>
                             </div>
                             <div className="col-4 text-center">
-                                <img alt='' src= {IconConstruction} className="icon-image-rubros" />
-                                <p className="text-icon-rubros">Construcción</p>
+                                <img alt='' src= {ImgConstruction} className="icon-image-rubros" />
+                                <p className="text-icon-rubros">Construcción y obras</p>
                             </div>
                             <div className="col-4 text-center">
-                            <img alt='' src= {IconOperaction} className="icon-image-rubros" />
-                            <p className="text-icon-rubros">Operaciones</p>
+                            <img alt='' src= {ImgOperaction} className="icon-image-rubros" />
+                            <p className="text-icon-rubros">Motorizados y courier</p>
                             </div>
                         </div>
                         <div className="row row-no-magin container-no-padding">
                             <div className="col-12 container-no-padding">
-                                <h1 className='h1-tittle-carousel'>Trabajamos con las mejores empresas del país</h1>
+                                <h1 className='h1-tittle-carousel'>TRABAJAMOS CON LAS MEJORES EMPRESAS DEL PAÍS</h1>
                             </div>
                         </div >
                         <div id="carouselExampleSlidesOnly" 
@@ -247,7 +245,7 @@ const Home= () => {
                         </div>     
                         <div className="row box-container-title-three row-no-magin container-no-padding">
                             <div className="col-12 container-no-padding">
-                                <h1 className='h1-text-ilustracion-box'>Cómo inscribirte</h1>
+                                <h1 className='h1-text-ilustracion-box'>CÓMO INSCRIBIRTE</h1>
                             </div>
                             <div className="col-6 container-no-padding">
                                     <img alt='conexion' src= {Ilustracion} className="icon-ilustracion" />

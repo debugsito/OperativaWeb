@@ -53,7 +53,7 @@ code {
   margin-left: 0 !important;
   font-family: 'Raleway', sans-serif;
   font-weight: bold;
-  font-size: 24px;
+  font-size: 20px;
   font-style: normal;
   color: #000000;
   line-height: 130%;
@@ -91,7 +91,7 @@ code {
   margin-top: 128px;
 }
 .h1-custom-notification{
-  position: static;
+  /* position: static; */
   /* width: 301px; */
   height: 93px;
   font-family: 'Raleway', sans-serif;
@@ -104,6 +104,7 @@ code {
   display: flex;
   justify-content: center;
   margin-top: 244px;
+  align-items: center;
 }
 .h1-title-form {
   /* position: absolute; */
@@ -324,6 +325,13 @@ box-shadow: 2px 1px 1px 1px rgba(237,29,64,0.43);
 .container-buttons{
   margin-top: 12px;
   margin-bottom: 12px;
+  display: flex;
+}
+.container-buttons-continue{
+  margin-top: 12px;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
 }
 .container-buttons-form{
   margin-top: 36px;
@@ -335,8 +343,8 @@ box-shadow: 2px 1px 1px 1px rgba(237,29,64,0.43);
   /*button/secondary*/position: static;
   width: 46%;
   height: 40px;
-  left: 0px;
-  top: 0px;
+  margin-left: 0px;
+  margin-top: 0px;
   border: 1px solid #979797;
   color: #B9B9BA;
   box-sizing: border-box;
@@ -345,6 +353,13 @@ box-shadow: 2px 1px 1px 1px rgba(237,29,64,0.43);
   -moz-border-radius: 0px;
   -ms-border-radius: 0px;
   -o-border-radius: 0px;
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .btn-cancel-pr{
   /*button/secondary*/min-width: 150px;
@@ -365,7 +380,7 @@ box-shadow: 2px 1px 1px 1px rgba(237,29,64,0.43);
   -o-border-radius: 0px !important;
 }
 .btn-register{
-  position: static;
+  /* position: static; */
   width: 46%;
   height: 40px;
   /*primary*/background: #ED1D40;
@@ -373,13 +388,13 @@ box-shadow: 2px 1px 1px 1px rgba(237,29,64,0.43);
   box-sizing: border-box;
   margin-left: 8%;
   border-radius: 0px ;
-  -webkit-border-radius: 0px ;
-  -moz-border-radius: 0px ;
-  -ms-border-radius: 0px ;
-  -o-border-radius: 0px ;
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
 }
 .btn-login {
-  position: static;
+  /* position: static; */
   width: 48%;
   height: 40px;
   /*primary*/background: #ED1D40;
@@ -387,10 +402,10 @@ box-shadow: 2px 1px 1px 1px rgba(237,29,64,0.43);
   box-sizing: border-box;
   margin-left: 6%;
   border-radius: 0px !important ;
-  -webkit-border-radius: 0px !important ;
-  -moz-border-radius: 0px !important ;
-  -ms-border-radius: 0px !important ;
-  -o-border-radius: 0px !important ;
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
 }
 .button-sign-up {
   width: 100%;
@@ -425,7 +440,24 @@ box-shadow: 2px 1px 1px 1px rgba(237,29,64,0.43);
   font-weight: 500;
   font-size: 14px;
   text-transform: uppercase;
-  color:#46A9D4;
+  color:#373737;
+  margin-left: 0px !important;
+  padding: 0px !important;
+}
+.button-continue-restore-notification{
+  font-family: 'Raleway, sans-serif';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #373737;
+  margin-left: 0px !important;
+  margin-top: 50px;
+  display: flex;
+  justify-content: flex-end;
+}
+.text-button-continue-restore{
+  margin-left: 0 !important;
 }
 .button-continue-notification{
   display: flex;
@@ -458,8 +490,9 @@ box-shadow: 2px 1px 1px 1px rgba(237,29,64,0.43);
     background-repeat: no-repeat;
     background-position: 98%;
     background-size: 12px;
-    padding: 8px 24px;
-    color: #373737
+    padding: 8px 14px;
+    color: #373737;
+    margin-left: 0px !important;
 }
 .info-form{
   font-family: 'Raleway', sans-serif;

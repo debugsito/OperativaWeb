@@ -16,7 +16,7 @@
     font-family: 'Raleway', sans-serif ;
     font-style: normal;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 16px;
     line-height: 20px;
     color: #757575;
     width: 264px;
@@ -47,8 +47,8 @@
     -ms-border-radius: 0px !important;
     -o-border-radius: 0px !important;
     border-color: transparent !important;
-    padding-left: 7px;
-    padding-right: 32px;
+    padding: 12px;
+    /* padding-right: 32px; */
 }
 .icon-next-button-blue{
     background-image: url(../../assets/icons/icon-next-button.svg);
@@ -56,4 +56,5 @@
     background-position: 98%;
     background-size: 10px;
     padding: 8px 24px;
+    margin-left: 0px !important;
 }
