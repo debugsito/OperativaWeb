@@ -62,7 +62,7 @@ const DesktopCarrusel = () => {
                                 <img className="img-fluid d-block mt-3 img-slite-custom" src={Ngl} alt="First slide"/>
                             </div>
                             <div className="col-1 col-sm-2 col-md-2">
-                                <img className="img-fluid d-block mt-2 img-slite-custom" src={Chinalco}  alt="First slide"/>
+                                <img className="img-fluid d-block mt-1 img-slite-custom" src={Chinalco}  alt="First slide"/>
                             </div>
                             <div className="col-1 col-sm-2 col-md-2 mt-2">
                                 <img className="img-fluid d-block  img-slite-custom" src={Neptunia}   alt="First slide"/>
