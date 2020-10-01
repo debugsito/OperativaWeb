@@ -39,6 +39,7 @@ import Tata from "../../assets/logos/27.png"
 import Sgs from "../../assets/logos/28.png"
 import Tailoy from "../../assets/logos/29.jpg"
 import Viva from "../../assets/logos/30.png"
+import DesktopCarrusel from "../../Components/Carrusel/DesktopCarrusel"
 import './index.css';
 
 const Home= () => {
@@ -47,15 +48,17 @@ const Home= () => {
         <Fragment>
         <NavBar/>
             <div className="row row-no-magin container-no-padding">
-                <div className="col-12 col-md-6 offset-md-3 container-no-padding">
+                {/* Primer Bloque */}
+                <div className="col-12 col-md-2 container-no-padding"></div>
+                <div className="col-12 col-md-8 container-no-padding">
                     <div className="row m-nav row-no-magin container-no-padding">
-                        <div className="col-12 col-sm-12 col-md-6 col-xl-4 container-no-padding">
-                            <h1 className='h1-tittle-Home'>BIENVENIDO A OPERATIVA</h1>
+                        <div className="col-11 col-md-9 container-no-padding">
+                            <h1 className='h1-tittle-Home'>ENCUENTRA EL TRABAJO QUE BUSCABAS</h1>
                         </div>
                     </div >
-                    <div className="row box-container-title">
-                        <div className="col-6 container-no-padding">
-                            <span className="text-box-one">Encuentra el trabajo que buscabas
+                    <div className="row box-container-title ">
+                        <div className="col-6 col-md-8 container-no-padding">
+                            <span className="text-box-one">Operativa te conecta con más de 600 empresas de todo el Perú
                             </span>
                             <div className="d-flex justify-content-start">
                                 <Link 
@@ -66,48 +69,60 @@ const Home= () => {
                                 </Link> 
                             </div>
                         </div>
-                        <div className="col-6 container-no-padding">
+                        <div className="col-6 col-md-4 container-no-padding">
                             <img alt='conexion' src= {ImageConexion} className="icon-image-conexion" />
                         </div>
                     </div>
+                </div>
+                <div className="col-12 col-md-2 container-no-padding"></div>
+                {/* Segundo Bloque */}
+                <div className="col-12 col-md-2 container-no-padding hide-sm box-container-title-two"></div>
+                <div className="col-12 col-md-8 container-no-padding">
                     <div className="row box-container-title-two box-container-align-rubros row-no-magin container-no-padding">
-                        <div className="col-12 container-no-padding">
+                        <div className="col-12 col-md-6 container-no-padding">
                             <h1 className='h1-tittle-box'>LOS SECTORES MÁS PRODUCTIVOS</h1>
                             <p className='text-box-two'>
                                 Encuentra el trabajo que buscabas desde tu celular.
                                 Más de 600 empresas reclutan a través de Operativa.
                             </p>
                         </div>
-                        <div className= "d-flex justify-content-center">
+                        <div className="col-12 col-md-6 pt-md-4">
+                            <div className="row row-no-magin container-no-padding">
+                                <div className="col-4 text-center">
+                                    <img alt='' src= {ImgProduction} className="icon-image-rubros" />
+                                    <p className="text-icon-rubros">Producción y operaciones</p>
+                                </div>
+                                <div className="col-4 text-center">
+                                    <img alt='' src= {ImgMaintenance} className="icon-image-rubros" />
+                                    <p className="text-icon-rubros">Mantenimiento y limpieza</p>
+                                    
+                                </div>
+                                <div className="col-4 text-center">
+                                    <img alt='' src= {ImgDistribution} className="icon-image-rubros" />
+                                    <p className="text-icon-rubros">Almacén y transporte</p>
+                                </div>
+                                <div className="col-4 text-center">
+                                    <img alt='' src= {ImgCallCenter} className="icon-image-rubros" />
+                                    <p className="text-icon-rubros">
+                                        Call-center y Ventas
+                                    </p>
+                                </div>
+                                <div className="col-4 text-center">
+                                    <img alt='' src= {ImgConstruction} className="icon-image-rubros" />
+                                    <p className="text-icon-rubros">Construcción y obras</p>
+                                </div>
+                                <div className="col-4 text-center">
+                                    <img alt='' src= {ImgOperaction} className="icon-image-rubros" />
+                                    <p className="text-icon-rubros">Motorizados y courier</p>
+                                </div>
+                            </div>
                         </div>
-                            <div className="col-4 text-center">
-                                <img alt='' src= {ImgProduction} className="icon-image-rubros" />
-                                <p className="text-icon-rubros">Producción y operaciones</p>
-                            </div>
-                            <div className="col-4 text-center">
-                                <img alt='' src= {ImgMaintenance} className="icon-image-rubros" />
-                                <p className="text-icon-rubros">Mantenimiento y limpieza</p>
-                                
-                            </div>
-                            <div className="col-4 text-center">
-                                <img alt='' src= {ImgDistribution} className="icon-image-rubros" />
-                                <p className="text-icon-rubros">Almacén y transporte</p>
-                            </div>
-                            <div className="col-4 text-center">
-                                <img alt='' src= {ImgCallCenter} className="icon-image-rubros" />
-                                <p className="text-icon-rubros">
-                                    Call-center y Ventas
-                                </p>
-                            </div>
-                            <div className="col-4 text-center">
-                                <img alt='' src= {ImgConstruction} className="icon-image-rubros" />
-                                <p className="text-icon-rubros">Construcción y obras</p>
-                            </div>
-                            <div className="col-4 text-center">
-                            <img alt='' src= {ImgOperaction} className="icon-image-rubros" />
-                            <p className="text-icon-rubros">Motorizados y courier</p>
-                            </div>
-                        </div>
+                    </div>
+                </div>
+                <div className="col-12 col-md-2 container-no-padding hide-sm box-container-title-two"></div>
+                {/* Tercer Bloque */}
+                <div className="col-12 col-md-2 container-no-padding hide-sm"></div>
+                <div className="col-12 col-md-8 container-no-padding">
                         <div className="row row-no-magin container-no-padding">
                             <div className="col-12 container-no-padding">
                                 <h1 className='h1-tittle-carousel'>TRABAJAMOS CON LAS MEJORES EMPRESAS DEL PAÍS</h1>
@@ -117,8 +132,8 @@ const Home= () => {
                                 className="carousel slide my-0" 
                                 width="100"  
                                 data-interval="3500" data-ride="carousel"
-                                >                
-                            <div className="carousel-inner h-slide-custom">
+                                >            
+                            <div className="carousel-inner h-slide-custom mobile-car">
                                 <div className="carousel-item active">
                                     <div className="row w-100 mx-auto">
                                         <div className="col-6 col-sm-6 col-md-6 mt-1">
@@ -242,15 +257,23 @@ const Home= () => {
                                     </div>
                                 </div>                     
                             </div>     
-                        </div>     
+                        </div>
+                        <div className = "desktop-car">
+                            <DesktopCarrusel/>  
+                        </div> 
+                    </div>
+                    <div className="col-12 col-md-2 container-no-padding hide-sm"></div>
+                    {/* Cuarto Bloque */}
+                    <div className="col-12 col-md-2 container-no-padding hide-sm box-container-title-three"></div>
+                    <div className="col-12 col-md-8 container-no-padding">   
                         <div className="row box-container-title-three row-no-magin container-no-padding">
                             <div className="col-12 container-no-padding">
                                 <h1 className='h1-text-ilustracion-box'>CÓMO INSCRIBIRTE</h1>
                             </div>
-                            <div className="col-6 container-no-padding">
+                            <div className="col-6 col-md-5 container-no-padding">
                                     <img alt='conexion' src= {Ilustracion} className="icon-ilustracion" />
                             </div>
-                            <div className="col-5 container-no-padding">
+                            <div className="col-5 col-md-3 container-no-padding">
                                 <div className="ml-2">
                                 <span className="text-box-three">Inscribete completando el formulario con tus datos.
                                 </span>
@@ -268,6 +291,7 @@ const Home= () => {
                         </div>
 
                 </div>
+                <div className="col-12 col-md-2 container-no-padding hide-sm box-container-title-three"></div>
             </div>
         </Fragment>
     )

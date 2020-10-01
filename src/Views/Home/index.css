@@ -69,7 +69,7 @@
     font-size: 14px;
     line-height: 120%;
     letter-spacing: 1.25px;
-    color: #000000;
+    color: #000000 !important;
     padding: 10px 0px;
     margin-left: 24px;
     margin-right: 24px;
@@ -180,8 +180,6 @@
 .container-icons-group{
     margin-top: 0px
 }
-
-
 .h-slide-custom {
     min-height: 242px !important;
 }
@@ -190,4 +188,71 @@
     margin: 0 auto;
     height: auto !important;
     padding: 15px 0 !important;
+}
+@media only screen and (max-width: 767px) {
+    .hide-sm {
+        display: none;
+    }
+}
+@media only screen and (min-width: 768px) {
+    .hide-sm {
+        display: block;
+    }
+}
+@media only screen and (min-width: 767px) {
+    .box-container-title{
+        background: #FFFFFF;
+    }
+    .h1-tittle-Home{
+        font-size: 32px;
+        width: 605px;
+        margin-left: 32px;
+    }
+    .text-box-one {
+        width: auto;
+        height: auto;
+    }
+    .icon-image-conexion {
+        width: 255px;
+        margin: 0;
+        margin-top: 0;
+        margin-left: 20px;
+        margin-right: 0;
+        position: absolute;
+        top: -50%;
+    }
+    .text-box-one, .text-box-two, .text-box-three{
+        font-size: 18px;
+    }
+    .h1-tittle-box, .h1-tittle-carousel{
+        font-size: 24px;
+    }
+    .h1-text-ilustracion-box{
+        font-size: 25.8px;
+    }
+    .icon-ilustracion{
+        width: 222px;
+        
+    }
+    .btn-ilustracion-operativa{
+        margin-top: 36px;
+    }
+    .icon-image-rubros{
+        width: 120px;
+        height: 120px;
+    }
+    .text-box-two{
+        width: 400px;
+        height: 46px;
+    }
+    .box-container-title-two {
+        margin-top: 45px;
+        height: 347px;
+    }
+}
+@media only screen and (min-width: 1200px) {
+    .btn-ilustracion-operativa{
+        margin-top: 38px;
+    }
+
 }
