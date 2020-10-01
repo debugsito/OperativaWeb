@@ -82,51 +82,53 @@ const ProfileInfo = (props) => {
                         <span className="span-error">
                             { errors.lastName && errors.lastName.message}
                         </span>
-                        <label htmlFor="doc" className="label-form mt-1">         
+                        <label htmlFor="doc" className="label-form-2 mt-1">        
                             Tipo de Documento
-                            <div className="form-check my-2">
-                                <input className="form-check-input"
-                                type="radio" 
-                                name="doc" 
-                                id="dni" 
-                                value="option1"
-                                autoComplete="off"
-                                ref={register}
-                                />
-                                <label className="form-text-check mb-2">
-                                    Dni
-                                </label>
-                            </div>
-                            <div className="form-check mb-3">
-                                <input className="form-check-input"
-                                type="radio" 
-                                name="doc" 
-                                id="carnet" 
-                                value="option2"
-                                required=""
-                                autoComplete="off"
-                                ref={register}
-                                />
-                                <label className="form-text-check">
-                                    Carnet de Extranjería
-                                </label>
-                            </div>
-                            <div className="form-check mb-3">
-                                <input className="form-check-input"
-                                type="radio" 
-                                name="doc" 
-                                id="pasaporte" 
-                                value="option3"
-                                required=""
-                                autoComplete="off"
-                                ref={
-                                    register({
-                                        required: "Seleccione un tipo de documento",
-                                    })}
-                                />
-                                <label className="form-text-check">
-                                    Pasaporte
-                                </label>
+                            <div className="container-radios">
+                                <div className="form-check my-2">
+                                    <input className="form-check-input"
+                                    type="radio" 
+                                    name="doc" 
+                                    id="dni" 
+                                    value="option1"
+                                    autoComplete="off"
+                                    ref={register}
+                                    />
+                                    <label className="form-text-check mb-2">
+                                        Dni
+                                    </label>
+                                </div>
+                                <div className="form-check mb-3">
+                                    <input className="form-check-input"
+                                    type="radio" 
+                                    name="doc" 
+                                    id="carnet" 
+                                    value="option2"
+                                    required=""
+                                    autoComplete="off"
+                                    ref={register}
+                                    />
+                                    <label className="form-text-check">
+                                        Carnet de Extranjería
+                                    </label>
+                                </div>
+                                <div className="form-check mb-3">
+                                    <input className="form-check-input"
+                                    type="radio" 
+                                    name="doc" 
+                                    id="pasaporte" 
+                                    value="option3"
+                                    required=""
+                                    autoComplete="off"
+                                    ref={
+                                        register({
+                                            required: "Seleccione un tipo de documento",
+                                        })}
+                                    />
+                                    <label className="form-text-check">
+                                        Pasaporte
+                                    </label>
+                                </div>
                             </div>
                         <span className="span-error">
                             { errors.doc && errors.doc.message}

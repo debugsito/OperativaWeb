@@ -34,7 +34,7 @@ const ProfileAcademic = (props) => {
                 <div className="col-12  col-md-6 offset-md-3 container-no-padding">
                 <form name="myForm" onSubmit={handleSubmit(onSubmit)} className=''>
                     <p className="text-form-academic">Ingresa los datos del último nivel de estudios que alcanzaste.</p>
-                    <label htmlFor="registerStudies" className="label-form mt-1">         
+                    <label htmlFor="registerStudies" className="label-form-2 mt-1">         
                         Nivel máximo alcanzado
                         <div className="form-check my-2">
                             <input className="form-check-input"
@@ -75,7 +75,7 @@ const ProfileAcademic = (props) => {
                                 Estudios técnicos
                             </label>
                         </div>
-                        <div className="form-check mb-3">
+                        <div className="form-check">
                             <input className="form-check-input"
                              type="radio" 
                              name="registerStudies" 
@@ -95,7 +95,7 @@ const ProfileAcademic = (props) => {
                             { errors.registerStudies && errors.registerStudies.message}
                         </span>
                     </label>
-                    <label htmlFor="educationalInstitution" className="label-form mt-4">
+                    <label htmlFor="educationalInstitution" className="label-form">
                         Institución educativa
                         <input
                             placeholder ="Colegio Fé y Alegría" 
@@ -133,44 +133,50 @@ const ProfileAcademic = (props) => {
                     <span className="span-error">
                         { errors.specialty && errors.specialty.message}
                     </span>
-                    <label 
-                        htmlFor="startDate"
-                        className=" label-form mt-1">
-                        Fecha de inicio
-                        <div className="customDatePickerWidth">
-                            <DatePicker 
-                            name='startDate'
-                            type="text"
-                            pattern="[0-9]+"
-                            requerid=""
-                            selected={startDate}
-                            autoComplete="off" 
-                            onChange={date => setStartDate(date)}
-                            placeholderText="DD/MM/AAAA"
-                            locale="es"
-                            className="form-control label-form-calen icon-calendar" 
-                        />
+                    <div className="row row-no-magin ">
+                        <div className="col-12 col-md-6 pr-md-4 pl-md-0 px-sm-0 px-xs-0">
+                            <label 
+                                htmlFor="startDate"
+                                className=" label-form mt-3">
+                                Fecha de inicio
+                                <div className="customDatePickerWidth">
+                                    <DatePicker 
+                                    name='startDate'
+                                    type="text"
+                                    pattern="[0-9]+"
+                                    requerid=""
+                                    selected={startDate}
+                                    autoComplete="off" 
+                                    onChange={date => setStartDate(date)}
+                                    placeholderText="DD/MM/AAAA"
+                                    locale="es"
+                                    className="form-control label-form-calen icon-calendar" 
+                                />
+                                </div>
+                            </label>
                         </div>
-                    </label>
-                    <label 
-                         htmlFor="endDate"
-                        className=" label-form mt-3">
-                        Fecha de fin
-                        <div className="customDatePickerWidth">
-                            <DatePicker 
-                            name='endDate'
-                            type="text"
-                            pattern="[0-9]+"
-                            requerid=""
-                            selected={startDate}
-                            autoComplete="off" 
-                            onChange={date => setStartDate(date)}
-                            placeholderText="DD/MM/AAAA"
-                            locale="es"
-                            className="form-control label-form-calen icon-calendar" 
-                        />
+                        <div className="col-12 col-md-6 pl-md-4 pr-md-0 px-sm-0 px-xs-0">
+                            <label 
+                                htmlFor="endDate"
+                                className=" label-form mt-3">
+                                Fecha de fin
+                                <div className="customDatePickerWidth">
+                                    <DatePicker 
+                                    name='endDate'
+                                    type="text"
+                                    pattern="[0-9]+"
+                                    requerid=""
+                                    selected={startDate}
+                                    autoComplete="off" 
+                                    onChange={date => setStartDate(date)}
+                                    placeholderText="DD/MM/AAAA"
+                                    locale="es"
+                                    className="form-control label-form-calen icon-calendar" 
+                                />
+                                </div>
+                            </label>
                         </div>
-                    </label>
+                    </div>
                     <section  className="container-buttons-form">
                         <Link
                             className="btn-cancel-form btn" 

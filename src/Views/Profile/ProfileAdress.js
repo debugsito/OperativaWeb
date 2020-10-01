@@ -84,192 +84,185 @@ const ProfileAdress = (props) => {
                         <h1 className='h1-form'>Completa tu registro</h1>
                     </div>
                     <div className="col-12  col-md-6 offset-md-3 container-no-padding">
-                    <form name="myForm" onSubmit={handleSubmit(onSubmit)} className='form-container-info'>
-                        <label htmlFor="registerAdress" className="label-form">
-                            Dirección
-                            <input
-                                placeholder ="Av. Grau 123" 
-                                className="form-control placeholder"                               
-                                id='registerAdress'
-                                name='registerAdress'
-                                type="text"
-                                autoComplete="off"
-                                ref={register({
-                                    required: {value: true, message: "Este campo es requerido"}
-                                })}
-                            />
-                        </label>
-                        <span className="span-error">
-                                { errors.registerAdress && errors.registerAdress.message}
-                        </span>
-                        <label  htmlFor="departamentAdress" className="label-form" >
-                            Departamento
-                            <select 
-                                className="form-control form-text-check-adress"
-                                id=""
-                                name="departamentAdress"
-                                onChange= {handlerdepartamento}
-                                ref={register({ required: {value: true, message: "Seleccione una opción"} })}
-                                > 
-                                <option value="">Option</option>
-                                {
-                                    listDepartament.map((item) => (
-                                    <option key= {item.id}
-                                    value= {item.id}
-                                    >
-                                        {item.name}
-                                    </option>
-                                ))
-                                }
-                            </select>
-                  
-                        </label>
-                        <span className="span-error">
-                            { errors.departamentAdress && errors.departamentAdress.message}
-                        </span>
-                        <label htmlFor="provinceAdress" className="label-form" >
-                            Provincia
-                            <select
-                                name="provinceAdress"
-                                className="form-control form-text-check-adress"
-                                onChange={handlerProvincia}
-                                ref={register({ required: {value: true, message: "Seleccione una opción"} })}
-                                >
-                                    <option value="">Option</option>
-                                {
-                                    listProvince.map((item) => (
-                                    <option key= {item.id} value= {item.id}>
-                                        {item.name}
-                                    </option>
-                                ))
-                                }
-                            </select>
-                        </label>
-                        <span className="span-error">
-                            { errors.provinceAdress && errors.provinceAdress.message}
-                        </span>
-                        <label htmlFor="districtAdress" className="label-form" >
-                            Distrito
-                            <select
-                                name="districtAdress"
-                                className="form-control form-text-check-adress"
-                                ref={register({ required: {value: true, message: "Seleccione una opción"} })}
-                                >
-                                    <option value="">Option</option>
-                                    {
-                                        listDistrict.map((item) => (
-                                        <option key= {item.id} 
-                                        value= {item.id}
-                                        >
-                                            {item.name}
-                                        </option>
-                                        ))
-                                    }
-                            </select>
-                        </label>
-                        <span className="span-error">
-                            { errors.districtAdress && errors.districtAdress.message}
-                        </span>
-                        <label htmlFor="phoneDate" className="label-form mt-2">
-                            Teléfono
-                            <input
-                                maxLength="9"
-                                placeholder="123 123 123"
-                                className="form-control placeholder mb-2"
-                                id='phoneDate'
-                                name='phoneDate'
-                                type="text"
-                                autoComplete="off"
-                                onKeyPress={e =>{onlyNumbers(e)}} 
-                                ref={register({
-                                    required: "Este campo es requerido",
-                                        maxLength : {
-                                            value: 9,
-                                            message: 'Coloque un número telefónico válido' 
-                                        },
-                                        minLength: {
-                                            value: 9,
-                                            message: 'Coloque un número telefónico válido' 
-                                        }
-                                  })} 
-                            />
-                        </label>
-                        <span className="span-error">
-                                { errors.phoneDate && errors.phoneDate.message}
-                        </span> 
-                        <label htmlFor="family" className="label-form mt-2">         
-                            Situación familiar
-                            <div className="form-check my-2">
-                                <input className="form-check-input"
-                                type="radio" 
-                                name="family" 
-                                id="single" 
-                                value="option1"
-                                ref={register}
-                                />
-                                <label className="form-text-check mb-2">
-                                    Soltero
-                                </label>
+                        <form name="myForm" onSubmit={handleSubmit(onSubmit)} className='form-container-info'>
+                            <div className="row row-no-magin ">
+                                <div className="col-12 col-md-4 pr-md-4 pl-md-0 px-sm-0 px-xs-0">
+                                    <label  htmlFor="departamentAdress" className="label-form" >
+                                        Departamento
+                                        <select 
+                                            className="form-control form-text-check-adress"
+                                            id=""
+                                            name="departamentAdress"
+                                            onChange= {handlerdepartamento}
+                                            ref={register({ required: {value: true, message: "Seleccione una opción"} })}
+                                            > 
+                                            <option value="">Option</option>
+                                            {
+                                                listDepartament.map((item) => (
+                                                <option key= {item.id}
+                                                value= {item.id}
+                                                >
+                                                    {item.name}
+                                                </option>
+                                            ))
+                                            }
+                                        </select>
+                                    </label>
+                                    <span className="span-error">
+                                        { errors.departamentAdress && errors.departamentAdress.message}
+                                    </span>
+                                </div>
+                                <div className="col-12 col-md-4 pr-md-3 pl-md-0 px-sm-0 px-xs-0">
+                                    <label htmlFor="provinceAdress" className="label-form" >
+                                        Provincia
+                                        <select
+                                            name="provinceAdress"
+                                            className="form-control form-text-check-adress"
+                                            onChange={handlerProvincia}
+                                            ref={register({ required: {value: true, message: "Seleccione una opción"} })}
+                                            >
+                                                <option value="">Option</option>
+                                            {
+                                                listProvince.map((item) => (
+                                                <option key= {item.id} value= {item.id}>
+                                                    {item.name}
+                                                </option>
+                                            ))
+                                            }
+                                        </select>
+                                    </label>
+                                    <span className="span-error">
+                                        { errors.provinceAdress && errors.provinceAdress.message}
+                                    </span>
+                                </div>
+                                <div className="col-12 col-md-4 pl-md-2 pr-md-0 px-sm-0 px-xs-0">
+                                    <label htmlFor="districtAdress" className="label-form" >
+                                        Distrito
+                                        <select
+                                            name="districtAdress"
+                                            className="form-control form-text-check-adress"
+                                            ref={register({ required: {value: true, message: "Seleccione una opción"} })}
+                                            >
+                                                <option value="">Option</option>
+                                                {
+                                                    listDistrict.map((item) => (
+                                                    <option key= {item.id} 
+                                                    value= {item.id}
+                                                    >
+                                                        {item.name}
+                                                    </option>
+                                                    ))
+                                                }
+                                        </select>
+                                    </label>
+                                    <span className="span-error">
+                                        { errors.districtAdress && errors.districtAdress.message}
+                                    </span>
+                                </div>
                             </div>
-                            <div className="form-check mb-3">
-                                <input className="form-check-input"
-                                type="radio" 
-                                name="family" 
-                                id="married" 
-                                value="option2"
-                                ref={register}
+                            
+                            <label htmlFor="phoneDate" className="label-form mt-2">
+                                Teléfono
+                                <input
+                                    maxLength="9"
+                                    placeholder="123 123 123"
+                                    className="form-control placeholder mb-2"
+                                    id='phoneDate'
+                                    name='phoneDate'
+                                    type="text"
+                                    autoComplete="off"
+                                    onKeyPress={e =>{onlyNumbers(e)}} 
+                                    ref={register({
+                                        required: "Este campo es requerido",
+                                            maxLength : {
+                                                value: 9,
+                                                message: 'Coloque un número telefónico válido' 
+                                            },
+                                            minLength: {
+                                                value: 9,
+                                                message: 'Coloque un número telefónico válido' 
+                                            }
+                                    })} 
                                 />
-                                <label className="form-text-check" >
-                                    Casado
-                                </label>
-                            </div>
-                            <div className="form-check mb-3">
-                                <input className="form-check-input"
-                                type="radio" 
-                                name="family" 
-                                id="divorced" 
-                                value="option3"
-                                ref={register}
-                                />
-                                <label className="form-text-check">
-                                    Divorciado
-                                </label>
-                            </div>
-                            <div className="form-check mb-3">
-                                <input className="form-check-input"
-                                type="radio" 
-                                name="family" 
-                                id="cohabiting" 
-                                value="option2"
-                                ref={
-                                    register({
-                                        required: "Seleccione una opción",
-                                    })}
-                                />
-                                <label className="form-text-check" >
-                                    Conviviente
-                                </label>
-                            </div>
+                            </label>
                             <span className="span-error">
-                            { errors.family && errors.family.message}
-                        </span>
-                        </label>
-                        <section  className="container-buttons-form">
-                            <Link
-                                className="btn-cancel-form btn" 
-                                to='/inicio'
+                                    { errors.phoneDate && errors.phoneDate.message}
+                            </span> 
+                            <label htmlFor="family" className="label-form-2 mt-2">         
+                                Situación familiar
+                                <div className="container-radios">
+                                    <div className="form-check my-2">
+                                        <input className="form-check-input"
+                                        type="radio" 
+                                        name="family" 
+                                        id="single" 
+                                        value="option1"
+                                        ref={register}
+                                        />
+                                        <label className="form-text-check mb-2">
+                                            Soltero
+                                        </label>
+                                    </div>
+                                    <div className="form-check mb-3">
+                                        <input className="form-check-input"
+                                        type="radio" 
+                                        name="family" 
+                                        id="married" 
+                                        value="option2"
+                                        ref={register}
+                                        />
+                                        <label className="form-text-check" >
+                                            Casado
+                                        </label>
+                                    </div>
+                                    <div className="form-check mb-3">
+                                        <input className="form-check-input"
+                                        type="radio" 
+                                        name="family" 
+                                        id="divorced" 
+                                        value="option3"
+                                        ref={register}
+                                        />
+                                        <label className="form-text-check">
+                                            Divorciado
+                                        </label>
+                                    </div>
+                                    <div className="form-check mb-3">
+                                        <input className="form-check-input"
+                                        type="radio" 
+                                        name="family" 
+                                        id="cohabiting" 
+                                        value="option2"
+                                        ref={
+                                            register({
+                                                required: "Seleccione una opción",
+                                            })}
+                                        />
+                                        <label className="form-text-check" >
+                                            Conviviente
+                                        </label>
+                                    </div>
+                                </div>
+                                <span className="span-error">
+                                { errors.family && errors.family.message}
+                            </span>
+                            </label>
+                            <section  className="container-buttons-form">
+                                <Link
+                                    className="btn-cancel-form btn" 
+                                    to='/inicio'
+                                    >
+                                    CANCELAR
+                                </Link> 
+                                <button
+                                    className="button-continue-restore btn"
+                                    type="submit"
                                 >
-                                CANCELAR
-                            </Link> 
-                            <button
-                                className="button-continue-restore btn"
-                                type="submit"
-                            >
-                                <span className= "text-button-continue-restore">CONTINUAR</span>
-                                <span className="icon-next"></span>
-                            </button>
-                        </section>                             
-                    </form>
+                                    <span className= "text-button-continue-restore">CONTINUAR</span>
+                                    <span className="icon-next"></span>
+                                </button>
+                            </section>                             
+                        </form>
                     </div>
                 </div>
         </Fragment>

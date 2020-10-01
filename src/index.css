@@ -168,6 +168,16 @@ code {
   text-align: left;
 
 }
+
+.label-form-2{
+  font-family: 'Open Sans';
+  font-size: 16px;
+  line-height: 19px;
+  width: 100%!important;
+  color: #979797;
+  text-align: left;
+
+}
 .input-container {
   position: absoluta !important;
   display: inline-block;
@@ -604,6 +614,33 @@ color: #46A9D4;
 
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (min-width: 780px) {
+  .container-buttons, .container-buttons-continue, .container-buttons-form{
+    justify-content: flex-end;
+  }
+  .btn-register, .btn-cancel-register, .btn-login, .button-continue-restore,
+  .btn-cancel-form {
+    max-width: 148px;
+    margin-left: 32px !important;
 
+  }
+
+  .container-radios {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    height: 35px;
+  }
+  .form-text-check {
+    line-height: 25px;
+  }
+
+}
+
+@media only screen and (max-width: 575px) {
+  .px-xs-0 {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
 }

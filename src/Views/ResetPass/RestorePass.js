@@ -44,7 +44,7 @@ const RestorePassword= (props) => {
       <Fragment>
         <NavBar/>
         <div className="row justify-content-center padding-container row-no-magin">
-          <div className="col-12 col-sm-8 col-md-6 col-xl-4 container-no-padding">
+          <div className="col-12 col-sm-8 col-md-6 container-no-padding">
             <h1 className="h1-custom-restore">RECUPERA TU CONTRASEÑA</h1>
             <form onSubmit={handleSubmit(onSubmit)} className="form-container">
               <label className="label-form">
