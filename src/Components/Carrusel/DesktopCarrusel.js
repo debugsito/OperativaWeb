@@ -37,7 +37,7 @@ const DesktopCarrusel = () => {
             <div id="carouselExampleSlidesOnly" 
                 className="carousel slide my-0" 
                 width="100"  
-                data-interval="5000" 
+                data-interval="2500" 
                 data-ride="carousel"
             >                
                 <div className="carousel-inner h-slide-custom">
