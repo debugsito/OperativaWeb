@@ -4,15 +4,14 @@ import { Link, withRouter } from 'react-router-dom'
 import DatePicker,{registerLocale}from "react-datepicker"
 import 'react-datepicker/dist/react-datepicker.css'
 import es from 'date-fns/locale/es';
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import Stepper from "./Stepper";
 import './index.css';
 
 registerLocale("es", es);
 
 const ProfileInfo = (props) => { 
-    const [startDate, setStartDate] = React.useState('');
-    const { handleSubmit, register, errors} = useForm();
+    const { handleSubmit, register, errors, control} = useForm();
 
     const onSubmit = (values, e) => { 
         console.log(values);
@@ -160,26 +159,34 @@ const ProfileInfo = (props) => {
                         <span className="span-error">
                             { errors.document && errors.document.message}
                         </span>
-                        <label htmlFor="dateOfBirth" className=" label-form mt-3" >
-                            Fecha de nacimiento
-                            <div className="customDatePickerWidth">
-                                    <DatePicker 
-                                    type="text"
-                                    pattern="[0-9]+"
-                                    name='dateOfBirth'
-                                    selected={startDate}
-                                    autoComplete="off" 
-                                    dateFormat="dd/MM/yyyy"
-                                    showYearDropdown
-                                    placeholderText="DD/MM/AAAA"
-                                    locale="es"
-                                    className="form-control label-form-calen icon-calendar"
-                                    ref={register({ required: true, message:"Agrega"})}
-                                    onChange={date => setStartDate(date)}
-                                    />
-                            </div> 
-                                <span className="span-error">{ errors.dateOfBirth && errors.dateOfBirth.message}</span>
-                        </label>
+                         <label htmlFor="dateOfBirth" className=" label-form mt-3" >
+                                Fecha de nacimiento
+                                <section className="customDatePickerWidth">
+                                    <Controller
+                                        control={control}
+                                        name="dateOfBirth"
+                                        defaultValue=""
+                                        render={(props) => (
+                                            <DatePicker
+                                                className="form-control label-form-calen icon-calendar"
+                                                placeholderText="DD/MM/AAAA"
+                                                onChange={(e) => props.onChange(e)}
+                                                selected={props.value}
+                                                dateFormat="dd/MM/yyyy"
+                                                locale={es}
+                                                showYearDropdown
+                                                defaultValue=""
+                                                name ="dateOfBirth"
+                                                autoComplete="off"     
+                                            />
+                                        )}
+                                                rules={{
+                                                    required: 'Coloque una fecha válida'
+                                                }}
+                                    /> 
+                                </section>
+                                <span className="span-error mt-2">{ errors.dateOfBirth && errors.dateOfBirth.message}</span>
+                            </label>
                         <section className="container-buttons-form">
                             <Link
                                 className="btn-cancel-form btn" 

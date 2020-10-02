@@ -4,15 +4,14 @@ import { Link, withRouter } from 'react-router-dom'
 import DatePicker,{registerLocale}from "react-datepicker"
 import 'react-datepicker/dist/react-datepicker.css'
 import es from 'date-fns/locale/es';
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import Stepper from "./Stepper";
 import './index.css';
 
 registerLocale("es", es);
 
 const ProfileAcademic = (props) => { 
-    const [startDate, setStartDate] = React.useState('');
-    const { handleSubmit, register, errors} = useForm();
+    const { handleSubmit, register, errors, control} = useForm();
 
     const onSubmit = (values, e) => { 
         console.log(values);
@@ -135,45 +134,63 @@ const ProfileAcademic = (props) => {
                     </span>
                     <div className="row row-no-magin ">
                         <div className="col-12 col-md-6 pr-md-4 pl-md-0 px-sm-0 px-xs-0">
-                            <label 
-                                htmlFor="startDate"
-                                className=" label-form mt-3">
-                                Fecha de inicio
-                                <div className="customDatePickerWidth">
-                                    <DatePicker 
-                                    name='startDate'
-                                    type="text"
-                                    pattern="[0-9]+"
-                                    requerid=""
-                                    selected={startDate}
-                                    autoComplete="off" 
-                                    onChange={date => setStartDate(date)}
-                                    placeholderText="DD/MM/AAAA"
-                                    locale="es"
-                                    className="form-control label-form-calen icon-calendar" 
-                                />
-                                </div>
+                        <label htmlFor="startDate" className=" label-form mt-3" >
+                                Fecha de nacimiento
+                                <section className="customDatePickerWidth">
+                                    <Controller
+                                        control={control}
+                                        name="startDate"
+                                        defaultValue=""
+                                        render={(props) => (
+                                            <DatePicker
+                                                className="form-control label-form-calen icon-calendar"
+                                                placeholderText="DD/MM/AAAA"
+                                                onChange={(e) => props.onChange(e)}
+                                                selected={props.value}
+                                                dateFormat="dd/MM/yyyy"
+                                                locale={es}
+                                                showYearDropdown
+                                                defaultValue=""
+                                                name ="startDate"
+                                                autoComplete="off"     
+                                            />
+                                        )}
+                                                rules={{
+                                                    required: 'Coloque una fecha válida'
+                                                }}
+                                    /> 
+                                </section>
+                                <span className="span-error mt-2">{ errors.startDate && errors.startDate.message}</span>
                             </label>
                         </div>
                         <div className="col-12 col-md-6 pl-md-4 pr-md-0 px-sm-0 px-xs-0">
-                            <label 
-                                htmlFor="endDate"
-                                className=" label-form mt-3">
-                                Fecha de fin
-                                <div className="customDatePickerWidth">
-                                    <DatePicker 
-                                    name='endDate'
-                                    type="text"
-                                    pattern="[0-9]+"
-                                    requerid=""
-                                    selected={startDate}
-                                    autoComplete="off" 
-                                    onChange={date => setStartDate(date)}
-                                    placeholderText="DD/MM/AAAA"
-                                    locale="es"
-                                    className="form-control label-form-calen icon-calendar" 
-                                />
-                                </div>
+                        <label htmlFor="endDate" className=" label-form mt-3" >
+                                Fecha de nacimiento
+                                <section className="customDatePickerWidth">
+                                    <Controller
+                                        control={control}
+                                        name="endDate"
+                                        defaultValue=""
+                                        render={(props) => (
+                                            <DatePicker
+                                                className="form-control label-form-calen icon-calendar"
+                                                placeholderText="DD/MM/AAAA"
+                                                onChange={(e) => props.onChange(e)}
+                                                selected={props.value}
+                                                dateFormat="dd/MM/yyyy"
+                                                locale={es}
+                                                showYearDropdown
+                                                defaultValue=""
+                                                name ="endDate"
+                                                autoComplete="off"     
+                                            />
+                                        )}
+                                                rules={{
+                                                    required: 'Coloque una fecha válida'
+                                                }}
+                                    /> 
+                                </section>
+                                <span className="span-error mt-2">{ errors.endDate && errors.endDate.message}</span>
                             </label>
                         </div>
                     </div>
