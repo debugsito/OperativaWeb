@@ -69,7 +69,7 @@ const Home= () => {
                                     className="btn btn-operativa btn-sm"
                                     to="/registro"
                                     >
-                                    REGISTRATE AQUÍ
+                                    REGISTRATE
                                 </Link> 
                             </div>
                         </div>
@@ -288,7 +288,7 @@ const Home= () => {
                                         type='submit'
                                         to="/registro"
                                         >
-                                        REGISTRATE AQUÍ
+                                        REGISTRATE
                                     </Link> 
                                 </div>
                             </div>
