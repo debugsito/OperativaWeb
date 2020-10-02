@@ -135,7 +135,7 @@ const ProfileAcademic = (props) => {
                     <div className="row row-no-magin ">
                         <div className="col-12 col-md-6 pr-md-4 pl-md-0 px-sm-0 px-xs-0">
                         <label htmlFor="startDate" className=" label-form mt-3" >
-                                Fecha de nacimiento
+                                Fecha de inicio
                                 <section className="customDatePickerWidth">
                                     <Controller
                                         control={control}
@@ -165,7 +165,7 @@ const ProfileAcademic = (props) => {
                         </div>
                         <div className="col-12 col-md-6 pl-md-4 pr-md-0 px-sm-0 px-xs-0">
                         <label htmlFor="endDate" className=" label-form mt-3" >
-                                Fecha de nacimiento
+                                Fecha de fin
                                 <section className="customDatePickerWidth">
                                     <Controller
                                         control={control}
