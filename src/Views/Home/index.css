@@ -38,6 +38,7 @@
     color: #000000;
     padding-top: 20px;
     margin-left: 24px;
+    margin-right: 12px;
     }
 .h1-text-ilustracion-box{
     margin-top: 24px;
@@ -189,7 +190,7 @@
     height: auto !important;
     padding: 15px 0 !important;
 }
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 768px) {
     .hide-sm {
         display: none;
     }
@@ -198,14 +199,12 @@
     .hide-sm {
         display: block;
     }
-}
-@media only screen and (min-width: 767px) {
+
     .box-container-title{
         background: #FFFFFF;
     }
     .h1-tittle-Home{
         font-size: 32px;
-        width: 605px;
         margin-left: 32px;
     }
     .text-box-one {
@@ -234,19 +233,16 @@
         margin-top: 32px;
     }
     .icon-ilustracion{
-        width: 222px;
+        width: 200px;
         
     }
     .btn-ilustracion-operativa{
         margin-top: 36px;
     }
+
     .icon-image-rubros{
-        width: 120px;
-        height: 120px;
-    }
-    .text-box-two{
-        width: 400px;
-        height: 46px;
+        width: 65px;
+        height: 65px;
     }
     .box-container-title-two {
         margin-top: 45px;
@@ -255,10 +251,77 @@
     .h-slide-custom{
         min-height: 255px !important;
     }
+    .btn-ilustracion-operativa {
+        margin-top: 10px;
+        margin-left: 24px;
+    }
+
+    .text-icon-rubros{
+        font-size: 12px;
+        text-align: center;
+        width: 67px;
+        margin-bottom: 10px;
+    }
+    .box-container-title-two{
+        height: 240px;
+    }
+    .text-box-three{
+        margin-left: 24px;
+    }
+}
+@media only screen and (min-width: 800px) {
+    .icon-image-rubros{
+        width: 75px;
+        height: 75px;
+    }
+    
+    .text-icon-rubros{
+        font-size: 12px;
+    }
+
+    .icon-ilustracion{
+        width: 210px;
+        
+    }
+
+    .box-container-title-two{
+        height: 280px;
+    }
+}
+@media only screen and (min-width: 920px) {
+    .icon-image-rubros{
+        width: 85px;
+        height: 85px;
+    }
+    .icon-ilustracion{
+        width: 222px;
+        
+    }
 }
 @media only screen and (min-width: 1200px) {
     .btn-ilustracion-operativa{
-        margin-top: 38px;
+        margin-top: 15px;
+        padding: 12px;
     }
 
+    .icon-image-rubros{
+        width: 125px;
+        height: 125px;
+    }
+
+    .box-container-title-two{
+        height: 365px;
+    }
+    .box-container-title-three{
+        height: 300px;
+    }
+    .btn-operativa{
+        padding: 12px;
+    }
+}
+
+@media only screen and (min-width: 1400px) {
+    .btn-ilustracion-operativa{
+        margin-top: 38px;
+    }
 }

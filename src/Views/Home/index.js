@@ -277,7 +277,7 @@ const Home= () => {
                             <div className="col-6 col-md-5 container-no-padding">
                                     <img alt='conexion' src= {Ilustracion} className="icon-ilustracion" />
                             </div>
-                            <div className="col-5 col-md-3 container-no-padding">
+                            <div className="col-5 col-md-7 container-no-padding">
                                 <div className="ml-2">
                                 <span className="text-box-three">Inscribete completando el formulario con tus datos.
                                 </span>
