@@ -6,8 +6,7 @@ import { IconContext } from 'react-icons';
 import LogoMedio from '../../assets/logos/logo-container-operativa.svg'
 import './index.css';
 
-
-function Navbar(props) {
+function NavbarDesk(props) {
   const [sidebar, setSidebar] = useState(false);
 
   const showSidebar = () => setSidebar(!sidebar);
@@ -27,7 +26,7 @@ function Navbar(props) {
   return (
     <>
       <IconContext.Provider value={{ color: 'white' }}>
-        <div className='navbar2 fixed-top'>
+        <div className='navbar2-desk fixed-top'>
         <div className="">                
                 <a href="/" ><img src= {LogoMedio} className="icon-img-logo"  alt="" /></a>            
         </div>
@@ -35,7 +34,7 @@ function Navbar(props) {
               {
                 sidebar ? (
                   (
-                    <Link to='#' className='menu-bars'>
+                    <Link to='#' className='menu-bars-desk'>
                         <AiIcons.AiOutlineClose onClick={showSidebar} 
                         style={{
                             color:"black"
@@ -43,7 +42,7 @@ function Navbar(props) {
                     </Link>
                   )              
                   ): (
-                    <Link to='#' className='menu-bars'>
+                    <Link to='#' className='menu-bars-desk'>
                       <FaIcons.FaBars onClick={showSidebar} 
                       style={{
                           color:"black"
@@ -80,6 +79,6 @@ function Navbar(props) {
   );
 }
 
-export default withRouter (Navbar);
+export default withRouter (NavbarDesk);
 
 

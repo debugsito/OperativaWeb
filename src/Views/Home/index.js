@@ -1,6 +1,6 @@
 import React, {Fragment} from "react";
 import { Link } from 'react-router-dom'
-import NavBar from "../../Components/MenuUser/index";
+import NavBarDesk from "../../Components/Menu-desktop/NavbarDesk";
 import ImageConexion from "../../assets/images/image-conexion.svg"
 import Ilustracion from "../../assets/images/ilustracion.svg"
 import ImgProduction from "../../assets/icons/medium1.png"
@@ -40,18 +40,22 @@ import Sgs from "../../assets/logos/28.png"
 import Tailoy from "../../assets/logos/29.jpg"
 import Viva from "../../assets/logos/30.png"
 import DesktopCarrusel from "../../Components/Carrusel/DesktopCarrusel"
+import LogoMedio from "../../assets/logos/logo-container-operativa.svg"
 import './index.css';
 
 const Home= () => {
 
     return (
         <Fragment>
-        <NavBar/>
+        <NavBarDesk/>
             <div className="row row-no-magin container-no-padding">
                 {/* Primer Bloque */}
                 <div className="col-12 col-md-2 container-no-padding"></div>
                 <div className="col-12 col-md-8 container-no-padding">
                     <div className="row m-nav row-no-magin container-no-padding">
+                        <div className="col-11 col-md-9 container-no-padding hide-sm">
+                            <a href="/" ><img src= {LogoMedio} className="icon-img-logo"  alt="" /></a>            
+                        </div>
                         <div className="col-11 col-md-9 container-no-padding">
                             <h1 className='h1-tittle-Home'>ENCUENTRA EL TRABAJO QUE BUSCABAS</h1>
                         </div>

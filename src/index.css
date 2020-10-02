@@ -135,7 +135,7 @@ code {
   font-family: 'Raleway', sans-serif;
   font-style: normal;
   font-weight: bold;
-  font-size: 24px;
+  font-size: 16px;
   line-height: 28px;
   display: flex;
   align-items: center;
@@ -627,7 +627,9 @@ color: #46A9D4;
   .btn-cancel-form {
     max-width: 148px;
     margin-left: 32px !important;
-
+  }
+  .m-nav {
+    margin-top: 74px;
   }
 
   .container-radios {
@@ -647,6 +649,9 @@ color: #46A9D4;
     padding-left: 0px !important;
     padding-right: 0px !important;
   }
+}
+@media only screen and (min-width: 575px) {
+  
 }
 @media only screen and (max-width: 738px) {
   .desktop-car{
