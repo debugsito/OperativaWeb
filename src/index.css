@@ -459,15 +459,27 @@ box-shadow: 2px 1px 1px 1px rgba(237,29,64,0.43);
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
-  text-transform: uppercase;
-  color: #373737;
+  color: #373737 !important;
   margin-left: 0px !important;
   margin-top: 50px;
   display: flex;
   justify-content: flex-end;
 }
+
+.button-continue-restore-notification:focus{
+  outline: transparent;
+  box-shadow: 0 0 0 0 transparent;
+}.button-continue-restore-notification:focus{
+  outline: transparent;
+  box-shadow: 0 0 0 0 transparent;
+}
+
 .text-button-continue-restore{
   margin-left: 0 !important;
+  color: #373737;
+}.text-button-continue-restore-inicio{
+  margin-left: 0 !important;
+  color: #FFFFFF;
 }
 .button-continue-notification{
   display: flex;
@@ -476,8 +488,6 @@ box-shadow: 2px 1px 1px 1px rgba(237,29,64,0.43);
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
-  text-transform: uppercase;
-  color:#46A9D4;
   margin-top: 48px;
 }
 .btn-cancel-form{

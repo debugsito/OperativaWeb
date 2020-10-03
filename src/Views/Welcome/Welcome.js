@@ -31,11 +31,11 @@ const Welcome= (props) => {
                             <span className="icon-next"></span>
                         </button> */}
                         <button
-                            className="btn-primary text-button-next " 
+                            className="btn btn-primary text-button-next " 
                             type= 'submit' 
                             onClick= {onSubmit}
                             >
-                            <span className="text-button-continue-restore">CONTINUAR</span>
+                            <span className="text-button-continue-restore-inicio">CONTINUAR</span>
                             <span className="icon-next-button-blue"></span>
                         </button> 
                         </div>
