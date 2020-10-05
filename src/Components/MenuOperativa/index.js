@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import { Link } from 'react-router-dom'
-import iconoMenuDark from "../../assets/icons/icon-menu-dark.svg"
+import LogoMedio from "../../assets/icons/icon-menu-dark.svg"
 
 const NavBarOperativa = () => {
 
@@ -32,7 +32,7 @@ const NavBarOperativa = () => {
                                 }}
                             >
                             <span>
-                                <img src= { iconoMenuDark } className='' alt=""/>
+                                <img src= { LogoMedio } className='' alt=""/>
                                 
                             </span> 
                         </button>
