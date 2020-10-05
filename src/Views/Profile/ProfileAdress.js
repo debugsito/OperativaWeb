@@ -12,7 +12,8 @@ const onlyNumbers= (e)=> {
 }}
 
 const ProfileAdress = (props) => { 
-    const { handleSubmit, register, errors} = useForm();
+    const { handleSubmit, register, errors, formState} = useForm();
+    const { isSubmitted } = formState;
     const onSubmit = (values) => { 
         console.log(values);
         props.history.push('/informacion-academica')
@@ -42,6 +43,7 @@ const ProfileAdress = (props) => {
                     // return listProvince
                     // eslint-disable-next-line react-hooks/exhaustive-deps
         }, [])
+
         const [listdistritoBase, setListdistritoBase]= useState([])
         useEffect(() => {
             fetch('json/distritos.json')
@@ -53,7 +55,7 @@ const ProfileAdress = (props) => {
                     // eslint-disable-next-line react-hooks/exhaustive-deps
         }, [])
 
-    //BOTTON:
+    //Button:
     const handlerdepartamento = (e) =>{
         let id = e.target.value;
             setListProvince([])
@@ -62,7 +64,7 @@ const ProfileAdress = (props) => {
             setListProvince(filterProvinceData)
         }
         
-        //BOTTON:
+        //Button:
         const handlerProvincia = function(e){
             let id = e.target.value;
             setListDistrict([])
@@ -90,7 +92,16 @@ const ProfileAdress = (props) => {
                                     <label  htmlFor="departamentAdress" className="label-form" >
                                         Departamento
                                         <select 
-                                            className="form-control form-text-check-adress"
+                                            className={`form-control form-text-check-adress
+                                                ${
+                                                    isSubmitted ? 
+                                                    !errors.departamentAdress ?
+                                                    ""
+                                                    : 
+                                                    "border-error red-input"       
+                                                    : ''
+                                                }
+                                            `}
                                             id=""
                                             name="departamentAdress"
                                             onChange= {handlerdepartamento}
@@ -117,7 +128,16 @@ const ProfileAdress = (props) => {
                                         Provincia
                                         <select
                                             name="provinceAdress"
-                                            className="form-control form-text-check-adress"
+                                            className={`form-control form-text-check-adress
+                                                ${
+                                                    isSubmitted ? 
+                                                    !errors.provinceAdress?
+                                                    ""
+                                                    : 
+                                                    "border-error red-input"       
+                                                    : ''
+                                                }
+                                            `}
                                             onChange={handlerProvincia}
                                             ref={register({ required: {value: true, message: "Seleccione una opción"} })}
                                             >
@@ -140,7 +160,16 @@ const ProfileAdress = (props) => {
                                         Distrito
                                         <select
                                             name="districtAdress"
-                                            className="form-control form-text-check-adress"
+                                            className={`form-control form-text-check-adress
+                                                ${
+                                                    isSubmitted ? 
+                                                    !errors.districtAdress ?
+                                                    ""
+                                                    : 
+                                                    "border-error red-input"       
+                                                    : ''
+                                                }
+                                            `}
                                             ref={register({ required: {value: true, message: "Seleccione una opción"} })}
                                             >
                                                 <option value="">Option</option>
@@ -166,7 +195,16 @@ const ProfileAdress = (props) => {
                                 <input
                                     maxLength="9"
                                     placeholder="123 123 123"
-                                    className="form-control placeholder mb-2"
+                                    className={`form-control placeholder mb-2
+                                        ${
+                                            isSubmitted ? 
+                                            !errors.phoneDate ?
+                                            "input-icono"
+                                            : 
+                                            "border-error red-input input-icoerror"       
+                                            : ''
+                                        }
+                                    `}
                                     id='phoneDate'
                                     name='phoneDate'
                                     type="text"

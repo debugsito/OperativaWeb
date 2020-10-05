@@ -18,7 +18,6 @@ const Login= (props) => {
     }
     
 //     const baseUrl="https://reqres.in/api/";
-
 //     const onSubmit = (values) => { 
 //         console.log(values);
 //         let datafield = {

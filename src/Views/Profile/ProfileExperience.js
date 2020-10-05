@@ -13,7 +13,8 @@ registerLocale("es", es);
 const ProfileAdress = (props) => { 
 
     const [experienceBuss, setExperienceBuss]= React.useState(false);
-    const { handleSubmit, register, errors, control} = useForm();
+    const { handleSubmit, register, errors, control, formState} = useForm();
+    const { isSubmitted } = formState;
 
     const onSubmit = (values) => { 
         console.log(values);
@@ -57,7 +58,8 @@ const ProfileAdress = (props) => {
                         Expericia laboral
                         <div className= "input-container-select mt-2">
                             <div classNme="form-check">
-                                <input className="form-check-input"
+                                <input 
+                                className="form-check-input"
                                 type="radio" 
                                 name="workExperience" 
                                 id="" 
@@ -71,7 +73,8 @@ const ProfileAdress = (props) => {
                                 </label>
                             </div>
                             <div className="form-check">
-                                <input className="form-check-input"
+                                <input 
+                                className="form-check-input"
                                 type="radio" 
                                 name="workExperience" 
                                 id="" 
@@ -100,7 +103,16 @@ const ProfileAdress = (props) => {
                                 Cargo
                                 <input
                                     placeholder ="Operario" 
-                                    className="form-control placeholder"                               
+                                    className={`form-control placeholder
+                                        ${
+                                            isSubmitted ? 
+                                            !errors.workPosition ?
+                                            "input-icono"
+                                            : 
+                                            "border-error red-input input-icoerror"       
+                                            : ''
+                                        }
+                                    `}                                         
                                     id=''
                                     name='workPosition'
                                     type="text"
@@ -117,7 +129,16 @@ const ProfileAdress = (props) => {
                                 Empresa
                                 <input
                                     placeholder ="Compañia SAC" 
-                                    className="form-control placeholder"                               
+                                    className={`form-control placeholder
+                                        ${
+                                            isSubmitted ? 
+                                            !errors.registerBusiness ?
+                                            "input-icono"
+                                            : 
+                                            "border-error red-input input-icoerror"       
+                                            : ''
+                                        }
+                                    `}                                              
                                     id=''
                                     name='registerBusiness'
                                     type="text"
@@ -130,11 +151,21 @@ const ProfileAdress = (props) => {
                             <span className="span-error">
                                 { errors.registerBusiness && errors.registerBusiness.message}
                             </span>
-                            <label htmlFor="registerRubros" className="label-form" >
+                            <label htmlFor="registerRubros" 
+                            className="label-form" >
                                 Rubro de interés
                                 <select 
                                     name='registerRubros'
-                                    className="form-control form-text-check-adress mt-2"
+                                    className={`form-control form-text-check-adress mt-2
+                                        ${
+                                            isSubmitted ? 
+                                            !errors.registerRubros ?
+                                            ""
+                                            : 
+                                            "border-error red-input "       
+                                            : ''
+                                        }
+                                    `} 
                                     ref={register({ required: {value: true, message: "Seleccione una opción"} })}
                                     id=""
                                     >
@@ -160,7 +191,16 @@ const ProfileAdress = (props) => {
                                             defaultValue=""
                                             render={(props) => (
                                                 <DatePicker
-                                                    className="form-control label-form-calen icon-calendar"
+                                                className={`form-control label-form-calen icon-calendar
+                                                    ${
+                                                        isSubmitted ? 
+                                                        !errors.startDate ?
+                                                        ""
+                                                        : 
+                                                        "border-error red-input"       
+                                                        : ''
+                                                    }
+                                                `} 
                                                     placeholderText="DD/MM/AAAA"
                                                     onChange={(e) => props.onChange(e)}
                                                     selected={props.value}
@@ -190,7 +230,16 @@ const ProfileAdress = (props) => {
                                             defaultValue=""
                                             render={(props) => (
                                                 <DatePicker
-                                                    className="form-control label-form-calen icon-calendar"
+                                                className={`form-control label-form-calen icon-calendar
+                                                    ${
+                                                        isSubmitted ? 
+                                                        !errors.startDate ?
+                                                        ""
+                                                        : 
+                                                        "border-error red-input"       
+                                                        : ''
+                                                    }
+                                                `} 
                                                     placeholderText="DD/MM/AAAA"
                                                     onChange={(e) => props.onChange(e)}
                                                     selected={props.value}
@@ -216,7 +265,16 @@ const ProfileAdress = (props) => {
                             <label htmlFor="retirement" className="label-form mt-3">
                                 Motivo de retiro
                                 <input
-                                    className="form-control box-style"                               
+                                    className={`form-control box-style
+                                        ${
+                                            isSubmitted ? 
+                                            !errors.retirement ?
+                                            ""
+                                            : 
+                                            "border-error red-input"       
+                                            : ''
+                                        }
+                                    `}                           
                                     id=''
                                     name='retirement'
                                     type="text"
@@ -258,8 +316,17 @@ const ProfileAdress = (props) => {
                     <>
                         <label htmlFor="rubroOption" className="label-form" >
                             Rubro de interés
-                            <select 
-                                className="form-control form-text-check-adress mt-2"
+                            <select  
+                            className={`form-control form-text-check-adress mt-2
+                                ${
+                                    isSubmitted ? 
+                                    !errors.rubroOption ?
+                                    ""
+                                    : 
+                                    "border-error red-input"       
+                                    : ''
+                                }
+                            `}   
                                 id=""
                                 name="rubroOption"
                                 ref={register({ required: {value: true, message: "Seleccione una opción"} })}

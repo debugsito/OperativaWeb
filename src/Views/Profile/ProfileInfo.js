@@ -11,7 +11,8 @@ import './index.css';
 registerLocale("es", es);
 
 const ProfileInfo = (props) => { 
-    const { handleSubmit, register, errors, control} = useForm();
+    const { handleSubmit, register, errors, control, formState} = useForm();
+    const { isSubmitted } = formState;
 
     const onSubmit = (values, e) => { 
         console.log(values);
@@ -43,7 +44,16 @@ const ProfileInfo = (props) => {
                             Nombres
                             <input
                                 placeholder ="Maria" 
-                                className="form-control placeholder"                               
+                                className={`form-control placeholder
+                                    ${
+                                        isSubmitted ? 
+                                        !errors.firstName ?
+                                        "input-icono"
+                                        : 
+                                        "border-error red-input input-icoerror"       
+                                        : ''
+                                    }
+                                `} 
                                 id='firstName'
                                 name='firstName'
                                 type="text"
@@ -64,7 +74,16 @@ const ProfileInfo = (props) => {
                             Apellidos
                             <input
                                 placeholder="Pérez"
-                                className="form-control placeholder mb-2"
+                                className={`form-control placeholder mb-2
+                                    ${
+                                        isSubmitted ? 
+                                        !errors.lastName ?
+                                        "input-icono"
+                                        : 
+                                        "border-error red-input input-icoerror"       
+                                        : ''
+                                    }
+                                `} 
                                 id='lastName'
                                 name='lastName'
                                 type="text"
@@ -137,7 +156,16 @@ const ProfileInfo = (props) => {
                             Número de documento
                             <input
                                 placeholder="90627452"
-                                className="form-control placeholder mb-2"
+                                className={`form-control placeholder mb-2
+                                    ${
+                                        isSubmitted ? 
+                                        !errors.document ?
+                                        "input-icono"
+                                        : 
+                                        "border-error red-input input-icoerror"       
+                                        : ''
+                                    }
+                                `} 
                                 id='document'
                                 name='document'
                                 type="text"
@@ -168,7 +196,16 @@ const ProfileInfo = (props) => {
                                         defaultValue=""
                                         render={(props) => (
                                             <DatePicker
-                                                className="form-control label-form-calen icon-calendar"
+                                            className={`form-control label-form-calen icon-calendar
+                                                ${
+                                                    isSubmitted ? 
+                                                    !errors.dateOfBirth ?
+                                                    ""
+                                                    : 
+                                                    "border-error red-input"       
+                                                    : ''
+                                                }
+                                            `} 
                                                 placeholderText="DD/MM/AAAA"
                                                 onChange={(e) => props.onChange(e)}
                                                 selected={props.value}

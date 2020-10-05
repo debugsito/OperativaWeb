@@ -11,7 +11,8 @@ import './index.css';
 registerLocale("es", es);
 
 const ProfileAcademic = (props) => { 
-    const { handleSubmit, register, errors, control} = useForm();
+    const { handleSubmit, register, errors, control, formState} = useForm();
+    const { isSubmitted } = formState;
 
     const onSubmit = (values, e) => { 
         console.log(values);
@@ -97,8 +98,17 @@ const ProfileAcademic = (props) => {
                     <label htmlFor="educationalInstitution" className="label-form">
                         Institución educativa
                         <input
-                            placeholder ="Colegio Fé y Alegría" 
-                            className="form-control placeholder"                               
+                            placeholder ="Colegio Fé y Alegría"
+                            className={`form-control placeholder
+                                ${
+                                    isSubmitted ? 
+                                    !errors.educationalInstitution ?
+                                    "input-icono"
+                                    : 
+                                    "border-error red-input input-icoerror"      
+                                    : ''
+                                }
+                            `}                         
                             id='educationalInstitution'
                             name='educationalInstitution'
                             type="text"
@@ -115,7 +125,16 @@ const ProfileAcademic = (props) => {
                         Especialidad
                         <input
                             placeholder="Derecho Tributario"
-                            className="form-control placeholder mb-2"
+                            className={`form-control placeholder
+                                ${
+                                    isSubmitted ? 
+                                    !errors.specialty ?
+                                    "input-icono"
+                                    : 
+                                    "border-error red-input input-icoerror"      
+                                    : ''
+                                }
+                            `} 
                             id='specialty'
                             name='specialty'
                             type="text"
@@ -143,7 +162,16 @@ const ProfileAcademic = (props) => {
                                         defaultValue=""
                                         render={(props) => (
                                             <DatePicker
-                                                className="form-control label-form-calen icon-calendar"
+                                                className={`form-control label-form-calen icon-calendar
+                                                    ${
+                                                        isSubmitted ? 
+                                                        !errors.startDate ?
+                                                        ""
+                                                        : 
+                                                        "border-error red-input"       
+                                                        : ''
+                                                    }
+                                                `} 
                                                 placeholderText="DD/MM/AAAA"
                                                 onChange={(e) => props.onChange(e)}
                                                 selected={props.value}
@@ -173,7 +201,16 @@ const ProfileAcademic = (props) => {
                                         defaultValue=""
                                         render={(props) => (
                                             <DatePicker
-                                                className="form-control label-form-calen icon-calendar"
+                                                className={`form-control label-form-calen icon-calendar
+                                                    ${
+                                                        isSubmitted ? 
+                                                        !errors.endDate ?
+                                                        ""
+                                                        : 
+                                                        "border-error red-input"       
+                                                        : ''
+                                                    }
+                                                `} 
                                                 placeholderText="DD/MM/AAAA"
                                                 onChange={(e) => props.onChange(e)}
                                                 selected={props.value}
