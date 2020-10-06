@@ -87,6 +87,32 @@ const ProfileAdress = (props) => {
                     </div>
                     <div className="col-12  col-md-6 offset-md-3 container-no-padding">
                         <form name="myForm" onSubmit={handleSubmit(onSubmit)} className='form-container-info'>
+                            <label htmlFor="adress" className="label-form">
+                                Dirección
+                                <input
+                                    placeholder ="Av. Grau" 
+                                    className={`form-control placeholder
+                                        ${
+                                            isSubmitted ? 
+                                            !errors.adress ?
+                                            "input-icono"
+                                            : 
+                                            "border-error red-input input-icoerror"       
+                                            : ''
+                                        }
+                                    `} 
+                                    id=''
+                                    name='adress'
+                                    type="text"
+                                    autoComplete="off"
+                                    ref={register({
+                                        required: {value: true, message: "Agregue una dirección" }
+                                    })}
+                                />
+                            </label>
+                            <span className="span-error">
+                                { errors.adress && errors.adress.message}
+                            </span>
                             <div className="row row-no-magin ">
                                 <div className="col-12 col-md-4 pr-md-4 pl-md-0 px-sm-0 px-xs-0">
                                     <label  htmlFor="departamentAdress" className="label-form" >
@@ -188,8 +214,7 @@ const ProfileAdress = (props) => {
                                         { errors.districtAdress && errors.districtAdress.message}
                                     </span>
                                 </div>
-                            </div>
-                            
+                            </div> 
                             <label htmlFor="phoneDate" className="label-form mt-2">
                                 Teléfono
                                 <input
