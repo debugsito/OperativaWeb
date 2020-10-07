@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import NavBar from "../../Components/MenuUser/index";
 import { IoIosEye, IoIosEyeOff } from 'react-icons/io';
 import axios from "axios";
-
+import ReactGa from "react-ga"
 
 const Register= (props) => {
     const [modalTerms, setModalTerms] = React.useState(false);
@@ -21,8 +21,15 @@ const Register= (props) => {
         setSee(!see)        
     }
     const baseUrl="https://www.operativaapi.tk:8080/";
+
     const onSubmit = (values) => { 
         console.log(values);
+
+        ReactGa.event({
+            category: 'Buttom',
+            action:"Click in the buttom"
+        })
+        
         let datafield = {
             "email": values.usuario, 
             "password": values.password 
