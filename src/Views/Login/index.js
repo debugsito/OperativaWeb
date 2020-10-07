@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import NavBar from "../../Components/MenuUser/index";
 import axios from "axios";
 import { IoIosEye, IoIosEyeOff } from 'react-icons/io';
-// import ReactGa from "react-ga"
+import ReactGa from "react-ga"
 import './index.css';
 
 const Login= (props) => {
@@ -59,10 +59,10 @@ const Login= (props) => {
     const onSubmit = (values) => { 
         console.log(values);
 
-        // ReactGa.event({
-        //     category: 'Buttom',
-        //     action:"Click in the buttom"
-        // })
+        ReactGa.event({
+            category: 'Buttom',
+            action:"Click in the buttom"
+        })
 
         let datafield = {
             "email": values.usuario, 

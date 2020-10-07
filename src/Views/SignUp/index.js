@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import NavBar from "../../Components/MenuUser/index";
 import { IoIosEye, IoIosEyeOff } from 'react-icons/io';
 import axios from "axios";
-// import ReactGa from "react-ga"
+import ReactGa from "react-ga"
 
 const Register= (props) => {
     const [modalTerms, setModalTerms] = React.useState(false);
@@ -25,10 +25,10 @@ const Register= (props) => {
     const onSubmit = (values) => { 
         console.log(values);
 
-        // ReactGa.event({
-        //     category: 'Buttom',
-        //     action:"Click in the buttom"
-        // })
+        ReactGa.event({
+            category: 'Buttom',
+            action:"Click in the buttom"
+        })
         
         let datafield = {
             "email": values.usuario, 
