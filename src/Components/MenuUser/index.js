@@ -38,7 +38,7 @@ function Navbar(props) {
                     <Link to='#' className='menu-bars'>
                         <AiIcons.AiOutlineClose onClick={showSidebar} 
                         style={{
-                            color:"black"
+                            color:"white"
                         }}/>
                     </Link>
                   )              
@@ -46,7 +46,7 @@ function Navbar(props) {
                     <Link to='#' className='menu-bars'>
                       <FaIcons.FaBars onClick={showSidebar} 
                       style={{
-                          color:"black"
+                          color:"white"
                       }}/>
                     </Link>
                 )
