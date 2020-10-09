@@ -64,6 +64,7 @@
     align-items: center;
     padding: 0 16px;
     background-color: #AAAAAA;
+    border-bottom: 0.1px solid #f7f7f7;
     /* background-color: #E20613; */
 }
 /* .nav-text a:hover {
