@@ -59,13 +59,13 @@ function NavbarDesk(props) {
                    
                     <li className ="nav-text">
                       <a onClick= {() => cerrarSesion()}><FaIcons.FaUserCircle/>
-                      <span>Cerrar Sesion</span>  
+                      <span>Cerrar sesión</span>  
                       </a>
                     </li>
                   ): (  
                     <li className ="nav-text">
                       <Link to="/inicio-sesion"><FaIcons.FaUserCircle/>
-                      <span>Iniciar Sesion</span>  
+                      <span>Iniciar sesión</span>  
                       </Link>
                     </li>
                   )
