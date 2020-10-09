@@ -262,15 +262,18 @@ const Register= (props) => {
         <Modal isOpen={modalTerms}>
             <ModalHeader>Términos y condiciones.</ModalHeader>
             <ModalBody>
-                <p>Este es el cuerpo del modal</p>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                  enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                  nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                  reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                  nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                  sunt in culpa qui officia deserunt mollit anim id est laborum.
+                <p className="style-modal">
+                De conformidad con la Ley 29733 de Protección de Datos Personales,
+                autorizo, libre y expresamente a la Plataforma OPERATIVA para que
+                mis datos personales sean utilizados para fines laborales.
+                <br/>
+                <br/>
+                Deseo recibir información sobre organizaciones, empresas, que puedan
+                adecuarse a mi interés de trabajo.
+                <br/>
+                <br/>                
+                Deseo recibir notificaciones de convocatorias de trabajo en mi correo
+                electrónico.
                 </p>
             </ModalBody>
                 <ModalFooter>

@@ -1,5 +1,6 @@
 .navbar2 {
-    background-color: #f7f7f7;
+    /* background-color: #f7f7f7; */
+    background-color: #ED1D40;
     height: 80px;
     display: flex;
     justify-content: space-between;
@@ -15,7 +16,7 @@
     justify-content: space-between;
 }
 .navbar2-desk {
-    background-color: #f7f7f7;
+    background-color: #ED1D40;
     height: 80px;
     display: flex;
     justify-content: space-between;
@@ -62,7 +63,8 @@
     display: flex;
     align-items: center;
     padding: 0 16px;
-    background-color: #E20613;
+    background-color: #AAAAAA;
+    /* background-color: #E20613; */
 }
 /* .nav-text a:hover {
     background-color: #1a83ff;

@@ -3,7 +3,7 @@ import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import { Link, withRouter } from 'react-router-dom';
 import { IconContext } from 'react-icons';
-import LogoMedio from '../../assets/logos/logo-container-operativa.svg'
+import LogoMedio from '../../assets/logos/small.svg'
 import './index.css';
 
 
@@ -71,8 +71,12 @@ function Navbar(props) {
                     </li>
                   )
               }
-                
-              
+              <li className ="nav-text">
+                <Link to="/inicio-sesion"><FaIcons.FaRegBuilding/>
+                <span>Empresas</span>  
+                </Link>
+              </li>
+               
           </ul>
         </nav>
       </IconContext.Provider>

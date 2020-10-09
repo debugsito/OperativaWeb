@@ -52,8 +52,10 @@
     margin-left: 24px;
 }
 .text-box-one{
-    font-family: 'Museo Sans';
-    font-size: 14px;
+    font-family:  'Raleway', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
     line-height: 120%;
     letter-spacing: 0.25px;
     color: #000000;
@@ -88,7 +90,7 @@
     display: flex;
 }
 .box-container-title{
-    background: #F7F7F7;
+    /* background: #F7F7F7; */
     border-radius: 8px;
     height: 207px;
     margin-left: 24px;
@@ -98,7 +100,7 @@
 .box-container-title-two{
     margin-top: 24px;
     background:  #EBEBEB;
-    height: 403px;
+    height: 370px;
 }
 .box-container-title-three{
     margin-top: 24px;
@@ -214,7 +216,7 @@
     .icon-image-conexion {
         width: 255px;
         margin: 0;
-        margin-top: 0;
+        margin-top: 37px;
         margin-left: 20px;
         margin-right: 0;
         position: absolute;

@@ -56,14 +56,10 @@ const Home= () => {
                         <div className="col-11 col-md-9 container-no-padding hide-sm">
                             <a href="/" ><img src= {LogoMedio} className="icon-img-logo"  alt="" /></a>            
                         </div>
-                        <div className="col-11 col-md-9 container-no-padding">
-                            <h1 className='h1-tittle-Home'>ENCUENTRA EL TRABAJO QUE BUSCABAS</h1>
-                        </div>
                     </div >
-                    <div className="row box-container-title ">
+                    <div className="row box-container-title">
                         <div className="col-6 col-md-8 container-no-padding">
-                            <span className="text-box-one">Operativa te conecta con más de 600 empresas de todo el Perú
-                            </span>
+                            <span className="text-box-one">Encuentra el trabajo que buscabas</span>
                             <div className="d-flex justify-content-start">
                                 <Link 
                                     className="btn btn-operativa btn-sm"
@@ -84,10 +80,9 @@ const Home= () => {
                 <div className="col-12 col-md-8 container-no-padding">
                     <div className="row box-container-title-two box-container-align-rubros row-no-magin container-no-padding">
                         <div className="col-12 col-md-6 container-no-padding">
-                            <h1 className='h1-tittle-box'>LOS SECTORES MÁS PRODUCTIVOS</h1>
+                            <h1 className='h1-tittle-box'>Los sectores más productivos</h1>
                             <p className='text-box-two'>
-                                Encuentra el trabajo que buscabas desde tu celular.
-                                Más de 600 empresas reclutan a través de Operativa.
+                                El trabajo ideal para tu perfil
                             </p>
                         </div>
                         <div className="col-12 col-md-6 pt-md-4">
@@ -105,17 +100,17 @@ const Home= () => {
                                     <img alt='' src= {ImgDistribution} className="icon-image-rubros" />
                                     <p className="text-icon-rubros">Almacén y transporte</p>
                                 </div>
-                                <div className="col-4 text-center">
+                                <div className="col-4 text-center mt-2">
                                     <img alt='' src= {ImgCallCenter} className="icon-image-rubros" />
                                     <p className="text-icon-rubros">
                                         Call-center y Ventas
                                     </p>
                                 </div>
-                                <div className="col-4 text-center">
+                                <div className="col-4 text-center mt-2">
                                     <img alt='' src= {ImgConstruction} className="icon-image-rubros" />
                                     <p className="text-icon-rubros">Construcción y obras</p>
                                 </div>
-                                <div className="col-4 text-center">
+                                <div className="col-4 text-center mt-2">
                                     <img alt='' src= {ImgOperaction} className="icon-image-rubros" />
                                     <p className="text-icon-rubros">Motorizados y courier</p>
                                 </div>
@@ -129,7 +124,7 @@ const Home= () => {
                 <div className="col-12 col-md-8 container-no-padding">
                         <div className="row row-no-magin container-no-padding">
                             <div className="col-12 container-no-padding">
-                                <h1 className='h1-tittle-carousel'>TRABAJAMOS CON LAS MEJORES EMPRESAS DEL PAÍS</h1>
+                                <h1 className='h1-tittle-carousel'>Trabajamos con las empresas más reconocidas del país</h1>
                             </div>
                         </div >
                         <div id="carouselExampleSlidesOnly" 
@@ -272,7 +267,7 @@ const Home= () => {
                     <div className="col-12 col-md-8 container-no-padding">   
                         <div className="row box-container-title-three row-no-magin container-no-padding">
                             <div className="col-12 container-no-padding">
-                                <h1 className='h1-text-ilustracion-box'>CÓMO INSCRIBIRTE</h1>
+                                <h1 className='h1-text-ilustracion-box'>Cómo inscribirte</h1>
                             </div>
                             <div className="col-6 col-md-5 container-no-padding">
                                     <img alt='conexion' src= {Ilustracion} className="icon-ilustracion" />
