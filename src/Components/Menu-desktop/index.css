@@ -66,8 +66,11 @@
 }
 span {
     margin-left: 16px;
-    /* color: #f5f5f5; */
+ 
 } 
+.title-color{
+    color: #f5f5f5;
+}
 .ul-sidebar{
     display: block;
     list-style-type: disc;

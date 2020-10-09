@@ -59,7 +59,7 @@ function NavbarDesk(props) {
                    
                     <li className ="nav-text">
                       <a onClick= {() => cerrarSesion()}><FaIcons.FaUserCircle/>
-                      <span>Cerrar sesión</span>  
+                      <span className="title-color" >Cerrar sesión</span>  
                       </a>
                     </li>
                   ): (  
