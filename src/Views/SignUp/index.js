@@ -1,12 +1,13 @@
 import React, { Fragment } from "react";
-import './index.css';
 import { Link, withRouter } from 'react-router-dom';
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 import { useForm } from "react-hook-form";
 import NavBar from "../../Components/MenuUser/index";
 import { IoIosEye, IoIosEyeOff } from 'react-icons/io';
+import * as OPTIONS from "../../services/options"
 import axios from "axios";
 import ReactGa from "react-ga"
+import './index.css';
 
 const Register= (props) => {
     const [modalTerms, setModalTerms] = React.useState(false);
@@ -20,7 +21,6 @@ const Register= (props) => {
     {
         setSee(!see)        
     }
-    const baseUrl="https://www.operativaapi.tk:8080/";
 
     const onSubmit = (values) => { 
         console.log(values);
@@ -34,21 +34,16 @@ const Register= (props) => {
             "email": values.usuario, 
             "password": values.password 
         }
-        let options = {
-            headers:{
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            }
-        }
-        axios.post(baseUrl+'user/', datafield, options)
+
+        axios.post(OPTIONS.baseUrl + 'user/', datafield, OPTIONS.options)
         .then((response) => {
-            if(response.status === 201) {
+            if(response.status === OPTIONS.SUCESS_RESPONSE) {
                 console.log(response.data)
-                axios.post(baseUrl+'auth/login', datafield, options)
+                axios.post(OPTIONS.baseUrl + 'auth/login', datafield, OPTIONS.options)
                 .then((response) => {
-                    if(response.status === 200) {
+                    if(response.status === OPTIONS.OK_RESPONSE) {
                         localStorage.setItem('token', response.data.Authorization);
-                        axios.get(baseUrl+'user/'+ values.usuario)
+                        axios.get(OPTIONS.baseUrl + 'user/' + values.usuario)
                         .then((response) => {   
                             //Guardar Email
                             localStorage.setItem('email', response.data.email);
@@ -57,7 +52,7 @@ const Register= (props) => {
                         .catch(function(error) {
                             console.log(error)
                         })             
-                    } else if(response.status === 401) {
+                    } else if(response.status === OPTIONS.ERROR_PAGE) {
                             alert(response.data.message);
                     } else {
                         alert("Ha ocurrido un error interno.");
@@ -69,7 +64,7 @@ const Register= (props) => {
                     setError('Usuario y contraseña Incorrecta')
                     return
                 })           
-            } else if(response.status === 401) {
+            } else if(response.status === OPTIONS.ERROR_PAGE) {
                     alert(response.message);
             } else {
                 alert("Ha ocurrido un error interno.");
