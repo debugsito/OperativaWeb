@@ -60,6 +60,16 @@ code {
   display: flex;
   align-items: center;
 }
+.style-modal{
+  text-align: justify;
+font-family: MuseoSans;
+font-size: 14px;
+line-height: 130%;
+display: flex;
+align-items: center;
+letter-spacing: 0.25px;
+color: #000000;
+}
 .h1-custom-restore{
   position: static;
   /* width: 312px; */

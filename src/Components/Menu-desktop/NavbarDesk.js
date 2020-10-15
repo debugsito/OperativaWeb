@@ -3,7 +3,7 @@ import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import { Link, withRouter } from 'react-router-dom';
 import { IconContext } from 'react-icons';
-import LogoMedio from '../../assets/logos/logo-container-operativa.svg'
+import LogoMedio from '../../assets/logos/small.svg'
 import './index.css';
 
 function NavbarDesk(props) {
@@ -37,7 +37,7 @@ function NavbarDesk(props) {
                     <Link to='#' className='menu-bars-desk'>
                         <AiIcons.AiOutlineClose onClick={showSidebar} 
                         style={{
-                            color:"black"
+                            color:"white"
                         }}/>
                     </Link>
                   )              
@@ -45,7 +45,7 @@ function NavbarDesk(props) {
                     <Link to='#' className='menu-bars-desk'>
                       <FaIcons.FaBars onClick={showSidebar} 
                       style={{
-                          color:"black"
+                          color:"white"
                       }}/>
                     </Link>
                 )
@@ -59,17 +59,22 @@ function NavbarDesk(props) {
                    
                     <li className ="nav-text">
                       <a onClick= {() => cerrarSesion()}><FaIcons.FaUserCircle/>
-                      <span>Cerrar Sesion</span>  
+                      <span className="title-color" >Cerrar sesión</span>  
                       </a>
                     </li>
                   ): (  
                     <li className ="nav-text">
                       <Link to="/inicio-sesion"><FaIcons.FaUserCircle/>
-                      <span>Iniciar Sesion</span>  
+                      <span>Iniciar sesión</span>  
                       </Link>
                     </li>
                   )
               }
+              <li className ="nav-text">
+                <Link to="/inicio-sesion"><FaIcons.FaRegBuilding/>
+                <span>Empresas</span>  
+                </Link>
+              </li>
                 
               
           </ul>

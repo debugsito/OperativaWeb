@@ -1,12 +1,13 @@
 import React, { Fragment } from "react";
-import './index.css';
 import { Link, withRouter } from 'react-router-dom';
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 import { useForm } from "react-hook-form";
 import NavBar from "../../Components/MenuUser/index";
 import { IoIosEye, IoIosEyeOff } from 'react-icons/io';
+import * as OPTIONS from "../../services/options"
 import axios from "axios";
-
+import ReactGa from "react-ga"
+import './index.css';
 
 const Register= (props) => {
     const [modalTerms, setModalTerms] = React.useState(false);
@@ -20,28 +21,29 @@ const Register= (props) => {
     {
         setSee(!see)        
     }
-    const baseUrl="https://www.operativaapi.tk:8080/";
+
     const onSubmit = (values) => { 
         console.log(values);
+
+        ReactGa.event({
+            category: 'Buttom',
+            action:"Click in the buttom"
+        })
+        
         let datafield = {
             "email": values.usuario, 
             "password": values.password 
         }
-        let options = {
-            headers:{
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            }
-        }
-        axios.post(baseUrl+'user/', datafield, options)
+
+        axios.post(OPTIONS.baseUrl + 'user/', datafield, OPTIONS.options)
         .then((response) => {
-            if(response.status === 201) {
+            if(response.status === OPTIONS.SUCESS_RESPONSE) {
                 console.log(response.data)
-                axios.post(baseUrl+'auth/login', datafield, options)
+                axios.post(OPTIONS.baseUrl + 'auth/login', datafield, OPTIONS.options)
                 .then((response) => {
-                    if(response.status === 200) {
+                    if(response.status === OPTIONS.OK_RESPONSE) {
                         localStorage.setItem('token', response.data.Authorization);
-                        axios.get(baseUrl+'user/'+ values.usuario)
+                        axios.get(OPTIONS.baseUrl + 'user/' + values.usuario)
                         .then((response) => {   
                             //Guardar Email
                             localStorage.setItem('email', response.data.email);
@@ -50,7 +52,7 @@ const Register= (props) => {
                         .catch(function(error) {
                             console.log(error)
                         })             
-                    } else if(response.status === 401) {
+                    } else if(response.status === OPTIONS.ERROR_PAGE) {
                             alert(response.data.message);
                     } else {
                         alert("Ha ocurrido un error interno.");
@@ -62,7 +64,7 @@ const Register= (props) => {
                     setError('Usuario y contraseña Incorrecta')
                     return
                 })           
-            } else if(response.status === 401) {
+            } else if(response.status === OPTIONS.ERROR_PAGE) {
                     alert(response.message);
             } else {
                 alert("Ha ocurrido un error interno.");
@@ -255,15 +257,18 @@ const Register= (props) => {
         <Modal isOpen={modalTerms}>
             <ModalHeader>Términos y condiciones.</ModalHeader>
             <ModalBody>
-                <p>Este es el cuerpo del modal</p>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                  enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                  nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                  reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                  nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                  sunt in culpa qui officia deserunt mollit anim id est laborum.
+                <p className="style-modal">
+                De conformidad con la Ley 29733 de Protección de Datos Personales,
+                autorizo, libre y expresamente a la Plataforma OPERATIVA para que
+                mis datos personales sean utilizados para fines laborales.
+                <br/>
+                <br/>
+                Deseo recibir información sobre organizaciones, empresas, que puedan
+                adecuarse a mi interés de trabajo.
+                <br/>
+                <br/>                
+                Deseo recibir notificaciones de convocatorias de trabajo en mi correo
+                electrónico.
                 </p>
             </ModalBody>
                 <ModalFooter>
