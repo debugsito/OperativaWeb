@@ -3,41 +3,15 @@ import { Link, withRouter } from 'react-router-dom'
 import { useForm } from "react-hook-form";
 import NavBar from "../../Components/MenuUser/index";
 import { IoIosEye, IoIosEyeOff } from 'react-icons/io';
-import axios from 'axios';
 import './index.css';
 
 const NewPassword= (props) => { 
     const { handleSubmit, register, errors, formState} = useForm();
     const { isSubmitted } = formState;
-    const [error, setError] = React.useState(null)
-
-    const baseUrl="https://reqres.in/api/";
-
+    
     const onSubmit = (values) => { 
         console.log(values);
         props.history.push('/inicio-sesion')
-        // let datafield = {
-        //     "password": values.password,
-        //     "token": props.match.params.token
-        //   }
-        //     axios.post(baseUrl+'resetpassword', datafield)
-        //     .then((response) => {
-        //         if(response.status === 200) {
-        //             console.log(response.data)
-        //             console.log(response.data.token)            
-        //         } else if(response.status === 401) {
-        //                 alert(response.message);
-        //         } else {
-        //             alert("Ha ocurrido un error interno.");
-        //             console.log(response.data);
-        //         }
-        //         props.history.push('/iniciar-sesion')
-        //     })
-        //     .catch(function(error) {
-        //         console.log(error.status)
-        //         setError('Usuario y contraseña Incorrecta')
-        //         return
-        //     })
         }          
     const [see, setSee] = React.useState(false)
     const seePass = () =>

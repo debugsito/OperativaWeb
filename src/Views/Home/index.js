@@ -130,7 +130,7 @@ const Home= () => {
                         <div id="carouselExampleSlidesOnly" 
                                 className="carousel slide my-0" 
                                 width="100"  
-                                data-interval="3500" data-ride="carousel"
+                                data-interval="1500" data-ride="carousel"
                                 >            
                             <div className="carousel-inner h-slide-custom mobile-car">
                                 <div className="carousel-item active">

@@ -21,15 +21,6 @@ const Welcome= (props) => {
                             <p className="text-one-card">Para poder conectarte con tu trabajo ideal, necesitamos que completes tu perfil..</p>
                             <p className="text-one-card">Llenar tus datos te tomará aproximadamente 5 minutos.</p>
                         <div className="d-flex justify-content-center">
-
-{/*                             
-                        <button
-                            className="button-continue-restore btn "
-                            type="submit"
-                        >
-                            <span className= "text-button-continue-restore">CONTINUAR</span>
-                            <span className="icon-next"></span>
-                        </button> */}
                         <button
                             className="btn btn-primary text-button-next " 
                             type= 'submit' 
