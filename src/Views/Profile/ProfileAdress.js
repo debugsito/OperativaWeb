@@ -29,7 +29,6 @@ const ProfileAdress = (props) => {
                     .then(datos => {
                         setListDepartament(datos)
                     })
-                    // return listDepartament
                     // eslint-disable-next-line react-hooks/exhaustive-deps
         }, [])
 
@@ -40,7 +39,6 @@ const ProfileAdress = (props) => {
                     .then(datos => {    
                         setListprovinciaBase(datos)
                     })
-                    // return listProvince
                     // eslint-disable-next-line react-hooks/exhaustive-deps
         }, [])
 
@@ -51,7 +49,6 @@ const ProfileAdress = (props) => {
                     .then(datos => {
                         setListdistritoBase(datos)
                     })
-                    // return listDistrict
                     // eslint-disable-next-line react-hooks/exhaustive-deps
         }, [])
 

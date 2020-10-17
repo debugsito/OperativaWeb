@@ -1,13 +1,8 @@
 import React, { Fragment } from "react";
 import { Link, withRouter } from 'react-router-dom'
 import { useForm } from "react-hook-form";
-import Icono from "../../assets/icons/icon-next.svg"
 import NavBar from "../../Components/MenuUser/index"
-// import axios from 'axios';
 import './index.css';
-
-// const baseUrl="https://reqres.in/api/";
-
 
 const RestorePassword= (props) => {
 
@@ -18,27 +13,6 @@ const RestorePassword= (props) => {
     const onSubmit = (values) => { 
         console.log(values);
       props.history.push('/notificacion-contraseña')
-        // let datafield = {
-        //   "email": values.usuario
-        // }
-        //   axios.post(baseUrl+'reset', datafield)
-        //       .then((response) => {
-        //       if(response.status === 200) {
-        //           console.log(response.data)
-        //           console.log(response.data.token)            
-        //       } else if(response.status === 401) {
-        //               alert(response.message);
-        //       } else {
-        //           alert("Ha ocurrido un error interno.");
-        //           console.log(response.data);
-        //       }
-        //       props.history.push('/notificacion-contraseña')
-        //   })
-        //   .catch(function(error) {
-        //       console.log(error.status)
-        //       setError('Usuario y contraseña Incorrecta')
-        //       return
-        //   })
       }
     return (
       <Fragment>
