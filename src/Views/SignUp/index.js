@@ -24,7 +24,7 @@ const Register = (props) => {
 
   //mostrar Contraseña:
   const seePass = () => {
-    setSee(!see);
+    setSee(!see); 
   };
 
   const onSubmit = (values) => {
