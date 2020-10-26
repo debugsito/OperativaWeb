@@ -1,8 +1,10 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "../../Components/MenuUser/index"
 import { Link, withRouter } from 'react-router-dom'
 import { useForm } from "react-hook-form";
+
 import Stepper from "./Stepper";
+import UtilService from '../../services/util.service';
 import './index.css';
 
 const onlyNumbers= (e)=> {
@@ -14,6 +16,7 @@ const onlyNumbers= (e)=> {
 const ProfileAdress = (props) => { 
     const { handleSubmit, register, errors, formState} = useForm();
     const { isSubmitted } = formState;
+    
     const onSubmit = (values) => { 
         console.log(values);
         props.history.push('/informacion-academica')
@@ -22,55 +25,98 @@ const ProfileAdress = (props) => {
     const [listDepartament, setListDepartament]= useState([])
     const [listProvince, setListProvince]= useState([])
     const [listDistrict, setListDistrict]= useState([])
-        
-        useEffect(() => {
-            fetch('json/departamentos.json')
-                .then(response => response.json())
-                    .then(datos => {
-                        setListDepartament(datos)
-                    })
-                    // eslint-disable-next-line react-hooks/exhaustive-deps
-        }, [])
+    const [civil, setCivil] = useState([]);
 
-        const [listprovinciaBase, setListprovinciaBase]= useState([])
-        useEffect(() => {
-            fetch('json/provincias.json')
-                .then(response => response.json())
-                    .then(datos => {    
-                        setListprovinciaBase(datos)
-                    })
-                    // eslint-disable-next-line react-hooks/exhaustive-deps
-        }, [])
+    // Cargar combo de lista de estado civil
+    useEffect( () => {
+        // Creo la funciona listaCivil
+        async function listCivil(){
+            // Consumo el servicio /civil/
+            const responseCivil = await UtilService.listCivil();
+            // Obtengo la respuesta en mi lista Civil
+            setCivil(responseCivil.data);
+        }
+        // Ejecuto mi funcion
+        listCivil();
+     }, []);
 
-        const [listdistritoBase, setListdistritoBase]= useState([])
-        useEffect(() => {
-            fetch('json/distritos.json')
-                .then(response => response.json())
-                    .then(datos => {
-                        setListdistritoBase(datos)
-                    })
-                    // eslint-disable-next-line react-hooks/exhaustive-deps
-        }, [])
+    /*
+    useEffect( () => {
+        async function listDepartament(){
+            const responseDepartament = await UtilService.listDepartament();
+            setListDepartament(responseDepartament.data);
+        }
+        listDepartament();
+     }, []);
+
+    useEffect( () => {
+    async function listProvince(){
+        const responseState = await UtilService.listState();
+        setListProvince(responseState.data);
+    }
+    listProvince();
+     }, []);
+    
+    */
+
+    useEffect( () => {
+    async function listDepartament(){
+        const responseDepartament = await UtilService.listDepartament();
+        setCivil(responseDepartament.data);
+    }
+    listDepartament();
+     }, []);
+
+
+    
+    useEffect(() => {
+        fetch('json/departamentos.json')
+            .then(response => response.json())
+                .then(datos => {
+                    setListDepartament(datos)
+                })
+                // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
+    const [listprovinciaBase, setListprovinciaBase]= useState([])
+    useEffect(() => {
+        fetch('json/provincias.json')
+            .then(response => response.json())
+                .then(datos => {    
+                    setListprovinciaBase(datos)
+                })
+                // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
+    const [listdistritoBase, setListdistritoBase]= useState([])
+    useEffect(() => {
+        fetch('json/distritos.json')
+            .then(response => response.json())
+                .then(datos => {
+                    setListdistritoBase(datos)
+                })
+                // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     //Button:
     const handlerdepartamento = (e) =>{
         let id = e.target.value;
-            setListProvince([])
-            setListDistrict([])
-            let filterProvinceData = listprovinciaBase.filter(item => item.department_id === id) 
-            setListProvince(filterProvinceData)
-        }
+        setListProvince([])
+        setListDistrict([])
+        let filterProvinceData = listprovinciaBase.filter(item => item.department_id === id) 
+        setListProvince(filterProvinceData)
+    }
         
-        //Button:
-        const handlerProvincia = function(e){
-            let id = e.target.value;
-            setListDistrict([])
-            let filterDistritoData = listdistritoBase.filter(item => item.province_id === id) 
-            setListDistrict(filterDistritoData)
-        }
+    //Button:
+    const handlerProvincia = function(e){
+        let id = e.target.value;
+        setListDistrict([])
+        let filterDistritoData = listdistritoBase.filter(item => item.province_id === id) 
+        setListDistrict(filterDistritoData)
+    }
         
         return (
-            <Fragment>
+            <>
             <NavBar/>
                 <div className="row row-no-magin padding-container">
                     <div className="col-12 col-md-6 offset-md-3 container-no-padding m-nav-form">
@@ -250,59 +296,12 @@ const ProfileAdress = (props) => {
                             </span> 
                             <label htmlFor="family" className="label-form-2 mt-2">         
                                 Situación familiar
-                                <div className="container-radios">
-                                    <div className="form-check my-2">
-                                        <input className="form-check-input"
-                                        type="radio" 
-                                        name="family" 
-                                        id="single" 
-                                        value="option1"
-                                        ref={register}
-                                        />
-                                        <label className="form-text-check mb-2">
-                                            Soltero
-                                        </label>
-                                    </div>
-                                    <div className="form-check mb-3">
-                                        <input className="form-check-input"
-                                        type="radio" 
-                                        name="family" 
-                                        id="married" 
-                                        value="option2"
-                                        ref={register}
-                                        />
-                                        <label className="form-text-check" >
-                                            Casado
-                                        </label>
-                                    </div>
-                                    <div className="form-check mb-3">
-                                        <input className="form-check-input"
-                                        type="radio" 
-                                        name="family" 
-                                        id="divorced" 
-                                        value="option3"
-                                        ref={register}
-                                        />
-                                        <label className="form-text-check">
-                                            Divorciado
-                                        </label>
-                                    </div>
-                                    <div className="form-check mb-3">
-                                        <input className="form-check-input"
-                                        type="radio" 
-                                        name="family" 
-                                        id="cohabiting" 
-                                        value="option2"
-                                        ref={
-                                            register({
-                                                required: "Seleccione una opción",
-                                            })}
-                                        />
-                                        <label className="form-text-check" >
-                                            Conviviente
-                                        </label>
-                                    </div>
-                                </div>
+                                <select className="form-control" name="typeDocument" id="exampleFormControlSelect2">
+                                    {civil.map( element =>(
+                                        <option key={element.id} value={element.id}>{element.name}</option>
+                                    )
+                                    )}
+                                </select>
                                 <span className="span-error">
                                 { errors.family && errors.family.message}
                             </span>
@@ -325,7 +324,7 @@ const ProfileAdress = (props) => {
                         </form>
                     </div>
                 </div>
-        </Fragment>
+        </>
     )
 }
 

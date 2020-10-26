@@ -1,11 +1,13 @@
-import React, { Fragment } from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "../../Components/MenuUser/index"
 import { Link, withRouter } from 'react-router-dom'
 import DatePicker,{registerLocale}from "react-datepicker"
 import 'react-datepicker/dist/react-datepicker.css'
 import es from 'date-fns/locale/es';
 import { useForm, Controller } from "react-hook-form";
+
 import Stepper from "./Stepper";
+import UtilService from '../../services/util.service';
 import './index.css';
 
 registerLocale("es", es);
@@ -13,20 +15,31 @@ registerLocale("es", es);
 const ProfileInfo = (props) => { 
     const { handleSubmit, register, errors, control, formState} = useForm();
     const { isSubmitted } = formState;
+    const [typeDocument, setTypeDocument] = useState([]);
 
     const onSubmit = (values, e) => { 
         console.log(values);
         props.history.push('/info-direccion')
-    } 
+    }
 
     const onlyNumbers= (e)=> {
         let key = window.event ? e.which : e.keyCode;
             if (key < 48 || key > 57) {
             e.preventDefault();
+            }
     }
-  }
+
+    // Cargar combo tipo de documento
+    useEffect( () => {
+        async function listDoc(){
+            const responseDocument = await UtilService.listDocument();
+            setTypeDocument(responseDocument.data);
+        }
+        listDoc();
+     }, []);
+
     return (
-        <Fragment>
+        <>
             <NavBar/>
             <div className="row row-no-magin padding-container">
                 <div className="col-12 col-md-6 offset-md-3 container-no-padding m-nav-form">
@@ -102,52 +115,12 @@ const ProfileInfo = (props) => {
                         </span>
                         <label htmlFor="doc" className="label-form-2 mt-1">        
                             Tipo de Documento
-                            <div className="container-radios">
-                                <div className="form-check my-2">
-                                    <input className="form-check-input"
-                                    type="radio" 
-                                    name="doc" 
-                                    id="dni" 
-                                    value="option1"
-                                    autoComplete="off"
-                                    ref={register}
-                                    />
-                                    <label className="form-text-check mb-2">
-                                        Dni
-                                    </label>
-                                </div>
-                                <div className="form-check mb-3">
-                                    <input className="form-check-input"
-                                    type="radio" 
-                                    name="doc" 
-                                    id="carnet" 
-                                    value="option2"
-                                    required=""
-                                    autoComplete="off"
-                                    ref={register}
-                                    />
-                                    <label className="form-text-check">
-                                        Carnet de Extranjería
-                                    </label>
-                                </div>
-                                <div className="form-check mb-3">
-                                    <input className="form-check-input"
-                                    type="radio" 
-                                    name="doc" 
-                                    id="pasaporte" 
-                                    value="option3"
-                                    required=""
-                                    autoComplete="off"
-                                    ref={
-                                        register({
-                                            required: "Seleccione un tipo de documento",
-                                        })}
-                                    />
-                                    <label className="form-text-check">
-                                        Pasaporte
-                                    </label>
-                                </div>
-                            </div>
+                            <select className="form-control" name="typeDocument" id="exampleFormControlSelect2">
+                             {typeDocument.map( element =>(
+                                 <option key={element.id} value={element.id}>{element.name}</option>
+                             )
+                             )}
+                            </select>
                         <span className="span-error">
                             { errors.doc && errors.doc.message}
                         </span>
@@ -242,7 +215,7 @@ const ProfileInfo = (props) => {
                     </form>
                 </div>
             </div>
-        </Fragment>
+        </>
     )
 }
 

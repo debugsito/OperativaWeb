@@ -59,7 +59,7 @@ function Navbar(props) {
                  isAuth() ? (
                    
                     <li className ="nav-text">
-                      <a onClick= {() => cerrarSesion()}><FaIcons.FaUserCircle/>
+                      <a href="/#" onClick= {() => cerrarSesion()}><FaIcons.FaUserCircle/>
                       <span className="title-color">Cerrar sesión</span>  
                       </a>
                     </li>
