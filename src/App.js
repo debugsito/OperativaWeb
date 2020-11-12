@@ -2,12 +2,23 @@ import React, { useEffect } from 'react';
 import ReactGa from 'react-ga';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
+import { persistStore, persistReducer } from 'redux-persist'
+import { PersistGate } from 'redux-persist/integration/react'
+import storage from 'redux-persist/lib/storage'
 import thunk from 'redux-thunk';
 
 import { reducers } from './redux-store';
 import Router from './Router/router';
 
-const store = createStore(reducers, applyMiddleware(thunk));
+// Redux - Persiste
+const persistConfig = {
+  key: 'root',
+  storage,
+}
+
+const persistedReducer = persistReducer(persistConfig, reducers)
+const store = createStore(persistedReducer, applyMiddleware(thunk));
+const persistor = persistStore(store)
 
 const App = () => {
   useEffect(() => {
@@ -21,9 +32,11 @@ const App = () => {
    */
   return (
     <Provider store={store}>
-      <div className="container-fluid container-no-padding">
+      <PersistGate persistor={persistor}>
+        <div className="container-fluid container-no-padding">
         <Router />
       </div>
+      </PersistGate>
     </Provider>
   );
 };

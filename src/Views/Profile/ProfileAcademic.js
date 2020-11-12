@@ -1,11 +1,15 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import NavBar from '../../Components/MenuUser/index';
 import { Link, withRouter } from 'react-router-dom';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import es from 'date-fns/locale/es';
 import { useForm, Controller } from 'react-hook-form';
+import moment from 'moment';
+
 import Stepper from './Stepper';
+import UtilService from '../../services/util.service';
+import UserService from '../../services/user.service';
 import './index.css';
 
 registerLocale('es', es);
@@ -13,11 +17,47 @@ registerLocale('es', es);
 const ProfileAcademic = (props) => {
   const { handleSubmit, register, errors, control, formState } = useForm();
   const { isSubmitted } = formState;
+  const [ level, setLevel ] = useState([]);
+  const [ field, setField] = useState([]);
 
-  const onSubmit = (values, e) => {
-    console.log(values);
-    props.history.push('/info-experiencia');
+  const onSubmit = (values) => {
+
+  const datafield = {
+    id_account: 1,
+    level: parseInt(values.level),
+    name_inst: values.name_inst,
+    field: parseInt(values.field),
+    from_year: moment(values.from_year).format('DD/MM/YYYY'),
+    to_year: moment(values.to_year).format('DD/MM/YYYY')
   };
+
+  UserEducation(datafield);
+  };
+
+  async function UserEducation(datafield){
+    const responseEducation = await UserService.registerUserEducation(datafield);
+    if(responseEducation.status === 201){
+      props.history.push('/info-experiencia');
+    } else {
+      // Mensaje de error
+    }
+  }
+
+  useEffect( () => {
+    async function listLevel(){
+        const responseLevel = await UtilService.listLevel();
+        setLevel(responseLevel.data);
+    }
+    listLevel();
+  }, []);
+
+  useEffect( () => {
+    async function listField(){
+        const responseField = await UtilService.listField();
+        setField(responseField.data);
+    }
+    listField();
+  }, []);
 
   return (
     <>
@@ -37,142 +77,119 @@ const ProfileAcademic = (props) => {
             <p className="text-form-academic">
               Ingresa los datos del último nivel de estudios que alcanzaste.
             </p>
-            <label htmlFor="registerStudies" className="label-form-2 mt-1">
+            <label htmlFor="level" className="label-form mt-1">
               Nivel máximo alcanzado
-              <div className="form-check my-2">
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name="registerStudies"
-                  id="registerStudiesPrimary"
-                  value="option1"
-                  autoComplete="off"
-                  ref={register}
-                />
-                <label className="form-text-check mb-2">Primaria completa</label>
-              </div>
-              <div className="form-check mb-3">
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name="registerStudies"
-                  id="registerStudiesSecundary"
-                  value="option2"
-                  autoComplete="off"
-                  ref={register}
-                />
-                <label className="form-text-check">Secundaria completa</label>
-              </div>
-              <div className="form-check mb-3">
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name="registerStudies"
-                  id="registerStudiesTechnical"
-                  value="option3"
-                  autoComplete="off"
-                  ref={register}
-                />
-                <label className="form-text-check">Estudios técnicos</label>
-              </div>
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name="registerStudies"
-                  id="registerStudiesUniversity"
-                  value="option3"
-                  autoComplete="off"
+              <select 
+                  className={`form-control placeholder
+                                  ${
+                                    isSubmitted
+                                      ? !errors.level
+                                        ? 'input-icono'
+                                        : 'border-error red-input input-icoerror'
+                                      : ''
+                                  }
+                              `}
+                  name="level"
+                  id="level"
                   ref={register({
-                    required: 'Seleccione una opción'
+                    required: { value: true, message: 'Este campo es requerido' }
                   })}
-                />
-                <label className="form-text-check">Estudios universitarios</label>
-              </div>
-              <span className="span-error">
-                {errors.registerStudies && errors.registerStudies.message}
+                  >
+                  <option value="">Seleccione</option>
+                  {level.map( element =>(
+                      <option key={element.id} value={element.id}>{element.name}</option>
+                  )
+                  )}
+              </select>
+              <span className="span-error mt-1">
+                {errors.level && errors.level.message}
               </span>
             </label>
-            <label htmlFor="educationalInstitution" className="label-form">
+
+            <label htmlFor="name_inst" className="label-form mt-1">
               Institución educativa
               <input
-                placeholder="Colegio Fé y Alegría"
+                placeholder="Ejemplo: Colegio Fé y Alegría"
                 className={`form-control placeholder
                                 ${
                                   isSubmitted
-                                    ? !errors.educationalInstitution
+                                    ? !errors.name_inst
                                       ? 'input-icono'
                                       : 'border-error red-input input-icoerror'
                                     : ''
                                 }
                             `}
-                id="educationalInstitution"
-                name="educationalInstitution"
+                id="name_inst"
+                name="name_inst"
                 type="text"
                 autoComplete="off"
                 ref={register({
                   required: { value: true, message: 'Este campo es requerido' }
                 })}
               />
+              <span className="span-error mt-1">
+                {errors.name_inst && errors.name_inst.message}
+              </span>
             </label>
-            <span className="span-error">
-              {errors.educationalInstitution && errors.educationalInstitution.message}
-            </span>
-            <label htmlFor="specialty" className="label-form mt-1">
+            <label htmlFor="field" className="label-form mt-1">
               Especialidad
-              <input
-                placeholder="Derecho Tributario"
-                className={`form-control placeholder
+              <select 
+                  className={`form-control placeholder
                                 ${
                                   isSubmitted
-                                    ? !errors.specialty
+                                    ? !errors.field
                                       ? 'input-icono'
                                       : 'border-error red-input input-icoerror'
                                     : ''
                                 }
                             `}
-                id="specialty"
-                name="specialty"
-                type="text"
-                autoComplete="off"
-                ref={register({
-                  required: 'Este campo es requerido',
-                  pattern: {
-                    value: /[A-Za-z]{3}/,
-                    message: 'Coloque un Nombre valido'
-                  }
-                })}
-              />
+                  name="field" 
+                  id="field" 
+                  ref={register({
+                    required: { value: true, message: 'Seleccione un registro' }
+                  })}>
+                  <option value="">Seleccione</option>
+                  {field.map( element =>(
+                      <option key={element.id} value={element.id}>{element.name}</option>
+                  )
+                  )}
+              </select>
+              <span className="span-error mt-1">
+                {errors.field && errors.field.message}
+              </span>
             </label>
-            <span className="span-error">{errors.specialty && errors.specialty.message}</span>
+
             <div className="row row-no-magin ">
               <div className="col-12 col-md-6 pr-md-4 pl-md-0 px-sm-0 px-xs-0">
-                <label htmlFor="startDate" className=" label-form mt-3">
+                <label htmlFor="from_year" className=" label-form mt-2">
                   Fecha de inicio
                   <section className="customDatePickerWidth">
                     <Controller
                       control={control}
-                      name="startDate"
+                      name="from_year"
                       defaultValue=""
                       render={(props) => (
                         <DatePicker
                           className={`form-control label-form-calen icon-calendar
-                                                    ${
-                                                      isSubmitted
-                                                        ? !errors.startDate
-                                                          ? ''
-                                                          : 'border-error red-input'
-                                                        : ''
-                                                    }
-                                                `}
+                                          ${
+                                            isSubmitted
+                                              ? !errors.from_year
+                                                ? 'input-icono'
+                                                : 'border-error red-input input-icoerror'
+                                              : ''
+                                          }
+                                      `}
                           placeholderText="DD/MM/AAAA"
-                          onChange={(e) => props.onChange(e)}
                           selected={props.value}
+                          onChange={(e) => props.onChange(e)}
                           dateFormat="dd/MM/yyyy"
                           locale={es}
+                          maxDate={new Date()}
+                          peekNextMonth
+                          showMonthDropdown
                           showYearDropdown
-                          defaultValue=""
-                          name="startDate"
+                          dropdownMode="select"
+                          name="from_year"
                           autoComplete="off"
                         />
                       )}
@@ -181,38 +198,41 @@ const ProfileAcademic = (props) => {
                       }}
                     />
                   </section>
-                  <span className="span-error mt-2">
-                    {errors.startDate && errors.startDate.message}
+                  <span className="span-error mt-1">
+                    {errors.from_year && errors.from_year.message}
                   </span>
                 </label>
               </div>
               <div className="col-12 col-md-6 pl-md-4 pr-md-0 px-sm-0 px-xs-0">
-                <label htmlFor="endDate" className=" label-form mt-3">
+                <label htmlFor="to_year" className=" label-form mt-2">
                   Fecha de fin
                   <section className="customDatePickerWidth">
                     <Controller
                       control={control}
-                      name="endDate"
+                      name="to_year"
                       defaultValue=""
                       render={(props) => (
                         <DatePicker
                           className={`form-control label-form-calen icon-calendar
                                                     ${
                                                       isSubmitted
-                                                        ? !errors.endDate
-                                                          ? ''
-                                                          : 'border-error red-input'
+                                                        ? !errors.to_year
+                                                          ? 'input-icono'
+                                                          : 'border-error red-input input-icoerror'
                                                         : ''
                                                     }
                                                 `}
                           placeholderText="DD/MM/AAAA"
-                          onChange={(e) => props.onChange(e)}
                           selected={props.value}
+                          onChange={(e) => props.onChange(e)}
                           dateFormat="dd/MM/yyyy"
                           locale={es}
+                          maxDate={new Date()}
+                          peekNextMonth
+                          showMonthDropdown
                           showYearDropdown
-                          defaultValue=""
-                          name="endDate"
+                          dropdownMode="select"
+                          name="to_year"
                           autoComplete="off"
                         />
                       )}
@@ -221,8 +241,8 @@ const ProfileAcademic = (props) => {
                       }}
                     />
                   </section>
-                  <span className="span-error mt-2">
-                    {errors.endDate && errors.endDate.message}
+                  <span className="span-error mt-1">
+                    {errors.to_year && errors.to_year.message}
                   </span>
                 </label>
               </div>

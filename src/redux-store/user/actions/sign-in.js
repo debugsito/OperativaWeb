@@ -23,7 +23,15 @@ export const signIn = (user) => {
       dispatch(setUserError(null));
     } catch (error) {
       dispatch(setUserLoading(false));
-      dispatch(setUserError(error.message));
+      if(!error.response){
+        dispatch(setUserError("Ha ocurrido un error interno."));
+      } else {
+        if(error.response.status === 401){
+        dispatch(setUserError("Usuario o contraseña Incorrecta."));
+      } else {
+        dispatch(setUserError("Ha ocurrido un error interno."));
+      };
+      }
     }
   };
 };

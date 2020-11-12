@@ -17,8 +17,11 @@ export const signUp = (user) => {
       dispatch(setSignUpUser(response));
       dispatch(setUserError(null));
     } catch (error) {
-      
-      dispatch(setUserError(error.message));
+      if(error.response.status === 409){
+        dispatch(setUserError("La cuenta ya existe. Por favor Iniciar sesión."));
+      } else {
+        dispatch(setUserError("Ha ocurrido un error interno."));
+      };
     }
   };
 };

@@ -12,12 +12,14 @@ const NewPassword= (props) => {
     const onSubmit = (values) => { 
         console.log(values);
         props.history.push('/inicio-sesion')
-        }          
+    }          
+
     const [see, setSee] = React.useState(false)
     const seePass = () =>
     {
         setSee(!see)        
     }
+    
     return (
         <Fragment>
             <NavBar/>

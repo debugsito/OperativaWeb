@@ -13,7 +13,6 @@ import ProfileInfo from '../Views/Profile/ProfileInfo';
 import ProfileAdress from '../Views/Profile/ProfileAdress';
 import ProfileAcademic from '../Views/Profile/ProfileAcademic';
 import ProfileExperience from '../Views/Profile/ProfileExperience';
-// import ProfileProfesional from '../Views/Profile/ProfileProfesional'
 import ProfileUpdate from '../Views/Profile/ProfileUpdate';
 
 //Guardar Token

@@ -1,78 +1,94 @@
 import React, { useEffect, useState } from "react";
 import NavBar from "../../Components/MenuUser/index"
 import { Link, withRouter } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux';
 import { useForm } from "react-hook-form";
+import Swal from 'sweetalert2'
 
 import Stepper from "./Stepper";
 import UtilService from '../../services/util.service';
+import UserService from '../../services/user.service';
+import { setUserInfo } from '../../redux-store/user';
 import './index.css';
 
-const onlyNumbers= (e)=> {
-    let key = window.event ? e.which : e.keyCode;
-        if (key < 48 || key > 57) {
-        e.preventDefault();
-}}
-
 const ProfileAdress = (props) => { 
+    const dispatch = useDispatch();
     const { handleSubmit, register, errors, formState} = useForm();
+    const { currentUser } = useSelector((state) => state.user);
     const { isSubmitted } = formState;
-    
-    const onSubmit = (values) => { 
-        console.log(values);
-        props.history.push('/informacion-academica')
-    } 
-    
+
     const [listDepartament, setListDepartament]= useState([])
     const [listProvince, setListProvince]= useState([])
     const [listDistrict, setListDistrict]= useState([])
     const [civil, setCivil] = useState([]);
+    const [provider, setProvider] = useState([]);
+    
+    const onSubmit = (values) => { 
+        //OBTENER LOS VALORES DEL FRONT
+        const datafield = {
+            address: values.address,
+            phone: values.phone,
+            id_country: parseInt(values.id_country),
+            id_state: parseInt(values.id_state),
+            id_city: parseInt(values.id_city),
+            id_civil_status: parseInt(values.id_civil_status),
+            id_provider: 1 // EN DURO
+        };
 
-    // Cargar combo de lista de estado civil
+        // Guardar los valores en mi Store Usuario
+        dispatch(setUserInfo(datafield));
+        const userInfo = {...currentUser, ...datafield}
+
+        registerUser(userInfo);
+    } 
+
+    async function registerUser(user){
+        const responseInfo = await UserService.registerUserInfo(user);
+        if(responseInfo.status === 201){
+            props.history.push('/informacion-academica')
+        } else {  
+            //Mensaje de error
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!',
+            })
+        }
+    }
+
     useEffect( () => {
-        // Creo la funciona listaCivil
+        console.log(currentUser);
+     }, [currentUser]);
+
+    // Obtener la lista de estado civil
+    useEffect( () => {
         async function listCivil(){
-            // Consumo el servicio /civil/
             const responseCivil = await UtilService.listCivil();
-            // Obtengo la respuesta en mi lista Civil
             setCivil(responseCivil.data);
         }
-        // Ejecuto mi funcion
         listCivil();
-     }, []);
+    }, []);
 
-    /*
+    // Obtener la lista de proveedores
     useEffect( () => {
-        async function listDepartament(){
-            const responseDepartament = await UtilService.listDepartament();
-            setListDepartament(responseDepartament.data);
+        async function listProvider(){
+            const responseProvider = await UtilService.listProvider();
+            setProvider(responseProvider.data);
         }
-        listDepartament();
-     }, []);
+        listProvider();
+    }, []);
 
-    useEffect( () => {
-    async function listProvince(){
-        const responseState = await UtilService.listState();
-        setListProvince(responseState.data);
-    }
-    listProvince();
-     }, []);
-    
-    */
+    // Validacion de solo numeros
+    const onlyNumbers= (e)=> {
+        let key = window.event ? e.which : e.keyCode;
+            if (key < 48 || key > 57) {
+            e.preventDefault();
+    }}
 
-    useEffect( () => {
-    async function listDepartament(){
-        const responseDepartament = await UtilService.listDepartament();
-        setCivil(responseDepartament.data);
-    }
-    listDepartament();
-     }, []);
-
-
-    
     useEffect(() => {
         fetch('json/departamentos.json')
             .then(response => response.json())
-                .then(datos => {
+                .then(datos => {    
                     setListDepartament(datos)
                 })
                 // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -130,10 +146,10 @@ const ProfileAdress = (props) => {
                     </div>
                     <div className="col-12  col-md-6 offset-md-3 container-no-padding">
                         <form name="myForm" onSubmit={handleSubmit(onSubmit)} className='form-container-info'>
-                            <label htmlFor="adress" className="label-form">
+                            <label htmlFor="address" className="label-form mt-1">
                                 Dirección
                                 <input
-                                    placeholder ="Av. Grau" 
+                                    placeholder ="Ejemplo: Urb Hipolito Unanue 123" 
                                     className={`form-control placeholder
                                         ${
                                             isSubmitted ? 
@@ -144,39 +160,40 @@ const ProfileAdress = (props) => {
                                             : ''
                                         }
                                     `} 
-                                    id=''
-                                    name='adress'
+                                    id='address'
+                                    name='address'
                                     type="text"
-                                    autoComplete="off"
+                                    maxLength='30'
                                     ref={register({
                                         required: {value: true, message: "Agregue una dirección" }
                                     })}
                                 />
+                                <span className="span-error">
+                                    { errors.address && errors.address.message}
+                                </span>
                             </label>
-                            <span className="span-error">
-                                { errors.adress && errors.adress.message}
-                            </span>
+
                             <div className="row row-no-magin ">
                                 <div className="col-12 col-md-4 pr-md-4 pl-md-0 px-sm-0 px-xs-0">
-                                    <label  htmlFor="departamentAdress" className="label-form" >
+                                    <label  htmlFor="id_country" className="label-form" >
                                         Departamento
                                         <select 
                                             className={`form-control form-text-check-adress
                                                 ${
                                                     isSubmitted ? 
-                                                    !errors.departamentAdress ?
+                                                    !errors.id_country ?
                                                     ""
                                                     : 
                                                     "border-error red-input"       
                                                     : ''
                                                 }
                                             `}
-                                            id=""
-                                            name="departamentAdress"
+                                            id="id_country"
+                                            name="id_country"
                                             onChange= {handlerdepartamento}
                                             ref={register({ required: {value: true, message: "Seleccione una opción"} })}
                                             > 
-                                            <option value="">Option</option>
+                                            <option value="">Seleccione</option>
                                             {
                                                 listDepartament.map((item) => (
                                                 <option key= {item.id}
@@ -187,30 +204,31 @@ const ProfileAdress = (props) => {
                                             ))
                                             }
                                         </select>
+                                        <span className="span-error">
+                                            { errors.id_country && errors.id_country.message}
+                                        </span>
                                     </label>
-                                    <span className="span-error">
-                                        { errors.departamentAdress && errors.departamentAdress.message}
-                                    </span>
                                 </div>
                                 <div className="col-12 col-md-4 pr-md-3 pl-md-0 px-sm-0 px-xs-0">
-                                    <label htmlFor="provinceAdress" className="label-form" >
+                                    <label htmlFor="id_state" className="label-form" >
                                         Provincia
                                         <select
-                                            name="provinceAdress"
                                             className={`form-control form-text-check-adress
                                                 ${
                                                     isSubmitted ? 
-                                                    !errors.provinceAdress?
+                                                    !errors.id_state?
                                                     ""
                                                     : 
                                                     "border-error red-input"       
                                                     : ''
                                                 }
                                             `}
+                                            id="id_state"
+                                            name="id_state"
                                             onChange={handlerProvincia}
                                             ref={register({ required: {value: true, message: "Seleccione una opción"} })}
                                             >
-                                                <option value="">Option</option>
+                                                <option value="">Seleccione</option>
                                             {
                                                 listProvince.map((item) => (
                                                 <option key= {item.id} value= {item.id}>
@@ -219,62 +237,64 @@ const ProfileAdress = (props) => {
                                             ))
                                             }
                                         </select>
+                                        <span className="span-error">
+                                            { errors.id_state && errors.id_state.message}
+                                        </span>
                                     </label>
-                                    <span className="span-error">
-                                        { errors.provinceAdress && errors.provinceAdress.message}
-                                    </span>
                                 </div>
                                 <div className="col-12 col-md-4 pl-md-2 pr-md-0 px-sm-0 px-xs-0">
-                                    <label htmlFor="districtAdress" className="label-form" >
+                                    <label htmlFor="id_city" className="label-form" >
                                         Distrito
                                         <select
-                                            name="districtAdress"
                                             className={`form-control form-text-check-adress
                                                 ${
                                                     isSubmitted ? 
-                                                    !errors.districtAdress ?
+                                                    !errors.id_city ?
                                                     ""
                                                     : 
                                                     "border-error red-input"       
                                                     : ''
                                                 }
                                             `}
+                                            id="id_city"
+                                            name="id_city"
                                             ref={register({ required: {value: true, message: "Seleccione una opción"} })}
                                             >
-                                                <option value="">Option</option>
-                                                {
-                                                    listDistrict.map((item) => (
-                                                    <option key= {item.id} 
-                                                    value= {item.id}
-                                                    >
-                                                        {item.name}
-                                                    </option>
-                                                    ))
-                                                }
+                                            <option value="">Seleccione</option>
+                                            {
+                                                listDistrict.map((item) => (
+                                                <option key= {item.id} 
+                                                value= {item.id}
+                                                >
+                                                    {item.name}
+                                                </option>
+                                                ))
+                                            }
                                         </select>
+                                        <span className="span-error">
+                                            { errors.id_city && errors.id_city.message}
+                                        </span>
                                     </label>
-                                    <span className="span-error">
-                                        { errors.districtAdress && errors.districtAdress.message}
-                                    </span>
+
                                 </div>
                             </div> 
-                            <label htmlFor="phoneDate" className="label-form mt-2">
+                            <label htmlFor="phone" className="label-form mt-1">
                                 Teléfono
                                 <input
                                     maxLength="9"
-                                    placeholder="123 123 123"
+                                    placeholder="Ejemplo: 958478595"
                                     className={`form-control placeholder mb-2
                                         ${
                                             isSubmitted ? 
-                                            !errors.phoneDate ?
+                                            !errors.phone ?
                                             "input-icono"
                                             : 
                                             "border-error red-input input-icoerror"       
                                             : ''
                                         }
                                     `}
-                                    id='phoneDate'
-                                    name='phoneDate'
+                                    id='phone'
+                                    name='phone'
                                     type="text"
                                     autoComplete="off"
                                     onKeyPress={e =>{onlyNumbers(e)}} 
@@ -290,22 +310,63 @@ const ProfileAdress = (props) => {
                                             }
                                     })} 
                                 />
+                                <span className="span-error">
+                                    { errors.phone && errors.phone.message}
+                                </span> 
                             </label>
-                            <span className="span-error">
-                                    { errors.phoneDate && errors.phoneDate.message}
-                            </span> 
-                            <label htmlFor="family" className="label-form-2 mt-2">         
-                                Situación familiar
-                                <select className="form-control" name="typeDocument" id="exampleFormControlSelect2">
+                            <label htmlFor="id_civil_status" className="label-form mt-1">         
+                                Estado Civil
+                                <select 
+                                    className={`form-control
+                                            ${
+                                                isSubmitted ? 
+                                                !errors.id_civil_status ?
+                                                ""
+                                                : 
+                                                "border-error red-input"       
+                                                : ''
+                                            }
+                                    `}
+                                    name="id_civil_status" 
+                                    id="id_civil_status"
+                                    ref={register({
+                                        required: "Este campo es requerido"
+                                    })}>
+                                    <option value="">Seleccione</option>
                                     {civil.map( element =>(
                                         <option key={element.id} value={element.id}>{element.name}</option>
                                     )
                                     )}
                                 </select>
                                 <span className="span-error">
-                                { errors.family && errors.family.message}
-                            </span>
+                                    { errors.id_civil_status && errors.id_civil_status.message}
+                                </span>
                             </label>
+                            <label htmlFor="id_provider" className="label-form mt-1">         
+                                Recomendado
+                                <select 
+                                    className={`form-control
+                                            ${
+                                                isSubmitted ? 
+                                                !errors.id_provider ?
+                                                ""
+                                                : 
+                                                "border-error red-input"       
+                                                : ''
+                                            }
+                                    `}
+                                    name="id_provider"
+                                    id="id_provider">
+                                    <option>Seleccione</option>
+                                    {provider.map( element =>(
+                                        <option key={element.id} value={element.id}>{element.name}</option>
+                                        )
+                                    )}
+                                </select>
+                            </label>
+                            <span className="span-error">
+                                { errors.id_provider && errors.id_provider.message}
+                            </span>
                             <section  className="container-buttons-form">
                                 <Link
                                     className="btn-cancel-form btn" 

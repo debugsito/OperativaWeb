@@ -1,35 +1,78 @@
 import React, { useEffect, useState } from "react";
 import NavBar from "../../Components/MenuUser/index"
 import { Link, withRouter } from 'react-router-dom'
-import DatePicker,{registerLocale}from "react-datepicker"
+import DatePicker,{registerLocale} from "react-datepicker"
+import { useDispatch, useSelector } from 'react-redux';
 import 'react-datepicker/dist/react-datepicker.css'
+
 import es from 'date-fns/locale/es';
 import { useForm, Controller } from "react-hook-form";
+import moment from 'moment';
 
 import Stepper from "./Stepper";
 import UtilService from '../../services/util.service';
+import { setUserInfo } from '../../redux-store/user';
+
 import './index.css';
 
 registerLocale("es", es);
 
 const ProfileInfo = (props) => { 
-    const { handleSubmit, register, errors, control, formState} = useForm();
-    const { isSubmitted } = formState;
-    const [typeDocument, setTypeDocument] = useState([]);
+    // Obtener los valores de mi storage
+    const { currentUser } = useSelector((state) => state.user);
+    const type_document = currentUser.type_doc ? currentUser.type_doc : '';
+    const fecha = currentUser.birth_date ? moment(currentUser.birth_date, "DD-MM-YYYY").toDate() : '';
 
+    const defaultValues = {
+        first_name: currentUser.first_name,
+        last_name: currentUser.last_name,
+        num_doc: currentUser.num_doc,
+        birth_date : fecha
+    };
+
+    const dispatch = useDispatch();
+    const { handleSubmit, register, errors, control, formState} = useForm({ defaultValues });
+    const { isSubmitted } = formState;
+
+    // Selected Value
+    
+    //const birth_date = currentUser.birth_date;
+    const [selectDocument, setSelectDocument] = useState(type_document);
+    //const [startDate, setStartDate] = useState();
+    
     const onSubmit = (values, e) => { 
-        console.log(values);
+        // Obtiene los valores
+        const datafield = {
+            id_account: 1,
+            first_name: values.first_name,
+            last_name: values.last_name,
+            type_doc: selectDocument,
+            num_doc: values.num_doc,
+            birth_date: moment(values.birth_date).format('DD/MM/YYYY'),
+            gender: parseInt(values.gender)
+        };
+        // Guardar los valores en mi Store Usuario
+        dispatch(setUserInfo(datafield));
         props.history.push('/info-direccion')
     }
+
 
     const onlyNumbers= (e)=> {
         let key = window.event ? e.which : e.keyCode;
             if (key < 48 || key > 57) {
-            e.preventDefault();
+                e.preventDefault();
             }
     }
 
+    const onlyLetters = (e) => {
+         var charCode = (e.which) ? e.which:e.KeyCode;
+        if(!((charCode >= 65 && charCode <= 90) || (charCode>=97 && charCode<=122))){
+            e.preventDefault();
+        } 
+    }
+
     // Cargar combo tipo de documento
+    const [ typeDocument, setTypeDocument] = useState([]);
     useEffect( () => {
         async function listDoc(){
             const responseDocument = await UtilService.listDocument();
@@ -51,98 +94,117 @@ const ProfileInfo = (props) => {
                 <div className="col-12 col-md-6 offset-md-3 container-no-padding">
                     <h1 className='h1-form'>Datos Personales</h1>
                 </div>
-                <div className="col-12  col-md-6 offset-md-3 container-no-padding">
+                <div className="col-12 col-md-6 offset-md-3 container-no-padding">
                     <form name="myForm" onSubmit={handleSubmit(onSubmit)}  className='form-container-info'>
-                        <label htmlFor="firstName" className="label-form">
+                        <label htmlFor="first_name" className="label-form">
                             Nombres
                             <input
-                                placeholder ="Maria" 
+                                placeholder ="Ejemplo: Maria Jose" 
                                 className={`form-control placeholder
                                     ${
                                         isSubmitted ? 
-                                        !errors.firstName ?
+                                        !errors.first_name ?
                                         "input-icono"
                                         : 
                                         "border-error red-input input-icoerror"       
                                         : ''
                                     }
                                 `} 
-                                id='firstName'
-                                name='firstName'
+                                id='first_name'
+                                name='first_name'
                                 type="text"
-                                autoComplete="off"
+                                maxLength="25"
+                                onKeyPress={e =>{onlyLetters(e)}} 
                                 ref={register({
                                     required: "Este campo es requerido",
                                     pattern: {
-                                        value:  /[A-Za-z]{3}/,
-                                        message: "Coloque un Nombre valido",
-                                      },
-                                  })}
+                                        value:  /^[A-Za-z]+$/i,
+                                        message: "Ingrese un nombre valido",
+                                    },
+                                })}
                             />
+                            <span className="span-error mt-1">
+                                { errors.first_name && errors.first_name.message}
+                            </span>
                         </label>
-                        <span className="span-error">
-                            { errors.firstName && errors.firstName.message}
-                        </span>
-                        <label htmlFor="lastName" className="label-form mt-1">
+                        <label htmlFor="last_name" className="label-form mt-1">
                             Apellidos
                             <input
-                                placeholder="Pérez"
+                                placeholder="Ejemplo: Ortiz Pérez"
                                 className={`form-control placeholder mb-2
                                     ${
                                         isSubmitted ? 
-                                        !errors.lastName ?
+                                        !errors.last_name ?
                                         "input-icono"
                                         : 
                                         "border-error red-input input-icoerror"       
                                         : ''
                                     }
                                 `} 
-                                id='lastName'
-                                name='lastName'
+                                id='last_name'
+                                name='last_name'
                                 type="text"
-                                autoComplete="off"
+                                onKeyPress={e =>{onlyLetters(e)}} 
                                 ref={register({
                                     required: "Este campo es requerido",
                                     pattern: {
-                                        value:  /[A-Za-z]{3}/,
-                                        message: "Coloque un Nombre valido",
+                                        value:  /^[A-Za-z]+$/i,
+                                        message: "Ingrese un nombre valido",
                                       },
                                   })}
                             />
+                            <span className="span-error mt-1">
+                                { errors.last_name && errors.last_name.message}
+                            </span>
                         </label>
-                        <span className="span-error">
-                            { errors.lastName && errors.lastName.message}
-                        </span>
-                        <label htmlFor="doc" className="label-form-2 mt-1">        
+                        <label htmlFor="type_doc" className="label-form mt-1">        
                             Tipo de Documento
-                            <select className="form-control" name="typeDocument" id="exampleFormControlSelect2">
-                             {typeDocument.map( element =>(
-                                 <option key={element.id} value={element.id}>{element.name}</option>
-                             )
-                             )}
-                            </select>
-                        <span className="span-error">
-                            { errors.doc && errors.doc.message}
-                        </span>
-                        </label>
-                        <label  htmlFor="document" className="label-form mt-3">
-                            Número de documento
-                            <input
-                                placeholder="90627452"
+                            <select 
                                 className={`form-control placeholder mb-2
                                     ${
                                         isSubmitted ? 
-                                        !errors.document ?
+                                        !errors.type_doc ?
                                         "input-icono"
                                         : 
                                         "border-error red-input input-icoerror"       
                                         : ''
                                     }
                                 `} 
-                                id='document'
-                                name='document'
+                                name="type_doc" 
+                                id="type_doc"
+                                value={selectDocument}
+                                onChange={(e => setSelectDocument(e.target.value))}
+                                ref={register({
+                                    required: "Este campo es requerido", message: "Coloque un Nombre valido"
+                                  })}>
+                                <option value="">Seleccione</option>
+                                {typeDocument.map( element =>(
+                                    <option key={element.id} value={element.id}>{element.name}</option>
+                                )
+                                )}
+                            </select>	
+                            <span className="span-error mt-1">
+                                { errors.type_doc && errors.type_doc.message}
+                            </span>
+                        </label>
+                        <label  htmlFor="num_doc" className="label-form mt-1">
+                            Número de documento
+                            <input
+                                placeholder="Ejemplo: 58748595"
+                                className={`form-control placeholder mb-2
+                                    ${
+                                        isSubmitted ? 
+                                        !errors.num_doc ?
+                                        "input-icono"
+                                        : 
+                                        "border-error red-input input-icoerror"       
+                                        : ''
+                                    }
+                                `} 
+                                id='num_doc'
+                                name='num_doc'
                                 type="text"
-                                autoComplete="off"
+                                maxLength='12'
                                 onKeyPress={e =>{onlyNumbers(e)}}
                                 ref={register({
                                     required: "Este campo es requerido",
@@ -156,47 +218,96 @@ const ProfileInfo = (props) => {
                                         }
                                   })} 
                             />
+                            <span className="span-error mt-1">
+                                { errors.num_doc && errors.num_doc.message }
+                            </span>
                         </label>
-                        <span className="span-error">
-                            { errors.document && errors.document.message}
-                        </span>
-                         <label htmlFor="dateOfBirth" className=" label-form mt-3" >
-                                Fecha de nacimiento
-                                <section className="customDatePickerWidth">
-                                    <Controller
-                                        control={control}
-                                        name="dateOfBirth"
-                                        defaultValue=""
-                                        render={(props) => (
-                                            <DatePicker
-                                            className={`form-control label-form-calen icon-calendar
+                        <label htmlFor="birth_date" className=" label-form mt-2" >
+                            Fecha de nacimiento
+                            <section className="customDatePickerWidth">
+                                <Controller
+                                    control={control}
+                                    name="birth_date"
+                                    render={(props) => (
+                                        <DatePicker
+                                        className={`form-control label-form-calen icon-calendar
                                                 ${
                                                     isSubmitted ? 
-                                                    !errors.dateOfBirth ?
+                                                    !errors.birth_date ?
                                                     ""
                                                     : 
                                                     "border-error red-input"       
                                                     : ''
                                                 }
                                             `} 
-                                                placeholderText="DD/MM/AAAA"
-                                                onChange={(e) => props.onChange(e)}
-                                                selected={props.value}
-                                                dateFormat="dd/MM/yyyy"
-                                                locale={es}
-                                                showYearDropdown
-                                                defaultValue=""
-                                                name ="dateOfBirth"
-                                                autoComplete="off"     
-                                            />
-                                        )}
-                                                rules={{
-                                                    required: 'Coloque una fecha válida'
-                                                }}
-                                    /> 
-                                </section>
-                                <span className="span-error mt-2">{ errors.dateOfBirth && errors.dateOfBirth.message}</span>
-                            </label>
+                                            placeholderText="DD/MM/AAAA"
+                                            onChange={(e) => props.onChange(e)}
+                                            selected={props.value}
+                                            dateFormat="dd/MM/yyyy"
+                                            locale={es}
+                                            maxDate={new Date()}
+                                            peekNextMonth
+                                            showMonthDropdown
+                                            showYearDropdown
+                                            dropdownMode="select"
+                                            name ="birth_date"
+                                        />
+                                    )}
+                                    rules={{
+                                        required: 'Coloque una fecha válida'
+                                    }}
+                                /> 
+                            </section>
+
+                        </label>
+                            <span className="span-error mt-1">
+                                {errors.birth_date && errors.birth_date.message}
+                            </span>
+                        <label htmlFor="gender" className="label-form mt-1">
+                            Genero
+                            <div className= "input-container-radio mt-2">
+                                <div className="form-check margin-right">
+                                    <input 
+                                        className="form-check-input"
+                                        type="radio" 
+                                        name="gender"
+                                        value='1'
+                                        ref={register({ required: "Seleccione una opción" })}
+                                    />
+                                    <label className="form-text-check">
+                                        Masculino
+                                    </label>
+                                </div>
+                                <div className="form-check margin-right">
+                                    <input 
+                                        className="form-check-input"
+                                        type="radio" 
+                                        name="gender" 
+                                        value="2"
+                                        ref={register({ required: "Seleccione una opción" })}
+                                    />
+                                    <label className="form-text-check">
+                                        Femenino
+                                    </label>
+                                </div>
+                                <div className="form-check margin-right">
+                                    <input 
+                                        className="form-check-input"
+                                        type="radio" 
+                                        name="gender" 
+                                        value="0"
+                                        ref={register({ required: "Seleccione una opción" })}
+                                    />
+                                    <label className="form-text-check">
+                                        Otros
+                                    </label>
+                                </div>
+                            </div>
+                            <span className="span-error">
+                                { errors.gender && errors.gender.message}
+                            </span>
+                        </label>
+
                         <section className="container-buttons-form">
                             <Link
                                 className="btn-cancel-form btn" 

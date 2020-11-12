@@ -6,13 +6,13 @@ import { IoIosEye, IoIosEyeOff } from 'react-icons/io';
 import ReactGa from 'react-ga';
 
 import NavBar from '../../Components/MenuUser/index';
-import { signIn } from '../../redux-store/user';
+import { signIn, setUserError, setSignInUser, setSignUpUser } from '../../redux-store/user';
 import './index.css';
 
 const Login = (props) => {
   // llamar accion de redux
   const dispatch = useDispatch();
-  const { signIn: login, error: userError } = useSelector((state) => state.user);
+  const { error: userError, signIn: success } = useSelector((state) => state.user);
   const { handleSubmit, register, errors, formState } = useForm();
   const { isSubmitted } = formState;
 
@@ -36,47 +36,31 @@ const Login = (props) => {
     };
 
     dispatch(signIn(datafield));
-
-    // axios
-    //   .post(OPTIONS.baseUrl + 'auth/login', datafield, OPTIONS.options)
-    //   .then((response) => {
-    //     if (response.status === OPTIONS.OK_RESPONSE) {
-    //       localStorage.setItem('token', response.data.Authorization);
-    //       axios
-    //         .get(OPTIONS.baseUrl + 'user/' + values.usuario)
-    //         .then((response) => {
-    //           //Guardar Email
-    //           localStorage.setItem('email', response.data.email);
-    //           history.push('/inicio');
-    //         })
-    //         .catch(function (error) {
-    //           console.log(error);
-    //         });
-    //     } else if (response.status === OPTIONS.ERROR_PAGE) {
-    //       alert(response.data.message);
-    //     } else {
-    //       alert('Ha ocurrido un error interno.');
-    //       console.log(response);
-    //     }
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //     setError('Usuario y contraseña Incorrecta');
-    //     return;
-    //   });
   };
 
   useEffect(() => {
+    dispatch(setUserError(""));
+    dispatch(setSignInUser(false));
+    dispatch(setSignUpUser(false));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  //Validar Error
+  useEffect(() => {
     if (userError) {
-      setError('Usuario y contraseña Incorrecta');
+      setError(userError);
+    } else {
+      setError("");
     }
   }, [userError]);
 
+  //Exito
   useEffect(() => {
-    if (login) {
+    if (success) {
       props.history.push('/inicio');
     }
-  }, [login]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [success]);
 
   return (
     <>
@@ -153,7 +137,7 @@ const Login = (props) => {
                 CANCELAR
               </Link>
               <button className="btn-login btn" type="submit">
-                SOLICITAR
+                INGRESAR
               </button>
             </section>
             <div className="space-spam-login-register">

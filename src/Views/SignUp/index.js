@@ -7,20 +7,19 @@ import { IoIosEye, IoIosEyeOff } from 'react-icons/io';
 import ReactGa from 'react-ga';
 
 import NavBar from '../../Components/MenuUser/index';
-import { signUp } from '../../redux-store/user';
+import { signUp, setUserError, setSignUpUser, setSignInUser } from '../../redux-store/user';
 import './index.css';
 
 const Register = (props) => {
   // llamar accion de redux
   const dispatch = useDispatch();
   const { signUp: account, error: userError } = useSelector((state) => state.user);
-
-  const [modalTerms, setModalTerms] = useState(false);
   const { handleSubmit, register, errors, formState } = useForm();
   const { isSubmitted } = formState;
-
   const [see, setSee] = useState(false);
   const [error, setError] = useState(null);
+  const [modalTerms, setModalTerms] = useState(false);
+
 
   //mostrar Contraseña:
   const seePass = () => {
@@ -35,29 +34,37 @@ const Register = (props) => {
       action: 'Click in the buttom'
     });
 
-    // Capturo los valores ingresados por el usuario
     let datafield = {
       email: values.usuario,
       password: values.password,
       term_condi: values.terms = true ? 1 : 0
     };
 
-    //Consumo de servicio.
     dispatch(signUp(datafield));
   };
+
+  useEffect(() => {
+    dispatch(setUserError(""));
+    dispatch(setSignUpUser(false));
+    dispatch(setSignInUser(false));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   //Validación del servicio
   useEffect(() => {
     if (userError) {
       setError(userError);
+    } else {
+      setError("");
     }
   }, [userError]);
 
   //Exito
   useEffect(() => {
     if (account) {
-      props.history.push('/inicio');
+      props.history.push('/inicio-sesion');
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [account]);
 
   return (
@@ -143,9 +150,10 @@ const Register = (props) => {
               />
               <span className="info-form-term">
                 Acepto{' '}
-                <a href="/#" onClick={(e) => setModalTerms(!modalTerms)}>
+                
+                <button type="button" onClick={(e) => setModalTerms(!modalTerms)}>
                   términos y condiciones
-                </a>
+                </button>
               </span>
             </label>
             <span className="span-error">{errors.terms && errors.terms.message}</span>
@@ -165,29 +173,32 @@ const Register = (props) => {
           </form>
         </div>
       </div>
+      
+
       <Modal isOpen={modalTerms}>
         <ModalHeader>Términos y condiciones.</ModalHeader>
         <ModalBody>
-          <p className="style-modal">
-            De conformidad con la Ley 29733 de Protección de Datos Personales, autorizo, libre y
-            expresamente a la Plataforma OPERATIVA para que mis datos personales sean utilizados
-            para fines laborales.
-            <br />
-            <br />
-            Deseo recibir información sobre organizaciones, empresas, que puedan adecuarse a mi
-            interés de trabajo.
-            <br />
-            <br />
-            Deseo recibir notificaciones de convocatorias de trabajo en mi correo electrónico.
+          <p >
+          De conformidad con la Ley 29733 de Protección de Datos Personales, autorizo, libre y
+          expresamente a la Plataforma OPERATIVA para que mis datos personales sean utilizados
+          para fines laborales.
+          <br />
+          <br />
+          Deseo recibir información sobre organizaciones, empresas, que puedan adecuarse a mi
+          interés de trabajo.
+          <br />
+          <br />
+          Deseo recibir notificaciones de convocatorias de trabajo en mi correo electrónico.
           </p>
         </ModalBody>
         <ModalFooter>
-          <buttom className="btn btn-danger" onClick={(e) => setModalTerms(!modalTerms)}>
-            {' '}
-            Cerrar{' '}
-          </buttom>
+          <button className="btn btn-danger" onClick={(e) => setModalTerms(!modalTerms)}>
+          {' '}
+          Cerrar{' '}
+          </button>
         </ModalFooter>
-      </Modal>
+        </Modal>
+
     </>
   );
 };

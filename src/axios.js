@@ -3,6 +3,7 @@ import axios from 'axios';
 const Api = axios.create({
   baseURL: 'https://www.operativaapi.tk:8080/',
   headers: {
+    'Access-Control-Allow-Origin': '*',
     'Content-Type': 'application/json',
     Accept: 'application/json'
   }
