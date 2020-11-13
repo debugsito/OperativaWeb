@@ -33,11 +33,11 @@ const Register = (props) => {
       category: 'Buttom',
       action: 'Click in the buttom'
     });
-
-    let datafield = {
-      email: values.usuario,
-      password: values.password,
-      term_condi: values.terms = true ? 1 : 0
+    
+    let datafield =  {
+          email: values.usuario,
+          password: values.password,
+          term_condi: values.terms === true ? 1 : 0
     };
 
     dispatch(signUp(datafield));
@@ -151,7 +151,7 @@ const Register = (props) => {
               <span className="info-form-term">
                 Acepto{' '}
                 
-                <button type="button" onClick={(e) => setModalTerms(!modalTerms)}>
+                <button type="button" className="terminos" onClick={(e) => setModalTerms(!modalTerms)}>
                   términos y condiciones
                 </button>
               </span>

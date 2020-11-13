@@ -16,6 +16,7 @@ const WithExperience = (props) => {
     const [ demo, setDemo] = useState();
 
     const onSubmit = (values) => {
+        console.log(values);
         
         const datafield = {
             id_account: 1,
@@ -36,7 +37,6 @@ const WithExperience = (props) => {
             attrition: parseInt(values.attrition),
             demo: demo
         };
-
         console.log(datafield);
         registerJob(datafield);
     } 
@@ -214,6 +214,7 @@ const WithExperience = (props) => {
                                         dateFormat="MM/yyyy"
                                         locale={es}
                                         maxDate={new Date()}
+                                        
                                         showMonthYearPicker
                                         name ="from_year" 
                                     />
@@ -251,7 +252,7 @@ const WithExperience = (props) => {
                                         placeholderText="Mes/Año"
                                         selected={props.value}
                                         onChange={(e) => props.onChange(e)}
-                                        dateFormat="MM/yyyy"
+                                        //dateFormat="mm/YYYY"
                                         locale={es}
                                         maxDate={new Date()}
                                         showMonthYearPicker
@@ -448,14 +449,13 @@ const WithExperience = (props) => {
                     { errors.attrition && errors.attrition.message}
                 </span>
             </label>
-            <label htmlFor="nivel" className="label-form mt-1">
+            <label htmlFor="nivel_participacion" className="label-form mt-1">
                 Nivel de participación en el trabajo
                 <section className="mt-2">
                 <Controller
                     control={control}
-                    name='nivel'
+                    name='nivel_participacion'
                     defaultValue=""
-                    id='nivel'
                     render={(props) => (
                         <ReactStars
                             className={`mt-2`}
@@ -467,7 +467,26 @@ const WithExperience = (props) => {
                     )}
                 />
                 </section>
-
+            </label>
+            <label htmlFor="nivel" className="label-form mt-1">
+                Nivel de satisfacción laboral relacionado con el trabajo
+                <section className="mt-2">
+                <Controller
+                    control={control}
+                    name='nivel'
+                    defaultValue=""
+                    id='nivel'
+                    render={(props) => (
+                        <ReactStars
+                            className={`mt-2`}
+                            count={5}
+                            onChange={(e) => props.onChange(e)}
+                            size={25}
+                            activeColor="#ffd700"
+                        />
+                    )}
+                />
+                </section>
             </label>
             <Link className="text-experience" to="/">
                 AGREGAR OTRA EXPERIENCIA

@@ -21,7 +21,6 @@ const ProfileAdress = (props) => {
     const [listProvince, setListProvince]= useState([])
     const [listDistrict, setListDistrict]= useState([])
     const [civil, setCivil] = useState([]);
-    const [provider, setProvider] = useState([]);
     
     const onSubmit = (values) => { 
         //OBTENER LOS VALORES DEL FRONT
@@ -32,7 +31,6 @@ const ProfileAdress = (props) => {
             id_state: parseInt(values.id_state),
             id_city: parseInt(values.id_city),
             id_civil_status: parseInt(values.id_civil_status),
-            id_provider: 1 // EN DURO
         };
 
         // Guardar los valores en mi Store Usuario
@@ -67,15 +65,6 @@ const ProfileAdress = (props) => {
             setCivil(responseCivil.data);
         }
         listCivil();
-    }, []);
-
-    // Obtener la lista de proveedores
-    useEffect( () => {
-        async function listProvider(){
-            const responseProvider = await UtilService.listProvider();
-            setProvider(responseProvider.data);
-        }
-        listProvider();
     }, []);
 
     // Validacion de solo numeros
@@ -342,31 +331,6 @@ const ProfileAdress = (props) => {
                                     { errors.id_civil_status && errors.id_civil_status.message}
                                 </span>
                             </label>
-                            <label htmlFor="id_provider" className="label-form mt-1">         
-                                Recomendado
-                                <select 
-                                    className={`form-control
-                                            ${
-                                                isSubmitted ? 
-                                                !errors.id_provider ?
-                                                ""
-                                                : 
-                                                "border-error red-input"       
-                                                : ''
-                                            }
-                                    `}
-                                    name="id_provider"
-                                    id="id_provider">
-                                    <option>Seleccione</option>
-                                    {provider.map( element =>(
-                                        <option key={element.id} value={element.id}>{element.name}</option>
-                                        )
-                                    )}
-                                </select>
-                            </label>
-                            <span className="span-error">
-                                { errors.id_provider && errors.id_provider.message}
-                            </span>
                             <section  className="container-buttons-form">
                                 <Link
                                     className="btn-cancel-form btn" 

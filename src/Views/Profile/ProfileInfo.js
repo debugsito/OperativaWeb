@@ -21,35 +21,33 @@ const ProfileInfo = (props) => {
     // Obtener los valores de mi storage
     const { currentUser } = useSelector((state) => state.user);
     const type_document = currentUser.type_doc ? currentUser.type_doc : '';
-    const fecha = currentUser.birth_date ? moment(currentUser.birth_date, "DD-MM-YYYY").toDate() : '';
+    const fechaNacimiento = currentUser.birth_date ? moment(currentUser.birth_date, "DD-MM-YYYY").toDate() : '';
+    const [selectDocument, setSelectDocument] = useState(type_document);
 
     const defaultValues = {
         first_name: currentUser.first_name,
         last_name: currentUser.last_name,
         num_doc: currentUser.num_doc,
-        birth_date : fecha
+        birth_date : fechaNacimiento
     };
 
     const dispatch = useDispatch();
     const { handleSubmit, register, errors, control, formState} = useForm({ defaultValues });
     const { isSubmitted } = formState;
 
-    // Selected Value
-    
-    //const birth_date = currentUser.birth_date;
-    const [selectDocument, setSelectDocument] = useState(type_document);
-    //const [startDate, setStartDate] = useState();
+
     
     const onSubmit = (values, e) => { 
+            console.log(values);
         // Obtiene los valores
         const datafield = {
-            id_account: 1,
             first_name: values.first_name,
             last_name: values.last_name,
             type_doc: selectDocument,
             num_doc: values.num_doc,
             birth_date: moment(values.birth_date).format('DD/MM/YYYY'),
-            gender: parseInt(values.gender)
+            gender: parseInt(values.gender),
+            id_provider: values.id_provider
         };
         // Guardar los valores en mi Store Usuario
         dispatch(setUserInfo(datafield));
@@ -178,6 +176,7 @@ const ProfileInfo = (props) => {
                                     required: "Este campo es requerido", message: "Coloque un Nombre valido"
                                   })}>
                                 <option value="">Seleccione</option>
+                                <option value="1">1</option>
                                 {typeDocument.map( element =>(
                                     <option key={element.id} value={element.id}>{element.name}</option>
                                 )
@@ -307,7 +306,28 @@ const ProfileInfo = (props) => {
                                 { errors.gender && errors.gender.message}
                             </span>
                         </label>
-
+                        <label htmlFor="id_provider" className="label-form mt-1">         
+                            Recomendado
+                            <select 
+                                className={`form-control
+                                        ${
+                                            isSubmitted ? 
+                                            !errors.id_provider ?
+                                            ""
+                                            : 
+                                            "border-error red-input"       
+                                            : ''
+                                        }
+                                `}
+                                name="id_provider"
+                                id="id_provider">
+                                <option value="">Seleccione</option>
+                                <option value="1">1</option>
+                            </select>
+                            <span className="span-error">
+                                { errors.id_provider && errors.id_provider.message}
+                            </span>
+                        </label>
                         <section className="container-buttons-form">
                             <Link
                                 className="btn-cancel-form btn" 

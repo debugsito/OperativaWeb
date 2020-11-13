@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const Api = axios.create({
-  baseURL: 'https://www.operativaapi.tk:8080/',
+  baseURL: 'https://dev.api.operativa.startapps.com.pe:8080/',
   headers: {
     'Access-Control-Allow-Origin': '*',
     'Content-Type': 'application/json',
@@ -14,7 +14,7 @@ Api.interceptors.request.use(async (config) => {
   const token = localStorage.getItem('token');
 
   if (token) {
-    newConfig.headers.Authorization = `Bearer ${token}`;
+    newConfig.headers.Authorization = `${token}`;
   }
 
   return newConfig;

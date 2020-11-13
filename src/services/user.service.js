@@ -5,7 +5,7 @@ export default class UserService {
   // Login
   static async signIn(user) {
     const response = await Api.post('/auth/login', user);
-    return response.data.status === 'success';
+    return response.data;
   }
 
   // Crear usuario
