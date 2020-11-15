@@ -21,8 +21,13 @@ const ProfileInfo = (props) => {
     // Obtener los valores de mi storage
     const { currentUser } = useSelector((state) => state.user);
     const type_document = currentUser.type_doc ? currentUser.type_doc : '';
+    const type_provider = currentUser.id_provider ? currentUser.id_provider : '';
     const fechaNacimiento = currentUser.birth_date ? moment(currentUser.birth_date, "DD-MM-YYYY").toDate() : '';
     const [selectDocument, setSelectDocument] = useState(type_document);
+    const [selectProvider, setSelectProvider] = useState(type_provider);
+
+    const [ typeDocument, setTypeDocument] = useState([]);
+    const [provider, setProvider] = useState([]);
 
     const defaultValues = {
         first_name: currentUser.first_name,
@@ -35,19 +40,17 @@ const ProfileInfo = (props) => {
     const { handleSubmit, register, errors, control, formState} = useForm({ defaultValues });
     const { isSubmitted } = formState;
 
-
-    
     const onSubmit = (values, e) => { 
             console.log(values);
         // Obtiene los valores
         const datafield = {
             first_name: values.first_name,
             last_name: values.last_name,
-            type_doc: selectDocument,
+            type_doc: parseInt(selectDocument),
             num_doc: values.num_doc,
             birth_date: moment(values.birth_date).format('DD/MM/YYYY'),
             gender: parseInt(values.gender),
-            id_provider: values.id_provider
+            id_provider: parseInt(selectProvider)
         };
         // Guardar los valores en mi Store Usuario
         dispatch(setUserInfo(datafield));
@@ -69,8 +72,16 @@ const ProfileInfo = (props) => {
         } 
     }
 
+        // Obtener la lista de proveedores
+    useEffect( () => {
+        async function listProvider(){
+            const responseProvider = await UtilService.listProvider();
+            setProvider(responseProvider.data);
+        }
+        listProvider();
+    }, []);
+
     // Cargar combo tipo de documento
-    const [ typeDocument, setTypeDocument] = useState([]);
     useEffect( () => {
         async function listDoc(){
             const responseDocument = await UtilService.listDocument();
@@ -176,7 +187,6 @@ const ProfileInfo = (props) => {
                                     required: "Este campo es requerido", message: "Coloque un Nombre valido"
                                   })}>
                                 <option value="">Seleccione</option>
-                                <option value="1">1</option>
                                 {typeDocument.map( element =>(
                                     <option key={element.id} value={element.id}>{element.name}</option>
                                 )
@@ -306,25 +316,33 @@ const ProfileInfo = (props) => {
                                 { errors.gender && errors.gender.message}
                             </span>
                         </label>
-                        <label htmlFor="id_provider" className="label-form mt-1">         
-                            Recomendado
+                        <label htmlFor="id_provider" className="label-form mt-1">        
+                            ¿Como te enteraste de operativa?
                             <select 
-                                className={`form-control
-                                        ${
-                                            isSubmitted ? 
-                                            !errors.id_provider ?
-                                            ""
-                                            : 
-                                            "border-error red-input"       
-                                            : ''
-                                        }
-                                `}
-                                name="id_provider"
-                                id="id_provider">
+                                className={`form-control placeholder mb-2
+                                    ${
+                                        isSubmitted ? 
+                                        !errors.id_provider ?
+                                        "input-icono"
+                                        : 
+                                        "border-error red-input input-icoerror"       
+                                        : ''
+                                    }
+                                `} 
+                                name="id_provider" 
+                                id="id_provider"
+                                value={selectProvider}
+                                onChange={(e => setSelectProvider(e.target.value))}
+                                ref={register({
+                                    required: "Este campo es requerido", message: "Coloque un Nombre valido"
+                                  })}>
                                 <option value="">Seleccione</option>
-                                <option value="1">1</option>
-                            </select>
-                            <span className="span-error">
+                                {provider.map( element =>(
+                                    <option key={element.id} value={element.id}>{element.name}</option>
+                                )
+                                )}
+                            </select>	
+                            <span className="span-error mt-1">
                                 { errors.id_provider && errors.id_provider.message}
                             </span>
                         </label>

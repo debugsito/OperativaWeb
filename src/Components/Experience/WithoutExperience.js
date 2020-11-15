@@ -8,7 +8,6 @@ import  'react-multiple-select-dropdown-lite/dist/index.css'
 const WithoutExperience = (props) => { 
 
     const {handleSubmit, register, errors,control} = useForm();
-
     const [value, setValue ] = useState('');
 
     const  handleOnchange  =  val  => {
