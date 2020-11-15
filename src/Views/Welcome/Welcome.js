@@ -11,8 +11,6 @@ const Welcome= (props) => {
 
     const dispatch = useDispatch();
 
-    console.log(localStorage.getItem('token'));
-
     const onSubmit = () => {  
         props.history.push('/info');
     }

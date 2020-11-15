@@ -27,7 +27,6 @@ const Register = (props) => {
   };
 
   const onSubmit = (values) => {
-    console.log(values);
 
     ReactGa.event({
       category: 'Buttom',
