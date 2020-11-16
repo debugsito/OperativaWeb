@@ -8,6 +8,7 @@ import ReactGa from 'react-ga';
 import NavBar from '../../Components/MenuUser/index';
 import { signIn, setUserError, setSignInUser, setSignUpUser } from '../../redux-store/user';
 import './index.css';
+import { setInitUser } from '../../redux-store/user/actions/init-user';
 
 const Login = (props) => {
   // llamar accion de redux
@@ -42,6 +43,7 @@ const Login = (props) => {
     dispatch(setUserError(""));
     dispatch(setSignInUser(false));
     dispatch(setSignUpUser(false));
+    dispatch(setInitUser());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

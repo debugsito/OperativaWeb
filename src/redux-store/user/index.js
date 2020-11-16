@@ -4,6 +4,10 @@ import { SET_USER_ERROR, reducer as errorReducer } from './actions/set-error-use
 import { SET_USER_INFO, reducer as userInfoReducer } from './actions/set-user-info';
 import { SIGN_IN, reducer as signInReducer } from './actions/sign-in';
 import { SIGN_UP, reducer as signUpReducer } from './actions/sign-up';
+import { LOGOUT, reducer as logoutReducer } from './actions/logout';
+import { SET_INIT_USER, reducer as initUserReducer } from './actions/init-user';
+import { SET_JOB, reducer as setJobReducer } from './actions/set-job';
+import { REMOVE_JOB, reducer as removeJobReducer } from './actions/remove-job';
 
 // exportamos nuestras acciones
 export { setUserLoading } from './actions/set-loading-user';
@@ -28,6 +32,7 @@ const initialState = {
     id_city: null,
     id_civil_status: null,
     id_provider: null,
+    jobs: []
   },
   loading: false,
   error: null,
@@ -40,7 +45,11 @@ const actionHandlers = {
   [SET_USER_ERROR]: errorReducer,
   [SET_USER_INFO]: userInfoReducer,
   [SIGN_IN]: signInReducer,
-  [SIGN_UP]: signUpReducer
+  [SIGN_UP]: signUpReducer,
+  [LOGOUT]: logoutReducer,
+  [SET_INIT_USER]: initUserReducer,
+  [SET_JOB]: setJobReducer,
+  [REMOVE_JOB]: removeJobReducer,
 };
 
 export default function reducer(state = initialState, action) {

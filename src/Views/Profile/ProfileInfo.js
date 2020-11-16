@@ -22,7 +22,8 @@ const ProfileInfo = (props) => {
     const { currentUser } = useSelector((state) => state.user);
     const type_document = currentUser.type_doc ? currentUser.type_doc : '';
     const type_provider = currentUser.id_provider ? currentUser.id_provider : '';
-    const fechaNacimiento = currentUser.birth_date ? moment(currentUser.birth_date, "DD-MM-YYYY").toDate() : '';
+    const fechaNacimiento = currentUser.birth_date? moment(currentUser.birth_date, "DD-MM-YYYY").toDate() : moment().toDate();
+    
     const [selectDocument, setSelectDocument] = useState(type_document);
     const [selectProvider, setSelectProvider] = useState(type_provider);
 
