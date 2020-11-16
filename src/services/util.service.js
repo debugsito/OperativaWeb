@@ -62,6 +62,12 @@ export default class UserService {
     return response.data;
  } 
 
+ // Servicio que obtiene la lista de roles de trabajo
+  static async listJobRole() {
+    const response = await Api.get('/job_role/');
+    return response.data;
+ } 
+
 // Servicio que obtiene la lista de rubros
   static async listRubro() {
     const response = await Api.get('/rubro/');

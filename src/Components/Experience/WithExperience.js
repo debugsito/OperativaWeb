@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect} from 'react';
 import { Link, withRouter } from 'react-router-dom'
 import { useForm, Controller } from "react-hook-form";
 import DatePicker,{ registerLocale }from "react-datepicker" 
@@ -6,6 +6,7 @@ import es from 'date-fns/locale/es';
 import moment from 'moment';
 import ReactStars from 'react-rating-stars-component';
 
+import UtilService from '../../services/util.service';
 import UserService from '../../services/user.service';
 registerLocale("es", es);
 
@@ -13,29 +14,33 @@ const WithExperience = (props) => {
 
     const { handleSubmit, register, errors, control , formState} = useForm();
     const { isSubmitted } = formState;
-    const [ demo, setDemo] = useState();
+
+    const [ jobRole, setJobRole ] = useState([]);
+    const [ motivoRetiro, setMotivoRetiro ] = useState([]);
 
     const onSubmit = (values) => {
         console.log(values);
         
         const datafield = {
             id_account: 1,
-            name_inst: values.name_inst,
-            department: parseInt(values.department),
-            job_level: parseInt(values.job_level),
+            job_role: parseInt(values.cargo),
+            name_inst: values.empresa,
+            // FALTA GUARDAR DIRECCION DE EMPRESA
+            department: parseInt(values.rubro),
             from_year: moment(values.from_year).format('DD/MM/YYYY'),
             to_year: moment(values.to_year).format('DD/MM/YYYY'),
-            buss_travel: parseInt(values.buss_travel),
-            distan_home: 0, // EN DURO
             hour_rate: parseInt(values.hour_rate),
-            job_role: 0, // EN DURO
-            job_sati: parseInt(values.job_sati),
             monthly_income: parseInt(values.monthly_income),
+            job_sati: parseInt(values.job_sati),
             over_time: parseInt(values.over_time),
-            work_bal_life: 0, // EN DURO
-            job_invol: 0, // EN DURO
             attrition: parseInt(values.attrition),
-            demo: demo
+
+            job_invol: 0, // NUEVO
+            work_bal_life: 0, // EN DURO
+
+            job_level: 1,// NUEVO
+            distan_home: 0, // EN DURO
+            buss_travel: 1
         };
         console.log(datafield);
         registerJob(datafield);
@@ -51,35 +56,25 @@ const WithExperience = (props) => {
     }
 
     const ratingChanged = (newRating) => {
-        setDemo(newRating);
         console.log(newRating);
     };
 
-    /*
     useEffect( () => {
-    async function listRubro(){
-        const responseRubro = await UtilService.listRubro();
-        setRubro(responseRubro.data);
+    async function listJobRole(){
+        const responseJobLevel = await UtilService.listJobRole();
+        setJobRole(responseJobLevel.data);
     }
-    listRubro();
-    }, []);
-    
-    useEffect( () => {
-    async function listJobLevel(){
-        const responseJobLevel = await UtilService.listJobLevel();
-        setJobLevel(responseJobLevel.data);
-    }
-    listJobLevel();
+    listJobRole();
     }, []);
 
     useEffect( () => {
     async function listMotivoRetiro(){
         const responseMotivoRetiro = await UtilService.listMotivoRetiro();
-        setMotivoRertiro(responseMotivoRetiro.data);
+        setMotivoRetiro(responseMotivoRetiro.data);
     }
-    listRubro();
+    listMotivoRetiro();
     }, []);
-    */
+    
     
     const onlyNumbers= (e)=> {
         let key = window.event ? e.which : e.keyCode;
@@ -90,47 +85,50 @@ const WithExperience = (props) => {
     return (
     <>
         <form name="myForm" onSubmit={handleSubmit(onSubmit)} className=''>
-            <label htmlFor="department" className="label-form mt-1">
+            <label htmlFor="cargo" className="label-form mt-1">        
                 Cargo
-                <input
-                    placeholder="Ejemplo: Operador"
-                    className={`form-control placeholder
-                                    ${
-                                    isSubmitted
-                                        ? !errors.department
-                                        ? 'input-icono'
-                                        : 'border-error red-input input-icoerror'
-                                        : ''
-                                    }
-                                `}
-                    id="department"
-                    name="department"
-                    type="text"
-                    autoComplete="off"
+                <select 
+                    className={`form-control placeholder mb-2
+                        ${
+                            isSubmitted ? 
+                            !errors.cargo ?
+                            "input-icono"
+                            : 
+                            "border-error red-input input-icoerror"       
+                            : ''
+                        }
+                    `} 
+                    name="cargo" 
+                    id="cargo"
                     ref={register({
-                        required: { value: true, message: 'Este campo es requerido' }
-                    })}
-                />
+                        required: "Este campo es requerido", message: "Coloque un Nombre valido"
+                        })}>
+                    <option value="">Seleccione</option>
+                    {jobRole.map( element =>(
+                        <option key={element.id} value={element.id}>{element.name}</option>
+                    )
+                    )}
+                </select>	
                 <span className="span-error mt-1">
-                    { errors.department && errors.department.message}
+                    { errors.cargo && errors.cargo.message}
                 </span>
             </label>
-            <label htmlFor="name_inst"  className="label-form mt-1">
+            <label htmlFor="empresa"  className="label-form mt-1">
                 Empresa
                 <input
                     placeholder ="Ejemplo: Compañia SAC" 
                     className={`form-control placeholder
                         ${
                             isSubmitted ? 
-                            !errors.name_inst ?
+                            !errors.empresa ?
                             "input-icono"
                             : 
                             "border-error red-input input-icoerror"       
                             : ''
                         }
                     `}                                              
-                    id='name_inst'
-                    name='name_inst'
+                    id='empresa'
+                    name='empresa'
                     type="text"
                     autoComplete="off"
                     ref={register({
@@ -138,7 +136,33 @@ const WithExperience = (props) => {
                     })}
                 />
                 <span className="span-error mt-1">
-                    { errors.name_inst && errors.name_inst.message}
+                    { errors.empresa && errors.empresa.message}
+                </span>
+            </label>
+            <label htmlFor="dir_empresa"  className="label-form mt-1">
+                Dirección de la empresa
+                <input
+                    placeholder ="Ejemplo: Victor Andres Belaunde 584" 
+                    className={`form-control placeholder
+                        ${
+                            isSubmitted ? 
+                            !errors.dir_empresa ?
+                            "input-icono"
+                            : 
+                            "border-error red-input input-icoerror"       
+                            : ''
+                        }
+                    `}                                              
+                    id='dir_empresa'
+                    name='dir_empresa'
+                    type="text"
+                    autoComplete="off"
+                    ref={register({
+                        required: {value: true, message:"Este campo es requerido"},
+                    })}
+                />
+                <span className="span-error mt-1">
+                    { errors.dir_empresa && errors.dir_empresa.message}
                 </span>
             </label>
             <label htmlFor="rubro" className="label-form mt-1" >
@@ -153,38 +177,15 @@ const WithExperience = (props) => {
                             : ''
                         }
                     `} 
-                    ref={register({ required: {value: true, message: "Seleccione una opción"} })}
                     id="rubro"
                     name='rubro'
+                    ref={register({ required: {value: true, message: "Seleccione una opción"} })}
                 >
                 <option value="">Seleccione</option>
                 <option value="1">1</option>   
                 </select>
                 <span className="span-error mt-1">
                     { errors.rubro && errors.rubro.message}
-                </span>
-            </label> 
-            <label htmlFor="job_level" className="label-form mt-1">
-                Nivel en el trabajo
-                <select 
-                    className={`form-control form-text-check-adress
-                        ${
-                            isSubmitted ? 
-                            !errors.job_level 
-                            ? 'input-icono'
-                            : 'border-error red-input input-icoerror'       
-                            : ''
-                        }
-                    `}
-                    name='job_level'
-                    id="job_level"
-                    ref={register({ required: {value: true, message: "Seleccione una opción"} })}
-                >
-                <option value="">Seleccione</option>    
-                <option value="1">1</option>      
-                </select>
-                <span className="span-error mt-1">
-                    { errors.job_level && errors.job_level.message}
                 </span>
             </label> 
             <div className="row row-no-magin">
@@ -214,7 +215,6 @@ const WithExperience = (props) => {
                                         dateFormat="MM/yyyy"
                                         locale={es}
                                         maxDate={new Date()}
-                                        
                                         showMonthYearPicker
                                         name ="from_year" 
                                     />
@@ -443,18 +443,22 @@ const WithExperience = (props) => {
                     ref={register({ required: {value: true, message: "Seleccione una opción"} })}
                 >
                 <option value="">Seleccione</option>
-                <option value="1">1</option>      
+                <option value="1">1</option>
+                {motivoRetiro.map( element =>(
+                    <option key={element.id} value={element.id}>{element.name}</option>
+                )
+                )}
                 </select>
                 <span className="span-error mt-1">
                     { errors.attrition && errors.attrition.message}
                 </span>
             </label>
-            <label htmlFor="nivel_participacion" className="label-form mt-1">
+            <label htmlFor="nivel_par" className="label-form mt-1">
                 Nivel de participación en el trabajo
                 <section className="mt-2">
                 <Controller
                     control={control}
-                    name='nivel_participacion'
+                    name='nivel_par'
                     defaultValue=""
                     render={(props) => (
                         <ReactStars
@@ -468,14 +472,13 @@ const WithExperience = (props) => {
                 />
                 </section>
             </label>
-            <label htmlFor="nivel" className="label-form mt-1">
+            <label htmlFor="nivel_sat" className="label-form mt-1">
                 Nivel de satisfacción laboral relacionado con el trabajo
                 <section className="mt-2">
                 <Controller
                     control={control}
-                    name='nivel'
+                    name='nivel_sat'
                     defaultValue=""
-                    id='nivel'
                     render={(props) => (
                         <ReactStars
                             className={`mt-2`}

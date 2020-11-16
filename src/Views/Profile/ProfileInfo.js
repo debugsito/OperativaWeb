@@ -26,8 +26,8 @@ const ProfileInfo = (props) => {
     const [selectDocument, setSelectDocument] = useState(type_document);
     const [selectProvider, setSelectProvider] = useState(type_provider);
 
-    const [ typeDocument, setTypeDocument] = useState([]);
-    const [provider, setProvider] = useState([]);
+    const [ typeDocument, setTypeDocument ] = useState([]);
+    const [ provider, setProvider ] = useState([]);
 
     const defaultValues = {
         first_name: currentUser.first_name,
