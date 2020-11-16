@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect} from 'react';
 import { Link, withRouter } from 'react-router-dom'
 import { useForm, Controller } from "react-hook-form";
 import DatePicker,{ registerLocale }from "react-datepicker" 
@@ -6,6 +6,7 @@ import es from 'date-fns/locale/es';
 import moment from 'moment';
 import ReactStars from 'react-rating-stars-component';
 
+import UtilService from '../../services/util.service';
 import UserService from '../../services/user.service';
 import { useDispatch, useSelector } from 'react-redux';
 import { setJob } from '../../redux-store/user/actions/set-job';
@@ -18,8 +19,9 @@ const WithExperience = (props) => {
     const { currentUser } = useSelector((state) => state.user);
     const { handleSubmit, register, errors, control , formState} = useForm();
     const { isSubmitted } = formState;
-    const [ demo, setDemo] = useState();
 
+    const [ jobRole, setJobRole ] = useState([]);
+    const [ motivoRetiro, setMotivoRetiro ] = useState([]);
 
     console.log("current_user",currentUser);
     console.log("lenght", currentUser.jobs.length);
@@ -51,22 +53,24 @@ const WithExperience = (props) => {
         console.log(values);
         
         const datafield = {
-            name_inst: values.name_inst,
-            department: parseInt(values.department),
-            job_level: parseInt(values.job_level),
+            job_role: parseInt(values.cargo),
+            name_inst: values.empresa,
+            // FALTA GUARDAR DIRECCION DE EMPRESA
+            department: parseInt(values.rubro),
             from_year: moment(values.from_year).format('DD/MM/YYYY'),
             to_year: moment(values.to_year).format('DD/MM/YYYY'),
-            buss_travel: parseInt(values.buss_travel),
-            distan_home: 0, // EN DURO
             hour_rate: parseInt(values.hour_rate),
-            job_role: 0, // EN DURO
-            job_sati: parseInt(values.job_sati),
             monthly_income: parseInt(values.monthly_income),
+            job_sati: parseInt(values.job_sati),
             over_time: parseInt(values.over_time),
-            work_bal_life: 0, // EN DURO
-            job_invol: 0, // EN DURO
             attrition: parseInt(values.attrition),
-            demo: demo
+
+            job_invol: 0, // NUEVO
+            work_bal_life: 0, // EN DURO
+
+            job_level: 1,// NUEVO
+            distan_home: 0, // EN DURO
+            buss_travel: 1
         };
         console.log(datafield);
         registerJob(datafield);
@@ -108,35 +112,24 @@ const WithExperience = (props) => {
     }
 
     const ratingChanged = (newRating) => {
-        setDemo(newRating);
         console.log(newRating);
     };
 
-    /*
     useEffect( () => {
-    async function listRubro(){
-        const responseRubro = await UtilService.listRubro();
-        setRubro(responseRubro.data);
+    async function listJobRole(){
+        const responseJobLevel = await UtilService.listJobRole();
+        setJobRole(responseJobLevel.data);
     }
-    listRubro();
-    }, []);
-    
-    useEffect( () => {
-    async function listJobLevel(){
-        const responseJobLevel = await UtilService.listJobLevel();
-        setJobLevel(responseJobLevel.data);
-    }
-    listJobLevel();
+    listJobRole();
     }, []);
 
     useEffect( () => {
     async function listMotivoRetiro(){
         const responseMotivoRetiro = await UtilService.listMotivoRetiro();
-        setMotivoRertiro(responseMotivoRetiro.data);
+        setMotivoRetiro(responseMotivoRetiro.data);
     }
-    listRubro();
+    listMotivoRetiro();
     }, []);
-    */
     
     const onlyNumbers= (e)=> {
         let key = window.event ? e.which : e.keyCode;
