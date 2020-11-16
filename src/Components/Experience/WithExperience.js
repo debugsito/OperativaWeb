@@ -160,7 +160,6 @@ const WithExperience = (props) => {
                                         : ''
                                     }
                                 `}
-                    id="department"
                     name="department"
                     type="text"
                     autoComplete="off"
@@ -186,7 +185,6 @@ const WithExperience = (props) => {
                             : ''
                         }
                     `}                                              
-                    id='name_inst'
                     name='name_inst'
                     type="text"
                     autoComplete="off"
@@ -212,7 +210,6 @@ const WithExperience = (props) => {
                             : ''
                         }
                     `}                                              
-                    id='direccion'
                     name='direccion'
                     type="text"
                     autoComplete="off"
@@ -321,7 +318,6 @@ const WithExperience = (props) => {
                             : ''
                         }
                     `}                                         
-                    id='hour_rate'
                     name='hour_rate'
                     maxLength='2'
                     onKeyPress={e =>{onlyNumbers(e)}}
@@ -349,7 +345,6 @@ const WithExperience = (props) => {
                             : ''
                         }
                     `}                                         
-                    id='monthly_income'
                     name='monthly_income'
                     type="text"
                     maxLength='4'
@@ -476,7 +471,6 @@ const WithExperience = (props) => {
                                     }
                                 `}
                     name='attrition'
-                    id="attrition"
                     ref={register({ required: {value: true, message: "Seleccione una opción"} })}
                 >
                 <option value="">Seleccione</option>
@@ -512,7 +506,6 @@ const WithExperience = (props) => {
                     control={control}
                     name='nivel'
                     defaultValue=""
-                    id='nivel'
                     render={(props) => (
                         <ReactStars
                             className={`mt-2`}
