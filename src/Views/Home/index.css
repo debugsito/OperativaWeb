@@ -68,7 +68,7 @@
   height: 54px;
 }
 .text-box-two {
-  font-family: 'Museo Sans';
+  font-family: 'Raleway', sans-serif;
   font-size: 14px;
   line-height: 120%;
   letter-spacing: 1.25px;
@@ -80,7 +80,7 @@
   margin-top: 0px !important;
 }
 .text-box-three {
-  font-family: 'Museo Sans';
+  font-family: 'Raleway', sans-serif;
   font-size: 14px;
   line-height: 120%;
   letter-spacing: 1.25px;
@@ -165,8 +165,8 @@
 }
 .text-icon-rubros {
   width: 80px;
-  font-family: 'Museo Sans';
-  font-size: 14px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 12px;
   line-height: 120%;
   letter-spacing: 0.25px;
   color: #373737;
@@ -315,7 +315,7 @@
   }
 
   .box-container-title-two {
-    height: 365px;
+    height: 380px;
   }
   .box-container-title-three {
     height: 300px;
