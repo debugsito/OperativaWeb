@@ -1,6 +1,13 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import NavBarDesk from '../../Components/Menu-desktop/NavbarDesk';
+import Produccion from '../../assets/icons/1.jpg';
+import Mantenimiento from '../../assets/icons/2.jpg';
+import Almacen from '../../assets/icons/3.jpg';
+import Call from '../../assets/icons/4.jpg';
+import Construccion from '../../assets/icons/5.jpg';
+import Motorizados from '../../assets/icons/6.jpg';
+import Gloria from '../../assets/logos/1.png';
 import Talma from '../../assets/logos/2.png';
 import Manpower from '../../assets/logos/3.png';
 import G4S from '../../assets/logos/4.png';
@@ -78,27 +85,27 @@ const Home = () => {
             <div className="col-12 col-md-6 pt-md-4">
               <div className="row row-no-magin container-no-padding">
                 <div className="col-4 text-center">
-                  <img alt="" src="/icons/medium1.png" className="icon-image-rubros" />
+                  <img alt="" src={Produccion} className="icon-image-rubros" />
                   <p className="text-icon-rubros">Producción y operaciones</p>
                 </div>
                 <div className="col-4 text-center">
-                  <img alt="" src="/icons/medium2.png" className="icon-image-rubros" />
+                  <img alt="" src={Mantenimiento} className="icon-image-rubros" />
                   <p className="text-icon-rubros">Mantenimiento y limpieza</p>
                 </div>
                 <div className="col-4 text-center">
-                  <img alt="" src="/icons/medium3.png" className="icon-image-rubros" />
+                  <img alt="" src={Almacen} className="icon-image-rubros" />
                   <p className="text-icon-rubros">Almacén y transporte</p>
                 </div>
                 <div className="col-4 text-center mt-2">
-                  <img alt="" src="/icons/medium4.png" className="icon-image-rubros" />
+                  <img alt="" src={Call} className="icon-image-rubros" />
                   <p className="text-icon-rubros">Call-center y Ventas</p>
                 </div>
                 <div className="col-4 text-center mt-2">
-                  <img alt="" src="/icons/medium5.png" className="icon-image-rubros" />
+                  <img alt="" src={Construccion} className="icon-image-rubros" />
                   <p className="text-icon-rubros">Construcción y obras</p>
                 </div>
                 <div className="col-4 text-center mt-2">
-                  <img alt="" src="/icons/medium6.png" className="icon-image-rubros" />
+                  <img alt="" src={Motorizados} className="icon-image-rubros" />
                   <p className="text-icon-rubros">Motorizados y courier</p>
                 </div>
               </div>
@@ -128,7 +135,7 @@ const Home = () => {
                   <div className="col-6 col-sm-6 col-md-6 mt-1">
                     <img
                       className="img-fluid d-block  img-slite-custom "
-                      src="/logos/1.png"
+                      src={Gloria}
                       alt="First slide"
                     />
                   </div>
