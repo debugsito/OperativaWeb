@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { Link, withRouter } from 'react-router-dom'
 import { useForm, Controller } from "react-hook-form";
 
@@ -8,11 +8,6 @@ import  'react-multiple-select-dropdown-lite/dist/index.css'
 const WithoutExperience = (props) => { 
 
     const {handleSubmit, register, errors,control} = useForm();
-    const [value, setValue ] = useState('');
-
-    const  handleOnchange  =  val  => {
-        setValue(val);
-    }
 
     const  options  = [
         { label:  'Option 1', value:  'option_1'  },
@@ -31,13 +26,13 @@ const WithoutExperience = (props) => {
     }, []);
     */
 
-    const onSubmit = (values) => {
-        const datafield = {
+    const onSubmit = () => {
+/*         const datafield = {
             id_account: 1,
             rubro: values.rubro,
             hour: values.hour,
             over_time: values.over_time,
-        };
+        }; */
         props.history.push('/informacion-completada-con-exito')
     } 
 
@@ -56,7 +51,6 @@ const WithoutExperience = (props) => {
                             width="100vr"
                             name="rubro"
                             placeholder="Seleccione"
-                            onChange={handleOnchange}
                             options={options}
                         />
                     )}

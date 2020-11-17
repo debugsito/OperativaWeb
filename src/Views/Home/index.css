@@ -158,13 +158,14 @@
   margin-left: 24px;
 }
 .icon-image-rubros {
+  object-fit: cover;
   width: 80px;
   height: 80px;
   margin: 0 auto;
   border-radius: 11px;
 }
 .text-icon-rubros {
-  width: 80px;
+  width: 85px;
   font-family: 'Raleway', sans-serif;
   font-size: 12px;
   line-height: 120%;
@@ -263,7 +264,7 @@
   .text-icon-rubros {
     font-size: 12px;
     text-align: center;
-    width: 67px;
+    width: 90px;
     margin-bottom: 10px;
   }
   .box-container-title-two {
@@ -310,6 +311,7 @@
     width: 142px;
   }
   .icon-image-rubros {
+    object-fit: cover;
     width: 125px;
     height: 125px;
   }
