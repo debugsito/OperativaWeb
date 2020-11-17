@@ -25,6 +25,14 @@ const ProfileAdress = (props) => {
     const onSubmit = (values) => { 
         //OBTENER LOS VALORES DEL FRONT
         const datafield = {
+            id_account: 1,
+            first_name: currentUser.first_name,
+            last_name: currentUser.last_name,
+            type_doc: currentUser.type_doc,
+            num_doc: currentUser.num_doc,
+            birth_date: currentUser.birth_date,
+            gender: currentUser.gender,
+            id_provider: currentUser.id_provider,
             address: values.address,
             phone: values.phone,
             id_country: parseInt(values.id_country),
@@ -32,12 +40,13 @@ const ProfileAdress = (props) => {
             id_city: parseInt(values.id_city),
             id_civil_status: parseInt(values.id_civil_status),
         };
+        console.log("Envio de datos");
+        console.log(datafield);
 
         // Guardar los valores en mi Store Usuario
         dispatch(setUserInfo(datafield));
-        const userInfo = {...currentUser, ...datafield}
-
-        registerUser(userInfo);
+        //const userInfo = {...currentUser, ...datafield}
+        registerUser(datafield);
     } 
 
     async function registerUser(user){
@@ -45,7 +54,6 @@ const ProfileAdress = (props) => {
         if(responseInfo.status === 201){
             props.history.push('/informacion-academica')
         } else {  
-            //Mensaje de error
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',

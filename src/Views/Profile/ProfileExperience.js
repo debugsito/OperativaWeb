@@ -39,10 +39,8 @@ const ProfileExperience = (props) => {
                                         className="form-check-input"
                                         type="radio" 
                                         name="check" 
-                                        id="" 
                                         value=""
                                         onClick= {()=> {handleExperience(1) }}
-                                        //defaultChecked= {!experienceBuss ? 'true' : ''}
                                     />
                                     <label className="form-text-check">
                                         Sin experiencia
@@ -53,10 +51,8 @@ const ProfileExperience = (props) => {
                                         className="form-check-input"
                                         type="radio" 
                                         name="check" 
-                                        id="" 
                                         value=""
                                         onClick= {()=> {handleExperience(2) }}
-                                        //defaultChecked= {experienceBuss ? 'false': '' }
                                     />
                                     <label className="form-text-check">
                                         Con experiencia
@@ -64,8 +60,9 @@ const ProfileExperience = (props) => {
                                 </div>
                             </div>
                         </label>
-                        { experienceBuss === 1 &&  <WithoutExperience/> }
-                        { experienceBuss === 2 &&  <WithExperience/> }
+                        { experienceBuss === 1 && <WithoutExperience/> }
+                        { experienceBuss === 2 && <WithExperience/> }
+                        
                 </div>
             </div>
         </>

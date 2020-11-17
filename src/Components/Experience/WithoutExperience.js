@@ -29,21 +29,16 @@ const WithoutExperience = (props) => {
     }
     listRubro();
     }, []);
-
     */
 
     const onSubmit = (values) => {
-
-        // props.history.push('/informacion-completada-con-exito')
-
         const datafield = {
             id_account: 1,
             rubro: values.rubro,
             hour: values.hour,
             over_time: values.over_time,
         };
-
-        console.log(datafield);
+        props.history.push('/informacion-completada-con-exito')
     } 
 
     return (
@@ -65,9 +60,6 @@ const WithoutExperience = (props) => {
                             options={options}
                         />
                     )}
-                        rules={{
-                            required: 'Seleccione un rubro'
-                        }}
                     />
                     <span className="span-error mt-1">
                         {errors.rubro && errors.rubro.message}

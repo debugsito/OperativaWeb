@@ -11,6 +11,7 @@ import UserService from '../../services/user.service';
 import { useDispatch, useSelector } from 'react-redux';
 import { setJob } from '../../redux-store/user/actions/set-job';
 import { removeJob } from '../../redux-store/user/actions/remove-job';
+import { updateJob } from '../../redux-store/user/actions/update-job';
 registerLocale("es", es);
 
 const WithExperience = (props) => { 
@@ -47,33 +48,31 @@ const WithExperience = (props) => {
         }));
     }
 
-    console.log(localStorage.getItem('token'));
+    const onSubmit = (e) => {
+        console.log("eee",e);
+        console.log("jobs",currentUser.jobs);
+        props.history.push('/informacion-completada-con-exito')
+        //registerJob(currentUser.jobs);
+        // const datafield = {
+        //     job_role: parseInt(values.cargo),
+        //     name_inst: values.empresa,
+        //     // FALTA GUARDAR DIRECCION DE EMPRESA
+        //     department: parseInt(values.rubro),
+        //     from_year: moment(values.from_year).format('DD/MM/YYYY'),
+        //     to_year: moment(values.to_year).format('DD/MM/YYYY'),
+        //     hour_rate: parseInt(values.hour_rate),
+        //     monthly_income: parseInt(values.monthly_income),
+        //     job_sati: parseInt(values.job_sati),
+        //     over_time: parseInt(values.over_time),
+        //     attrition: parseInt(values.attrition),
+        //     job_invol: values.nivel_par,
+        //     work_bal_life: values.nivel_sat,
 
-    const onSubmit = (values) => {
-        console.log(values);
-        
-        const datafield = {
-            job_role: parseInt(values.cargo),
-            name_inst: values.empresa,
-            // FALTA GUARDAR DIRECCION DE EMPRESA
-            department: parseInt(values.rubro),
-            from_year: moment(values.from_year).format('DD/MM/YYYY'),
-            to_year: moment(values.to_year).format('DD/MM/YYYY'),
-            hour_rate: parseInt(values.hour_rate),
-            monthly_income: parseInt(values.monthly_income),
-            job_sati: parseInt(values.job_sati),
-            over_time: parseInt(values.over_time),
-            attrition: parseInt(values.attrition),
-
-            job_invol: 0, // NUEVO
-            work_bal_life: 0, // EN DURO
-
-            job_level: 1,// NUEVO
-            distan_home: 0, // EN DURO
-            buss_travel: 1
-        };
-        console.log(datafield);
-        registerJob(datafield);
+        //     job_level: 1,// NUEVO
+        //     distan_home: 1, // EN DURO
+        //     buss_travel: 1 // EN DURO
+        // };
+        // registerJob(datafield);
     } 
 
     const addJob = () => {
@@ -94,9 +93,16 @@ const WithExperience = (props) => {
             work_bal_life: 0, // EN DURO
             job_invol: 0, // EN DURO
             attrition: 0,
-            demo: 0
         }));
     };
+
+    const changeValueJob = (e) => {
+        let value = e.target.dataset.type && e.target.dataset.type==='int'? parseInt(e.target.value):e.target.value;
+        let name = e.target.dataset.name;
+        let job = currentUser.jobs[e.target.dataset.index];
+        job[name] = value;
+        dispatch(updateJob(job));
+    }
 
     const deleteJob = (e) => {
         dispatch(removeJob(e.target.dataset.index))
@@ -110,10 +116,6 @@ const WithExperience = (props) => {
             //Mensaje de error
         }
     }
-
-    const ratingChanged = (newRating) => {
-        console.log(newRating);
-    };
 
     useEffect( () => {
     async function listJobRole(){
@@ -139,46 +141,51 @@ const WithExperience = (props) => {
 
     let jobForms = currentUser.jobs.map((job, index) => 
         <div key={index}>
-        <form name="myForm" onSubmit={handleSubmit(onSubmit)} className=''>
-            <label htmlFor="department" className="label-form mt-1">
+        <div name="myForm" className=''>
+            <label htmlFor="cargo" className="label-form mt-1">        
                 Cargo
-                <input
-                    placeholder="Ejemplo: Operador"
-                    className={`form-control placeholder
-                                    ${
-                                    isSubmitted
-                                        ? !errors.department
-                                        ? 'input-icono'
-                                        : 'border-error red-input input-icoerror'
-                                        : ''
-                                    }
-                                `}
-                    name="department"
-                    type="text"
-                    autoComplete="off"
+                <select 
+                     data-type="int" value={job.job_role} data-index={index} data-name="job_role" onChange={changeValueJob}
+                    className={`form-control placeholder mb-2
+                        ${
+                            isSubmitted ? 
+                            !errors.cargo ?
+                            "input-icono"
+                            : 
+                            "border-error red-input input-icoerror"       
+                            : ''
+                        }
+                    `} 
+                    name="cargo" 
                     ref={register({
-                        required: { value: true, message: 'Este campo es requerido' }
-                    })}
-                />
+                        required: "Este campo es requerido", message: "Coloque un Nombre valido"
+                        })}>
+                    <option value="">Seleccione</option>
+                    {jobRole.map( element =>(
+                        <option key={element.id} value={element.id}>{element.name}</option>
+                    )
+                    )}
+                </select>	
                 <span className="span-error mt-1">
-                    { errors.department && errors.department.message}
+                    { errors.cargo && errors.cargo.message}
                 </span>
             </label>
-            <label htmlFor="name_inst"  className="label-form mt-1">
+            <label htmlFor="empresa"  className="label-form mt-1">
                 Empresa
                 <input
                     placeholder ="Ejemplo: Compañia SAC" 
                     className={`form-control placeholder
                         ${
                             isSubmitted ? 
-                            !errors.name_inst ?
+                            !errors.empresa ?
                             "input-icono"
                             : 
                             "border-error red-input input-icoerror"       
                             : ''
                         }
-                    `}                                              
-                    name='name_inst'
+                    `}         
+                    value={job.name_inst} data-index={index} data-name="name_inst" onChange={changeValueJob}
+                    name='empresa'
                     type="text"
                     autoComplete="off"
                     ref={register({
@@ -186,24 +193,24 @@ const WithExperience = (props) => {
                     })}
                 />
                 <span className="span-error mt-1">
-                    { errors.name_inst && errors.name_inst.message}
+                    { errors.empresa && errors.empresa.message}
                 </span>
             </label>
-            <label htmlFor="direccion"  className="label-form mt-1">
+            <label htmlFor="dir_empresa"  className="label-form mt-1">
                 Dirección de la empresa
                 <input
-                    placeholder ="Ejemplo: Compañia SAC" 
+                    placeholder ="Ejemplo: Victor Andres Belaunde 584" 
                     className={`form-control placeholder
                         ${
                             isSubmitted ? 
-                            !errors.direccion ?
+                            !errors.dir_empresa ?
                             "input-icono"
                             : 
                             "border-error red-input input-icoerror"       
                             : ''
                         }
-                    `}                                              
-                    name='direccion'
+                    `}       
+                    name='dir_empresa'
                     type="text"
                     autoComplete="off"
                     ref={register({
@@ -211,9 +218,34 @@ const WithExperience = (props) => {
                     })}
                 />
                 <span className="span-error mt-1">
-                    { errors.direccion && errors.direccion.message}
+                    { errors.dir_empresa && errors.dir_empresa.message}
                 </span>
             </label>
+            <label htmlFor="rubro" className="label-form mt-1" >
+                Rubro
+                <select 
+                    className={`form-control form-text-check-adress
+                        ${
+                            isSubmitted ? 
+                            !errors.rubro 
+                            ? 'input-icono'
+                            : 'border-error red-input input-icoerror'       
+                            : ''
+                        }
+                    `} 
+                    data-type="int" value={job.department} data-index={index} data-name="department" onChange={changeValueJob}
+                    name='rubro'
+                    ref={register({ required: {value: true, message: "Seleccione una opción"} })}
+                >
+                <option value="">Seleccione</option>
+                <option value="1">Rubro 1</option>   
+                <option value="2">Rubro 2</option>   
+                <option value="3">Rubro 3</option>   
+                </select>
+                <span className="span-error mt-1">
+                    { errors.rubro && errors.rubro.message}
+                </span>
+            </label> 
             <div className="row row-no-magin">
                 <div className="col-12 col-md-6 pr-md-4 pl-md-0 px-sm-0 px-xs-0 mb-2">
                     <label htmlFor="from_year" className=" label-form">
@@ -241,7 +273,6 @@ const WithExperience = (props) => {
                                         dateFormat="MM/yyyy"
                                         locale={es}
                                         maxDate={new Date()}
-                                        
                                         showMonthYearPicker
                                         name ="from_year" 
                                     />
@@ -279,7 +310,7 @@ const WithExperience = (props) => {
                                         placeholderText="Mes/Año"
                                         selected={props.value}
                                         onChange={(e) => props.onChange(e)}
-                                        //dateFormat="mm/YYYY"
+                                        dateFormat="MM/yyyy"
                                         locale={es}
                                         maxDate={new Date()}
                                         showMonthYearPicker
@@ -467,49 +498,70 @@ const WithExperience = (props) => {
                     ref={register({ required: {value: true, message: "Seleccione una opción"} })}
                 >
                 <option value="">Seleccione</option>
-                <option value="1">1</option>      
+                <option value="1">Despido</option>
+                <option value="2">Renuncia</option>
+                {motivoRetiro.map( element =>(
+                    <option key={element.id} value={element.id}>{element.name}</option>
+                )
+                )}     
                 </select>
                 <span className="span-error mt-1">
                     { errors.attrition && errors.attrition.message}
                 </span>
             </label>
-            <label htmlFor="nivel_participacion" className="label-form mt-1">
+            <label htmlFor="nivel_par" className="label-form mt-1">
                 Nivel de participación en el trabajo
                 <section className="mt-2">
                 <Controller
                     control={control}
-                    name='nivel_participacion'
-                    defaultValue=""
+                    name='nivel_par'
+                    defaultValue={0}
                     render={(props) => (
                         <ReactStars
                             className={`mt-2`}
                             count={5}
-                            onChange={ratingChanged}
+                            value={parseInt(props.value)}
+                            onChange={(e) => { props.onChange(e)} }
                             size={25}
                             activeColor="#ffd700"
                         />
                     )}
+                    rules={{
+                        required: 'Coloque una fecha válida',
+                        min: { value: 1 , message:"Seleccione una opción"}
+                    }}
                 />
                 </section>
+                <span className="span-error mt-1">
+                    { errors.nivel_par && errors.nivel_par.message}
+                </span>
             </label>
-            <label htmlFor="nivel" className="label-form mt-1">
+            <label htmlFor="nivel_sat" className="label-form mt-1">
                 Nivel de satisfacción laboral relacionado con el trabajo
                 <section className="mt-2">
                 <Controller
                     control={control}
-                    name='nivel'
-                    defaultValue=""
+                    name='nivel_sat'
+                    defaultValue={0}
                     render={(props) => (
                         <ReactStars
                             className={`mt-2`}
                             count={5}
+                            value={parseInt(props.value)}
                             onChange={(e) => props.onChange(e)}
                             size={25}
                             activeColor="#ffd700"
                         />
                     )}
+                    rules={{
+                        required: 'Coloque una fecha válida',
+                        min: { value: 1 , message:"Seleccione una opción"}
+                    }}
                 />
                 </section>
+                <span className="span-error mt-1">
+                    { errors.nivel_sat && errors.nivel_sat.message}
+                </span>
             </label>
             <button type="button" className="text-experience" onClick={addJob}>
                 AGREGAR OTRA EXPERIENCIA
@@ -517,29 +569,29 @@ const WithExperience = (props) => {
             <button type="button" className="text-experience" data-index={index} onClick={deleteJob}>
                 ELIMINAR EXPERIENCIA
             </button>
-            <section  className="container-buttons-form">
-                <Link
-                    className="btn-cancel-form btn" 
-                    to='/inicio'
-                    >
-                    CANCELAR
-                </Link> 
-                <button
-                    className="button-continue-restore btn"
-                    type="submit"
-                >
-                    <span className= "text-button-continue-restore">CONTINUAR</span>
-                    <span className="icon-next"></span>
-                </button>
-            </section>
-        </form> 
+
+            {currentUser.jobs.length === index + 1 && (            
+                <section  className="container-buttons-form">
+                    <Link className="btn-cancel-form btn" to='/inicio'>
+                        CANCELAR
+                    </Link>
+                    <button className="button-continue-restore btn" type="submit">
+                        <span className= "text-button-continue-restore">CONTINUAR</span>
+                        <span className="icon-next"></span>
+                    </button>
+                </section>)
+            }
+        </div> 
+        
         </div>
     )
 
     return (
     <>
           <div>
-            {jobForms}
+              <form name="myForm" onSubmit={handleSubmit(onSubmit)} className=''>
+                  {jobForms}
+              </form>
         </div>
     </>
 )

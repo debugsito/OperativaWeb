@@ -46,6 +46,15 @@ code {
   margin-right: 20px;
 }
 
+.terminos {
+  background: none;
+  border: none;
+  color: -webkit-link;
+  cursor: pointer;
+  text-decoration: underline;
+  padding-left: 0px;
+}
+
 /* Forms */
 .h1-custom {
   position: static;

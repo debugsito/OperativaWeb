@@ -42,7 +42,6 @@ const ProfileInfo = (props) => {
     const { isSubmitted } = formState;
 
     const onSubmit = (values, e) => { 
-            console.log(values);
         // Obtiene los valores
         const datafield = {
             first_name: values.first_name,

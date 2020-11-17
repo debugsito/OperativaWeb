@@ -8,6 +8,7 @@ import { LOGOUT, reducer as logoutReducer } from './actions/logout';
 import { SET_INIT_USER, reducer as initUserReducer } from './actions/init-user';
 import { SET_JOB, reducer as setJobReducer } from './actions/set-job';
 import { REMOVE_JOB, reducer as removeJobReducer } from './actions/remove-job';
+import { UPDATE_JOB, reducer as updateJobReducer } from './actions/update-job';
 
 // exportamos nuestras acciones
 export { setUserLoading } from './actions/set-loading-user';
@@ -18,7 +19,7 @@ export { setSignUpUser, signUp } from './actions/sign-up';
 
 const initialState = {
   currentUser: {
-    id_account: null,
+    id_accyouount: null,
     first_name: null,
     last_name: null,
     gender: null,
@@ -50,6 +51,7 @@ const actionHandlers = {
   [SET_INIT_USER]: initUserReducer,
   [SET_JOB]: setJobReducer,
   [REMOVE_JOB]: removeJobReducer,
+  [UPDATE_JOB]: updateJobReducer,
 };
 
 export default function reducer(state = initialState, action) {
