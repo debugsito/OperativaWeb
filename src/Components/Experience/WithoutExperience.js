@@ -27,13 +27,13 @@ const WithoutExperience = (props) => {
     */
 
     const onSubmit = () => {
+        props.history.push('/informacion-completada-con-exito')
 /*         const datafield = {
             id_account: 1,
             rubro: values.rubro,
             hour: values.hour,
             over_time: values.over_time,
         }; */
-        props.history.push('/informacion-completada-con-exito')
     } 
 
     return (
@@ -60,7 +60,7 @@ const WithoutExperience = (props) => {
                     </span>
                 </label>
                 <label htmlFor="hour" className="label-form mt-1">
-                    ¿Posibilidad de trabajar horas extras?
+                    ¿Cuenta con disponibilidad para trabajar en horarios rotativos?
                     <div className="input-container-radio mt-2">
                         <div className="form-check margin-right">
                             <input 
@@ -92,7 +92,7 @@ const WithoutExperience = (props) => {
                     </span>
                 </label>
                 <label htmlFor="over_time" className="label-form mt-1">
-                    ¿Posibilidad de trabajar en horarios rotativos?
+                    ¿Cuenta con disponibilidad para trabajar horas extras?
                     <div className= "input-container-radio mt-2">
                         <div className="form-check margin-right">
                             <input 

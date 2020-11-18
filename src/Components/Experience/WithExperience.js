@@ -509,8 +509,8 @@ const WithExperience = (props) => {
                     { errors.attrition && errors.attrition.message}
                 </span>
             </label>
-            <label htmlFor="nivel_par" className="label-form mt-1">
-                Nivel de participación en el trabajo
+            <label htmlFor="nivel_par" className="label-form mt-3">
+                ¿Cómo calificaría su grado de compromiso con la empresa?
                 <section className="mt-2">
                 <Controller
                     control={control}
@@ -537,7 +537,7 @@ const WithExperience = (props) => {
                 </span>
             </label>
             <label htmlFor="nivel_sat" className="label-form mt-1">
-                Nivel de satisfacción laboral relacionado con el trabajo
+                ¿Qué tan satisfecho se siente/sintió con la relación entre el trabajo y su vida personal?
                 <section className="mt-2">
                 <Controller
                     control={control}

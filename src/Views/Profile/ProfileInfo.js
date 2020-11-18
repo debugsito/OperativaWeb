@@ -101,7 +101,7 @@ const ProfileInfo = (props) => {
                     <Stepper current = {0} />
                 </div>
                 <div className="col-12 col-md-6 offset-md-3 container-no-padding">
-                    <h1 className='h1-form'>Datos Personales</h1>
+                    <h1 className='h1-form'>DATOS PERSONALES</h1>
                 </div>
                 <div className="col-12 col-md-6 offset-md-3 container-no-padding">
                     <form name="myForm" onSubmit={handleSubmit(onSubmit)}  className='form-container-info'>

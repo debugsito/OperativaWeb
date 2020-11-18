@@ -5,7 +5,7 @@
   top: 95.04px;
 }
 .h1-tittle-Home {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Roboto Medium';
   font-style: normal;
   font-weight: bold;
   font-size: 20px;
@@ -20,7 +20,7 @@
 .h1-tittle-box {
   margin-top: 24px;
   margin-left: 24px;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Roboto Regular';
   font-style: normal;
   font-weight: bold;
   font-size: 16px;
@@ -29,7 +29,7 @@
   color: #000000;
 }
 .h1-tittle-carousel {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Roboto Lighter';
   font-style: normal;
   font-weight: bold;
   font-size: 16px;
@@ -52,7 +52,7 @@
   margin-left: 24px;
 }
 .text-box-one {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Roboto Regular';
   font-style: normal;
   font-weight: bold;
   font-size: 16px;
@@ -68,7 +68,7 @@
   height: 54px;
 }
 .text-box-two {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Roboto Lighter';
   font-size: 14px;
   line-height: 120%;
   letter-spacing: 1.25px;
@@ -114,10 +114,10 @@
 }
 .btn-operativa {
   background: #ed1d40;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Roboto Medium';
   font-style: normal;
   font-weight: 500;
-  font-size: 12px;
+  font-size: 14px;
   text-transform: uppercase;
   color: #ffffff;
   border-radius: 0px;
@@ -129,10 +129,10 @@
 }
 .btn-ilustracion-operativa {
   background: #ed1d40;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Roboto Medium';
   font-style: normal;
   font-weight: 500;
-  font-size: 12px;
+  font-size: 14px;
   text-transform: uppercase;
   color: #ffffff;
   border-radius: 0px;
@@ -166,7 +166,7 @@
 }
 .text-icon-rubros {
   width: 85px;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Roboto Lighter';
   font-size: 12px;
   line-height: 120%;
   letter-spacing: 0.25px;

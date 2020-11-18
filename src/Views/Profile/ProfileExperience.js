@@ -28,11 +28,10 @@ const ProfileExperience = (props) => {
                     <Stepper current = {3} />
                 </div>
                 <div className="col-12 col-md-6 offset-md-3 container-no-padding">
-                    <h1 className='h1-form'>Completa tu experiencia profesional</h1>
+                    <h1 className='h1-form'>EXPERIENCIA LABORAL</h1>
                 </div>
                 <div className="col-12  col-md-6 offset-md-3 container-no-padding">
                         <label htmlFor="workExperience" className="label-form mt-2 mb-2">         
-                            Expericia laboral
                             <div className= "input-container-select mt-2">
                                 <div className="form-check">
                                     <input 
