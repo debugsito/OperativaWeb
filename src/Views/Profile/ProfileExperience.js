@@ -9,7 +9,7 @@ import WithExperience from '../../Components/Experience/WithExperience'
 import './index.css';
 
 
-const ProfileExperience = (props) => { 
+const ProfileExperience = () => { 
 
     const [experienceBuss, setExperienceBuss]= useState();
     

@@ -12,8 +12,9 @@ import moment from 'moment';
 import Stepper from "./Stepper";
 import UtilService from '../../services/util.service';
 import { setUserInfo } from '../../redux-store/user';
-
 import './index.css';
+import { onlyNumbers } from './../../utils/validation';
+import { onlyLetters } from './../../utils/validation';
 
 registerLocale("es", es);
 
@@ -55,21 +56,6 @@ const ProfileInfo = (props) => {
         // Guardar los valores en mi Store Usuario
         dispatch(setUserInfo(datafield));
         props.history.push('/info-direccion')
-    }
-
-
-    const onlyNumbers= (e)=> {
-        let key = window.event ? e.which : e.keyCode;
-            if (key < 48 || key > 57) {
-                e.preventDefault();
-            }
-    }
-
-    const onlyLetters = (e) => {
-         var charCode = (e.which) ? e.which:e.KeyCode;
-        if(!((charCode >= 65 && charCode <= 90) || (charCode>=97 && charCode<=122))){
-            e.preventDefault();
-        } 
     }
 
         // Obtener la lista de proveedores

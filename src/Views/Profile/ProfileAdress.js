@@ -3,13 +3,14 @@ import NavBar from "../../Components/MenuUser/index"
 import { Link, withRouter } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
 import { useForm } from "react-hook-form";
-import Swal from 'sweetalert2'
 
 import Stepper from "./Stepper";
 import UtilService from '../../services/util.service';
 import UserService from '../../services/user.service';
 import { setUserInfo } from '../../redux-store/user';
 import './index.css';
+import { onlyNumbers } from './../../utils/validation';
+import { onlyAlphaNumeric } from './../../utils/validation';
 
 const ProfileAdress = (props) => { 
     const dispatch = useDispatch();
@@ -54,11 +55,7 @@ const ProfileAdress = (props) => {
         if(responseInfo.status === 201){
             props.history.push('/informacion-academica')
         } else {  
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Something went wrong!',
-            })
+
         }
     }
 
@@ -74,14 +71,6 @@ const ProfileAdress = (props) => {
         }
         listCivil();
     }, []);
-
-
-    // Validacion de solo numeros
-    const onlyNumbers= (e)=> {
-        let key = window.event ? e.which : e.keyCode;
-            if (key < 48 || key > 57) {
-            e.preventDefault();
-    }}
 
     useEffect(() => {
         fetch('json/departamentos.json')
@@ -162,6 +151,7 @@ const ProfileAdress = (props) => {
                                     name='address'
                                     type="text"
                                     maxLength='30'
+                                    onKeyPress={e =>{onlyAlphaNumeric(e)}} 
                                     ref={register({
                                         required: {value: true, message: "Agregue una dirección" }
                                     })}
