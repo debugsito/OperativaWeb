@@ -10,8 +10,8 @@ export default class UserService {
 
   // Crear usuario
   static async singUp(user) {
-    const response = await Api.post('/account/', user);
-    return response.data.status === 'success';
+    const response = await Api.post('/auth/register', user);
+    return !!response.data.account;
   }
 
   // Registrar la información Personal del Usuario

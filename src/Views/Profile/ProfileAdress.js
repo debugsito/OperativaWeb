@@ -26,20 +26,20 @@ const ProfileAdress = (props) => {
     const onSubmit = (values) => { 
         //OBTENER LOS VALORES DEL FRONT
         const datafield = {
-            id_account: 1,
             first_name: currentUser.first_name,
             last_name: currentUser.last_name,
             type_doc: currentUser.type_doc,
             num_doc: currentUser.num_doc,
             birth_date: currentUser.birth_date,
             gender: currentUser.gender,
-            id_provider: currentUser.id_provider,
+            provider_id: currentUser.id_provider,
             address: values.address,
             phone: values.phone,
-            id_country: parseInt(values.id_country),
-            id_state: parseInt(values.id_state),
-            id_city: parseInt(values.id_city),
-            id_civil_status: parseInt(values.id_civil_status),
+            country_id: 1,
+            department_id: parseInt(values.id_country),
+            province_id: parseInt(values.id_state),
+            district_id: parseInt(values.id_city),
+            civil_id: parseInt(values.id_civil_status),
         };
         console.log("Envio de datos");
         console.log(datafield);
@@ -52,7 +52,7 @@ const ProfileAdress = (props) => {
 
     async function registerUser(user){
         const responseInfo = await UserService.registerUserInfo(user);
-        if(responseInfo.status === 201){
+        if(responseInfo.status === 200){
             props.history.push('/informacion-academica')
         } else {  
 
@@ -67,38 +67,35 @@ const ProfileAdress = (props) => {
     useEffect( () => {
         async function listCivil(){
             const responseCivil = await UtilService.listCivil();
-            setCivil(responseCivil.data);
+            setCivil(responseCivil.civils);
         }
         listCivil();
     }, []);
 
     useEffect(() => {
-        fetch('json/departamentos.json')
-            .then(response => response.json())
-                .then(datos => {    
-                    setListDepartament(datos)
-                })
-                // eslint-disable-next-line react-hooks/exhaustive-deps
+        async function listDepartment(){
+            const responseDepartment = await UtilService.listDepartment();
+            setListDepartament(responseDepartment.departments);
+        }
+        listDepartment();
     }, [])
 
     const [listprovinciaBase, setListprovinciaBase]= useState([])
     useEffect(() => {
-        fetch('json/provincias.json')
-            .then(response => response.json())
-                .then(datos => {    
-                    setListprovinciaBase(datos)
-                })
-                // eslint-disable-next-line react-hooks/exhaustive-deps
+        async function listProvince(){
+            const responseProvince = await UtilService.listProvince();
+            setListprovinciaBase(responseProvince.provinces);
+        }
+        listProvince();
     }, [])
 
     const [listdistritoBase, setListdistritoBase]= useState([])
     useEffect(() => {
-        fetch('json/distritos.json')
-            .then(response => response.json())
-                .then(datos => {
-                    setListdistritoBase(datos)
-                })
-                // eslint-disable-next-line react-hooks/exhaustive-deps
+        async function listDistrict(){
+            const responseDistrict = await UtilService.listDistrict();
+            setListdistritoBase(responseDistrict.districts);
+        }
+        listDistrict();
     }, [])
 
     //Button:
@@ -106,7 +103,7 @@ const ProfileAdress = (props) => {
         let id = e.target.value;
         setListProvince([])
         setListDistrict([])
-        let filterProvinceData = listprovinciaBase.filter(item => item.department_id === id) 
+        let filterProvinceData = listprovinciaBase.filter(item => item.department_id == id) 
         setListProvince(filterProvinceData)
     }
         
@@ -114,7 +111,7 @@ const ProfileAdress = (props) => {
     const handlerProvincia = function(e){
         let id = e.target.value;
         setListDistrict([])
-        let filterDistritoData = listdistritoBase.filter(item => item.province_id === id) 
+        let filterDistritoData = listdistritoBase.filter(item => item.province_id == id) 
         setListDistrict(filterDistritoData)
     }
         

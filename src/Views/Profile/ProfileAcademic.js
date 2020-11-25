@@ -23,12 +23,11 @@ const ProfileAcademic = (props) => {
   const onSubmit = (values) => {
 
   const datafield = {
-    id_account: 1,
-    level: parseInt(values.level),
+    level_id: parseInt(values.level),
     name_inst: values.name_inst,
-    field: parseInt(values.field),
-    from_year: moment(values.from_year).format('DD/MM/YYYY'),
-    to_year: moment(values.to_year).format('DD/MM/YYYY')
+    field_id: parseInt(values.field),
+    from_year: moment(values.from_year).format('YYYY-MM-DD'),
+    to_year: moment(values.to_year).format('YYYY-MM-DD')
   };
 
   UserEducation(datafield);
@@ -36,7 +35,7 @@ const ProfileAcademic = (props) => {
 
   async function UserEducation(datafield){
     const responseEducation = await UserService.registerUserEducation(datafield);
-    if(responseEducation.status === 201){
+    if(responseEducation.status === 200){
       props.history.push('/info-experiencia');
     } else {
       // Mensaje de error
@@ -46,7 +45,7 @@ const ProfileAcademic = (props) => {
   useEffect( () => {
     async function listLevel(){
         const responseLevel = await UtilService.listLevel();
-        setLevel(responseLevel.data);
+        setLevel(responseLevel.levels);
     }
     listLevel();
   }, []);
@@ -54,7 +53,7 @@ const ProfileAcademic = (props) => {
   useEffect( () => {
     async function listField(){
         const responseField = await UtilService.listField();
-        setField(responseField.data);
+        setField(responseField.fields);
     }
     listField();
   }, []);

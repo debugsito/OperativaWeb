@@ -21,7 +21,7 @@ export const signUp = (user) => {
         dispatch(setUserError("Ha ocurrido un error interno."));
       } else {
         if(error.response.status === 401){
-        dispatch(setUserError("Usuario o contraseña Incorrecta."));
+        dispatch(setUserError(error.response.data.message));
         } else if (error.response.status === 409){
           dispatch(setUserError("La cuenta ya existe. Por favor Iniciar sesión."));
         } else {

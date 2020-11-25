@@ -8,12 +8,11 @@ import WithoutExperience from '../../Components/Experience/WithoutExperience';
 import WithExperience from '../../Components/Experience/WithExperience'
 import './index.css';
 
-
-const ProfileExperience = () => { 
+const ProfileExperience = () => {
 
     const [experienceBuss, setExperienceBuss]= useState();
     
-    const handleExperience= (e)=>{
+    const handleExperience= (e) => {
         setExperienceBuss(e)
     }
 

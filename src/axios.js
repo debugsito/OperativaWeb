@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const Api = axios.create({
-  baseURL: 'https://dev.api.operativa.startapps.com.pe:8080/',
+  baseURL: 'https://dev.api.operativa.startapps.com.pe/api/',
   headers: {
     'Access-Control-Allow-Origin': '*',
     'Content-Type': 'application/json',
@@ -23,8 +23,8 @@ Api.interceptors.request.use(async (config) => {
 Api.interceptors.response.use(
   async (response) => {
     //Validar la respuesta del token
-    if (response.data.Authorization) {
-      localStorage.setItem('token', response.data.Authorization);
+    if (response.data.token) {
+      localStorage.setItem('token', response.data.token);
     }
 
     return response;

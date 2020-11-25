@@ -21,7 +21,7 @@ const WithExperience = (props) => {
     const { handleSubmit, register, errors, control , formState} = useForm();
     const { isSubmitted } = formState;
 
-    const [ jobRole, setJobRole ] = useState([]);
+    const [ jobLevel, setJobLevel ] = useState([]);
     const [ motivoRetiro, setMotivoRetiro ] = useState([]);
 
     console.log("current_user",currentUser);
@@ -30,14 +30,14 @@ const WithExperience = (props) => {
         console.log("add job");
         dispatch(setJob({
             name_inst: "",
+            address:"",
             department: 0,
-            job_level: 0,
+            job_level_id: 0,
             from_year: null,
             to_year: null,
             buss_travel: 0,
             distan_home: 0, // EN DURO
             hour_rate: 0,
-            job_role: 0, // EN DURO
             job_sati: 0,
             monthly_income: 0,
             over_time: 0,
@@ -51,10 +51,11 @@ const WithExperience = (props) => {
     const onSubmit = (e) => {
         console.log("eee",e);
         console.log("jobs",currentUser.jobs);
-        props.history.push('/informacion-completada-con-exito')
-        //registerJob(currentUser.jobs);
+        
+        registerJob(currentUser.jobs);
+        // props.history.push('/informacion-completada-con-exito')
         // const datafield = {
-        //     job_role: parseInt(values.cargo),
+        //     job_level: parseInt(values.cargo),
         //     name_inst: values.empresa,
         //     // FALTA GUARDAR DIRECCION DE EMPRESA
         //     department: parseInt(values.rubro),
@@ -79,14 +80,14 @@ const WithExperience = (props) => {
         console.log("addjob");
         dispatch(setJob({
             name_inst: "",
+            address:"",
             department: 0,
-            job_level: 0,
+            job_level_id: 0,
             from_year: null,
             to_year: null,
             buss_travel: 0,
             distan_home: 0, // EN DURO
             hour_rate: 0,
-            job_role: 0, // EN DURO
             job_sati: 0,
             monthly_income: 0,
             over_time: 0,
@@ -110,7 +111,8 @@ const WithExperience = (props) => {
 
     async function registerJob(datafield){
         const responseInfo = await UserService.registerUserJob(datafield);
-        if(responseInfo.status === 201){
+        if(responseInfo.status === 200){
+
             props.history.push('/informacion-completada-con-exito')
         } else {  
             //Mensaje de error
@@ -118,17 +120,17 @@ const WithExperience = (props) => {
     }
 
     useEffect( () => {
-    async function listJobRole(){
-        const responseJobLevel = await UtilService.listJobRole();
-        setJobRole(responseJobLevel.data);
+    async function listJobLevel(){
+        const responseJobLevel = await UtilService.listJobLevel();
+        setJobLevel(responseJobLevel.job_levels);
     }
-    listJobRole();
+    listJobLevel();
     }, []);
 
     useEffect( () => {
     async function listMotivoRetiro(){
         const responseMotivoRetiro = await UtilService.listMotivoRetiro();
-        setMotivoRetiro(responseMotivoRetiro.data);
+        setMotivoRetiro(responseMotivoRetiro.attritions);
     }
     listMotivoRetiro();
     }, []);
@@ -145,7 +147,7 @@ const WithExperience = (props) => {
             <label htmlFor="cargo" className="label-form mt-1">        
                 Cargo
                 <select 
-                     data-type="int" value={job.job_role} data-index={index} data-name="job_role" onChange={changeValueJob}
+                     data-type="int" value={job.job_level} data-index={index} data-name="job_level" onChange={changeValueJob}
                     className={`form-control placeholder mb-2
                         ${
                             isSubmitted ? 
@@ -161,7 +163,7 @@ const WithExperience = (props) => {
                         required: "Este campo es requerido", message: "Coloque un Nombre valido"
                         })}>
                     <option value="">Seleccione</option>
-                    {jobRole.map( element =>(
+                    {jobLevel.map( element =>(
                         <option key={element.id} value={element.id}>{element.name}</option>
                     )
                     )}

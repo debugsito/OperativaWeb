@@ -46,12 +46,13 @@ const ProfileInfo = (props) => {
         // Obtiene los valores
         const datafield = {
             first_name: values.first_name,
+            country_id:1,
             last_name: values.last_name,
             type_doc: parseInt(selectDocument),
             num_doc: values.num_doc,
-            birth_date: moment(values.birth_date).format('DD/MM/YYYY'),
+            birth_date: moment(values.birth_date).format('YYYY-MM-DD'),
             gender: parseInt(values.gender),
-            id_provider: parseInt(selectProvider)
+            provider_id: parseInt(selectProvider)
         };
         // Guardar los valores en mi Store Usuario
         dispatch(setUserInfo(datafield));
@@ -62,7 +63,7 @@ const ProfileInfo = (props) => {
     useEffect( () => {
         async function listProvider(){
             const responseProvider = await UtilService.listProvider();
-            setProvider(responseProvider.data);
+            setProvider(responseProvider.providers);
         }
         listProvider();
     }, []);
@@ -71,7 +72,7 @@ const ProfileInfo = (props) => {
     useEffect( () => {
         async function listDoc(){
             const responseDocument = await UtilService.listDocument();
-            setTypeDocument(responseDocument.data);
+            setTypeDocument(responseDocument.documents);
         }
         listDoc();
      }, []);
