@@ -13,7 +13,7 @@ const NotificationReset = (props) => {
           </h1>
           <div className="row">
             <div className="col-12">
-              <Link className="button-continue-restore-notification btn" to="/nueva-contraseña">
+              <Link className="button-continue-restore-notification btn" to="/inicio-sesion">
                 <span className="text-button-continue-restore">CONTINUAR</span>
                 <span className="icon-next"></span>
               </Link>

@@ -14,6 +14,13 @@ export default class UserService {
     return !!response.data.account;
   }
 
+  // Recuperar Contraseña
+  static async restorePass(user) {
+    const response = await Api.post('/recover_password', user);
+    return response;
+  }
+
+
   // Registrar la información Personal del Usuario
   static async registerUserInfo(info){
     const response = await Api.post('/user/', info)
@@ -34,7 +41,7 @@ export default class UserService {
 
   // Registrar la información de Trabajo del Usuario
   static async registerUserWithoutExperience(info){
-    const response = await Api.post('/job/', info)
+    const response = await Api.post('/job_without', info)
     return response;
   }
 }

@@ -22,10 +22,10 @@ const WithoutExperience = (props) => {
 
     const onSubmit = (values) => {
         const datafield = {
-            id_account: 1,
-            rubro: values.rubro,
-            hour: values.hour,
-            over_time: values.over_time,
+            rotating_schedule: values.rotating_schedule,
+            extra_hours: values.extra_hours,
+            work_weekend: values.weekend,
+            interest_area_id: values.cargo,
         };
         WithoutExperience(datafield);
     } 
@@ -38,7 +38,6 @@ const WithoutExperience = (props) => {
                 // Mensaje de error
             }
     }
-
 
     return (
         <>

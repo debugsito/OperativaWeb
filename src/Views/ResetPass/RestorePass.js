@@ -3,16 +3,29 @@ import { Link, withRouter } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import NavBar from '../../Components/MenuUser/index';
 import './index.css';
+import UserService from '../../services/user.service';
 
 const RestorePassword = (props) => {
   const { handleSubmit, register, errors, formState } = useForm();
   const { isSubmitted } = formState;
-  // const [error, setError] = React.useState(null)
 
   const onSubmit = (values) => {
     console.log(values);
-    props.history.push('/notificacion-contraseña');
+    const datafield = {
+      email: values.usuario
+    }
+    restorePass(datafield);
   };
+
+  async function restorePass(datafield){
+    const responseEducation = await UserService.restorePass(datafield);
+      if(responseEducation.status === 200){
+          props.history.push('/notificacion-contraseña');
+      } else {
+          // Mensaje de error
+      }
+  }
+
   return (
     <>
       <NavBar />
@@ -46,7 +59,9 @@ const RestorePassword = (props) => {
                 })}
               />
             </label>
-            <span className="span-error">{errors.usuario && errors.usuario.message}</span>
+            <span 
+              className="span-error">{errors.usuario && errors.usuario.message}
+            </span>
             <section className="container-buttons-continue">
               <Link className="btn-cancel-pr btn" to="/registro">
                 CANCELAR
