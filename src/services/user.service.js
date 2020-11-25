@@ -27,7 +27,13 @@ export default class UserService {
   }
 
   // Registrar la información de Trabajo del Usuario
-  static async registerUserJob(info){
+  static async registerUserWithExperience(info){
+    const response = await Api.post('/job/', info)
+    return response;
+  }
+
+  // Registrar la información de Trabajo del Usuario
+  static async registerUserWithoutExperience(info){
     const response = await Api.post('/job/', info)
     return response;
   }

@@ -3,7 +3,6 @@ import { Link, withRouter } from 'react-router-dom'
 import { useForm, Controller } from "react-hook-form";
 import DatePicker,{ registerLocale }from "react-datepicker" 
 import es from 'date-fns/locale/es';
-import moment from 'moment';
 import ReactStars from 'react-rating-stars-component';
 
 import UtilService from '../../services/util.service';
@@ -110,7 +109,7 @@ const WithExperience = (props) => {
     };
 
     async function registerJob(datafield){
-        const responseInfo = await UserService.registerUserJob(datafield);
+        const responseInfo = await UserService.registerUserWithExperience(datafield);
         if(responseInfo.status === 200){
 
             props.history.push('/informacion-completada-con-exito')
@@ -120,7 +119,7 @@ const WithExperience = (props) => {
     }
 
     useEffect( () => {
-    async function listJobLevel(){
+        async function listJobLevel(){
         const responseJobLevel = await UtilService.listJobLevel();
         setJobLevel(responseJobLevel.job_levels);
     }
@@ -128,10 +127,10 @@ const WithExperience = (props) => {
     }, []);
 
     useEffect( () => {
-    async function listMotivoRetiro(){
-        const responseMotivoRetiro = await UtilService.listMotivoRetiro();
-        setMotivoRetiro(responseMotivoRetiro.attritions);
-    }
+        async function listMotivoRetiro(){
+            const responseMotivoRetiro = await UtilService.listMotivoRetiro();
+            setMotivoRetiro(responseMotivoRetiro.attritions);
+        }
     listMotivoRetiro();
     }, []);
     

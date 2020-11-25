@@ -1,72 +1,83 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { Link, withRouter } from 'react-router-dom'
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
-import MultiSelect from 'react-multiple-select-dropdown-lite'
+import UtilService from '../../services/util.service';
+import UserService from '../../services/user.service';
 import  'react-multiple-select-dropdown-lite/dist/index.css'
 
 const WithoutExperience = (props) => { 
 
-    const {handleSubmit, register, errors,control} = useForm();
+    const {handleSubmit, register, errors, formState} = useForm();
+    const { isSubmitted } = formState;
+    const [ rubro, setRubro] = useState([]);
 
-    const  options  = [
-        { label:  'Option 1', value:  'option_1'  },
-        { label:  'Option 2', value:  'option_2'  },
-        { label:  'Option 3', value:  'option_3'  },
-        { label:  'Option 4', value:  'option_4'  },
-    ]
-
-    /*
-    useEffect( () => {
-    async function listRubro(){
+    useEffect(() => {
+        async function listRubro(){
         const responseRubro = await UtilService.listRubro();
-        setRubro(responseRubro.data);
+        setRubro(responseRubro.areas);
     }
     listRubro();
-    }, []);
-    */
+    }, [])
 
-    const onSubmit = () => {
-        props.history.push('/informacion-completada-con-exito')
-/*         const datafield = {
+    const onSubmit = (values) => {
+        const datafield = {
             id_account: 1,
             rubro: values.rubro,
             hour: values.hour,
             over_time: values.over_time,
-        }; */
+        };
+        WithoutExperience(datafield);
     } 
+
+    async function WithoutExperience(datafield){
+        const responseEducation = await UserService.registerUserWithoutExperience(datafield);
+            if(responseEducation.status === 200){
+                props.history.push('/informacion-completada-con-exito')
+            } else {
+                // Mensaje de error
+            }
+    }
+
 
     return (
         <>
             <form name="myForm" onSubmit={handleSubmit(onSubmit)} className=''>
-                <label htmlFor="rubro" className="label-form mt-1">
-                    Rubro de interés
-                    <Controller
-                        control={control}
-                        name="rubro"
-                        defaultValue=""
-                        render={(props) => (
-                        <MultiSelect
-                            selected={props.value}
-                            width="100vr"
-                            name="rubro"
-                            placeholder="Seleccione"
-                            options={options}
-                        />
-                    )}
-                    />
+                <label htmlFor="cargo" className="label-form mt-1">        
+                Rubro de interés
+                    <select 
+                        className={`form-control placeholder mb-2
+                            ${
+                                isSubmitted ? 
+                                !errors.cargo ?
+                                "input-icono"
+                                : 
+                                "border-error red-input input-icoerror"       
+                                : ''
+                            }
+                        `} 
+                        name="cargo" 
+                        ref={register({
+                            required: "Este campo es requerido", message: "Coloque un Nombre valido"
+                            })}>
+                        <option value="">Seleccione</option>
+                        {rubro.map( e =>(
+                            <option key={e.id} value={e.id}>{e.name}</option>
+                            )
+                        )}	
+                    </select>
                     <span className="span-error mt-1">
-                        {errors.rubro && errors.rubro.message}
+                        { errors.cargo && errors.cargo.message}
                     </span>
                 </label>
-                <label htmlFor="hour" className="label-form mt-1">
+                <label htmlFor="rotativo" className="label-form mt-1">
                     ¿Cuenta con disponibilidad para trabajar en horarios rotativos?
                     <div className="input-container-radio mt-2">
                         <div className="form-check margin-right">
                             <input 
                                 className="form-check-input"
                                 type="radio" 
-                                name="hour"
+                                name="rotativo"
                                 value="1"
                                 ref={register({ required: "Seleccione una opción" })}
                             />
@@ -78,7 +89,7 @@ const WithoutExperience = (props) => {
                             <input 
                                 className="form-check-input"
                                 type="radio" 
-                                name="hour"
+                                name="rotativo"
                                 value="0"
                                 ref={register({ required: "Seleccione una opción" })}
                             />
@@ -88,17 +99,17 @@ const WithoutExperience = (props) => {
                         </div>
                     </div>
                     <span className="span-error">
-                        { errors.hour && errors.hour.message}
+                        { errors.rotativo && errors.rotativo.message}
                     </span>
                 </label>
-                <label htmlFor="over_time" className="label-form mt-1">
+                <label htmlFor="extra_hours" className="label-form mt-1">
                     ¿Cuenta con disponibilidad para trabajar horas extras?
                     <div className= "input-container-radio mt-2">
                         <div className="form-check margin-right">
                             <input 
                                 className="form-check-input"
                                 type="radio" 
-                                name="over_time"
+                                name="extra_hours"
                                 value="1"
                                 ref={register({ required: "Seleccione una opción" })}
                             />
@@ -110,8 +121,8 @@ const WithoutExperience = (props) => {
                             <input 
                                 className="form-check-input"
                                 type="radio" 
-                                name="over_time"
-                                value="2"
+                                name="extra_hours"
+                                value="0"
                                 ref={register({ required: "Seleccione una opción" })}
                             />
                             <label className="form-text-check">
@@ -120,7 +131,39 @@ const WithoutExperience = (props) => {
                         </div>
                     </div>
                     <span className="span-error">
-                        { errors.over_time && errors.over_time.message}
+                        { errors.extra_hours && errors.extra_hours.message}
+                    </span>
+                </label>
+                <label htmlFor="weekend" className="label-form mt-1">
+                    ¿Cuenta con disponibilidad para trabajos fin de semana?
+                    <div className= "input-container-radio mt-2">
+                        <div className="form-check margin-right">
+                            <input 
+                                className="form-check-input"
+                                type="radio" 
+                                name="weekend"
+                                value="1"
+                                ref={register({ required: "Seleccione una opción" })}
+                            />
+                            <label className="form-text-check">
+                                Si
+                            </label>
+                        </div>
+                        <div className="form-check margin-right">
+                            <input 
+                                className="form-check-input"
+                                type="radio" 
+                                name="weekend"
+                                value="0"
+                                ref={register({ required: "Seleccione una opción" })}
+                            />
+                            <label className="form-text-check">
+                                No
+                            </label>
+                        </div>
+                    </div>
+                    <span className="span-error">
+                        { errors.weekend && errors.weekend.message}
                     </span>
                 </label>
                 <section  className="container-buttons-form">

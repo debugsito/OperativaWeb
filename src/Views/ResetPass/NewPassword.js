@@ -11,7 +11,7 @@ const NewPassword= (props) => {
     const { isSubmitted } = formState;
     
     const onSubmit = () => { 
-        MensajeExito("prueba de validacion");
+        MensajeExito("Has creado una nueva contraseña");
         props.history.push('/inicio-sesion')
     }          
 
