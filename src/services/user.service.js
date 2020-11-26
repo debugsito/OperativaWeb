@@ -20,7 +20,6 @@ export default class UserService {
     return response;
   }
 
-
   // Registrar la información Personal del Usuario
   static async registerUserInfo(info){
     const response = await Api.post('/user/', info)

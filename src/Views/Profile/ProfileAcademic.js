@@ -89,7 +89,6 @@ const ProfileAcademic = (props) => {
                                   }
                               `}
                   name="level"
-                  id="level"
                   ref={register({
                     required: { value: true, message: 'Este campo es requerido' }
                   })}
@@ -104,7 +103,6 @@ const ProfileAcademic = (props) => {
                 {errors.level && errors.level.message}
               </span>
             </label>
-
             <label htmlFor="name_inst" className="label-form mt-1">
               Institución educativa
               <input
@@ -118,7 +116,6 @@ const ProfileAcademic = (props) => {
                                     : ''
                                 }
                             `}
-                id="name_inst"
                 name="name_inst"
                 type="text"
                 autoComplete="off"
@@ -143,7 +140,6 @@ const ProfileAcademic = (props) => {
                                 }
                             `}
                   name="field" 
-                  id="field" 
                   ref={register({
                     required: { value: true, message: 'Seleccione un registro' }
                   })}>

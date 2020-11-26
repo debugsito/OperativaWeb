@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import NavBar from '../../Components/MenuUser/index';
@@ -9,6 +9,8 @@ const RestorePassword = (props) => {
   const { handleSubmit, register, errors, formState } = useForm();
   const { isSubmitted } = formState;
 
+  const [error, setError] = useState(null);
+
   const onSubmit = (values) => {
     console.log(values);
     const datafield = {
@@ -18,12 +20,15 @@ const RestorePassword = (props) => {
   };
 
   async function restorePass(datafield){
-    const responseEducation = await UserService.restorePass(datafield);
-      if(responseEducation.status === 200){
-          props.history.push('/notificacion-contraseña');
-      } else {
-          // Mensaje de error
+    try{
+    const responseEducation = await UserService.restorePass(datafield);  
+    if(responseEducation.status === 200){
+        props.history.push('/notificacion-contraseña');
       }
+    }catch(error){
+      console.log("error: ", error.response.data.message);
+      setError(error.response.data.message);
+    }
   }
 
   return (
@@ -33,6 +38,7 @@ const RestorePassword = (props) => {
         <div className="col-12 col-sm-8 col-md-6 container-no-padding">
           <h1 className="h1-custom-restore">RECUPERA TU CONTRASEÑA</h1>
           <form onSubmit={handleSubmit(onSubmit)} className="form-container">
+            {error ? <div className="alert alert-danger">{error}</div> : null}
             <label className="label-form">
               Ingresa tu correo electrónico
               <input
