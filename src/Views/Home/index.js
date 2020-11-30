@@ -1,5 +1,7 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import Conexion from '../../assets/images/image-conexion.svg'
+import Inscribirte from '../../assets/images/image-inscribirte.svg'
 import NavBarDesk from '../../Components/Menu-desktop/NavbarDesk';
 import Produccion from '../../assets/icons/1.jpg';
 import Mantenimiento from '../../assets/icons/2.jpg';
@@ -49,25 +51,31 @@ const Home = () => {
         <div className="col-12 col-md-2 container-no-padding"></div>
         <div className="col-12 col-md-8 container-no-padding">
           <div className="row m-nav row-no-magin container-no-padding">
-            <div className="col-11 col-md-9 container-no-padding hide-sm">
-              <Link to="/">
-                <img src="/logos/logo-container-operativa.svg" className="icon-img-logo" alt="" />
-              </Link>
-            </div>
           </div>
           <div className="row box-container-title">
-            <div className="col-6 col-md-8 container-no-padding">
-              <span className="text-box-one">Encuentra el trabajo que buscabas</span>
+            <div className="col-6 col-md-6 container-no-padding">
+              <span className="text-box-one">Encuentra el trabajo que buscabas en nuestra plataforma especializada en personal operativo.</span>
               <div className="d-flex justify-content-start">
                 <Link to="/registro" className="btn btn-operativa btn-sm">
-                  REGISTRATE
+                  BUSCAR EMPLEO
+                </Link>
+                <Link to="/info-company" className="btn btn-operativa-second btn-sm">
+                  PUBLICAR EMPLEO
                 </Link>
               </div>
+              <label className="m-top">
+              <span className="info-sol-registro">
+                Si eres una Municipalidad y quieres unirte a nuestra red, llena la{' '}
+                <button type="button" className="terminos">
+                  solicitud de registro
+                </button>
+              </span>
+            </label>
             </div>
             <div className="col-6 col-md-4 container-no-padding">
               <img
                 alt="conexion"
-                src="/images/image-conexion.svg"
+                src={Conexion}
                 className="icon-image-conexion"
               />
             </div>
@@ -78,33 +86,32 @@ const Home = () => {
         <div className="col-12 col-md-2 container-no-padding hide-sm box-container-title-two"></div>
         <div className="col-12 col-md-8 container-no-padding">
           <div className="row box-container-title-two box-container-align-rubros row-no-magin container-no-padding">
-            <div className="col-12 col-md-6 container-no-padding">
+            <div className="col-12 col-md-12 container-no-padding justify-content-center">
               <h1 className="h1-tittle-box">Los sectores más productivos</h1>
-              <p className="text-box-two">El trabajo ideal para tu perfil</p>
             </div>
-            <div className="col-12 col-md-6 pt-md-4">
+            <div className="col-12 col-md-12">
               <div className="row row-no-magin container-no-padding">
-                <div className="col-4 text-center">
+                <div className="col-2 text-center">
                   <img alt="" src={Produccion} className="icon-image-rubros" />
                   <p className="text-icon-rubros">Producción y operaciones</p>
                 </div>
-                <div className="col-4 text-center">
+                <div className="col-2 text-center">
                   <img alt="" src={Mantenimiento} className="icon-image-rubros" />
                   <p className="text-icon-rubros">Mantenimiento y limpieza</p>
                 </div>
-                <div className="col-4 text-center">
+                <div className="col-2 text-center">
                   <img alt="" src={Almacen} className="icon-image-rubros" />
                   <p className="text-icon-rubros">Almacén y transporte</p>
                 </div>
-                <div className="col-4 text-center mt-2">
+                <div className="col-2 text-center">
                   <img alt="" src={Call} className="icon-image-rubros" />
                   <p className="text-icon-rubros">Call-center y Ventas</p>
                 </div>
-                <div className="col-4 text-center mt-2">
+                <div className="col-2 text-center">
                   <img alt="" src={Construccion} className="icon-image-rubros" />
                   <p className="text-icon-rubros">Construcción y obras</p>
                 </div>
-                <div className="col-4 text-center mt-2">
+                <div className="col-2 text-center">
                   <img alt="" src={Motorizados} className="icon-image-rubros" />
                   <p className="text-icon-rubros">Motorizados y courier</p>
                 </div>
@@ -383,21 +390,21 @@ const Home = () => {
         <div className="col-12 col-md-2 container-no-padding hide-sm box-container-title-three"></div>
         <div className="col-12 col-md-8 container-no-padding">
           <div className="row box-container-title-three row-no-magin container-no-padding">
-            <div className="col-12 container-no-padding">
-              <h1 className="h1-text-ilustracion-box">Cómo inscribirte</h1>
+            <div className="col-6 col-md-7 container-no-padding">
+              <img alt="conexion" src={Inscribirte} className="icon-ilustracion" />
             </div>
-            <div className="col-6 col-md-5 container-no-padding">
-              <img alt="conexion" src="/images/ilustracion.svg" className="icon-ilustracion" />
-            </div>
-            <div className="col-5 col-md-7 container-no-padding">
+            <div className="col-5 col-md-5 container-no-padding">
+              <div className="col-12 container-no-padding">
+                <h1 className="h1-text-ilustracion-box">¿Cómo inscribirte?</h1>
+              </div>  
               <div className="ml-2">
                 <span className="text-box-three">
-                  Inscribete completando el formulario con tus datos.
+                  Inscríbete completando el formulario con tus datos.
                 </span>
               </div>
               <div className="d-flex justify-content-start ml-2">
-                <Link className="btn btn-ilustracion-operativa btn-sm" type="submit" to="/registro">
-                  REGISTRATE
+                <Link className="btn btn-operativa btn-sm" type="submit" to="/registro">
+                  BUSCAR EMPLEO
                 </Link>
               </div>
             </div>

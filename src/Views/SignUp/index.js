@@ -137,7 +137,6 @@ const Register = (props) => {
               />
             </label>
             <span className="span-error">{errors.password && errors.password.message}</span>
-            <span className="span-error">{errors.dni && errors.dni.message}</span>
             <label className="">
               <input
                 className="terms-checkbox "

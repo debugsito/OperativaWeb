@@ -193,7 +193,7 @@ code {
   align-self: flex-start;
 }
 .form-container {
-  margin-top: 40px;
+  margin-top: 20px;
   margin-left: 0px !important;
   margin-right: 0px !important;
 }
@@ -590,10 +590,23 @@ code {
   margin-left: 0 !important;
 }
 .info-form-term {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Roboto Medium';
   font-size: 12px;
-  line-height: 130%;
+  line-height: 20px;
   margin-left: 4px;
+}
+
+.m-top {
+  margin-top: 15px;
+}
+
+.info-sol-registro {
+  font-family: 'Roboto Medium';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  margin-left: 12px;
 }
 .space-spam-login-register {
   margin-top: 24px;
@@ -692,6 +705,15 @@ code {
   line-height: 130%;
   color: #000000;
 }
+.text-form-company {
+  font-family: 'Roboto Medium';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  line-height: 24px;
+  color: #000000;
+}
 .desktop-car {
   display: block;
 }
@@ -713,7 +735,7 @@ code {
     margin-left: 32px !important;
   }
   .m-nav {
-    margin-top: 74px;
+    margin-top: 125px;
   }
 
   .container-radios {

@@ -22,7 +22,7 @@
   margin-left: 24px;
   font-family: 'Roboto Regular';
   font-style: normal;
-  font-weight: bold;
+  font-weight: normal;
   font-size: 16px;
   letter-spacing: 0.15px;
   line-height: 20.8px;
@@ -42,12 +42,13 @@
 }
 .h1-text-ilustracion-box {
   margin-top: 24px;
-  margin-bottom: 0;
-  font-family: 'Raleway', sans-serif;
+  margin-bottom: 20px;
+  font-family: 'Roboto Medium';
   font-style: normal;
-  font-weight: bold;
-  font-size: 16px;
-  letter-spacing: 0.15px;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 130%;
+  letter-spacing: 0.25px;
   color: #000000;
   margin-left: 24px;
 }
@@ -80,14 +81,28 @@
   margin-top: 0px !important;
 }
 .text-box-three {
-  font-family: 'Raleway', sans-serif;
-  font-size: 14px;
-  line-height: 120%;
+  font-family: 'Roboto Medium';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 18px !important;
+  line-height: 24px;
+  margin-bottom: 15px;
+  color: #000000;
+  /* margin-left: 0!important; */
+  display: flex;
+}
+.text-box-four {
+  font-family: 'Roboto Lighter';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 16px !important;
+  line-height: 24px;
   letter-spacing: 1.25px;
   color: #000000;
   /* margin-left: 0!important; */
   margin-right: 0px;
   display: flex;
+  letter-spacing: 0.5px;
 }
 .box-container-title {
   /* background: #F7F7F7; */
@@ -120,13 +135,48 @@
   font-size: 14px;
   text-transform: uppercase;
   color: #ffffff;
-  border-radius: 0px;
-  width: 134px;
+  border-radius: 10px;
+  width: 191px;
   padding: 5px 0px;
   margin-top: 16px;
   margin-left: 12px;
   margin-right: 0px;
 }
+.btn-operativa-second {
+  background: #ffffff;
+  font-family: 'Roboto Medium';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #ed1d40;
+  border-color: #ed1d40;
+  border-radius: 10px;
+  width: 191px;
+  padding: 5px 0px;
+  margin-top: 16px;
+  margin-left: 12px;
+  margin-right: 0px;
+}
+.btn-solicitud {
+  font-family: 'Roboto Medium';
+  font-style: normal;
+  font-size: 14px;
+  line-height: 16px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px 36px;
+  position: absolute;
+  width: 189px;
+  height: 40px;
+  left: 180px;
+  top: 234px;
+  background: #ed1d40;
+  color: #ffffff;
+  border-radius: 10px;
+}
+
 .btn-ilustracion-operativa {
   background: #ed1d40;
   font-family: 'Roboto Medium';
@@ -151,11 +201,25 @@
   justify-content: center;
   display: flex;
 }
+.icon-image-solicitud {
+  width: 150px;
+  margin: 0 auto;
+  margin-top: 12px;
+  /* margin-left: 12px; */
+  /* margin-right: 12px; */
+  padding: 0px;
+  justify-content: center;
+  display: flex;
+}
 .icon-ilustracion {
-  width: 140px;
-  background: #f7f7f7;
+  width: 220px;
+  background: #ebebeb;
   border-radius: 8px;
-  margin-left: 24px;
+  margin-left: 40px;
+  margin-top: 10px;
+}
+.h1-text-ilustracion-box {
+  font-size: 20px;
 }
 .icon-image-rubros {
   object-fit: cover;
@@ -204,6 +268,7 @@
   }
 
   .box-container-title {
+    margin-bottom: 150px;
     background: #ffffff;
   }
   .h1-tittle-Home {
@@ -213,9 +278,36 @@
   .text-box-one {
     width: auto;
     height: auto;
+    font-family: 'Roboto Regular';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 48px !important;
+    margin-top: -30px;
   }
   .icon-image-conexion {
-    width: 255px;
+    width: 455px;
+    margin: 0;
+    margin-top: 37px;
+    margin-left: 45px;
+    margin-right: 0;
+    position: absolute;
+    top: -50%;
+  }
+
+  .title-solicitud {
+    font-family: 'Roboto Medium';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 34px;
+    line-height: 130%;
+    color: #222121;
+    /* or 44px */
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.25px;
+  }
+  .icon-image-solicitud-enviada {
+    width: 355px;
     margin: 0;
     margin-top: 37px;
     margin-left: 20px;
@@ -225,18 +317,24 @@
   }
   .text-box-one,
   .text-box-two,
+  .text-box-four,
   .text-box-three {
     font-size: 18px;
   }
-  .h1-tittle-box,
+  .h1-tittle-box {
+    font-size: 32px;
+    margin-top: 70px;
+    padding-top: 0px;
+    text-align: center;
+  }
   .h1-tittle-carousel {
     font-size: 24px;
     margin-top: 32px;
     padding-top: 0px;
   }
   .h1-text-ilustracion-box {
-    font-size: 25.8px;
-    margin-top: 32px;
+    font-size: 34px;
+    margin-top: 15px;
   }
   .icon-ilustracion {
     width: 200px;
@@ -250,7 +348,7 @@
     height: 65px;
   }
   .box-container-title-two {
-    margin-top: 45px;
+    margin-top: 25px;
     height: 347px;
   }
   .h-slide-custom {
@@ -271,8 +369,7 @@
     height: 240px;
   }
   .text-box-three {
-    margin-left: 32px;
-    width: 142px;
+    width: 302px;
   }
 }
 @media only screen and (min-width: 800px) {
@@ -298,8 +395,12 @@
     width: 85px;
     height: 85px;
   }
+  .h1-tittle-box {
+    font-size: 24px;
+  }
+
   .icon-ilustracion {
-    width: 222px;
+    width: 224px;
   }
 }
 @media only screen and (min-width: 1200px) {
@@ -307,22 +408,32 @@
     margin-top: 15px;
     padding: 12px;
   }
+  .h1-tittle-box {
+    font-size: 32px;
+  }
   .text-box-three {
-    width: 142px;
+    width: 322px;
   }
   .icon-image-rubros {
     object-fit: cover;
     width: 125px;
     height: 125px;
   }
+  .icon-ilustracion {
+    width: 370px;
+    margin-left: 90px;
+  }
 
   .box-container-title-two {
     height: 380px;
   }
   .box-container-title-three {
-    height: 300px;
+    height: 400px;
   }
   .btn-operativa {
+    padding: 12px;
+  }
+  .btn-operativa-second {
     padding: 12px;
   }
 }
@@ -332,6 +443,7 @@
     margin-top: 15px;
   }
   .text-box-three {
-    width: 142px;
+    width: 322px;
+    font-size: 24px;
   }
 }

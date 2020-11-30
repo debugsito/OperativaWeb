@@ -27,7 +27,6 @@ const initialState = {
     document_id: null,
     num_doc: null,
     birth_date: null,
-    address: null,
     phone: null,
     country_id: 1,
     department_id: null,

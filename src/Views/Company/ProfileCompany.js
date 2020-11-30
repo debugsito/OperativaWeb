@@ -5,9 +5,9 @@ import { registerLocale } from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import es from 'date-fns/locale/es';
 import { useForm } from 'react-hook-form';
-import { onlyNumbers } from './../../utils/validation';
+import { onlyNumbers, onlyLetters , onlyAlphaNumeric  } from './../../utils/validation';
 import UtilService from '../../services/util.service';
-
+import document  from '../../assets/docs/terminosycondiciones.pdf'
 registerLocale('es', es);
 
 const ProfileCompany = (props) => {
@@ -16,8 +16,11 @@ const ProfileCompany = (props) => {
   const [ rubro, setRubro] = useState([]);
 
   const onSubmit = (values) => {
-    console.log("AAAAAAAAA");
-  };
+    props.history.push('/solicitud-enviada')
+  }
+  
+  async function WithoutExperience(datafield){
+  }
   
   useEffect(() => {
       async function listRubro(){
@@ -27,15 +30,17 @@ const ProfileCompany = (props) => {
   listRubro();
   }, [])
 
-
   return (
     <>
     <NavBar />
     <div className="row justify-content-center padding-container row-no-magin">
         <div className="col-12 col-sm-8 col-md-6 container-no-padding">
           <h1 className="h1-custom-restore">Solicitud de nuevo usuario</h1>
-          <label>Llena los siguientes campos para ser parte de Operativa</label>
           <form onSubmit={handleSubmit(onSubmit)} className="form-container">
+            <p className="text-form-company">
+              Completa los siguientes campos para ser parte de Operativa.
+              <br/>Si ya tienes una cuenta <a href="/registro">inicia sesión</a>
+            </p>
             <label htmlFor="name" className="label-form mt-1">
               Nombre
               <input
@@ -51,6 +56,8 @@ const ProfileCompany = (props) => {
                             `}
                 name="name"
                 type="text"
+                maxLength="25"
+                onKeyPress={e =>{onlyLetters(e)}} 
                 autoComplete="off"
                 ref={register({
                   required: { value: true, message: 'Este campo es requerido' }
@@ -75,6 +82,8 @@ const ProfileCompany = (props) => {
                             `}
                 name="last_name"
                 type="text"
+                maxLength="25"
+                onKeyPress={e =>{onlyLetters(e)}} 
                 autoComplete="off"
                 ref={register({
                   required: { value: true, message: 'Este campo es requerido' }
@@ -99,7 +108,9 @@ const ProfileCompany = (props) => {
                             `}
                 name="business_name"
                 type="text"
+                maxLength="25"
                 autoComplete="off"
+                onKeyPress={e =>{onlyAlphaNumeric(e)}} 
                 ref={register({
                   required: { value: true, message: 'Este campo es requerido' }
                 })}
@@ -111,7 +122,7 @@ const ProfileCompany = (props) => {
             <label htmlFor="ruc" className="label-form mt-1">
               RUC
               <input
-                placeholder="Ejemplo: 201458745856"
+                placeholder="Ejemplo: 20145874585"
                 className={`form-control placeholder
                                 ${
                                   isSubmitted
@@ -123,9 +134,12 @@ const ProfileCompany = (props) => {
                             `}
                 name="ruc"
                 type="text"
+                maxLength="11"
+                onKeyPress={e =>{onlyNumbers(e)}} 
                 autoComplete="off"
                 ref={register({
-                  required: { value: true, message: 'Este campo es requerido' }
+                  required:  {value: true, message: 'Este campo es requerido'},
+                  minLength: {value: 8, message: 'Ingrese un RUC valido'} 
                 })}
               />
               <span className="span-error mt-1">
@@ -231,9 +245,7 @@ const ProfileCompany = (props) => {
               <span className="info-form-term">
                 Acepto los{' '}
                 
-                <button type="button" className="terminos">
-                  términos y condiciones
-                </button>
+                <a href={document} target = "_blank" rel="noopener noreferrer">terminos y condiciones</a>
               </span>
             </label>
             <span className="span-error">{errors.terms && errors.terms.message}</span>

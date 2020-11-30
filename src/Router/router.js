@@ -6,6 +6,7 @@ import Home from '../Views/Home';
 import Register from '../Views/SignUp/index';
 import RestorePass from '../Views/ResetPass/RestorePass';
 import NotificationReset from '../Views/Notificaciones/NotificationReset';
+import RequestSent from '../Views/Notificaciones/RequestSent';
 import NewPassword from '../Views/ResetPass/NewPassword';
 import Login from '../Views/Login/index';
 import Welcome from '../Views/Welcome/Welcome';
@@ -33,6 +34,7 @@ function router() {
         <Route path={ROUTES.REGISTER} component={Register} />
         <Route path={ROUTES.RESTOREPASS} component={RestorePass} />
         <Route path={ROUTES.NOTIFICATIONPASS} component={NotificationReset} />
+        <Route path={ROUTES.NOTIFICATIONREQUESTSENT} component={RequestSent} />
         <Route path={ROUTES.NEWPASSWORD} component={NewPassword} />
         <Route path={ROUTES.INFOCOMPANY} component={ProfileCompany} />
         <PrivateRoute path={ROUTES.WELCOME} component={Welcome} />

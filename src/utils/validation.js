@@ -6,10 +6,12 @@ export const onlyNumbers= (e)=> {
 }
 
 export const onlyLetters = (e) => {
-    var charCode = (e.which) ? e.which:e.KeyCode;
-        if(!((charCode >= 65 && charCode <= 90) || (charCode>=97 && charCode<=122))){
-            e.preventDefault();
-        } 
+    var regex = new RegExp("^[a-zA-Z ]+$");
+    var key = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+    if (!regex.test(key)) {
+        e.preventDefault();
+        return false;
+    }
 }
 
 export const onlyAlphaNumeric = (e) => {
@@ -22,6 +24,5 @@ export const onlyAlphaNumeric = (e) => {
 				(allowedCode.indexOf(charCode) === -1)) {
 				e.preventDefault();
     }
-
 }
 
