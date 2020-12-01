@@ -55,7 +55,7 @@ const Home = () => {
           <div className="row box-container-title">
             <div className="col-6 col-md-6 container-no-padding">
               <span className="text-box-one">Encuentra el trabajo que buscabas en nuestra plataforma especializada en personal operativo.</span>
-              <div className="d-flex justify-content-start">
+              <div className="d-flex flex-wrap justify-content-start">
                 <Link to="/registro" className="btn btn-operativa btn-sm">
                   BUSCAR EMPLEO
                 </Link>
@@ -64,12 +64,12 @@ const Home = () => {
                 </Link>
               </div>
               <label className="m-top">
-              <span className="info-sol-registro">
+              <label className="info-sol-registro">
                 Si eres una Municipalidad y quieres unirte a nuestra red, llena la{' '}
-                <button type="button" className="terminos">
+                <Link to="/info-municipality" className="">
                   solicitud de registro
-                </button>
-              </span>
+                </Link>
+              </label>
             </label>
             </div>
             <div className="col-6 col-md-4 container-no-padding">
@@ -87,31 +87,31 @@ const Home = () => {
         <div className="col-12 col-md-8 container-no-padding">
           <div className="row box-container-title-two box-container-align-rubros row-no-magin container-no-padding">
             <div className="col-12 col-md-12 container-no-padding justify-content-center">
-              <h1 className="h1-tittle-box">Los sectores más productivos</h1>
+              <h1 className="h1-tittle-box text-center">Los sectores más productivos</h1>
             </div>
             <div className="col-12 col-md-12">
               <div className="row row-no-magin container-no-padding">
-                <div className="col-2 text-center">
+                <div className="col-4 text-center">
                   <img alt="" src={Produccion} className="icon-image-rubros" />
                   <p className="text-icon-rubros">Producción y operaciones</p>
                 </div>
-                <div className="col-2 text-center">
+                <div className="col-4 text-center">
                   <img alt="" src={Mantenimiento} className="icon-image-rubros" />
                   <p className="text-icon-rubros">Mantenimiento y limpieza</p>
                 </div>
-                <div className="col-2 text-center">
+                <div className="col-4 text-center">
                   <img alt="" src={Almacen} className="icon-image-rubros" />
                   <p className="text-icon-rubros">Almacén y transporte</p>
                 </div>
-                <div className="col-2 text-center">
+                <div className="col-4 text-center">
                   <img alt="" src={Call} className="icon-image-rubros" />
                   <p className="text-icon-rubros">Call-center y Ventas</p>
                 </div>
-                <div className="col-2 text-center">
+                <div className="col-4 text-center">
                   <img alt="" src={Construccion} className="icon-image-rubros" />
                   <p className="text-icon-rubros">Construcción y obras</p>
                 </div>
-                <div className="col-2 text-center">
+                <div className="col-4 text-center">
                   <img alt="" src={Motorizados} className="icon-image-rubros" />
                   <p className="text-icon-rubros">Motorizados y courier</p>
                 </div>
@@ -411,6 +411,10 @@ const Home = () => {
           </div>
         </div>
         <div className="col-12 col-md-2 container-no-padding hide-sm box-container-title-three"></div>
+  
+
+
+
       </div>
     </Fragment>
   );

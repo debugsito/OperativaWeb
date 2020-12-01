@@ -111,10 +111,10 @@ code {
   position: static;
   /* width: 312px; */
   height: 62px;
-  margin-top: 178px;
+  margin-top: 115px;
   margin-left: 0 !important;
-  font-family: 'Raleway', sans-serif;
-  font-weight: bold;
+  font-family: 'Roboto Medium';
+  font-weight: normal;
   font-size: 24px;
   font-style: normal;
   color: #000000;
@@ -448,6 +448,56 @@ code {
   -ms-border-radius: 0px !important;
   -o-border-radius: 0px !important;
 }
+.btn-cancelar-sol {
+  min-width: 150px;
+  height: 40px;
+  border: 1px solid #ed1d40;
+  box-sizing: border-box;
+  border-radius: 10px;
+  box-sizing: border-box;
+  color: #ed1d40;
+  font-family: 'Roboto Medium';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  padding: 12px;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.btn-cancelar-sol:hover {
+  background-color: #ffffff;
+  color: #ed1d40;
+  text-decoration: none;
+}
+
+.btn-continue-sol {
+  min-width: 150px;
+  height: 40px;
+  border: 1px solid #ed1d40;
+  box-sizing: border-box;
+  border-radius: 10px;
+  box-sizing: border-box;
+  background: #ed1d40;
+  color: #ffffff;
+  font-family: 'Roboto Medium';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  padding: 12px;
+  text-transform: uppercase;
+  text-decoration: none;
+  margin-left: 10px;
+}
+/*
+.btn-continue-sol:hover {
+  background-color: #ffffff;
+  color: #ed1d40;
+  text-decoration: none;
+}
+*/
+
 .btn-register {
   /* position: static; */
   width: 46%;
@@ -463,6 +513,7 @@ code {
   font-weight: 500;
   font-size: 14px;
 }
+
 .btn-login {
   /* position: static; */
   width: 48%;
@@ -504,6 +555,16 @@ code {
   text-transform: uppercase;
   color: #373737;
   /* margin: auto; */
+}
+.button-continue-sol {
+  font-family: 'Roboto Medium';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #373737;
+  margin-left: 0px !important;
+  padding: 0px !important;
 }
 .button-continue-restore {
   font-family: 'Roboto Medium';

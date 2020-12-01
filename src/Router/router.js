@@ -16,6 +16,7 @@ import ProfileAcademic from '../Views/Profile/ProfileAcademic';
 import ProfileExperience from '../Views/Profile/ProfileExperience';
 import ProfileUpdate from '../Views/Profile/ProfileUpdate';
 import ProfileCompany from '../Views/Company/ProfileCompany';
+import ProfileMunicipality from '../Views/Municipality/ProfileMunicipality';
 
 //Guardar Token
 const isAuth = () => {
@@ -37,6 +38,7 @@ function router() {
         <Route path={ROUTES.NOTIFICATIONREQUESTSENT} component={RequestSent} />
         <Route path={ROUTES.NEWPASSWORD} component={NewPassword} />
         <Route path={ROUTES.INFOCOMPANY} component={ProfileCompany} />
+        <Route path={ROUTES.INFOMUNICIPALITY} component={ProfileMunicipality} />
         <PrivateRoute path={ROUTES.WELCOME} component={Welcome} />
         <PrivateRoute path={ROUTES.INFO} component={ProfileInfo} />
         <PrivateRoute path={ROUTES.INFOADRESS} component={ProfileAdress} />

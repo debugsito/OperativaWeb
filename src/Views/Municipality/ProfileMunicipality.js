@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import NavBar from '../../Components/MenuUser/index';
 import { Link, withRouter } from 'react-router-dom';
 import { registerLocale } from 'react-datepicker';
@@ -6,30 +6,29 @@ import 'react-datepicker/dist/react-datepicker.css';
 import es from 'date-fns/locale/es';
 import { useForm } from 'react-hook-form';
 import { onlyNumbers, onlyLetters , onlyAlphaNumeric  } from './../../utils/validation';
-import CompanyService from '../../services/company.service';
-import UtilService from '../../services/util.service';
+import MunicipalityService from '../../services/municipality.service';
 import document  from '../../assets/docs/terminosycondiciones.pdf'
 registerLocale('es', es);
 
-const ProfileCompany = (props) => {
+const ProfileMunicipality = (props) => {
   const { handleSubmit, register, errors, formState } = useForm();
   const { isSubmitted } = formState;
-  const [ rubro, setRubro] = useState([]);
 
   const onSubmit = (values) => {
     const datafield = {
       first_name: values.first_name,
       last_name: values.last_name,
-      document_number: values.ruc,
       email: values.mail,
+      razon_social: values.business_name,
+      document_number: values.ruc,
       phone: values.phone,
-      interest_area_id: values.cargo
+      interest_area_id : ""
     };
-    registerCompany(datafield);
+    registerMunicipality(datafield);
   }
   
-  async function registerCompany(datafield){
-    const responseCompany = await CompanyService.registerCompany(datafield);
+  async function registerMunicipality(datafield){
+    const responseCompany = await MunicipalityService.registerMunicipality(datafield);
     if(responseCompany.status === 200){
       props.history.push('/solicitud-enviada')
     } else {
@@ -37,14 +36,6 @@ const ProfileCompany = (props) => {
     }
   }
   
-  useEffect(() => {
-      async function listRubro(){
-      const responseRubro = await UtilService.listRubro();
-      setRubro(responseRubro.areas);
-  }
-  listRubro();
-  }, [])
-
   return (
     <>
     <NavBar />
@@ -108,6 +99,34 @@ const ProfileCompany = (props) => {
                 {errors.last_name && errors.last_name.message}
               </span>
             </label>
+                        <label className="label-form">
+              Correo Electrónico
+              <input
+                placeholder="mail@ejemplo.com"
+                className={`form-control placeholder
+                                    ${
+                                      isSubmitted
+                                        ? !errors.mail
+                                          ? 'input-icono'
+                                          : 'border-error red-input input-icoerror'
+                                        : ''
+                                    }
+                                `}
+                name="mail"
+                type="text"
+                autoComplete="off"
+                ref={register({
+                  required: 'Este campo es requerido',
+                  pattern: {
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                    message: 'Coloque un email valido'
+                  }
+                })}
+              />
+              <span className="span-error mt-1">
+                  { errors.mail && errors.mail.message}
+              </span> 
+            </label>
             <label htmlFor="business_name" className="label-form mt-1">
               Razon Social
               <input
@@ -161,34 +180,6 @@ const ProfileCompany = (props) => {
                 {errors.ruc && errors.ruc.message}
               </span>
             </label>
-            <label className="label-form">
-              Correo Electrónico
-              <input
-                placeholder="mail@ejemplo.com"
-                className={`form-control placeholder
-                                    ${
-                                      isSubmitted
-                                        ? !errors.mail
-                                          ? 'input-icono'
-                                          : 'border-error red-input input-icoerror'
-                                        : ''
-                                    }
-                                `}
-                name="mail"
-                type="text"
-                autoComplete="off"
-                ref={register({
-                  required: 'Este campo es requerido',
-                  pattern: {
-                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                    message: 'Coloque un email valido'
-                  }
-                })}
-              />
-              <span className="span-error mt-1">
-                  { errors.mail && errors.mail.message}
-              </span> 
-            </label>
             <label htmlFor="phone" className="label-form mt-1">
               Teléfono
               <input
@@ -224,33 +215,6 @@ const ProfileCompany = (props) => {
                   { errors.phone && errors.phone.message}
               </span> 
             </label>
-            <label htmlFor="cargo" className="label-form mt-1">        
-              Rubro
-                <select 
-                    className={`form-control placeholder mb-2
-                        ${
-                            isSubmitted ? 
-                            !errors.cargo ?
-                            "input-icono"
-                            : 
-                            "border-error red-input input-icoerror"       
-                            : ''
-                        }
-                    `} 
-                    name="cargo" 
-                    ref={register({
-                        required: "Este campo es requerido", message: "Coloque un Nombre valido"
-                        })}>
-                    <option value="">Seleccione</option>
-                    {rubro.map( e =>(
-                        <option key={e.id} value={e.id}>{e.name}</option>
-                        )
-                    )}	
-                </select>
-                <span className="span-error mt-1">
-                    { errors.cargo && errors.cargo.message}
-                </span>
-            </label>
             <label className="">
               <input
                 className="terms-checkbox "
@@ -269,12 +233,11 @@ const ProfileCompany = (props) => {
             <span className="span-error">{errors.terms && errors.terms.message}</span>
 
             <section className="container-buttons-continue">
-              <Link className="btn-cancel-pr btn" to="/registro">
+              <Link className="btn-cancelar-sol text-center" to="/">
                 CANCELAR
               </Link>
-              <button className="button-continue-restore btn" type="submit">
-                <span className="text-button-continue-restore">CONTINUAR</span>
-                <span className="icon-next"></span>
+              <button className="btn-continue-sol text-center" type="submit">
+                ACEPTAR
               </button>
             </section>
           </form>
@@ -285,4 +248,4 @@ const ProfileCompany = (props) => {
   );
 };
 
-export default withRouter(ProfileCompany);
+export default withRouter(ProfileMunicipality);

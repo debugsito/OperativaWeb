@@ -11,6 +11,7 @@ export const INFOADRESS = '/info-direccion';
 export const INFOACADEMIC = '/informacion-academica';
 export const INFOEXPERIENCE = '/info-experiencia';
 export const INFOCOMPANY = '/info-company';
+export const INFOMUNICIPALITY = '/info-municipality';
 export const PROFILEUPDATESUCCESSFUL = '/informacion-completada-con-exito';
 
 // export const NEWPASSWORD = '/nueva-contraseña/:token'

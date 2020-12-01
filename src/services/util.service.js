@@ -1,6 +1,6 @@
 import Api from '../axios';
 
-export default class UserService {
+export default class UtilService {
 
  // Servicio que obtiene la lista de tipo de documento
   static async listDocument() {
