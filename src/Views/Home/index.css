@@ -543,6 +543,15 @@
     width: 500px;
     height: 210px;
   }
+  .input-icono {
+    background-position: 98%;
+  }
+  .input-icoerror {
+    background-position: 98%;
+  }
+  .icon-calendar {
+    background-position: 98.5%;
+  }
   .icon-image-solicitud-enviada {
     width: 410px;
     margin: 0;

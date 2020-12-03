@@ -378,9 +378,10 @@ code {
 .input-icono {
   background-image: url(./assets/icons/verification.svg);
   background-repeat: no-repeat;
-  background-position: 98%;
+  background-position: 95%;
   background-size: 20px;
 }
+
 .icon-calendar {
   background-image: url(./assets/icons/date.svg);
   background-repeat: no-repeat;
@@ -390,9 +391,10 @@ code {
 .input-icoerror {
   background-image: url(./assets/icons/Error.svg);
   background-repeat: no-repeat;
-  background-position: 98%;
+  background-position: 95%;
   background-size: 20px;
 }
+
 .customDatePickerWidth,
 .customDatePickerWidth > div.react-datepicker-wrapper,
 .customDatePickerWidth
