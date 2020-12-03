@@ -28,6 +28,35 @@
   line-height: 20.8px;
   color: #000000;
 }
+.tittle-footer {
+  font-family: 'Roboto Medium';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 1.25px;
+  color: #ffffff;
+  padding-top: 50px;
+  padding-bottom: 10px;
+  margin-right: 12px;
+}
+.subtittle-footer {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: 150px;
+  align-content: space-between;
+  color: #ffffff;
+  font-family: 'Roboto Lighter';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.25px;
+}
+.icon-footer {
+  margin-right: 45px;
+}
 .h1-tittle-carousel {
   font-family: 'Roboto Lighter';
   font-style: normal;
@@ -41,7 +70,7 @@
   margin-right: 12px;
 }
 .h1-text-ilustracion-box {
-  margin-top: 20px;
+  margin-top: 80px;
   margin-bottom: 0px;
   font-family: 'Roboto Medium';
   font-style: normal;
@@ -65,6 +94,25 @@
   width: 132px;
   height: 54px;
 }
+
+.image-solicitud {
+  display: none;
+}
+
+.mensaje-solicitud {
+  margin-top: 55px;
+  max-width: 800px;
+  flex: 0 0 100%;
+}
+
+.icon-image-solicitud-enviada {
+  width: 390px;
+  margin: 0;
+  margin-top: 35px;
+  margin-left: 100px;
+  margin-right: 0;
+  display: none;
+}
 .text-box-two {
   font-family: 'Roboto Lighter';
   font-size: 14px;
@@ -81,9 +129,10 @@
   font-family: 'Roboto Medium';
   font-weight: normal;
   font-style: normal;
-  font-size: 18px !important;
+  font-size: 18px;
   line-height: 24px;
   margin-bottom: 15px;
+  margin-top: 10px;
   color: #000000;
   /* margin-left: 0!important; */
   display: flex;
@@ -99,7 +148,6 @@
   /* margin-left: 0!important; */
   margin-right: 0px;
   display: flex;
-  letter-spacing: 0.5px;
 }
 .box-container-title {
   /* background: #F7F7F7; */
@@ -123,6 +171,8 @@
 .box-container-title-four {
   /*margin-bottom: 216px;*/
   background: #373737;
+  height: 250px;
+  display: none;
 }
 .box-container-align-two {
   margin-top: 10px;
@@ -139,7 +189,7 @@
   border-radius: 10px;
   width: 191px;
   padding: 5px 0px;
-  margin-top: 16px;
+  margin-top: 0px;
   margin-left: 12px;
   margin-right: 0px;
   text-decoration: none;
@@ -156,7 +206,7 @@
   border-radius: 10px;
   width: 191px;
   padding: 5px 0px;
-  margin-top: 16px;
+  margin-top: 30px;
   margin-left: 12px;
   margin-right: 0px;
 }
@@ -172,8 +222,6 @@
   position: absolute;
   width: 189px;
   height: 40px;
-  left: 180px;
-  top: 234px;
   background: #ed1d40;
   color: #ffffff;
   border-radius: 10px;
@@ -196,6 +244,23 @@
 
 .flex-wrap {
   flex-wrap: wrap;
+}
+.icon-image-footer {
+  width: 180px;
+  margin: 0 auto;
+  margin-top: 12px;
+  padding: 0px;
+  justify-content: center;
+  display: flex;
+}
+.icon-redes-footer {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto;
+  margin-top: 12px;
+  padding: 0px;
+  justify-content: center;
+  display: flex;
 }
 .icon-image-conexion {
   width: 180px;
@@ -224,6 +289,7 @@
 }
 .h1-text-ilustracion-box {
   font-size: 20px;
+  margin-top: 25px;
 }
 .icon-image-rubros {
   object-fit: cover;
@@ -231,6 +297,12 @@
   height: 80px;
   margin: 0 auto;
   border-radius: 11px;
+}
+.title-solicitud {
+  font-family: 'Roboto Medium';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 30px;
 }
 .text-icon-rubros {
   width: 85px;
@@ -293,6 +365,15 @@
     font-size: 42px;
     margin-top: -30px;
   }
+
+  .icon-image-footer {
+    width: 355px;
+    margin: 0;
+    margin-top: 70px;
+    margin-left: 0px;
+    margin-right: 0;
+    position: absolute;
+  }
   .icon-image-conexion {
     width: 355px;
     margin: 0;
@@ -315,16 +396,6 @@
     align-items: center;
     letter-spacing: 0.25px;
   }
-  .icon-image-solicitud-enviada {
-    width: 390px;
-    margin: 0;
-    margin-top: 35px;
-    margin-left: 100px;
-    margin-right: 0;
-    position: absolute;
-    top: -50%;
-  }
-
   .img-carrousel {
     padding: 0 18px;
   }
@@ -332,6 +403,11 @@
     width: 350px;
     height: 150px;
     font-size: 30px;
+  }
+
+  .icon-image-solicitud-enviada {
+    width: 390px;
+    margin: 0;
   }
   .text-box-two,
   .text-box-four,
@@ -350,8 +426,8 @@
     padding-top: 0px;
   }
   .h1-text-ilustracion-box {
-    font-size: 34px;
-    margin-top: 15px;
+    font-size: 25px;
+    margin-top: 20px;
   }
   .icon-ilustracion {
     width: 200px;
@@ -415,11 +491,32 @@
   .h1-tittle-box {
     font-size: 24px;
   }
+  .icon-image-footer {
+    width: 255px;
+  }
+  .subtittle-footer {
+    height: 150px;
+  }
   .icon-image-conexion {
     width: 355px;
   }
   .icon-ilustracion {
     width: 215px;
+  }
+  .h1-text-ilustracion-box {
+    font-size: 34px;
+    margin-top: 50px;
+  }
+  .icon-image-solicitud-enviada {
+    width: 315px;
+    margin: 0;
+    display: flex;
+  }
+  .title-solicitud {
+    font-size: 20px;
+  }
+  .image-solicitud {
+    display: grid;
   }
 }
 @media only screen and (min-width: 1200px) {
@@ -430,16 +527,40 @@
   .h1-tittle-box {
     font-size: 32px;
   }
+  .h1-custom-solicitud {
+    margin-top: 115px;
+  }
   .text-box-one {
     font-size: 40px;
     width: 500px;
     height: 210px;
   }
+  .icon-image-solicitud-enviada {
+    width: 410px;
+    margin: 0;
+    display: flex;
+  }
+  .mensaje-solicitud {
+    margin-top: 55px;
+    max-width: 800px;
+    flex: 0 0 58%;
+  }
+  .title-solicitud {
+    font-size: 34px;
+  }
+  .image-solicitud {
+    display: grid;
+  }
   .text-box-three {
+    padding-top: 24px;
     width: 322px;
   }
   .img-carrousel {
     padding: 0 40px;
+  }
+  .icon-image-footer {
+    width: 445px;
+    margin-top: 50px;
   }
   .icon-image-conexion {
     width: 455px;
@@ -450,17 +571,25 @@
     height: 125px;
   }
   .icon-ilustracion {
-    width: 360px;
+    width: 396px;
     margin-left: 90px;
+  }
+  .subtittle-footer {
+    height: 115px;
   }
 
   .box-container-title-two {
     height: 380px;
   }
   .box-container-title-three {
-    height: 400px;
+    height: 440px;
+  }
+  .box-container-title-four {
+    height: 200px;
+    display: grid;
   }
   .btn-operativa {
+    margin-top: 30px;
     padding: 12px;
   }
   .btn-operativa-second {
@@ -473,7 +602,8 @@
     margin-top: 15px;
   }
   .text-box-three {
-    width: 322px;
+    padding-top: 24px;
+    width: 410px;
     font-size: 24px;
   }
 }

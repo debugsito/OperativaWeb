@@ -122,6 +122,21 @@ code {
   display: flex;
   align-items: center;
 }
+.h1-custom-solicitud {
+  position: static;
+  /* width: 312px; */
+  height: 62px;
+  margin-top: 60px;
+  margin-left: 0 !important;
+  font-family: 'Roboto Medium';
+  font-weight: normal;
+  font-size: 24px;
+  font-style: normal;
+  color: #000000;
+  line-height: 130%;
+  display: flex;
+  align-items: center;
+}
 .h1-custom-init {
   position: static;
   width: 312px;

@@ -269,12 +269,11 @@ const ProfileCompany = (props) => {
             <span className="span-error">{errors.terms && errors.terms.message}</span>
 
             <section className="container-buttons-continue">
-              <Link className="btn-cancel-pr btn" to="/registro">
+              <Link className="btn-cancelar-sol text-center" to="/registro">
                 CANCELAR
               </Link>
-              <button className="button-continue-restore btn" type="submit">
-                <span className="text-button-continue-restore">CONTINUAR</span>
-                <span className="icon-next"></span>
+              <button className="btn-continue-sol text-center" type="submit">
+                ACEPTAR
               </button>
             </section>
           </form>

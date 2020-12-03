@@ -1,6 +1,11 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import Conexion from '../../assets/images/image-conexion.svg'
+import Footer from '../../assets/images/footer.svg'
+import Twitter from '../../assets/redes/Twitter.svg'
+import Facebook from '../../assets/redes/Facebook.svg'
+import Instagram from '../../assets/redes/Instagram.svg'
+
 import Inscribirte from '../../assets/images/image-inscribirte.svg'
 import NavBarDesk from '../../Components/Menu-desktop/NavbarDesk';
 import Produccion from '../../assets/icons/1.jpg';
@@ -411,8 +416,40 @@ const Home = () => {
           </div>
         </div>
         <div className="col-12 col-md-2 container-no-padding hide-sm box-container-title-three"></div>
-  
 
+        <div className="col-1 col-md-1  box-container-title-four"></div>
+        <div className="col-10 col-md-10 container-no-padding box-container-title-four">
+          <div className="row">
+            <div className="col-4">
+              <img alt="conexion" src={Footer} className="icon-image-footer"/>
+            </div>
+            <div className="col-4 ">
+              <label className="tittle-footer">REDES</label>
+                <div className="">
+                  <div>
+                    <a href="https://www.facebook.com" rel="noopener noreferrer" target="_blank" title="Facebook">
+                      <img alt="conexion" src={Facebook} className="icon-footer"/>
+                    </a>
+                    <a href="https://www.instagram.com" rel="noopener noreferrer" target="_blank" title="Instagram">
+                      <img alt="conexion" src={Instagram} className="icon-footer"/>
+                    </a>
+                    <a href="https://www.twitter.com" rel="noopener noreferrer" target="_blank" title="Twitter">
+                      <img alt="conexion" src={Twitter} className=""/>
+                    </a>
+                  </div>
+                </div>
+            </div>
+            <div className="col-4">
+              <label className="tittle-footer">CONTACTO</label>
+                <div className="subtittle-footer">
+                  <label>Teléfono:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(01) 247-2829 / 923 890 165</label>
+                  <label>Mail:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;comercial@operativa.com</label>
+                  <label>Dirección:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Jr. Alfonso Ugarte 235, Of.103, Barranco</label>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div className="col-1 col-md-1 box-container-title-four"></div>
 
 
       </div>

@@ -75,6 +75,11 @@ function NavbarDesk(props) {
                 <span>Empresas</span>  
                 </Link>
               </li>
+              <li className ="nav-text">
+                <Link to="/inicio-sesion"><FaIcons.FaFileAlt/>
+                <span>Solicitudes</span>  
+                </Link>
+              </li>
                 
               
           </ul>
