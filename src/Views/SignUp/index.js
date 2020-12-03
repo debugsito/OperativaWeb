@@ -72,6 +72,9 @@ const Register = (props) => {
       <div className="row justify-content-center container-padding row-no-magin">
         <div className="col-12 col-sm-8 col-md-6">
           <h1 className="h1-custom">REGISTRATE EN OPERATIVA</h1>
+          <span className="info-form">
+            Si ya tienes una cuenta <a href="/inicio-sesion">inicia sesión aquí</a>
+          </span>
           <form onSubmit={handleSubmit(onSubmit)} className="form-container">
             {error ? <div className="alert alert-danger">{error}</div> : null}
             <label className="label-form">
@@ -164,9 +167,6 @@ const Register = (props) => {
               </button>
             </section>
             <div className="space-spam-login-register">
-              <span className="info-form">
-                Si ya tienes una cuenta <a href="/inicio-sesion">inicia sesión aquí</a>
-              </span>
             </div>
           </form>
         </div>

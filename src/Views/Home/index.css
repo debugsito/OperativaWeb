@@ -194,6 +194,9 @@
   margin-right: 0px;
   text-decoration: none;
 }
+.btn-operativa:hover {
+  color: #ffffff;
+}
 .btn-operativa-second {
   background: #ffffff;
   font-family: 'Roboto Medium';
@@ -210,6 +213,11 @@
   margin-left: 12px;
   margin-right: 0px;
 }
+
+.btn-operativa-second:hover {
+  color: #ed1d40;
+}
+
 .btn-solicitud {
   font-family: 'Roboto Medium';
   font-style: normal;

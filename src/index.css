@@ -88,8 +88,8 @@ code {
   height: 62px;
   margin-top: 118px;
   margin-left: 0 !important;
-  font-family: 'Raleway', sans-serif;
-  font-weight: bold;
+  font-family: 'Roboto Medium';
+  font-weight: 500;
   font-size: 20px;
   font-style: normal;
   color: #000000;
@@ -428,21 +428,21 @@ code {
   height: 40px;
   margin-left: 0px;
   margin-top: 0px;
-  border: 1px solid #979797;
-  color: #b9b9ba;
+  color: #ed1d40;
+  border: 1px solid #ed1d40;
   box-sizing: border-box;
-  border-radius: 0px;
-  -webkit-border-radius: 0px;
-  -moz-border-radius: 0px;
-  -ms-border-radius: 0px;
-  -o-border-radius: 0px;
+  border-radius: 10px;
   font-family: 'Roboto Medium';
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
+  letter-spacing: 1.25px;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.btn-cancel-register:hover {
+  color: #ed1d40;
 }
 .btn-cancel-pr {
   /*button/secondary*/
@@ -514,21 +514,23 @@ code {
 */
 
 .btn-register {
-  /* position: static; */
   width: 46%;
   height: 40px;
-  /*primary*/
   background: #ed1d40;
+  border: 1px solid #ed1d40;
+  box-sizing: border-box;
+  border-radius: 10px;
   color: #ffffff;
   box-sizing: border-box;
   margin-left: 8%;
-  border-radius: 0px;
   font-family: 'Roboto Medium';
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
 }
-
+.btn-register:hover {
+  color: #ffffff;
+}
 .btn-login {
   /* position: static; */
   width: 48%;
@@ -660,16 +662,30 @@ code {
   margin-left: 0px !important;
 }
 .info-form {
-  font-family: 'Raleway', sans-serif;
-  font-size: 12px;
+  font-family: 'Roboto Lighter';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
   line-height: 130%;
   margin-left: 0 !important;
+  letter-spacing: 0.5px;
 }
 .info-form-term {
-  font-family: 'Roboto Medium';
-  font-size: 12px;
+  font-family: 'Roboto Lighter';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
   line-height: 20px;
   margin-left: 4px;
+}
+.info-form-pass {
+  font-family: 'Roboto Lighter';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 130%;
+  margin-left: 0 !important;
+  letter-spacing: 0.5px;
 }
 
 .m-top {
@@ -700,12 +716,7 @@ code {
   height: 102px;
 }
 .text-experience {
-  position: static;
-  left: 0%;
-  right: 0%;
-  top: 0%;
-  bottom: 0%;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Roboto Lighter';
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
@@ -713,9 +724,10 @@ code {
   display: flex;
   align-items: center;
   text-decoration-line: underline;
-  text-transform: uppercase;
   color: #46a9d4;
   margin-top: 20px;
+  background: none;
+  border: none;
 }
 .icon-img-logo {
   display: flex !important;

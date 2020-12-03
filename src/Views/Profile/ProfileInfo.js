@@ -113,11 +113,7 @@ const ProfileInfo = (props) => {
                                 onKeyPress={e =>{onlyLetters(e)}} 
                                 ref={register({
                                     required: "Este campo es requerido",
-                                    pattern: {
-                                        value:  /^[A-Za-z]+$/i,
-                                        message: "Ingrese un nombre valido",
-                                    },
-                                })}
+                                  })} 
                             />
                             <span className="span-error mt-1">
                                 { errors.first_name && errors.first_name.message}
@@ -143,11 +139,7 @@ const ProfileInfo = (props) => {
                                 onKeyPress={e =>{onlyLetters(e)}} 
                                 ref={register({
                                     required: "Este campo es requerido",
-                                    pattern: {
-                                        value:  /^[A-Za-z]+$/i,
-                                        message: "Ingrese un nombre valido",
-                                      },
-                                  })}
+                                })} 
                             />
                             <span className="span-error mt-1">
                                 { errors.last_name && errors.last_name.message}

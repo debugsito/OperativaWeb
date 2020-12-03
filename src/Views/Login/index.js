@@ -70,6 +70,9 @@ const Login = (props) => {
       <div className="row justify-content-center container-padding row-no-magin">
         <div className="col-12 col-sm-8 col-md-6">
           <h1 className="h1-custom">INICIA SESIÓN EN OPERATIVA</h1>
+          <span className="info-form">
+                Si aún no tienes una cuenta <a href="/registro">registrate aquí</a>
+              </span>
           <form className="form-container" onSubmit={handleSubmit(onSubmit)}>
             {error ? <div className="alert alert-danger">{error}</div> : null}
             <label className="label-form">
@@ -138,15 +141,10 @@ const Login = (props) => {
               <Link className="btn-cancel-register btn" type="submit" to="/">
                 CANCELAR
               </Link>
-              <button className="btn-login btn" type="submit">
+              <button className="btn-register btn" type="submit">
                 INGRESAR
               </button>
             </section>
-            <div className="space-spam-login-register">
-              <span className="info-form">
-                Si aún no tienes una cuenta <a href="/registro">registrate aquí</a>
-              </span>
-            </div>
           </form>
         </div>
       </div>

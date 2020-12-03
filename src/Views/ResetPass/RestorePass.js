@@ -37,10 +37,13 @@ const RestorePassword = (props) => {
       <div className="row justify-content-center padding-container row-no-magin">
         <div className="col-12 col-sm-8 col-md-6 container-no-padding">
           <h1 className="h1-custom-restore">RECUPERA TU CONTRASEÑA</h1>
+            <span className="info-form-pass">
+              Ingresa tu correo electrónico para recibir instrucciones de cómo retablecer tu contraseña.
+            </span>
           <form onSubmit={handleSubmit(onSubmit)} className="form-container">
             {error ? <div className="alert alert-danger">{error}</div> : null}
             <label className="label-form">
-              Ingresa tu correo electrónico
+              Correo electrónico
               <input
                 placeholder="mail@ejemplo.com"
                 className={`form-control placeholder
@@ -69,12 +72,11 @@ const RestorePassword = (props) => {
               className="span-error">{errors.usuario && errors.usuario.message}
             </span>
             <section className="container-buttons-continue">
-              <Link className="btn-cancel-pr btn" to="/registro">
+              <Link className="btn-cancel-register btn" to="/registro">
                 CANCELAR
               </Link>
-              <button className="button-continue-restore btn" type="submit">
-                <span className="text-button-continue-restore">CONTINUAR</span>
-                <span className="icon-next"></span>
+              <button className="btn-register" type="submit">
+                CONTINUAR
               </button>
             </section>
           </form>
