@@ -8,6 +8,7 @@ import { useForm } from 'react-hook-form';
 import { onlyNumbers, onlyLetters , onlyAlphaNumeric  } from './../../utils/validation';
 import MunicipalityService from '../../services/municipality.service';
 import document  from '../../assets/docs/terminosycondiciones.pdf'
+import { MensajeError } from './../../utils/toast'
 registerLocale('es', es);
 
 const ProfileMunicipality = (props) => {
@@ -28,11 +29,13 @@ const ProfileMunicipality = (props) => {
   }
   
   async function registerMunicipality(datafield){
+    try{
     const responseCompany = await MunicipalityService.registerMunicipality(datafield);
     if(responseCompany.status === 200){
       props.history.push('/solicitud-enviada')
-    } else {
-      // Mensaje de error
+    }
+    }catch(error){
+      MensajeError("Error: " + error.response.data.message);
     }
   }
   

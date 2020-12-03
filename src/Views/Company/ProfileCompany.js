@@ -9,6 +9,7 @@ import { onlyNumbers, onlyLetters , onlyAlphaNumeric  } from './../../utils/vali
 import CompanyService from '../../services/company.service';
 import UtilService from '../../services/util.service';
 import document  from '../../assets/docs/terminosycondiciones.pdf'
+import { MensajeError } from './../../utils/toast'
 registerLocale('es', es);
 
 const ProfileCompany = (props) => {
@@ -29,11 +30,13 @@ const ProfileCompany = (props) => {
   }
   
   async function registerCompany(datafield){
-    const responseCompany = await CompanyService.registerCompany(datafield);
-    if(responseCompany.status === 200){
-      props.history.push('/solicitud-enviada')
-    } else {
-      // Mensaje de error
+    try{
+      const responseCompany = await CompanyService.registerCompany(datafield);
+      if(responseCompany.status === 200){
+        props.history.push('/solicitud-enviada')
+      }
+    }catch(error){
+      MensajeError("Error: " + error.response.data.message);
     }
   }
   
