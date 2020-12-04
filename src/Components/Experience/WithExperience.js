@@ -7,6 +7,7 @@ import ReactStars from 'react-rating-stars-component';
 
 import UtilService from '../../services/util.service';
 import UserService from '../../services/user.service';
+import { onlyNumbers } from './../../utils/validation';
 import { useDispatch, useSelector } from 'react-redux';
 import { setJob } from '../../redux-store/user/actions/set-job';
 import { removeJob } from '../../redux-store/user/actions/remove-job';
@@ -22,6 +23,7 @@ const WithExperience = (props) => {
 
     const [ jobLevel, setJobLevel ] = useState([]);
     const [ motivoRetiro, setMotivoRetiro ] = useState([]);
+    const [ rubro, setRubro] = useState([]);
 
     console.log("current_user",currentUser);
     console.log("lenght", currentUser.jobs.length);
@@ -30,20 +32,19 @@ const WithExperience = (props) => {
         dispatch(setJob({
             name_inst: "",
             address:"",
-            department: 0,
-            job_level_id: 0,
+            area_id: 1,
             from_year: null,
             to_year: null,
-            buss_travel: 0,
-            distan_home: 0, // EN DURO
             hour_rate: 0,
-            job_sati: 0,
+            job_level_id: 1,
             monthly_income: 0,
+            job_sati: 0,
             over_time: 0,
-            work_bal_life: 0, // EN DURO
-            job_invol: 0, // EN DURO
-            attrition: 0,
-            demo: 0
+            attrition_id: 0,
+            job_involvement: 0,
+            job_life: 0, // EN DURO
+            time_distance_home: 1,
+            distance_home: 1,
         }));
     }
 
@@ -111,7 +112,6 @@ const WithExperience = (props) => {
     async function registerJob(datafield){
         const responseInfo = await UserService.registerUserWithExperience(datafield);
         if(responseInfo.status === 200){
-
             props.history.push('/informacion-completada-con-exito')
         } else {  
             //Mensaje de error
@@ -126,6 +126,14 @@ const WithExperience = (props) => {
     listJobLevel();
     }, []);
 
+    useEffect(() => {
+        async function listRubro(){
+        const responseRubro = await UtilService.listRubro();
+        setRubro(responseRubro.areas);
+    }
+    listRubro();
+    }, [])
+
     useEffect( () => {
         async function listMotivoRetiro(){
             const responseMotivoRetiro = await UtilService.listMotivoRetiro();
@@ -133,12 +141,6 @@ const WithExperience = (props) => {
         }
     listMotivoRetiro();
     }, []);
-    
-    const onlyNumbers= (e)=> {
-        let key = window.event ? e.which : e.keyCode;
-            if (key < 48 || key > 57) {
-            e.preventDefault();
-    }}
 
     let jobForms = currentUser.jobs.map((job, index) => 
         <div key={index}>
@@ -146,7 +148,7 @@ const WithExperience = (props) => {
             <label htmlFor="cargo" className="label-form mt-1">        
                 Cargo
                 <select 
-                     data-type="int" value={job.job_level} data-index={index} data-name="job_level" onChange={changeValueJob}
+                    data-type="int" value={job.job_level_id} data-index={index} data-name="job_level_id" onChange={changeValueJob}
                     className={`form-control placeholder mb-2
                         ${
                             isSubmitted ? 
@@ -160,12 +162,13 @@ const WithExperience = (props) => {
                     name="cargo" 
                     ref={register({
                         required: "Este campo es requerido", message: "Coloque un Nombre valido"
-                        })}>
-                    <option value="">Seleccione</option>
-                    {jobLevel.map( element =>(
-                        <option key={element.id} value={element.id}>{element.name}</option>
+                    })}
+                >
+                <option value="">Seleccione</option>
+                {jobLevel.map( element =>(
+                    <option key={element.id} value={element.id}>{element.name}</option>
                     )
-                    )}
+                )}
                 </select>	
                 <span className="span-error mt-1">
                     { errors.cargo && errors.cargo.message}
@@ -210,7 +213,8 @@ const WithExperience = (props) => {
                             "border-error red-input input-icoerror"       
                             : ''
                         }
-                    `}       
+                    `}
+                    value={job.address} data-index={index} data-name="address" onChange={changeValueJob}
                     name='dir_empresa'
                     type="text"
                     autoComplete="off"
@@ -225,7 +229,7 @@ const WithExperience = (props) => {
             <label htmlFor="rubro" className="label-form mt-1" >
                 Rubro
                 <select 
-                    className={`form-control form-text-check-adress
+                    className={`form-control placeholder mb-2
                         ${
                             isSubmitted ? 
                             !errors.rubro 
@@ -234,14 +238,15 @@ const WithExperience = (props) => {
                             : ''
                         }
                     `} 
-                    data-type="int" value={job.department} data-index={index} data-name="department" onChange={changeValueJob}
+                    data-type="int" value={job.attrition_id} data-index={index} data-name="attrition_id" onChange={changeValueJob}
                     name='rubro'
                     ref={register({ required: {value: true, message: "Seleccione una opción"} })}
-                >
+                    >
                 <option value="">Seleccione</option>
-                <option value="1">Rubro 1</option>   
-                <option value="2">Rubro 2</option>   
-                <option value="3">Rubro 3</option>   
+                {rubro.map( element =>(
+                        <option key={element.id} value={element.id}>{element.name}</option>
+                    )
+                )}
                 </select>
                 <span className="span-error mt-1">
                     { errors.rubro && errors.rubro.message}
@@ -482,20 +487,20 @@ const WithExperience = (props) => {
                     { errors.over_time && errors.over_time.message}
                 </span>
             </label>
-            <label htmlFor="attrition" className="label-form mt-1">
+            <label htmlFor="attrition_id" className="label-form mt-1">
                 Motivo de retiro
                 <select 
                     className={`form-control form-text-check-adress mt-2
                                     ${
                                         isSubmitted ? 
-                                        !errors.attrition ?
+                                        !errors.attrition_id ?
                                         ""
                                         : 
                                         "border-error red-input "       
                                         : ''
                                     }
                                 `}
-                    name='attrition'
+                    name='attrition_id'
                     ref={register({ required: {value: true, message: "Seleccione una opción"} })}
                 >
                 <option value="">Seleccione</option>
@@ -507,7 +512,7 @@ const WithExperience = (props) => {
                 )}     
                 </select>
                 <span className="span-error mt-1">
-                    { errors.attrition && errors.attrition.message}
+                    { errors.attrition_id && errors.attrition_id.message}
                 </span>
             </label>
             <label htmlFor="nivel_par" className="label-form mt-3">
