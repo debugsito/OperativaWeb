@@ -84,7 +84,7 @@ function Navbar(props) {
                 </Link>
               </li>
               <li className ="nav-text">
-                <Link to="/inicio-sesion"><FaIcons.FaFileAlt/>
+                <Link to="/solicitudes"><FaIcons.FaFileAlt/>
                 <span>Solicitudes</span>  
                 </Link>
               </li>
