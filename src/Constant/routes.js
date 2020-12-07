@@ -14,4 +14,6 @@ export const INFOCOMPANY = '/info-company';
 export const INFOMUNICIPALITY = '/info-municipality';
 export const PROFILEUPDATESUCCESSFUL = '/informacion-completada-con-exito';
 
+export const SOLICITUDES = '/solicitudes';
+
 // export const NEWPASSWORD = '/nueva-contraseña/:token'

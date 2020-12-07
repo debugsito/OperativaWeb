@@ -197,6 +197,48 @@
 .btn-operativa:hover {
   color: #ffffff;
 }
+
+.btn-cancelar-modal {
+  background: #ffffff;
+  font-family: 'Roboto Medium';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #ed1d40;
+  border: 1px solid #ed1d40;
+  border-radius: 10px;
+  width: 134px;
+  height: 40px;
+  margin: 9px 0px;
+}
+.btn-aceptar-modal {
+  background: #ed1d40;
+  font-family: 'Roboto Medium';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #ffffff;
+  border-radius: 10px;
+  width: 134px;
+  height: 40px;
+  margin: 9px 4px;
+  text-decoration: none;
+}
+
+.modal-solicitud {
+  width: 341px;
+  height: 230px;
+  justify-content: center !important;
+}
+.title-modal {
+  font-family: 'Roboto Medium';
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  line-height: 24px;
+}
+
 .btn-operativa-second {
   background: #ffffff;
   font-family: 'Roboto Medium';

@@ -292,6 +292,7 @@ code {
   color: #373737;
   display: flex;
   align-items: center;
+  letter-spacing: 0.5px;
 }
 .form-text-check-adress {
   font-family: 'Roboto Medium';
@@ -393,6 +394,12 @@ code {
   background-repeat: no-repeat;
   background-position: 95%;
   background-size: 20px;
+}
+
+.btn-revisar {
+  color: #46a9d4;
+  border: none;
+  background: none;
 }
 
 .customDatePickerWidth,

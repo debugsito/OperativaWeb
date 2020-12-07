@@ -26,7 +26,6 @@ const RestorePassword = (props) => {
         props.history.push('/notificacion-contraseña');
       }
     }catch(error){
-      console.log("error: ", error.response.data.message);
       setError(error.response.data.message);
     }
   }

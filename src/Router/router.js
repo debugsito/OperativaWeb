@@ -18,6 +18,8 @@ import ProfileUpdate from '../Views/Profile/ProfileUpdate';
 import ProfileCompany from '../Views/Company/ProfileCompany';
 import ProfileMunicipality from '../Views/Municipality/ProfileMunicipality';
 
+import Request from '../Components/Table/Request';
+
 //Guardar Token
 const isAuth = () => {
   if (localStorage.getItem('token') !== null) {
@@ -39,6 +41,9 @@ function router() {
         <Route path={ROUTES.NEWPASSWORD} component={NewPassword} />
         <Route path={ROUTES.INFOCOMPANY} component={ProfileCompany} />
         <Route path={ROUTES.INFOMUNICIPALITY} component={ProfileMunicipality} />
+
+        <Route path={ROUTES.SOLICITUDES} component={Request} />
+
         <PrivateRoute path={ROUTES.WELCOME} component={Welcome} />
         <PrivateRoute path={ROUTES.INFO} component={ProfileInfo} />
         <PrivateRoute path={ROUTES.INFOADRESS} component={ProfileAdress} />

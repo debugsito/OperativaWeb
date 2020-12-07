@@ -7,6 +7,7 @@ import LogoMedio from '../../assets/logos/small.svg'
 import { useDispatch } from 'react-redux';
 import './index.css';
 import { logout } from '../../redux-store/user/actions/logout';
+import { logoutAccount } from '../../redux-store/user/actions/logout-account';
 
 
 function Navbar(props) {
@@ -27,6 +28,7 @@ function Navbar(props) {
          localStorage.removeItem('token')
          localStorage.removeItem('email')
          dispatch(logout());
+         dispatch(logoutAccount());
          props.history.push('/')    
      }
   return (

@@ -4,10 +4,15 @@ import * as AiIcons from 'react-icons/ai';
 import { Link, withRouter } from 'react-router-dom';
 import { IconContext } from 'react-icons';
 import LogoMedio from '../../assets/logos/small.svg'
+import { useDispatch } from 'react-redux';
 import './index.css';
+import { logout } from '../../redux-store/user/actions/logout';
+import { logoutAccount } from '../../redux-store/user/actions/logout-account';
 
 function NavbarDesk(props) {
   const [sidebar, setSidebar] = useState(false);
+
+  const dispatch = useDispatch();
 
   const showSidebar = () => setSidebar(!sidebar);
 
@@ -21,6 +26,8 @@ function NavbarDesk(props) {
     const cerrarSesion= () =>{
          localStorage.removeItem('token')
          localStorage.removeItem('email')
+         dispatch(logout());
+         dispatch(logoutAccount());
          props.history.push('/')    
      }
   return (
@@ -76,7 +83,7 @@ function NavbarDesk(props) {
                 </Link>
               </li>
               <li className ="nav-text">
-                <Link to="/inicio-sesion"><FaIcons.FaFileAlt/>
+                <Link to="/solicitudes"><FaIcons.FaFileAlt/>
                 <span>Solicitudes</span>  
                 </Link>
               </li>

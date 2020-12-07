@@ -9,6 +9,8 @@ import { SET_INIT_USER, reducer as initUserReducer } from './actions/init-user';
 import { SET_JOB, reducer as setJobReducer } from './actions/set-job';
 import { REMOVE_JOB, reducer as removeJobReducer } from './actions/remove-job';
 import { UPDATE_JOB, reducer as updateJobReducer } from './actions/update-job';
+import { SET_INIT_ACCOUNT, reducer as initAccountReducer } from './actions/init-account';
+import { LOGOUT_ACCOUNT, reducer as logoutAccountReducer } from './actions/logout-account';
 
 // exportamos nuestras acciones
 export { setUserLoading } from './actions/set-loading-user';
@@ -34,7 +36,15 @@ const initialState = {
     district_id: null,
     civil_id: null,
     provider_id: null,
+    role:'postulante',
     jobs: []
+  },
+  account:{
+    email: "test2@gmail.com",
+    id: null,
+    razon_social: null,
+    role: "postulante",
+    status: null
   },
   loading: false,
   error: null,
@@ -53,6 +63,8 @@ const actionHandlers = {
   [SET_JOB]: setJobReducer,
   [REMOVE_JOB]: removeJobReducer,
   [UPDATE_JOB]: updateJobReducer,
+  [SET_INIT_ACCOUNT]: initAccountReducer,
+  [LOGOUT_ACCOUNT]: logoutAccountReducer,
 };
 
 export default function reducer(state = initialState, action) {

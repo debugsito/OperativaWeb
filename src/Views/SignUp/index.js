@@ -20,7 +20,6 @@ const Register = (props) => {
   const [error, setError] = useState(null);
   const [modalTerms, setModalTerms] = useState(false);
 
-
   //mostrar Contraseña:
   const seePass = () => {
     setSee(!see); 
@@ -195,7 +194,7 @@ const Register = (props) => {
           Cerrar{' '}
           </button>
         </ModalFooter>
-        </Modal>
+      </Modal>
 
     </>
   );

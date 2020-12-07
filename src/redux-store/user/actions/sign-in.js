@@ -1,6 +1,7 @@
 import UserService from '../../../services/user.service';
 import { setUserLoading } from './set-loading-user';
 import { setUserError } from './set-error-user';
+import { setInitAccount } from './init-account';
 
 export const SIGN_IN = 'User/SIGN_IN';
 
@@ -18,9 +19,11 @@ export const signIn = (user) => {
       // dispatch llama a las acciones
       dispatch(setUserLoading(true));
       const response = await UserService.signIn(user);
+      dispatch(setInitAccount(response.account));
       dispatch(setSignInUser(response));
       dispatch(setUserLoading(false));
       dispatch(setUserError(null));
+
     } catch (error) {
       dispatch(setUserLoading(false));
       if(!error.response){

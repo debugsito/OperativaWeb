@@ -13,7 +13,7 @@ import { setInitUser } from '../../redux-store/user/actions/init-user';
 const Login = (props) => {
   // llamar accion de redux
   const dispatch = useDispatch();
-  const { error: userError, signIn: success } = useSelector((state) => state.user);
+  const { error: userError, signIn: success, account: account } = useSelector((state) => state.user);
   const { handleSubmit, register, errors, formState } = useForm();
   const { isSubmitted } = formState;
 
@@ -58,10 +58,25 @@ const Login = (props) => {
 
   //Exito
   useEffect(() => {
-    if (success) {
-      props.history.push('/inicio');
+    if(account && account.role){
+      switch(account.role) {
+        case 'postulante':
+          props.history.push('/inicio');
+          break;
+        case 'admin':
+          props.history.push('/solicitudes');
+          break;
+        case 'business':
+          props.history.push('/inicio');
+          break;
+        case 'muni':
+          props.history.push('/inicio');
+          break;
+        default:
+          props.history.push('/inicio');
+          break;
+      }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [success]);
 
   return (
