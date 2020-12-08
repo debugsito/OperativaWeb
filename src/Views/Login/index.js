@@ -58,13 +58,14 @@ const Login = (props) => {
 
   //Exito
   useEffect(() => {
+    
     if(account && account.role){
       switch(account.role) {
         case 'postulante':
           props.history.push('/inicio');
           break;
         case 'admin':
-          props.history.push('/solicitudes');
+          props.history.push('/inicio');
           break;
         case 'business':
           props.history.push('/inicio');
@@ -77,6 +78,7 @@ const Login = (props) => {
           break;
       }
     }
+    
   }, [success]);
 
   return (

@@ -5,14 +5,16 @@ import { registerLocale } from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import es from 'date-fns/locale/es';
 import { useForm } from 'react-hook-form';
-import { onlyNumbers, onlyLetters , onlyAlphaNumeric  } from './../../utils/validation';
+import { onlyNumbers, onlyLetters , onlyAlphaNumeric  } from '../../utils/validation';
 import CompanyService from '../../services/company.service';
+import MunicipalityService from '../../services/municipality.service';
 import UtilService from '../../services/util.service';
 import document  from '../../assets/docs/terminosycondiciones.pdf'
-import { MensajeError } from './../../utils/toast'
+import { MensajeError } from '../../utils/toast'
+
 registerLocale('es', es);
 
-const ProfileCompany = (props) => {
+const RegistrationRequest = (props) => {
   const { handleSubmit, register, errors, formState } = useForm();
   const { isSubmitted } = formState;
   const [ rubro, setRubro] = useState([]);
@@ -26,7 +28,26 @@ const ProfileCompany = (props) => {
       phone: values.phone,
       interest_area_id: values.cargo
     };
-    registerCompany(datafield);
+
+    const postulante = parseInt(values.postulante);
+
+    if(postulante === 1){
+      registerCompany(datafield);
+    } else {
+      registerMunicipality(datafield);
+    }
+    
+  }
+
+  async function registerMunicipality(datafield){
+    try{
+    const responseCompany = await MunicipalityService.registerMunicipality(datafield);
+    if(responseCompany.status === 200){
+      props.history.push('/solicitud-enviada')
+    }
+    }catch(error){
+      MensajeError("Error: " + error.response.data.message);
+    }
   }
   
   async function registerCompany(datafield){
@@ -39,6 +60,8 @@ const ProfileCompany = (props) => {
       MensajeError("Error: " + error.response.data.message);
     }
   }
+
+
   
   useEffect(() => {
       async function listRubro(){
@@ -59,6 +82,38 @@ const ProfileCompany = (props) => {
               Completa los siguientes campos para ser parte de Operativa.
               <br/>Si ya tienes una cuenta <a href="/registro">inicia sesión</a>
             </p>
+            <label htmlFor="postulante" className="label-form mt-1">
+              Soy
+                <div className= "input-container-radio mt-2">
+                    <div className="form-check margin-right">
+                        <input 
+                            className="form-check-input"
+                            type="radio" 
+                            name="postulante"
+                            value='1'
+                            ref={register({ required: "Seleccione una opción" })}
+                        />
+                        <label className="form-text-check">
+                            Empresa
+                        </label>
+                    </div>
+                    <div className="form-check margin-right">
+                        <input 
+                            className="form-check-input"
+                            type="radio" 
+                            name="postulante" 
+                            value="2"
+                            ref={register({ required: "Seleccione una opción" })}
+                        />
+                        <label className="form-text-check">
+                            Municipalidad
+                        </label>
+                    </div>
+                </div>
+                <span className="span-error">
+                    { errors.postulante && errors.postulante.message}
+                </span>
+            </label>
             <label htmlFor="first_name" className="label-form mt-1">
               Nombre
               <input
@@ -287,4 +342,4 @@ const ProfileCompany = (props) => {
   );
 };
 
-export default withRouter(ProfileCompany);
+export default withRouter(RegistrationRequest);

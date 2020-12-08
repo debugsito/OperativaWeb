@@ -145,7 +145,7 @@ const ProfileMunicipality = (props) => {
                             `}
                 name="business_name"
                 type="text"
-                maxLength="25"
+                maxLength="60"
                 autoComplete="off"
                 onKeyPress={e =>{onlyAlphaNumeric(e)}} 
                 ref={register({

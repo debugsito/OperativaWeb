@@ -64,14 +64,14 @@ const Home = () => {
                 <Link to="/registro" className="btn btn-operativa btn-sm">
                   BUSCAR EMPLEO
                 </Link>
-                <Link to="/info-company" className="btn btn-operativa-second btn-sm">
+                <Link to="/registration-request" className="btn btn-operativa-second btn-sm">
                   PUBLICAR EMPLEO
                 </Link>
               </div>
               <label className="m-top">
               <label className="info-sol-registro">
                 Si eres una Municipalidad y quieres unirte a nuestra red, llena la{' '}
-                <Link to="/info-municipality" className="">
+                <Link to="/registration-request" className="">
                   solicitud de registro
                 </Link>
               </label>

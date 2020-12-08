@@ -212,6 +212,10 @@
   height: 40px;
   margin: 9px 0px;
 }
+.btn-cancelar-modal:hover {
+  color: #ed1d40;
+}
+
 .btn-aceptar-modal {
   background: #ed1d40;
   font-family: 'Roboto Medium';
@@ -225,6 +229,9 @@
   height: 40px;
   margin: 9px 4px;
   text-decoration: none;
+}
+.btn-aceptar-modal:hover {
+  color: #ffffff;
 }
 
 .modal-solicitud {

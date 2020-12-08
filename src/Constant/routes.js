@@ -10,8 +10,7 @@ export const INFO = '/info';
 export const INFOADRESS = '/info-direccion';
 export const INFOACADEMIC = '/informacion-academica';
 export const INFOEXPERIENCE = '/info-experiencia';
-export const INFOCOMPANY = '/info-company';
-export const INFOMUNICIPALITY = '/info-municipality';
+export const REGISTRATION_REQUEST = '/registration-request';
 export const PROFILEUPDATESUCCESSFUL = '/informacion-completada-con-exito';
 
 export const SOLICITUDES = '/solicitudes';

@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import UtilService from '../../services/util.service';
 import UserService from '../../services/user.service';
 import  'react-multiple-select-dropdown-lite/dist/index.css'
+import { MensajeError } from './../../utils/toast'
 
 const WithoutExperience = (props) => { 
 
@@ -22,21 +23,23 @@ const WithoutExperience = (props) => {
 
     const onSubmit = (values) => {
         const datafield = {
-            rotating_schedule: values.rotating_schedule,
-            extra_hours: values.extra_hours,
-            work_weekend: values.weekend,
-            interest_area_id: values.cargo,
+            rotating_schedule: parseInt(values.rotativo),
+            extra_hours: parseInt(values.extra_hours),
+            work_weekend: parseInt(values.weekend),
+            interest_area_id: parseInt(values.cargo),
         };
         WithoutExperience(datafield);
     } 
 
     async function WithoutExperience(datafield){
+        try{
         const responseEducation = await UserService.registerUserWithoutExperience(datafield);
             if(responseEducation.status === 200){
                 props.history.push('/informacion-completada-con-exito')
-            } else {
-                // Mensaje de error
             }
+        }catch(error){
+            MensajeError(error.response.data.message);
+        }
     }
 
     return (

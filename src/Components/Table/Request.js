@@ -10,10 +10,9 @@ import { MensajeExito } from './../../utils/toast'
 const Request = (props) => {
 
     const [ account, setAccount ] = useState([]);
-    const [modalTerms, setModalTerms] = useState(false);
+    const [ modalTerms, setModalTerms] = useState(false);
     const [ accountid, setAccountid ] = useState(null);
-    const [stateRequest, setStateRequest] = useState(1);
-
+    const [ stateRequest, setStateRequest] = useState(0);
 
     const columns = [
         {
@@ -28,18 +27,16 @@ const Request = (props) => {
         },
         {
             name:'RUC',
-            selector: 'role',
-            sortable: true
+            cell: row => row.user.document_number
         },
         {
             name:'Teléfono',
-            selector: 'role',
-            sortable: true
+            cell: row => row.user.phone
+            
         },
         {
             name:'Persona Responsable',
-            selector: 'role',
-            sortable: true
+            cell: row => row.user.first_name
         },
         {
             name:'Correo',
@@ -82,10 +79,13 @@ const Request = (props) => {
             account_id: id
         };
 
-        if(state == 1){
+        if(state === 0){
+            MensajeError("Selecciona una acción")
+        }
+        if(state === 1){
             activateAccount(datafield);
         } 
-        if(state == 2){
+        if(state === 2){
             denyAccount(datafield);
         }
     };
@@ -98,7 +98,8 @@ const Request = (props) => {
             }
         }catch(error){
             MensajeError("Ocurrio un error interno");
-        }  
+        } 
+        setModalTerms(!modalTerms)
     }
 
     async function denyAccount(datafield){
@@ -109,7 +110,8 @@ const Request = (props) => {
             }
         }catch(error){
             MensajeError("Ocurrio un error interno");
-        }  
+        } 
+        setModalTerms(!modalTerms)
     }
 
     return (
@@ -141,7 +143,6 @@ const Request = (props) => {
                             type="radio" 
                             name="gender"
                             onChange={(e) => setStateRequest(1)}
-                            value='1'
                         />
                         <label className="form-text-check">
                             Aprobar
@@ -153,7 +154,6 @@ const Request = (props) => {
                             type="radio" 
                             name="gender"
                             onChange={(e) => setStateRequest(2)}
-                            value='2'
                         />
                         <label className="form-text-check">
                             Rechazar

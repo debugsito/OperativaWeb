@@ -15,15 +15,31 @@ import ProfileAdress from '../Views/Profile/ProfileAdress';
 import ProfileAcademic from '../Views/Profile/ProfileAcademic';
 import ProfileExperience from '../Views/Profile/ProfileExperience';
 import ProfileUpdate from '../Views/Profile/ProfileUpdate';
-import ProfileCompany from '../Views/Company/ProfileCompany';
-import ProfileMunicipality from '../Views/Municipality/ProfileMunicipality';
+import RegistrationRequest from '../Views/Company/RegistrationRequest';
 
 import Request from '../Components/Table/Request';
+import { useSelector } from 'react-redux';
+ 
+const userPages = ['/inicio','/info','/info-direccion','/informacion-academica','/info-experiencia','/informacion-completada-con-exito'];
+const adminPages = ['/solicitudes', '/welcome', '/inicio'];
+const businessPages = ['/inicio','/info-municipality','info-company'];
+const muniPages = ['/inicio','/info-municipality','info-company'];
 
 //Guardar Token
-const isAuth = () => {
-  if (localStorage.getItem('token') !== null) {
-    return true;
+const isAuth = (account,routeName,token) => {
+  if (account && token) {
+    switch (account.account.role) {
+      case 'admin':
+        return adminPages.includes(routeName);
+      case 'postulante':
+        return userPages.includes(routeName);
+      case 'business':
+        return businessPages.includes(routeName);
+      case 'muni':
+        return muniPages.includes(routeName);
+      default:
+        return false;
+    }
   }
   return false;
 };
@@ -39,28 +55,27 @@ function router() {
         <Route path={ROUTES.NOTIFICATIONPASS} component={NotificationReset} />
         <Route path={ROUTES.NOTIFICATIONREQUESTSENT} component={RequestSent} />
         <Route path={ROUTES.NEWPASSWORD} component={NewPassword} />
-        <Route path={ROUTES.INFOCOMPANY} component={ProfileCompany} />
-        <Route path={ROUTES.INFOMUNICIPALITY} component={ProfileMunicipality} />
-
-        <Route path={ROUTES.SOLICITUDES} component={Request} />
-
+        <Route path={ROUTES.REGISTRATION_REQUEST} component={RegistrationRequest} />
+        <PrivateRoute path={ROUTES.SOLICITUDES} component={Request} />
         <PrivateRoute path={ROUTES.WELCOME} component={Welcome} />
         <PrivateRoute path={ROUTES.INFO} component={ProfileInfo} />
         <PrivateRoute path={ROUTES.INFOADRESS} component={ProfileAdress} />
         <PrivateRoute path={ROUTES.INFOACADEMIC} component={ProfileAcademic} />
         <PrivateRoute path={ROUTES.INFOEXPERIENCE} component={ProfileExperience} />
-        {/* <PrivateRoute path={ROUTES.INFOEXPERIENCEPRO} component={ProfileProfesional} />   */}
         <PrivateRoute path={ROUTES.PROFILEUPDATESUCCESSFUL} component={ProfileUpdate} />
       </Switch>
     </BrowserRouter>
   );
 
   function PrivateRoute({ component: Component, ...rest }) {
+    const account = useSelector(state => state.user);
+    const token = localStorage.getItem('token');
+  
     return (
       <Route
         {...rest}
         render={(props) =>
-          isAuth() ? (
+          isAuth(account, rest.path, token) ? (
             <Component {...props} />
           ) : (
             <Redirect
