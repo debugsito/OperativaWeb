@@ -368,13 +368,21 @@ code {
 .border-error {
   border: 1px solid #ed1d40;
 }
-.placeholder {
-  font-family: 'Raleway', sans-serif;
+.input-text {
+  font-family: 'Roboto Medium';
   font-size: 12px;
   font-weight: normal;
   display: flex;
   justify-content: center;
-  color: #979797;
+  color: #000000;
+}
+.placeholder {
+  font-family: 'Roboto Medium';
+  font-size: 12px;
+  font-weight: normal;
+  display: flex;
+  justify-content: center;
+  color: ##757575;
 }
 .input-icono {
   background-image: url(./assets/icons/verification.svg);

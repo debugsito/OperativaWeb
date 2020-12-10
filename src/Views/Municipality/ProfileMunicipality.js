@@ -102,7 +102,7 @@ const ProfileMunicipality = (props) => {
                 {errors.last_name && errors.last_name.message}
               </span>
             </label>
-                        <label className="label-form">
+            <label className="label-form">
               Correo Electrónico
               <input
                 placeholder="mail@ejemplo.com"
@@ -176,7 +176,7 @@ const ProfileMunicipality = (props) => {
                 autoComplete="off"
                 ref={register({
                   required:  {value: true, message: 'Este campo es requerido'},
-                  minLength: {value: 8, message: 'Ingrese un RUC valido'} 
+                  minLength: {value: 11, message: 'Ingrese un RUC valido'} 
                 })}
               />
               <span className="span-error mt-1">
@@ -209,7 +209,7 @@ const ProfileMunicipality = (props) => {
                               message: 'Coloque un número telefónico válido' 
                           },
                           minLength: {
-                              value: 9,
+                              value: 7,
                               message: 'Coloque un número telefónico válido' 
                           }
                   })} 

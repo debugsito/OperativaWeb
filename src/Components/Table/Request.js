@@ -79,13 +79,13 @@ const Request = (props) => {
             account_id: id
         };
 
-        if(state === 0){
+        if(state === "0"){
             MensajeError("Selecciona una acción")
         }
-        if(state === 1){
+        if(state === "1"){
             activateAccount(datafield);
         } 
-        if(state === 2){
+        if(state === "2"){
             denyAccount(datafield);
         }
     };

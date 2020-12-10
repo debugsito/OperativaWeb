@@ -24,6 +24,7 @@ const RegistrationRequest = (props) => {
       first_name: values.first_name,
       last_name: values.last_name,
       document_number: values.ruc,
+      razon_social: values.business_name,
       email: values.mail,
       phone: values.phone,
       interest_area_id: values.cargo
@@ -61,8 +62,6 @@ const RegistrationRequest = (props) => {
     }
   }
 
-
-  
   useEffect(() => {
       async function listRubro(){
       const responseRubro = await UtilService.listRubro();
@@ -118,7 +117,7 @@ const RegistrationRequest = (props) => {
               Nombre
               <input
                 placeholder="Ejemplo: Pedro Luis"
-                className={`form-control placeholder
+                className={`form-control input-text
                                 ${
                                   isSubmitted
                                     ? !errors.first_name
@@ -144,7 +143,7 @@ const RegistrationRequest = (props) => {
               Apellido
               <input
                 placeholder="Ejemplo: Castillo Lopez"
-                className={`form-control placeholder
+                className={`form-control input-text
                                 ${
                                   isSubmitted
                                     ? !errors.last_name
@@ -170,7 +169,7 @@ const RegistrationRequest = (props) => {
               Razon Social
               <input
                 placeholder="Ejemplo: Operativa"
-                className={`form-control placeholder
+                className={`form-control input-text
                                 ${
                                   isSubmitted
                                     ? !errors.business_name
@@ -196,7 +195,7 @@ const RegistrationRequest = (props) => {
               RUC
               <input
                 placeholder="Ejemplo: 20145874585"
-                className={`form-control placeholder
+                className={`form-control input-text
                                 ${
                                   isSubmitted
                                     ? !errors.ruc
@@ -212,7 +211,7 @@ const RegistrationRequest = (props) => {
                 autoComplete="off"
                 ref={register({
                   required:  {value: true, message: 'Este campo es requerido'},
-                  minLength: {value: 8, message: 'Ingrese un RUC valido'} 
+                  minLength: {value: 11, message: 'Ingrese un RUC valido'} 
                 })}
               />
               <span className="span-error mt-1">
@@ -223,7 +222,7 @@ const RegistrationRequest = (props) => {
               Correo Electrónico
               <input
                 placeholder="mail@ejemplo.com"
-                className={`form-control placeholder
+                className={`form-control input-text
                                     ${
                                       isSubmitted
                                         ? !errors.mail
@@ -251,7 +250,7 @@ const RegistrationRequest = (props) => {
               Teléfono
               <input
                   placeholder="Ejemplo: 958478595"
-                  className={`form-control placeholder mb-2
+                  className={`form-control input-text
                       ${
                           isSubmitted ? 
                           !errors.phone ?
@@ -273,7 +272,7 @@ const RegistrationRequest = (props) => {
                               message: 'Coloque un número telefónico válido' 
                           },
                           minLength: {
-                              value: 9,
+                              value: 7,
                               message: 'Coloque un número telefónico válido' 
                           }
                   })} 
@@ -285,7 +284,7 @@ const RegistrationRequest = (props) => {
             <label htmlFor="cargo" className="label-form mt-1">        
               Rubro
                 <select 
-                    className={`form-control placeholder mb-2
+                    className={`form-control input-text
                         ${
                             isSubmitted ? 
                             !errors.cargo ?
@@ -321,7 +320,7 @@ const RegistrationRequest = (props) => {
               <span className="info-form-term">
                 Acepto los{' '}
                 
-                <a href={document} target = "_blank" rel="noopener noreferrer">terminos y condiciones</a>
+                <a href={document} target = "" rel="noopener noreferrer" >terminos y condiciones</a>
               </span>
             </label>
             <span className="span-error">{errors.terms && errors.terms.message}</span>
