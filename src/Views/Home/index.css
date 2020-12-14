@@ -194,6 +194,7 @@
   margin-right: 0px;
   text-decoration: none;
 }
+
 .btn-operativa:hover {
   color: #ffffff;
 }
@@ -658,6 +659,7 @@
     margin-top: 30px;
     padding: 12px;
   }
+
   .btn-operativa-second {
     padding: 12px;
   }

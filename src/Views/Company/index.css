@@ -1,0 +1,54 @@
+.justify-content-right {
+  justify-content: flex-end;
+}
+
+.text-align-center {
+  text-align: center;
+}
+
+.label-form-modal {
+  font-family: 'Roboto Medium';
+  font-style: normal;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 130%;
+  width: 100% !important;
+  height: 30px;
+  color: #000000;
+  text-align: left;
+}
+
+.btn-nuevo-user {
+  background: #ed1d40;
+  font-family: 'Roboto Medium';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #ffffff;
+  border-radius: 10px;
+  width: 191px;
+  padding: 5px 0px;
+  margin-left: 12px;
+  margin-bottom: 5px;
+  letter-spacing: 1.25px;
+  text-decoration: none;
+}
+
+.btn-nuevo-user:hover {
+  color: #ffffff;
+}
+
+@media only screen and (min-width: 768px) {
+  .btn-nuevo-user {
+    margin-top: 20px;
+    padding: 10px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .btn-nuevo-user {
+    margin-top: 10px;
+    padding: 10px;
+  }
+}

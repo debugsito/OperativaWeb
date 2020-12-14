@@ -83,6 +83,11 @@ function NavbarDesk(props) {
                 </Link>
               </li>
               <li className ="nav-text">
+                <Link to="/maintenance-user"><FaIcons.FaFileAlt/>
+                <span>Usuarios</span>  
+                </Link>
+              </li>
+              <li className ="nav-text">
                 <Link to="/solicitudes"><FaIcons.FaFileAlt/>
                 <span>Solicitudes</span>  
                 </Link>

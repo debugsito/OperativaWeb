@@ -18,4 +18,19 @@ export default class AdminService {
     return response;
   }
 
+  // Lista los Sub Usuarios (Empresa o Municipalidad)
+  static async listSubUser() {
+    const response = await Api.get('/account/users');
+    return response;
+  }
+  // Crear los Sub Usuarios (Empresa o Municipalidad)
+  static async createUser(info) {
+    const response = await Api.post('/account/user',info);
+    return response;
+  }
+    static async deleteSubUser(info,id) {
+    const response = await Api.post('/account/user/'+ id +'/delete', info);
+    return response;
+  }
+
 }

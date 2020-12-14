@@ -24,6 +24,8 @@ const RegistrationRequest = (props) => {
       first_name: values.first_name,
       last_name: values.last_name,
       document_number: values.ruc,
+      cargo_input: values.cargo,
+      area_input: values.area,
       razon_social: values.business_name,
       email: values.mail,
       phone: values.phone,
@@ -165,8 +167,60 @@ const RegistrationRequest = (props) => {
                 {errors.last_name && errors.last_name.message}
               </span>
             </label>
+            <label htmlFor="cargo" className="label-form mt-1">
+              Cargo
+              <input
+                placeholder="Ejemplo: Asistente RRHH"
+                className={`form-control input-text
+                                ${
+                                  isSubmitted
+                                    ? !errors.cargo
+                                      ? 'input-icono'
+                                      : 'border-error red-input input-icoerror'
+                                    : ''
+                                }
+                            `}
+                name="cargo"
+                type="text"
+                maxLength="30"
+                onKeyPress={e =>{onlyLetters(e)}} 
+                autoComplete="off"
+                ref={register({
+                  required: { value: true, message: 'Este campo es requerido' }
+                })}
+              />
+              <span className="span-error mt-1">
+                {errors.cargo && errors.cargo.message}
+              </span>
+            </label>
+            <label htmlFor="area" className="label-form mt-1">
+              Área
+              <input
+                placeholder="Ejemplo: Recursos Humanos"
+                className={`form-control input-text
+                                ${
+                                  isSubmitted
+                                    ? !errors.area
+                                      ? 'input-icono'
+                                      : 'border-error red-input input-icoerror'
+                                    : ''
+                                }
+                            `}
+                name="area"
+                type="text"
+                maxLength="30"
+                onKeyPress={e =>{onlyLetters(e)}} 
+                autoComplete="off"
+                ref={register({
+                  required: { value: true, message: 'Este campo es requerido' }
+                })}
+              />
+              <span className="span-error mt-1">
+                {errors.area && errors.area.message}
+              </span>
+            </label>
             <label htmlFor="business_name" className="label-form mt-1">
-              Razon Social
+              Razón Social
               <input
                 placeholder="Ejemplo: Operativa"
                 className={`form-control input-text
@@ -218,7 +272,7 @@ const RegistrationRequest = (props) => {
                 {errors.ruc && errors.ruc.message}
               </span>
             </label>
-            <label className="label-form">
+            <label  htmlFor="mail" className="label-form">
               Correo Electrónico
               <input
                 placeholder="mail@ejemplo.com"

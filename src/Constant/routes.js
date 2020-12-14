@@ -11,6 +11,7 @@ export const INFOADRESS = '/info-direccion';
 export const INFOACADEMIC = '/informacion-academica';
 export const INFOEXPERIENCE = '/info-experiencia';
 export const REGISTRATION_REQUEST = '/registration-request';
+export const MAINTENANCE_USER = '/maintenance-user';
 export const PROFILEUPDATESUCCESSFUL = '/informacion-completada-con-exito';
 
 export const SOLICITUDES = '/solicitudes';

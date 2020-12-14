@@ -78,7 +78,6 @@ const Login = (props) => {
           break;
       }
     }
-    
   }, [success]);
 
   return (
@@ -117,7 +116,9 @@ const Login = (props) => {
                 })}
               />
             </label>
-            <span className="span-error">{errors.usuario && errors.usuario.message}</span>
+            <span className="span-error">
+              {errors.usuario && errors.usuario.message}
+            </span>
             <label className="label-form">
               Contraseña
               <div className="icon-see-container">
@@ -138,7 +139,6 @@ const Login = (props) => {
                                         : ''
                                     }
                                 `}
-                id="password"
                 name="password"
                 type={!see ? 'password' : 'text'}
                 ref={register({
@@ -148,7 +148,9 @@ const Login = (props) => {
                 })}
               />
             </label>
-            <span className="span-error">{errors.password && errors.password.message}</span>
+            <span className="span-error">
+              {errors.password && errors.password.message}
+            </span>
             <div>
               <span className="info-form">
                 <a href="/restablecer-contraseña">Restablecer contraseña</a>

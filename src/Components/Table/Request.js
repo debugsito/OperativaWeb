@@ -39,13 +39,21 @@ const Request = (props) => {
             cell: row => row.user.first_name
         },
         {
+            name:'Cargo',
+            cell: row => row.user.first_name
+        },
+        {
+            name:'Área',
+            cell: row => row.user.first_name,
+        },
+        {
             name:'Correo',
             selector: 'email',
-            sortable: true
         },
         {
             name:'Fecha',
-            cell: row => moment(row.createdAt).format('YYYY-MM-DD')
+            cell: row => moment(row.createdAt).format('YYYY-MM-DD'),
+            sortable: true
         },
         {
             name: 'Acción',

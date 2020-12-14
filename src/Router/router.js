@@ -16,12 +16,13 @@ import ProfileAcademic from '../Views/Profile/ProfileAcademic';
 import ProfileExperience from '../Views/Profile/ProfileExperience';
 import ProfileUpdate from '../Views/Profile/ProfileUpdate';
 import RegistrationRequest from '../Views/Company/RegistrationRequest';
-
 import Request from '../Components/Table/Request';
+import MaintenanceUser from '../Views/Company/MaintenanceUser';
+
 import { useSelector } from 'react-redux';
  
 const userPages = ['/inicio','/info','/info-direccion','/informacion-academica','/info-experiencia','/informacion-completada-con-exito'];
-const adminPages = ['/solicitudes', '/welcome', '/inicio'];
+const adminPages = ['/solicitudes', '/welcome','/maintenance-user', '/inicio'];
 const businessPages = ['/inicio','/info-municipality','info-company'];
 const muniPages = ['/inicio','/info-municipality','info-company'];
 
@@ -57,6 +58,7 @@ function router() {
         <Route path={ROUTES.NEWPASSWORD} component={NewPassword} />
         <Route path={ROUTES.REGISTRATION_REQUEST} component={RegistrationRequest} />
         <PrivateRoute path={ROUTES.SOLICITUDES} component={Request} />
+        <PrivateRoute path={ROUTES.MAINTENANCE_USER} component={MaintenanceUser} />
         <PrivateRoute path={ROUTES.WELCOME} component={Welcome} />
         <PrivateRoute path={ROUTES.INFO} component={ProfileInfo} />
         <PrivateRoute path={ROUTES.INFOADRESS} component={ProfileAdress} />

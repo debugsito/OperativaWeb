@@ -84,6 +84,11 @@ function Navbar(props) {
                 </Link>
               </li>
               <li className ="nav-text">
+                <Link to="/maintenance-user"><FaIcons.FaUserAlt/>
+                <span>Usuarios</span>  
+                </Link>
+              </li>
+              <li className ="nav-text">
                 <Link to="/solicitudes"><FaIcons.FaFileAlt/>
                 <span>Solicitudes</span>  
                 </Link>
