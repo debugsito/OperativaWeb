@@ -28,8 +28,16 @@ export default class AdminService {
     const response = await Api.post('/account/user',info);
     return response;
   }
-    static async deleteSubUser(info,id) {
+
+  // Eliminar los Sub Usuarios (Empresa o Municipalidad)
+  static async deleteSubUser(info,id) {
     const response = await Api.post('/account/user/'+ id +'/delete', info);
+    return response;
+  }
+
+  // Editar los Sub Usuarios (Empresa o Municipalidad)
+  static async editSubUser(info,id) {
+    const response = await Api.post('/account/user/'+ id, info);
     return response;
   }
 

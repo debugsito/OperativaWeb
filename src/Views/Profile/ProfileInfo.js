@@ -106,7 +106,6 @@ const ProfileInfo = (props) => {
                                         : ''
                                     }
                                 `} 
-                                id='first_name'
                                 name='first_name'
                                 type="text"
                                 maxLength="25"
