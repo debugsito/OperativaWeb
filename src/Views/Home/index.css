@@ -284,6 +284,9 @@
   color: #ffffff;
   border-radius: 10px;
 }
+.btn-solicitud:hover {
+  color: #ffffff;
+}
 
 .btn-ilustracion-operativa {
   background: #ed1d40;
@@ -449,7 +452,6 @@
     font-size: 34px;
     line-height: 130%;
     color: #222121;
-    /* or 44px */
     display: flex;
     align-items: center;
     letter-spacing: 0.25px;
@@ -575,6 +577,7 @@
   }
   .image-solicitud {
     display: grid;
+    margin-left: 200px;
   }
 }
 @media only screen and (min-width: 1200px) {
@@ -603,7 +606,7 @@
     background-position: 98.5%;
   }
   .icon-image-solicitud-enviada {
-    width: 410px;
+    width: 500px;
     margin: 0;
     display: flex;
   }
@@ -611,12 +614,14 @@
     margin-top: 55px;
     max-width: 800px;
     flex: 0 0 58%;
+    place-self: center;
   }
   .title-solicitud {
     font-size: 34px;
   }
   .image-solicitud {
     display: grid;
+    margin-left: 0px;
   }
   .text-box-three {
     padding-top: 24px;

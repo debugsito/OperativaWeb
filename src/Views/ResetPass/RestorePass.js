@@ -8,11 +8,9 @@ import UserService from '../../services/user.service';
 const RestorePassword = (props) => {
   const { handleSubmit, register, errors, formState } = useForm();
   const { isSubmitted } = formState;
-
   const [error, setError] = useState(null);
 
   const onSubmit = (values) => {
-    console.log(values);
     const datafield = {
       email: values.usuario
     }
@@ -35,7 +33,7 @@ const RestorePassword = (props) => {
       <NavBar />
       <div className="row justify-content-center padding-container row-no-magin">
         <div className="col-12 col-sm-8 col-md-6 container-no-padding">
-          <h1 className="h1-custom-restore">RECUPERA TU CONTRASEÑA</h1>
+          <h1 className="h1-custom-restore">Recupera tu contraseña</h1>
             <span className="info-form-pass">
               Ingresa tu correo electrónico para recibir instrucciones de cómo retablecer tu contraseña.
             </span>
@@ -45,7 +43,7 @@ const RestorePassword = (props) => {
               Correo electrónico
               <input
                 placeholder="mail@ejemplo.com"
-                className={`form-control placeholder
+                className={`form-control input-text
                                 ${
                                   isSubmitted
                                     ? !errors.usuario
@@ -54,7 +52,6 @@ const RestorePassword = (props) => {
                                     : ''
                                 }
                             `}
-                id="email"
                 name="usuario"
                 type="text"
                 autoComplete="off"

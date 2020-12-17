@@ -9,13 +9,12 @@ import { MensajeExito} from './../../utils/toast'
 const NewPassword= (props) => { 
     const { handleSubmit, register, errors, formState} = useForm();
     const { isSubmitted } = formState;
+    const [see, setSee] = React.useState(false)
     
     const onSubmit = () => { 
-        MensajeExito("Has creado una nueva contraseña");
-        props.history.push('/inicio-sesion')
+        props.history.push('/update-password')
     }          
 
-    const [see, setSee] = React.useState(false)
     const seePass = () =>
     {
         setSee(!see)        
@@ -26,7 +25,7 @@ const NewPassword= (props) => {
             <NavBar/>
             <div className="row justify-content-center container-padding row-no-magin">
                 <div className="col-12 col-sm-8 col-md-6">
-                    <h1 className='h1-custom-restore'>CREA UNA NUEVA CONTRASEÑA</h1>
+                    <h1 className='h1-custom-restore'>Restablece tu contraseña</h1>
                 <form onSubmit= { handleSubmit(onSubmit) } className='form-container'>
                     <label className="label-form">
                         Nueva Contraseña
@@ -40,7 +39,7 @@ const NewPassword= (props) => {
                             </div>
                             <input
                                 placeholder=".........."
-                                className={`form-control placeholder
+                                className={`form-control input-text
                                     ${
                                         isSubmitted ? 
                                             !errors.password ?
@@ -50,7 +49,6 @@ const NewPassword= (props) => {
                                         : ''
                                     }
                                 `} 
-                                id='password'
                                 name='password'
                                 type={!see ? 'password' : 'text'}
                                 ref={register({
@@ -60,24 +58,55 @@ const NewPassword= (props) => {
                                     }
                                 )}
                             />
-                        
+                    </label>
+                    <label className="label-form">
+                        Confirmar Contraseña
+                        <div className="icon-see-container">
+                            {see 
+                                ? 
+                                <IoIosEye className="space-icon-see" onClick={seePass}/> 
+                                :
+                                <IoIosEyeOff className="space-icon-see" onClick={seePass}/>
+                            }
+                            </div>
+                            <input
+                                placeholder=".........."
+                                className={`form-control input-text
+                                    ${
+                                        isSubmitted ? 
+                                            !errors.password_ok ?
+                                            ""
+                                            : 
+                                            "border-error red-input"                                            
+                                        : ''
+                                    }
+                                `} 
+                                name='password_ok'
+                                type={!see ? 'password_ok' : 'text'}
+                                ref={register({
+                                    required: "Este campo es requerido",
+                                    minLength: { value: 6, message: "Debe contener mínimo 6 caracteres" },
+                                    maxLength: { value: 12, message: "Debe contener máximo 12 caracteres" }
+                                    }
+                                )}
+                            />
                     </label>
                         <span className="span-error">
-                            {errors.password && errors.password.message}
+                            {errors.password_ok && errors.password_ok.message}
                         </span>                  
                     <section  className="container-buttons">
                         <Link
                             className="btn-cancel-register btn" 
-                            type= 'submit' 
-                            to="/registro"
+                            type='button' 
+                            to="/"
                             >
                             CANCELAR  
                         </Link> 
                         <button 
-                            className="btn-login btn" 
-                            type= 'submit'
+                            className="btn-continue-sol text-center" 
+                            type='submit'
                             >
-                            SOLICITAR
+                            ACEPTAR
                         </button>
                     </section>
                 </form>

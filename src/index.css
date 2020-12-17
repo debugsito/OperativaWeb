@@ -113,14 +113,15 @@ code {
   height: 62px;
   margin-top: 115px;
   margin-left: 0 !important;
-  font-family: 'Roboto Medium';
-  font-weight: normal;
-  font-size: 24px;
+  font-family: 'Roboto Lighter';
+  font-weight: 600;
+  font-size: 34px;
   font-style: normal;
   color: #000000;
   line-height: 130%;
   display: flex;
   align-items: center;
+  letter-spacing: 0.25px;
 }
 .h1-custom-solicitud {
   position: static;
@@ -382,7 +383,7 @@ code {
   font-weight: normal;
   display: flex;
   justify-content: center;
-  color: ##757575;
+  color: #757575;
 }
 .input-icono {
   background-image: url(./assets/icons/verification.svg);
