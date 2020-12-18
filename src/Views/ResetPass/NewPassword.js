@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import NavBar from "../../Components/MenuUser/index";
 import { IoIosEye, IoIosEyeOff } from 'react-icons/io';
 import './index.css';
-import { MensajeExito} from './../../utils/toast'
 
 const NewPassword= (props) => { 
     const { handleSubmit, register, errors, formState} = useForm();

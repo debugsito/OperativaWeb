@@ -27,7 +27,6 @@ const UpdatePassword = (props) => {
                 </div>
             </div>
         </div>
-  
     </div>
     </>
   );

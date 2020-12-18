@@ -20,6 +20,12 @@ export default class UserService {
     return response;
   }
 
+  // Cambiar Password
+  static async ChangePass(user) {
+    const response = await Api.post('/change_password', user);
+    return response;
+  }
+
   // Registrar la información Personal del Usuario
   static async registerUserInfo(info){
     const response = await Api.post('/user/', info)

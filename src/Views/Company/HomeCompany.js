@@ -1,5 +1,7 @@
 import React from 'react'
 import NavBar from '../../Components/MenuUser/index';
+import * as FaIcons from 'react-icons/fa'
+import EmploymentCard from '../../Components/Card/EmploymentCard';
 
 
 import './index.css'
@@ -17,12 +19,15 @@ const HomeCompany = (props) => {
                     <div className="card col-12">
                         <div className="card-body">
                             <blockquote className="blockquote mb-0">
-                                <button type="button" className="edit-card">
-                                    <span>EDITAR</span>
+                                <button type="button" className="edit-card mt-2">
+                                    <span><FaIcons.FaPen size={14}/>  EDITAR</span>
                                 </button>
-                            <p>Nombre de la empresa</p>
-                            
-                            <footer className="blockquote-footer">RUC: <cite title="Source Title">Source Title</cite></footer>
+                                <button type="button" className="edit-card mt-2">
+                                    <span><FaIcons.FaTrashAlt size={14}/>  BORRAR</span>
+                                </button>
+                                <p className="name-company">Nombre de la empresa</p>
+                                <footer className="">RUC: <cite>25748574854</cite></footer>
+                                <label className="label-postulant">100 postulantes</label>
                             </blockquote>
                         </div>
                     </div>
@@ -32,6 +37,8 @@ const HomeCompany = (props) => {
                             <button className='btn btn-nuevo-user'>PUBLICAR EMPLEO</button>
                         </div>
                     </div>
+
+                    <EmploymentCard></EmploymentCard>
                     
                 </div>
             </div>

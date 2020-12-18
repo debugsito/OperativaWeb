@@ -6,17 +6,43 @@
   text-align: center;
 }
 
-.edit-card {
+.label-postulant {
+  font-family: 'Roboto Lighter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  width: 114px;
+  display: flex;
+  place-content: center;
+  height: 24px;
+  background: #f1efef;
+  align-items: center;
+  text-align: center;
+  border-radius: 100px;
+  margin-top: 10px !important;
+}
+
+.name-company {
   font-family: 'Roboto Medium';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 24px;
+  color: #222121;
+  mix-blend-mode: normal;
+  margin-bottom: 5px !important;
+}
+
+.edit-card {
+  font-family: 'Roboto Lighter';
+  font-size: 14px;
   float: right;
-  font-size: 1.5rem;
-  font-weight: 700;
-  line-height: 1;
+  font-weight: 600;
+  line-height: 16px;
   color: #000;
-  text-shadow: 0 1px 0 #fff;
-  opacity: 0.5;
   border: none;
   background: none;
+  letter-spacing: 1.25px;
 }
 
 .label-form-modal {
