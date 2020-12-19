@@ -8,7 +8,6 @@ import './index.css'
 
 const HomeCompany = (props) => {
     
-
     return (
         <>
         <NavBar />

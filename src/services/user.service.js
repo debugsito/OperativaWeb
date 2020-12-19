@@ -21,8 +21,8 @@ export default class UserService {
   }
 
   // Cambiar Password
-  static async ChangePass(user) {
-    const response = await Api.post('/change_password', user);
+  static async changePass(info) {
+    const response = await Api.post('/recover/change_password', info);
     return response;
   }
 
