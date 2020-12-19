@@ -24,8 +24,8 @@ import { useSelector } from 'react-redux';
  
 const userPages = ['/inicio','/info','/info-direccion','/informacion-academica','/info-experiencia','/informacion-completada-con-exito'];
 const adminPages = ['/solicitudes', '/welcome','/maintenance-user', '/inicio', '/menu-company'];
-const businessPages = ['/inicio','/info-municipality','info-company'];
-const muniPages = ['/inicio','/info-municipality','info-company'];
+const businessPages = ['/inicio', '/menu-company'];
+const muniPages = ['/inicio', '/menu-company'];
 
 //Guardar Token
 const isAuth = (account,routeName,token) => {

@@ -1,15 +1,30 @@
-import React, { useState, useEffect } from 'react'
-import { Modal, ModalBody } from 'reactstrap'
-import { useForm } from 'react-hook-form'
-import AdminService from '../../services/admin.service'
-import { IoIosEye, IoIosEyeOff } from 'react-icons/io'
-import { MensajeError } from './../../utils/toast'
-import { MensajeExito } from './../../utils/toast'
+import React from 'react'
+import * as FaIcons from 'react-icons/fa'
+import './index.css'
 
-const EmploymentCard = ({}) => {
+const EmploymentCard = () => {
 
     return (
-    <h1>HOLA MUNDO</h1>
+    <div className="col-12 mt-4">
+        <div className="card-job">
+            <div className="card-body">
+                <blockquote className="blockquote mb-0">
+                    <button type="button" className="edit-card mt-2">
+                        <span><FaIcons.FaPen size={14}/>  EDITAR</span>
+                    </button>
+                    <button type="button" className="edit-card mt-2">
+                        <span><FaIcons.FaTrashAlt size={14}/>  BORRAR</span>
+                    </button>
+                    <p className="name-company">Nombre de la empresa</p>
+                    <footer className="card-job-subtitle">
+                        <label className="vertical-align"><FaIcons.FaCalendarAlt/>&nbsp;</label>
+                        <label>Publicado 12 de noviembre del 2020</label>
+                    </footer>
+                    <label className="label-postulant">100 postulantes</label>
+                </blockquote>
+            </div>
+        </div>
+    </div>
     )
 }
 

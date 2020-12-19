@@ -15,19 +15,17 @@ const HomeCompany = (props) => {
             <div className='col-12 col-md-12 container-no-padding m-nav-form'></div>
             <div className='col-12 col-md-12 container-no-padding mt-2'>
                 <div className='row justify-content-center'>
-                    <div className="card col-12">
-                        <div className="card-body">
-                            <blockquote className="blockquote mb-0">
-                                <button type="button" className="edit-card mt-2">
-                                    <span><FaIcons.FaPen size={14}/>  EDITAR</span>
-                                </button>
-                                <button type="button" className="edit-card mt-2">
-                                    <span><FaIcons.FaTrashAlt size={14}/>  BORRAR</span>
-                                </button>
-                                <p className="name-company">Nombre de la empresa</p>
-                                <footer className="">RUC: <cite>25748574854</cite></footer>
-                                <label className="label-postulant">100 postulantes</label>
-                            </blockquote>
+                    <div className="col-12 mt-4">
+                        <div className="card-job">
+                            <div className="card-body">
+                                <blockquote className="blockquote mb-0">
+                                    <button type="button" className="edit-card mt-2">
+                                        <span><FaIcons.FaPen size={14}/>  EDITAR</span>
+                                    </button>
+                                    <p className="name-company">Nombre de la empresa</p>
+                                    <footer className="">RUC: 25748574851</footer>
+                                </blockquote>
+                            </div>
                         </div>
                     </div>
                     <div className="col-12 container-no-padding">
@@ -36,7 +34,7 @@ const HomeCompany = (props) => {
                             <button className='btn btn-nuevo-user'>PUBLICAR EMPLEO</button>
                         </div>
                     </div>
-
+                    
                     <EmploymentCard></EmploymentCard>
                     
                 </div>

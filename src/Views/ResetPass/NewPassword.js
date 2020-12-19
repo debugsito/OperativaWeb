@@ -5,7 +5,7 @@ import NavBar from "../../Components/MenuUser/index";
 import { IoIosEye, IoIosEyeOff } from 'react-icons/io';
 import {useLocation} from "react-router-dom";
 import UserService from '../../services/user.service'
-import { MensajeError, MensajeExito } from './../../utils/toast'
+import { MensajeError } from './../../utils/toast'
 import './index.css';
 
 const NewPassword= (props) => { 
