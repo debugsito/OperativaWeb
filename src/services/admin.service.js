@@ -43,7 +43,7 @@ export default class AdminService {
 
   // Listar las publicaciones
   static async listPublications() {
-    const response = await Api.post('/publications');
+    const response = await Api.get('/publications');
     return response;
   }
 

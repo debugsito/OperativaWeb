@@ -1,16 +1,24 @@
-import React from 'react'
+import React, {useState, useEffect}from 'react'
 import NavBar from '../../Components/MenuUser/index';
 import * as FaIcons from 'react-icons/fa'
 import EmploymentCard from '../../Components/Card/EmploymentCard';
 import { Link } from 'react-router-dom'
+import AdminService from '../../services/admin.service';
 
 import './index.css'
 
 const HomeCompany = (props) => {
 
+    const [ publication, setPublications] = useState([]);
 
+    useEffect(() => {
+      async function listPublications(){
+      const responsePublications = await AdminService.listPublications();
+      setPublications(responsePublications.data.publications);
+    }
+    listPublications();
     
-
+    }, [])
     
     return (
         <>
@@ -44,8 +52,13 @@ const HomeCompany = (props) => {
                         </div>
                     </div>
                     
-                    <EmploymentCard></EmploymentCard>
+                    {publication.map((e) =>
+                        <EmploymentCard className="card-container" publish={e} key={e.id}></EmploymentCard>
+                    )}
                     
+                    <div className="col-12 mt-4">
+                        <label className="">VER TODO</label>
+                    </div>
                 </div>
             </div>
         </div>

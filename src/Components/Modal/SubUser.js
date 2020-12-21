@@ -28,7 +28,6 @@ const SubUser = ({ open, setOpen, user, onModalClose, edit, titulo }) => {
     } else {
         createUser(datafield);
     }
-    
   }
 
   async function editUser(datafield, id) {
@@ -39,11 +38,10 @@ const SubUser = ({ open, setOpen, user, onModalClose, edit, titulo }) => {
         onModalClose(true)
       }
     } catch (error) {
-      MensajeError('Ocurrio un error interno')
+      MensajeError(error.response.data.message)
     }
     setOpen(false)
   }
-
 
   async function createUser(datafield) {
     try {
@@ -53,7 +51,7 @@ const SubUser = ({ open, setOpen, user, onModalClose, edit, titulo }) => {
         onModalClose(true)
       }
     } catch (error) {
-      MensajeError('Ocurrio un error interno')
+      MensajeError(error.response.data.message)
     }
     setOpen(false)
   }

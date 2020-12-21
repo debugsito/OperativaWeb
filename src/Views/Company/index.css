@@ -6,6 +6,14 @@
   text-align: center;
 }
 
+.card-container {
+}
+
+.card-container:nth-child(n + 5) {
+  display: none;
+  background: #ed1d40;
+}
+
 .height-32 {
   height: 32px !important;
 }

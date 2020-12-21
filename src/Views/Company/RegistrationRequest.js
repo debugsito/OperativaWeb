@@ -355,7 +355,7 @@ const RegistrationRequest = (props) => {
                     <option value="">Seleccione</option>
                     {rubro.map( e =>(
                         <option key={e.id} value={e.id}>{e.name}</option>
-                        )
+                      )
                     )}	
                 </select>
                 <span className="span-error mt-1">
