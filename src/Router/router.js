@@ -20,12 +20,13 @@ import RegistrationRequest from '../Views/Company/RegistrationRequest';
 import Request from '../Components/Table/Request';
 import MaintenanceUser from '../Views/Company/MaintenanceUser';
 import HomeCompany from '../Views/Company/HomeCompany';
+import Publications from '../Views/Company/Publications';
 import { useSelector } from 'react-redux';
  
 const userPages = ['/inicio','/info','/info-direccion','/informacion-academica','/info-experiencia','/informacion-completada-con-exito'];
 const adminPages = ['/solicitudes', '/welcome','/maintenance-user', '/inicio', '/menu-company'];
-const businessPages = ['/inicio', '/menu-company'];
-const muniPages = ['/inicio', '/menu-company'];
+const businessPages = ['/solicitudes','/inicio', '/menu-company', '/publications'];
+const muniPages = ['/solicitudes','/inicio', '/menu-company', '/publications'];
 
 //Guardar Token
 const isAuth = (account,routeName,token) => {
@@ -61,6 +62,7 @@ function router() {
         <Route path={ROUTES.REGISTRATION_REQUEST} component={RegistrationRequest} />
         
         <PrivateRoute path={ROUTES.HOMECOMPANY} component={HomeCompany} />
+        <PrivateRoute path={ROUTES.PUBLICATIONS} component={Publications} />
         <PrivateRoute path={ROUTES.SOLICITUDES} component={Request} />
         <PrivateRoute path={ROUTES.MAINTENANCE_USER} component={MaintenanceUser} />
         <PrivateRoute path={ROUTES.WELCOME} component={Welcome} />

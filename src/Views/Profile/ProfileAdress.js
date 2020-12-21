@@ -9,8 +9,7 @@ import UtilService from '../../services/util.service';
 import UserService from '../../services/user.service';
 import { setUserInfo } from '../../redux-store/user';
 import './index.css';
-import { onlyNumbers } from './../../utils/validation';
-import { onlyAlphaNumeric } from './../../utils/validation';
+import { onlyNumbers, onlyAlphaNumeric } from './../../utils/validation';
 
 const ProfileAdress = (props) => { 
     const dispatch = useDispatch();
@@ -157,7 +156,6 @@ const ProfileAdress = (props) => {
                                     { errors.address && errors.address.message}
                                 </span>
                             </label>
-
                             <div className="row row-no-magin ">
                                 <div className="col-12 col-md-4 pr-md-4 pl-md-0 px-sm-0 px-xs-0">
                                     <label  htmlFor="id_country" className="label-form" >

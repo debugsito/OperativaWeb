@@ -2,11 +2,15 @@ import React from 'react'
 import NavBar from '../../Components/MenuUser/index';
 import * as FaIcons from 'react-icons/fa'
 import EmploymentCard from '../../Components/Card/EmploymentCard';
-
+import { Link } from 'react-router-dom'
 
 import './index.css'
 
 const HomeCompany = (props) => {
+
+
+    
+
     
     return (
         <>
@@ -31,7 +35,12 @@ const HomeCompany = (props) => {
                     <div className="col-12 container-no-padding">
                         <h1 className="h1-tittle-carousel">Posiciones abiertas</h1>
                         <div className='row justify-content-left ml-2'>
-                            <button className='btn btn-nuevo-user'>PUBLICAR EMPLEO</button>
+                            <Link
+                                className="btn btn-nuevo-user" 
+                                to='/publications'
+                                >
+                                PUBLICAR EMPLEO
+                            </Link> 
                         </div>
                     </div>
                     

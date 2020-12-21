@@ -41,4 +41,22 @@ export default class AdminService {
     return response;
   }
 
+  // Listar las publicaciones
+  static async listPublications() {
+    const response = await Api.post('/publications');
+    return response;
+  }
+
+  // Crear publicacion
+  static async createPublications(info) {
+    const response = await Api.post('/publications', info);
+    return response;
+  }
+
+  // Edit publicacion
+  static async editPublications(info,id) {
+    const response = await Api.post('/publications'+ id, info);
+    return response;
+  }
+
 }

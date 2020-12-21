@@ -4,17 +4,14 @@ import { Link, withRouter } from 'react-router-dom'
 import DatePicker,{registerLocale} from "react-datepicker"
 import { useDispatch, useSelector } from 'react-redux';
 import 'react-datepicker/dist/react-datepicker.css'
-
 import es from 'date-fns/locale/es';
 import { useForm, Controller } from "react-hook-form";
 import moment from 'moment';
-
 import Stepper from "./Stepper";
 import UtilService from '../../services/util.service';
 import { setUserInfo } from '../../redux-store/user';
 import './index.css';
-import { onlyNumbers } from './../../utils/validation';
-import { onlyLetters } from './../../utils/validation';
+import { onlyNumbers, onlyLetters } from './../../utils/validation';
 
 registerLocale("es", es);
 
