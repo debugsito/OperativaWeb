@@ -11,7 +11,7 @@ const RequestSent = (props) => {
     <div className="row justify-content-center container-padding row-no-magin">
         <div className="col-12 col-sm-6 col-md-10">
             <h1 className="h1-custom-solicitud"> </h1>
-            <div className="row box-container-title">
+            <div className="row box-container-title justify-content-center">
                 <div className="col-4 col-md-5 image-solicitud">
                     <img alt="conexion" src={SolicitudEnviada} className="icon-image-solicitud-enviada"/>
                 </div>

@@ -57,7 +57,7 @@ const HomeCompany = (props) => {
                     )}
                     
                     <div className="col-12 mt-4">
-                        <label className="">VER TODO</label>
+                        <button className="">VER TODO</button>
                     </div>
                 </div>
             </div>

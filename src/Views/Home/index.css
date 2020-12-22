@@ -568,7 +568,7 @@
     margin-top: 50px;
   }
   .icon-image-solicitud-enviada {
-    width: 315px;
+    width: 400px;
     margin: 0;
     display: flex;
   }
@@ -577,7 +577,8 @@
   }
   .image-solicitud {
     display: grid;
-    margin-left: 200px;
+    justify-content: center;
+    /*margin-left: 160px;*/
   }
 }
 @media only screen and (min-width: 1200px) {
@@ -605,11 +606,7 @@
   .icon-calendar {
     background-position: 98.5%;
   }
-  .icon-image-solicitud-enviada {
-    width: 500px;
-    margin: 0;
-    display: flex;
-  }
+
   .mensaje-solicitud {
     margin-top: 55px;
     max-width: 800px;
@@ -618,10 +615,6 @@
   }
   .title-solicitud {
     font-size: 34px;
-  }
-  .image-solicitud {
-    display: grid;
-    margin-left: 0px;
   }
   .text-box-three {
     padding-top: 24px;
@@ -678,5 +671,22 @@
     padding-top: 24px;
     width: 410px;
     font-size: 24px;
+  }
+  .icon-image-solicitud-enviada {
+    width: 460px;
+    margin: 0;
+    display: flex;
+  }
+  .image-solicitud {
+    display: grid;
+    margin-left: 0px;
+  }
+}
+
+@media only screen and (min-width: 1500px) {
+  .icon-image-solicitud-enviada {
+    width: 520px;
+    margin: 0;
+    display: flex;
   }
 }
