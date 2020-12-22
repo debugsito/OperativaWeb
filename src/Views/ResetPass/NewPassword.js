@@ -76,6 +76,7 @@ const NewPassword= (props) => {
                                     : ''
                                 }
                             `}
+                            maxLength='12'
                             name='password'
                             type={!see ? 'password' : 'text'}
                             ref={register({
@@ -111,6 +112,7 @@ const NewPassword= (props) => {
                                     : ''
                                 }
                             `}
+                            maxLength='12'
                             name='password_confirmed'
                             type={!see2 ? 'password' : 'text'}
                             ref={register({

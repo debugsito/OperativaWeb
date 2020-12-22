@@ -19,7 +19,6 @@ const UpdatePassword = (props) => {
                     <label className="title-solicitud justify-content-center">Tu contraseña ha sido actualizada correctamentente.</label>
                     <p className="text-box-four justify-content-center">
                         Ahora puedes acceder a la plataforma con tu nueva contraseña.
-                        
                     </p>
                     <div className="row justify-content-center mt-5">
                         <Link to="/" className="btn btn-solicitud">VOLVER AL INICIO</Link>
