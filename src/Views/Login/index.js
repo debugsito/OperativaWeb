@@ -58,26 +58,9 @@ const Login = (props) => {
 
   //Exito
   useEffect(() => {
-    
-    if(account && account.role){
-      switch(account.role) {
-        case 'postulante':
-          props.history.push('/inicio');
-          break;
-        case 'admin':
-          props.history.push('/inicio');
-          break;
-        case 'business':
-          props.history.push('/inicio');
-          break;
-        case 'muni':
-          props.history.push('/inicio');
-          break;
-        default:
-          //props.history.push('/inicio-sesion');
-          break;
-      }
-    }
+    console.log(account);
+    console.log(account.role);
+  
   }, [success]);
 
   return (
