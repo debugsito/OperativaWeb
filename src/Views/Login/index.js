@@ -75,7 +75,7 @@ const Login = (props) => {
           props.history.push('/inicio');
           break;
         default:
-          //props.history.push('/inicio-sesion');
+          props.history.push('/inicio-sesion');
           break;
       }
     }
