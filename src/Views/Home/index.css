@@ -268,6 +268,50 @@
   color: #ed1d40;
 }
 
+.btn-ir-plataforma {
+  font-family: 'Roboto Medium';
+  font-style: normal;
+  font-size: 14px;
+  line-height: 16px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  place-content: center;
+  width: 201px;
+  height: 40px;
+  color: #ed1d40;
+  border: 1px solid #ed1d40;
+  box-sizing: border-box;
+  border-radius: 10px;
+}
+.btn-ir-plataforma:hover {
+  color: #ed1d40;
+}
+
+.btn-cancel-alert {
+  font-family: 'Roboto Medium';
+  font-style: normal;
+  font-size: 14px;
+  line-height: 16px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  place-content: center;
+  width: 201px;
+  height: 40px;
+  border: 1px solid #ed1d40;
+  background: #ed1d40;
+  color: #ffffff;
+  border-radius: 10px;
+}
+
+.section-btn-cancel {
+  margin-top: 160px;
+}
+.btn-cancel-alert {
+  margin-top: 10px;
+}
+
 .btn-solicitud {
   font-family: 'Roboto Medium';
   font-style: normal;
@@ -365,6 +409,16 @@
   font-weight: normal;
   font-size: 30px;
 }
+
+.title-cancel-suscription {
+  font-family: 'Roboto Medium';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: 0.15px;
+}
+
 .text-icon-rubros {
   width: 85px;
   font-family: 'Roboto Lighter';
@@ -402,6 +456,15 @@
 @media only screen and (min-width: 768px) {
   .hide-sm {
     display: block;
+  }
+
+  .section-btn-cancel {
+    margin-top: 100px;
+  }
+
+  .btn-cancel-alert {
+    margin-left: 20px;
+    margin-top: 0px;
   }
 
   .box-container-title {
@@ -578,7 +641,13 @@
   .image-solicitud {
     display: grid;
     justify-content: center;
-    /*margin-left: 160px;*/
+  }
+  .section-btn-cancel {
+    margin-top: 115px;
+  }
+
+  .btn-cancel-alert {
+    margin-left: 20px;
   }
 }
 @media only screen and (min-width: 1200px) {

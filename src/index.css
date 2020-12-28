@@ -295,6 +295,18 @@ code {
   align-items: center;
   letter-spacing: 0.5px;
 }
+
+.form-text-check-cancel {
+  font-family: 'Roboto Medium';
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #373737;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.5px;
+}
+
 .form-text-check-adress {
   font-family: 'Roboto Medium';
   font-style: normal;
@@ -440,7 +452,6 @@ code {
   justify-content: space-between;
 }
 .btn-cancel-register {
-  /*button/secondary*/
   position: static;
   width: 46%;
   height: 40px;
@@ -853,6 +864,9 @@ code {
     height: 35px;
   }
   .form-text-check {
+    line-height: 25px;
+  }
+  .form-text-check-cancel {
     line-height: 25px;
   }
 }

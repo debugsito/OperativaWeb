@@ -21,7 +21,13 @@ import Request from '../Components/Table/Request';
 import MaintenanceUser from '../Views/Company/MaintenanceUser';
 import HomeCompany from '../Views/Company/HomeCompany';
 import Publications from '../Views/Company/Publications';
+
+import CancelAlert from '../Views/Notificaciones/CancelAlert';
+import NotificacionAlert from '../Views/Notificaciones/NotificationAlert';
+
+
 import { useSelector } from 'react-redux';
+
  
 const userPages = ['/inicio','/info','/info-direccion','/informacion-academica','/info-experiencia','/informacion-completada-con-exito'];
 const adminPages = ['/solicitudes', '/welcome','/maintenance-user', '/inicio', '/menu-company'];
@@ -60,6 +66,9 @@ function router() {
         <Route path={ROUTES.NOTIFICATIONUPDATEPASSWORD} component={UpdatePassword} />
         <Route path={ROUTES.NEWPASSWORD} component={NewPassword} />
         <Route path={ROUTES.REGISTRATION_REQUEST} component={RegistrationRequest} />
+
+        <Route path={ROUTES.CANCEL_ALERT} component={CancelAlert} />
+        <Route path={ROUTES.NOTIFICATION_ALERT} component={NotificacionAlert} />
         
         <PrivateRoute path={ROUTES.HOMECOMPANY} component={HomeCompany} />
         <PrivateRoute path={ROUTES.PUBLICATIONS} component={Publications} />

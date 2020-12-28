@@ -17,6 +17,9 @@ export const REGISTRATION_REQUEST = '/registration-request';
 export const MAINTENANCE_USER = '/maintenance-user';
 export const PROFILEUPDATESUCCESSFUL = '/informacion-completada-con-exito';
 
+export const CANCEL_ALERT = '/cancel-alert'
+export const NOTIFICATION_ALERT = '/notification-alert'
+
 export const SOLICITUDES = '/solicitudes';
 
 // export const NEWPASSWORD = '/nueva-contraseña/:token'
