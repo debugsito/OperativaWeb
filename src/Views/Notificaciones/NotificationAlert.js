@@ -1,16 +1,35 @@
-import React from 'react';
+import React, {useState} from 'react';
 import NavBar from '../../Components/MenuUser/index';
 import { useForm } from "react-hook-form";
 import { Link } from 'react-router-dom';
 import SolicitudEnviada from '../../assets/images/solicitud-enviada.svg';
+import UserService from '../../services/user.service';
+import { MensajeError } from '../../utils/toast'
 
-const NotificacionAlert = () => {
+const NotificacionAlert = (props) => {
 
    const { handleSubmit, register, errors} = useForm();
+   const [ reason, setReason] = useState("");
 
-   const onSubmit = () => { 
+   const onSubmit = (values) => {
+    const datafield = {
+        motivo_id: values.reason,
+        motivo: reason
+    }
 
+    cancelSubscription(datafield);
    }
+
+    async function cancelSubscription(datafield){
+     try{
+        const responseCompany = await UserService.cancelSubscription(datafield);
+        if(responseCompany.status === 200){
+        props.history.push('/cancel-alert')
+     }
+     }catch(error){
+        MensajeError(error.response.data.message);
+     }
+    }
 
   return (
     <>
@@ -28,17 +47,18 @@ const NotificacionAlert = () => {
                         <label className="title-cancel-suscription">Si tienes un minuto, por favor permítenos saber por qué no deseas recibir más alertas laborales a tu correo.</label>
                         
                         <div className="text-box-four">
-                            <label htmlFor="gender" className="label-form mt-1">
+                            <label htmlFor="reason" className="label-form mt-1">
                             <div className= "mt-2">
                                 <div className="form-check margin-right">
                                     <input 
                                         className="form-check-input"
                                         type="radio" 
-                                        name="gender"
+                                        name="reason"
                                         value='1'
+                                        onClick={() => setReason('Ya encontré trabajo')}
                                         ref={register({ required: "Seleccione una opción" })}
                                     />
-                                    <label className="form-text-check-cancel">
+                                    <label id="1" className="form-text-check-cancel">
                                         Ya encontré trabajo
                                     </label>
                                 </div>
@@ -46,11 +66,12 @@ const NotificacionAlert = () => {
                                     <input 
                                         className="form-check-input"
                                         type="radio" 
-                                        name="gender" 
+                                        name="reason" 
                                         value="2"
+                                        onClick={() => setReason('Las ofertas laborales que recibo no se ajustan a mi búsqueda')}
                                         ref={register({ required: "Seleccione una opción" })}
                                     />
-                                    <label className="form-text-check-cancel">
+                                    <label id="2" className="form-text-check-cancel">
                                         Las ofertas laborales que recibo no se ajustan a mi búsqueda
                                     </label>
                                 </div>
@@ -58,11 +79,12 @@ const NotificacionAlert = () => {
                                     <input 
                                         className="form-check-input"
                                         type="radio" 
-                                        name="gender" 
-                                        value="0"
+                                        name="reason" 
+                                        value="3"
+                                        onClick={() => setReason('Los correos llegan con demasiada frecuencia')}
                                         ref={register({ required: "Seleccione una opción" })}
                                     />
-                                    <label className="form-text-check-cancel">
+                                    <label id="3" className="form-text-check-cancel">
                                         Los correos llegan con demasiada frecuencia
                                     </label>
                                 </div>
@@ -70,17 +92,18 @@ const NotificacionAlert = () => {
                                     <input 
                                         className="form-check-input"
                                         type="radio" 
-                                        name="gender" 
-                                        value="0"
+                                        name="reason" 
+                                        value="4"
+                                        onClick={() => setReason('Otro motivo')}
                                         ref={register({ required: "Seleccione una opción" })}
                                     />
-                                    <label className="form-text-check-cancel">
+                                    <label id="4" className="form-text-check-cancel">
                                         Otro motivo
                                     </label>
                                 </div>
                             </div>
                             <span className="span-error">
-                                { errors.gender && errors.gender.message}
+                                { errors.reason && errors.reason.message}
                             </span>
                         </label>
 
@@ -93,7 +116,6 @@ const NotificacionAlert = () => {
                 </div>
             </form>
         </div>
-  
     </div>
     </>
   );

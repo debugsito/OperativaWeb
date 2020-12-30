@@ -49,4 +49,10 @@ export default class UserService {
     const response = await Api.post('/job_without', info)
     return response;
   }
+
+   // Servicio que cancela la suscripcion 
+  static async cancelSubscription(info){
+    const response = await Api.post('/account/unsuscribe', info)
+    return response;
+  }
 }

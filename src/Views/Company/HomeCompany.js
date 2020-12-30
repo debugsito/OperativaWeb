@@ -52,13 +52,7 @@ const HomeCompany = (props) => {
                         </div>
                     </div>
                     
-                    {publication.map((e) =>
-                        <EmploymentCard className="card-container" publish={e} key={e.id}></EmploymentCard>
-                    )}
                     
-                    <div className="col-12 mt-4">
-                        <button className="">VER TODO</button>
-                    </div>
                 </div>
             </div>
         </div>

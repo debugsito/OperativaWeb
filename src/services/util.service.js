@@ -74,10 +74,9 @@ export default class UtilService {
     return response.data;
  } 
 
-// Servicio que obtiene la lista de motivos de retiro
+ // Servicio que obtiene la lista de motivos de retiro
   static async listMotivoRetiro() {
     const response = await Api.get('/attritions');
     return response.data;
- } 
-
+ }
 }
