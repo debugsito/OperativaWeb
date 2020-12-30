@@ -58,8 +58,9 @@ const Login = (props) => {
 
   //Exito
   useEffect(() => {
-    
-    if(account && account.role){
+    console.log(account);
+    console.log(account.role);
+    if(account && account.id){
       switch(account.role) {
         case 'postulante':
           props.history.push('/inicio');
@@ -74,10 +75,11 @@ const Login = (props) => {
           props.history.push('/inicio');
           break;
         default:
-          props.history.push('/inicio');
+          props.history.push('/inicio-sesion');
           break;
       }
     }
+  
   }, [success]);
 
   return (
