@@ -68,7 +68,7 @@ const Register = (props) => {
   return (
     <>
       <NavBar />
-      <div className="row justify-content-center container-padding row-no-magin">
+      <div className="container-central row justify-content-center container-padding row-no-magin">
         <div className="col-12 col-sm-8 col-md-6">
           <h1 className="h1-custom">REGISTRATE EN OPERATIVA</h1>
           <span className="info-form">

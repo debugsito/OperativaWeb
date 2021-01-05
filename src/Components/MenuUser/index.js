@@ -15,13 +15,47 @@ function Navbar(props) {
 
   const dispatch = useDispatch();
 
-  const showSidebar = () => setSidebar(!sidebar);
+  const showSidebar = () => {
+    setSidebar(!sidebar);
+    var container = document.getElementsByClassName("container-central");
+    if (container && container.length > 0 && isMobile.any() == null) {
+      container[0].style['transition'] = "350ms";
+      if (!sidebar) {
+        container[0].style['margin-left'] = "223px";
+      } else {
+        container[0].style['margin-left'] = "";
+      } 
+    }
+    
+  }
 
   const isAuth = () => {
     if(localStorage.getItem('token') !== null) {
         return true
     }
         return false
+};
+
+
+var isMobile = {
+    Android: function() {
+        return navigator.userAgent.match(/Android/i);
+    },
+    BlackBerry: function() {
+        return navigator.userAgent.match(/BlackBerry/i);
+    },
+    iOS: function() {
+        return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+    },
+    Opera: function() {
+        return navigator.userAgent.match(/Opera Mini/i);
+    },
+    Windows: function() {
+        return navigator.userAgent.match(/IEMobile/i);
+    },
+    any: function() {
+        return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+    }
 };
 
     const cerrarSesion= () =>{

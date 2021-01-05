@@ -14,7 +14,17 @@ function NavbarDesk(props) {
 
   const dispatch = useDispatch();
 
-  const showSidebar = () => setSidebar(!sidebar);
+  const showSidebar = () => {
+    setSidebar(!sidebar);
+    var container = document.getElementsByClassName("padding-container");
+    container.style['transition'] = "350ms";
+    if (!sidebar) {
+      container.style['margin-right'] = "223px";
+    } else {
+      container.style['margin-right'] = "";
+    }
+    
+  }
 
   const isAuth = () => {
     if(localStorage.getItem('token') !== null) {

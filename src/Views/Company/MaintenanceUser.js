@@ -7,7 +7,6 @@ import DeleteSubUser from '../../Components/Modal/DeleteSubUser'
 import * as FaIcons from 'react-icons/fa'
 import moment from 'moment'
 
-
 import './index.css'
 
 const MaintenanceUser = (props) => {
@@ -104,11 +103,12 @@ const MaintenanceUser = (props) => {
   }, [refresh])
 
   const tablaSubUser = account;
+  console.log(tablaSubUser);
 
   return (
     <>
       <NavBar />
-      <div className='row row-no-magin padding-container'>
+      <div className='container-central row row-no-magin padding-container'>
         <div className='col-12 col-md-12 offset-md-3 container-no-padding m-nav-form'></div>
         <div className='col-12 col-md-12 container-no-padding mt-2'>
           <div className='row justify-content-right mr-2'>

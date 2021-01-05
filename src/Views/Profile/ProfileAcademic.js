@@ -61,7 +61,7 @@ const ProfileAcademic = (props) => {
   return (
     <>
       <NavBar />
-      <div className="row row-no-magin padding-container">
+      <div className="container-central row row-no-magin padding-container">
         <div className="col-12 col-md-6 offset-md-3 container-no-padding m-nav-form">
           <h1 className="h1-title-form">COMPLETA TU REGISTRO</h1>
         </div>
