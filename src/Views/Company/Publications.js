@@ -21,21 +21,46 @@ const Publications = (props) => {
     const { isSubmitted } = formState;
     const [ rubro, setRubro] = useState([]);
     const [ district, setDistrict] = useState([]);
+    const [ publication, setPublication ] = useState({})
+    const [ toDate, setToDate] = useState(new Date());
+    const [ fromDate, setFromDate] = useState(new Date());
+    const [ jobLevel, setJobLevel ] = useState("");
+    const [ distrito, setDistrito ] = useState("");
+    const [ periodo, setPeriodo ] = useState("");
+    const id = props.match.params.id;
 
     const onSubmit = (values) => {
-
         const datafield = {
             job_title: values.name,
             description: values.position,
             requirements: values.requirements,
-            job_level_id: values.cargo,
+            job_level_id: parseInt(values.cargo),
             address: values.address,
-            district_id: values.district,
-            salary: values.salario,
-            from_date: moment(values.start_date).format('YYYY-MM-DD'),
-            to_date: moment(values.to_date).format('YYYY-MM-DD'),
+            district_id: parseInt(values.district),
+            salary: parseInt(values.salario),
+            period: parseInt(periodo),
+            from_date: moment(fromDate).format('DD-MM-YYYY'),
+            to_date: moment(toDate).format('DD-MM-YYYY'),
+            status:1
         };
-        registerPublication(datafield);
+
+        if(id){
+            editPublication(datafield,id)
+        } else {
+            registerPublication(datafield);
+        }
+        
+    }
+
+    async function editPublication(datafield){
+        try{
+        const responsePublication = await CompanyService.editPublication(datafield,id);
+        if(responsePublication.status === 200){
+            props.history.push('/menu-company')
+        }
+        }catch(error){
+            MensajeError("Error: " + error.response.data.message);
+        }
     }
 
     async function registerPublication(datafield){
@@ -49,11 +74,22 @@ const Publications = (props) => {
         }
     }
 
+    async function editPublication(datafield,id){
+        try{
+        const responsePublicationEdit = await CompanyService.editPublication(datafield,id);
+        if(responsePublicationEdit.status === 200){
+            props.history.push('/menu-company')
+        }
+        }catch(error){
+            MensajeError("Error: " + error.response.data.message);
+        }
+    }
+
     useEffect(() => {
         async function listRubro(){
         const responseRubro = await UtilService.listRubro();
         setRubro(responseRubro.areas);
-    }
+        }
     listRubro();
     }, [])
 
@@ -61,9 +97,32 @@ const Publications = (props) => {
         async function listDistrict(){
         const responseDistrict = await UtilService.listDistrictXLima();
         setDistrict(responseDistrict.districts);
-    }
+        }
     listDistrict();
     }, [])
+
+    useEffect(() => {
+        async function listPublicationXID(){
+
+        const responsePublicationXID = await CompanyService.listPublicationXID(id);
+        setPublication(responsePublicationXID.publication);
+
+            if(responsePublicationXID.publication && responsePublicationXID.publication.from_date){
+                const fechaCaducidad = moment(responsePublicationXID.publication.to_date).toDate();
+                const fechaInicio = moment(responsePublicationXID.publication.from_date).toDate();
+                const job = responsePublicationXID.publication.job_level_id;
+                const distrito = responsePublicationXID.publication.district_id;
+                const periodo = responsePublicationXID.publication.period;
+                setJobLevel(responsePublicationXID.publication ? job : '')
+                setDistrito(responsePublicationXID.publication ? distrito : '');
+                setPeriodo(responsePublicationXID.publication ? periodo : '');
+                setToDate(fechaCaducidad);
+                setFromDate(fechaInicio);
+            }   
+        }
+        
+    listPublicationXID();
+    }, [ ])
 
     return (
         <>
@@ -86,6 +145,7 @@ const Publications = (props) => {
                                         control={control}
                                         name="to_date"
                                         defaultValue=""
+                                        
                                         render={(props) => (
                                             <DatePicker
                                             className={`form-control label-form-calen height-32 icon-calendar
@@ -98,8 +158,8 @@ const Publications = (props) => {
                                                             }
                                                         `}
                                             placeholderText="DD/MM/AAAA"
-                                            selected={props.value}
-                                            onChange={(e) => props.onChange(e)}
+                                            selected={toDate}
+                                            onChange={date => setToDate(date)}
                                             dateFormat="dd/MM/yyyy"
                                             locale={es}
                                             minDate={new Date()}
@@ -111,9 +171,6 @@ const Publications = (props) => {
                                             autoComplete="off"
                                             />
                                         )}
-                                        rules={{
-                                            required: 'Coloque una fecha válida'
-                                        }}
                                         />
                                     </section>
                                     <span className="span-error mt-1">
@@ -135,7 +192,8 @@ const Publications = (props) => {
                                         "border-error red-input input-icoerror"       
                                         : ''
                                     }
-                                `} 
+                                `}
+                                defaultValue={publication ? publication.job_title: ''}
                                 name='name'
                                 type="text"
                                 maxLength="25"
@@ -160,14 +218,16 @@ const Publications = (props) => {
                                         "border-error red-input input-icoerror"       
                                         : ''
                                     }
-                                `} 
+                                `}
+                                value={jobLevel}
+                                onChange={e => setJobLevel(e.target.value)}
                                 name="cargo" 
                                 ref={register({
                                     required: "Este campo es requerido", message: "Coloque un Nombre valido"
                                     })}>
                                 <option value="">Seleccione</option>
                                 {rubro.map( e =>(
-                                    <option key={e.id} value={e.id}>{e.name}</option>
+                                    <option key={e.id} value={e.id} >{e.name}</option>
                                     )
                                 )}	
                             </select>
@@ -175,7 +235,6 @@ const Publications = (props) => {
                                 { errors.cargo && errors.cargo.message}
                             </span>
                         </label>
-
                         <label htmlFor="position" className="label-form mt-1">
                             Funciones del puesto
                                 <Controller
@@ -185,6 +244,7 @@ const Publications = (props) => {
                                     render={(props) => (
                                     <CKEditor
                                         editor= {ClassicEditor}
+                                        data={publication ? publication.description:''}
                                         selected={props.value}
                                         onChange={(e, editor) => {
                                             const data = editor.getData();
@@ -202,7 +262,6 @@ const Publications = (props) => {
                                 {errors.position && errors.position.message}
                             </span>
                         </label>
-
                         <label htmlFor="requirements" className="label-form mt-1">
                             Requisitos del puesto
                                 <Controller
@@ -212,6 +271,7 @@ const Publications = (props) => {
                                     render={(props) => (
                                     <CKEditor
                                         editor= {ClassicEditor}
+                                        data={publication ? publication.requirements:''}
                                         selected={props.value}
                                         onChange={(e, editor) => {
                                             const data = editor.getData();
@@ -229,7 +289,6 @@ const Publications = (props) => {
                                 {errors.requirements && errors.requirements.message}
                             </span>
                         </label>
-
                         <label htmlFor="address" className="label-form mt-1">
                             Dirección
                             <input
@@ -243,7 +302,8 @@ const Publications = (props) => {
                                         "border-error red-input input-icoerror"       
                                         : ''
                                     }
-                                `} 
+                                `}
+                                defaultValue={publication ? publication.address: ''}
                                 name='address'
                                 type="text"
                                 maxLength='30'
@@ -270,7 +330,9 @@ const Publications = (props) => {
                                                 "border-error red-input input-icoerror"       
                                                 : ''
                                             }
-                                        `} 
+                                        `}
+                                        value={distrito}
+                                        onChange={e => setDistrito(e.target.value)}
                                         name="district" 
                                         ref={register({
                                             required: "Este campo es requerido", message: "Coloque un Nombre valido"
@@ -302,6 +364,7 @@ const Publications = (props) => {
                                                 : ''
                                             }
                                         `}
+                                        defaultValue={publication ? publication.salary: ''}
                                         onKeyPress={e =>{onlyNumbers(e)}}
                                         name='salario'
                                         type="text"
@@ -337,8 +400,8 @@ const Publications = (props) => {
                                                             }
                                                         `}
                                             placeholderText="DD/MM/AAAA"
-                                            selected={props.value}
-                                            onChange={(e) => props.onChange(e)}
+                                            selected={fromDate}
+                                            onChange={date => setFromDate(date)}
                                             dateFormat="dd/MM/yyyy"
                                             locale={es}
                                             maxDate={new Date()}
@@ -350,9 +413,7 @@ const Publications = (props) => {
                                             autoComplete="off"
                                             />
                                         )}
-                                        rules={{
-                                            required: 'Coloque una fecha válida'
-                                        }}
+                                        
                                         />
                                     </section>
                                     <span className="span-error mt-1">
@@ -373,7 +434,9 @@ const Publications = (props) => {
                                                 "border-error red-input input-icoerror"       
                                                 : ''
                                             }
-                                        `} 
+                                        `}
+                                        value={periodo}
+                                        onChange={e => setPeriodo(e.target.value)}
                                         name="period" 
                                         ref={register({
                                             required: "Este campo es requerido", message: "Coloque un Nombre valido"

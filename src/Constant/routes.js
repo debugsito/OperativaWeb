@@ -1,6 +1,6 @@
 export const HOME = '/';
 export const HOMECOMPANY = '/menu-company';
-export const PUBLICATIONS = '/publications';
+export const PUBLICATIONS = '/publications/:id?';
 export const REGISTER = '/registro';
 export const RESTOREPASS = '/restablecer-contraseña';
 export const NOTIFICATIONPASS = '/notificacion-contraseña';

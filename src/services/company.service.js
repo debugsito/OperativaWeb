@@ -13,9 +13,23 @@ export default class CompanyService {
     return response;
   }
 
+  static async editPublication(info, id){
+    const response = await Api.post('/publication/'+id, info)
+    return response;
+  }
+
   static async deletePublication(id){
     const response = await Api.post('/publication/'+id+'/delete')
     return response;
-  } 
+  }
+
+  static async listPublicationXID(id){
+    const response = await Api.get('/publication/'+id);
+    return response.data;
+  }
+
+
+
+
 
 }

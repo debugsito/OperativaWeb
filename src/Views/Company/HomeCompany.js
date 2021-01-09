@@ -17,7 +17,7 @@ const HomeCompany = (props) => {
     moment.locale('es')
     const [publication, setPublications ] = useState([]);
     const [business, setBusiness ] = useState({});
-    
+    const [user, setUser ] = useState({user: {}})
     const [modalDeleteUser, setModalDeleteUser] = useState(false)
     const [refresh, setRefresh] = useState(false)
     const [publi, setPubli] = useState({pbulications: {}})
@@ -27,10 +27,10 @@ const HomeCompany = (props) => {
             const responsePublications = await AdminService.listPublications();
             setPublications(responsePublications.data.publications);
             setBusiness(responsePublications.data.business_muni);
+            setUser(responsePublications.data.business_muni.user);
         }catch(error){
             MensajeError("Ocurrio un error inesperado");
         }
-
     }
 
     const paginationOption = {
@@ -73,11 +73,22 @@ const HomeCompany = (props) => {
     const columns = [
         {
         name: 'Título de la publicación' ,
-        cell: (row) => row.job_title
+        cell: (row) =>  
+                    <div className="ml-2">    
+                        <label 
+                            className="title-publication mt-2">{row.job_title}
+                        </label>
+                        <label 
+                            className="user-create"><FaIcons.FaRegCalendarAlt size={20}/> Caduca {moment(row.to_date).format('LL')}
+                        </label>
+                        <label 
+                            className="user-create">Creado por {user.fullname}
+                        </label>
+                    </div>
         },
         {
         name: 'Fecha de publicación',
-        cell: (row) => moment(row.from_date).format('LL')
+        cell: (row) => <label><FaIcons.FaRegCalendarAlt size={20}/> {moment(row.from_date).format('LL')}</label>
         },
         {
         name: 'Postulantes',
@@ -91,26 +102,26 @@ const HomeCompany = (props) => {
         name: 'Acción',
         cell: (row) => (
             <div>
-                <button
-                    type='button'
-                    className='btn-revisar mb-2 mt-2'
-                    onClick={() => {}}
-                >
-                <FaIcons.FaPen size={20} />
-                <label> &nbsp;EDITAR</label>
+                <button 
+                    type='button' 
+                    className='edit-card mb-2 mt-2'>
+                    <FaIcons.FaPen size={20} className="mt-1" />
+                    <Link to={'/publications/'+ row.id}>
+                        <label className="edit-card mt-2">&nbsp;EDITAR</label>
+                    </Link> 
                 </button>
                 <br></br>
                 <button
                     type='button'
-                    className='btn-revisar'
+                    className='edit-card '
                     data-accountid={row.id}
                     onClick={(e) => {
                         setPubli(row)
                         setModalDeleteUser(true)
                     }}
                 >
-                <FaIcons.FaTrashAlt size={20} color='red' />
-                <label> &nbsp;ARCHIVAR</label>
+                <FaIcons.FaFileAlt size={20} />
+                <label className="edit-card"> &nbsp;ARCHIVAR</label>
                 </button>
             </div>
             )

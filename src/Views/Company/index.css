@@ -90,6 +90,33 @@
   color: #373737;
 }
 
+.title-publication {
+  font-family: 'Roboto Medium';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  /* identical to box height, or 120% */
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.15px;
+  /* Texto/Títulos */
+  color: #222121;
+  mix-blend-mode: normal;
+}
+
+.user-create {
+  /* Desktop/Body-2 */
+  font-family: 'Roboto Lighter';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.25px;
+  /* Texto/párrafos */
+  color: #373737;
+}
+
 .edit-card {
   font-family: 'Roboto Lighter';
   font-size: 14px;
