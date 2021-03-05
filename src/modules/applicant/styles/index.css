@@ -1,0 +1,14 @@
+.applicant-container {
+    background: #f7f7f7;
+    padding: 1rem;
+}
+
+.applicant-data-card {
+    background: #F1EFEF;
+    padding: .5rem;
+}
+
+.applicant-data-card > div:first-child {
+    display: flex;
+    align-items: center;
+}

@@ -1,0 +1,15 @@
+.MuiTypography-root {
+  color: var(--paragraphColor) !important;
+}
+
+.MuiTypography-root.color-white {
+  color: #ffffff !important;
+}
+
+.title-color {
+  color: var(--titleColor) !important;
+}
+
+.light-gray-color {
+  color: var(--lightGrayColor) !important;
+}

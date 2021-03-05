@@ -1,0 +1,22 @@
+/* Custom Button */
+.MuiButtonBase-root {
+  border-radius: 10px !important;
+}
+
+.MuiButton-containedSecondary {
+  background: var(--primaryButtonColor) !important;
+}
+
+.MuiButton-containedSecondary.Mui-disabled {
+  background: #ebebeb !important;
+  color: #aaaaaa !important;
+}
+
+.MuiButton-outlinedSecondary {
+  color: var(--primaryButtonColor) !important;
+  border: 1px solid var(--primaryButtonColor) !important;
+}
+
+.MuiButton-textPrimary {
+  color: var(--secondaryButtonColor) !important;
+}

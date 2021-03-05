@@ -1,0 +1,8 @@
+.applicant-profile__accordion-header {
+    display: flex;
+    justify-content: center;
+}
+
+.applicant-profile__accordion-header img {
+    margin-right: 0.5rem;
+}

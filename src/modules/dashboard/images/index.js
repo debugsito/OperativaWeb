@@ -1,0 +1,10 @@
+export { default as calendarIcon } from './calendar.svg';
+export { default as checkIcon } from './check.svg';
+export { default as checkCircleIcon } from './checkCircle.svg';
+export { default as deleteIcon } from './delete.svg';
+export { default as editIcon } from './edit.svg';
+export { default as fileIcon } from './file.svg';
+export { default as folderIcon } from './folder.svg';
+export { default as registeredIcon } from './registered.svg';
+export { default as closeIcon } from './close.svg';
+export { default as showIcon } from './show.svg';

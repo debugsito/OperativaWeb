@@ -1,0 +1,3 @@
+.MuiRadio-root, .MuiRadio-colorSecondary.Mui-checked {
+    color: var(--paragraphColor) !important;
+}

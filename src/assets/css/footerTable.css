@@ -1,0 +1,14 @@
+/* Estilos para el footer de las tablas */
+.MuiDataGrid-footer{
+    background: var(--paragraphColor);
+    color: white !important;
+}
+
+.MuiDataGrid-footer .MuiTablePagination-root .MuiToolbar-root > *, 
+.MuiDataGrid-footer .MuiTablePagination-root .MuiToolbar-root svg.MuiSvgIcon-root.MuiSelect-icon.MuiTablePagination-selectIcon,
+.MuiDataGrid-footer .MuiTablePagination-root .MuiTablePagination-actions svg.MuiSvgIcon-root{
+    color: white !important;
+}
+.MuiDataGrid-selectedRowCount{
+    color: white !important
+}

@@ -1,0 +1,20 @@
+.Carousel-indicators-12, .Carousel-next-21, .Carousel-prev-22  {
+    display: none;
+}
+
+.business-carousel-images-container {
+  justify-content: space-around;
+}
+
+.business-carousel-images-container > div {
+  width: 120px;
+  height: 120px;
+  display: flex;
+  flex-basis: auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.business-carousel-images-container img {
+  height: "100%" !important;
+}

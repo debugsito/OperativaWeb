@@ -1,0 +1,91 @@
+.navigation-text {
+    display: flex;
+    margin-bottom: .25rem !important;
+    justify-content: flex-end;
+}
+
+.side-bar .MuiListItem-root:hover,.side-bar .MuiListItem-root:active,
+.side-bar .MuiListItem-root:visited,.side-bar .MuiListItem-root:focus-within,
+.side-bar .MuiListItem-root:focus-visible{ 
+    color: #373737;
+}
+
+.side-bar .MuiListItemIcon-root{
+    color: white !important;
+    left: 8.33%;
+    right: 8.46%;
+    top: 8.33%;
+    bottom: 8.46%;
+}
+
+.side-bar .MuiListItemText-root span{
+    color: white !important;
+  
+}
+
+.side-bar .MuiSvgIcon-root{
+    position: static;
+    left: 20%;
+    right: 12%;
+    top: 28.57%;
+    bottom: 28.57%;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 19px;
+    line-height: 24px;
+    display: flex;
+    align-items: flex-end;
+    letter-spacing: 0.15px;
+    color: #373737;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+    margin: 0px 16px;
+    color: white;
+}
+
+.side-bar .MuiListItem-root.Mui-selected, .MuiListItem-root.Mui-selected:hover {
+    background-color:white !important;
+}
+.side-bar .MuiListItem-root.Mui-selected, .MuiListItem-root.Mui-selected:active {
+    background-color:white !important;
+}
+
+.side-bar .MuiListItem-root.Mui-selected .MuiSvgIcon-root, .MuiListItem-root.Mui-selected:hover .MuiSvgIcon-root {
+    color:black
+}
+
+
+.side-bar .MuiListItem-root.Mui-selected .MuiListItemIcon-root, .MuiListItem-root.Mui-selected:hover .MuiListItemIcon-root {
+    color:black !important;
+}
+
+.side-bar .MuiListItem-root.Mui-selected .MuiListItemText-root span, .MuiListItem-root.Mui-selected:hover .MuiListItemText-root span{
+    color:black !important;
+}
+
+.side-bar{
+    color:"#fff";
+}
+
+.side-bar .MuiButtonBase-root {
+    border-radius: 0px !important;
+}
+.side-bar .MuiListItem-button{
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+    margin: 0px 0px;
+    position: static;
+    width: 230px;
+    height: 56px;
+    left: 0px;
+    top: 128px;
+}
+
+.side-bar .MuiList-padding {
+    padding-top: 0px; 
+    padding-bottom: 0px;
+}
+

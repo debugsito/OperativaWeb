@@ -1,0 +1,149 @@
+.dashboard-container {
+    background: #f7f7f7;
+    padding: 1rem;
+}
+
+.dashboard-data-card {
+    background: #F1EFEF;
+    padding: .5rem;
+}
+
+.dashboard-data-card > div:first-child {
+    display: flex;
+    align-items: center;
+}
+
+.highcharts-credits {
+    display: none;
+}
+
+/* .MuiGrid-root.postulant-perfl.MuiGrid-container.MuiGrid-spacing-xs-3{
+    margin-top: "20%";
+}
+
+.MuiGrid-root.postulant-perfl__header.MuiGrid-item.MuiGrid-grid-xs-12{
+    position: fixed;
+    top: 3rem;
+} */
+
+
+
+/* .dashboard-title {
+    color: #222121;
+    letter-spacing: 1.25px;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-family: "Roboto Medium";
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.dashboard-municipality-card>p {
+    color: #222121;
+    line-height: 24px;
+    margin-bottom: 0;
+}
+
+.dashboard-municipality-card>p:first-child {
+    font-size: 24px;
+    margin-bottom: 0.3rem;
+}
+
+.dashboard-municipality-card>p:last-child {
+    font-size: 16px;
+}
+
+.dashboard-subtitle {
+    color: #222121;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.data-card {
+    background: #f1efef;
+    border-radius: 4px;
+    padding: 1.25rem 1rem;
+    margin: 0.5rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.data-card>div>div:first-child {
+    color: #222121;
+    font-family: "Roboto Medium";
+    font-size: 20px !important;
+    display: flex;
+    align-content: center;
+}
+
+.data-card>div>div:first-child>img {
+    padding-right: 3px;
+}
+
+.data-card>div>div:last-child {
+    color: #373737;
+    font-size: 24px;
+}
+
+
+
+.dashboard-applicant-name {
+    font-size: 34px;
+}
+
+.dashboard-applicant-data {
+    font-weight: 600;
+    font-size: 14px;
+    color: #373737;
+    padding: 0.25rem 0;
+}
+
+.dashboard-applicant-data-response {
+    font-size: 16px;
+    color: #373737;
+    padding: 0.25rem 0;
+}
+
+.dashboard-applicant-options {
+    font-size: 16px;
+    color: #373737;
+    padding: 0.25rem 0;
+    text-transform: uppercase;
+    padding: 0 0.5rem;
+    cursor: pointer;
+}
+
+.dashboard-applicant-data-info {
+    font-weight: 400;
+    font-size: 10px;
+}
+
+.MuiDivider-root {
+    background-color: #aaaaaa !important;
+}
+
+.dark-gray {
+    color: #979797;
+}
+
+.modal-button-container>div {
+    display: flex;
+}
+
+.edit-container {
+    display: flex;
+}
+
+.edit-container img {
+    width: 18px;
+    height: 18px;
+    padding-right: 5px;
+}
+
+.alert-container {
+    position: absolute;
+    right: 1.5rem;
+    margin: 1rem;
+} */

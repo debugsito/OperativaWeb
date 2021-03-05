@@ -1,1 +1,0 @@
-export { reducers } from './reducers';

@@ -1,0 +1,12 @@
+.account-type-container button {
+    margin: 1rem 0;
+}
+
+.account-type-form, .account-type-button-container {
+    display: flex;
+    justify-content: center;
+}
+
+.account-type-form h5, .account-type-form p {
+    padding: 0.25rem 0;
+}

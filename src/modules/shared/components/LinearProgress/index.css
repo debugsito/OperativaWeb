@@ -1,0 +1,7 @@
+.MuiLinearProgress-barColorPrimary {
+  background-color: var(--secondaryButtonColor) !important;
+}
+
+.MuiLinearProgress-colorPrimary {
+  color: #C4C4C4 !important;
+}
