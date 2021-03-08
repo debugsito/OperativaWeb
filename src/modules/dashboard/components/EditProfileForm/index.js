@@ -6,10 +6,9 @@ import { Button, TextInput } from "../../../shared/components";
 import { useForm } from "../../../hooks";
 import { isEmail, isRuc } from "../../../shared/libs/validators";
 
-import service_UserCompany from "../../../../store/services/company/user.service";
-import { getAccount } from "../../../../store/actions/auth/auth.action";
+import { updateAccount } from "../../../../store/actions/auth/auth.action";
 
-export default function Editprofile({ setIsEditActive, userData, setOpenAlert, setAccount }) {
+export default function Editprofile({ setIsEditActive, userData, setOpenAlert }) {
     const { auth: { user: { account } }, utils: { items } } = useSelector(state => state);
     const dispatch = useDispatch();
 
@@ -53,7 +52,6 @@ export default function Editprofile({ setIsEditActive, userData, setOpenAlert, s
     } = useForm(userData, true, validate);
 
     const handleUpdate = async () => {
-        console.log(values)
         let body = {
             email: values.email,
             razon_social: values.razon_social,
@@ -67,17 +65,9 @@ export default function Editprofile({ setIsEditActive, userData, setOpenAlert, s
                 interest_rubro_id: values.rubro
             }
         }
-        try {
-            let response = await service_UserCompany.updateAccount(body);
-            if (response.status == 200) {
-                setIsEditActive(false)
-                setOpenAlert(true)
-                setAccount();
-                dispatch(getAccount())
-            }
-        } catch (error) {
-            console.log(error)
-        }
+        dispatch(updateAccount(body))
+        setIsEditActive(false)
+        setOpenAlert(true)
 
     }
 

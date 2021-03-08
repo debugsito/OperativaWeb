@@ -3,11 +3,16 @@ import React from 'react'
 import { Grid, Typography } from '@material-ui/core';
 import { Button } from '../../../shared/components';
 import { peopleSVG } from "../../images";
-import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { signOut } from "../../../../store/actions/auth/auth.action";
 
 
-export default function Index(props) {
-    const history = useHistory();
+export default function Index() {
+    const dispatch = useDispatch()
+
+    const handleClick = () => {
+        dispatch(signOut())
+    }
 
     return (
         <>
@@ -35,7 +40,7 @@ export default function Index(props) {
                             </Grid>
 
                             <Grid item xs={12} style={{ display: 'flex', justifyContent: "center", marginTop: "2rem" }}>
-                                <Button variant="contained" size="large" onClick={() => history.push("/")}>Volver al Inicio</Button>
+                                <Button variant="contained" size="large" onClick={handleClick}>Volver al Inicio</Button>
                             </Grid>
                         </Grid>
                     </Grid>

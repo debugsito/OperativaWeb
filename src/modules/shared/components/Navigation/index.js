@@ -172,7 +172,7 @@ export default function Navigation({ children }) {
           <Grid container justify="space-between" alignItems="center" spacing={1}>
             <Grid item>
               <Typography variant="h6" noWrap>
-                <a href={session?'/':process.env.REACT_APP_LANDING_URL} ><img src={logoSVG} alt="Operativa" /></a>
+                <a href={session ? '/' : process.env.REACT_APP_PATH_LANDING} ><img src={logoSVG} alt="Operativa" /></a>
               </Typography>
             </Grid>
             {session && !hasDashboard && (

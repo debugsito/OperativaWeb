@@ -96,7 +96,7 @@ export default function ShowPositionDetail(props) {
                                         <strong>Salario:</strong>
                                     </Typography>
                                     <Typography variant="body1" component="h6">
-                                        {publicationSelected.salary}
+                                        {publicationSelected.salary!==null? publicationSelected.salary:"A tratar"}
                                     </Typography>
                                 </Grid >
                                 <br />
@@ -128,7 +128,6 @@ export default function ShowPositionDetail(props) {
                                         fullWidth
                                         label=""
                                         multiline
-                                        rows={5}
                                         variant="filled"
                                         name="requirements"
                                         value={publicationSelected.description}
@@ -146,7 +145,6 @@ export default function ShowPositionDetail(props) {
                                         fullWidth
                                         label=""
                                         multiline
-                                        rows={5}
                                         variant="filled"
                                         name="requirements"
                                         value={publicationSelected.requirements}

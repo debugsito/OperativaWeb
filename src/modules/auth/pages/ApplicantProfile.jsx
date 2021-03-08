@@ -238,7 +238,6 @@ const ApplicantProfile = ({ history }) => {
                             <Grid item>
                                 <Button fullWidth variant="contained" size="large" onClick={() => {
                                     dispatch(signOut());
-                                    history.push('/');
                                 }}>finalizar</Button>
                             </Grid>
                         </Grid>

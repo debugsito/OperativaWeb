@@ -6,7 +6,7 @@ import { Button, TextInput } from '../../shared/components';
 import { useForm } from "../../hooks/useForm";
 import { isEmail } from "../../shared/libs/validators";
 import RequestRecoverSent from "../components/RequestRecoverSent";
-import service_RecoverPassword from "../../../store/services/auth/recoverPassword.service";
+import {service_Auth} from "../../../store/services";
 
 const initialValues = {
     email: ""
@@ -44,7 +44,7 @@ const SignIn = ({ history }) => {
     const handleClick = async () => {
         setError(null)
         try {
-            let response = await service_RecoverPassword(values)
+            let response = await service_Auth.recoverPassword(values)
             if (response.data) {
                 setHasRequesSent(true);
             }

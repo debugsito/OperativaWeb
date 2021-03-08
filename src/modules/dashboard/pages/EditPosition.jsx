@@ -254,7 +254,7 @@ export default function EditPosition({ history }) {
                         id="outlined-multiline-static"
                         label="Funciones del puesto"
                         multiline
-                        rows={5}
+                        rows={8}
                         variant="outlined"
                         name="description"
                         value={values.description}
@@ -269,7 +269,7 @@ export default function EditPosition({ history }) {
                         id="outlined-multiline-static"
                         label="Requisitos del puesto"
                         multiline
-                        rows={5}
+                        rows={8}
                         variant="outlined"
                         name="requirements"
                         value={values.requirements}

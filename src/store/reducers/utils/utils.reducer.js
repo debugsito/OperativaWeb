@@ -6,6 +6,7 @@ const initialState = {
     departments: [],
     provinces: [],
     districts: [],
+    districtsLima: [],
     academicLevels: [],
     specialties: [],
     gender: [],
@@ -47,6 +48,11 @@ const utilsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 districts: action.payload,
+            };
+        case utilsType.SET_DISTRICTS_LIMA:
+            return {
+                ...state,
+                districtsLima: action.payload,
             };
         case utilsType.SET_ACADEMIC_LEVELS:
             return {

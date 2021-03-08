@@ -2,7 +2,7 @@ import axios from "axios";
 import AppSession from "../session/AppSession";
 
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
+  baseURL: "https://dev.api.operativa.startapps.com.pe/api/",
   // baseURL: "http://localhost:3005/api/",
   headers: {
     "Access-Control-Allow-Origin": "*",

@@ -200,13 +200,14 @@ const businessItems4 = [
 ]
 
 const Home = ({ history }) => {
+    console.log("PATH",process.env.REACT_APP_PATH_LANDING)
     const goSignUpPage = () => {
         history.push("/tipo-de-cuenta")
     }
     const  goLoginPage = () => {
         history.push("/iniciar-sesion")
     }
-    window.location.href = process.env.REACT_APP_LANDING_URL;
+    window.location.href = process.env.REACT_APP_PATH_LANDING
 
     return (
         <Grid container spacing={0}>

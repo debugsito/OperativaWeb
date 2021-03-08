@@ -30,6 +30,12 @@ export const districtsList = async () => {
     return response;
 }
 
+// Servicio que obtiene la lista de Distrito de Lima y Callao
+export const listDistrictsLima = async () => {
+    const response = await api.get('/district_lima_callao');
+    return response;
+}
+
 // Servicio que obtiene la lista de nivel academico
 export const academicLevelsList = async () => {
     const response = await api.get('/levels');

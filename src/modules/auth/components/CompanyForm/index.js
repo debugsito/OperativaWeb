@@ -19,10 +19,11 @@ const initialValues = {
     phone: '',
     interest_rubro_id: null,
     termsAndCondition: false,
+    district_id: ''
 }
 
 export default function Index({ handleRegisterCompleted, representativeFormData, goToPreviousForm }) {
-    const { auth: { accountType }, utils: { items } } = useSelector(state => state);
+    const { auth: { accountType }, utils: { items, districtsLima } } = useSelector(state => state);
     const dispatch = useDispatch();
     const [showTermsAndConditionModal, setShowTermsAndConditionModal] = useState(false);
     const [userError, setUserError] = useState(null);
@@ -60,6 +61,7 @@ export default function Index({ handleRegisterCompleted, representativeFormData,
 
     useEffect(() => {
         dispatch(actions_Utils.getItems())
+        dispatch(actions_Utils.getDistrictsLima())
     }, [])
 
     const openTermsAndConditionModal = (event) => {
@@ -123,6 +125,23 @@ export default function Index({ handleRegisterCompleted, representativeFormData,
                     helperText={errors.document_number}
                 />
             </Grid>
+            {
+                accountType === "municipality" &&
+                <Grid item xs={12} justify="center">
+                    <Select
+                        label="Distrito"
+                        name="district_id"
+                        value={values.district_id}
+                        onChange={handleInputChange}
+                        error={errors.district_id ? true : false}
+                        helperText={errors.district_id}
+                    >
+                        {districtsLima.length > 0 && districtsLima.map(element =>
+                            <MenuItem key={element.id} value={element.id}>{element.name}</MenuItem>
+                        )}
+                    </Select>
+                </Grid>
+            }
             <Grid item xs={12} justify="center">
                 <TextInput
                     fullWidth

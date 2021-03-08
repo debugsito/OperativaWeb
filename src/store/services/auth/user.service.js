@@ -10,6 +10,6 @@ const updateAccount = async (body) => {
     return response;
 }
 
-export default {
-    getAccount, updateAccount
+export {
+    updateAccount, getAccount
 }

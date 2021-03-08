@@ -61,7 +61,7 @@ export default function Index({ userData, handleSaveAreasOfInterest }) {
                 </Select>
             </Grid>
             <Grid item xs={12} className="justify-center">
-                <Button variant="outlined" size="large" onClick={() => history.push('/')}>Cancelar</Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                {/* <Button variant="outlined" size="large" onClick={() => history.push('/')}>Cancelar</Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; */}
                 <Button variant="contained" size="large" onClick={() => handleSaveAreasOfInterest(values)} disabled={disabledButtonState}>Finalizar</Button>
             </Grid>
         </Grid>

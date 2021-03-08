@@ -6,7 +6,7 @@ import { Alert } from '@material-ui/lab';
 import CloseIcon from '@material-ui/icons/Close';
 import { Button } from '../../shared/components';
 import { useForm } from "../../hooks";
-import service_ChangePassword from "../../../store/services/auth/changePassword.service";
+import {service_Auth} from "../../../store/services";
 import RequestNewPasswordSent from "../components/RequestNewPasswordSent";
 
 const initialValues = {
@@ -54,7 +54,7 @@ export default function Index(props) {
         }
         setError(null)
         try {
-            let response = await service_ChangePassword(body)
+            let response = await service_Auth.changePassword(body)
             if (response.data) {
                 setHasRequestSent(true);
             }
@@ -149,7 +149,7 @@ export default function Index(props) {
                                     <Grid item xs={12} className="justify-center">
                                         <Grid container spacing={3}>
                                             <Grid item xs={6}>
-                                                <Button fullWidth variant="outlined" size="large" onClick={() => history.goBack()}>Cancelar</Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <Button fullWidth variant="outlined" size="large" onClick={() => window.location.href = process.env.REACT_APP_PATH_LANDING}>Cancelar</Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             </Grid>
                                             <Grid item xs={6}>
                                                 <Button fullWidth variant="contained" size="large" onClick={handleRestorePassword} disabled={disabledButtonState}>Siguiente</Button>

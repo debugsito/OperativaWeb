@@ -5,29 +5,25 @@ import { Alert } from "@material-ui/lab";
 import { EditProfileForm, ShowProfile } from "../components";
 import { Breadcrumbs } from "../../shared/components";
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { service_UserCompany } from "../../../store/services";
 import { actions_Utils } from "../../../store/actions";
 
 const routes = [{ name: "Perfil", to: "/dashboard" }];
 
 const Profile = () => {
     const dispatch = useDispatch();
-
+    const {user} = useSelector(state => state?.auth)
     const [isEditActive, setIsEditActive] = useState(false);
     const [userData, setUserData] = useState({})
     const [openAlert, setOpenAlert] = useState(false)
 
     useEffect(() => {
-        getAccount();
         dispatch(actions_Utils.getItems())
     }, [])
 
-    const getAccount = async () => {
-        try {
-            const response = await service_UserCompany.getAccount();
-            const { account } = response.data;
+    useEffect(() => {
+        const { account } = user;
             let dateTemp = {
                 razon_social: account.razon_social,
                 document_number: account.user.document_number,
@@ -40,10 +36,7 @@ const Profile = () => {
                 area: account.user.area_input
             }
             setUserData(dateTemp)
-        } catch (error) {
-            console.log(error)
-        }
-    }
+    },[user])
 
     const AlertMessage = () => (
         <div className="alert-container">
@@ -77,7 +70,7 @@ const Profile = () => {
 
                                         {
                                             isEditActive ?
-                                                <EditProfileForm setIsEditActive={setIsEditActive} userData={userData} setOpenAlert={setOpenAlert} setAccount={getAccount} /> :
+                                                <EditProfileForm setIsEditActive={setIsEditActive} userData={userData} setOpenAlert={setOpenAlert} /> :
                                                 <ShowProfile setIsEditActive={setIsEditActive} userData={userData} />
                                         }
                                     </Grid>

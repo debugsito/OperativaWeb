@@ -32,7 +32,7 @@ const PrivateRoute = ({
                 if (hasSession) {
                     return isPath ? <Component {...props} /> : <Redirect to={initRoute} />
                 } else {
-                    return !needSession ? <Component {...props} /> : <Redirect to='/' />
+                    return !needSession ? <Component {...props} /> : window.location.href = process.env.REACT_APP_PATH_LANDING
                 }
             }}
         />

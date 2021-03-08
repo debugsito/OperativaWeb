@@ -10,7 +10,6 @@ import { Button, Checkbox, Link, TextInput } from '../../shared/components';
 import { useForm } from "../../hooks/useForm";
 import { isEmail } from "../../shared/libs/validators";
 import { setUserError, setUser, logIn } from '../../../store/actions/auth/auth.action';
-import { service_SignIn } from "../../../store/services";
 
 const initialValues = {
     email: "",

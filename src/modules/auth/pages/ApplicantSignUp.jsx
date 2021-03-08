@@ -138,7 +138,7 @@ const SignUp = ({ history }) => {
         setShowTermsAndConditionModal(false);
     }
 
-    const goBack = () => history.push('/');
+    const goBack = () => history.goBack()
 
     return (
         <>

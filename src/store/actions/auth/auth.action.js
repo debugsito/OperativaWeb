@@ -1,5 +1,5 @@
 import AppSession from "../../../modules/shared/libs/session/AppSession";
-import { service_SignIn, service_ApplicantSignUp } from "../../services";
+import { service_ApplicantSignUp, service_Auth } from "../../services";
 import { authType } from "../../types/auth";
 
 export const setUser = (payload) => ({
@@ -52,8 +52,28 @@ export const applicantSignUp = (user) => {
 export const logIn = (user) => {
     return async (dispatch) => {
         try {
-            const response = await service_SignIn.logIn(user);
+            await service_Auth.logIn(user);
             // dispatch(setUser(response.data));
+            dispatch(setUserError(null));
+            dispatch(getAccount());
+        } catch (error) {
+            if (!error.response) {
+                dispatch(setUserError("Ha ocurrido un error interno."));
+            } else {
+                if (error.response.status === 401) {
+                    dispatch(setUserError(error.response.data.message));
+                } else {
+                    dispatch(setUserError("Ha ocurrido un error interno."));
+                };
+            }
+        }
+    };
+};
+
+export const updateAccount = (body) => {
+    return async (dispatch) => {
+        try {
+            await service_Auth.updateAccount(body)
             dispatch(setUserError(null));
             dispatch(getAccount());
         } catch (error) {
@@ -73,7 +93,7 @@ export const logIn = (user) => {
 export const getAccount = () => {
     return async (dispatch) => {
         try {
-            const response = await service_SignIn.getAccount();
+            const response = await service_Auth.getAccount();
             console.log("response getAccount:  ", response)
             dispatch(setUser(response.data));
             dispatch(setUserError(null));

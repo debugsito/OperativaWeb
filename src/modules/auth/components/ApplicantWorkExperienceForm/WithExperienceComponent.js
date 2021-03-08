@@ -24,11 +24,26 @@ const defaultValues = {
 
 export default function WithExperienceComponent({ handleDeleteWorkExperience, handleUpdateWorkExperience, handleAddWorkExperience, handleSaveWithExperience, index, length, user }) {
     let initialValues = user ? user : defaultValues;
+    // let initialValues = user ? {
+    //     position: user.job_level_id,
+    //     company: user.name_inst,
+    //     companyAddress: user.address,
+    //     heading: user.department,
+    //     startDate: user.from_year,
+    //     finishDate: user.to_year,
+    //     weeklyHours: user.hour_rate + "",
+    //     monthlyIncome: user.monthly_income,
+    //     hasExtraHours: user.over_time + "",
+    //     commitmentDegree: user.job_invol,
+    //     workingRelationship: user.job_sati + "",
+    //     withdrawalReason: user.attrition,
+    // } : defaultValues;
     // const dateLocal = DateTime.local().toFormat("yyyy-LL-dd") //Don't use momentjs, will soon be deprecated
     const dateLocal = DateTime.local().toFormat("yyyy-LL") //Don't use momentjs, will soon be deprecated
-    const [showButtons, setShowButtons] = useState(index >= 1)
+    const [showCheckBox] = useState(index >= 1)
     const [isHidden, setIsHidden] = useState(false) //Si la lista tiene mas de 1 elemento
     const [openConfirmationModal, setOpenConfirmationModal] = useState(false)
+
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
 
@@ -52,13 +67,12 @@ export default function WithExperienceComponent({ handleDeleteWorkExperience, ha
             temp.commitmentDegree = fieldValues.commitmentDegree ? "" : "El campo es requerido."
         if ('workingRelationship' in fieldValues)
             temp.workingRelationship = fieldValues.workingRelationship ? "" : "El campo es requerido."
-        if (hasWork) {
+        if (!hasWork) {
             if ('finishDate' in fieldValues)
                 temp.finishDate = fieldValues.finishDate ? "" : "El campo es requerido."
             if ('withdrawalReason' in fieldValues)
                 temp.withdrawalReason = fieldValues.withdrawalReason ? "" : "El campo es requerido."
         }
-
 
         setErrors({ ...temp })
 
@@ -107,6 +121,7 @@ export default function WithExperienceComponent({ handleDeleteWorkExperience, ha
 
     const handleChangeCheckbox = (e) => {
         setHasWork(prevState => !prevState)
+        setErrors({})
         if (e.target.checked) {
             setValues({ ...values, finishDate: null, withdrawalReason: null })
         } else {
@@ -139,20 +154,22 @@ export default function WithExperienceComponent({ handleDeleteWorkExperience, ha
 
     return (
         <>
-            {!showButtons && <Grid item xs={12} md={12} className="justify-center">
-                <FormControl variant="outlined">
-                    <Checkbox
-                        label={
-                            <Typography variant="body2" component="p">
-                                Actualmente estoy laborando.
-                            </Typography>
-                        }
-                        name="hasWork"
-                        checked={hasWork}
-                        onChange={(e) => handleChangeCheckbox(e)}
-                    />
-                </FormControl>
-            </Grid>}
+            {!showCheckBox &&
+                <Grid item xs={12} md={12} className="justify-center">
+                    <FormControl variant="outlined">
+                        <Checkbox
+                            label={
+                                <Typography variant="body2" component="p">
+                                    Actualmente estoy laborando.
+                                </Typography>
+                            }
+                            name="hasWork"
+                            checked={hasWork}
+                            onChange={(e) => handleChangeCheckbox(e)}
+                        />
+                    </FormControl>
+                </Grid>
+            }
             <Grid item xs={12} md={6}>
                 <FormControl variant="outlined" fullWidth error={errors.position ? true : false}>
                     <InputLabel id="demo-simple-select-outlined-label">Cargo</InputLabel>
@@ -336,7 +353,10 @@ export default function WithExperienceComponent({ handleDeleteWorkExperience, ha
             </Grid>}
 
             {
-                !isHidden && index == length - 1 &&
+                //Condiciones para mostrar:
+                //1 se debe mostrar en la ultima expriencia (al final de la lista)
+                //2 solo debe permitirse agregar 3 experiencias como maximo
+                (index == length - 1 && index < 2) &&
                 <>
                     <Grid item xs={12} md={12} lg={12}>
                         <Divider />
