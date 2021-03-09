@@ -11,3 +11,4 @@ export { default as TextInput } from './TextInput';
 export { default as Typography } from './Typography';
 export { default as Select } from './Select';
 export { default as DataGrid } from './DataGrid';
+export { default as Backdrop } from './Backdrop';

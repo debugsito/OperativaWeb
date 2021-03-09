@@ -10,7 +10,7 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import { Link as LinkRouter } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Breadcrumbs, Link } from '..';
+import { Link } from '..';
 import { logoSVG } from '../../images';
 import AppSession from '../../libs/session/AppSession';
 import { MenuRoutes } from "../../libs/menuRoutes";
@@ -23,6 +23,8 @@ import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
 import GroupIcon from '@material-ui/icons/Group';
 import MenuIcon from '@material-ui/icons/Menu';
 import HomeIcon from '@material-ui/icons/Home';
+
+import { Backdrop } from "../../components";
 
 const drawerWidth = 230;
 
@@ -94,6 +96,7 @@ export default function Navigation({ children }) {
   const [open, setOpen] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [selectedIndex, setSelectedIndex] = React.useState(0);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const [openMenu, setOpenMenu] = React.useState(false);
   const anchorRef = React.useRef(null);
@@ -133,6 +136,7 @@ export default function Navigation({ children }) {
   };
 
   const handleSignOut = () => {
+    setIsLoading(true)
     dispatch(signOut());
   }
 
@@ -272,6 +276,11 @@ export default function Navigation({ children }) {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         {children}
+        <Backdrop
+          open={isLoading}
+          onClick={() => setIsLoading(false)}
+          transitionDuration={1000}
+        />
       </main>
     </div >
   );

@@ -7,7 +7,7 @@ import { FormControl, FormHelperText, Grid, IconButton, MenuItem, Typography } f
 
 import { useForm } from "../../../hooks";
 import { useDispatch, useSelector } from 'react-redux';
-import { isRuc, isPhone } from "../../../shared/libs/validators";
+import { onlyNumbers, isRuc, isPhone } from "../../../shared/libs/validators";
 
 import service_MunicipalitySignUp from "../../../../store/services/auth/municipalitySignUp.service";
 import service_CompanySignUp from "../../../../store/services/auth/companySignUp.service";
@@ -121,6 +121,7 @@ export default function Index({ handleRegisterCompleted, representativeFormData,
                     label="RUC"
                     value={values.document_number}
                     onChange={handleInputChange}
+                    onKeyPress={e => onlyNumbers(e)}
                     error={errors.document_number ? true : false}
                     helperText={errors.document_number}
                 />
@@ -149,6 +150,7 @@ export default function Index({ handleRegisterCompleted, representativeFormData,
                     label="Telefono"
                     value={values.phone}
                     onChange={handleInputChange}
+                    onKeyPress={e => onlyNumbers(e)}
                     error={errors.phone ? true : false}
                     helperText={errors.phone}
                 />
