@@ -3,7 +3,7 @@ import {
     departmentsList, documentsTypeList, genderList,
     itemsList, jobLevelsList, jobRolesList, providerList,
     districtsList, listDistrictsLima, provincesList, specialtiesList, withdrawalReasonsList,
-    getPeriods, getRubrosOp
+    getPeriods, getRubrosOp, listDistrictsByText
 } from "../../services/utils.service.temp";
 import { utilsType } from "../../types/utils";
 
@@ -106,6 +106,23 @@ const getDistrictsLima = () => {
         try {
             const response = await listDistrictsLima();
             dispatch(setDistrictsLima(response.data.districts));
+            dispatch(setError(null));
+        } catch (error) {
+            dispatch(setError(error.response.data.message));
+        }
+    };
+};
+const setDistrictsByText = (payload) => ({
+    type: utilsType.SET_DISTRICTS_BY_TEXT,
+    payload
+});
+
+const getDistrictsByText = (body) => {
+    return async (dispatch) => {
+        try {
+            const response = await listDistrictsByText(body);
+            console.log("districts", response)
+            dispatch(setDistrictsByText(response.data.districts));
             dispatch(setError(null));
         } catch (error) {
             dispatch(setError(error.response.data.message));
@@ -304,7 +321,7 @@ export {
     getWithdrawalReasons, setWithdrawalReasons, getItems, setItems,
     getAreas, setAreas, getJobRoles, setJobRoles, getJobLevels, setJobLevels,
     getProviders, getGender, setGender, getSpecialties, setSpecialties, getAcademicLevels, setAcademicLevels,
-    getDistricts, getDistrictsLima, getProvinces, setProvinces, getDepartments, setDepartments,
+    getDistricts, getDistrictsLima, getDistrictsByText, getProvinces, setProvinces, getDepartments, setDepartments,
     getCivilStatuses, setCivilStatuses, getDocumentsType, setDocumentsType, setError, getAllPeriods,
     getRubrosOp, getItemsOp
 }

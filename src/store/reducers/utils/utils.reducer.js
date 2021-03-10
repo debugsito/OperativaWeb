@@ -49,6 +49,11 @@ const utilsReducer = (state = initialState, action) => {
                 ...state,
                 districts: action.payload,
             };
+        case utilsType.SET_DISTRICTS_BY_TEXT:
+            return {
+                ...state,
+                districts: action.payload,
+            };
         case utilsType.SET_DISTRICTS_LIMA:
             return {
                 ...state,

@@ -36,6 +36,12 @@ export const listDistrictsLima = async () => {
     return response;
 }
 
+// Servicio que hace la busqueda de distritos por texto
+export const listDistrictsByText = async (body) => {
+    const response = await api.get(`/districts/search/${body.text}`);
+    return response;
+}
+
 // Servicio que obtiene la lista de nivel academico
 export const academicLevelsList = async () => {
     const response = await api.get('/levels');

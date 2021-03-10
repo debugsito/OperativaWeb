@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Alert } from '@material-ui/lab';
 import CloseIcon from '@material-ui/icons/Close';
 import { TermsAndConditionModalEnterprise } from '../../components';
-import { Button, Checkbox, Link, TextInput, Select } from '../../../shared/components';
+import { Autocomplete, Button, Checkbox, Link, TextInput, Select } from '../../../shared/components';
 import { FormControl, FormHelperText, Grid, IconButton, MenuItem, Typography } from '@material-ui/core';
 
 import { useForm } from "../../../hooks";
@@ -129,18 +129,14 @@ export default function Index({ handleRegisterCompleted, representativeFormData,
             {
                 accountType === "municipality" &&
                 <Grid item xs={12} justify="center">
-                    <Select
+                    <Autocomplete
                         label="Distrito"
                         name="district_id"
                         value={values.district_id}
-                        onChange={handleInputChange}
+                        handleChange={handleInputChange}
                         error={errors.district_id ? true : false}
                         helperText={errors.district_id}
-                    >
-                        {districtsLima.length > 0 && districtsLima.map(element =>
-                            <MenuItem key={element.id} value={element.id}>{element.name}</MenuItem>
-                        )}
-                    </Select>
+                    />
                 </Grid>
             }
             <Grid item xs={12} justify="center">
