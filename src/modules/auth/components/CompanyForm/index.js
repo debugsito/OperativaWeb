@@ -19,11 +19,11 @@ const initialValues = {
     phone: '',
     interest_rubro_id: null,
     termsAndCondition: false,
-    district_id: ''
+    district_id: null
 }
 
 export default function Index({ handleRegisterCompleted, representativeFormData, goToPreviousForm }) {
-    const { auth: { accountType }, utils: { items, districtsLima } } = useSelector(state => state);
+    const { auth: { accountType }, utils: { items } } = useSelector(state => state);
     const dispatch = useDispatch();
     const [showTermsAndConditionModal, setShowTermsAndConditionModal] = useState(false);
     const [userError, setUserError] = useState(null);
@@ -36,12 +36,13 @@ export default function Index({ handleRegisterCompleted, representativeFormData,
             temp.document_number = fieldValues.document_number ? (isRuc(fieldValues.document_number) ? "" : "El RUC debe ser de 11 digitos") : "El campo es requerido."
         if ('phone' in fieldValues)
             temp.phone = fieldValues.phone ? (isPhone(fieldValues.phone) ? "" : "Numero de celular inválido") : "El campo es requerido."
-        if (accountType === "company") {
-            if ('heading' in fieldValues)
-                temp.heading = fieldValues.heading ? "" : "El campo es requerido."
+        if (accountType === "municipality") {
+            if ('district_id' in fieldValues)
+                temp.district_id = fieldValues.district_id ? "" : "El campo es requerido."
         }
         if ('termsAndCondition' in fieldValues)
             temp.termsAndCondition = fieldValues.termsAndCondition ? "" : "Acepte los términos y condiciones."
+
         setErrors({
             ...temp
         })
@@ -132,7 +133,7 @@ export default function Index({ handleRegisterCompleted, representativeFormData,
                     <Autocomplete
                         label="Distrito"
                         name="district_id"
-                        value={values.district_id}
+                        value={values.district_id || ""}
                         handleChange={handleInputChange}
                         error={errors.district_id ? true : false}
                         helperText={errors.district_id}
