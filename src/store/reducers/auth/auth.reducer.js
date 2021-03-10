@@ -16,6 +16,7 @@ const initialState = {
     error: false,
     accountType: '',
     signUpSucces: null,
+    showLoading: false
 };
 
 const accountTypeReducer = (state = initialState, action) => {
@@ -29,6 +30,11 @@ const accountTypeReducer = (state = initialState, action) => {
             return {
                 ...state,
                 signUpSucces: action.payload,
+            };
+        case authType.SHOW_LOADING:
+            return {
+                ...state,
+                showLoading: action.payload,
             };
         case authType.SET_USER:
             return {

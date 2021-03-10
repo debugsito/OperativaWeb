@@ -4,14 +4,14 @@ import { Grid, Typography } from '@material-ui/core';
 import { Button } from '../../../shared/components';
 import { peopleSVG } from "../../images";
 import { useDispatch } from "react-redux";
-import { signOut } from "../../../../store/actions/auth/auth.action";
+import { redirectToLandingPage } from "../../../../store/actions/auth/auth.action";
 
 
 export default function Index() {
     const dispatch = useDispatch()
 
     const handleClick = () => {
-        dispatch(signOut())
+        dispatch(redirectToLandingPage(true))
     }
 
     return (

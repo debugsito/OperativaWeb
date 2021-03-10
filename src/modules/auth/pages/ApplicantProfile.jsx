@@ -7,11 +7,11 @@ import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 import "../styles/ApplicantProfile.css";
-import { appManSVG, numberOneSVG, numberTwoSVG, numberThreeSVG, numberFourSVG,numberFiveSVG, highFiveSVG } from '../images';
-import { Button, LinearProgress, TextInput } from '../../shared/components';
+import { appManSVG, numberOneSVG, numberTwoSVG, numberThreeSVG, numberFourSVG, numberFiveSVG, highFiveSVG } from '../images';
+import { Button, LinearProgress, Backdrop } from '../../shared/components';
 import { ApplicantContactInformationForm, ApplicantEducationForm, ApplicantPersonalDataForm, ApplicantWorkExperienceForm, ApplicantAreasOfInterestForm } from '../components';
 import { service_ApplicantProfile } from '../../../store/services';
-import { setUser, signOut } from '../../../store/actions/auth/auth.action';
+import { setUser, signOut, redirectToLandingPage } from '../../../store/actions/auth/auth.action';
 
 const ApplicantProfile = ({ history }) => {
     const { user } = useSelector(state => state?.auth);
@@ -92,7 +92,7 @@ const ApplicantProfile = ({ history }) => {
     const handleSaveAreasOfInterest = async (data) => {
         saveApplicantProfile('areasOfInterest', data)
         try {
-            const response = await service_ApplicantProfile.applicantPersonalDataRegister({...data });
+            const response = await service_ApplicantProfile.applicantPersonalDataRegister({ ...data });
             if (response.status === 200) {
                 setStep(6) //Mostrar Datos completados con éxito
             }
@@ -101,7 +101,7 @@ const ApplicantProfile = ({ history }) => {
         }
     }
 
-    const saveApplicantProfile = (property, value) =>  dispatch(setUser({ ...user, account: { ...user.account, [property]: value } }));
+    const saveApplicantProfile = (property, value) => dispatch(setUser({ ...user, account: { ...user.account, [property]: value } }));
 
     const expandIcon = (validation, selectedStep) => (validation ? <CheckCircleIcon style={{ color: "var(--paragraphColor)" }} /> : (step === selectedStep ? <ExpandLessIcon style={{ color: "var(--secondaryButtonColor)" }} /> : <ChevronRightIcon style={{ color: "var(--paragraphColor)" }} />))
 
@@ -183,10 +183,10 @@ const ApplicantProfile = ({ history }) => {
                                 </Typography>
                             </AccordionSummary>
                             <AccordionDetails>
-                                <ApplicantWorkExperienceForm 
-                                    history={history} 
+                                <ApplicantWorkExperienceForm
+                                    history={history}
                                     userData={user?.account?.workExperience}
-                                    handleSaveWorkExperience={handleSaveWorkExperience} 
+                                    handleSaveWorkExperience={handleSaveWorkExperience}
                                     handleUpdateWorkExperience={(data) => saveApplicantProfile('workExperience', data)} />
                             </AccordionDetails>
                         </Accordion>
@@ -202,12 +202,12 @@ const ApplicantProfile = ({ history }) => {
                                 </Typography>
                             </AccordionSummary>
                             <AccordionDetails>
-                                <ApplicantAreasOfInterestForm 
-                                     userData={user?.account?.areasOfInterest}
-                                     handleSaveAreasOfInterest={handleSaveAreasOfInterest}
-                                    // handleSaveWorkExperience={handleSaveWorkExperience} 
-                                    // handleUpdateWorkExperience={(data) => saveApplicantProfile('workExperience', data)} 
-                                    />
+                                <ApplicantAreasOfInterestForm
+                                    userData={user?.account?.areasOfInterest}
+                                    handleSaveAreasOfInterest={handleSaveAreasOfInterest}
+                                // handleSaveWorkExperience={handleSaveWorkExperience} 
+                                // handleUpdateWorkExperience={(data) => saveApplicantProfile('workExperience', data)} 
+                                />
                             </AccordionDetails>
                         </Accordion>
                     </Grid>
@@ -216,28 +216,27 @@ const ApplicantProfile = ({ history }) => {
                 <>
                     <Grid item xs={10} sm={6} md={5} lg={4} className="justify-center">
                         <Grid container justify="center" alignItems="center" spacing={3} style={{ marginTop: "2rem" }}>
-
                             <Grid item xs={12} md={12} lg={12}>
                                 <Typography variant="h5" component="h5" className="title-color">
                                     Tus datos se completaron con éxito
-                                </Typography>
+                                    </Typography>
                             </Grid>
                             <Grid item xs={12} md={12} lg={12}>
                                 <Typography variant="body1" component="p">
                                     Has dado el primer paso para conseguir el trabajo que tanto anhelas.
-                                </Typography>
+                                    </Typography>
                             </Grid>
                             <Grid item xs={12} md={12} lg={12}>
                                 <Typography variant="body1" component="p">
                                     Pronto se enviarán ofertas laborales a tu correo.
-                                </Typography>
+                                    </Typography>
                             </Grid>
                             <Grid item xs={12} md={12} lg={12} className="justify-center">
                                 <img src={highFiveSVG} alt="" />
                             </Grid>
                             <Grid item>
                                 <Button fullWidth variant="contained" size="large" onClick={() => {
-                                    dispatch(signOut());
+                                    dispatch(redirectToLandingPage(true));
                                 }}>finalizar</Button>
                             </Grid>
                         </Grid>

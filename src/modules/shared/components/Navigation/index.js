@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { AppBar, CssBaseline, ClickAwayListener, Divider, Drawer, Grid, Grow, IconButton, List, ListItem, ListItemIcon, ListItemText, MenuList, MenuItem, Paper, Popper, Toolbar, Typography } from '@material-ui/core';
@@ -90,7 +90,7 @@ export default function Navigation({ children }) {
   const menuList = MenuRoutes().list;
   const hasDashboard = MenuRoutes().hasDashboard;
   const dispatch = useDispatch();
-  const { user } = useSelector(state => state?.auth);
+  const { user, showLoading } = useSelector(state => state?.auth);
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -100,6 +100,14 @@ export default function Navigation({ children }) {
 
   const [openMenu, setOpenMenu] = React.useState(false);
   const anchorRef = React.useRef(null);
+
+  useEffect(() => {
+    if (showLoading) {
+      console.log("Ejecutando")
+      setIsLoading(true)
+      dispatch(signOut());
+    }
+  }, [showLoading])
 
   const getAvatarIcon = (name) => {
     switch (name) {
@@ -122,9 +130,6 @@ export default function Navigation({ children }) {
 
   const handleDrawerClose = () => {
     setOpen(false);
-  };
-
-  const handleChange = (event) => {
   };
 
   const handleMenu = (event) => {

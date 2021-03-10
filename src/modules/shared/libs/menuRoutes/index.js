@@ -4,7 +4,6 @@ import { SessionRoutes } from "../sessionRoutes";
 
 export function MenuRoutes(props) {
     const { user: { account }, user } = useSelector(state => state.auth)
-    console.log("account Menu Routes", account)
     const route = SessionRoutes().initRoute;
     const session = AppSession.get();
     const hasSession = (!session || Object.keys(session).length === 0 || session.errorCode) ? false : true;
@@ -39,8 +38,8 @@ export function MenuRoutes(props) {
                 break;
             case 'postulante':
                 //solucion Temporal, cambiar en el sprint 4
-                if(user.account.user){
-                   
+                if (user.account.user) {
+
                     list = [
                         { name: "En Progreso", to: `postulante/postulaciones` }//soluciona Temporal, a corregir en el sprint 4
                     ]

@@ -6,7 +6,8 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
     backdrop: {
         zIndex: theme.zIndex.drawer + 1,
-        color: '#E20613',
+        color: '#fff',//'#E20613',
+        backgroundColor: 'rgba(0, 0, 0, 0.8)'
     },
 }));
 
@@ -19,7 +20,7 @@ export default function SimpleBackdrop({ ...props }) {
                 className={classes.backdrop}
                 {...props}
             >
-                <CircularProgress color="inherit" />
+                <CircularProgress color="inherit" size="5rem" thickness={4} />
             </Backdrop>
         </div>
     );

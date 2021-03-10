@@ -111,6 +111,11 @@ export const getAccount = () => {
     };
 };
 
+export const redirectToLandingPage = (payload) => ({
+    type: authType.SHOW_LOADING,
+    payload
+});
+
 export const signOut = () => {
     return async (dispatch) => {
         dispatch(clearSignUp());
