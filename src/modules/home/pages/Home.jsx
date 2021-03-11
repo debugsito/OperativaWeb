@@ -200,7 +200,6 @@ const businessItems4 = [
 ]
 
 const Home = ({ history }) => {
-    console.log("PATH",process.env.REACT_APP_PATH_LANDING)
     const goSignUpPage = () => {
         history.push("/tipo-de-cuenta")
     }

@@ -39,7 +39,6 @@ const SignUp = ({ history }) => {
     }, [error])
 
     useEffect(() => {
-        console.log("signUpSucces",signUpSucces)
         if(signUpSucces){
             history.push('/postulante/inicio')
         }

@@ -9,7 +9,6 @@ import {ApplicantDataTable} from '../components'
 
 const Applicant  = ({ history }) => {
     const { user } = useSelector(state => state?.auth);
-    console.log("user:  ", user)
     const dispatch = useDispatch();
     const initRoute = SessionRoutes().initRoute;
     const routes = [{ name: "Mis postulaciones", to: `${initRoute}` }];
