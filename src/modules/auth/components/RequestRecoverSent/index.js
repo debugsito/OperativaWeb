@@ -1,5 +1,4 @@
 import React from 'react'
-
 import { Grid, Typography } from '@material-ui/core';
 import { Button } from '../../../shared/components';
 import { peopleSVG } from "../../images";
@@ -7,7 +6,6 @@ import { useHistory } from "react-router-dom";
 
 
 export default function Index(props) {
-    const history = useHistory();
 
     return (
         <>
@@ -22,7 +20,7 @@ export default function Index(props) {
                                 Te hemos enviado un correo electrónico con las instrucciones para restablecer tu contraseña
                             </Typography>
                             <Grid item xs={12} style={{ display: 'flex', justifyContent: "center", marginTop: "2rem" }}>
-                                <Button variant="contained" size="large" onClick={() => history.push("/")}>Volver al Inicio</Button>
+                                <Button variant="contained" size="large" href={process.env.REACT_APP_PATH_LANDING}>Volver al Inicio</Button>
                             </Grid>
                         </Grid>
                     </Grid>

@@ -18,12 +18,12 @@ const RouterOperativa = () => {
     return (
         <>
             <Switch>
-                <Route exact path={HomeRoutes} component={HomeRouter} />
+                {/* <Route exact path={HomeRoutes} component={HomeRouter} /> */}
                 <Route exact path={AuthRoutes} component={AuthRouter} />
                 <Route exact path={DashboardRoutes} component={DashboardRouter} />
                 <Route exact path={AdminRoutes} component={AdminRouter} />
                 <Route exact path={ApplicantRoutes} component={ApplicantRouter} />
-                <Redirect to={initRoute} />
+                <Redirect to={initRoute} /> {/*window.location.href = process.env.REACT_APP_PATH_LANDING */}
             </Switch>
         </>
     );
