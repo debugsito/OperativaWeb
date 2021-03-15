@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { Container, Grid, MenuItem, FormControl, Checkbox, Typography, FormControlLabel } from "@material-ui/core";
-import { Breadcrumbs, TextInput, Button, Select, Modal } from "../../shared/components";
+import { Container, Grid, MenuItem, Checkbox, Typography, FormControlLabel } from "@material-ui/core";
+import { Breadcrumbs, TextInput, Button, Select, Modal, RichText } from "../../shared/components";
 import { useForm } from "../../hooks";
-import { itemsList, getPeriods, districtsList } from "../../../store/services/utils.service";
+import { getPeriods } from "../../../store/services/utils.service";
 import { updatePublication, savePublication, getJobsInfo } from "../../../store/actions/dashboard/dashboard.action";
 import { DateTime } from "luxon";
 import * as moment from 'moment';
@@ -249,7 +249,8 @@ export default function EditPosition({ history }) {
                     </Select>
                 </Grid>
                 <Grid item xs={8} style={{ margin: "auto" }}>
-                    <TextInput
+                    <RichText />
+                    {/* <TextInput
                         fullWidth
                         id="outlined-multiline-static"
                         label="Funciones del puesto"
@@ -261,7 +262,7 @@ export default function EditPosition({ history }) {
                         onChange={handleInputChange}
                         error={errors.description ? true : false}
                         helperText={errors.description}
-                    />
+                    /> */}
                 </Grid>
                 <Grid item xs={8} style={{ margin: "auto" }}>
                     <TextInput

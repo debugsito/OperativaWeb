@@ -1,0 +1,15 @@
+.editor {
+
+}
+
+.editor-text {
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  min-height: 200px;
+  padding: 8px;
+  text-align: left
+}
+.editor-controls{
+  display:flex;
+  justify-content: flex-end;
+}
