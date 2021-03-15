@@ -3,26 +3,35 @@ import FormatBoldIcon from "@material-ui/icons/FormatBold";
 import FormatItalicIcon from "@material-ui/icons/FormatItalic";
 import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
 import IconButton from "@material-ui/core/IconButton";
+import { FormHelperText } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 // Import the Slate editor factory.
 import { createEditor, Editor, Transforms, Text } from "slate";
 // Import the Slate components and React plugin.
 import { Slate, Editable, withReact } from "slate-react";
+import "./richText.css"
 
 const useStyles = makeStyles((theme) => ({
     editorControls: {
         display: 'flex',
         justifyContent: 'flex-end'
     },
-    editorText: {
-        // border: "1px solid #ccc",
-        borderStyle: 'solid',
-        borderWidth: 1,
-        borderColor: 'rgba(0, 0, 0, 0.23)',
-        borderRadius: 4,
-        minHeight: 200,
-        padding: 8,
-        textAlign: 'left'
+    editorText: error => {
+        console.log("error", error)
+        return {
+            borderStyle: 'solid',
+            borderWidth: 1,
+            borderColor: error ? '#f44336' : 'rgba(0, 0, 0, 0.23)',
+            borderRadius: 4,
+            minHeight: 200,
+            padding: 8,
+            textAlign: 'left'
+        }
+
+    },
+    editorHelperText: {
+        marginLeft: "1rem",
+        color: "#f44336"
     }
 }))
 
@@ -99,16 +108,18 @@ const CustomEditor = {
     }
 };
 
-export default function RichText() {
-    const classes = useStyles();
+export default function RichText({ handleInputChange, name, error, helperText, valueText, label }) {
+    let event = { target: { name: "", value: "" } }
+    const classes = useStyles(error);
     const editor = useMemo(() => withReact(createEditor()), []);
     //const content = localStorage.getItem("content");
-    const [value, setValue] = useState([
-        {
-            type: "paragraph",
-            children: [{ text: "" }]
-        }
-    ]);
+    const [value, setValue] = useState(
+        valueText || [
+            {
+                type: "paragraph",
+                children: [{ text: "" }]
+            }
+        ]);
 
     const renderElement = useCallback((props) => {
         switch (props.element.type) {
@@ -125,10 +136,18 @@ export default function RichText() {
         return <Leaf {...props} />;
     }, []);
 
+    const handleChange = (value) => {
+        event.target.name = name
+        event.target.value = value
+        setValue(value)
+        handleInputChange(event)
+        console.log("value richt", value)
+    }
+
     return (
         <div className="editor">
-            <Slate editor={editor} value={value} onChange={value => setValue(value)}>
-                <div className={classes.editorControls}>
+            <Slate editor={editor} value={value} onChange={handleChange}>
+                <div className={`${classes.editorTextError} ${classes.editorControls}`}>
                     <IconButton
                         aria-label="Negrita"
                         onMouseDown={(event) => {
@@ -161,6 +180,7 @@ export default function RichText() {
                     className={classes.editorText}
                     renderElement={renderElement}
                     renderLeaf={renderLeaf}
+                    placeholder={label}
                     onKeyDown={(event) => {
                         if (!event.ctrlKey) {
                             return;
@@ -176,6 +196,7 @@ export default function RichText() {
                     }}
                 />
             </Slate>
+            {error && <FormHelperText className={classes.editorHelperText}>{helperText}</FormHelperText>}
         </div>
     );
 }

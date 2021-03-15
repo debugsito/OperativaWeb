@@ -41,8 +41,8 @@ export default function EditPosition({ history }) {
     const routes = [{ name: "Inicio", to: `${initRoute}` }, { name: publicationSelected ? "Editar posición" : "Publicar empleo", to: `${initRoute}/editar-posicion` }];
     const initialValues = publicationSelected ? {
         job_title: publicationSelected.job_title,
-        description: publicationSelected.description,
-        requirements: publicationSelected.requirements,
+        description: JSON.parse(publicationSelected.description),
+        requirements: JSON.parse(publicationSelected.requirements),
         job_level_id: publicationSelected.job_level_id,//rubro
         address: publicationSelected.address,
         district_id: publicationSelected.district.id,
@@ -64,9 +64,9 @@ export default function EditPosition({ history }) {
         if ('job_title' in fieldValues)
             temp.job_title = fieldValues.job_title ? "" : "El campo es requerido."
         if ('description' in fieldValues)
-            temp.description = fieldValues.description ? "" : "El campo es requerido."
+            temp.description = fieldValues.description[0].children[0].text ? "" : "El campo es requerido."
         if ('requirements' in fieldValues)
-            temp.requirements = fieldValues.requirements ? "" : "El campo es requerido."
+            temp.requirements = fieldValues.requirements[0].children[0].text ? "" : "El campo es requerido."
         if ('job_level_id' in fieldValues)
             temp.job_level_id = fieldValues.job_level_id ? "" : "El campo es requerido."
         if ('address' in fieldValues)
@@ -153,14 +153,17 @@ export default function EditPosition({ history }) {
     }
 
     const handleClickSave = () => {
-        values.rubro_id = values?.job_level_id;
-        values.period_id = values?.period;
+        let valuesTemp = {...values}
+        valuesTemp.description = JSON.stringify(values.description)
+        valuesTemp.requirements = JSON.stringify(values.requirements)
+        valuesTemp.rubro_id = values?.job_level_id;
+        valuesTemp.period_id = values?.period;
         if (publicationSelected) {
-            const params = { publication_id: publicationSelected.id, body: { status: 1, ...values, a_tratar:isActiveSalary} }
+            const params = { publication_id: publicationSelected.id, body: { status: 1, ...valuesTemp, a_tratar:isActiveSalary} }
 
             dispatch(updatePublication(params))
         } else {
-            dispatch(savePublication({...values,a_tratar:isActiveSalary}))
+            dispatch(savePublication({...valuesTemp,a_tratar:isActiveSalary}))
         }
         dispatch(getJobsInfo())
         goForward(false)
@@ -249,7 +252,14 @@ export default function EditPosition({ history }) {
                     </Select>
                 </Grid>
                 <Grid item xs={8} style={{ margin: "auto" }}>
-                    <RichText />
+                    <RichText 
+                        label="Funciones del puesto"
+                        name="description"
+                        valueText={values.description}
+                        handleInputChange={handleInputChange}
+                        error={errors.description ? true : false}
+                        helperText={errors.description}
+                    />
                     {/* <TextInput
                         fullWidth
                         id="outlined-multiline-static"
@@ -265,7 +275,15 @@ export default function EditPosition({ history }) {
                     /> */}
                 </Grid>
                 <Grid item xs={8} style={{ margin: "auto" }}>
-                    <TextInput
+                    <RichText 
+                        label="Requisitos del puesto"
+                        name="requirements"
+                        valueText={values.requirements}
+                        handleInputChange={handleInputChange}
+                        error={errors.requirements ? true : false}
+                        helperText={errors.requirements}
+                    />
+                    {/* <TextInput
                         fullWidth
                         id="outlined-multiline-static"
                         label="Requisitos del puesto"
@@ -277,7 +295,7 @@ export default function EditPosition({ history }) {
                         onChange={handleInputChange}
                         error={errors.requirements ? true : false}
                         helperText={errors.requirements}
-                    />
+                    /> */}
                 </Grid>
                 <Grid item xs={8} style={{ margin: "auto" }}>
                     <TextInput
