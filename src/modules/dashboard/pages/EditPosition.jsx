@@ -56,6 +56,13 @@ export default function EditPosition({ history }) {
         period_id: publicationSelected.period,
     } : defaultValues
 
+    const convertJson = (str) =>{
+        try {
+            return JSON.parse(str)
+        } catch (error) {
+            return str
+        }
+    } 
 
     const goForward = () => history.push(initRoute);
 
@@ -260,19 +267,6 @@ export default function EditPosition({ history }) {
                         error={errors.description ? true : false}
                         helperText={errors.description}
                     />
-                    {/* <TextInput
-                        fullWidth
-                        id="outlined-multiline-static"
-                        label="Funciones del puesto"
-                        multiline
-                        rows={8}
-                        variant="outlined"
-                        name="description"
-                        value={values.description}
-                        onChange={handleInputChange}
-                        error={errors.description ? true : false}
-                        helperText={errors.description}
-                    /> */}
                 </Grid>
                 <Grid item xs={8} style={{ margin: "auto" }}>
                     <RichText 

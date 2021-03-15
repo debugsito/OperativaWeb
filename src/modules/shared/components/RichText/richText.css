@@ -1,4 +1,4 @@
-.editor [contenteditable="false"]{
+.editor [contenteditable="false"], .editor-label{
     color: rgba(0, 0, 0, 0.54);
     padding: 0;
     font-size: 1rem;

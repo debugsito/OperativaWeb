@@ -5,7 +5,7 @@ import { DateTime } from "luxon";
 import * as moment from 'moment';
 import { useDispatch, useSelector } from "react-redux";
 import { actions_Utils } from "../../../store/actions";
-import { Breadcrumbs, Button, TextInput } from "../../shared/components";
+import { Breadcrumbs, Button, RichText } from "../../shared/components";
 import { SessionRoutes } from '../../shared/libs/sessionRoutes';
 
 
@@ -124,7 +124,13 @@ export default function ShowPositionDetail(props) {
                                         <strong>Funciones del puesto:</strong>
                                     </Typography>
                                     <br />
-                                    <TextInput
+                                    <RichText 
+                                        label="Funciones del puesto"
+                                        name="description"
+                                        valueText={JSON.parse(publicationSelected.description)}
+                                        readOnly
+                                    />
+                                    {/* <TextInput
                                         fullWidth
                                         label=""
                                         multiline
@@ -134,23 +140,18 @@ export default function ShowPositionDetail(props) {
                                         InputProps={{
                                             readOnly: true,
                                           }}
-                                    />
+                                    /> */}
                                 </Grid>
                                 <Grid item xs={12}>
                                     <Typography variant="subtitle2" component="h6">
                                         <strong>Requisitos del puesto:</strong>
                                     </Typography>
                                     <br />
-                                    <TextInput
-                                        fullWidth
-                                        label=""
-                                        multiline
-                                        variant="filled"
-                                        name="requirements"
-                                        value={publicationSelected.requirements}
-                                        InputProps={{
-                                            readOnly: true,
-                                          }}
+                                    <RichText 
+                                        label="Requisitos del puesto"
+                                        name="description"
+                                        valueText={JSON.parse(publicationSelected.requirements)}
+                                        readOnly
                                     />
                                 </Grid>
                                 <Grid item xs={12} style={{ display: 'flex', justifyContent: 'flex-end' }} >

@@ -11,29 +11,30 @@ import { createEditor, Editor, Transforms, Text } from "slate";
 import { Slate, Editable, withReact } from "slate-react";
 import "./richText.css"
 
-const useStyles = makeStyles((theme) => ({
-    editorControls: {
-        display: 'flex',
-        justifyContent: 'flex-end'
-    },
-    editorText: error => {
-        console.log("error", error)
-        return {
-            borderStyle: 'solid',
-            borderWidth: 1,
-            borderColor: error ? '#f44336' : 'rgba(0, 0, 0, 0.23)',
-            borderRadius: 4,
-            minHeight: 200,
-            padding: 8,
-            textAlign: 'left'
-        }
+const useStyles = makeStyles((theme) => {
+    return ({
+        editorControls: {
+            display: 'flex',
+            justifyContent: 'space-between'
+        },
+        editorText: (props) => {
+            return {
+                borderStyle: 'solid',
+                borderWidth: props.focus ? 2 : 1,
+                borderColor: props.focus ? '#46A9D4' : props.error ? '#f44336' : 'rgba(0, 0, 0, 0.23)',
+                borderRadius: 4,
+                minHeight: 200,
+                padding: 8,
+                textAlign: 'left'
+            }
 
-    },
-    editorHelperText: {
-        marginLeft: "1rem",
-        color: "#f44336"
-    }
-}))
+        },
+        editorHelperText: {
+            marginLeft: "1rem",
+            color: "#f44336"
+        }
+    })
+})
 
 // Define our own custom set of helpers.
 const CustomEditor = {
@@ -108,11 +109,13 @@ const CustomEditor = {
     }
 };
 
-export default function RichText({ handleInputChange, name, error, helperText, valueText, label }) {
+export default function RichText({ handleInputChange = () => { }, name, error = false, helperText, valueText, label, readOnly = false }) {
     let event = { target: { name: "", value: "" } }
-    const classes = useStyles(error);
     const editor = useMemo(() => withReact(createEditor()), []);
+    const [focus, setFocus] = useState(false)
+    const stylesProps = { error, focus }
     //const content = localStorage.getItem("content");
+    const classes = useStyles(stylesProps);
     const [value, setValue] = useState(
         valueText || [
             {
@@ -141,46 +144,58 @@ export default function RichText({ handleInputChange, name, error, helperText, v
         event.target.value = value
         setValue(value)
         handleInputChange(event)
-        console.log("value richt", value)
     }
 
     return (
         <div className="editor">
             <Slate editor={editor} value={value} onChange={handleChange}>
-                <div className={`${classes.editorTextError} ${classes.editorControls}`}>
-                    <IconButton
-                        aria-label="Negrita"
-                        onMouseDown={(event) => {
-                            event.preventDefault();
-                            CustomEditor.toggleBoldMark(editor);
-                        }}
-                    >
-                        <FormatBoldIcon />
-                    </IconButton>
-                    <IconButton
-                        aria-label="Italic"
-                        onMouseDown={(event) => {
-                            event.preventDefault();
-                            CustomEditor.toggleItalicMark(editor);
-                        }}
-                    >
-                        <FormatItalicIcon />
-                    </IconButton>
-                    <IconButton
-                        aria-label="Lista"
-                        onMouseDown={(event) => {
-                            event.preventDefault();
-                            CustomEditor.toggleListBlock(editor);
-                        }}
-                    >
-                        <FormatListBulletedIcon />
-                    </IconButton>
-                </div>
+
+                {
+                    !readOnly &&
+                    <div className={classes.editorControls}>
+                        <div className="editor-label">
+                            <p>{label}</p>
+                        </div>
+                        <div>
+                            <IconButton
+                                aria-label="Negrita"
+                                onMouseDown={(event) => {
+                                    event.preventDefault();
+                                    CustomEditor.toggleBoldMark(editor);
+                                }}
+                            >
+                                <FormatBoldIcon />
+                            </IconButton>
+                            <IconButton
+                                aria-label="Italic"
+                                onMouseDown={(event) => {
+                                    event.preventDefault();
+                                    CustomEditor.toggleItalicMark(editor);
+                                }}
+                            >
+                                <FormatItalicIcon />
+                            </IconButton>
+                            <IconButton
+                                aria-label="Lista"
+                                onMouseDown={(event) => {
+                                    event.preventDefault();
+                                    CustomEditor.toggleListBlock(editor);
+                                }}
+                            >
+                                <FormatListBulletedIcon />
+                            </IconButton>
+                        </div>
+
+                    </div>
+                }
+
                 <Editable
                     className={classes.editorText}
                     renderElement={renderElement}
                     renderLeaf={renderLeaf}
-                    placeholder={label}
+                    readOnly={readOnly}
+                    onFocus={() => setFocus(true)}
+                    onBlur={() => setFocus(false)}
                     onKeyDown={(event) => {
                         if (!event.ctrlKey) {
                             return;
@@ -196,7 +211,7 @@ export default function RichText({ handleInputChange, name, error, helperText, v
                     }}
                 />
             </Slate>
-            {error && <FormHelperText className={classes.editorHelperText}>{helperText}</FormHelperText>}
+            {focus || (error && <FormHelperText className={classes.editorHelperText}>{helperText}</FormHelperText>)}
         </div>
     );
 }
