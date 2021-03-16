@@ -23,6 +23,7 @@ const ApplicantProfile = ({ history }) => {
     const [education, setEducation] = useState()
     const [workExperience, setWorkExperience] = useState()
     const [areasOfInterest, setAreasOfInterest] = useState()
+    const [hasExperience, setHasExperience] = useState()
 
     const handleSavePersonalData = (data) => {
         if (data) {
@@ -65,6 +66,7 @@ const ApplicantProfile = ({ history }) => {
 
     const handleSaveWorkExperience = async (data, hasExperience) => {
         if (data) {
+            setHasExperience(hasExperience.value)
             setWorkExperience(data);
             saveApplicantProfile('workExperience', data);
             if (hasExperience.value === "withExperience") {
@@ -77,28 +79,41 @@ const ApplicantProfile = ({ history }) => {
                     // MensajeError(error.response.data.message);
                 }
             } else {
-                try {
-                    const responseEducation = await service_ApplicantProfile.applicantWithoutExperienceRegister(data);
-                    if (responseEducation.status === 200) {
-                        setStep(5)
-                    }
-                } catch (error) {
-                    // MensajeError(error.response.data.message);
-                }
+                setStep(5)
+                // try {
+                //     const responseEducation = await service_ApplicantProfile.applicantWithoutExperienceRegister(data);
+                //     if (responseEducation.status === 200) {
+                //         setStep(5)
+                //     }
+                // } catch (error) {
+                //     // MensajeError(error.response.data.message);
+                // }
             }
         }
     }
 
     const handleSaveAreasOfInterest = async (data) => {
         saveApplicantProfile('areasOfInterest', data)
-        try {
-            const response = await service_ApplicantProfile.applicantPersonalDataRegister({ ...data });
-            if (response.status === 200) {
-                setStep(6) //Mostrar Datos completados con éxito
+        if(hasExperience === "withExperience"){
+            try {
+                const response = await service_ApplicantProfile.applicantPersonalDataRegister({ ...data });
+                if (response.status === 200) {
+                    setStep(6) //Mostrar Datos completados con éxito
+                }
+            } catch (error) {
+                // MensajeError(error.response.data.message);
             }
-        } catch (error) {
-            // MensajeError(error.response.data.message);
-        }
+        }else {
+            try {
+                const responseEducation = await service_ApplicantProfile.applicantWithoutExperienceRegister({...workExperience,...data});
+                if (responseEducation.status === 200) {
+                    setStep(6)
+                }
+            } catch (error) {
+                // MensajeError(error.response.data.message);
+            }
+    }
+        
     }
 
     const saveApplicantProfile = (property, value) => dispatch(setUser({ ...user, account: { ...user.account, [property]: value } }));
@@ -197,7 +212,7 @@ const ApplicantProfile = ({ history }) => {
                                 id="panel2a-header"
                             >
                                 <Typography className="applicant-profile__accordion-header" variant="button" gutterBottom>
-                                    <img src={numberFiveSVG} alt="Primer paso" />
+                                    <img src={numberFiveSVG} alt="Quinto paso" />
                                     Rubro de interés
                                 </Typography>
                             </AccordionSummary>

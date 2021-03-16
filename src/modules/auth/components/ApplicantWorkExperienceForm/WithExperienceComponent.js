@@ -10,7 +10,7 @@ const defaultValues = {
     position: "",
     company: "",
     companyAddress: "",
-    heading: "",
+    rubro_id: "",
     startDate: "",
     finishDate: "",
     weeklyHours: "",
@@ -24,21 +24,6 @@ const defaultValues = {
 
 export default function WithExperienceComponent({ handleDeleteWorkExperience, handleUpdateWorkExperience, handleAddWorkExperience, handleSaveWithExperience, index, length, user }) {
     let initialValues = user ? user : defaultValues;
-    // let initialValues = user ? {
-    //     position: user.job_level_id,
-    //     company: user.name_inst,
-    //     companyAddress: user.address,
-    //     heading: user.department,
-    //     startDate: user.from_year,
-    //     finishDate: user.to_year,
-    //     weeklyHours: user.hour_rate + "",
-    //     monthlyIncome: user.monthly_income,
-    //     hasExtraHours: user.over_time + "",
-    //     commitmentDegree: user.job_invol,
-    //     workingRelationship: user.job_sati + "",
-    //     withdrawalReason: user.attrition,
-    // } : defaultValues;
-    // const dateLocal = DateTime.local().toFormat("yyyy-LL-dd") //Don't use momentjs, will soon be deprecated
     const dateLocal = DateTime.local().toFormat("yyyy-LL") //Don't use momentjs, will soon be deprecated
     const [showCheckBox] = useState(index >= 1)
     const [isHidden, setIsHidden] = useState(false) //Si la lista tiene mas de 1 elemento
@@ -53,8 +38,8 @@ export default function WithExperienceComponent({ handleDeleteWorkExperience, ha
             temp.company = fieldValues.company ? "" : "El campo es requerido."
         if ('companyAddress' in fieldValues)
             temp.companyAddress = fieldValues.companyAddress ? "" : "El campo es requerido."
-        if ('heading' in fieldValues)
-            temp.heading = fieldValues.heading ? "" : "El campo es requerido."
+        if ('rubro_id' in fieldValues)
+            temp.rubro_id = fieldValues.rubro_id ? "" : "El campo es requerido."
         if ('startDate' in fieldValues)
             temp.startDate = fieldValues.startDate ? "" : "El campo es requerido."
         if ('weeklyHours' in fieldValues)
@@ -213,13 +198,13 @@ export default function WithExperienceComponent({ handleDeleteWorkExperience, ha
                 />
             </Grid>
             <Grid item xs={12} md={6}>
-                <FormControl variant="outlined" fullWidth error={errors.heading ? true : false}>
+                <FormControl variant="outlined" fullWidth error={errors.rubro_id ? true : false}>
                     <InputLabel id="demo-simple-select-outlined-label">Rubro</InputLabel>
                     <Select
                         labelId="demo-simple-select-outlined-label"
                         id="demo-simple-select-outlined"
-                        name="heading"
-                        value={values.heading}
+                        name="rubro_id"
+                        value={values.rubro_id}
                         onChange={handleInputChange}
                         label="Rubro"
                     >
@@ -228,7 +213,7 @@ export default function WithExperienceComponent({ handleDeleteWorkExperience, ha
                         )}
                         {/* <MenuItem value="other">Otro</MenuItem> */}
                     </Select>
-                    <FormHelperText>{errors.heading}</FormHelperText>
+                    <FormHelperText>{errors.rubro_id}</FormHelperText>
                 </FormControl>
             </Grid>
             <Grid item xs={12} md={6}>
@@ -299,8 +284,8 @@ export default function WithExperienceComponent({ handleDeleteWorkExperience, ha
                 <FormControl component="fieldset" error={errors.hasExtraHours ? true : false}>
                     <FormLabel component="legend">¿Trabajaste horas extras?</FormLabel>
                     <RadioGroup row aria-label="hasExtraHours" name="hasExtraHours" value={values.hasExtraHours} onChange={handleInputChange}>
-                        <FormControlLabel value="yes" control={<Radio />} label="Sí" />
-                        <FormControlLabel value="no" control={<Radio />} label="No" />
+                        <FormControlLabel value="1" control={<Radio />} label="Sí" />
+                        <FormControlLabel value="0" control={<Radio />} label="No" />
                     </RadioGroup>
                     <FormHelperText>{errors.hasExtraHours}</FormHelperText>
                 </FormControl>

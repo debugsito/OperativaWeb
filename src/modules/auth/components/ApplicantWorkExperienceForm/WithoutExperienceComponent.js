@@ -38,7 +38,6 @@ export default function WithoutExperienceComponent({ user, handleFinish, history
 
     const handleSave = () => {
         const body = {
-            interest_area_id: 1,//EN DURO
             volunteering: parseInt(hasVolunteering.value === "yes" ? 1 : 0),
             rotating_schedule: parseInt(hasRotativeSchedules.value === "yes" ? 1 : 0),
             extra_hours: parseInt(hasExtraHours.value === "yes" ? 1 : 0),
