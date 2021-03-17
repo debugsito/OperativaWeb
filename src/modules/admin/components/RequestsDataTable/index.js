@@ -16,7 +16,7 @@ export default function DataTable() {
     {
       field: 'role', headerName: 'Tipo', width: 120, valueGetter: (params) => {
         const { role } = params.row;
-        return role === "muni" ? "Muncipalidad" : "Empresa"
+        return role === "muni" ? "Municipalidad" : "Empresa"
       }
     },
     { field: 'razon_social', headerName: 'Razón social', width: 280 },
