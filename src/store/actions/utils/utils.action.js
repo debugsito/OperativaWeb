@@ -121,7 +121,6 @@ const getDistrictsByText = (body) => {
     return async (dispatch) => {
         try {
             const response = await listDistrictsByText(body);
-            console.log("districts", response)
             dispatch(setDistrictsByText(response.data.districts));
             dispatch(setError(null));
         } catch (error) {
