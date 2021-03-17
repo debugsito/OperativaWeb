@@ -35,8 +35,8 @@ export default function Index() {
                             <br />
                             <Grid item xs={12}>
                                 <Typography variant="body2" component="p">
-                                    En caso de presentar algún inconveniente no dude en comunicarse con nosotros a través del correo soporte@operativa.pe
-                            </Typography>
+                                    En caso de presentar algún inconveniente no dude en comunicarse con nosotros a través del correo <strong>soporte@operativa.pe</strong>
+                                </Typography>
                             </Grid>
 
                             <Grid item xs={12} style={{ display: 'flex', justifyContent: "center", marginTop: "2rem" }}>
