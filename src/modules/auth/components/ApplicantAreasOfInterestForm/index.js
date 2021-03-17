@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux"
 
-import { Grid, MenuItem } from '@material-ui/core'
+import { Grid, MenuItem, Typography } from '@material-ui/core'
 import { Select, Button } from "../../../shared/components";
 
 import { actions_Utils } from "../../../../store/actions";
-import { useHistory } from "react-router-dom";
 import { useForm } from "../../../hooks";
 
 const defaultValues = {
@@ -14,13 +13,10 @@ const defaultValues = {
 
 export default function Index({ userData, handleSaveAreasOfInterest }) {
     const dispatch = useDispatch()
-    const history = useHistory()
-    const initialValues = userData ? userData : defaultValues
     const { items } = useSelector(state => state.utils)
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
-
         if ('interest_rubro_id' in fieldValues)
             temp.interest_rubro_id = fieldValues.interest_rubro_id ? "" : "El campo es requerido."
 
@@ -45,6 +41,11 @@ export default function Index({ userData, handleSaveAreasOfInterest }) {
 
     return (
         <Grid container spacing={3} style={{ padding: 20 }}>
+            <Grid item xs={10} sm={10} md={10} lg={10}>
+                <Typography variant="body1" component="p" className="title-color">
+                    Seleccione el rubro principal de su interés.
+                </Typography>
+            </Grid>
             <Grid item xs={12} md={6}>
                 <Select
                     label="Rubro"
