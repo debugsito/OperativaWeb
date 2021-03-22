@@ -29,8 +29,8 @@ export default function Index() {
                             <br />
                             <Grid item xs={12}>
                                 <Typography variant="body2" component="p">
-                                    La solicitud ha sido enviada para su aprobación, en un plazo máximo de 24 horas recibirá un correo con la contraseña de su usuario.
-                            </Typography>
+                                    La solicitud ha sido enviada para su aprobación, <strong>en un plazo máximo de 24 horas recibirá un correo con la contraseña de su usuario.</strong>
+                                </Typography>
                             </Grid>
                             <br />
                             <Grid item xs={12}>

@@ -132,9 +132,9 @@ const ApplicantProfile = ({ history }) => {
                     <Grid item xs={2} sm={2} md={2} lg={2} className="justify-center">
                         <img src={appManSVG} width="120" alt="" />
                     </Grid>
-                    <Grid item xs={10} sm={10} md={10} lg={10}>
+                    <Grid item xs={10} sm={10} md={8} lg={8}>
                         <Typography variant="body1" component="p" className="title-color">
-                            Completa tu perfil para ser visible por miles de empresas.
+                            Recuerda completar todos los campos del perfil del registro, para posicionarte como primero en las listas de contratación por miles de empresas
                         </Typography>
                     </Grid>
                     <Grid item xs={12} md={12} lg={12}>

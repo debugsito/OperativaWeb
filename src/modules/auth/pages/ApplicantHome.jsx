@@ -21,8 +21,10 @@ const ApplicantHome = ({ history }) => {
                         </Typography>
                     </Grid>
                     <Grid item xs={12} md={12} lg={12}>
-                        <Typography variant="body1" component="p">
-                            Para poder conectarte con tu trabajo ideal, necesitamos que completes tu perfil.
+                        <Typography variant="body1" component="p" style={{textAlign:'justify', textJustify:"inter-word"}}>
+                        Para participar en los procesos de selección 
+                        te recomendamos completar los campos del perfil del registro, para posicionarte como primero en las listas de contratación por miles 
+                        de empresas.
                         </Typography>
                     </Grid>
                     <Grid item xs={12} md={12} lg={12}>
