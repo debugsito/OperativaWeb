@@ -27,6 +27,11 @@ export default function TermsAndConditionModal({ handleClose, handleAccept, ...p
                         Deseo recibir notificaciones de convocatorias de trabajo en mi correo electrónico.
                     </Typography>
                 </Grid>
+                <Grid item xs={12}>
+                    <Typography variant="body2" component="p" style={{ fontWeight: 500 }}>
+                        Operativa es una plataforma tecnológicas que permite conectar a empresas y postulantes en la búsqueda de contrataciones para realizar trabajos operarios, siendo únicamente las empresas  responsables del proceso selección y de contratación de personal.
+                    </Typography>
+                </Grid>
                 <br />
                 <br />
                 <Grid item xs={12}>
