@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import * as moment from 'moment';
 import { useDispatch, useSelector } from "react-redux";
 import { Container, Grid } from "@material-ui/core";
+import { makeStyles } from '@material-ui/core/styles';
+import Fab from '@material-ui/core/Fab';
 
 import { Breadcrumbs, Button, DataGrid } from "../../shared/components";
 import { SessionRoutes } from '../../shared/libs/sessionRoutes';
@@ -25,7 +27,15 @@ const getStatus = (state) => {
 
 }
 
+const useStyles = makeStyles((theme) => ({
+    fab: {
+      borderRadius: "50% !important",
+      background: "#46A9D4"
+    },
+  }));
+
 export default function Listpostulants({ history }) {
+    const classes = useStyles();
     const dispatch = useDispatch()
     const publication_id = history.location.state.publication_id
     const { postulantsByPublicationId } = useSelector(state => state?.dashboard)
@@ -42,6 +52,7 @@ export default function Listpostulants({ history }) {
             let rowTemp = postulantsByPublicationId?.data?.map((item) => (
                 {
                     id: item.id,
+                    residenceTime: "1 año",
                     fullName: item.user.fullname,
                     academicLevel: item.user.level_name || "",
                     experience: item.user.experience == 1 ? "Con experiencia" : "Sin experiencia",
@@ -56,6 +67,10 @@ export default function Listpostulants({ history }) {
     }, [postulantsByPublicationId])
 
     const columns = [
+        { field: 'match', headerName: 'Match', width: 100, renderCell: (params) => {
+            return (<Fab color="primary" size="small" className={classes.fab}>90%</Fab>) 
+        }},
+        { field: 'residenceTime', headerName: 'Tiempo de permanencia', width: 200 },
         { field: 'fullName', headerName: 'Nombres del postulantes', width: 300 },
         { field: 'academicLevel', headerName: 'Nivel de estudio', width: 220 },
         { field: 'experience', headerName: 'Experiencia', width: 180 },
