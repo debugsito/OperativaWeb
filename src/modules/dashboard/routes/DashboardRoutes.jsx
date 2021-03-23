@@ -13,5 +13,7 @@ const DashboardRoutes = [
     '/empresa/dashboard/postulante/perfil/:postulant_id',
     '/municipalidad/dashboard/ver-posicion',
     '/empresa/dashboard/ver-posicion',
+    '/empresa/dashboard/cambiar-password',
+    '/municipalidad/dashboard/cambiar-password',
 ];
 export default DashboardRoutes;
