@@ -27,8 +27,8 @@ const getStatus = (state) => {
 
 export default function Listpostulants({ history }) {
     const dispatch = useDispatch()
-    const publication_id = history.location.state.publication_id
-    const { postulantsByPublicationId } = useSelector(state => state?.dashboard)
+    const { postulantsByPublicationId, publicationSelected } = useSelector(state => state?.dashboard)
+    const publication_id = publicationSelected.data.id
     const initRoute = SessionRoutes().initRoute;
     const routes = [{ name: "Incio", to: `${initRoute}` }, { name: "Postulantes", to: `${initRoute}/postulantes` }];
     const [rows, setRows] = useState([])

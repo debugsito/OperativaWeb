@@ -273,7 +273,7 @@ export default function OpenPositionsTable() {
             createData(
                 publication.job_title,
                 moment(publication.to_date).utc().format('LL'),
-                "Valeria",//publication.account.user.fullname,
+                publication.account?.user?.fullname,
                 moment(publication.createdAt).format('LL'),
                 publication.count_postulantes,
                 moment(publication.to_date).utc().format('X') > moment().utc().format('X'), //como se si esta activo
@@ -361,9 +361,8 @@ export default function OpenPositionsTable() {
     }
 
     const goToPostulants = (publication) => {
-        const publication_id = publication.data.id
         dispatch(setPublicationSelected(publication));
-        history.push({ pathname: `${initRoute}/postulantes`, state: { publication_id } })
+        history.push({ pathname: `${initRoute}/postulantes` })
     };
 
     return (
