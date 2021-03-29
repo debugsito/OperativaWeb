@@ -1,4 +1,5 @@
 .MuiDataGrid-colCellTitle {
+    margin-top: 0.5rem;
     white-space: normal !important;
-    line-height: 1.5rem;
+    line-height: 1.3rem;
 }

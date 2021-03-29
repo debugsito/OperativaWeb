@@ -2,14 +2,11 @@ import React, { useEffect, useState } from 'react'
 import * as moment from 'moment';
 import { useDispatch, useSelector } from "react-redux";
 import { Container, Grid } from "@material-ui/core";
-import { makeStyles } from '@material-ui/core/styles';
-import Fab from '@material-ui/core/Fab';
 
 import { Breadcrumbs, Button, DataGrid, FabLights } from "../../shared/components";
 import { SessionRoutes } from '../../shared/libs/sessionRoutes';
 
 import { getPostulantsByPublicationId } from "../../../store/actions/dashboard/dashboard.action";
-import { NearMeTwoTone } from '@material-ui/icons';
 
 const getStatus = (state) => {
     switch (state) {
@@ -27,15 +24,7 @@ const getStatus = (state) => {
 
 }
 
-const useStyles = makeStyles((theme) => ({
-    fab: {
-      borderRadius: "50% !important",
-      background: "#46A9D4"
-    },
-  }));
-
 export default function Listpostulants({ history }) {
-    const classes = useStyles();
     const dispatch = useDispatch()
     const publication_id = history.location.state.publication_id
     const { postulantsByPublicationId } = useSelector(state => state?.dashboard)
@@ -69,8 +58,9 @@ export default function Listpostulants({ history }) {
 
     const columns = [
         { field: 'match', headerName: 'Match', width: 100, renderCell: (params) => {
+            const random = Math.random() * 100;
             const { similarity } = params.row
-            return (<FabLights value={similarity}/>) 
+            return (<FabLights value={random }/>) 
         }},
         { field: 'residenceTime', headerName: 'Tiempo de permanencia', width: 200 },
         { field: 'fullName', headerName: 'Nombres del postulantes', width: 300 },
