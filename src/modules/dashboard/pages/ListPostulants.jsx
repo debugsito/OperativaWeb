@@ -19,9 +19,17 @@ const getStatus = (state) => {
         case 3:
             return 'Contratado';
         default:
-            return 'Resigtrado';
+            return 'Registrado';
     }
 
+}
+
+const convertDaysIntoYearhAndMonth = (days) => {
+    const years = Math.round(days/365)
+    const months = Math.round((days%365)/30)
+    const textOfYear = years > 1? "años": "año"
+    const textOfMonth = months > 1? "meses": "mes"
+    return years > 0? (`${years} ${textOfYear} ${months} ${textOfMonth}`): `${months} ${textOfMonth}`
 }
 
 export default function Listpostulants({ history }) {
@@ -29,7 +37,7 @@ export default function Listpostulants({ history }) {
     const publication_id = history.location.state.publication_id
     const { postulantsByPublicationId } = useSelector(state => state?.dashboard)
     const initRoute = SessionRoutes().initRoute;
-    const routes = [{ name: "Incio", to: `${initRoute}` }, { name: "Postulantes", to: `${initRoute}/postulantes` }];
+    const routes = [{ name: "Inicio", to: `${initRoute}` }, { name: "Postulantes", to: `${initRoute}/postulantes` }];
     const [rows, setRows] = useState([])
 
     useEffect(() => {
@@ -48,7 +56,7 @@ export default function Listpostulants({ history }) {
                     state: getStatus(item.estado),
                     postulant_id: item.user.account_id,
                     similarity: item.user.similarity,
-                    residenceTime: item.user.account_vector.ptime
+                    residenceTime: convertDaysIntoYearhAndMonth(item.user.account_vector.ptime)
                 }
             ))
             setRows(rowTemp)
@@ -60,7 +68,7 @@ export default function Listpostulants({ history }) {
         { field: 'match', headerName: 'Match', width: 100, renderCell: (params) => {
             const random = Math.random() * 100;
             const { similarity } = params.row
-            return (<FabLights value={random }/>) 
+            return (<FabLights value={similarity }/>) 
         }},
         { field: 'residenceTime', headerName: 'Tiempo de permanencia', width: 200 },
         { field: 'fullName', headerName: 'Nombres del postulantes', width: 300 },
