@@ -5,7 +5,7 @@ import { Container, Grid } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
 
-import { Breadcrumbs, Button, DataGrid } from "../../shared/components";
+import { Breadcrumbs, Button, DataGrid, FabLights } from "../../shared/components";
 import { SessionRoutes } from '../../shared/libs/sessionRoutes';
 
 import { getPostulantsByPublicationId } from "../../../store/actions/dashboard/dashboard.action";
@@ -52,13 +52,14 @@ export default function Listpostulants({ history }) {
             let rowTemp = postulantsByPublicationId?.data?.map((item) => (
                 {
                     id: item.id,
-                    residenceTime: "1 año",
-                    fullName: item.user.fullname,
+                    fullName: `${item.user.first_name} ${item.user.last_name}`,
                     academicLevel: item.user.level_name || "",
                     experience: item.user.experience == 1 ? "Con experiencia" : "Sin experiencia",
                     date: item.createAt,
                     state: getStatus(item.estado),
-                    postulant_id: item.user.account_id
+                    postulant_id: item.user.account_id,
+                    similarity: item.user.similarity,
+                    residenceTime: item.user.account_vector.ptime
                 }
             ))
             setRows(rowTemp)
@@ -68,13 +69,14 @@ export default function Listpostulants({ history }) {
 
     const columns = [
         { field: 'match', headerName: 'Match', width: 100, renderCell: (params) => {
-            return (<Fab color="primary" size="small" className={classes.fab}>90%</Fab>) 
+            const { similarity } = params.row
+            return (<FabLights value={similarity}/>) 
         }},
         { field: 'residenceTime', headerName: 'Tiempo de permanencia', width: 200 },
         { field: 'fullName', headerName: 'Nombres del postulantes', width: 300 },
         { field: 'academicLevel', headerName: 'Nivel de estudio', width: 220 },
         { field: 'experience', headerName: 'Experiencia', width: 180 },
-        { field: 'date', headerName: 'Fecha de postulacion', width: 200, valueGetter: (params) => moment(params.value).format("YYYY-MM-DD") },
+        { field: 'date', headerName: 'Fecha de postulación', width: 200, valueGetter: (params) => moment(params.value).format("YYYY-MM-DD") },
         {
             field: 'state', headerName: 'Estado', width: 130, renderCell: (params) => {
                 const { postulant_id, state } = params.row

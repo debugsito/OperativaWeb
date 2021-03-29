@@ -1,5 +1,6 @@
 import React from 'react'
 import { DataGrid } from '@material-ui/data-grid';
+import "./datagrid.css"
 
 
 // PD1. como todas las tablas tienen una paginacion igual (en cuanto a estilos: color)
