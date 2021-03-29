@@ -23,7 +23,10 @@ const defaultValues = {
 export default function ApplicantContactInformationForm({ user, handleSavePersonalData }) {
     // #region 
     let initialValues = user ? user : defaultValues;
-    const dateLocal = DateTime.local().toFormat("yyyy-LL-dd")
+    const yearMax = DateTime.utc().year - 18
+    const monthMax = DateTime.utc().month
+    const dayMax = DateTime.utc().day
+    const dateMax = DateTime.utc(yearMax, monthMax, dayMax).toFormat("yyyy-LL-dd")
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
@@ -196,7 +199,7 @@ export default function ApplicantContactInformationForm({ user, handleSavePerson
                         shrink: true,
                     }}
                     inputProps={{
-                        max: dateLocal
+                        max: dateMax
                     }}
                 />
 
