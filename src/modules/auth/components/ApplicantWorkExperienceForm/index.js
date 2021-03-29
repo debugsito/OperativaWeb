@@ -13,13 +13,13 @@ const defaultValues = {
     companyAddress: "",
     rubro_id: "",
     startDate: "",
-    finishDate: null,
+    finishDate: "",
     weeklyHours: "",
     monthlyIncome: "",
     hasExtraHours: "",
     commitmentDegree: "",
     workingRelationship: "",
-    withdrawalReason: null,
+    withdrawalReason: "",
 
 }
 
@@ -42,8 +42,12 @@ export default function ApplicantWorkExperienceForm({ userData = initialValues, 
     // const validateHasExperience = (value = hasExperience.value) => setHasExperience({ value: value, error: !value });
 
     const handleCheckBox = (value = hasExperience.value) => {
+        console.log("value", value)
         setHasExperience({ value: value, error: !value })
-        if (value === "withExperience") handleUpdateWorkExperience(initialValues)
+        if (value == "withExperience") {
+            console.log("Con experiencia")
+            handleUpdateWorkExperience(initialValues)
+        }
     }
 
     const handleSaveWithExperience = async () => {

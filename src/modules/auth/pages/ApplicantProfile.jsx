@@ -116,7 +116,9 @@ const ApplicantProfile = ({ history }) => {
         
     }
 
-    const saveApplicantProfile = (property, value) => dispatch(setUser({ ...user, account: { ...user.account, [property]: value } }));
+    const saveApplicantProfile = (property, value) => {
+        dispatch(setUser({ ...user, account: { ...user.account, [property]: value } }))
+    };
 
     const expandIcon = (validation, selectedStep) => (validation ? <CheckCircleIcon style={{ color: "var(--paragraphColor)" }} /> : (step === selectedStep ? <ExpandLessIcon style={{ color: "var(--secondaryButtonColor)" }} /> : <ChevronRightIcon style={{ color: "var(--paragraphColor)" }} />))
 

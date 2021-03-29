@@ -204,7 +204,7 @@ export default function ApplicantEducationForm({ user, handleSaveEducation }) {
                 />
             </Grid>
             <Grid item xs={12} md={12} className="justify-end">
-                <Button color="primary" type="submit" onClick={handleClickSave}>continuar</Button>
+                <Button variant="contained" size="large" onClick={handleClickSave} disabled={disabledButtonState}>Continuar</Button>
             </Grid>
         </Grid >
     );

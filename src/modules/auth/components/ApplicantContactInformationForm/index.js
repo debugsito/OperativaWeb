@@ -243,7 +243,7 @@ export default function ApplicantPersonalDataForm({ user, handleSaveContactInfor
                 </FormControl>
             </Grid>
             <Grid item xs={12} md={12} className="justify-end">
-                <Button color="primary" onClick={handleSave} >continuar</Button>
+                <Button variant="contained" size="large" onClick={handleSave} disabled={disabledButtonState}>Continuar</Button>
             </Grid>
         </Grid>
     );

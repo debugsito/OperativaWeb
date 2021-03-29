@@ -23,7 +23,7 @@ const defaultValues = {
 }
 
 export default function WithExperienceComponent({ handleDeleteWorkExperience, handleUpdateWorkExperience, handleAddWorkExperience, handleSaveWithExperience, index, length, user }) {
-    let initialValues = user ? user : defaultValues;
+    let initialValues = user ? user : defaultValues
     const dateLocal = DateTime.local().toFormat("yyyy-LL") //Don't use momentjs, will soon be deprecated
     const [showCheckBox] = useState(index >= 1)
     const [isHidden, setIsHidden] = useState(false) //Si la lista tiene mas de 1 elemento
@@ -366,7 +366,8 @@ export default function WithExperienceComponent({ handleDeleteWorkExperience, ha
             {
                 !isHidden && index == length - 1 &&
                 <Grid item xs={12} md={12} className="justify-end">
-                    <Button color="primary" type="submit" onClick={handleClickNextStep}>continuar</Button>
+                    <Button variant="contained" size="large" onClick={handleClickNextStep} disabled={disabledButtonState}>Continuar</Button>
+                    {/* <Button color="primary" type="submit" onClick={handleClickNextStep}>continuar</Button> */}
                 </Grid>
             }
 
