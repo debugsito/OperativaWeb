@@ -14,3 +14,4 @@ export { default as DataGrid } from './DataGrid';
 export { default as Backdrop } from './Backdrop';
 export { default as Autocomplete } from './Autocomplete';
 export { default as RichText } from './RichText';
+export { default as FabLights } from './FabLights';

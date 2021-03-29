@@ -3,11 +3,10 @@ import * as moment from 'moment';
 import { useDispatch, useSelector } from "react-redux";
 import { Container, Grid } from "@material-ui/core";
 
-import { Breadcrumbs, Button, DataGrid } from "../../shared/components";
+import { Breadcrumbs, Button, DataGrid, FabLights } from "../../shared/components";
 import { SessionRoutes } from '../../shared/libs/sessionRoutes';
 
 import { getPostulantsByPublicationId } from "../../../store/actions/dashboard/dashboard.action";
-import { NearMeTwoTone } from '@material-ui/icons';
 
 const getStatus = (state) => {
     switch (state) {
@@ -20,9 +19,17 @@ const getStatus = (state) => {
         case 3:
             return 'Contratado';
         default:
-            return 'Resigtrado';
+            return 'Registrado';
     }
 
+}
+
+const convertDaysIntoYearhAndMonth = (days) => {
+    const years = Math.round(days/365)
+    const months = Math.round((days%365)/30)
+    const textOfYear = years > 1? "años": "año"
+    const textOfMonth = months > 1? "meses": "mes"
+    return years > 0? (`${years} ${textOfYear} ${months} ${textOfMonth}`): `${months} ${textOfMonth}`
 }
 
 export default function Listpostulants({ history }) {
@@ -30,7 +37,7 @@ export default function Listpostulants({ history }) {
     const { postulantsByPublicationId, publicationSelected } = useSelector(state => state?.dashboard)
     const publication_id = publicationSelected.data.id
     const initRoute = SessionRoutes().initRoute;
-    const routes = [{ name: "Incio", to: `${initRoute}` }, { name: "Postulantes", to: `${initRoute}/postulantes` }];
+    const routes = [{ name: "Inicio", to: `${initRoute}` }, { name: "Postulantes", to: `${initRoute}/postulantes` }];
     const [rows, setRows] = useState([])
 
     useEffect(() => {
@@ -42,12 +49,14 @@ export default function Listpostulants({ history }) {
             let rowTemp = postulantsByPublicationId?.data?.map((item) => (
                 {
                     id: item.id,
-                    fullName: item.user.fullname,
+                    fullName: `${item.user.first_name} ${item.user.last_name}`,
                     academicLevel: item.user.level_name || "",
                     experience: item.user.experience == 1 ? "Con experiencia" : "Sin experiencia",
                     date: item.createAt,
                     state: getStatus(item.estado),
-                    postulant_id: item.user.account_id
+                    postulant_id: item.user.account_id,
+                    similarity: item.user.similarity,
+                    residenceTime: convertDaysIntoYearhAndMonth(item.user.account_vector.ptime)
                 }
             ))
             setRows(rowTemp)
@@ -56,10 +65,16 @@ export default function Listpostulants({ history }) {
     }, [postulantsByPublicationId])
 
     const columns = [
+        { field: 'match', headerName: 'Match', width: 100, renderCell: (params) => {
+            const random = Math.random() * 100;
+            const { similarity } = params.row
+            return (<FabLights value={similarity }/>) 
+        }},
+        { field: 'residenceTime', headerName: 'Tiempo de permanencia', width: 200 },
         { field: 'fullName', headerName: 'Nombres del postulantes', width: 300 },
         { field: 'academicLevel', headerName: 'Nivel de estudio', width: 220 },
         { field: 'experience', headerName: 'Experiencia', width: 180 },
-        { field: 'date', headerName: 'Fecha de postulacion', width: 200, valueGetter: (params) => moment(params.value).format("YYYY-MM-DD") },
+        { field: 'date', headerName: 'Fecha de postulación', width: 200, valueGetter: (params) => moment(params.value).format("YYYY-MM-DD") },
         {
             field: 'state', headerName: 'Estado', width: 130, renderCell: (params) => {
                 const { postulant_id, state } = params.row
