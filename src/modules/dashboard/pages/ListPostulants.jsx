@@ -70,9 +70,9 @@ export default function Listpostulants({ history }) {
             const { similarity } = params.row
             return (<FabLights value={similarity }/>) 
         }},
-        { field: 'residenceTime', headerName: 'Tiempo de permanencia', width: 200 },
+        { field: 'residenceTime', headerName: 'Tiempo de permanencia', width: 180 },
         { field: 'fullName', headerName: 'Nombres del postulantes', width: 300 },
-        { field: 'academicLevel', headerName: 'Nivel de estudio', width: 220 },
+        // { field: 'academicLevel', headerName: 'Nivel de estudio', width: 220 },
         { field: 'experience', headerName: 'Experiencia', width: 180 },
         { field: 'date', headerName: 'Fecha de postulación', width: 200, valueGetter: (params) => moment(params.value).format("YYYY-MM-DD") },
         {
