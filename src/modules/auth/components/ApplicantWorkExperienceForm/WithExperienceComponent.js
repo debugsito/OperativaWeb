@@ -180,7 +180,7 @@ export default function WithExperienceComponent({ handleDeleteWorkExperience, ha
                     name="company"
                     value={values.company}
                     onChange={handleInputChange}
-                    error={errors.company && true}
+                    error={errors.company ? true : false}
                     helperText={errors.company}
                     onKeyPress={e => onlyLetters(e)}
                 />
@@ -192,7 +192,7 @@ export default function WithExperienceComponent({ handleDeleteWorkExperience, ha
                     name="companyAddress"
                     value={values.companyAddress}
                     onChange={handleInputChange}
-                    error={errors.companyAddress && true}
+                    error={errors.companyAddress ? true : false}
                     helperText={errors.companyAddress}
                     onKeyPress={e => onlyLetters(e)}
                 />
@@ -224,7 +224,7 @@ export default function WithExperienceComponent({ handleDeleteWorkExperience, ha
                     label="Fecha de inicio"
                     value={values.startDate}
                     onChange={handleInputChange}
-                    error={errors.startDate && true}
+                    error={errors.startDate ? true : false}
                     helperText={errors.startDate}
                     type="month"
                     InputLabelProps={{
@@ -244,7 +244,7 @@ export default function WithExperienceComponent({ handleDeleteWorkExperience, ha
                     label="Fecha de fin"
                     value={values.finishDate || ''}
                     onChange={handleInputChange}
-                    error={errors.finishDate && true}
+                    error={errors.finishDate ? true : false}
                     helperText={errors.finishDate}
                     InputLabelProps={{
                         shrink: true,
@@ -261,7 +261,7 @@ export default function WithExperienceComponent({ handleDeleteWorkExperience, ha
                     name="weeklyHours"
                     value={values.weeklyHours}
                     onChange={handleInputChange}
-                    error={errors.weeklyHours && true}
+                    error={errors.weeklyHours ? true : false}
                     helperText={errors.weeklyHours}
                     onKeyPress={e => onlyNumbers(e)}
                     type="Number"
@@ -275,7 +275,7 @@ export default function WithExperienceComponent({ handleDeleteWorkExperience, ha
                     name="monthlyIncome"
                     value={values.monthlyIncome}
                     onChange={handleInputChange}
-                    error={errors.monthlyIncome}
+                    error={errors.monthlyIncome ? true : false}
                     helperText={errors.monthlyIncome}
                     onKeyPress={e => onlyNumbers(e)}
                 />
