@@ -25,6 +25,7 @@ export default function Index({ ...props }) {
         <div style={{ height: 400, width: '100%', background: "white" }}>
             <DataGrid
                 localeText={DEFAULT_LOCAL_TEXT}
+                disableColumnMenu
                 {...props}
             />
         </div>

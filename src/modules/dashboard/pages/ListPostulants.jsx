@@ -65,18 +65,17 @@ export default function Listpostulants({ history }) {
     }, [postulantsByPublicationId])
 
     const columns = [
-        { field: 'match', headerName: 'Match', width: 100, renderCell: (params) => {
-            const random = Math.random() * 100;
+        { field: 'similarity', headerName: 'Match', width: 100, sortable: false, renderCell: (params) => {
             const { similarity } = params.row
             return (<FabLights value={similarity }/>) 
         }},
-        { field: 'residenceTime', headerName: 'Tiempo de permanencia', width: 180 },
-        { field: 'fullName', headerName: 'Nombres del postulantes', width: 300 },
+        { field: 'residenceTime', headerName: 'Tiempo de permanencia', width: 180, sortable: false },
+        { field: 'fullName', headerName: 'Nombres del postulantes', width: 300, sortable: false },
         // { field: 'academicLevel', headerName: 'Nivel de estudio', width: 220 },
-        { field: 'experience', headerName: 'Experiencia', width: 180 },
-        { field: 'date', headerName: 'Fecha de postulación', width: 200, valueGetter: (params) => moment(params.value).format("YYYY-MM-DD") },
+        { field: 'experience', headerName: 'Experiencia', width: 180, sortable: false },
+        { field: 'date', headerName: 'Fecha de postulación', width: 200, sortable: false, valueGetter: (params) => moment(params.value).format("YYYY-MM-DD") },
         {
-            field: 'state', headerName: 'Estado', width: 130, renderCell: (params) => {
+            field: 'state', headerName: 'Estado', width: 130, sortable: false, renderCell: (params) => {
                 const { postulant_id, state } = params.row
                 return <Button color="primary" onClick={() => history.push({ pathname: `${initRoute}/postulante/perfil/${postulant_id}`, state: { postulant_id: postulant_id } })}>{state}</Button>
                 // return <Button color="primary" onClick={() => console.log("hice click")}>Registrado</Button>
@@ -98,7 +97,7 @@ export default function Listpostulants({ history }) {
                                 columns={columns}
                                 pageSize={10}
                                 rowsPerPageOptions={[10, 20, 30]}
-                                hideFooterSelectedRowCount
+                                hideFooterSelectedRowCount 
                                 autoHeight
                             />
                         </Grid>
