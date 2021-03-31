@@ -18,7 +18,7 @@ const RouterOperativa = () => {
     return (
         <>
             <Switch>
-                {/* <Route exact path={HomeRoutes} component={HomeRouter} /> */}
+                <Route exact path={HomeRoutes} component={HomeRouter} />
                 <Route exact path={AuthRoutes} component={AuthRouter} />
                 <Route exact path={DashboardRoutes} component={DashboardRouter} />
                 <Route exact path={AdminRoutes} component={AdminRouter} />
