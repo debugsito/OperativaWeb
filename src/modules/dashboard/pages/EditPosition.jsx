@@ -85,7 +85,7 @@ export default function EditPosition({ history }) {
             temp.period = fieldValues.period ? "" : "El campo es requerido."
         if (!isActiveSalary) {
             if ('salary' in fieldValues)
-                temp.salary = fieldValues.salary ? "" : "El campo es requerido."
+                temp.salary = fieldValues.salary ? "" : "El campo es requerido en numeros."
         }
         if ('from_date' in fieldValues)
             temp.from_date = fieldValues.from_date ? "" : "El campo es requerido."
