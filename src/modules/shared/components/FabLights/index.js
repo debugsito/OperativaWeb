@@ -6,7 +6,8 @@ const useStyles = makeStyles((theme) => ({
     fab: (props) => ({
         pointerEvents: "none",
         borderRadius: "50% !important",
-        background: Math.round(props.value) <= 10 ? "var(--redLight)" : (Math.round(props.value) >= 11 && Math.round(props.value) <= 60 ? "var(--orangeLight)" : "var(--greenLight)")
+        background: Math.round(props.value) <= 10 ? "var(--redLight)" : (Math.round(props.value) >= 11 && Math.round(props.value) <= 60 ? "var(--orangeLight)" : "var(--greenLight)"),
+        color: "black"
     }),
 }));
 
