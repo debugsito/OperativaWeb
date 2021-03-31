@@ -9,6 +9,7 @@ import * as moment from 'moment';
 import { useDispatch, useSelector } from "react-redux";
 import { actions_Utils } from "../../../store/actions";
 import { SessionRoutes } from '../../shared/libs/sessionRoutes';
+import { onlyNumbers } from '../../shared/libs/validators';
 
 const defaultValues = {
     job_title: "",
@@ -359,6 +360,7 @@ export default function EditPosition({ history }) {
                                 label="Salario"
                                 value={values.salary || ""}
                                 onChange={handleInputChange}
+                                onKeyPress={onlyNumbers}
                                 error={errors.salary ? true : false}
                                 helperText={errors.salary}
                                 disabled={isActiveSalary}
