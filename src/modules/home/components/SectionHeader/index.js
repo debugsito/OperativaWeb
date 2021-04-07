@@ -43,9 +43,11 @@ const useStyles = makeStyles(theme => ({
     marginLeft: {
         marginLeft: '3rem'
     },
-    cards: {
+    containerCards: {
         marginLeft: '5rem',
-        display: 'flex'
+        display: 'grid',
+        gridGap: '1rem',
+        gridTemplateColumns: '1fr 1fr 1fr 1fr',
     },
 
     rootMovil: {
@@ -77,6 +79,12 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         justifyContent: 'flex-start'
     },
+    containerButtons: {
+        margin: '0 1.2rem',
+        display: 'grid',
+        gridGap: '1rem',
+        gridTemplateColumns: '1fr 1fr',
+    },
     containerTitleMovil: {
         marginTop: '4.5rem',
         textAlign: 'center'
@@ -88,14 +96,17 @@ const useStyles = makeStyles(theme => ({
         color: '#fff',
     },
     titleLightMovil: {
-        fontFamily: 'Roboto-light',
+        fontFamily: 'Roboto-light, serif',
         marginTop: '0.5rem',
-        fontSize: '1.5rem',
+        fontSize: '1.4rem',
         color: '#fff',
     },
-    cardsMovil: {
-        display: 'flex',
-        flexDirection: 'column'
+    containerCardsMovil: {
+        marginTop: '0.5rem',
+        display: 'grid',
+        justifyItems: 'center',
+        gridGap: '0.5rem',
+        gridTemplateRows: '1fr 1fr 1fr'
     }
 }))
 
@@ -128,7 +139,7 @@ export default function SectionHeader(props) {
                             <img src={sectoresGif} className={classes.gifScreen} />
                         </Grid>
                         <Grid item xs={12} md={10}>
-                            <div className={classes.cards}>
+                            <div className={classes.containerCards}>
                                 <FeatureCard text="Inmediatez de identificacion del personal requerido" img={featureOne} />
                                 <FeatureCard text="Trabajo segmentado por sectores productivos" img={featureTwo} />
                                 <FeatureCard text="Prediccion de tiempo de contratación" img={featureThree} />
@@ -150,9 +161,11 @@ export default function SectionHeader(props) {
                             <h1 className={classes.titleBoldMovil}>Primera Plataforma digital</h1>
                             <h1 className={classes.titleLightMovil}>inteligente de reclutamiento</h1>
                         </div>
-                        <ButtonHome>Crea tu cuenta</ButtonHome>
-                        <ButtonHome>Inicia sesión</ButtonHome>
-                        <div className={classes.cardsMovil}>
+                        <div className={classes.containerButtons}>
+                            <ButtonHome>Crea tu cuenta</ButtonHome>
+                            <ButtonHome>Inicia sesión</ButtonHome>
+                        </div>
+                        <div className={classes.containerCardsMovil}>
                             <FeatureCard text="Inmediatez de identificacion del personal requerido" img={featureOne} />
                             <FeatureCard text="Trabajo segmentado por sectores productivos" img={featureTwo} />
                             <FeatureCard text="Prediccion de tiempo de contratación" img={featureThree} />
