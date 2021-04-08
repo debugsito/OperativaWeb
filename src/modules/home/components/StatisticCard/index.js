@@ -4,30 +4,59 @@ import { statisticOne } from "../../images2";
 
 const useStyles = makeStyles(theme => ({
     rootCard: {
-        background: "#FFFFFF 0% 0% no-repeat padding-box",
-        boxShadow: '0px 3px 6px #2958a329',
-        borderRadius: '11px',
-        opacity: 1,
-        marginTop: '2rem',
-        padding: '0.5rem 1rem',
-        display: 'grid',
-        gridGap: '0.5rem',
-        gridTemplateColumns: '1fr 1fr 1fr',
+         [theme.breakpoints.down('sm')]: {
+           background: "#FFFFFF 0% 0% no-repeat padding-box",
+            boxShadow: '0px 3px 6px #2958a329',
+            borderRadius: '10px',
+            opacity: 1,
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr 1fr',
+        },
+        [theme.breakpoints.up('md')]: {
+            background: "#FFFFFF 0% 0% no-repeat padding-box",
+            boxShadow: '0px 3px 6px #2958a329',
+            borderRadius: '11px',
+            opacity: 1,
+            marginTop: '1rem',
+            padding: '0.5rem 1rem',
+            display: 'grid',
+            gridGap: '0.5rem',
+            gridTemplateColumns: '1fr 1fr 1fr',
+        },
     },
     imgCard: {
+        [theme.breakpoints.down('sm')]: {
+            height:'70%',
+            margin:'auto 0',
+            display: 'flex',
+            justifyContent: 'center',
+        },
         display: 'flex',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        
+        
     },
     numberCard: {
         margin: 'auto 0',
         fontFamily: 'Roboto-medium',
         color: '#E20613',
-        fontSize: '3.10rem',
+        [theme.breakpoints.down('sm')]: {
+            fontSize: '2.10rem',
+        },
+        [theme.breakpoints.up('md')]: {
+            fontSize: '3.10rem',
+        },
     },
     textCard: {
         margin: 'auto 0',
-        fontSize: '20px',
         color: '#3E3D3D',
+        [theme.breakpoints.down('sm')]: {
+            fontSize: '1.1rem',
+        },
+        [theme.breakpoints.up('md')]: {
+            fontSize: '20px',
+        },
+        
     }
 }))
 

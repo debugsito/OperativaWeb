@@ -35,7 +35,13 @@ const useStyles = makeStyles(theme => ({
         margin: '0 2rem',
         display: 'flex',
         flexWrap: 'wrap',
-        justifyContent: 'space-evenly'
+        [theme.breakpoints.down('sm')]: {
+           justifyContent: 'space-around'
+        },
+        [theme.breakpoints.up('md')]: {
+            justifyContent: 'space-evenly'
+        },
+        
     },
 
 

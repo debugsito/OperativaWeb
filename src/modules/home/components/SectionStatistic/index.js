@@ -1,4 +1,5 @@
 import React from 'react'
+import { Hidden } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { about, statisticOne, statisticTwo, statisticThree } from "../../images2";
 
@@ -9,34 +10,73 @@ const useStyles = makeStyles(theme => ({
         height: '100vh',
         backgroundImage: `url(${about})`,
         backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat'
+        backgroundRepeat: 'no-repeat',
+        padding:'1rem'
     },
     containerCards: {
-        width: '100%',
-        display: 'grid',
-        gridGap: '1rem',
-        gridTemplateColumns: 'repeat(11, 1fr)'
+        [theme.breakpoints.down('sm')]: {
+            margin:'0 1.5rem',
+            display: 'grid',
+            gridGap: '0.5rem',
+            gridTemplateColumns: '1fr',
+            gridTemplateRows:'1fr 1fr 1fr',
+        },
+        [theme.breakpoints.up('md')]: {
+            width: '100%',
+            display: 'grid',
+            gridGap: '1rem',
+            gridTemplateColumns: 'repeat(11, 1fr)'
+        },
     },
+    
     itemCardOne: {
-        gridColumn: '2 / 5'
+        [theme.breakpoints.down('sm')]: {
+           
+        },
+        [theme.breakpoints.up('md')]: {
+           gridColumn: '2 / 5'
+        },
     },
     itemCardTwo: {
-        gridColumn: '5 / 8'
+         [theme.breakpoints.down('sm')]: {
+           
+        },
+        [theme.breakpoints.up('md')]: {
+           gridColumn: '5 / 8'
+        },
     },
     itemCardThree: {
-        gridColumn: '8 / 11'
+         [theme.breakpoints.down('sm')]: {
+           
+        },
+        [theme.breakpoints.up('md')]: {
+            gridColumn: '8 / 11'
+        },
     },
     containerText: {
-        marginTop: '3rem',
-        textAlign: 'center',
-        lineHeight: '1rem',
-        '& h1': {
-            fontFamily: 'Roboto-bold',
+         [theme.breakpoints.down('sm')]: {
+            textAlign: 'center',
+            '& h1': {
+                fontFamily: 'Roboto-bold',
+                fontSize: '1.2rem',
+            },
+            '& h3': {
+                fontFamily: 'Roboto-light',
+                fontSize: '1rem',
+            }
         },
-        '& h3': {
-            fontFamily: 'Roboto-light',
-            fontSize: '1.5rem',
-        }
+        [theme.breakpoints.up('md')]: {
+            marginTop: '3rem',
+            textAlign: 'center',
+            lineHeight: '1rem',
+            '& h1': {
+                fontFamily: 'Roboto-bold',
+            },
+            '& h3': {
+                fontFamily: 'Roboto-light',
+                fontSize: '1.5rem',
+            }
+        },
     },
 
 }))
@@ -70,12 +110,16 @@ export default function SectionStatistic(props) {
                 </div>
             </div>
             <div className={classes.containerText} >
-                <h1>Nuestra plataforma está segmentada por los </h1>
-                <h3>sectores productivos de mayor demanda laboral</h3>
+                <Hidden smDown>
+                    <h1>Nuestra plataforma está segmentada por los </h1>
+                    <h3>sectores productivos de mayor demanda laboral</h3>
+                </Hidden>
+                <Hidden mdUp>
+                    <h1>Nuestra plataforma está segmentada por los sectores productivos de mayor demanda laboral</h1>
+                </Hidden>
+                
             </div>
-            <br />
             <SectorList />
-
         </div>
     )
 }
