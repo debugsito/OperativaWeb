@@ -17,6 +17,11 @@ body {
   src: local('Roboto'), url(./fonts/Roboto-Bold.ttf) format('truetype');
 }
 
+@font-face {
+  font-family: 'Roboto-medium';
+  src: url(./fonts/Roboto-Medium.ttf) format('truetype');
+}
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',

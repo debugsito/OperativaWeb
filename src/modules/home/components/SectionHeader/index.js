@@ -47,7 +47,7 @@ const useStyles = makeStyles(theme => ({
         marginLeft: '5rem',
         display: 'grid',
         gridGap: '1rem',
-        gridTemplateColumns: '1fr 1fr 1fr 1fr',
+        gridTemplateColumns: '1fr 1fr 1fr',
     },
 
     rootMovil: {
@@ -65,7 +65,7 @@ const useStyles = makeStyles(theme => ({
     },
     sectionTwoMovil: {
         gridRowStart: 4,
-        gridRowEnd: 12,
+        gridRowEnd: 13,
         backgroundImage: `url(${backgroundMovil})`,
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',

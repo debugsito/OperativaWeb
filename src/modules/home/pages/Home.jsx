@@ -1,6 +1,5 @@
 import React from 'react';
-import { SectionHeader } from "../components";
-import { SectionAbout } from "../components";
+import { SectionHeader, SectionOurProcess, SectionAbout, SectionStatistic } from "../components";
 
 
 
@@ -11,6 +10,8 @@ const Home = () => {
         <>
             <SectionHeader />
             <SectionAbout />
+            <SectionOurProcess />
+            <SectionStatistic />
         </>
         
     )
