@@ -1,5 +1,5 @@
 import React from 'react';
-import { SectionHeader, SectionOurProcess, SectionAbout, SectionStatistic, SectionOurPartners } from "../components";
+import { SectionHeader, SectionOurProcess, SectionAbout, SectionStatistic, SectionOurPartners, SectionContact } from "../components";
 
 
 
@@ -13,6 +13,7 @@ const Home = () => {
             <SectionOurProcess />
             <SectionStatistic />
             <SectionOurPartners />
+            <SectionContact />
         </>
         
     )

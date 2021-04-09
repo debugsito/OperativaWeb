@@ -13,3 +13,4 @@ export { default as sectorCallCenter } from './sector-callCenter.png';
 export { default as sectorCourier } from './sector-courier.png';
 export { default as sectorBuilding } from './sector-building.png';
 export { default as sectorStorage } from './sector-storage.png';
+export { default as bgContact } from './bgContact.svg';
