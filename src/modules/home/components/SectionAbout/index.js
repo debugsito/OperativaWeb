@@ -1,5 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
+import { TitleWithLineRed } from "../";
 import { about } from "../../images2";
 
 
@@ -10,35 +11,7 @@ const useStyles = makeStyles(theme => ({
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
     },
-    containerTitle: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center'
-    },
-    titleAbout: {
-        [theme.breakpoints.down('sm')]: {
-            marginTop: '1rem',
-            fontSize: '1.5rem',
-        },
-        [theme.breakpoints.up('md')]: {
-            marginTop: '4rem',
-            fontSize: '3.10rem',
-        },
-        marginBottom: '0.5rem',
-        fontFamily: "Roboto-Bold",
 
-    },
-    lineRed: {
-        [theme.breakpoints.down('sm')]: {
-            borderBottom: '6px solid #EF1C40',
-            width: '4.5rem',
-        },
-        [theme.breakpoints.up('md')]: {
-            borderBottom: '8px solid #EF1C40',
-            width: '6.5rem',
-        },
-
-    },
     containerText: {
         margin: '2rem auto',
         [theme.breakpoints.down('sm')]: {
@@ -69,10 +42,9 @@ export default function SectionAbout(props) {
 
     return (
         <div className={classes.root}>
-            <div className={classes.containerTitle}>
-                <h1 className={classes.titleAbout}>Sobre Nosotros</h1>
-                <div className={classes.lineRed} />
-            </div>
+            <TitleWithLineRed>
+                Sobre Nosotros
+            </TitleWithLineRed>
             <div className={classes.containerText}>
                 <p className={classes.text}>
                     Para las empresas de RRHH la problemática se agudiza en los procesos de selección
