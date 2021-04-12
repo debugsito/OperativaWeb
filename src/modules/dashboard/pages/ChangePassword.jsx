@@ -87,8 +87,8 @@ export default function Setting(props) {
                     </Grid>}
 
                 <Grid item xs={12} style={{ marginTop: "1rem" }}>
-                    <Grid container spacing={3} direction="column" alignItems="center" justify="center">
-                        <Grid item xs={12} md={5}>
+                    <Grid container spacing={3} direction="column" alignItems="center">
+                        <Grid item xs={12} md={5} style={{width:'100%'}}>
                             <Typography align="left" variant="h6" component="h6">
                                 <strong>Cambiar contraseña</strong>
                             </Typography>
