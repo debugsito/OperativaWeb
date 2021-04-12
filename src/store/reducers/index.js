@@ -5,12 +5,14 @@ import auth from './auth/auth.reducer';
 import dashboard from './dashboard/dashboard.reducer';
 import utils from './utils/utils.reducer';
 import applicant from './applicant/applicant.reducer';
+import global from './global';
 
 const rootReducer = combineReducers({
   auth,
   dashboard,
   utils,
-  applicant
+  applicant,
+  global
 });
 
 const reducers = (state, action) => {
