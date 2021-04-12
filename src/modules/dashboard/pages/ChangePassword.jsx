@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { Container, Grid, Typography } from "@material-ui/core";
 // import { Alert, AlertTitle } from '@material-ui/lab';
 import { Alert, Breadcrumbs, Button, TextInputPassword } from "../../shared/components";
@@ -25,11 +25,11 @@ export default function Setting(props) {
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
         if ('old_password' in fieldValues)
-            temp.old_password = fieldValues.old_password ? (fieldValues.old_password.length < 6? "Ingrese mínimo 6 caracteres entre letras y numeros" : "") : "El campo es requerido."
+            temp.old_password = fieldValues.old_password ? (fieldValues.old_password.length < 6 ? "Ingrese mínimo 6 caracteres entre letras y numeros" : "") : "El campo es requerido."
         if ('new_password' in fieldValues)
-            temp.new_password = fieldValues.new_password ? (fieldValues.new_password.length < 6? "Ingrese mínimo 6 caracteres entre letras y numeros" : "") : "El campo es requerido."
+            temp.new_password = fieldValues.new_password ? (fieldValues.new_password.length < 6 ? "Ingrese mínimo 6 caracteres entre letras y numeros" : "") : "El campo es requerido."
         if ('new_password_confirmed' in fieldValues)
-            temp.new_password_confirmed = fieldValues.new_password_confirmed ? (fieldValues.new_password_confirmed.length < 6? "Ingrese mínimo 6 caracteres entre letras y numeros" : "") : "El campo es requerido."
+            temp.new_password_confirmed = fieldValues.new_password_confirmed ? (fieldValues.new_password_confirmed.length < 6 ? "Ingrese mínimo 6 caracteres entre letras y numeros" : "") : "El campo es requerido."
 
         setErrors({
             ...temp
@@ -49,12 +49,12 @@ export default function Setting(props) {
     } = useForm(initialValues, true, validate);
 
     useEffect(() => {
-        if(alert){
+        if (alert) {
             setShowAlert(true)
-            if(alert.type==='success') setValues({...initialValues})
+            if (alert.type === 'success') setValues({ ...initialValues })
         }
 
-    },[alert])
+    }, [alert])
 
     const handleClickSave = () => {
         dispatch(changePasswordFromDashboard(values))
@@ -73,34 +73,35 @@ export default function Setting(props) {
                 </Grid>
                 {showAlert &&
                     <Grid item xs={12}>
-                    <Grid container spacing={0} justify="flex-end">
-                        <Grid item xs={5}>
-                            <Alert 
-                                severity={alert.type}
-                                onClose={handleCloseAlert}
-                                title={alert.title}
-                                message={alert.message}
-                            />
-                                 
+                        <Grid container spacing={0} justify="flex-end">
+                            <Grid item xs={5}>
+                                <Alert
+                                    severity={alert.type}
+                                    onClose={handleCloseAlert}
+                                    title={alert.title}
+                                    message={alert.message}
+                                />
+
+                            </Grid>
                         </Grid>
-                    </Grid>
-                </Grid>}
-               
-                <Grid item xs={12} style={{ margin: "1rem" }}>
-                    <Grid container xs={12} md={6} spacing={3} style={{ margin: "auto" }}>
-                        <Grid item xs={12}>
+                    </Grid>}
+
+                <Grid item xs={12} style={{ marginTop: "1rem" }}>
+                    <Grid container spacing={3} direction="column" alignItems="center" justify="center">
+                        <Grid item xs={12} md={5}>
                             <Typography align="left" variant="h6" component="h6">
                                 <strong>Cambiar contraseña</strong>
                             </Typography>
                         </Grid>
-                        <Grid item xs={12}>
+                        <Grid item xs={12} md={5}>
                             <Typography align="left" variant="body1" component="p">
                                 Se recomienda crear una contraseña segura de mínimo 6 caracteres, puedes combinar entre letras y numeros.
                             </Typography>
                         </Grid>
+                        
                     </Grid>
-                    <Grid container xs={12} md={5} spacing={3} style={{ margin: "auto" }}>
-                        <Grid item xs={12}>
+                    <Grid container spacing={3} direction="column" alignItems="center" justify="center" >
+                        <Grid item xs={12} md={4} style={{width:'100%'}}>
                             <TextInputPassword
                                 label="Contraseña actual"
                                 name="old_password"
@@ -110,7 +111,7 @@ export default function Setting(props) {
                                 helperText={errors.old_password}
                             />
                         </Grid>
-                        <Grid item xs={12}>
+                        <Grid item xs={12} md={4} style={{width:'100%'}}>
                             <TextInputPassword
                                 label="Contraseña nueva"
                                 name="new_password"
@@ -120,7 +121,7 @@ export default function Setting(props) {
                                 helperText={errors.new_password}
                             />
                         </Grid>
-                        <Grid item xs={12}>
+                        <Grid item xs={12} md={4} style={{width:'100%'}}>
                             <TextInputPassword
                                 label="Confirmar contraseña nueva"
                                 name="new_password_confirmed"
@@ -132,13 +133,9 @@ export default function Setting(props) {
                         </Grid>
 
                     </Grid>
-                    <Grid container xs={12} md={5} spacing={3} style={{ margin: "auto" }}>
-                        <Grid item xs={12}>
-                            <Grid container justify="center">
-                                <Button variant="outlined" size="large" >Cancelar</Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <Button variant="contained" size="large" onClick={handleClickSave} disabled={disabledButtonState}>ACEPTAR</Button>
-                            </Grid>
-                        </Grid>
+                    <Grid container spacing={3} justify="center" style={{marginTop:'1.5rem'}}>
+                        <Button variant="outlined" size="large" >Cancelar</Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <Button variant="contained" size="large" onClick={handleClickSave} disabled={disabledButtonState}>ACEPTAR</Button>
                     </Grid>
                 </Grid>
             </Grid>
