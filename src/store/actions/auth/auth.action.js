@@ -1,6 +1,8 @@
 import AppSession from "../../../modules/shared/libs/session/AppSession";
 import { service_ApplicantSignUp, service_Auth } from "../../services";
+import { setAlert } from "../global";
 import { authType } from "../../types/auth";
+import { globalType } from "../../types/global";
 
 export const setUser = (payload) => ({
     type: authType.SET_USER,
@@ -69,6 +71,29 @@ export const logIn = (user) => {
         }
     };
 };
+
+//Cambiar contraseña desde el dashboard de empresa o municipalidad
+export const changePasswordFromDashboard = (data) => {
+    return async (dispatch) => {
+        try {
+            let response = await service_Auth.changePasswordFromDashboard(data);
+            dispatch(setAlert({ state: true, title: 'Éxito', type: 'success', message: response.data.message }));
+        } catch (error) {
+            console.log("error", error.response)
+            if (!error.response) {
+                dispatch(setAlert({ state: true, title: 'Error', type: 'error', message: 'Ha ocurrido un error interno, inténtalo mas tarde.' }));
+            } else {
+                if (error.response.status === 401) {
+                    dispatch(setAlert({ state: true, title: 'Error', type: 'error', message: error.response.data.message }));
+                } else {
+                    dispatch(setAlert({ state: true, title: 'Error', type: 'error', message: error.response.data.message }));
+                };
+            }
+        }
+    };
+};
+
+
 
 export const updateAccount = (body) => {
     return async (dispatch) => {

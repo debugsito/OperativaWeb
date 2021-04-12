@@ -7,3 +7,4 @@
 //import { getDistric } from "....../store/actions/utils/utils.action"
 
 export * as actions_Utils from "./utils/utils.action"
+export * as actions_Global from "./global"

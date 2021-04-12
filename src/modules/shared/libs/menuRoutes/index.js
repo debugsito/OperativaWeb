@@ -17,7 +17,12 @@ export function MenuRoutes(props) {
                 list = [
                     { name: "Inicio", to: `${route}` },
                     { name: "Mi perfil", to: `${route}/perfil` },
-                    { name: "Usuarios", to: `${route}/usuarios` }
+                    { name: "Usuarios", to: `${route}/usuarios` },
+                    {
+                        name: "Configuración", to: "", nestedList: [
+                            { name: "Cambiar password", to: `${route}/cambiar-password` }
+                        ]
+                    },
                 ]
                 hasDashboard = true
                 break;
@@ -26,6 +31,11 @@ export function MenuRoutes(props) {
                 list = [
                     { name: "Inicio", to: `${route}` },
                     { name: "Mi perfil", to: `${route}/perfil` },
+                    {
+                        name: "Configuracion", to: "", nestedList: [
+                            { name: "Cambiar password", to: `${route}/cambiar-password` }
+                        ]
+                    }
                 ]
                 hasDashboard = true
                 break;

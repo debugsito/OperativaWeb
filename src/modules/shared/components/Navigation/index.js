@@ -1,13 +1,10 @@
 import React, { useEffect } from 'react';
 import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { AppBar, CssBaseline, ClickAwayListener, Divider, Drawer, Grid, Grow, IconButton, List, ListItem, ListItemIcon, ListItemText, MenuList, MenuItem, Paper, Popper, Toolbar, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import { AppBar, CssBaseline, ClickAwayListener, Grid, Grow, IconButton, MenuList, MenuItem, Paper, Popper, Toolbar, Typography } from '@material-ui/core';
 import { AccountCircle } from '@material-ui/icons';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
+import MenuIcon from '@material-ui/icons/Menu';
 
-import { Link as LinkRouter } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Link } from '..';
@@ -17,16 +14,11 @@ import { MenuRoutes } from "../../libs/menuRoutes";
 import { signOut } from '../../../../store/actions/auth/auth.action';
 import './index.css';
 
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import AssignmentIcon from '@material-ui/icons/Assignment';
-import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
-import GroupIcon from '@material-ui/icons/Group';
-import MenuIcon from '@material-ui/icons/Menu';
-import HomeIcon from '@material-ui/icons/Home';
+
 
 import { Backdrop } from "../../components";
 
-const drawerWidth = 230;
+import NavigationDrawer from "./NavigationDrawer";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -46,32 +38,6 @@ const useStyles = makeStyles((theme) => ({
   hide: {
     display: 'none',
   },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-    // whiteSpace: 'nowrap',
-  },
-  drawerOpen: {
-    width: drawerWidth,
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    backgroundColor: "#373737",
-    overflowX: 'hidden',
-  },
-  drawerClose: {
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    backgroundColor: "#373737",
-    overflowX: 'hidden',
-    width: theme.spacing(7) + 1,
-    [theme.breakpoints.up('sm')]: {
-      width: theme.spacing(9) + 1,
-    },
-  },
   toolbar: {
     display: 'flex',
     alignItems: 'center',
@@ -87,15 +53,12 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Navigation({ children }) {
   const session = AppSession.get();
-  const menuList = MenuRoutes().list;
   const hasDashboard = MenuRoutes().hasDashboard;
   const dispatch = useDispatch();
   const { user, showLoading } = useSelector(state => state?.auth);
   const classes = useStyles();
-  const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [selectedIndex, setSelectedIndex] = React.useState(0);
   const [isLoading, setIsLoading] = React.useState(false);
 
   const [openMenu, setOpenMenu] = React.useState(false);
@@ -103,51 +66,16 @@ export default function Navigation({ children }) {
 
   useEffect(() => {
     if (showLoading) {
-      console.log("Ejecutando")
+      console.log("logout...")
       setIsLoading(true)
       dispatch(signOut());
     }
   }, [showLoading])
 
-  const getAvatarIcon = (name) => {
-    switch (name) {
-      case 'Inicio':
-        return (<HomeIcon />);
-      case 'Mi perfil':
-        return (<AccountCircleIcon />);
-      case 'Usuarios':
-        return (<GroupIcon />);
-      case 'Solicitudes':
-        return <AssignmentIcon />
-      default:
-        return (<InboxIcon />);
-    }
-  }
-
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
-
-  const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
   const handleSignOut = () => {
     setIsLoading(true)
     dispatch(signOut());
   }
-
-  const handleListItemClick = (event, index) => {
-    setSelectedIndex(index);
-  };
 
   const handleToggle = () => {
     setOpenMenu((prevOpen) => !prevOpen);
@@ -164,7 +92,6 @@ export default function Navigation({ children }) {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
     }
-
     setOpenMenu(false);
   };
 
@@ -239,45 +166,47 @@ export default function Navigation({ children }) {
       </AppBar>
       {
         hasDashboard &&
-        <Drawer
+        <NavigationDrawer />
+        // <Drawer
 
-          variant="permanent"
-          className={clsx(classes.drawer, {
-            [classes.drawerOpen]: open,
-            [classes.drawerClose]: !open,
-          })}
-          classes={{
-            paper: clsx({
-              [classes.drawerOpen]: open,
-              [classes.drawerClose]: !open,
-            }),
-          }}
-        >
-          <div className={classes.toolbar}>
-            <IconButton onClick={handleDrawerClose}>
-              {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-            </IconButton>
-          </div>
-          <Divider />
-          <div class="side-bar">
-            <List
-              onMouseMove={() => setOpen(true)}
-              onMouseLeave={() => setOpen(false)}
-            >
-              {menuList?.map((item, index) => (
-                <LinkRouter to={item.to} style={{ textDecoration: 'none' }}>
-                  <ListItem button key={item.name} selected={selectedIndex === index} onClick={event => handleListItemClick(event, index)}>
-                    <ListItemIcon>{getAvatarIcon(item.name)}</ListItemIcon>
-                    <ListItemText primary={item.name} />
-                    {selectedIndex === index && <ArrowLeftIcon style={{ position: "relative", top: "0%" }} />}
-                  </ListItem>
-                </LinkRouter>
-              ))}
-            </List>
+        //   variant="permanent"
+        //   className={clsx(classes.drawer, {
+        //     [classes.drawerOpen]: open,
+        //     [classes.drawerClose]: !open,
+        //   })}
+        //   classes={{
+        //     paper: clsx({
+        //       [classes.drawerOpen]: open,
+        //       [classes.drawerClose]: !open,
+        //     }),
+        //   }}
+        // >
+        //   <div className={classes.toolbar}>
+        //     <IconButton onClick={handleDrawerClose}>
+        //       {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+        //     </IconButton>
+        //   </div>
+        //   <Divider />
+        //   <div class="side-bar">
+        //     <List
+        //       onMouseMove={() => setOpen(true)}
+        //       onMouseLeave={() => setOpen(false)}
+        //     >
+        //       {menuList?.map((item, index) => (
+        //         <LinkRouter to={item.to} style={{ textDecoration: 'none' }}>
+        //           <ListItem button key={item.name} selected={selectedIndex === index} onClick={event => handleListItemClick(event, index)}>
+        //             <ListItemIcon>{getAvatarIcon(item.name)}</ListItemIcon>
+        //             <ListItemText primary={item.name} />
+        //             {selectedIndex === index && <ArrowLeftIcon style={{ position: "relative", top: "0%" }} />}
+        //           </ListItem>
+        //         </LinkRouter>
+        //       ))}
+        //     </List>
 
-          </div>
+        //   </div>
 
-        </Drawer>}
+        // </Drawer>
+      }
       <main className={classes.content}>
         <div className={classes.toolbar} />
         {children}

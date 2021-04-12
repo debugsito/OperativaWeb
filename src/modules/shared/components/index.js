@@ -1,3 +1,4 @@
+export { default as Alert } from './Alert';
 export { default as Button } from './Button';
 export { default as Breadcrumbs } from './Breadcrumbs';
 export { default as Checkbox } from './Checkbox';
@@ -14,4 +15,8 @@ export { default as DataGrid } from './DataGrid';
 export { default as Backdrop } from './Backdrop';
 export { default as Autocomplete } from './Autocomplete';
 export { default as RichText } from './RichText';
+<<<<<<< HEAD
 export { default as FabLights } from './FabLights';
+=======
+export { default as TextInputPassword } from './TextInputPassword';
+>>>>>>> #0005/juan/feat/dashboard_add_change_password

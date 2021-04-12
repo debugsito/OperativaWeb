@@ -13,6 +13,7 @@ import ListPostulants from '../pages/ListPostulants';
 import ApplicantProfile from '../pages/ApplicantProfile';
 import Profile from '../pages/Profile';
 import showPositionDetail from '../pages/PositionDetails';
+import ChangePassword from '../pages/ChangePassword';
 import Users from '../pages/Users'; 
 // import Home from '../components/Home'; //cambiar a page
 
@@ -90,6 +91,16 @@ const MyAccountRouter = () => {
                     exact
                     path={DashboardRoutes[13]}
                     component={showPositionDetail} />
+                <PrivateRoute
+                    needSession
+                    exact
+                    path={DashboardRoutes[14]}
+                    component={ChangePassword} />
+                <PrivateRoute
+                    needSession
+                    exact
+                    path={DashboardRoutes[15]}
+                    component={ChangePassword} />
             </Switch>
         </>
     );
