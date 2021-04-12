@@ -5,6 +5,11 @@ const changePassword = async (body) => {
     return response;
 }
 
+const changePasswordFromDashboard = async (body) => {
+    const response = await api.post('/account/change_password', body);
+    return response;
+}
+
 const logIn = async (body) => {
     const response = await api.post('/auth/login', body);
     return response;
@@ -17,6 +22,7 @@ const recoverPassword = async (body) => {
 
 export {
     changePassword,
+    changePasswordFromDashboard,
     logIn,
     recoverPassword
 }

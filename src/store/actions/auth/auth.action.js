@@ -70,6 +70,28 @@ export const logIn = (user) => {
     };
 };
 
+//Cambiar contraseña desde el dashboard de empresa o municipalidad
+export const changePasswordFromDashboard = (data) => {
+    return async (dispatch) => {
+        try {
+            await service_Auth.changePasswordFromDashboard(data);
+            dispatch(setUserError(null));
+        } catch (error) {
+            if (!error.response) {
+                dispatch(setUserError("Ha ocurrido un error interno."));
+            } else {
+                if (error.response.status === 401) {
+                    dispatch(setUserError(error.response.data.message));
+                } else {
+                    dispatch(setUserError("Ha ocurrido un error interno."));
+                };
+            }
+        }
+    };
+};
+
+
+
 export const updateAccount = (body) => {
     return async (dispatch) => {
         try {

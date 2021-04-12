@@ -1,9 +1,12 @@
 import React from 'react'
 import { Container, Grid, Typography } from "@material-ui/core";
+import { Alert, AlertTitle } from '@material-ui/lab';
 
 import { Breadcrumbs, Button, TextInputPassword } from "../../shared/components";
 import { SessionRoutes } from '../../shared/libs/sessionRoutes';
 import { useForm } from "../../hooks";
+import { useDispatch } from "react-redux";
+import { changePasswordFromDashboard } from "../../../store/actions/auth/auth.action";
 
 const initialValues = {
     old_password: "",
@@ -12,6 +15,7 @@ const initialValues = {
 }
 
 export default function Setting(props) {
+    const dispatch = useDispatch()
     const initRoute = SessionRoutes().initRoute;
     const routes = [{ name: "Configuracion", to: `${initRoute}/configuracion` }];
 
@@ -40,12 +44,27 @@ export default function Setting(props) {
         disabledButtonState,
     } = useForm(initialValues, true, validate);
 
+    const handleClickSave = () => {
+        dispatch(changePasswordFromDashboard(values))
+    }
+
     return (
         <Container className="dashboard-container">
             <Grid container spacing={0}>
                 <Grid item xs={12}>
                     <Breadcrumbs routes={routes} />
                 </Grid>
+                {/* <Grid item xs={12}>
+                    <Grid container spacing={0} justify="flex-end">
+                        <Grid item xs={4}>
+                            <Alert severity="success" onClose={() => {}}>
+                                <AlertTitle>Success</AlertTitle>
+                                This is a success alert — <strong>check it out!</strong>
+                            </Alert>        
+                        </Grid>
+                    </Grid>
+                </Grid> */}
+               
                 <Grid item xs={12} style={{ margin: "1rem" }}>
                     <Grid container xs={12} md={6} spacing={3} style={{ margin: "auto" }}>
                         <Grid item xs={12}>
@@ -96,7 +115,7 @@ export default function Setting(props) {
                         <Grid item xs={12}>
                             <Grid container justify="center">
                                 <Button variant="outlined" size="large" >Cancelar</Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <Button variant="contained" size="large" disabled={disabledButtonState}>ACEPTAR</Button>
+                                <Button variant="contained" size="large" onClick={handleClickSave} disabled={disabledButtonState}>ACEPTAR</Button>
                             </Grid>
                         </Grid>
                     </Grid>
