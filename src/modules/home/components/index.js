@@ -2,7 +2,9 @@ export { default as BusinessCarousel } from './BusinessCarousel';
 
 export { default as Footer } from './Footer';
 export { default as ButtonHome } from './ButtonHome';
+export { default as ButtonContact } from './ButtonContact';
 export { default as TitleWithLineRed } from './TitleWithLineRed';
+export { default as TextInput } from './TextInput';
 
 
 export { default as SectionHeader } from './SectionHeader';
@@ -16,3 +18,4 @@ export { default as FeatureCard } from './FeatureCard';
 export { default as StatisticCard } from './StatisticCard';
 export { default as SectorCard } from './SectorCard';
 export { default as SectorList } from './SectorList';
+export { default as ContactForm } from './ContactForm';

@@ -1,7 +1,7 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import { bgContact } from "../../images2";
-import { Footer } from "../";
+import { Footer, ContactForm } from "../";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
         margin: '0 auto',
         boxShadow: '0px 1px 11px #2958a329',
         borderRadius: '11px',
-        width: '80%',
+        width: '85%',
         height: '95%'
     },
     cardContact: {
@@ -77,12 +77,13 @@ export default function SectionContact(props) {
                     </div>
                     <div className={classes.sectionTwo}>
                         <h2>Soy...</h2>
+                        <ContactForm />
                     </div>
                 </div>
 
             </div>
             <div className={classes.footer}>
-                <Footer />
+                {/* <Footer /> */}
             </div>
         </div>
     )
