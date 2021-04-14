@@ -18,3 +18,10 @@ export { default as bgContactMovil } from './bgContact-movil.png';
 export { default as logoPng } from './logoPng.svg';
 export { default as fbLogo } from './fb.svg';
 export { default as linkedingLogo } from './linkeding.svg';
+
+export { default as numberOne } from './carousel/01.png';
+export { default as numberTwo } from './carousel/02.png';
+export { default as numberThree } from './carousel/03.png';
+export { default as numberFour } from './carousel/04.png';
+export { default as numberFive } from './carousel/05.png';
+export { default as imgOne } from './carousel/img01.svg';

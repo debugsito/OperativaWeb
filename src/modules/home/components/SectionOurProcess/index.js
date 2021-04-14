@@ -1,5 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
+import { ProcessCorousel, TitleWithLine } from "../";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -13,7 +14,8 @@ export default function SectionOurProcess(props) {
 
     return (
         <div className={classes.root}>
-
+            <TitleWithLine color="#EF1C40">Nuestro Proceso</TitleWithLine>
+            <ProcessCorousel />
         </div>
     )
 }

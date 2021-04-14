@@ -6,7 +6,6 @@ import { FooterMain, ContactForm } from "../";
 const useStyles = makeStyles(theme => ({
     root: {
         height: '100vh',
-        width: '100vw',
         display: 'grid',
         gridTemplateRows: '1fr 6fr 1fr'
     },

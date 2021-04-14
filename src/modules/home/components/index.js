@@ -20,3 +20,4 @@ export { default as StatisticCard } from './StatisticCard';
 export { default as SectorCard } from './SectorCard';
 export { default as SectorList } from './SectorList';
 export { default as ContactForm } from './ContactForm';
+export { default as ProcessCorousel } from './ProcessCorousel';
