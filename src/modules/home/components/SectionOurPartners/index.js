@@ -1,6 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
-import { TitleWithLineRed } from "../";
+import { TitleWithLine } from "../";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -26,7 +26,7 @@ export default function SectionOurPartners(props) {
 
     return (
         <div className={classes.root}>
-            <TitleWithLineRed>Nuestros<br />Socios Estratégicos</TitleWithLineRed>
+            <TitleWithLine color="#EF1C40">Nuestros<br />Socios Estratégicos</TitleWithLine>
             <div className={classes.containerText}>
                 <p>
                     Junto a nuestros SOCIOS ESTRATÉGICOS, MUNICIPALIDADES, ONG ́s e INSTITUTOS, acercamos a miles de operarios en la búsqueda permanente de empleo debido a la dispersión de bolsas de trabajo que no centralizan las ofertas de empleo y en lugar de facilitar la búsqueda, terminan haciendo más complejo el proceso de encuentro entre la oferta y demanda

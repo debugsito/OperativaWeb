@@ -3,7 +3,7 @@ export { default as BusinessCarousel } from './BusinessCarousel';
 export { default as Footer } from './Footer';
 export { default as ButtonHome } from './ButtonHome';
 export { default as ButtonContact } from './ButtonContact';
-export { default as TitleWithLineRed } from './TitleWithLineRed';
+export { default as TitleWithLine } from './TitleWithLine';
 export { default as TextInput } from './TextInput';
 export { default as FooterMain } from './FooterMain';
 

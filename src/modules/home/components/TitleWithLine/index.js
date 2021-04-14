@@ -21,21 +21,20 @@ const useStyles = makeStyles(theme => ({
         textAlign: 'center'
 
     },
-    lineRed: {
+    lineRed: props => ({
         [theme.breakpoints.down('sm')]: {
-            borderBottom: '6px solid #EF1C40',
+            borderBottom: `6px solid ${props.color}`,
             width: '4.5rem',
         },
         [theme.breakpoints.up('md')]: {
-            borderBottom: '8px solid #EF1C40',
+            borderBottom: `8px solid ${props.color}`,
             width: '6.5rem',
         },
-
-    },
+    }),
 }))
 
-export default function TitleWithLineRed({ children }) {
-    const classes = useStyles();
+export default function TitleWithLine({ children, ...props }) {
+    const classes = useStyles(props);
 
     return (
         <div className={classes.containerTitle}>

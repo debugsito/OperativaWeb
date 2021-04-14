@@ -1,6 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
-import { TitleWithLineRed } from "../";
+import { TitleWithLine } from "../";
 import { about } from "../../images2";
 
 
@@ -42,9 +42,9 @@ export default function SectionAbout(props) {
 
     return (
         <div className={classes.root}>
-            <TitleWithLineRed>
+            <TitleWithLine color="#EF1C40">
                 Sobre Nosotros
-            </TitleWithLineRed>
+            </TitleWithLine>
             <div className={classes.containerText}>
                 <p className={classes.text}>
                     Para las empresas de RRHH la problemática se agudiza en los procesos de selección

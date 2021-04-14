@@ -15,3 +15,6 @@ export { default as sectorBuilding } from './sector-building.png';
 export { default as sectorStorage } from './sector-storage.png';
 export { default as bgContact } from './bgContact.svg';
 export { default as bgContactMovil } from './bgContact-movil.png';
+export { default as logoPng } from './logoPng.svg';
+export { default as fbLogo } from './fb.svg';
+export { default as linkedingLogo } from './linkeding.svg';
