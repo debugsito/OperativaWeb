@@ -5,6 +5,7 @@ export { default as ButtonHome } from './ButtonHome';
 export { default as ButtonContact } from './ButtonContact';
 export { default as TitleWithLineRed } from './TitleWithLineRed';
 export { default as TextInput } from './TextInput';
+export { default as FooterMain } from './FooterMain';
 
 
 export { default as SectionHeader } from './SectionHeader';

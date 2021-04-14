@@ -12,7 +12,8 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: '#FFFFFF',
         fontFamily: 'Robot-medium',
         padding: '.25rem 1.5rem',
-        fontSize: '1.2rem'
+        fontSize: '1.2rem',
+        outline: 0,
     })
 }))
 

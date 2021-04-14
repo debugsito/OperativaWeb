@@ -14,15 +14,37 @@ const initialValues = {
 }
 const useStyles = makeStyles(theme => ({
     root: {
-
+        height: '100%'
+    },
+    headerForm: {
+        [theme.breakpoints.down('sm')]: {
+            position: 'relative',
+            bottom: '105px',
+            left: '60px'
+        },
+    },
+    textBe: {
+        [theme.breakpoints.down('sm')]: {
+            textAlign: "center"
+        },
     },
     containerButton: {
-        width: '50%',
         display: 'flex',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        [theme.breakpoints.down('sm')]: {
+            width: '80%',
+        },
+        [theme.breakpoints.up('md')]: {
+            width: '50%',
+        },
     },
     containerInputs: {
-        marginTop: '1rem'
+        marginTop: '1rem',
+        [theme.breakpoints.down('sm')]: {
+            marginLeft: '1rem',
+            position: 'relative',
+            bottom: '110px',
+        },
     },
     textArea: {
         width: '100%',
@@ -92,10 +114,17 @@ export default function ContactForm(props) {
     }
 
     return (
-        <div>
-            <div className={classes.containerButton}>
-                <ButtonContact active={business} handleClick={handleClickBusiness}>Empresa</ButtonContact>
-                <ButtonContact active={municipality} handleClick={handleClickMunicipality}>Postulante</ButtonContact>
+        <div className={classes.root}>
+            <div className={classes.headerForm}>
+                <div>
+                    <div>
+                        <h2 className={classes.textBe}>Soy...</h2>
+                    </div>
+                    <div className={classes.containerButton}>
+                        <ButtonContact active={business} handleClick={handleClickBusiness}>Empresa</ButtonContact>
+                        <ButtonContact active={municipality} handleClick={handleClickMunicipality}>Postulante</ButtonContact>
+                    </div>
+                </div>
             </div>
             <Grid container spacing={1} className={classes.containerInputs}>
                 <Grid item xs={10}>
@@ -170,6 +199,7 @@ export default function ContactForm(props) {
                         name="send"
                         value="Enviar"
                         onClick={() => console.log("hice Click")}
+                        button
                     />
                 </Grid>
             </Grid>
