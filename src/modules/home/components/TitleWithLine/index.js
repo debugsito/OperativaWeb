@@ -7,7 +7,7 @@ const useStyles = makeStyles(theme => ({
         flexDirection: 'column',
         alignItems: 'center',
     },
-    titleAbout: {
+    titleAbout: props => ({
         [theme.breakpoints.down('sm')]: {
             marginTop: '1rem',
             fontSize: '1.5rem',
@@ -18,16 +18,16 @@ const useStyles = makeStyles(theme => ({
         },
         marginBottom: '0.5rem',
         fontFamily: "Roboto-Bold",
-        textAlign: 'center'
-
-    },
+        textAlign: 'center',
+        color: props.colorText
+    }),
     lineRed: props => ({
         [theme.breakpoints.down('sm')]: {
-            borderBottom: `6px solid ${props.color}`,
+            borderBottom: `6px solid ${props.colorLine}`,
             width: '4.5rem',
         },
         [theme.breakpoints.up('md')]: {
-            borderBottom: `8px solid ${props.color}`,
+            borderBottom: `8px solid ${props.colorLine}`,
             width: '6.5rem',
         },
     }),

@@ -42,7 +42,7 @@ export default function SectionAbout(props) {
 
     return (
         <div className={classes.root}>
-            <TitleWithLine color="#EF1C40">
+            <TitleWithLine colorLine="#EF1C40">
                 Sobre Nosotros
             </TitleWithLine>
             <div className={classes.containerText}>

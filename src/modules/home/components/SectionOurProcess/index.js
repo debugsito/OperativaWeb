@@ -6,6 +6,9 @@ const useStyles = makeStyles(theme => ({
     root: {
         height: '100vh',
         backgroundColor: '#EF1C40'
+    },
+    corousel: {
+        margin: '4rem 1rem'
     }
 }))
 
@@ -14,8 +17,10 @@ export default function SectionOurProcess(props) {
 
     return (
         <div className={classes.root}>
-            <TitleWithLine color="#EF1C40">Nuestro Proceso</TitleWithLine>
-            <ProcessCorousel />
+            <TitleWithLine colorLine="#00F0CA" colorText="#fff">Nuestro Proceso</TitleWithLine>
+            <div className={classes.corousel}>
+                <ProcessCorousel />
+            </div>
         </div>
     )
 }
