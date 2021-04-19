@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core'
 
 const useStyles = makeStyles(theme => ({
     rootCard: {
-         [theme.breakpoints.down('sm')]: {
+        [theme.breakpoints.down('sm')]: {
             width: '80px',
             boxShadow: '3px 7px 11px #122e5a29',
             borderRadius: '10px',
@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
             textAlign: 'center',
             fontFamily: "Roboto-medium",
             color: '#7C7B7B',
-            fontSize:'0.6rem',
+            fontSize: '0.6rem',
             padding: '0 0.5rem',
         },
         [theme.breakpoints.up('md')]: {
@@ -38,11 +38,11 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-export default function SectorCard({ text, image }) {
+export default function SectorCard({ text, image, index }) {
     const classes = useStyles()
 
     return (
-        <div className={classes.rootCard}>
+        <div className={classes.rootCard} key={index}>
             <div className={classes.cardContainerImg}>
                 <img src={image} className={classes.cardImg} />
             </div>

@@ -5,12 +5,20 @@ const useStyles = makeStyles(theme => ({
     root: {
         height: '100%',
         display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'flex-start',
-        justifyContent: 'center',
-        '& h1': {
+
+        [theme.breakpoints.up('md')]: {
+            flexDirection: 'column',
+            alignItems: 'flex-start',
+            justifyContent: 'center',
+        },
+        [theme.breakpoints.down('sm')]: {
+            textAlign: 'center',
+            flexDirection: 'column',
+            alignItems: 'center'
+        },
+        '& h2': {
             color: '#fff'
-        }
+        },
     }
 }))
 export default function DescriptionSlide({ numberImg, text }) {

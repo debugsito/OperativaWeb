@@ -36,12 +36,12 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         flexWrap: 'wrap',
         [theme.breakpoints.down('sm')]: {
-           justifyContent: 'space-around'
+            justifyContent: 'space-around'
         },
         [theme.breakpoints.up('md')]: {
             justifyContent: 'space-evenly'
         },
-        
+
     },
 
 
@@ -52,7 +52,7 @@ export default function SectorList(props) {
     return (
         <div className={classes.root}>
             {
-                list.map(sector => <SectorCard text={sector.text} image={sector.image} />)
+                list.map((sector, index) => <SectorCard text={sector.text} image={sector.image} index={index} />)
             }
         </div>
     )

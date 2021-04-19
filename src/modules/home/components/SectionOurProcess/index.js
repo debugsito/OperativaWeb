@@ -8,6 +8,7 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: '#EF1C40'
     },
     corousel: {
+        height: '80%',
         margin: '4rem 1rem'
     }
 }))

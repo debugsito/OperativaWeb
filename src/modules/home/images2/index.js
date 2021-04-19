@@ -25,3 +25,7 @@ export { default as numberThree } from './carousel/03.png';
 export { default as numberFour } from './carousel/04.png';
 export { default as numberFive } from './carousel/05.png';
 export { default as imgOne } from './carousel/img01.svg';
+export { default as imgTwo } from './carousel/img02.svg';
+export { default as imgThree } from './carousel/img03.svg';
+export { default as imgFour } from './carousel/img04.svg';
+export { default as imgFive } from './carousel/img05.svg';
