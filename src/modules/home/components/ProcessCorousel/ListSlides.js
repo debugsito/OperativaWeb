@@ -73,7 +73,7 @@ export default function ListSlides() {
         <Carousel
             className={classes.slider}
             navButtonsAlwaysInvisible={true}
-
+            interval={3500}
         >
             {
                 slides.map((slide, index) => <Slide slide={slide} index={index} />)

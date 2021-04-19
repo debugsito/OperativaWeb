@@ -5,10 +5,7 @@ const useStyles = makeStyles(theme => ({
     root: {
         display: 'flex',
         justifyContent: 'center',
-
-
         [theme.breakpoints.down('sm')]: {
-
             display: 'grid',
             gridTemplateColumns: '1fr 1fr 1fr',
             gridTemplateRows: '1fr 1fr',
