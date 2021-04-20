@@ -57,6 +57,7 @@ const useStyles = makeStyles(theme => ({
         fontWeight: 400,
         lineHeight: 1.5,
         padding: '.375rem .75rem',
+        resize: 'none',
         '&:focus': {
             color: '#495057',
             backgroundColor: '#fff',
