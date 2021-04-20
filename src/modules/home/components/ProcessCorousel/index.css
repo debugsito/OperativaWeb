@@ -1,18 +1,3 @@
-/* @keyframes first-picture {
-  0% { transform: translateX(0%); }
-  7.5%, 33% { transform: translateX(0); }
-  40.5%, 100% { transform: translateX(-100%); }
-}
-
-@keyframes carousel {
-  0% { transform: translateX(100%); }
-  7.5%, 33% { transform: translateX(0); }
-  40.5%, 100% { transform: translateX(-100%); }
-} */
-
-
-
-
 svg.MuiSvgIcon-root.Carousel-indicator-45 {
   color: white;
   padding: 0.8rem;
@@ -33,4 +18,19 @@ svg.MuiSvgIcon-root.Carousel-indicator-45.Carousel-active-46{
     flex-direction: column;
     justify-content: center;
   }
+}
+
+.slide__containerText{
+  line-height: 1rem;
+}
+
+.slide__title-bold{
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 1rem;
+}
+
+.slide__title-light{
+  font-weight: 400;
+  font-size: 1.7rem;
 }

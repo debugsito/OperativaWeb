@@ -8,27 +8,27 @@ import "./index.css";
 const slides = [
     {
         numberImg: numberOne,
-        text: <h2>Registrate como <br /> empresa en operativa.pe</h2>,
+        text: <div className="slide__containerText"><h2 className="slide__title-bold">Registrate como</h2><h2 className="slide__title-light">empresa en operativa.pe</h2></div>,
         img: imgOne,
     },
     {
         numberImg: numberTwo,
-        text: <h2>Registrate como <br /> empresa en operativa.pe</h2>,
+        text: <div className="slide__containerText"><h2 className="slide__title-bold">Busca candidatos</h2><h2 className="slide__title-light">según el rubro necesario</h2></div>,
         img: imgTwo,
     },
     {
         numberImg: numberThree,
-        text: <h2>Registrate como <br /> empresa en operativa.pe</h2>,
+        text: <div className="slide__containerText"><h2 className="slide__title-bold">Revisa y analiza</h2><h2 className="slide__title-light">su perfil profesional</h2></div>,
         img: imgThree,
     },
     {
         numberImg: numberFour,
-        text: <h2>Registrate como <br /> empresa en operativa.pe</h2>,
+        text: <div className="slide__containerText"><h2 className="slide__title-bold">Selecciona tus</h2><h2 className="slide__title-light">mejores candidatos</h2></div>,
         img: imgFour,
     },
     {
         numberImg: numberFive,
-        text: <h2>Registrate como <br /> empresa en operativa.pe</h2>,
+        text: <div className="slide__containerText"><h2 className="slide__title-bold">Contacta a</h2><h2 className="slide__title-light">tus postulantes</h2></div>,
         img: imgFive,
     }
 ]
