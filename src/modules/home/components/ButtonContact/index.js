@@ -10,9 +10,10 @@ const useStyles = makeStyles(theme => ({
         color: props.active ? '#F11C40' : '#DBDBDB',
         borderRadius: '25px',
         backgroundColor: '#FFFFFF',
-        fontFamily: 'Robot-medium',
+        // fontFamily: 'Roboto, sans-serif',
+        fontWeight: 450,
         padding: '.25rem 1.5rem',
-        fontSize: '1.2rem',
+        fontSize: '1.1rem',
         outline: 0,
     })
 }))

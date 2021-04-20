@@ -4,8 +4,8 @@ import { statisticOne } from "../../images2";
 
 const useStyles = makeStyles(theme => ({
     rootCard: {
-         [theme.breakpoints.down('sm')]: {
-           background: "#FFFFFF 0% 0% no-repeat padding-box",
+        [theme.breakpoints.down('sm')]: {
+            background: "#FFFFFF 0% 0% no-repeat padding-box",
             boxShadow: '0px 3px 6px #2958a329',
             borderRadius: '10px',
             opacity: 1,
@@ -26,19 +26,19 @@ const useStyles = makeStyles(theme => ({
     },
     imgCard: {
         [theme.breakpoints.down('sm')]: {
-            height:'70%',
-            margin:'auto 0',
+            height: '70%',
+            margin: 'auto 0',
             display: 'flex',
             justifyContent: 'center',
         },
         display: 'flex',
         justifyContent: 'center',
-        
-        
+
+
     },
     numberCard: {
         margin: 'auto 0',
-        fontFamily: 'Roboto-medium',
+        fontWeight: 500,
         color: '#E20613',
         [theme.breakpoints.down('sm')]: {
             fontSize: '2.10rem',
@@ -50,13 +50,15 @@ const useStyles = makeStyles(theme => ({
     textCard: {
         margin: 'auto 0',
         color: '#3E3D3D',
+
         [theme.breakpoints.down('sm')]: {
             fontSize: '1.1rem',
         },
         [theme.breakpoints.up('md')]: {
-            fontSize: '20px',
+            lineHeight: '1.2rem',
+            fontSize: '22px',
         },
-        
+
     }
 }))
 

@@ -24,13 +24,14 @@ const useStyles = makeStyles(theme => ({
     text: {
         [theme.breakpoints.down('sm')]: {
             fontSize: '0.9rem',
+            fontWeight: 400,
         },
         [theme.breakpoints.up('md')]: {
             fontSize: '1.3rem',
+            fontWeight: 300,
         },
         color: '#373737',
         textShadow: '0px 3px 56px #ffffffa8',
-        fontFamily: "Roboto-Light",
         textAlign: 'center',
         lineHeight: '2rem'
 

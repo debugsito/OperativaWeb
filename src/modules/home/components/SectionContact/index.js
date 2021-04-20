@@ -7,7 +7,8 @@ const useStyles = makeStyles(theme => ({
     root: {
         height: '100vh',
         display: 'grid',
-        gridTemplateRows: '1fr 6fr 1fr'
+        gridTemplateRows: '1fr 6fr 1fr',
+        fontFamily: 'Roboto, sans-serif',
     },
     cardContainer: {
         [theme.breakpoints.down('sm')]: {
@@ -81,25 +82,32 @@ const useStyles = makeStyles(theme => ({
         lineHeight: '1rem'
     },
     titleBold: {
-        fontFamily: 'Roboto-bold',
+        fontWeight: 700,
         fontSize: '2.3rem',
         [theme.breakpoints.down('sm')]: {
             fontSize: '2rem'
         },
     },
     titleLight: {
-        fontFamily: 'Roboto-light',
+        fontWeight: 500,
         [theme.breakpoints.down('sm')]: {
             fontSize: '1.5rem'
         },
     },
     atention: {
         lineHeight: '1rem',
+        '& h3': {
+            fontWeight: 700,
+        },
         [theme.breakpoints.down('sm')]: {
             lineHeight: '0.6rem',
+            '& h2': {
+                fontSize: '1rem'
+            }
         },
     },
     footer: {
+
         gridRow: '3/4',
     }
 }))
@@ -118,7 +126,7 @@ export default function SectionContact(props) {
                                 <h1 className={classes.titleLight}>tus dudas</h1>
                             </div>
                             <div className={classes.atention}>
-                                <h3>Horario de atención</h3>
+                                <h2>Horario de atención</h2>
                                 <p>Lunes a Viernes</p>
                                 <p>9am a 6pm</p>
                             </div>

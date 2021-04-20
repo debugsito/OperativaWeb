@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
         },
         borderRadius: '7px',
         color: '#fff !important',
-        fontFamily: 'Roboto-bold',
+        fontWeight: 600,
         padding: '.55rem 2.5rem',
         fontSize: '1.15rem',
     },
@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
         },
         borderRadius: '7px',
         color: '#fff !important',
-        fontFamily: 'Roboto-bold',
+        fontWeight: 600,
         padding: '.375rem 0.75rem',
         fontSize: '1.15rem',
     }

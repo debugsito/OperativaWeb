@@ -10,7 +10,6 @@ const useStyles = makeStyles(theme => ({
         background: props.button ? '#F11C40 0% 0% no-repeat padding-box' : '#F5F7F9 0% 0% no-repeat padding-box',
         borderRadius: '25px',
         color: props.button ? '#fff' : '#373737',
-        fontFamily: "Roboto-light",
         border: 0,
         fontSize: '1rem',
         fontWeight: 400,

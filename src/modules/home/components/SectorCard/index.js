@@ -20,9 +20,9 @@ const useStyles = makeStyles(theme => ({
         width: '100%'
     },
     cardText: {
+        fontWeight: 500,
         [theme.breakpoints.down('sm')]: {
             textAlign: 'center',
-            fontFamily: "Roboto-medium",
             color: '#7C7B7B',
             fontSize: '0.6rem',
             padding: '0 0.5rem',
@@ -32,7 +32,6 @@ const useStyles = makeStyles(theme => ({
             margin: '2rem 0',
             padding: '0 1.5rem',
             lineHeight: '1.5rem',
-            fontFamily: "Roboto-medium",
             color: '#7C7B7B',
         },
     }

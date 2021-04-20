@@ -51,7 +51,7 @@ const useStyles = makeStyles(theme => ({
         background: '#F5F7F9 0% 0% no-repeat padding-box',
         borderRadius: '25px',
         color: '#373737',
-        fontFamily: "Roboto-light",
+        fontFamily: 'Roboto, sans-serif',
         border: 0,
         fontSize: '1rem',
         fontWeight: 400,

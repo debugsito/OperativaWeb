@@ -17,7 +17,8 @@ const useStyles = makeStyles(theme => ({
         },
         [theme.breakpoints.up('md')]: {
             fontSize: '1.3rem',
-            width: '70%'
+            width: '80%',
+            fontWeight: 370,
         },
     },
     containerCarousel: {

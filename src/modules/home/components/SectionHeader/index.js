@@ -23,13 +23,13 @@ const useStyles = makeStyles(theme => ({
         margin: '0 auto'
     },
     titleBold: {
-        fontFamily: 'Roboto-bold',
+        fontWeight: 700,
         marginBottom: '0.5rem',
         fontSize: '2.5rem',
         color: '#fff',
     },
     titleLight: {
-        fontFamily: 'Roboto-light',
+        fontWeight: 400,
         marginTop: '0.5rem',
         fontSize: '2.5rem',
         color: '#fff',
@@ -91,13 +91,13 @@ const useStyles = makeStyles(theme => ({
         textAlign: 'center'
     },
     titleBoldMovil: {
-        fontFamily: 'Roboto-bold',
+        fontWeight: 700,
         marginBottom: '0.5rem',
         fontSize: '1.5rem',
         color: '#fff',
     },
     titleLightMovil: {
-        fontFamily: 'Roboto-light, serif',
+        fontWeight: 400,
         marginTop: '0.5rem',
         fontSize: '1.4rem',
         color: '#fff',
