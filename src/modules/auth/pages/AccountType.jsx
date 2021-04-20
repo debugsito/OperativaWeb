@@ -23,7 +23,7 @@ const AccountType = ({ history }) => {
     }
 
     const goBack = () => {
-        window.location.href = process.env.REACT_APP_PATH_LANDING
+        history.goBack()
     }
 
     return (

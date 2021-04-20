@@ -12,7 +12,8 @@ const add = (nodeName, nodeData) => {
 const destroy = (exitNavigation = true) => {
     sessionProvider.removeItem(sessionItemName);
     if (exitNavigation) {
-        window.location.href = process.env.REACT_APP_PATH_LANDING;
+        window.location.reload();
+        // history.push('/')
     }
 }
 

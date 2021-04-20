@@ -28,7 +28,7 @@ const RouterOperativa = () => {
                     <Route exact path={AdminRoutes} component={AdminRouter} />
                     <Route exact path={ApplicantRoutes} component={ApplicantRouter} />
                 </Navigation>
-                <Redirect to={initRoute} /> {/*window.location.href = process.env.REACT_APP_PATH_LANDING */}
+                <Redirect to={initRoute} />
             </Switch>
         </>
     );
