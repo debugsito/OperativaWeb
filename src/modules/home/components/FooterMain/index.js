@@ -14,13 +14,30 @@ const useStyles = makeStyles(theme => ({
         marginLeft: '2rem',
         display: 'flex',
         flexDirection: 'columm',
-        alignItems: 'center'
+        alignItems: 'center',
+
+    },
+    operativaLogo: {
+        [theme.breakpoints.down('sm')]: {
+            width: '140px'
+        },
     },
     redesFooter: {
         marginRight: '2rem',
         display: 'flex',
         flexDirection: 'columm',
         alignItems: 'center'
+    },
+    fbLogo: {
+        margin: '0 1rem',
+        [theme.breakpoints.down('sm')]: {
+            width: '40px'
+        },
+    },
+    LinkedingLogo: {
+        [theme.breakpoints.down('sm')]: {
+            width: '45px'
+        },
     }
 
 }))
@@ -31,11 +48,11 @@ export default function Footer(props) {
     return (
         <div className={classes.root}>
             <div className={classes.logoFooter}>
-                <img src={logoPng} />
+                <img className={classes.operativaLogo} src={logoPng} />
             </div>
             <div className={classes.redesFooter}>
-                <img src={fbLogo} />
-                <img src={linkedingLogo} />
+                <img className={classes.fbLogo} src={fbLogo} />
+                <img className={classes.LinkedingLogo} src={linkedingLogo} />
             </div>
 
         </div>
