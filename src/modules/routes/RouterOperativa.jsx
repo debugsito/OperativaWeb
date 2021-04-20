@@ -11,6 +11,9 @@ import { AdminRoutes, AdminRouter } from '../admin';
 import { SessionRoutes } from '../shared/libs/sessionRoutes';
 import {ApplicantRouter,ApplicantRoutes} from '../applicant'
 
+//Sidebar
+import { Navigation } from "../shared/components";
+
 const RouterOperativa = () => {
     // Get session and user
     const initRoute = SessionRoutes().initRoute;
@@ -18,12 +21,14 @@ const RouterOperativa = () => {
     return (
         <>
             <Switch>
-                {/* <Route exact path={HomeRoutes} component={HomeRouter} /> */}
-                <Route exact path={AuthRoutes} component={AuthRouter} />
-                <Route exact path={DashboardRoutes} component={DashboardRouter} />
-                <Route exact path={AdminRoutes} component={AdminRouter} />
-                <Route exact path={ApplicantRoutes} component={ApplicantRouter} />
-                <Redirect to={initRoute} /> {/*window.location.href = process.env.REACT_APP_PATH_LANDING */}
+                <Route exact path={HomeRoutes} component={HomeRouter} />
+                <Navigation>
+                    <Route exact path={AuthRoutes} component={AuthRouter} />
+                    <Route exact path={DashboardRoutes} component={DashboardRouter} />
+                    <Route exact path={AdminRoutes} component={AdminRouter} />
+                    <Route exact path={ApplicantRoutes} component={ApplicantRouter} />
+                </Navigation>
+                <Redirect to={initRoute} />
             </Switch>
         </>
     );

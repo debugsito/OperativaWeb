@@ -1,0 +1,36 @@
+/* @keyframes first-picture {
+  0% { transform: translateX(0%); }
+  7.5%, 33% { transform: translateX(0); }
+  40.5%, 100% { transform: translateX(-100%); }
+}
+
+@keyframes carousel {
+  0% { transform: translateX(100%); }
+  7.5%, 33% { transform: translateX(0); }
+  40.5%, 100% { transform: translateX(-100%); }
+} */
+
+
+
+
+svg.MuiSvgIcon-root.Carousel-indicator-45 {
+  color: white;
+  padding: 0.8rem;
+}
+
+svg.MuiSvgIcon-root.Carousel-indicator-45.Carousel-active-46{
+  color:#00F0CA
+}
+@media screen and (min-width: 600px){
+  .Carousel-root-43.makeStyles-slider-39 {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+
+  .Carousel-indicators-44 {
+    width: 15% !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}

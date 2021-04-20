@@ -1,0 +1,24 @@
+
+@media screen and (min-width: 600px){
+    
+}
+.Carousel-root-43.slider-partners {
+    display: flex;
+    flex-direction:column;
+  }
+
+  .slider-partners .Carousel-indicators-44 {
+    width: 100% !important;
+    display: flex;
+    flex-direction: row;
+  }
+
+  
+  .slider-partners .Carousel-indicators-44 svg.MuiSvgIcon-root.Carousel-indicator-45 {
+    color: #EAEAEA;
+    padding: 0.8rem;
+  }
+  
+  .slider-partners .Carousel-indicators-44 svg.MuiSvgIcon-root.Carousel-indicator-45.Carousel-active-46{
+    color:#D02D26
+  }
