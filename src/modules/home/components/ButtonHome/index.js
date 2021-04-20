@@ -29,9 +29,9 @@ const useStyles = makeStyles(theme => ({
     }
 
 }))
-export default function Button({ children }) {
-    const classes = useStyles();
 
+export default function ButtonHome({ children, ...props }) {
+    const classes = useStyles();
     return (
         <>
             <Hidden smDown>
@@ -40,9 +40,7 @@ export default function Button({ children }) {
                     component="button"
                     variant="body2"
                     underline="none"
-                    onClick={() => {
-                        console.info("I'm a button.");
-                    }}
+                    {...props}
                 >
                     {children}
                 </Link>
@@ -53,9 +51,7 @@ export default function Button({ children }) {
                     component="button"
                     variant="body2"
                     underline="none"
-                    onClick={() => {
-                        console.info("I'm a button.");
-                    }}
+                    {...props}
                 >
                     {children}
                 </Link>

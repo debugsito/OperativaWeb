@@ -1,6 +1,7 @@
 import React from 'react'
 import { Hidden, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { useHistory } from "react-router-dom";
 
 import bgImage from "../../assets/images/bg.png"
 import operativaLogo from "../../assets/images/operativa_logo.png"
@@ -112,7 +113,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function SectionHeader(props) {
     const classes = useStyles();
-
+    const history = useHistory()
     return (
         <>
             <Hidden smDown>
@@ -125,10 +126,10 @@ export default function SectionHeader(props) {
                                 <h1 className={classes.titleLight}>inteligente de reclutamiento</h1>
                                 <div className={classes.contentButtons}>
                                     <div>
-                                        <ButtonHome>Crea tu cuenta</ButtonHome>
+                                        <ButtonHome onClick={() => history.push('/tipo-de-cuenta')}>Crea tu cuenta</ButtonHome>
                                     </div>
                                     <div className={classes.marginLeft}>
-                                        <ButtonHome>Inicia sesión</ButtonHome>
+                                        <ButtonHome onClick={() => history.push('/iniciar-sesion')}>Inicia sesión</ButtonHome>
                                     </div>
                                 </div>
 
@@ -162,8 +163,8 @@ export default function SectionHeader(props) {
                             <h1 className={classes.titleLightMovil}>inteligente de reclutamiento</h1>
                         </div>
                         <div className={classes.containerButtons}>
-                            <ButtonHome>Crea tu cuenta</ButtonHome>
-                            <ButtonHome>Inicia sesión</ButtonHome>
+                            <ButtonHome onClick={() => history.push('/tipo-de-cuenta')}>Crea tu cuenta</ButtonHome>
+                            <ButtonHome onClick={() => history.push('/iniciar-sesion')}>Inicia sesión</ButtonHome>
                         </div>
                         <div className={classes.containerCardsMovil}>
                             <FeatureCard text="Inmediatez de identificacion del personal requerido" img={featureOne} />

@@ -19,7 +19,6 @@ const AppRouter = () => {
         <ScrollToTopRouter />
         <Route to={OperativaModule.moduleRouter.pathBase} component={OperativaModule.moduleRouter.componentRouter} />
       {/* </Navigation> */}
-
     </BrowserRouter>
   );
 };
