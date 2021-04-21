@@ -11,7 +11,7 @@ import { appManSVG, numberOneSVG, numberTwoSVG, numberThreeSVG, numberFourSVG, n
 import { Button, LinearProgress, Backdrop } from '../../shared/components';
 import { ApplicantContactInformationForm, ApplicantEducationForm, ApplicantPersonalDataForm, ApplicantWorkExperienceForm, ApplicantAreasOfInterestForm } from '../components';
 import { service_ApplicantProfile } from '../../../store/services';
-import { setUser, signOut, redirectToLandingPage } from '../../../store/actions/auth/auth.action';
+import { setUser, signOut } from '../../../store/actions/auth/auth.action';
 
 const ApplicantProfile = ({ history }) => {
     const { user } = useSelector(state => state?.auth);
@@ -253,7 +253,8 @@ const ApplicantProfile = ({ history }) => {
                             </Grid>
                             <Grid item>
                                 <Button fullWidth variant="contained" size="large" onClick={() => {
-                                    dispatch(redirectToLandingPage(true));
+                                    dispatch(signOut());
+                                    history.push("/")
                                 }}>finalizar</Button>
                             </Grid>
                         </Grid>

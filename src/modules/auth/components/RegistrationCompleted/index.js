@@ -1,17 +1,19 @@
 import React from 'react'
-
+import { useHistory } from "react-router-dom";
 import { Grid, Typography } from '@material-ui/core';
 import { Button } from '../../../shared/components';
 import { peopleSVG } from "../../images";
 import { useDispatch } from "react-redux";
-import { redirectToLandingPage } from "../../../../store/actions/auth/auth.action";
+import { signOut } from "../../../../store/actions/auth/auth.action";
 
 
 export default function Index() {
     const dispatch = useDispatch()
+    const history = useHistory()
 
-    const handleClick = () => {
-        dispatch(redirectToLandingPage(true))
+    const goHome = () => {
+        dispatch(signOut)
+        history.push("/")
     }
 
     return (
@@ -40,7 +42,7 @@ export default function Index() {
                             </Grid>
 
                             <Grid item xs={12} style={{ display: 'flex', justifyContent: "center", marginTop: "2rem" }}>
-                                <Button variant="contained" size="large" onClick={handleClick}>Volver al Inicio</Button>
+                                <Button variant="contained" size="large" onClick={goHome}>Volver al Inicio</Button>
                             </Grid>
                         </Grid>
                     </Grid>

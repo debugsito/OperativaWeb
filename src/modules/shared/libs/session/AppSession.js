@@ -11,10 +11,9 @@ const add = (nodeName, nodeData) => {
 };
 const destroy = (exitNavigation = true) => {
     sessionProvider.removeItem(sessionItemName);
-    if (exitNavigation) {
-        window.location.reload();
-        // history.push('/')
-    }
+    // if (exitNavigation) {
+    //     window.location.reload();
+    // }
 }
 
 export default { create, get, add, destroy };

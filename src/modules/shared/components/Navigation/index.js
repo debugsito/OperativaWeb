@@ -1,24 +1,22 @@
 import React, { useEffect } from 'react';
-import clsx from 'clsx';
+import { useHistory, Redirect } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, CssBaseline, ClickAwayListener, Grid, Grow, IconButton, MenuList, MenuItem, Paper, Popper, Toolbar, Typography } from '@material-ui/core';
 import { AccountCircle } from '@material-ui/icons';
 import MenuIcon from '@material-ui/icons/Menu';
+import clsx from 'clsx';
+import { AppBar, CssBaseline, ClickAwayListener, Grid, Grow, IconButton, MenuList, MenuItem, Paper, Popper, Toolbar, Typography } from '@material-ui/core';
 
-import { useDispatch, useSelector } from 'react-redux';
 
 import { Link } from '..';
 import { logoSVG } from '../../images';
 import AppSession from '../../libs/session/AppSession';
 import { MenuRoutes } from "../../libs/menuRoutes";
 import { signOut } from '../../../../store/actions/auth/auth.action';
-import './index.css';
-
-
 
 import { Backdrop } from "../../components";
-
 import NavigationDrawer from "./NavigationDrawer";
+import './index.css';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -52,6 +50,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Navigation({ children }) {
+  const history = useHistory();
   const session = AppSession.get();
   const hasDashboard = MenuRoutes().hasDashboard;
   const dispatch = useDispatch();
@@ -64,17 +63,19 @@ export default function Navigation({ children }) {
   const [openMenu, setOpenMenu] = React.useState(false);
   const anchorRef = React.useRef(null);
 
-  useEffect(() => {
-    if (showLoading) {
-      console.log("logout...")
-      setIsLoading(true)
-      dispatch(signOut());
-    }
-  }, [showLoading])
+  // useEffect(() => {
+  //   if (showLoading) {
+  //     console.log("logout...")
+  //     setIsLoading(true)
+  //     dispatch(signOut());
+  //   }
+  // }, [showLoading])
 
   const handleSignOut = () => {
-    setIsLoading(true)
+    // setIsLoading(true)
     dispatch(signOut());
+    // history.push("/")
+    return <Redirect to="/" />
   }
 
   const handleToggle = () => {
@@ -167,45 +168,7 @@ export default function Navigation({ children }) {
       {
         hasDashboard &&
         <NavigationDrawer />
-        // <Drawer
 
-        //   variant="permanent"
-        //   className={clsx(classes.drawer, {
-        //     [classes.drawerOpen]: open,
-        //     [classes.drawerClose]: !open,
-        //   })}
-        //   classes={{
-        //     paper: clsx({
-        //       [classes.drawerOpen]: open,
-        //       [classes.drawerClose]: !open,
-        //     }),
-        //   }}
-        // >
-        //   <div className={classes.toolbar}>
-        //     <IconButton onClick={handleDrawerClose}>
-        //       {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-        //     </IconButton>
-        //   </div>
-        //   <Divider />
-        //   <div class="side-bar">
-        //     <List
-        //       onMouseMove={() => setOpen(true)}
-        //       onMouseLeave={() => setOpen(false)}
-        //     >
-        //       {menuList?.map((item, index) => (
-        //         <LinkRouter to={item.to} style={{ textDecoration: 'none' }}>
-        //           <ListItem button key={item.name} selected={selectedIndex === index} onClick={event => handleListItemClick(event, index)}>
-        //             <ListItemIcon>{getAvatarIcon(item.name)}</ListItemIcon>
-        //             <ListItemText primary={item.name} />
-        //             {selectedIndex === index && <ArrowLeftIcon style={{ position: "relative", top: "0%" }} />}
-        //           </ListItem>
-        //         </LinkRouter>
-        //       ))}
-        //     </List>
-
-        //   </div>
-
-        // </Drawer>
       }
       <main className={classes.content}>
         <div className={classes.toolbar} />
