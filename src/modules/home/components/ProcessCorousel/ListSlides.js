@@ -71,7 +71,7 @@ export default function ListSlides() {
 
     return (
         <Carousel
-            className={classes.slider}
+            className="ourProcessSlides"
             navButtonsAlwaysInvisible={true}
             interval={3500}
         >
