@@ -1,9 +1,9 @@
 import React from 'react'
+import Carousel from 'react-material-ui-carousel'
+import "./index.css";
 import { makeStyles } from '@material-ui/core';
 import DescriptionSlide from "./DescriptionSlide";
-import Carousel from 'react-material-ui-carousel'
 import { numberOne, numberTwo, numberThree, numberFour, numberFive, imgOne, imgTwo, imgThree, imgFour, imgFive } from "../../images2";
-import "./index.css";
 
 const slides = [
     {
@@ -73,7 +73,7 @@ export default function ListSlides() {
         <Carousel
             className="ourProcessSlides"
             navButtonsAlwaysInvisible={true}
-            interval={3500}
+            interval={2000}
         >
             {
                 slides.map((slide, index) => <Slide slide={slide} index={index} />)

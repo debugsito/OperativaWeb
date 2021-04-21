@@ -13,6 +13,7 @@ svg.MuiSvgIcon-root.Carousel-indicator-45.Carousel-active-46{
   }
 
   .Carousel-indicators-44 {
+    display: none;
     width: 15% !important;
     display: flex;
     flex-direction: column;
