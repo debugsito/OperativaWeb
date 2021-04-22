@@ -1,3 +1,4 @@
+export { default as sectorImgMovil } from './sectorImg2.png';
 export { default as featureOne } from './featureOne.svg';
 export { default as featureTwo } from './featureTwo.svg';
 export { default as featureThree } from './featureThree.svg';

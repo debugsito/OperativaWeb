@@ -10,6 +10,9 @@ const useStyles = makeStyles(theme => ({
         padding: '0.5rem',
         width: '260px',
         display: 'flex',
+        [theme.breakpoints.down('sm')]: {
+            padding: '0.2rem',
+        },
     },
     boxImg: {
         marginRight: '0.5rem'

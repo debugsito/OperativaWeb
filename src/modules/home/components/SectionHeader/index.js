@@ -8,7 +8,7 @@ import operativaLogo from "../../assets/images/operativa_logo.png"
 import sectoresGif from "../../assets/images/sectores.gif"
 
 import { ButtonHome, FeatureCard } from "../";
-import { featureOne, featureTwo, featureThree, backgroundMovil, logoMovil } from "../../images2";
+import { featureOne, featureTwo, featureThree, backgroundMovil, logoMovil, sectorImgMovil } from "../../images2";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -59,20 +59,20 @@ const useStyles = makeStyles(theme => ({
     },
     sectionOneMovil: {
         gridRowStart: 1,
-        gridRowEnd: 3,
+        gridRowEnd: 4,
         margin: '1rem',
         display: 'flex',
         flexDirection: 'column'
     },
     sectionTwoMovil: {
-        gridRowStart: 4,
+        gridRowStart: 5,
         gridRowEnd: 13,
         backgroundImage: `url(${backgroundMovil})`,
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
     },
     gifMovil: {
-        width: '6rem',
+        width: '55%',
         margin: '0 auto',
     },
     containerLogoMovil: {
@@ -80,14 +80,11 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         justifyContent: 'flex-start'
     },
-    containerButtons: {
-        margin: '0 1.2rem',
-        display: 'grid',
-        gridGap: '1rem',
-        gridTemplateColumns: '1fr 1fr',
-    },
+
     containerTitleMovil: {
-        marginTop: '4.5rem',
+        marginTop: '6rem',
+        marginBottom: '1.5rem',
+        lineHeight: '1rem',
         textAlign: 'center'
     },
     titleBoldMovil: {
@@ -102,8 +99,14 @@ const useStyles = makeStyles(theme => ({
         fontSize: '1.4rem',
         color: '#fff',
     },
+    containerButtons: {
+        margin: '0 1.2rem',
+        display: 'grid',
+        gridGap: '1rem',
+        gridTemplateColumns: '1fr 1fr',
+    },
     containerCardsMovil: {
-        marginTop: '0.5rem',
+        marginTop: '1.5rem',
         display: 'grid',
         justifyItems: 'center',
         gridGap: '0.5rem',
@@ -155,7 +158,7 @@ export default function SectionHeader(props) {
                         <div className={classes.containerLogoMovil}>
                             <img src={logoMovil} />
                         </div>
-                        <img src={sectoresGif} className={classes.gifMovil} />
+                        <img src={sectorImgMovil} className={classes.gifMovil} />
                     </div>
                     <div className={classes.sectionTwoMovil}>
                         <div className={classes.containerTitleMovil}>
