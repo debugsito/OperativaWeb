@@ -1,24 +1,25 @@
-svg.MuiSvgIcon-root.Carousel-indicator-45 {
+.ourProcessSlides .Carousel-indicators-44 button.MuiButtonBase-root.MuiIconButton-root.Carousel-indicator-45.MuiIconButton-sizeSmall {
   color: white;
   padding: 0.8rem;
 }
 
-svg.MuiSvgIcon-root.Carousel-indicator-45.Carousel-active-46{
+.ourProcessSlides .Carousel-indicators-44 button.MuiButtonBase-root.MuiIconButton-root.Carousel-indicator-45.Carousel-active-47.MuiIconButton-sizeSmall{
   color:#00F0CA
 }
-@media screen and (min-width: 600px){
-  .Carousel-root-43.ourProcessSlides {
+/* @media screen and (min-width: 600px){
+  .container-slider.Carousel-root-43.ourProcessSlides {
     display: flex;
     flex-direction: row-reverse;
   }
 
-  .Carousel-indicators-44 {
+  .container-slider.Carousel-root-43.Carousel-indicators-44 {
     width: 15% !important;
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
-}
+} */
+
 
 .slide__containerText{
   line-height: 1rem;

@@ -34,36 +34,6 @@ const useStyles = makeStyles(theme => ({
     slides: {
         display: 'flex',
         overflowX: 'auto',
-        // scrollSnapType: 'x mandatory',
-        // scrollBehavior: 'smooth',
-        // WebkitOverflowScrolling: 'touch',
-        // '&::-webkit-scrollbar': {
-        //     width: '10px',
-        //     height: '10px',
-        // },
-        // '&::-webkit-scrollbar-track': {
-        //     background: 'transparent'
-        // },
-        // animation: 'carousel 15s linear infinite',
-        // '& >div:nth-child(1)': {
-        //     // animationName: 'first-picture, carousel',
-        //     // animationDuration: '15s',
-        //     // animationIterationCount: 'infinite',
-        //     // animationDelay: '0s, 15s',
-        //     // transform: 'translateX(0%)',
-        // },
-        // '& >div:nth-child(2)': {
-        //     animationDelay: 'Calc(15s * .2)',
-        // },
-        // '& >div:nth-child(3)': {
-        //     animationDelay: 'Calc(15s * .2)',
-        // },
-        // '& >div:nth-child(4)': {
-        //     animationDelay: 'Calc(15s * .2)',
-        // },
-        // '& >div:nth-child(5)': {
-        //     animationDelay: 'Calc(15s * .2)',
-        // },
     },
 }))
 

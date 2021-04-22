@@ -45,7 +45,7 @@ const useStyles = makeStyles(theme => ({
         borderRadius: '10px',
 
         display: 'grid',
-        gridTemplateColumns: '4fr 4fr 2fr',
+        gridTemplateColumns: '2fr 4fr 4fr 2fr',
         [theme.breakpoints.down('sm')]: {
             display: 'flex',
             flexDirection: 'column-reverse',
@@ -55,30 +55,30 @@ const useStyles = makeStyles(theme => ({
         }
     },
     slideContainerText: {
-        gridColumn: '1/2',
+        gridColumn: '2/3',
     },
     slideImg: {
-        gridColumn: '2/3',
-        width: '400px',
+        gridColumn: '3/4',
+        height: '350px',
         [theme.breakpoints.down('sm')]: {
-            width: '200px',
+            height: '200px'
         },
     }
 }))
 
 export default function ListSlides() {
-    const classes = useStyles();
-
     return (
-        <Carousel
-            className="ourProcessSlides"
-            navButtonsAlwaysInvisible={true}
-            interval={3500}
-        >
-            {
-                slides.map((slide, index) => <Slide slide={slide} index={index} />)
-            }
-        </Carousel>
+        <div className="container-slider">
+            <Carousel
+                className="ourProcessSlides"
+                navButtonsAlwaysInvisible={true}
+                interval={3000}
+            >
+                {
+                    slides.map((slide, index) => <Slide slide={slide} index={index} />)
+                }
+            </Carousel>
+        </div>
     )
 }
 
