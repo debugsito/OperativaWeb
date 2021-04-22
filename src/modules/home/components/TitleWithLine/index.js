@@ -9,11 +9,11 @@ const useStyles = makeStyles(theme => ({
     },
     titleAbout: props => ({
         [theme.breakpoints.down('sm')]: {
-            marginTop: '1rem',
+            marginTop: '0.8rem',
             fontSize: '1.5rem',
         },
         [theme.breakpoints.up('md')]: {
-            marginTop: '3.5rem',
+            marginTop: '2rem',
             fontSize: '3rem',
         },
         marginBottom: '0.5rem',
