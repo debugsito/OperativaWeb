@@ -83,20 +83,20 @@ const useStyles = makeStyles(theme => ({
     },
     titleBold: {
         fontWeight: 700,
-        fontSize: '2.3rem',
+        fontSize: '2.5rem',
         [theme.breakpoints.down('sm')]: {
             fontSize: '2rem'
         },
     },
     titleLight: {
-        fontWeight: 500,
+        fontWeight: 300,
         [theme.breakpoints.down('sm')]: {
             fontSize: '1.5rem'
         },
     },
     atention: {
         lineHeight: '1rem',
-        '& h3': {
+        '& h2': {
             fontWeight: 700,
         },
         [theme.breakpoints.down('sm')]: {
@@ -107,7 +107,6 @@ const useStyles = makeStyles(theme => ({
         },
     },
     footer: {
-
         gridRow: '3/4',
     }
 }))

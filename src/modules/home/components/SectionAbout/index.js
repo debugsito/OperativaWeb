@@ -22,15 +22,16 @@ const useStyles = makeStyles(theme => ({
         },
     },
     text: {
+        fontFamily: 'Roboto, sans-serif',
+        color: "#373737",
         [theme.breakpoints.down('sm')]: {
             fontSize: '0.9rem',
-            fontWeight: 400,
+            // fontWeight: 400,
         },
         [theme.breakpoints.up('md')]: {
             fontSize: '1.3rem',
             fontWeight: 300,
         },
-        color: '#373737',
         textShadow: '0px 3px 56px #ffffffa8',
         textAlign: 'center',
         lineHeight: '2rem'
@@ -43,7 +44,7 @@ export default function SectionAbout(props) {
 
     return (
         <div className={classes.root}>
-            <TitleWithLine colorLine="#EF1C40">
+            <TitleWithLine colorLine="#EF1C40" colorText="#212529">
                 Sobre Nosotros
             </TitleWithLine>
             <div className={classes.containerText}>

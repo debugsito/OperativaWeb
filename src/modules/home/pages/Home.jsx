@@ -1,8 +1,5 @@
 import React from 'react';
 import { SectionHeader, SectionOurProcess, SectionAbout, SectionStatistic, SectionOurPartners, SectionContact } from "../components";
-import '../styles/index.css'
-
-
 
 const Home = () => {
     

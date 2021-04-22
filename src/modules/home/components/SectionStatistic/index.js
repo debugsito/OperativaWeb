@@ -11,7 +11,9 @@ const useStyles = makeStyles(theme => ({
         backgroundImage: `url(${about})`,
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
-        padding: '1rem 1rem 0 1rem'
+        padding: '1rem 1rem 0 1rem',
+        fontFamily: 'Roboto, sans-serif',
+        color: "#212529"
     },
     containerCards: {
         [theme.breakpoints.down('sm')]: {
@@ -57,7 +59,7 @@ const useStyles = makeStyles(theme => ({
         [theme.breakpoints.down('sm')]: {
             textAlign: 'center',
             '& h1': {
-                fontWeight: 600,
+                fontWeight: 900,
                 fontSize: '1.2rem',
             },
             '& h3': {
@@ -70,10 +72,10 @@ const useStyles = makeStyles(theme => ({
             textAlign: 'center',
             lineHeight: '1rem',
             '& h1': {
-                fontWeight: 700,
+                fontWeight: 900,
             },
             '& h3': {
-                fontWeight: 200,
+                fontWeight: 300,
                 fontSize: '1.5rem',
             }
         },

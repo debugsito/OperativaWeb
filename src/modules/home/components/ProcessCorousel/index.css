@@ -25,12 +25,14 @@ svg.MuiSvgIcon-root.Carousel-indicator-45.Carousel-active-46{
 }
 
 .slide__title-bold{
-  font-weight: 700;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 900;
   font-size: 2rem;
   line-height: 1rem;
 }
 
 .slide__title-light{
-  font-weight: 400;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
   font-size: 1.7rem;
 }

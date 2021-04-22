@@ -23,13 +23,13 @@ const useStyles = makeStyles(theme => ({
         margin: '0 auto'
     },
     titleBold: {
-        fontWeight: 700,
+        fontFamily: 'Roboto-Bold, sans-serif',
         marginBottom: '0.5rem',
         fontSize: '2.5rem',
         color: '#fff',
     },
     titleLight: {
-        fontWeight: 400,
+        fontWeight: 100,
         marginTop: '0.5rem',
         fontSize: '2.5rem',
         color: '#fff',
@@ -97,7 +97,7 @@ const useStyles = makeStyles(theme => ({
         color: '#fff',
     },
     titleLightMovil: {
-        fontWeight: 400,
+        fontWeight: 200,
         marginTop: '0.5rem',
         fontSize: '1.4rem',
         color: '#fff',
@@ -122,7 +122,7 @@ export default function SectionHeader(props) {
                         <Grid item xs={12} md={6}>
                             <div className={classes.content}>
                                 <img src={operativaLogo} />
-                                <h1 className={classes.titleBold}>Primera Plataforma digital</h1>
+                                <h1 className={classes.titleBold}>Primera plataforma digital</h1>
                                 <h1 className={classes.titleLight}>inteligente de reclutamiento</h1>
                                 <div className={classes.contentButtons}>
                                     <div>
