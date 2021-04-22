@@ -31,7 +31,17 @@ export default function Partnerslist(props) {
             className="slider-partners"
             navButtonsAlwaysInvisible={true}
             interval={3000}
-            animation="fade"
+            indicatorIconButtonProps={{
+                style: {
+                    padding: '10px',    // 1
+                },
+            }}
+            indicatorContainerProps={{
+                style: {
+                    marginTop: '2rem', // 5
+                }
+
+            }}
         >
             {
                 slidesTemp.map((slides, index) =>

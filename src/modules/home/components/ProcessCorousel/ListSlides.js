@@ -73,6 +73,18 @@ export default function ListSlides() {
                 className="ourProcessSlides"
                 navButtonsAlwaysInvisible={true}
                 interval={3000}
+                indicatorIconButtonProps={{
+                    style: {
+                        padding: '10px',    // 1
+                    },
+                }}
+                indicatorContainerProps={{
+                    style: {
+                        marginTop: '1rem', // 5
+                    }
+
+                }}
+
             >
                 {
                     slides.map((slide, index) => <Slide slide={slide} index={index} />)
