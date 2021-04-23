@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Divider, FormControl, FormControlLabel, FormHelperText, FormLabel, Grid, InputLabel, MenuItem, RadioGroup, Select, Typography } from '@material-ui/core';
-import { Button, Checkbox, Radio, TextInput, Modal } from '../../../shared/components';
+import { Button, Checkbox, Radio, TextInput, Modal, Snackbars } from '../../../shared/components';
 import { areasList, itemsList, jobLevelsList, withdrawalReasonsList } from '../../../../store/services/utils.service';
 import { onlyNumbers, onlyLetters } from '../../../shared/libs/validators';
 import { useForm } from "../../../hooks/useForm";
@@ -28,6 +28,7 @@ export default function WithExperienceComponent({ handleDeleteWorkExperience, ha
     const [showCheckBox] = useState(index >= 1)
     const [isHidden, setIsHidden] = useState(false) //Si la lista tiene mas de 1 elemento
     const [openConfirmationModal, setOpenConfirmationModal] = useState(false)
+    const [openAlert, setOpenAlert] = useState(false)
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
@@ -114,11 +115,16 @@ export default function WithExperienceComponent({ handleDeleteWorkExperience, ha
         }
     }
 
+    const handleCloseAlert = () => {
+        setOpenAlert(false)
+    }
+
     const handleClickAddExperience = () => {
         if (!disabledButtonState) {
             handleAddWorkExperience()
         } else {
             validate();
+            setOpenAlert(true)
             return
         }
     }
@@ -128,6 +134,7 @@ export default function WithExperienceComponent({ handleDeleteWorkExperience, ha
             handleSaveWithExperience()
         } else {
             validate();
+            setOpenAlert(true)
             return
         }
     }
@@ -366,7 +373,7 @@ export default function WithExperienceComponent({ handleDeleteWorkExperience, ha
             {
                 !isHidden && index == length - 1 &&
                 <Grid item xs={12} md={12} className="justify-end">
-                    <Button variant="contained" size="large" onClick={handleClickNextStep} disabled={disabledButtonState}>Continuar</Button>
+                    <Button variant="contained" size="large" onClick={handleClickNextStep}>Continuar</Button>
                     {/* <Button color="primary" type="submit" onClick={handleClickNextStep}>continuar</Button> */}
                 </Grid>
             }
@@ -385,6 +392,10 @@ export default function WithExperienceComponent({ handleDeleteWorkExperience, ha
                 </Grid>
 
             </Modal>
+            <Snackbars
+                open={openAlert}
+                onClose={handleCloseAlert}
+            />
             {/* <Grid item xs={12} md={12} lg={12}>
                 <Divider />
             </Grid>

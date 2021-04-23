@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { DateTime } from "luxon";
 import { Divider, FormControl, FormHelperText, Grid, InputLabel, MenuItem, Select } from '@material-ui/core';
 
-import { Button, TextInput } from '../../../shared/components';
+import { Button, TextInput, Snackbars } from '../../../shared/components';
 import { documentsTypeList, providerList } from '../../../../store/services/utils.service';
 import { onlyNumbers, onlyLetters, isRuc, isDni } from '../../../shared/libs/validators';
 import { useForm } from "../../../hooks/useForm";
@@ -27,6 +27,7 @@ export default function ApplicantContactInformationForm({ user, handleSavePerson
     const monthMax = DateTime.utc().month
     const dayMax = DateTime.utc().day
     const dateMax = DateTime.utc(yearMax, monthMax, dayMax).toFormat("yyyy-LL-dd")
+    const [openAlert, setOpenAlert] = useState(false)
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
@@ -113,11 +114,16 @@ export default function ApplicantContactInformationForm({ user, handleSavePerson
         handleInputChange(e);
     }
 
+    const handleCloseAlert = () => {
+        setOpenAlert(false)
+    }
+
     const handleSave = () => {
         if (!disabledButtonState) {
             handleSavePersonalData(values)
         } else {
             validate(values);
+            setOpenAlert(true)
             return
         }
     }
@@ -258,8 +264,12 @@ export default function ApplicantContactInformationForm({ user, handleSavePerson
                 </Grid>
             }
             <Grid item xs={12} md={12} className="justify-end">
-                <Button variant="contained" size="large" onClick={handleSave} disabled={disabledButtonState}>Continuar</Button>
+                <Button variant="contained" size="large" onClick={handleSave}>Continuar</Button>
             </Grid>
+            <Snackbars
+                open={openAlert}
+                onClose={handleCloseAlert}
+            />
         </Grid>
     );
 }

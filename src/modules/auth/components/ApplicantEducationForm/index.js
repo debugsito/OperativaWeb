@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FormControl, FormHelperText, Grid, InputLabel, MenuItem, Select } from '@material-ui/core';
 import { useForm } from "../../../hooks";
-import { Button, TextInput } from '../../../shared/components';
+import { Button, TextInput, Snackbars } from '../../../shared/components';
 import { academicLevelsList, specialtiesList } from '../../../../store/services/utils.service';
 import { onlyNumbers } from '../../../shared/libs/validators';
 import ACADEMIC_LEVEL from "../../../global/constants/types/academicLevels";
@@ -18,6 +18,7 @@ const defaultValues = {
 
 export default function ApplicantEducationForm({ user, handleSaveEducation }) {
     let initialValues = user ? user : defaultValues;
+    const [openAlert, setOpenAlert] = useState(false)
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
@@ -100,11 +101,16 @@ export default function ApplicantEducationForm({ user, handleSaveEducation }) {
         setSpecialties(response?.fields);
     }
 
+    const handleCloseAlert = () => {
+        setOpenAlert(false)
+    }
+
     const handleClickSave = () => {
         if (!disabledButtonState) {
             handleSaveEducation(values)
         } else {
             validate(values);
+            setOpenAlert(true)
             return
         }
     }
@@ -204,8 +210,12 @@ export default function ApplicantEducationForm({ user, handleSaveEducation }) {
                 />
             </Grid>
             <Grid item xs={12} md={12} className="justify-end">
-                <Button variant="contained" size="large" onClick={handleClickSave} disabled={disabledButtonState}>Continuar</Button>
+                <Button variant="contained" size="large" onClick={handleClickSave}>Continuar</Button>
             </Grid>
+            <Snackbars
+                open={openAlert}
+                onClose={handleCloseAlert}
+            />
         </Grid >
     );
 }

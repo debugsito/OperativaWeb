@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FormControl, FormHelperText, Grid, InputLabel, MenuItem, Select, } from '@material-ui/core';
-import { Button, TextInput } from '../../../shared/components';
+import { Button, TextInput, Snackbars } from '../../../shared/components';
 import { civilStatusesList, departmentsList, districtsList, provincesList } from '../../../../store/services/utils.service';
 import { onlyNumbers, isPhone } from '../../../shared/libs/validators';
 import { useForm } from "../../../hooks/useForm";
@@ -18,6 +18,7 @@ const defaultValues = {
 export default function ApplicantPersonalDataForm({ user, handleSaveContactInformation }) {
     // #region 
     let initialValues = user ? user : defaultValues;
+    const [openAlert, setOpenAlert] = useState(false)
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
@@ -121,12 +122,17 @@ export default function ApplicantPersonalDataForm({ user, handleSaveContactInfor
         setDistricts(filteredDistricts);
     }
 
+    const handleCloseAlert = () => {
+        setOpenAlert(false)
+    }
+
     const handleSave = () => {
         if (!disabledButtonState) {
             let data = { ...values, country_id: 1 } //Country_id en DURO
             handleSaveContactInformation(data)
         } else {
             validate(values);
+            setOpenAlert(true)
             return
         }
 
@@ -243,8 +249,12 @@ export default function ApplicantPersonalDataForm({ user, handleSaveContactInfor
                 </FormControl>
             </Grid>
             <Grid item xs={12} md={12} className="justify-end">
-                <Button variant="contained" size="large" onClick={handleSave} disabled={disabledButtonState}>Continuar</Button>
+                <Button variant="contained" size="large" onClick={handleSave}>Continuar</Button>
             </Grid>
+            <Snackbars
+                open={openAlert}
+                onClose={handleCloseAlert}
+            />
         </Grid>
     );
 }

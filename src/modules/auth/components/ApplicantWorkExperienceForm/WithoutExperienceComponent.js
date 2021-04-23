@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import moment from 'moment';
 import { Divider, FormControl, FormControlLabel, FormHelperText, FormLabel, Grid, InputLabel, MenuItem, RadioGroup, Select, Typography } from '@material-ui/core';
 
-import { Button, Radio, TextInput } from '../../../shared/components';
+import { Button, Radio, TextInput, Snackbars } from '../../../shared/components';
 import { areasList, specialtiesList } from '../../../../store/services/utils.service';
 import { onlyLetters } from '../../../shared/libs/validators';
 
@@ -14,6 +13,7 @@ export default function WithoutExperienceComponent({ user, handleFinish, history
     const [hasRotativeSchedules, setHasRotativeSchedules] = useState({ value: '', error: false });
     const [hasExtraHours, setHasExtraHours] = useState({ value: '', error: false });
     const [hasWeekend, setHasWeekend] = useState({ value: '', error: false });
+    const [openAlert, setOpenAlert] = useState(false)
 
     const [areas, setAreas] = useState([]);
 
@@ -36,6 +36,10 @@ export default function WithoutExperienceComponent({ user, handleFinish, history
     //     setAreas(response?.areas);
     // }
 
+    const handleCloseAlert = () => {
+        setOpenAlert(false)
+    }
+
     const handleSave = () => {
         const body = {
             volunteering: parseInt(hasVolunteering.value === "yes" ? 1 : 0),
@@ -45,6 +49,8 @@ export default function WithoutExperienceComponent({ user, handleFinish, history
         };
         if (!isButtonDisabled()) {
             handleFinish(body)
+        } else {
+            setOpenAlert(true)
         }
     }
 
@@ -136,8 +142,13 @@ export default function WithoutExperienceComponent({ user, handleFinish, history
                 </FormControl>
             </Grid>
             <Grid item xs={12} md={12} className="justify-end">
-                <Button color="primary" type="submit" onClick={handleSave}>continuar</Button>
+                {/* <Button color="primary" type="submit" onClick={handleSave}>continuar</Button> */}
+                <Button variant="contained" size="large" onClick={handleSave}>Continuar</Button>
             </Grid>
+            <Snackbars
+                open={openAlert}
+                onClose={handleCloseAlert}
+            />
             {/* <Grid item xs={12} className="justify-center">
                 <Button variant="outlined" size="large" onClick={() => history.push('/')}>Cancelar</Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <Button variant="contained" size="large" onClick={handleSave} disabled={isButtonDisabled()}>Finalizar</Button>

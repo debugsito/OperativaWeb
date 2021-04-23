@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux"
 
 import { Grid, MenuItem, Typography } from '@material-ui/core'
-import { Select, Button } from "../../../shared/components";
+import { Select, Button, Snackbars } from "../../../shared/components";
 
 import { actions_Utils } from "../../../../store/actions";
 import { useForm } from "../../../hooks";
@@ -14,6 +14,7 @@ const defaultValues = {
 export default function Index({ userData, handleSaveAreasOfInterest }) {
     const dispatch = useDispatch()
     const { items } = useSelector(state => state.utils)
+    const [openAlert, setOpenAlert] = useState(false)
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
@@ -39,6 +40,20 @@ export default function Index({ userData, handleSaveAreasOfInterest }) {
         dispatch(actions_Utils.getItems())
     }, [])
 
+    const handleCloseAlert = () => {
+        setOpenAlert(false)
+    }
+
+    const handleClickFinish = () => {
+        if (!disabledButtonState) {
+            handleSaveAreasOfInterest(values)
+        } else {
+            validate();
+            setOpenAlert(true)
+            return
+        }
+    }
+
     return (
         <Grid container spacing={3} style={{ padding: 20 }}>
             <Grid item xs={10} sm={10} md={10} lg={10}>
@@ -63,8 +78,12 @@ export default function Index({ userData, handleSaveAreasOfInterest }) {
             </Grid>
             <Grid item xs={12} className="justify-center">
                 {/* <Button variant="outlined" size="large" onClick={() => history.push('/')}>Cancelar</Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; */}
-                <Button variant="contained" size="large" onClick={() => handleSaveAreasOfInterest(values)} disabled={disabledButtonState}>Finalizar</Button>
+                <Button variant="contained" size="large" onClick={handleClickFinish}>Finalizar</Button>
             </Grid>
+            <Snackbars
+                open={openAlert}
+                onClose={handleCloseAlert}
+            />
         </Grid>
     )
 }
