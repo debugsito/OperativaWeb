@@ -1,9 +1,11 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import { statisticOne } from "../../images2";
+import "./index.css"
 
 const useStyles = makeStyles(theme => ({
     rootCard: {
+
         [theme.breakpoints.down('sm')]: {
             background: "#FFFFFF 0% 0% no-repeat padding-box",
             boxShadow: '0px 3px 6px #2958a329',
@@ -11,6 +13,7 @@ const useStyles = makeStyles(theme => ({
             opacity: 1,
             display: 'grid',
             gridTemplateColumns: '1fr 1fr 1fr',
+            paddingRight: '1rem',
         },
         [theme.breakpoints.up('md')]: {
             background: "#FFFFFF 0% 0% no-repeat padding-box",
@@ -18,7 +21,7 @@ const useStyles = makeStyles(theme => ({
             borderRadius: '11px',
             opacity: 1,
             marginTop: '1rem',
-            padding: '0.5rem 1rem',
+            padding: '0.5rem 1.5rem 0.5rem 1rem',
             display: 'grid',
             gridGap: '0.5rem',
             gridTemplateColumns: '1fr 1fr 1fr',
@@ -26,7 +29,7 @@ const useStyles = makeStyles(theme => ({
     },
     imgCard: {
         [theme.breakpoints.down('sm')]: {
-            height: '70%',
+            height: '60%',
             margin: 'auto 0',
             display: 'flex',
             justifyContent: 'center',
@@ -62,16 +65,17 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-export default function StatisticCard({ image, number, text }) {
+export default function StatisticCard({ image, number, text, cssName, inView }) {
     const classes = useStyles();
-
+    console.log("inView", inView)
     return (
         <div className={classes.rootCard}>
             <div className={classes.imgCard}>
                 <img src={image} />
             </div>
-            <div className={classes.numberCard}>
-                {number}
+            <div className={classes.numberCard + ` ${inView ? cssName : ''}`}>
+                {/* Show index.css */}
+                {/* {number} */}
             </div>
             <div className={classes.textCard}>
                 {text}

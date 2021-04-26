@@ -1,0 +1,69 @@
+@property --numOne {
+    syntax: "<integer>";
+    initial-value: 5000;
+    inherits: false;
+  }
+  
+  .counterOne{
+    animation: mycounterone 3s normal ease-in-out;
+    counter-reset: numOne var(--numOne);
+  }
+  .counterOne::after {
+    content: counter(numOne);
+  }
+  
+  @keyframes mycounterone {
+    from {
+      --numOne: 0;
+    }
+    to {
+      --numOne: 5000;
+    }
+  }
+
+@property --numTwo {
+    syntax: "<integer>";
+    initial-value: 500;
+    inherits: false;
+  }
+  
+  .counterTwo{
+    animation: mycountertwo 3s normal ease-in-out;
+    counter-reset: numTwo var(--numTwo);
+  }
+  .counterTwo::after {
+    content: counter(numTwo);
+  }
+  
+  @keyframes mycountertwo {
+    from {
+      --numTwo: 0;
+    }
+    to {
+      --numTwo: 500;
+    }
+  }
+  
+@property --numThree {
+    syntax: "<integer>";
+    initial-value: 600;
+    inherits: false;
+  }
+  
+  .counterThree{
+    animation: mycounterthree 3s normal ease-in-out;
+    counter-reset: numThree var(--numThree);
+  }
+  .counterThree::after {
+    content: counter(numThree);
+  }
+  
+  @keyframes mycounterthree {
+    from {
+      --numThree: 0;
+    }
+    to {
+      --numThree: 600;
+    }
+  }
+  

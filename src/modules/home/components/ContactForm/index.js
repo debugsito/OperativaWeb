@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         justifyContent: 'space-between',
         [theme.breakpoints.down('sm')]: {
-            width: '80%',
+            width: '77%',
         },
         [theme.breakpoints.up('md')]: {
             width: '50%',

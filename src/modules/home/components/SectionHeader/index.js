@@ -17,10 +17,16 @@ const useStyles = makeStyles(theme => ({
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
         backgroundPosition: 'center center',
+        display: 'grid',
+        gridTemplateRows: 'repeat(12,1fr)'
+    },
+    container: {
+        gridRow: '2/12'
     },
     gifScreen: {
         width: '30rem',
-        margin: '0 auto'
+        margin: '0 auto',
+        height: '430px'
     },
     titleBold: {
         fontFamily: 'Roboto-Bold, sans-serif',
@@ -46,6 +52,7 @@ const useStyles = makeStyles(theme => ({
     },
     containerCards: {
         marginLeft: '5rem',
+        marginBottom: '1rem',
         display: 'grid',
         gridGap: '1rem',
         gridTemplateColumns: '1fr 1fr 1fr',
@@ -121,7 +128,7 @@ export default function SectionHeader(props) {
         <>
             <Hidden smDown>
                 <div className={classes.root}>
-                    <Grid container alignItems="center">
+                    <Grid container alignItems="center" className={classes.container}>
                         <Grid item xs={12} md={6}>
                             <div className={classes.content}>
                                 <img src={operativaLogo} />

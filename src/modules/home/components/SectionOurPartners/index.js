@@ -9,21 +9,29 @@ const useStyles = makeStyles(theme => ({
         fontFamily: 'Roboto, sans-serif',
     },
     containerText: {
-        margin: '1rem auto',
+        margin: '2rem auto',
         textAlign: 'center',
         color: "#3e3d3d",
         [theme.breakpoints.down('sm')]: {
             fontSize: '0.9rem',
-            width: '95%'
+            width: '85%',
+            lineHeight: '1.5rem'
         },
         [theme.breakpoints.up('md')]: {
             fontSize: '1.3rem',
             width: '80%',
             fontWeight: 370,
+            lineHeight: '2rem'
         },
     },
     containerCarousel: {
-        marginTop: '5rem'
+        [theme.breakpoints.down('sm')]: {
+            marginTop: '3.5rem'
+        },
+        [theme.breakpoints.up('md')]: {
+            marginTop: '5rem'
+        },
+
     }
 }))
 
@@ -35,8 +43,7 @@ export default function SectionOurPartners(props) {
             <TitleWithLine colorLine="#EF1C40">Nuestros<br />Socios Estratégicos</TitleWithLine>
             <div className={classes.containerText}>
                 <p>
-                    Junto a nuestros SOCIOS ESTRATÉGICOS, MUNICIPALIDADES, ONG ́s e INSTITUTOS, acercamos a miles de operarios en la búsqueda permanente de empleo debido a la dispersión de bolsas de trabajo que no centralizan las ofertas de empleo y en lugar de facilitar la búsqueda, terminan haciendo más complejo el proceso de encuentro entre la oferta y demanda
-                    laboral.
+                    En colaboración con nuestros socios estratégicos a nivel nacional, Municipalidades, ONGs, Instituciones, acercamos a miles de operarios, con el propósito de reducir el índice de desempleo, promover la oportunidad laboral y centralizar las ofertas de empleo formal.
                 </p>
             </div>
             <div className={classes.containerCarousel}>

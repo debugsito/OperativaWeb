@@ -63,7 +63,7 @@ const useStyles = makeStyles(theme => ({
     sectionOneContainer: {
         [theme.breakpoints.down('sm')]: {
             color: 'white',
-            margin: '0 1rem',
+            margin: '0 2rem',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',

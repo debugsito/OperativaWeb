@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useRef, useEffect } from 'react'
 import { Hidden } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { about, statisticOne, statisticTwo, statisticThree } from "../../images2";
+import { useIntersectionObserver } from "../../../hooks";
 
 import { StatisticCard, SectorList } from "../";
 
@@ -85,15 +86,22 @@ const useStyles = makeStyles(theme => ({
 
 export default function SectionStatistic(props) {
     const classes = useStyles();
+    const elementRef = useRef(null);
+    //para las animaciones de los cards
+    const [inView, entry] = useIntersectionObserver(elementRef, {
+        threshold: 0
+    });
 
     return (
         <div className={classes.root}>
-            <div className={classes.containerCards}>
+            <div className={classes.containerCards} ref={elementRef}>
                 <div className={classes.itemCardOne}>
                     <StatisticCard
                         image={statisticOne}
                         number="5000"
                         text={<small>Registro de <strong>postulantes</strong></small>}
+                        cssName="counterOne"
+                        inView={inView}
                     />
                 </div>
                 <div className={classes.itemCardTwo}>
@@ -101,6 +109,8 @@ export default function SectionStatistic(props) {
                         image={statisticTwo}
                         number="500"
                         text={<small>Socios <strong>estratégicos</strong></small>}
+                        cssName="counterTwo"
+                        inView={inView}
                     />
                 </div>
                 <div className={classes.itemCardThree}>
@@ -108,6 +118,8 @@ export default function SectionStatistic(props) {
                         image={statisticThree}
                         number="600"
                         text={<small>Cantidad de <strong>colocaciones</strong></small>}
+                        cssName="counterThree"
+                        inView={inView}
                     />
                 </div>
             </div>

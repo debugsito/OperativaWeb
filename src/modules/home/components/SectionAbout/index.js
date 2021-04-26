@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
     containerText: {
         margin: '2rem auto',
         [theme.breakpoints.down('sm')]: {
-            width: '95%',
+            width: '85%',
         },
         [theme.breakpoints.up('md')]: {
             width: '60%',
@@ -25,16 +25,18 @@ const useStyles = makeStyles(theme => ({
         fontFamily: 'Roboto, sans-serif',
         color: "#373737",
         [theme.breakpoints.down('sm')]: {
-            fontSize: '0.7rem',
+            fontSize: '0.8rem',
+            lineHeight: '1.5rem'
             // fontWeight: 400,
         },
         [theme.breakpoints.up('md')]: {
             fontSize: '1.3rem',
             fontWeight: 300,
+            lineHeight: '2rem'
         },
         textShadow: '0px 3px 56px #ffffffa8',
         textAlign: 'justify',
-        lineHeight: '2rem'
+
 
     },
 }))
