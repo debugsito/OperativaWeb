@@ -7,8 +7,8 @@ const Home = () => {
     return (
         <>
             <SectionHeader />
-            <SectionAbout />
-            <SectionOurProcess />
+            {/* <SectionAbout /> */}
+            {/* <SectionOurProcess /> */}
             <SectionStatistic />
             <SectionOurPartners />
             <SectionContact />

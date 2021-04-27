@@ -20,19 +20,30 @@ const useStyles = makeStyles(theme => ({
         [theme.breakpoints.down('sm')]: {
             position: 'relative',
             bottom: '105px',
-            left: '60px'
         },
+    },
+    headerContainer: {
+        [theme.breakpoints.down('sm')]: {
+            display: 'grid',
+            gridTemplateColumns: '2fr 4fr 4fr 1fr',
+        },
+        [theme.breakpoints.up('md')]: {
+        },
+    },
+    textContainer: {
+        gridColumn: '3/4'
     },
     textBe: {
         [theme.breakpoints.down('sm')]: {
-            textAlign: "center"
+            textAlign: "left"
         },
     },
     containerButton: {
+        gridColumn: '2/4',
         display: 'flex',
         justifyContent: 'space-between',
         [theme.breakpoints.down('sm')]: {
-            width: '77%',
+            // width: '100%',
         },
         [theme.breakpoints.up('md')]: {
             width: '50%',
@@ -41,7 +52,7 @@ const useStyles = makeStyles(theme => ({
     containerInputs: {
         marginTop: '1rem',
         [theme.breakpoints.down('sm')]: {
-            marginLeft: '1rem',
+            marginLeft: '1.5rem',
             position: 'relative',
             bottom: '110px',
         },
@@ -117,8 +128,8 @@ export default function ContactForm(props) {
     return (
         <div className={classes.root}>
             <div className={classes.headerForm}>
-                <div>
-                    <div>
+                <div className={classes.headerContainer}>
+                    <div className={classes.textContainer}>
                         <h2 className={classes.textBe}>Soy...</h2>
                     </div>
                     <div className={classes.containerButton}>
@@ -127,83 +138,86 @@ export default function ContactForm(props) {
                     </div>
                 </div>
             </div>
-            <Grid container spacing={1} className={classes.containerInputs}>
-                <Grid item xs={10}>
-                    <TextInput
-                        type="text"
-                        name="full_name"
-                        placeholder="Nombre y apellido"
-                        value={values.full_name}
-                        onChange={handleInputChange}
-                    />
-                </Grid>
-                <Grid item xs={10}>
-                    {business &&
+            <div className={classes.containerInputs}>
+                <Grid container spacing={1}>
+                    <Grid item xs={10}>
                         <TextInput
                             type="text"
-                            name="razon_social"
-                            placeholder="Razón Social"
-                            value={values.razon_social || ""}
+                            name="full_name"
+                            placeholder="Nombre y apellido"
+                            value={values.full_name}
                             onChange={handleInputChange}
                         />
-                    }
-                    {
-                        municipality &&
-                        <TextInput
-                            placeholder="DNI (Opcional)"
-                            name="dni"
-                            value={values.dni || ""}
-                            onChange={handleInputChange}
-                        />
-                    }
+                    </Grid>
+                    <Grid item xs={10}>
+                        {business &&
+                            <TextInput
+                                type="text"
+                                name="razon_social"
+                                placeholder="Razón Social"
+                                value={values.razon_social || ""}
+                                onChange={handleInputChange}
+                            />
+                        }
+                        {
+                            municipality &&
+                            <TextInput
+                                placeholder="DNI (Opcional)"
+                                name="dni"
+                                value={values.dni || ""}
+                                onChange={handleInputChange}
+                            />
+                        }
 
-                </Grid>
-                <Grid item xs={10}>
-                    <Grid container spacing={5}>
-                        <Grid item xs={5}>
-                            <TextInput
-                                type="tel"
-                                name="phone"
-                                placeholder="Teléfono"
-                                value={values.phone}
-                                onChange={handleInputChange}
-                            />
-                        </Grid>
-                        <Grid item xs={7}>
-                            <TextInput
-                                type="email"
-                                name="email"
-                                placeholder="Correo"
-                                value={values.email}
-                                onChange={handleInputChange}
-                            />
+                    </Grid>
+                    <Grid item xs={10}>
+                        <Grid container spacing={5}>
+                            <Grid item xs={5}>
+                                <TextInput
+                                    type="tel"
+                                    name="phone"
+                                    placeholder="Teléfono"
+                                    value={values.phone}
+                                    onChange={handleInputChange}
+                                />
+                            </Grid>
+                            <Grid item xs={7}>
+                                <TextInput
+                                    type="email"
+                                    name="email"
+                                    placeholder="Correo"
+                                    value={values.email}
+                                    onChange={handleInputChange}
+                                />
+                            </Grid>
+
                         </Grid>
 
                     </Grid>
+                    <Grid item xs={10}>
+                        <textarea
+                            placeholder="Mensaje"
+                            className={classes.textArea}
+                            name="message"
+                            value={values.message}
+                            onChange={handleInputChange}
+                            rows="4"
+                            cols="40"
+                        >
+                        </textarea>
+                    </Grid>
+                    <Grid item xs={3}>
+                        <TextInput
+                            type="button"
+                            name="send"
+                            value="Enviar"
+                            onClick={() => console.log("hice Click")}
+                            button
+                        />
+                    </Grid>
 
                 </Grid>
-                <Grid item xs={10}>
-                    <textarea
-                        placeholder="Mensaje"
-                        className={classes.textArea}
-                        name="message"
-                        value={values.message}
-                        onChange={handleInputChange}
-                        rows="4"
-                        cols="40"
-                    >
-                    </textarea>
-                </Grid>
-                <Grid item xs={3}>
-                    <TextInput
-                        type="button"
-                        name="send"
-                        value="Enviar"
-                        onClick={() => console.log("hice Click")}
-                        button
-                    />
-                </Grid>
-            </Grid>
+            </div>
 
         </div>
     )

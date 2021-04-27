@@ -4,7 +4,7 @@ import { logoPng, fbLogo, linkedingLogo } from "../../images2";
 
 const useStyles = makeStyles(theme => ({
     root: {
-        width: '100%',
+        // width: '100%',
         height: '100%',
         backgroundColor: '#EF1C40',
         display: 'flex',

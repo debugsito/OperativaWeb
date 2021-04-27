@@ -7,9 +7,9 @@ import { about } from "../../images2";
 const useStyles = makeStyles(theme => ({
     root: {
         height: '100vh',
-        backgroundImage: `url(${about})`,
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover',
+        // backgroundImage: `url(${about})`,
+        // backgroundRepeat: 'no-repeat',
+        // backgroundSize: 'cover',
     },
 
     containerText: {
