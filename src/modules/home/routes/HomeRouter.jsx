@@ -6,6 +6,8 @@ import HomeRoutes from './HomeRoutes';
 
 //Pages
 import Home from '../pages/Home';
+
+//PrivateRoute
 import PrivateRoute from '../../../routers/PrivateRoute';
 
 const MyAccountRouter = () => {

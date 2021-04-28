@@ -14,6 +14,9 @@ import {ApplicantRouter,ApplicantRoutes} from '../applicant'
 //Sidebar
 import { Navigation } from "../shared/components";
 
+//404
+import Error from "../home/pages/Error";
+
 const RouterOperativa = () => {
     // Get session and user
     const initRoute = SessionRoutes().initRoute;
@@ -27,8 +30,9 @@ const RouterOperativa = () => {
                     <Route exact path={DashboardRoutes} component={DashboardRouter} />
                     <Route exact path={AdminRoutes} component={AdminRouter} />
                     <Route exact path={ApplicantRoutes} component={ApplicantRouter} />
+                    <Route path="*" component={Error} />
                 </Navigation>
-                <Redirect to={initRoute} />
+                <Redirect to={"initRoute"} />
             </Switch>
         </>
     );

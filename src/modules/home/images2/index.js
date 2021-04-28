@@ -1,3 +1,7 @@
+//Page Error
+export { default as errorImg } from './error/error.svg'
+
+//Page Home
 export { default as sectorImgMovil } from './sectorImg2.png';
 export { default as featureOne } from './featureOne.svg';
 export { default as featureTwo } from './featureTwo.svg';
