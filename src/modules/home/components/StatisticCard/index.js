@@ -65,7 +65,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-export default function StatisticCard({ image, number, text, cssName, inView }) {
+export default function StatisticCard({ image, number, text, cssName, inView = false }) {
     const classes = useStyles();
     console.log("inView", inView)
     return (
