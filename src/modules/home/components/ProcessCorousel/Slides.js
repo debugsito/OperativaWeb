@@ -72,7 +72,7 @@ export default function Slides() {
     const [current, setCurrent] = useState(0);
     // estoy usando useReft porque timeout es especificamente manejado por
     // el browser y no por react
-    const timeoutRef = React.useRef(null);
+    const timeoutRef = useRef(null);
 
     const handleClick = (event) => {
         setCurrent(event.target.getAttribute("data") * 1);
@@ -110,7 +110,6 @@ export default function Slides() {
                         <div data={index} className={`${classes.control} ${index === current ? classes.activeControl : ''}`} onClick={handleClick}></div>
                     )
                 }
-
             </div>
         </div>
     );
