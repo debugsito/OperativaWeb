@@ -1,11 +1,3 @@
-/* .ourProcessSlides .Carousel-indicators-44 button.MuiButtonBase-root.MuiIconButton-root.Carousel-indicator-45.MuiIconButton-sizeSmall {
-  color: white;
-  padding: 0.8rem;
-}
-
-.ourProcessSlides .Carousel-indicators-44 button.MuiButtonBase-root.MuiIconButton-root.Carousel-indicator-45.Carousel-active-47.MuiIconButton-sizeSmall{
-  color:#00F0CA
-} */
 
 .slide__containerText{
   line-height: 1rem;
@@ -22,4 +14,16 @@
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
   font-size: 1.7rem;
+}
+
+/* slides.js */
+
+.slide {
+  opacity: 0;
+  transition-duration: 1s ease;
+}
+
+.slide.active {
+  opacity: 1;
+  transition-duration: 1s;
 }
