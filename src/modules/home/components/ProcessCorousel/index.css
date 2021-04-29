@@ -23,3 +23,13 @@
   font-weight: 300;
   font-size: 1.7rem;
 }
+
+.slide {
+  opacity: 0;
+  transition-duration: 1s ease;
+}
+
+.slide.active {
+  opacity: 1;
+  transition-duration: 1s;
+}

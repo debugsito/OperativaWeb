@@ -1,6 +1,7 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core'
 import ListSlides from "./ListSlides";
+import Slides from "./Slides";
 import './index.css'
 
 const useStyles = makeStyles(theme => ({
@@ -42,7 +43,8 @@ export default function ProcessCorousel(props) {
 
     return (
         <div className={classes.root}>
-            <ListSlides />
+            <Slides />
+            {/* <ListSlides /> */}
             {/* <div className={classes.sliderControls}>
                 <a href="#slide-1"></a>
                 <a href="#slide-2"></a>
