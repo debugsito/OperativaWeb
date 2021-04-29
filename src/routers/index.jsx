@@ -15,10 +15,10 @@ import { Navigation } from "../modules/shared/components";
 const AppRouter = () => {
   return (
     <BrowserRouter>
-      {/* <Navigation> */}
+      <Navigation>
         <ScrollToTopRouter />
         <Route to={OperativaModule.moduleRouter.pathBase} component={OperativaModule.moduleRouter.componentRouter} />
-      {/* </Navigation> */}
+      </Navigation>
     </BrowserRouter>
   );
 };

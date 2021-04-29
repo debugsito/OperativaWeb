@@ -6,6 +6,7 @@ import HomeRoutes from './HomeRoutes';
 
 //Pages
 import Home from '../pages/Home';
+import Error from '../pages/Error';
 
 //PrivateRoute
 import PrivateRoute from '../../../routers/PrivateRoute';

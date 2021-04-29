@@ -20,19 +20,21 @@ import Error from "../home/pages/Error";
 const RouterOperativa = () => {
     // Get session and user
     const initRoute = SessionRoutes().initRoute;
-
+    console.log("entre a router Operativa")
     return (
         <>
             <Switch>
                 <Route exact path={HomeRoutes} component={HomeRouter} />
-                <Navigation>
-                    <Route exact path={AuthRoutes} component={AuthRouter} />
-                    <Route exact path={DashboardRoutes} component={DashboardRouter} />
-                    <Route exact path={AdminRoutes} component={AdminRouter} />
-                    <Route exact path={ApplicantRoutes} component={ApplicantRouter} />
+                <Route exact path={AuthRoutes} component={AuthRouter} />
+                <Route exact path={DashboardRoutes} component={DashboardRouter} />
+                <Route exact path={AdminRoutes} component={AdminRouter} />
+                <Route exact path={ApplicantRoutes} component={ApplicantRouter} />
+                {
+                    initRoute !== "/" ?
+                    <Redirect to={initRoute} /> :
                     <Route path="*" component={Error} />
-                </Navigation>
-                <Redirect to={"initRoute"} />
+                }
+                
             </Switch>
         </>
     );
