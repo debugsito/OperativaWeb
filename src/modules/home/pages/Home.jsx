@@ -8,9 +8,9 @@ const Home = () => {
         <>
             <SectionHeader />
             <SectionAbout />
-            <SectionOurProcess />
+            {/* <SectionOurProcess /> */}
             <SectionStatistic />
-            <SectionOurPartners />
+            {/* <SectionOurPartners /> */}
             <SectionContact />
         </>
         
