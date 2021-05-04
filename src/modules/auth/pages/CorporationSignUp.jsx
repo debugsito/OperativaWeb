@@ -1,25 +1,13 @@
 import React, { useState } from 'react';
 import { Grid, Typography } from '@material-ui/core';
 import { Link } from '../../shared/components';
-import { RepresentativeForm, CompanyForm, RegistrationCompleted } from '../components';
+import {CorporationForm, RegistrationCompleted } from '../components';
 
 export default function CompanySignUp({history}) {
-
-    const [isRepresentativeFormComplete, setIsRepresentativeFormComplete] = useState(false)
     const [isRegisterCompleted, setIsRegisterCompleted] = useState(false)
-    const [representativeFormData, setRepresentativeFormData] = useState(null)
-
-    const goNextForm = (values) => {
-        setRepresentativeFormData(values)
-        setIsRepresentativeFormComplete(true);
-    }
 
     const handleRegisterCompleted = () => {
         setIsRegisterCompleted(true)
-    }
-
-    const goToPreviousForm = () => {
-        setIsRepresentativeFormComplete(false)
     }
 
     return (
@@ -43,17 +31,9 @@ export default function CompanySignUp({history}) {
                                     <Link href="#" onClick={() => history.push("/iniciar-sesion")} underline="always">inicia sesión.</Link>
                                 </Typography>
                             </Grid>
-                            {
-                                isRepresentativeFormComplete ?
-                                    <CompanyForm 
-                                        handleRegisterCompleted={handleRegisterCompleted}
-                                        goToPreviousForm={goToPreviousForm}
-                                        representativeFormData={representativeFormData}
-                                    /> :
-                                    <RepresentativeForm
-                                        goNextForm={goNextForm}
-                                    />
-                            }
+                            <CorporationForm 
+                                handleRegisterCompleted={handleRegisterCompleted}
+                            />
                         </Grid>
                     </Grid>
                 </Grid>

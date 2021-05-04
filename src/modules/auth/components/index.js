@@ -3,6 +3,7 @@ export { default as TermsAndConditionModalEnterprise } from './TermsAndCondition
 export { default as RegistrationCompleted } from './RegistrationCompleted';
 export { default as CompanyForm } from './CompanyForm';
 export { default as RepresentativeForm } from './RepresentativeForm';
+export { default as CorporationForm } from './CorporationForm';
 export { default as ApplicantPersonalDataForm } from './ApplicantPersonalDataForm';
 export { default as ApplicantContactInformationForm } from './ApplicantContactInformationForm';
 export { default as ApplicantEducationForm } from './ApplicantEducationForm';

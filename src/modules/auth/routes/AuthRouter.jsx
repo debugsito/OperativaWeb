@@ -8,7 +8,7 @@ import AuthRoutes from './AuthRoutes';
 import AccountType from '../pages/AccountType';
 import SignIn from '../pages/SignIn';
 import ApplicantSignUp from '../pages/ApplicantSignUp';
-import CompanySignUp from "../pages/CompanySignUp";
+import CorporationSignUp from "../pages/CorporationSignUp";
 import ApplicantHome from "../pages/ApplicantHome";
 import ApplicantProfile from '../pages/ApplicantProfile';
 import RecoverPassword from '../pages/RecoverPassword';
@@ -36,12 +36,12 @@ const MyAccountRouter = () => {
                     exact
                     needAccountType
                     path={AuthRoutes[3]}
-                    component={CompanySignUp} />
+                    component={CorporationSignUp} />
                 <PrivateRoute
                     exact
                     needAccountType
                     path={AuthRoutes[4]}
-                    component={CompanySignUp} />
+                    component={CorporationSignUp} />
                 <PrivateRoute
                     exact
                     needSession
