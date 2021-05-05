@@ -7,7 +7,8 @@ const AuthRoutes = [
     '/postulante/inicio',
     '/postulante/perfil',
     '/recuperar-contraseña',
-    '/new-password'
+    '/new-password',
+    '/terminos-y-condiciones-operativa',
 ];
 
 export default AuthRoutes;

@@ -13,6 +13,9 @@ import ApplicantHome from "../pages/ApplicantHome";
 import ApplicantProfile from '../pages/ApplicantProfile';
 import RecoverPassword from '../pages/RecoverPassword';
 import NewPassword from '../pages/NewPassword';
+import TermsAndCodition from "../pages/TermsAndCodition";
+
+//Private router
 import PrivateRoute from '../../../routers/PrivateRoute';
 
 const MyAccountRouter = () => {
@@ -62,6 +65,10 @@ const MyAccountRouter = () => {
                     exact
                     path={AuthRoutes[8]}
                     component={NewPassword} />
+                <PrivateRoute
+                    exact
+                    path={AuthRoutes[9]}
+                    component={TermsAndCodition} />
             </Switch>
         </>
     );

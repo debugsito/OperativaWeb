@@ -6,6 +6,7 @@ import { Autocomplete, Button, Checkbox, Link, TextInput, Select } from '../../.
 import { FormControl, FormHelperText, Grid, IconButton, MenuItem, Typography } from '@material-ui/core';
 
 import { useForm } from "../../../hooks";
+import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { onlyNumbers, isRuc, isPhone } from "../../../shared/libs/validators";
 
@@ -25,7 +26,8 @@ const initialValues = {
 export default function CorporationDataForm({ handleRegisterCompleted, representativeFormData, goToPreviousForm }) {
     const { auth: { accountType }, utils: { items } } = useSelector(state => state);
     const dispatch = useDispatch();
-    const [showTermsAndConditionModal, setShowTermsAndConditionModal] = useState(false);
+    const history = useHistory()
+    // const [showTermsAndConditionModal, setShowTermsAndConditionModal] = useState(false);
     const [userError, setUserError] = useState(null);
 
     const validate = (fieldValues = values) => {
@@ -67,7 +69,8 @@ export default function CorporationDataForm({ handleRegisterCompleted, represent
 
     const openTermsAndConditionModal = (event) => {
         event.preventDefault();
-        setShowTermsAndConditionModal(true);
+        history.push("/terminos-y-condiciones-operativa")
+        // setShowTermsAndConditionModal(true);
     }
 
     const handleClickAccept = async () => {
@@ -220,7 +223,7 @@ export default function CorporationDataForm({ handleRegisterCompleted, represent
             </Grid>
 
 
-            <TermsAndConditionModalEnterprise open={showTermsAndConditionModal} handleClose={() => setShowTermsAndConditionModal(false)} />
+            {/* <TermsAndConditionModalEnterprise open={showTermsAndConditionModal} handleClose={() => setShowTermsAndConditionModal(false)} /> */}
         </>
     )
 }

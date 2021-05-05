@@ -10,4 +10,7 @@ export { default as ApplicantEducationForm } from './ApplicantEducationForm';
 export { default as ApplicantWorkExperienceForm } from './ApplicantWorkExperienceForm';
 export { default as ApplicantAreasOfInterestForm } from './ApplicantAreasOfInterestForm';
 export { default as RequestRecoverSent } from './RequestRecoverSent';
+
+export { default as TermsAndCondition } from './TermsAndCondition';
+
 // export { default as ApplicantPublicationDataTable } from './ApplicantPublicationDataTable'
