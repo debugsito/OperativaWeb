@@ -24,7 +24,15 @@ const getDocumentsType = () => {
             dispatch(setDocumentsType(response.data));
             dispatch(setError(null));
         } catch (error) {
-            dispatch(setError(error.response.data.message));
+            if (!error.response) {
+                dispatch(setError("Ha ocurrido un error interno."));
+            } else {
+                if (error.response.status === 401) {
+                    dispatch(setError(error.response.data.message));
+                } else {
+                    dispatch(setError("Ha ocurrido un error interno."));
+                };
+            }
         }
     };
 };
@@ -41,7 +49,15 @@ const getCivilStatuses = () => {
             dispatch(setCivilStatuses(response.data));
             dispatch(setError(null));
         } catch (error) {
-            dispatch(setError(error.response.data.message));
+            if (!error.response) {
+                dispatch(setError("Ha ocurrido un error interno."));
+            } else {
+                if (error.response.status === 401) {
+                    dispatch(setError(error.response.data.message));
+                } else {
+                    dispatch(setError("Ha ocurrido un error interno."));
+                };
+            }
         }
     };
 };
@@ -58,7 +74,15 @@ const getDepartments = () => {
             dispatch(setDepartments(response.data.departments));
             dispatch(setError(null));
         } catch (error) {
-            dispatch(setError(error.response.data.message));
+            if (!error.response) {
+                dispatch(setError("Ha ocurrido un error interno."));
+            } else {
+                if (error.response.status === 401) {
+                    dispatch(setError(error.response.data.message));
+                } else {
+                    dispatch(setError("Ha ocurrido un error interno."));
+                };
+            }
         }
     };
 };
@@ -75,7 +99,15 @@ const getProvinces = () => {
             dispatch(setProvinces(response.data.provinces));
             dispatch(setError(null));
         } catch (error) {
-            dispatch(setError(error.response.data.message));
+            if (!error.response) {
+                dispatch(setError("Ha ocurrido un error interno."));
+            } else {
+                if (error.response.status === 401) {
+                    dispatch(setError(error.response.data.message));
+                } else {
+                    dispatch(setError("Ha ocurrido un error interno."));
+                };
+            }
         }
     };
 };
@@ -108,7 +140,15 @@ const getDistrictsLima = () => {
             dispatch(setDistrictsLima(response.data.districts));
             dispatch(setError(null));
         } catch (error) {
-            dispatch(setError(error.response.data.message));
+            if (!error.response) {
+                dispatch(setError("Ha ocurrido un error interno."));
+            } else {
+                if (error.response.status === 401) {
+                    dispatch(setError(error.response.data.message));
+                } else {
+                    dispatch(setError("Ha ocurrido un error interno."));
+                };
+            }
         }
     };
 };
@@ -124,7 +164,15 @@ const getDistrictsByText = (body) => {
             dispatch(setDistrictsByText(response.data.districts));
             dispatch(setError(null));
         } catch (error) {
-            dispatch(setError(error.response.data.message));
+            if (!error.response) {
+                dispatch(setError("Ha ocurrido un error interno."));
+            } else {
+                if (error.response.status === 401) {
+                    dispatch(setError(error.response.data.message));
+                } else {
+                    dispatch(setError("Ha ocurrido un error interno."));
+                };
+            }
         }
     };
 };
@@ -141,7 +189,15 @@ const getAcademicLevels = () => {
             dispatch(setAcademicLevels(response.data));
             dispatch(setError(null));
         } catch (error) {
-            dispatch(setError(error.response.data.message));
+            if (!error.response) {
+                dispatch(setError("Ha ocurrido un error interno."));
+            } else {
+                if (error.response.status === 401) {
+                    dispatch(setError(error.response.data.message));
+                } else {
+                    dispatch(setError("Ha ocurrido un error interno."));
+                };
+            }
         }
     };
 };
@@ -158,7 +214,15 @@ const getSpecialties = () => {
             dispatch(setSpecialties(response.data.fields));
             dispatch(setError(null));
         } catch (error) {
-            dispatch(setError(error.response.data.message));
+            if (!error.response) {
+                dispatch(setError("Ha ocurrido un error interno."));
+            } else {
+                if (error.response.status === 401) {
+                    dispatch(setError(error.response.data.message));
+                } else {
+                    dispatch(setError("Ha ocurrido un error interno."));
+                };
+            }
         }
     };
 };
@@ -175,7 +239,15 @@ const getGender = () => {
             dispatch(setGender(response.data));
             dispatch(setError(null));
         } catch (error) {
-            dispatch(setError(error.response.data.message));
+            if (!error.response) {
+                dispatch(setError("Ha ocurrido un error interno."));
+            } else {
+                if (error.response.status === 401) {
+                    dispatch(setError(error.response.data.message));
+                } else {
+                    dispatch(setError("Ha ocurrido un error interno."));
+                };
+            }
         }
     };
 };
@@ -192,7 +264,15 @@ const getProviders = () => {
             dispatch(setProviders(response.data));
             dispatch(setError(null));
         } catch (error) {
-            dispatch(setError(error.response.data.message));
+            if (!error.response) {
+                dispatch(setError("Ha ocurrido un error interno."));
+            } else {
+                if (error.response.status === 401) {
+                    dispatch(setError(error.response.data.message));
+                } else {
+                    dispatch(setError("Ha ocurrido un error interno."));
+                };
+            }
         }
     };
 };
@@ -209,7 +289,15 @@ const getJobLevels = () => {
             dispatch(setJobLevels(response.data));
             dispatch(setError(null));
         } catch (error) {
-            dispatch(setError(error.response.data.message));
+            if (!error.response) {
+                dispatch(setError("Ha ocurrido un error interno."));
+            } else {
+                if (error.response.status === 401) {
+                    dispatch(setError(error.response.data.message));
+                } else {
+                    dispatch(setError("Ha ocurrido un error interno."));
+                };
+            }
         }
     };
 };
@@ -226,7 +314,15 @@ const getJobRoles = () => {
             dispatch(setJobRoles(response.data));
             dispatch(setError(null));
         } catch (error) {
-            dispatch(setError(error.response.data.message));
+            if (!error.response) {
+                dispatch(setError("Ha ocurrido un error interno."));
+            } else {
+                if (error.response.status === 401) {
+                    dispatch(setError(error.response.data.message));
+                } else {
+                    dispatch(setError("Ha ocurrido un error interno."));
+                };
+            }
         }
     };
 };
@@ -243,7 +339,15 @@ const getAreas = () => {
             dispatch(setAreas(response.data));
             dispatch(setError(null));
         } catch (error) {
-            dispatch(setError(error.response.data.message));
+            if (!error.response) {
+                dispatch(setError("Ha ocurrido un error interno."));
+            } else {
+                if (error.response.status === 401) {
+                    dispatch(setError(error.response.data.message));
+                } else {
+                    dispatch(setError("Ha ocurrido un error interno."));
+                };
+            }
         }
     };
 };
@@ -260,7 +364,15 @@ const getItems = () => {
             dispatch(setItems(response.data.rubros));
             dispatch(setError(null));
         } catch (error) {
-            dispatch(setError(error.response.data.message));
+            if (!error.response) {
+                dispatch(setError("Ha ocurrido un error interno."));
+            } else {
+                if (error.response.status === 401) {
+                    dispatch(setError(error.response.data.message));
+                } else {
+                    dispatch(setError("Ha ocurrido un error interno."));
+                };
+            }
         }
     };
 };
@@ -277,7 +389,15 @@ const getWithdrawalReasons = () => {
             dispatch(setWithdrawalReasons(response.data));
             dispatch(setError(null));
         } catch (error) {
-            dispatch(setError(error.response.data.message));
+            if (!error.response) {
+                dispatch(setError("Ha ocurrido un error interno."));
+            } else {
+                if (error.response.status === 401) {
+                    dispatch(setError(error.response.data.message));
+                } else {
+                    dispatch(setError("Ha ocurrido un error interno."));
+                };
+            }
         }
     };
 };
@@ -294,7 +414,15 @@ const getAllPeriods = () => {
             dispatch(setPeriods(response.data.periods));
             dispatch(setError(null));
         } catch (error) {
-            dispatch(setError(error.response.data.message));
+            if (!error.response) {
+                dispatch(setError("Ha ocurrido un error interno."));
+            } else {
+                if (error.response.status === 401) {
+                    dispatch(setError(error.response.data.message));
+                } else {
+                    dispatch(setError("Ha ocurrido un error interno."));
+                };
+            }
         }
     }
 }
@@ -311,7 +439,15 @@ const getItemsOp = () => {
             dispatch(setItemsOp(response.data.rubros));
             dispatch(setError(null));
         } catch (error) {
-            dispatch(setError(error.response.data.message));
+            if (!error.response) {
+                dispatch(setError("Ha ocurrido un error interno."));
+            } else {
+                if (error.response.status === 401) {
+                    dispatch(setError(error.response.data.message));
+                } else {
+                    dispatch(setError("Ha ocurrido un error interno."));
+                };
+            }
         }
     }
 }

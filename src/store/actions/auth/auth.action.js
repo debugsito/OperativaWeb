@@ -14,6 +14,11 @@ export const setUserError = (payload) => ({
     payload
 });
 
+export const setCorporationData = (payload) => ({
+    type: authType.SET_CORPORATION_DATA,
+    payload
+});
+
 export const clearSignUp = () => ({
     type: authType.CLEAR_SIGN_UP
 });

@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from 'react'
-import { Divider, FormControl, FormHelperText, Grid, InputLabel, MenuItem, Select, Typography } from '@material-ui/core';
+import React from 'react'
+import { Grid, Typography } from '@material-ui/core';
 import { Button, TextInput } from '../../../shared/components';
 import { useForm } from "../../../hooks";
 import { useHistory } from "react-router-dom"
 import { isEmailCorporate } from '../../../shared/libs/validators';
+
+import { useDispatch } from "react-redux";
+import { setCorporationData } from "../../../../store/actions/auth/auth.action";
 
 const initialValues = {
     first_name: '',
@@ -14,7 +17,7 @@ const initialValues = {
 }
 
 export default function RepresentativeDataForm({ goNextForm }) {
-
+    const dispatch = useDispatch()
     const history = useHistory();
 
     const validate = (fieldValues = values) => {
@@ -50,6 +53,7 @@ export default function RepresentativeDataForm({ goNextForm }) {
 
     const handleClickButtonNext = () => {
         if (!disabledButtonState) {
+            setCorporationData(values)
             goNextForm(values);
         } else {
             validate()

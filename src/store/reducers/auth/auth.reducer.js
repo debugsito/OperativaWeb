@@ -12,6 +12,20 @@ const initialState = {
         },
         token: ''
     },
+    corporationData: {
+        first_name: '',
+        last_name: '',
+        email: '',
+        cargo_input: '',
+        area_input: '',
+
+        razon_social: '',
+        document_number: '',
+        phone: '',
+        interest_rubro_id: null,
+        termsAndCondition: false,
+        district_id: null
+    },
     applicantSignUp: null,
     error: false,
     accountType: '',
@@ -21,6 +35,11 @@ const initialState = {
 
 const accountTypeReducer = (state = initialState, action) => {
     switch (action.type) {
+        case authType.SET_CORPORATION_DATA:
+            return {
+                ...state,
+                corporationData: action.payload,
+            };
         case authType.SIGN_UP:
             return {
                 ...state,
