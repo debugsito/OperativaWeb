@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 
 import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, Box, Grid, Link, Tab, Tabs, Typography } from '@material-ui/core';
-import { TermsAndCondition } from "../components";
+import { TermsAndCondition, PrivacyPolicies, CookesPolicy } from "../components";
 import "../styles/TermsAndConditionPage.css"
 
 const useStyles = makeStyles((theme) => ({
@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
         position:'fixed',
         width:'100%',
         backgroundColor:'#F7F7F7',
-        paddingTop:'10px'
+        paddingTop:'2%'
     },
     rootAppbar: {
         flexGrow: 1,
@@ -92,7 +92,7 @@ export default function TermsAndCodition() {
                                     textColorPrimary:classes.textColorPrimary,
                                     selected:classes.selected
                                 }}
-                                label="POLITICAS DE PRIVACIDAD" {...a11yProps(1)}
+                                label="POLÍTICAS DE PRIVACIDAD" {...a11yProps(1)}
                             />
                             <Tab
                                 classes={{
@@ -100,7 +100,7 @@ export default function TermsAndCodition() {
                                     textColorPrimary:classes.textColorPrimary,
                                     selected:classes.selected
                                 }}
-                                label="POLITICA DE COOKIES" {...a11yProps(2)}
+                                label="POLÍTICA DE COOKIES" {...a11yProps(2)}
                             />
                         </Tabs>
                     </AppBar>
@@ -114,10 +114,10 @@ export default function TermsAndCodition() {
                         <TermsAndCondition />
                     </TabPanel>
                     <TabPanel value={value} index={1}>
-                        Item Two
+                        <PrivacyPolicies />
                     </TabPanel>
                     <TabPanel value={value} index={2}>
-                        Item Three
+                        <CookesPolicy />
                     </TabPanel>
                 </div>
             </Grid>

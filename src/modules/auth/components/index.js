@@ -12,5 +12,7 @@ export { default as ApplicantAreasOfInterestForm } from './ApplicantAreasOfInter
 export { default as RequestRecoverSent } from './RequestRecoverSent';
 
 export { default as TermsAndCondition } from './TermsAndCondition';
+export { default as PrivacyPolicies } from './PrivacyPolicies';
+export { default as CookesPolicy } from './CookesPolicy';
 
 // export { default as ApplicantPublicationDataTable } from './ApplicantPublicationDataTable'
