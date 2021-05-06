@@ -9,7 +9,6 @@ import CloseIcon from '@material-ui/icons/Close';
 
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 import { Button, Checkbox, Link, TextInput } from '../../shared/components';
-import { TermsAndConditionModal } from '../components';
 
 import { isEmail } from '../../shared/libs/validators';
 import { setUserError, applicantSignUp } from '../../../store/actions/auth/auth.action';
@@ -32,7 +31,6 @@ const SignUp = ({ history }) => {
     const [repeatPassword, setRepeatPassword] = useState(initialValue);
     const [termsAndCondition, setTermsAndCondition] = useState(initialValue);
 
-    const [showTermsAndConditionModal, setShowTermsAndConditionModal] = useState(false);
 
     useEffect(() => {
         setHasError(error)
@@ -58,9 +56,9 @@ const SignUp = ({ history }) => {
         history.push('/iniciar-sesion')
     }
 
-    const openTermsAndConditionModal = (event) => {
+    const goTermsAndConditionPage = (event) => {
         event.preventDefault();
-        setShowTermsAndConditionModal(true);
+        history.push("/terminos-y-condiciones-operativa")
     }
 
     const handleRegister = () => {
@@ -130,11 +128,6 @@ const SignUp = ({ history }) => {
         }
 
         setTermsAndCondition({ ...termsAndCondition, checked: _termsAndCondition, error, helperText });
-    }
-
-    const handleAcceptTermsAndCondition = () => {
-        validateTermsAndCondition(true);
-        setShowTermsAndConditionModal(false);
     }
 
     const goBack = () => history.goBack()
@@ -235,7 +228,7 @@ const SignUp = ({ history }) => {
                                     label={
                                         <Typography variant="body2" component="p">
                                             Acepto los&nbsp;
-                                        <Link onClick={openTermsAndConditionModal} underline="always">términos y condiciones</Link>
+                                        <Link onClick={goTermsAndConditionPage} underline="always">Términos y condiciones y la Política de privacidad</Link>
                                         </Typography>
                                     }
                                     checked={termsAndCondition.checked}
@@ -257,7 +250,6 @@ const SignUp = ({ history }) => {
                     </Grid>
                 </Grid>
             </Grid>
-            <TermsAndConditionModal open={showTermsAndConditionModal} handleClose={() => setShowTermsAndConditionModal(false)} handleAccept={handleAcceptTermsAndCondition} />
         </>
     )
 }
