@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Accordion, AccordionDetails, AccordionSummary, Grid, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
@@ -13,9 +14,20 @@ import { ApplicantContactInformationForm, ApplicantEducationForm, ApplicantPerso
 import { service_ApplicantProfile } from '../../../store/services';
 import { setUser, signOut } from '../../../store/actions/auth/auth.action';
 
+const useStyle = makeStyles(theme => ({
+    expandIcon:{
+        color: "var(--paragraphColor)",
+        '&$expanded':{
+            transform: "rotate(360deg)"
+        },
+    },
+    expanded:{},
+}))
+
 const ApplicantProfile = ({ history }) => {
-    const { user } = useSelector(state => state?.auth);
     const dispatch = useDispatch();
+    const classes = useStyle()
+    const { user } = useSelector(state => state?.auth);
 
     const [step, setStep] = useState(1)
     const [personalData, setPersonalData] = useState()
@@ -120,7 +132,15 @@ const ApplicantProfile = ({ history }) => {
         dispatch(setUser({ ...user, account: { ...user.account, [property]: value } }))
     };
 
-    const expandIcon = (validation, selectedStep) => (validation ? <CheckCircleIcon style={{ color: "var(--paragraphColor)" }} /> : (step === selectedStep ? <ExpandLessIcon style={{ color: "var(--secondaryButtonColor)" }} /> : <ChevronRightIcon style={{ color: "var(--paragraphColor)" }} />))
+    const expandIcon = (validation, selectedStep) => (
+        validation ? 
+            <CheckCircleIcon /> : 
+            (
+                step === selectedStep ? 
+                <ExpandLessIcon style={{ color: "var(--secondaryButtonColor)" }} /> : 
+                <ChevronRightIcon style={{ color: "var(--paragraphColor)" }} />
+            )
+        )
 
     return (
         <Grid container justify="center" alignItems="center" spacing={2} style={{ padding: 20 }}>
@@ -145,8 +165,12 @@ const ApplicantProfile = ({ history }) => {
                     <Grid item xs={12} md={12} lg={12}>
                         <Accordion expanded={step === 1} onChange={(event, expanded) => personalData && setStep(expanded ? 1 : 0)}>
                             <AccordionSummary
-                                expandIcon={expandIcon(personalData, 1)}
+                                 classes={{
+                                    expanded: classes.expanded,
+                                    expandIcon:classes.expandIcon,
+                                }}
                                 aria-controls="panel1a-content"
+                                expandIcon={expandIcon(personalData, 1)}
                                 id="panel1a-header"
                             >
                                 <Typography className="applicant-profile__accordion-header" variant="button" gutterBottom>
@@ -160,6 +184,10 @@ const ApplicantProfile = ({ history }) => {
                         </Accordion>
                         <Accordion expanded={step === 2} onChange={(event, expanded) => contactInformation && setStep(expanded ? 2 : 0)}>
                             <AccordionSummary
+                                classes={{
+                                    expanded: classes.expanded,
+                                    expandIcon:classes.expandIcon,
+                                }}
                                 expandIcon={expandIcon(contactInformation, 2)}
                                 aria-controls="panel2a-content"
                                 id="panel2a-header"
@@ -175,6 +203,10 @@ const ApplicantProfile = ({ history }) => {
                         </Accordion>
                         <Accordion expanded={step === 3} onChange={(event, expanded) => education && setStep(expanded ? 3 : 0)}>
                             <AccordionSummary
+                                classes={{
+                                    expanded: classes.expanded,
+                                    expandIcon:classes.expandIcon,
+                                }}
                                 expandIcon={expandIcon(education, 3)}
                                 aria-controls="panel2a-content"
                                 id="panel2a-header"
@@ -190,6 +222,10 @@ const ApplicantProfile = ({ history }) => {
                         </Accordion>
                         <Accordion expanded={step === 4} onChange={(event, expanded) => workExperience && setStep(expanded ? 4 : 0)}>
                             <AccordionSummary
+                                classes={{
+                                    expanded: classes.expanded,
+                                    expandIcon:classes.expandIcon,
+                                }}
                                 expandIcon={expandIcon(workExperience, 4)}
                                 aria-controls="panel2a-content"
                                 id="panel2a-header"
@@ -209,6 +245,10 @@ const ApplicantProfile = ({ history }) => {
                         </Accordion>
                         <Accordion expanded={step === 5} onChange={(event, expanded) => areasOfInterest && setStep(expanded ? 5 : 0)}>
                             <AccordionSummary
+                                classes={{
+                                    expanded: classes.expanded,
+                                    expandIcon:classes.expandIcon,
+                                }}
                                 expandIcon={expandIcon(areasOfInterest, 5)}
                                 aria-controls="panel2a-content"
                                 id="panel2a-header"
