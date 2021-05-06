@@ -5,8 +5,8 @@ import { useForm } from "../../../hooks";
 import { useHistory } from "react-router-dom"
 import { isEmailCorporate } from '../../../shared/libs/validators';
 
-import { useDispatch } from "react-redux";
-import { setCorporationData } from "../../../../store/actions/auth/auth.action";
+import { useDispatch, useSelector } from "react-redux";
+import { setReprensentativeData, setStepTwo } from "../../../../store/actions/auth/auth.action";
 
 const initialValues = {
     first_name: '',
@@ -17,8 +17,11 @@ const initialValues = {
 }
 
 export default function RepresentativeDataForm({ goNextForm }) {
-    const dispatch = useDispatch()
     const history = useHistory();
+    const dispatch = useDispatch()
+    const { corporationSignUp } = useSelector(state => state?.auth)
+
+    const defaultValues = Object.values(corporationSignUp.reprensentativeData).every(x => x !== "") ? corporationSignUp.reprensentativeData : initialValues
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
@@ -48,12 +51,13 @@ export default function RepresentativeDataForm({ goNextForm }) {
         setErrors,
         handleInputChange,
         disabledButtonState,
-    } = useForm(initialValues, true, validate);
+    } = useForm(defaultValues, true, validate);
 
 
     const handleClickButtonNext = () => {
         if (!disabledButtonState) {
-            setCorporationData(values)
+            dispatch(setReprensentativeData(values))
+            dispatch(setStepTwo(true))
             goNextForm(values);
         } else {
             validate()

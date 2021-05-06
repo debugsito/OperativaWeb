@@ -12,19 +12,23 @@ const initialState = {
         },
         token: ''
     },
-    corporationData: {
-        first_name: '',
-        last_name: '',
-        email: '',
-        cargo_input: '',
-        area_input: '',
-
-        razon_social: '',
-        document_number: '',
-        phone: '',
-        interest_rubro_id: null,
-        termsAndCondition: false,
-        district_id: null
+    corporationSignUp: {
+        stepTwo: false,
+        reprensentativeData: {
+            first_name: '',
+            last_name: '',
+            email: '',
+            cargo_input: '',
+            area_input: '',
+        },
+        corporationdata: {
+            razon_social: '',
+            document_number: '',
+            phone: '',
+            interest_rubro_id: '',
+            termsAndCondition: '',
+            district_id: ''
+        },
     },
     applicantSignUp: null,
     error: false,
@@ -35,10 +39,33 @@ const initialState = {
 
 const accountTypeReducer = (state = initialState, action) => {
     switch (action.type) {
+        case authType.SET_STEP:
+            return {
+                ...state,
+                corporationSignUp: {
+                    ...state.corporationSignUp,
+                    stepTwo: action.payload
+                },
+            };
         case authType.SET_CORPORATION_DATA:
             return {
                 ...state,
-                corporationData: action.payload,
+                corporationSignUp: {
+                    ...state.corporationSignUp,
+                    corporationdata: {
+                        ...action.payload
+                    },
+                },
+            };
+        case authType.SET_REPRENSENTATIVE_DATA:
+            return {
+                ...state,
+                corporationSignUp: {
+                    ...state.corporationSignUp,
+                    reprensentativeData: {
+                        ...action.payload
+                    },
+                },
             };
         case authType.SIGN_UP:
             return {

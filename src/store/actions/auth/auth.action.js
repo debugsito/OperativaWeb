@@ -19,6 +19,16 @@ export const setCorporationData = (payload) => ({
     payload
 });
 
+export const setReprensentativeData = (payload) => ({
+    type: authType.SET_REPRENSENTATIVE_DATA,
+    payload
+});
+
+export const setStepTwo = (payload) => ({
+    type: authType.SET_STEP,
+    payload
+});
+
 export const clearSignUp = () => ({
     type: authType.CLEAR_SIGN_UP
 });

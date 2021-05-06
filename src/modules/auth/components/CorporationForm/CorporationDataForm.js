@@ -13,6 +13,7 @@ import { onlyNumbers, isRuc, isPhone } from "../../../shared/libs/validators";
 import service_MunicipalitySignUp from "../../../../store/services/auth/municipalitySignUp.service";
 import service_CompanySignUp from "../../../../store/services/auth/companySignUp.service";
 import { actions_Utils } from '../../../../store/actions';
+import { setCorporationData } from '../../../../store/actions/auth/auth.action';
 
 const initialValues = {
     razon_social: '',
@@ -24,11 +25,13 @@ const initialValues = {
 }
 
 export default function CorporationDataForm({ handleRegisterCompleted, representativeFormData, goToPreviousForm }) {
-    const { auth: { accountType }, utils: { items } } = useSelector(state => state);
+    const { auth: { accountType, corporationSignUp }, utils: { items } } = useSelector(state => state);
     const dispatch = useDispatch();
     const history = useHistory()
     // const [showTermsAndConditionModal, setShowTermsAndConditionModal] = useState(false);
     const [userError, setUserError] = useState(null);
+
+    const defaultValues = corporationSignUp.stepTwo ? corporationSignUp.corporationdata : initialValues
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
@@ -60,7 +63,7 @@ export default function CorporationDataForm({ handleRegisterCompleted, represent
         setErrors,
         handleInputChange,
         disabledButtonState,
-    } = useForm(initialValues, true, validate);
+    } = useForm(defaultValues, true, validate);
 
     useEffect(() => {
         dispatch(actions_Utils.getItems())
@@ -69,6 +72,7 @@ export default function CorporationDataForm({ handleRegisterCompleted, represent
 
     const openTermsAndConditionModal = (event) => {
         event.preventDefault();
+        dispatch(setCorporationData(values))
         history.push("/terminos-y-condiciones-operativa")
         // setShowTermsAndConditionModal(true);
     }
