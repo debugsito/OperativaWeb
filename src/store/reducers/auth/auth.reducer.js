@@ -27,7 +27,7 @@ const initialState = {
             phone: '',
             interest_rubro_id: '',
             termsAndCondition: '',
-            district_id: ''
+            district_id: null
         },
     },
     applicantSignUp: null,

@@ -34,6 +34,7 @@ const useStyles = makeStyles((theme) => ({
     },
     //Style by Tabs container
     rootTabs:{
+        paddingBottom:'5px'
     },
     indicator: {
         [theme.breakpoints.down('sm')]: {
@@ -133,7 +134,7 @@ export default function TermsAndCodition() {
                 </Grid>
             </Grid>
             
-            <Grid item xs={10}>
+            <Grid item xs={11} md={10}>
                 <div className={classes.rootAppbar}>
                     <TabPanel value={value} index={0}>
                         <TermsAndCondition />

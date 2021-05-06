@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/AccountType.css'
 
 import { FormControl, FormControlLabel, FormLabel, Grid, RadioGroup, Typography } from '@material-ui/core';
 import { Button, Radio } from '../../shared/components';
 import { useDispatch } from 'react-redux';
-import { setAccountType } from '../../../store/actions/auth/auth.action';
+import { setAccountType,resetStore } from '../../../store/actions/auth/auth.action';
 
 const AccountType = ({ history }) => {
     const dispatch = useDispatch()
     const [type, setType] = useState({value: '', name: ''});
+
+    useEffect(() => {
+        dispatch(resetStore())
+    },[])
 
     const handleChange = (event) => {
         setType({

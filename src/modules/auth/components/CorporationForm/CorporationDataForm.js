@@ -79,7 +79,7 @@ export default function CorporationDataForm({ handleRegisterCompleted, represent
 
     const handleClickAccept = async () => {
         const body = {
-            ...representativeFormData,
+            ...corporationSignUp.reprensentativeData,
             ...values,
             interest_area_id: "2"//en DURO
         }
