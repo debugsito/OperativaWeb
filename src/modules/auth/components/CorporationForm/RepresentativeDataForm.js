@@ -16,7 +16,7 @@ const initialValues = {
     area_input: '',
 }
 
-export default function RepresentativeDataForm({ goNextForm }) {
+export default function RepresentativeDataForm() {
     const history = useHistory();
     const dispatch = useDispatch()
     const { corporationSignUp } = useSelector(state => state?.auth)
@@ -58,7 +58,6 @@ export default function RepresentativeDataForm({ goNextForm }) {
         if (!disabledButtonState) {
             dispatch(setReprensentativeData(values))
             dispatch(setStepTwo(true))
-            goNextForm(values);
         } else {
             validate()
             return

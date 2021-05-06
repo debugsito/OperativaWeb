@@ -25,7 +25,7 @@ const initialState = {
             razon_social: '',
             document_number: '',
             phone: '',
-            interest_rubro_id: '',
+            interest_rubro_id: null,
             termsAndCondition: '',
             district_id: null
         },

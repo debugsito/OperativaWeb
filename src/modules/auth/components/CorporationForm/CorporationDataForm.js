@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Alert } from '@material-ui/lab';
 import CloseIcon from '@material-ui/icons/Close';
-import { TermsAndConditionModalEnterprise } from '../../components';
 import { Autocomplete, Button, Checkbox, Link, TextInput, Select } from '../../../shared/components';
 import { FormControl, FormHelperText, Grid, IconButton, MenuItem, Typography } from '@material-ui/core';
 
@@ -21,14 +20,13 @@ const initialValues = {
     phone: '',
     interest_rubro_id: null,
     termsAndCondition: false,
-    district_id: null
+    district_id: null,
 }
 
-export default function CorporationDataForm({ handleRegisterCompleted, representativeFormData, goToPreviousForm }) {
+export default function CorporationDataForm({ handleRegisterCompleted, goToPreviousForm }) {
     const { auth: { accountType, corporationSignUp }, utils: { items } } = useSelector(state => state);
     const dispatch = useDispatch();
     const history = useHistory()
-    // const [showTermsAndConditionModal, setShowTermsAndConditionModal] = useState(false);
     const [userError, setUserError] = useState(null);
 
     const defaultValues = corporationSignUp.stepTwo ? corporationSignUp.corporationdata : initialValues
@@ -74,7 +72,6 @@ export default function CorporationDataForm({ handleRegisterCompleted, represent
         event.preventDefault();
         dispatch(setCorporationData(values))
         history.push("/terminos-y-condiciones-operativa")
-        // setShowTermsAndConditionModal(true);
     }
 
     const handleClickAccept = async () => {
@@ -84,7 +81,6 @@ export default function CorporationDataForm({ handleRegisterCompleted, represent
             interest_area_id: "2"//en DURO
         }
         if (!disabledButtonState) {
-
             try {
                 let response = accountType === "municipality" ? await service_MunicipalitySignUp(JSON.stringify(body)) : await service_CompanySignUp(JSON.stringify(body))
                 if (response.data) {
@@ -225,9 +221,6 @@ export default function CorporationDataForm({ handleRegisterCompleted, represent
                 <Button variant="outlined" size="large" onClick={goToPreviousForm}>regresar</Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <Button variant="contained" size="large" onClick={handleClickAccept} disabled={disabledButtonState}>Aceptar</Button>
             </Grid>
-
-
-            {/* <TermsAndConditionModalEnterprise open={showTermsAndConditionModal} handleClose={() => setShowTermsAndConditionModal(false)} /> */}
         </>
     )
 }

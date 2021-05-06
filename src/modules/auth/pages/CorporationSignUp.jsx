@@ -14,7 +14,7 @@ export default function CompanySignUp({history}) {
         //is Register completed? Show register completed <RegistrationCompleted />
         isRegisterCompleted ? <RegistrationCompleted /> :
             <>
-                <Grid container spacing={3}>
+                <Grid container>
                     <Grid item xs={12} md={6} lg={5} style={{ margin: "auto" }}>
                         <Grid container spacing={3} style={{ padding: "4rem" }}>
                             <Grid item xs={12} justify="center">
