@@ -15,18 +15,42 @@ const useStyles = makeStyles((theme) => ({
         position:'fixed',
         width:'100%',
         backgroundColor:'#F7F7F7',
-        paddingTop:'2%'
+        [theme.breakpoints.down('sm')]: {
+            paddingTop:'5%'
+        },
+        [theme.breakpoints.up('md')]: {
+            paddingTop:'2%'
+        },
     },
     rootAppbar: {
         flexGrow: 1,
         width: '100%',
-        marginTop:'10%',
+        [theme.breakpoints.down('sm')]: {
+            marginTop:'55%',
+        },
+        [theme.breakpoints.up('md')]: {
+            marginTop:'10%',
+        },
     },
+    //Style by Tabs container
     rootTabs:{
     },
     indicator: {
-        backgroundColor: "var(--primaryButtonColor)"
+        [theme.breakpoints.down('sm')]: {
+            backgroundColor: "#F7F7F7",
+        },
+        [theme.breakpoints.up('md')]: {
+            backgroundColor: "var(--primaryButtonColor)",
+        },
+        
     },
+    flexContainer:{
+        [theme.breakpoints.down('sm')]: {
+            flexDirection:'column',
+            alignItems:'flex-start'
+        },
+    },
+    //Fin Tabs
 
     // Estilos para Tab
     rootTab:{
@@ -68,7 +92,8 @@ export default function TermsAndCodition() {
                         <Tabs
                             classes={{
                                 root:classes.rootTabs,
-                                indicator: classes.indicator
+                                indicator: classes.indicator,
+                                flexContainer:classes.flexContainer
                             }}
                             value={value}
                             onChange={handleChange}
