@@ -15,5 +15,7 @@ const DashboardRoutes = [
     '/empresa/dashboard/ver-posicion',
     '/empresa/dashboard/cambiar-password',
     '/municipalidad/dashboard/cambiar-password',
+    '/empresa/dashboard/historial-de-publicaciones',
+    '/municipalidad/dashboard/historial-de-publicaciones',
 ];
 export default DashboardRoutes;

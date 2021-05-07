@@ -15,6 +15,7 @@ import Profile from '../pages/Profile';
 import showPositionDetail from '../pages/PositionDetails';
 import ChangePassword from '../pages/ChangePassword';
 import Users from '../pages/Users'; 
+import History from '../pages/History';
 // import Home from '../components/Home'; //cambiar a page
 
 const MyAccountRouter = () => {
@@ -101,6 +102,16 @@ const MyAccountRouter = () => {
                     exact
                     path={DashboardRoutes[15]}
                     component={ChangePassword} />
+                <PrivateRoute
+                    needSession
+                    exact
+                    path={DashboardRoutes[16]}
+                    component={History} />
+                <PrivateRoute
+                    needSession
+                    exact
+                    path={DashboardRoutes[17]}
+                    component={History} />
             </Switch>
         </>
     );
