@@ -136,7 +136,7 @@ export default function SectionHeader(props) {
                                 <h1 className={classes.titleLight}>inteligente de reclutamiento</h1>
                                 <div className={classes.contentButtons}>
                                     <div>
-                                        <ButtonHome onClick={() => history.push('/tipo-de-cuenta')}>Crea tu cuenta</ButtonHome>
+                                        <ButtonHome onClick={() => history.push('/tipo-de-cuenta')}>Regístrate</ButtonHome>
                                     </div>
                                     <div className={classes.marginLeft}>
                                         <ButtonHome onClick={() => history.push('/iniciar-sesion')}>Inicia sesión</ButtonHome>
@@ -173,7 +173,7 @@ export default function SectionHeader(props) {
                             <h1 className={classes.titleLightMovil}>inteligente de reclutamiento</h1>
                         </div>
                         <div className={classes.containerButtons}>
-                            <ButtonHome onClick={() => history.push('/tipo-de-cuenta')}>Crea tu cuenta</ButtonHome>
+                            <ButtonHome onClick={() => history.push('/tipo-de-cuenta')}>Regístrate</ButtonHome>
                             <ButtonHome onClick={() => history.push('/iniciar-sesion')}>Inicia sesión</ButtonHome>
                         </div>
                         <div className={classes.containerCardsMovil}>
