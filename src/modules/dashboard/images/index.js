@@ -8,3 +8,5 @@ export { default as folderIcon } from './folder.svg';
 export { default as registeredIcon } from './registered.svg';
 export { default as closeIcon } from './close.svg';
 export { default as showIcon } from './show.svg';
+export { default as downloadIcon } from './download.svg';
+export { default as republishIcon } from './republish.svg';

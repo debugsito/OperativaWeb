@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Container, Grid } from "@material-ui/core";
 
 import { Breadcrumbs, Button, DataGrid, LinearProgressWithDescription } from "../../shared/components";
@@ -6,6 +6,7 @@ import {HistoryTable} from "../components"
 import { SessionRoutes } from "../../shared/libs/sessionRoutes";
 
 import "../styles/TermsAndCondition.css"
+import { downloadIcon } from "../images";
 
 const data = [
     {
@@ -51,8 +52,6 @@ const columns = [
         return (
             <div className="statistics__container">
                 <LinearProgressWithDescription title="180" description="Postulantes alcanzados" value={80}/>
-                <LinearProgressWithDescription title="180" description="Postulantes alcanzados" value={80}/>
-                <LinearProgressWithDescription title="180" description="Postulantes alcanzados" value={80}/>
             </div>
         )
     }},
@@ -64,9 +63,13 @@ const columns = [
 ];
 
 export default function History() {
-
+    const [selectedRow, setSelectedRow] = useState([]);
     const initRoute = SessionRoutes().initRoute;
     const routes = [{ name: "HISTORIAL", to: `${initRoute}` }];
+
+    const handleEnableButton = (rowsSelected) => {
+        setSelectedRow(rowsSelected)
+    }
 
     return (
         <Container className="dashboard-container">
@@ -75,10 +78,18 @@ export default function History() {
                     <Breadcrumbs routes={routes} />
                 </Grid>
                 <Grid item xs={12}>
-                    <Button variant="contained" color="secondary" size="large">DESCARGA</Button>
+                    <Button 
+                        startIcon={<img src={downloadIcon} alt="descargar" />} 
+                        variant="contained" 
+                        color="secondary" 
+                        size="large" 
+                        disabled={!(selectedRow.length > 0)}
+                    >
+                        DESCARGA
+                    </Button>
                 </Grid>
                 <Grid item xs={12}>
-                    <HistoryTable />
+                    <HistoryTable handleEnableButtonDownload={handleEnableButton} />
                     {/* <DataGrid 
                         rows={data}
                         columns={columns}

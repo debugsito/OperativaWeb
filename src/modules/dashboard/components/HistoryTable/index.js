@@ -1,26 +1,17 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
 import { DateTime } from "luxon";
+import { makeStyles } from "@material-ui/core/styles";
+import { Grid, Table, TableBody, TableCell, TableContainer, TablePagination, TableRow, Paper } from "@material-ui/core";
 
-import clsx from "clsx";
-
-import { lighten, makeStyles } from "@material-ui/core/styles";
-
-import { Grid, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TableSortLabel, Toolbar, Paper, Tooltip, IconButton } from "@material-ui/core";
-import { Button, Checkbox, Chip, Typography, LinearProgressWithDescription } from "../../../shared/components";
 import { useDispatch, useSelector } from "react-redux";
-import { archivePublication, deletePublication, getPublicationsInfo, setPublicationSelected } from "../../../../store/actions/dashboard/dashboard.action";
-import { SessionRoutes } from "../../../shared/libs/sessionRoutes";
 import { useHistory } from "react-router-dom";
-import {
-    calendarIcon,
-    registeredIcon,
-    editIcon,
-    fileIcon,
-    folderIcon,
-    deleteIcon,
-    showIcon,
-} from "../../images";
+
+import EnhancedTableHead from "./EnhancedTableHead"
+import EnhancedTableToolbar from "./EnhancedTableToolbar"
+import { SessionRoutes } from "../../../shared/libs/sessionRoutes";
+import { Button, Checkbox, Typography, LinearProgressWithDescription } from "../../../shared/components";
+import { getPublicationsInfo } from "../../../../store/actions/dashboard/dashboard.action";
+import { fileIcon, showIcon, republishIcon } from "../../images";
 
 function createData(
     title,
@@ -39,7 +30,7 @@ const historialData = [
         id: 1,
         title: "Motorizado mensajero",
         publicationdate: "2021-03-04T00:18:48.000Z",
-        createdBy: "Jean Carlo",
+        createdBy: "Juan Jose Silupu Maza",
         items: "Motorizado y courier",
         postulantScope: 180,
         postulantProgress: 120,
@@ -93,165 +84,6 @@ function stableSort(array = [], comparator) {
     return stabilizedThis.map((el) => el[0]);
 }
 
-const headCells = [
-    {
-        id: "title",
-        numeric: false,
-        disablePadding: true,
-        label: "Título de la publicación",
-    },
-    {
-        id: "publicationDate",
-        numeric: false,
-        disablePadding: false,
-        label: "Fecha de publicación",
-    },
-    {
-        id: "createBy",
-        numeric: false,
-        disablePadding: false,
-        label: "Creado por",
-    },
-    { id: "items", numeric: false, disablePadding: false, label: "Rubro del puesto" },
-    { id: "statitics", numeric: false, disablePadding: false, label: "Interacción de la publicación" },
-    { id: "action", numeric: false, disablePadding: false, label: "Acciones" },
-];
-
-function EnhancedTableHead(props) {
-    const {
-        classes,
-        onSelectAllClick,
-        order,
-        orderBy,
-        numSelected,
-        rowCount,
-        onRequestSort,
-    } = props;
-    const createSortHandler = (property) => (event) => {
-        onRequestSort(event, property);
-    };
-
-    return (
-        <TableHead>
-            <TableRow>
-                <TableCell padding="checkbox" size="small" align="center">
-                    <Checkbox
-                        indeterminate={numSelected > 0 && numSelected < rowCount}
-                        checked={rowCount > 0 && numSelected === rowCount}
-                        onChange={onSelectAllClick}
-                        inputProps={{ "aria-label": "select all desserts" }}
-                    />
-                </TableCell>
-                {headCells.map((headCell) => (
-                    <TableCell
-                        key={headCell.id}
-                        align={headCell.numeric ? "right" : "left"}
-                        padding={headCell.disablePadding ? "none" : "default"}
-                        sortDirection={orderBy === headCell.id ? order : false}
-                        style={{ width: 100 }}
-                    >
-                        <TableSortLabel
-                            active={orderBy === headCell.id}
-                            direction={orderBy === headCell.id ? order : "asc"}
-                            onClick={createSortHandler(headCell.id)}
-                        >
-                            <span className={classes.headCellLabel}>{headCell.label}</span>
-                            {orderBy === headCell.id ? (
-                                <span className={classes.visuallyHidden}>
-                                    {order === "desc" ? "sorted descending" : "sorted ascending"}
-                                </span>
-                            ) : null}
-                        </TableSortLabel>
-                    </TableCell>
-                ))}
-            </TableRow>
-        </TableHead>
-    );
-}
-
-EnhancedTableHead.propTypes = {
-    classes: PropTypes.object.isRequired,
-    numSelected: PropTypes.number.isRequired,
-    onRequestSort: PropTypes.func.isRequired,
-    onSelectAllClick: PropTypes.func.isRequired,
-    order: PropTypes.oneOf(["asc", "desc"]).isRequired,
-    orderBy: PropTypes.string.isRequired,
-    rowCount: PropTypes.number.isRequired,
-};
-
-const useToolbarStyles = makeStyles((theme) => ({
-    root: {
-        paddingLeft: theme.spacing(2),
-        paddingRight: theme.spacing(1),
-    },
-    highlight:
-        theme.palette.type === "light"
-            ? {
-                color: "#FFFFFF !important",
-                backgroundColor: "var(--secondaryButtonColor)",
-            }
-            : {
-                color: "#FFFFFF !important",
-                backgroundColor: "var(--secondaryButtonColor)",
-            },
-    title: {
-        flex: "1 1 100%",
-    },
-}));
-
-const EnhancedTableToolbar = (props) => {
-    const classes = useToolbarStyles();
-    const { numSelected, selected } = props;
-    const dispatch = useDispatch();
-
-    const deletePublicationFn = () => {
-        selected.map(id => dispatch(deletePublication({ id })));
-    }
-
-    const archivePublicationFn = () => {
-        selected.map(id => dispatch(archivePublication({ id })));
-    }
-
-    return (
-        <Toolbar
-            className={clsx(classes.root, {
-                [classes.highlight]: numSelected > 0,
-            })}
-        >
-            <Tooltip title="Delete">
-                <IconButton aria-label="delete" onClick={deletePublicationFn}>
-                    <img src={deleteIcon} alt="Eliminar" />
-                    <Typography
-                        className={classes.title}
-                        color="inherit"
-                        variant="subtitle1"
-                        component="div"
-                    >
-                        Eliminar
-                    </Typography>
-                </IconButton>
-            </Tooltip>
-            <Tooltip title="Archive">
-                <IconButton aria-label="archive" onClick={archivePublicationFn}>
-                    <img src={folderIcon} alt="Archivar" />
-                    <Typography
-                        className={classes.title}
-                        color="inherit"
-                        variant="subtitle1"
-                        component="div"
-                    >
-                        Archivar
-                    </Typography>
-                </IconButton>
-            </Tooltip>
-        </Toolbar>
-    );
-};
-
-EnhancedTableToolbar.propTypes = {
-    numSelected: PropTypes.number.isRequired,
-};
-
 const useStyles = makeStyles((theme) => ({
     root: {
         width: "100%",
@@ -280,7 +112,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function OpenPositionsTable() {
+export default function HistoryTable({ handleEnableButtonDownload }) {
     const classes = useStyles();
     const [order, setOrder] = useState("asc");
     const [orderBy, setOrderBy] = useState("");
@@ -309,12 +141,12 @@ export default function OpenPositionsTable() {
                 history.statitics,
                 [
                     {
-                        id: "REPUBLICAR",
-                        name: "REPUBLICAR",
+                        id: "show",
+                        name: "VER",
                     },
                     {
-                        id: "VER",
-                        name: "VER",
+                        id: "republish",
+                        name: "REPUBLICAR",
                     },
                 ],
                 history
@@ -335,12 +167,14 @@ export default function OpenPositionsTable() {
         if (event.target.checked) {
             const newSelecteds = publications.map((n) => n.data.id);
             setSelected(newSelecteds);
+            handleEnableButtonDownload(newSelecteds)
             return;
         }
         setSelected([]);
+        handleEnableButtonDownload([])
     };
 
-    const handleClick = (event, id) => {
+    const handleClickSelectedRow = (event, id) => {
         const selectedIndex = selected.indexOf(id);
         let newSelected = [];
 
@@ -356,7 +190,7 @@ export default function OpenPositionsTable() {
                 selected.slice(selectedIndex + 1)
             );
         }
-
+        handleEnableButtonDownload(newSelected)
         setSelected(newSelected);
     };
 
@@ -383,17 +217,13 @@ export default function OpenPositionsTable() {
         console.log("hice click")
     }
 
-    const goToPostulants = (publication) => {
-        console.log("hice click")
-    };
-
     return (
         <div className="open-positions-table">
             <div className={classes.root}>
                 <Paper className={classes.paper}>
-                    {selected?.length > 0 && (
+                    {/* {selected?.length > 0 && (
                         <EnhancedTableToolbar numSelected={selected?.length} selected={selected} />
-                    )}
+                    )} */}
                     <TableContainer>
                         <Table
                             className={classes.table}
@@ -428,7 +258,7 @@ export default function OpenPositionsTable() {
                                             >
                                                 <TableCell padding="checkbox" size="small" align="center">
                                                     <Checkbox
-                                                        onClick={(event) => handleClick(event, row.data.id)}
+                                                        onClick={(event) => handleClickSelectedRow(event, row.data.id)}
                                                         checked={isItemSelected}
                                                         inputProps={{ "aria-labelledby": labelId }}
                                                     />
@@ -481,31 +311,35 @@ export default function OpenPositionsTable() {
                                                 >
                                                     <Grid container spacing={0}>
                                                         <Grid item xs={12}>
-                                                            <LinearProgressWithDescription title="180" description="Postulantes alcanzados" value={100} color="celeste" />
+                                                            <LinearProgressWithDescription title={row.data.postulantScope} description="Postulantes alcanzados" value={100} color="celeste" />
                                                         </Grid>
                                                         <Grid item xs={12}>
-                                                            <LinearProgressWithDescription title="120" description="Postulantes alcanzados" value={70} color="naranja" />
+                                                            <LinearProgressWithDescription title={row.data.postulantProgress} description="Postulantes en progreso" value={70} color="naranja" />
                                                         </Grid>
                                                         <Grid item xs={12}>
-                                                            <LinearProgressWithDescription title="70" description="Postulantes alcanzados" value={40} color="verde" />
+                                                            <LinearProgressWithDescription title={row.data.postulantContract} description="Postulantes contratados" value={40} color="verde" />
                                                         </Grid>
                                                     </Grid>
                                                 </TableCell>
-                                                <TableCell align="left" style={{ display: "flex", flexDirection: "column", alignItems: "start" }}>
-                                                    {row.actions.map((action, index) => (
-                                                        <Button
-                                                            onClick={(event) => executeAction(event, action.id, row.data)}
-                                                            key={index}
-                                                            color=""
-                                                            startIcon={
-                                                                <img
-                                                                    src={action.id === "edit" ? editIcon : (action.id === "archive" ? fileIcon : showIcon)}
-                                                                    alt="Calendario"
-                                                                />}
-                                                        >
-                                                            {action.name}
-                                                        </Button>
-                                                    ))}
+                                                <TableCell align="left">
+                                                    <Grid container>
+                                                        {row.actions.map((action, index) => (
+                                                            <Grid item xs={12}>
+                                                                <Button
+                                                                    onClick={(event) => executeAction(event, action.id, row.data)}
+                                                                    key={index}
+                                                                    color=""
+                                                                    startIcon={
+                                                                        <img
+                                                                            src={action.id === "show" ? showIcon : (action.id === "republish" ? republishIcon : fileIcon)}
+                                                                            alt="Calendario"
+                                                                        />}
+                                                                >
+                                                                    {action.name}
+                                                                </Button>
+                                                            </Grid>
+                                                        ))}
+                                                    </Grid>
                                                 </TableCell>
                                             </TableRow>
                                         );

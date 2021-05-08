@@ -26,8 +26,8 @@ const useStyles = makeStyles({
     root: {
         display: "flex",
         flexDirection: "column",
-        marginTop: "0.5rem",
-        marginBottom: "0.5rem",
+        marginTop: "0.25rem",
+        marginBottom: "0.25rem",
         // width: "150px",
         '& h4': {
             marginTop: 0,
@@ -43,6 +43,7 @@ const useStyles = makeStyles({
 
 function CustomLinearProgress(props) {
     const classes = useStyles()
+    console.log("props", props)
 
     return (
         <div className={classes.root}>
