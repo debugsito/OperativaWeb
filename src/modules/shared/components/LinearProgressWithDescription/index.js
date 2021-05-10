@@ -17,8 +17,9 @@ const BorderLinearProgress = withStyles((theme) => ({
                 (props.color === "naranja" ? "#FBC547" :
                     (props.color === "verde" ? "#B8EA71" : props.color)
                 )
-            ) : "#1a90ff",
-    }),
+            ) : "#111",
+    })
+    ,
 })
 )(LinearProgress);
 
@@ -43,13 +44,12 @@ const useStyles = makeStyles({
 
 function CustomLinearProgress(props) {
     const classes = useStyles()
-    console.log("props", props)
 
     return (
         <div className={classes.root}>
             <h4>{props.title}</h4>
             <p>{props.description}</p>
-            <BorderLinearProgress variant="determinate" value={props.value} color={props.color} />
+            <BorderLinearProgress variant="determinate" value={props.value} color={props.colorBar} />
         </div>
     )
 }
@@ -60,5 +60,5 @@ CustomLinearProgress.propTypes = {
     title: PropTypes.any.isRequired,
     description: PropTypes.any.isRequired,
     value: PropTypes.any.isRequired,
-    color: PropTypes.PropTypes.oneOf(["celeste", "naranja", "verde"]).isRequired
+    colorBar: PropTypes.PropTypes.oneOf(["celeste", "naranja", "verde"]).isRequired
 };

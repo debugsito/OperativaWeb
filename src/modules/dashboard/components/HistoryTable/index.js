@@ -86,7 +86,6 @@ function getComparator(order, orderBy) {
 }
 
 function stableSort(array = [], comparator) {
-    console.log("array", array)
     const stabilizedThis = array.map((el, index) => [el, index]);
     stabilizedThis.sort((a, b) => {
         const order = comparator(a[0], b[0]);
@@ -134,11 +133,12 @@ export default function HistoryTable({ handleEnableButtonDownload, searchInput }
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [publications, setPublications] = useState([createData("", DateTime.utc().toFormat("DDD"), "", "", "", [], { id: "" })]);
     const [dataPublications, setDataPublications] = useState([])
+    console.log("render")
 
     // const { publicationsInfo } = useSelector(state => state?.dashboard);
     // const dispatch = useDispatch();
-    // const history = useHistory();
-    // const initRoute = SessionRoutes().initRoute;
+    const history = useHistory();
+    const initRoute = SessionRoutes().initRoute;
 
     useEffect(() => {
         const rows = historialData.map(history => (
@@ -235,7 +235,8 @@ export default function HistoryTable({ handleEnableButtonDownload, searchInput }
 
     const executeAction = (event, id, publication) => {
         event.preventDefault();
-        console.log("hice click")
+        if (id === "show") history.push(`${initRoute}/historial-de-publicaciones`);
+        if (id === "republish") history.push(`${initRoute}/republicar-posicion`);
     }
 
     return (
@@ -265,7 +266,6 @@ export default function HistoryTable({ handleEnableButtonDownload, searchInput }
                                 {stableSort(publications, getComparator(order, orderBy))
                                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map((row, index) => {
-                                        console.log("row", row)
                                         const isItemSelected = isSelected(row.data.id);
                                         const labelId = `enhanced-table-checkbox-${index}`;
                                         return (
@@ -333,20 +333,20 @@ export default function HistoryTable({ handleEnableButtonDownload, searchInput }
                                                 >
                                                     <Grid container spacing={0}>
                                                         <Grid item xs={12}>
-                                                            <LinearProgressWithDescription title={row.data.postulantScope} description="Postulantes alcanzados" value={100} color="celeste" />
+                                                            <LinearProgressWithDescription title={row.data.postulantScope} description="Postulantes alcanzados" value={100} colorBar="celeste" />
                                                         </Grid>
                                                         <Grid item xs={12}>
-                                                            <LinearProgressWithDescription title={row.data.postulantProgress} description="Postulantes en progreso" value={70} color="naranja" />
+                                                            <LinearProgressWithDescription title={row.data.postulantProgress} description="Postulantes en progreso" value={70} colorBar="naranja" />
                                                         </Grid>
                                                         <Grid item xs={12}>
-                                                            <LinearProgressWithDescription title={row.data.postulantContract} description="Postulantes contratados" value={40} color="verde" />
+                                                            <LinearProgressWithDescription title={row.data.postulantContract} description="Postulantes contratados" value={40} colorBar="verde" />
                                                         </Grid>
                                                     </Grid>
                                                 </TableCell>
                                                 <TableCell align="left">
                                                     <Grid container>
                                                         {row.actions.map((action, index) => (
-                                                            <Grid item xs={12}>
+                                                            <Grid item xs={12} key={index}>
                                                                 <Button
                                                                     onClick={(event) => executeAction(event, action.id, row.data)}
                                                                     key={index}
