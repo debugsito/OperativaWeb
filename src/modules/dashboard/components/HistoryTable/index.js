@@ -12,6 +12,7 @@ import { SessionRoutes } from "../../../shared/libs/sessionRoutes";
 import { Button, Checkbox, Typography, LinearProgressWithDescription } from "../../../shared/components";
 import { getPublicationsInfo } from "../../../../store/actions/dashboard/dashboard.action";
 import { fileIcon, showIcon, republishIcon } from "../../images";
+import { FormatListNumberedRtlOutlined } from "@material-ui/icons";
 
 function createData(
     title,
@@ -56,6 +57,16 @@ const historialData = [
         postulantProgress: 120,
         postulantContract: 70
     },
+    {
+        id: 4,
+        title: "Call Center",
+        publicationdate: "2021-03-04T00:18:48.000Z",
+        createdBy: "Jean Carlo",
+        items: "Motorizado y courier",
+        postulantScope: 150,
+        postulantProgress: 120,
+        postulantContract: 70
+    },
 ]
 
 function descendingComparator(a, b, orderBy) {
@@ -75,6 +86,7 @@ function getComparator(order, orderBy) {
 }
 
 function stableSort(array = [], comparator) {
+    console.log("array", array)
     const stabilizedThis = array.map((el, index) => [el, index]);
     stabilizedThis.sort((a, b) => {
         const order = comparator(a[0], b[0]);
@@ -112,7 +124,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function HistoryTable({ handleEnableButtonDownload }) {
+export default function HistoryTable({ handleEnableButtonDownload, searchInput }) {
     const classes = useStyles();
     const [order, setOrder] = useState("asc");
     const [orderBy, setOrderBy] = useState("");
@@ -121,15 +133,12 @@ export default function HistoryTable({ handleEnableButtonDownload }) {
     const [dense, setDense] = useState(false);
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [publications, setPublications] = useState([createData("", DateTime.utc().toFormat("DDD"), "", "", "", [], { id: "" })]);
+    const [dataPublications, setDataPublications] = useState([])
 
-    const { publicationsInfo } = useSelector(state => state?.dashboard);
-    const dispatch = useDispatch();
-    const history = useHistory();
-    const initRoute = SessionRoutes().initRoute;
-
-    useEffect(() => {
-        dispatch(getPublicationsInfo())
-    }, [])
+    // const { publicationsInfo } = useSelector(state => state?.dashboard);
+    // const dispatch = useDispatch();
+    // const history = useHistory();
+    // const initRoute = SessionRoutes().initRoute;
 
     useEffect(() => {
         const rows = historialData.map(history => (
@@ -153,9 +162,21 @@ export default function HistoryTable({ handleEnableButtonDownload }) {
             )
         ))
         setPublications(rows)
-    }, [publicationsInfo])
+        setDataPublications(rows)
+    }, [])
 
-
+    useEffect(() => {
+        if (searchInput !== null) {
+            if (searchInput !== "") {
+                const filteredPublications = publications.filter(data => {
+                    return data.title.toLowerCase().includes(searchInput.toLowerCase())
+                })
+                setPublications(filteredPublications)
+            } else {
+                setPublications(dataPublications)
+            }
+        }
+    }, [searchInput])
 
     const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === "asc";
@@ -244,6 +265,7 @@ export default function HistoryTable({ handleEnableButtonDownload }) {
                                 {stableSort(publications, getComparator(order, orderBy))
                                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map((row, index) => {
+                                        console.log("row", row)
                                         const isItemSelected = isSelected(row.data.id);
                                         const labelId = `enhanced-table-checkbox-${index}`;
                                         return (
