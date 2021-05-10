@@ -235,7 +235,7 @@ export default function HistoryTable({ handleEnableButtonDownload, searchInput }
 
     const executeAction = (event, id, publication) => {
         event.preventDefault();
-        if (id === "show") history.push(`${initRoute}/historial-de-publicaciones`);
+        if (id === "show") history.push(`${initRoute}/ver-detalles-de-posicion`);
         if (id === "republish") history.push(`${initRoute}/republicar-posicion`);
     }
 

@@ -1,10 +1,11 @@
 import React from 'react'
 import { makeStyles } from "@material-ui/core/styles";
-import { Container, Divider, Grid, Paper, Typography } from "@material-ui/core";
+import { Container, Grid, Paper } from "@material-ui/core";
 
-import { Breadcrumbs, Button, TextInput } from "../../shared/components";
+import { Breadcrumbs, Button} from "../../shared/components";
 import { ShowPosition } from "../components";
 import { SessionRoutes } from "../../shared/libs/sessionRoutes";
+import { downloadBlackIcon } from "../images";
 
 const useStyles = makeStyles( theme => ({
     paper:{
@@ -12,10 +13,10 @@ const useStyles = makeStyles( theme => ({
     }
 }))
 
-export default function Republish(props) {
+export default function ShowPositionPage() {
     const classes = useStyles()
     const initRoute = SessionRoutes().initRoute;
-    const routes = [{ name: "HISTORIAL", to: `${initRoute}/historial-de-publicaciones` }, { name: "REPUBLICAR", to: `${initRoute}/republicar-posicion` }];
+    const routes = [{ name: "HISTORIAL", to: `${initRoute}/historial-de-publicaciones` }, { name: "VER", to: `${initRoute}/ver-posicion` }];
 
     return (
         <Container className="dashboard-container">
@@ -27,7 +28,14 @@ export default function Republish(props) {
                     <Grid container direction="column" justify="center" alignItems="center">
                         <Grid item xs={10}>
                             <Paper className={classes.paper}>
-                                <ShowPosition />
+                                <ShowPosition 
+                                    button={
+                                        <Button color="black" onClick={() => console.log("descargando...")}>
+                                            <img src={downloadBlackIcon} />
+                                            <span className="dashboard-title">Descargar</span>
+                                        </Button>
+                                    }
+                                />
                             </Paper>
                         </Grid>
                     </Grid>

@@ -1,10 +1,7 @@
 import React from 'react'
 import { Divider, Grid, Typography } from "@material-ui/core";
 
-import { Button } from "../../../shared/components";
-import { editIcon } from "../../images";
-
-export default function Index(props) {
+export default function Index({ button }) {
 
 
     return (
@@ -17,10 +14,7 @@ export default function Index(props) {
                         </Typography>
                     </Grid>
                     <Grid item xs={2}>
-                        <Button onClick={() => console.log("edit")}>
-                            <img src={editIcon} />
-                            <span className="dashboard-title">EDITAR</span>
-                        </Button>
+                        {button}
                     </Grid>
                 </Grid>
                 <Divider />
