@@ -43,7 +43,8 @@ export function MenuRoutes(props) {
             case 'admin':
                 list = [
                     // { name: "Inicio", to: `${route}` },
-                    { name: "Solicitudes", to: `${route}/solicitudes` }
+                    { name: "Solicitudes", to: `${route}/solicitudes` },
+                    { name: "Facturacion", to: `${route}/facturacion` },
                 ]
                 hasDashboard = true
                 break;
