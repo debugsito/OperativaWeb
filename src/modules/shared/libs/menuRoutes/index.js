@@ -18,6 +18,7 @@ export function MenuRoutes(props) {
                     { name: "Inicio", to: `${route}` },
                     { name: "Mi perfil", to: `${route}/perfil` },
                     { name: "Usuarios", to: `${route}/usuarios` },
+                    { name: "Historial", to: `${route}/historial-de-publicaciones` },
                     {
                         name: "Configuración", to: "", nestedList: [
                             { name: "Cambiar password", to: `${route}/cambiar-password` }
