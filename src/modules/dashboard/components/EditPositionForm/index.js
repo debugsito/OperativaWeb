@@ -383,7 +383,7 @@ export default function Index({ handleExitForm }) {
             </Grid>
             <Grid item xs={8} style={{ display: 'flex', justifyContent: 'center', margin: "auto" }} >
                 <Button variant="outlined" size="large" onClick={() => setOpenConfirmationModal(true)}>CANCELAR</Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <Button variant="contained" size="large" onClick={() => setOpenModal(true)} disabled={disabledButtonState}>GUARDAR</Button>
+                    <Button variant="contained" size="large" onClick={() => setOpenModal(true)} disabled={disabledButtonState}>REPUBLICAR</Button>
             </Grid>
 
             <Modal open={openModal} handleCloseModal={() => setOpenModal(false)}>
