@@ -7,6 +7,10 @@
   background: var(--primaryButtonColor) !important;
 }
 
+.MuiButton-containedSecondary:hover {
+  background: #bb0511 !important;
+}
+
 .MuiButton-containedSecondary.Mui-disabled {
   background: #ebebeb !important;
   color: #aaaaaa !important;
