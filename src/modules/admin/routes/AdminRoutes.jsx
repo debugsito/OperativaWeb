@@ -1,2 +1,2 @@
-const AdminRoutes = ['/admin/solicitudes','/admin/facturacion'];
+const AdminRoutes = ['/admin','/admin/facturacion'];
 export default AdminRoutes;
