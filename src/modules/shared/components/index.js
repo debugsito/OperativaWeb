@@ -19,3 +19,4 @@ export { default as FabLights } from './FabLights';
 export { default as TextInputPassword } from './TextInputPassword';
 export { default as Snackbars } from './Snackbars';
 export { default as LinearProgressWithDescription } from './LinearProgressWithDescription';
+export { default as LinearProgressMunicipality } from './LinearProgressMunicipality';

@@ -89,7 +89,7 @@ export default function TermsAndCodition() {
                         </Link>
                     </Grid>
                     <Grid item xs={10}>
-                    <AppBar position="static" color="default" className="Appbar-terms-and-condition">
+                    <AppBar position="static" color="default" className="Appbar-tabs">
                         <Tabs
                             classes={{
                                 root:classes.rootTabs,
