@@ -44,7 +44,7 @@ export function MenuRoutes(props) {
                 list = [
                     // { name: "Inicio", to: `${route}` },
                     { name: "Solicitudes", to: `${route}` },
-                    { name: "Facturacion", to: `${route}/facturacion` },
+                    { name: "Facturación", to: `${route}/facturacion` },
                 ]
                 hasDashboard = true
                 break;
