@@ -15,8 +15,14 @@ const denyAccount = async (body) => {
     return response;
 }
 
+const getReport = async (params) => {
+    const response = await api.get(`/account/users/report/${params.startDate}/${params.finishDate}`);
+    return response;
+}
+
 export default {
     getAccounts,
     acceptAccount,
-    denyAccount
+    denyAccount,
+    getReport
 }

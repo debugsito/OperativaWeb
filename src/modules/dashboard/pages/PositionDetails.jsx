@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import { Container,Divider, Grid, Typography } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
-import { DateTime } from "luxon";
+// import { DateTime } from "luxon";
 import * as moment from 'moment';
 import { useDispatch, useSelector } from "react-redux";
 import { actions_Utils } from "../../../store/actions";
@@ -54,6 +54,7 @@ export default function ShowPositionDetail(props) {
                                     </Typography>
                                     <Typography variant="body1" component="h6">
                                         {moment(publicationSelected.to_date).utc().format("LL")}
+                                        {/* {DateTime.fromISO(publicationSelected.to_date).toFormat("DDD")} */}
                                     </Typography>
                                 </Grid>
                                 <Grid item xs={6}>
