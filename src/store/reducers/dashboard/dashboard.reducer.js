@@ -7,6 +7,7 @@ const initialState = {
         registrados: 0,
         contratados: 0,
     },
+    postHistory: [],
     error: "",
     publicationsInfo: {},
     publicationSelected: "",
@@ -72,6 +73,16 @@ const dashboardReducer = (state = initialState, action) => {
             return {
                 ...state,
                 applicantProfile: action.payload,
+            };
+        case dashboardType.SET_HISTORY_OF_PUBLICATIONS:
+            return {
+                ...state,
+                postHistory: action.payload,
+            };
+        case dashboardType.SET_ERROR_FETCH:
+            return {
+                ...state,
+                error: action.payload,
             };
         default:
             return state;

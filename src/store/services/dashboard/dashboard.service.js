@@ -41,18 +41,24 @@ const getApplicantProfile = async (params) => {
     return response;
 }
 
-const selectApplicant =async (body,publication_id) =>{
-    const response = await api.post(`/publication/${publication_id}/selectApplicant`,body);
+const selectApplicant = async (body, publication_id) => {
+    const response = await api.post(`/publication/${publication_id}/selectApplicant`, body);
     return response;
 }
 
-const denyApplicant = async (body,publication_id) =>{
-    const response = await api.post(`/publication/${publication_id}/denyApplicant`,body);
+const denyApplicant = async (body, publication_id) => {
+    const response = await api.post(`/publication/${publication_id}/denyApplicant`, body);
     return response;
 }
 
-const hireApplicant = async (body,publication_id) =>{
-    const response = await api.post(`/publication/${publication_id}/hireApplicant`,body);
+const hireApplicant = async (body, publication_id) => {
+    const response = await api.post(`/publication/${publication_id}/hireApplicant`, body);
+    return response;
+}
+
+//Obtener historial de publicaciones
+const getHistory = async (params) => {
+    const response = await api.get(`/publications/history`);
     return response;
 }
 
@@ -68,5 +74,6 @@ export default {
     getApplicantProfile,
     selectApplicant,
     denyApplicant,
-    hireApplicant
+    hireApplicant,
+    getHistory
 }

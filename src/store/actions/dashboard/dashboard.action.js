@@ -35,6 +35,16 @@ export const setPublicationSelected = (payload) => ({
   payload
 });
 
+export const setHistory = (payload) => ({
+  type: dashboardType.SET_HISTORY_OF_PUBLICATIONS,
+  payload
+});
+
+export const setErrorFetch = (payload) => ({
+  type: dashboardType.SET_ERROR_FETCH,
+  payload
+});
+
 export const getJobsInfo = () => {
   return async (dispatch) => {
     try {

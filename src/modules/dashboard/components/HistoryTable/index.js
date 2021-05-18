@@ -7,67 +7,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import EnhancedTableHead from "./EnhancedTableHead"
-import EnhancedTableToolbar from "./EnhancedTableToolbar"
 import { SessionRoutes } from "../../../shared/libs/sessionRoutes";
 import { Button, Checkbox, Typography, LinearProgressWithDescription } from "../../../shared/components";
-import { getPublicationsInfo } from "../../../../store/actions/dashboard/dashboard.action";
+import { getHistory } from "../../../../store/actions/dashboard/dashboard.middleware";
+import { setPublicationSelected } from "../../../../store/actions/dashboard/dashboard.action";
 import { fileIcon, showIcon, republishIcon } from "../../images";
-import { FormatListNumberedRtlOutlined } from "@material-ui/icons";
 
 function createData(
     title,
     publicationDate,
     createBy,
-    items,
-    statitics,
+    rubro,
+    achieve,
+    hired,
+    inProgress,
     actions,
     data
 ) {
-    return { title, publicationDate, createBy, items, statitics, actions, data };
+    return { title, publicationDate, createBy, rubro, achieve, hired, inProgress, actions, data };
 }
-
-const historialData = [
-    {
-        id: 1,
-        title: "Motorizado mensajero",
-        publicationdate: "2021-03-04T00:18:48.000Z",
-        createdBy: "Juan Jose Silupu Maza",
-        items: "Motorizado y courier",
-        postulantScope: 180,
-        postulantProgress: 120,
-        postulantContract: 70
-    },
-    {
-        id: 2,
-        title: "Call Center",
-        publicationdate: "2021-05-06T00:18:48.000Z",
-        createdBy: "Jean Carlo",
-        items: "Motorizado y courier",
-        postulantScope: 170,
-        postulantProgress: 120,
-        postulantContract: 70
-    },
-    {
-        id: 3,
-        title: "Developer",
-        publicationdate: "2021-03-04T00:18:48.000Z",
-        createdBy: "Jean Carlo",
-        items: "Motorizado y courier",
-        postulantScope: 150,
-        postulantProgress: 120,
-        postulantContract: 70
-    },
-    {
-        id: 4,
-        title: "Call Center",
-        publicationdate: "2021-03-04T00:18:48.000Z",
-        createdBy: "Jean Carlo",
-        items: "Motorizado y courier",
-        postulantScope: 150,
-        postulantProgress: 120,
-        postulantContract: 70
-    },
-]
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -131,23 +89,28 @@ export default function HistoryTable({ handleEnableButtonDownload, searchInput }
     const [page, setPage] = useState(0);
     const [dense, setDense] = useState(false);
     const [rowsPerPage, setRowsPerPage] = useState(5);
-    const [publications, setPublications] = useState([createData("", DateTime.utc().toFormat("DDD"), "", "", "", [], { id: "" })]);
-    const [dataPublications, setDataPublications] = useState([])
-    console.log("render")
+    const [publications, setPublications] = useState([createData("", DateTime.utc().toFormat("DDD"), "", "", "", "", "", [], { id: "" })]);
+    const [dataPublications, setDataPublications] = useState([createData("", DateTime.utc().toFormat("DDD"), "", "", "", "", "", [], { id: "" })])
 
-    // const { publicationsInfo } = useSelector(state => state?.dashboard);
-    // const dispatch = useDispatch();
+    const { postHistory } = useSelector(state => state?.dashboard);
+    const dispatch = useDispatch();
     const history = useHistory();
     const initRoute = SessionRoutes().initRoute;
 
     useEffect(() => {
-        const rows = historialData.map(history => (
+        dispatch(getHistory())
+    }, [])
+
+    useEffect(() => {
+        const rows = postHistory?.map(post => (
             createData(
-                history.title,
-                DateTime.fromISO(history.publicationdate).toFormat("DDD"),
-                history.createdBy,
-                history.items,
-                history.statitics,
+                post.job_title,
+                DateTime.fromISO(post.createdAt).toFormat("DDD"),
+                post.account.user.fullname,
+                post.rubro.name,
+                post.alcanzados,
+                post.contratados,
+                post.en_progreso,
                 [
                     {
                         id: "show",
@@ -158,12 +121,13 @@ export default function HistoryTable({ handleEnableButtonDownload, searchInput }
                         name: "REPUBLICAR",
                     },
                 ],
-                history
+                post
             )
         ))
         setPublications(rows)
         setDataPublications(rows)
-    }, [])
+
+    }, [postHistory])
 
     useEffect(() => {
         if (searchInput !== null) {
@@ -177,6 +141,8 @@ export default function HistoryTable({ handleEnableButtonDownload, searchInput }
             }
         }
     }, [searchInput])
+
+
 
     const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === "asc";
@@ -235,6 +201,7 @@ export default function HistoryTable({ handleEnableButtonDownload, searchInput }
 
     const executeAction = (event, id, publication) => {
         event.preventDefault();
+        dispatch(setPublicationSelected(publication));
         if (id === "show") history.push(`${initRoute}/ver-detalles-de-posicion`);
         if (id === "republish") history.push(`${initRoute}/republicar-posicion`);
     }
@@ -322,7 +289,7 @@ export default function HistoryTable({ handleEnableButtonDownload, searchInput }
                                                     padding="none"
                                                 >
                                                     <Grid item xs={12}>
-                                                        <Typography variant="body1" component="span">{row.items}</Typography>
+                                                        <Typography variant="body1" component="span">{row.rubro}</Typography>
                                                     </Grid>
                                                 </TableCell>
                                                 <TableCell
@@ -333,13 +300,13 @@ export default function HistoryTable({ handleEnableButtonDownload, searchInput }
                                                 >
                                                     <Grid container spacing={0}>
                                                         <Grid item xs={12}>
-                                                            <LinearProgressWithDescription title={row.data.postulantScope} description="Postulantes alcanzados" value={100} colorBar="celeste" />
+                                                            <LinearProgressWithDescription title={row.achieve} description="Postulantes alcanzados" value={100} colorBar="celeste" />
                                                         </Grid>
                                                         <Grid item xs={12}>
-                                                            <LinearProgressWithDescription title={row.data.postulantProgress} description="Postulantes en progreso" value={70} colorBar="naranja" />
+                                                            <LinearProgressWithDescription title={row.inProgress} description="Postulantes en progreso" value={70} colorBar="naranja" />
                                                         </Grid>
                                                         <Grid item xs={12}>
-                                                            <LinearProgressWithDescription title={row.data.postulantContract} description="Postulantes contratados" value={40} colorBar="verde" />
+                                                            <LinearProgressWithDescription title={row.hired} description="Postulantes contratados" value={40} colorBar="verde" />
                                                         </Grid>
                                                     </Grid>
                                                 </TableCell>

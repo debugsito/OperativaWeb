@@ -1,8 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from "react-redux";
+import { DateTime } from "luxon";
 import { Divider, Grid, Typography } from "@material-ui/core";
 
-export default function Index({ button }) {
+import { actions_Utils } from "../../../../store/actions";
 
+export default function Index({ button }) {
+    const dispatch = useDispatch()
+    const { publicationSelected } = useSelector(state => state?.dashboard)
+
+    useEffect(() => {
+        dispatch(actions_Utils.getDepartments());
+        dispatch(actions_Utils.getProvinces());
+        dispatch(actions_Utils.getDistricts());
+        dispatch(actions_Utils.getItems());
+        dispatch(actions_Utils.getAllPeriods());
+    }, [])
 
     return (
         <Grid container spacing={3}>
@@ -10,7 +23,7 @@ export default function Index({ button }) {
                 <Grid container direction="row" justify="space-between">
                     <Grid item xs={6}>
                         <Typography variant="h6" component="h6">
-                            Motorizado
+                            {publicationSelected.job_title}
                         </Typography>
                     </Grid>
                     <Grid item xs={2}>
@@ -24,14 +37,14 @@ export default function Index({ button }) {
                     <strong>Creado por</strong>
                 </Typography>
                 <Typography variant="body1" component="h6">
-                    Marco Antonio Perez Diaz
+                    {publicationSelected.account.user.fullname}
                 </Typography>
                 <br />
                 <Typography variant="subtitle2" component="h6">
                     <strong>Fecha de publicación</strong>
                 </Typography>
                 <Typography variant="body1" component="h6">
-                    31/11/2020
+                    {DateTime.fromISO(publicationSelected.createdAt).toFormat("dd/LL/yyyy")}
                 </Typography>
                 <br />
 
@@ -39,7 +52,7 @@ export default function Index({ button }) {
                     <strong>Fecha de caducidad</strong>
                 </Typography>
                 <Typography variant="body1" component="h6">
-                    31/11/2020
+                    {DateTime.fromISO(publicationSelected.createdAt).toFormat("dd/LL/yyyy")}
                 </Typography>
                 <br />
 
