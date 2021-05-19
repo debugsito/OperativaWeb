@@ -1,6 +1,8 @@
 import React from 'react'
 import { makeStyles, Typography } from '@material-ui/core'
 
+const colors = ["#B8EA71", "#FBC547", "#731D88", "#8FA5DD", "#F96E6E", "#3F7DF6", "#D280BB", "#FFBE9D", "#78AD80", "#867789"]
+
 const useStyles = makeStyles({
     root: {
         width: "95%",
@@ -13,23 +15,23 @@ const useStyles = makeStyles({
         alignItems: "center"
     },
     bar: props => ({
-        borderRadius: 5,
-        backgroundColor: props.colorBar,
-        height: "20px",
+        backgroundColor: colors[props.index],
+        height: "30px",
         width: `calc((90% * ${props.value})/100)`,
         marginRight: "0.5rem",
         borderRadius: 0
-    }),
+    })
+    ,
 });
 
 export default function CustomLinearProgress(props) {
     const classes = useStyles(props)
     return (
-        <div className={classes.root}>
-            <Typography variant="body2">{props.name}</Typography>
+        <div className={classes.root} key={props.index}>
+            <Typography variant="body2">{props.name.toUpperCase()}</Typography>
             <div className={classes.containerBar}>
-                <div className={classes.bar} color={props.colorBar}></div>
-                <Typography variant="body2">{props.number}</Typography>
+                <div className={classes.bar}></div>
+                <Typography variant="body2">{props.total}</Typography>
             </div>
         </div>
     )

@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSelector } from "react-redux";
 import { makeStyles, Grid, Typography } from '@material-ui/core'
 // graficos
 import { LinearProgressMunicipality } from "../../../shared/components";
@@ -43,13 +44,14 @@ const useStyles = makeStyles(theme => ({
 }))
 export default function RegisteredApplicantsReport(props) {
     const classes = useStyles();
+    const { report } = useSelector(state => state?.admin)
 
     return (
         <div className={classes.root}>
             <CardReport title="TOTAL DE POSTULANTES REGISTRADOS">
                 <div className={classes.bodyOne}>
                     <div className={classes.box}>
-                        <Typography variant="h6">82 839</Typography>
+                        <Typography variant="h6">{report.postulantes}</Typography>
                         <Typography variant="h6">POSTULANTES</Typography>
                     </div>
                 </div>
@@ -57,90 +59,27 @@ export default function RegisteredApplicantsReport(props) {
             <CardReport title="POR QUE MEDIO SE ENTERÓ">
                 <div className={classes.bodyTwo}>
                     <Grid container>
-                        <Grid item xs={6}>
-                            <Typography variant="body2">Municipalidad</Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Typography variant="body2">80300</Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Typography variant="body2">ONG</Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Typography variant="body2">250</Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Typography variant="body2">Instituo</Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Typography variant="body2">200</Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Typography variant="body2">Facebook</Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Typography variant="body2">100</Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Typography variant="body2">Instagram</Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Typography variant="body2">150</Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Typography variant="body2">Periódico</Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Typography variant="body2">4</Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Typography variant="body2">Mailing</Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Typography variant="body2">200</Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Typography variant="body2">TV</Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Typography variant="body2">103</Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Typography variant="body2">Radio</Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Typography variant="body2">300</Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Typography variant="body2">En bolsa de trabajo</Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Typography variant="body2">0</Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Typography variant="body2">Feria laboral</Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Typography variant="body2">20</Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Typography variant="body2">Referido</Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Typography variant="body2">10</Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Typography variant="body2">Otro</Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Typography variant="body2">50</Typography>
-                        </Grid>
+                        {report?.medio?.map(medio => (
+                            <>
+                                <Grid item xs={6}>
+                                    <Typography variant="body2">{medio.provedor}</Typography>
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <Typography variant="body2">{medio.count}</Typography>
+                                </Grid>
+                            </>
+                        ))}
+
                         <br />
                         <Grid item xs={6}>
                             <Typography variant="body2"><b>Total</b></Typography>
                         </Grid>
                         <Grid item xs={6}>
-                            <Typography variant="body2"><b>82 839</b></Typography>
+                            <Typography variant="body2"><b>
+                                {
+                                    report?.medio?.reduce((acc, current) => acc + current.count, 0)
+                                }
+                            </b></Typography>
                         </Grid>
                     </Grid>
                 </div>
@@ -148,30 +87,18 @@ export default function RegisteredApplicantsReport(props) {
             <CardReport title="TOP 10 DE REGISTRADOS EN MUNICIPALIDADES">
                 <div className={classes.bodyThree}>
                     {
-                        dataMunicipality.map(data =>
-                        (<LinearProgressMunicipality
-                            name={data.name}
-                            value={data.value}
-                            colorBar={data.color}
-                            number={data.total}
-                        />)
-                        )
+                        report?.munis?.map((data, index) => (
+                            <LinearProgressMunicipality
+                                index={index}
+                                name={data.razon_social}
+                                value={data.cantidad}
+                                // colorBar={data.color}
+                                total={data.cantidad}
+                            />
+                        ))
                     }
                 </div>
             </CardReport>
         </div>
     )
 }
-
-const dataMunicipality = [
-    { name: "Muni Lima", total: 5000, value: 100, color: "#B8EA71" },
-    { name: "Muni Callao", total: 4000, value: 95, color: "#FBC547" },
-    { name: "Muni SJL", total: 3000, value: 90, color: "#731D88" },
-    { name: "Muni Lurin", total: 2000, value: 80, color: "#8FA5DD" },
-    { name: "Muni A", total: 1000, value: 70, color: "#F96E6E" },
-    { name: "Muni B", total: 900, value: 60, color: "#3F7DF6" },
-    { name: "Muni C", total: 800, value: 50, color: "#D280BB" },
-    { name: "Muni D", total: 700, value: 40, color: "#FFBE9D" },
-    { name: "Muni E", total: 600, value: 30, color: "#78AD80" },
-    { name: "Municipalidad distrital de leoncio prado", total: 500, value: 20, color: "#867789" }
-]

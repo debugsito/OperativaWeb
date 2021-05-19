@@ -6,19 +6,19 @@ import { useForm } from "../../../hooks";
 import { Button, TextInput } from "../../../shared/components";
 
 const initialValues = {
-    firstDate: "",
-    lastDate: "",
+    startDate: "2021-03-19",
+    finishDate: "2021-03-31",
 }
 
-export default function Dateform(props) {
+export default function Dateform({ updateReport }) {
     const dateMax = DateTime.utc().toFormat("yyyy-LL-dd")
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
-        if ('firstDate' in fieldValues)
-            temp.firstDate = fieldValues.firstDate ? "" : "El campo es requerido."
-        if ('lastDate' in fieldValues)
-            temp.lastDate = fieldValues.lastDate ? "" : "El campo es requerido."
+        if ('startDate' in fieldValues)
+            temp.startDate = fieldValues.startDate ? "" : "El campo es requerido."
+        if ('finishDate' in fieldValues)
+            temp.finishDate = fieldValues.finishDate ? "" : "El campo es requerido."
 
         setErrors({
             ...temp
@@ -37,6 +37,15 @@ export default function Dateform(props) {
         disabledButtonState,
     } = useForm(initialValues, true, validate);
 
+    const handleClick = () => {
+        if (!disabledButtonState) {
+            updateReport(values)
+        } else {
+            validate();
+            return
+        }
+    }
+
     return (
         <Grid container spacing={2} alignItems="center">
             <Grid item xs={4}>
@@ -44,12 +53,12 @@ export default function Dateform(props) {
                     id="date"
                     fullWidth
                     type="date"
-                    name="firstDate"
+                    name="startDate"
                     label="Fecha de inicio"
-                    value={values.firstDate}
+                    value={values.startDate}
                     onChange={handleInputChange}
-                    error={errors.firstDate ? true : false}
-                    helperText={errors.firstDate}
+                    error={errors.startDate ? true : false}
+                    helperText={errors.startDate}
                     InputLabelProps={{
                         shrink: true,
                     }}
@@ -63,12 +72,12 @@ export default function Dateform(props) {
                     id="date"
                     fullWidth
                     type="date"
-                    name="lastDate"
+                    name="finishDate"
                     label="Fecha fin"
-                    value={values.lastDate}
+                    value={values.finishDate}
                     onChange={handleInputChange}
-                    error={errors.lastDate ? true : false}
-                    helperText={errors.lastDate}
+                    error={errors.finishDate ? true : false}
+                    helperText={errors.finishDate}
                     InputLabelProps={{
                         shrink: true,
                     }}
@@ -78,7 +87,7 @@ export default function Dateform(props) {
                 />
             </Grid>
             <Grid item xs={4}>
-                <Button variant="contained" size="large">ACEPTAR</Button>
+                <Button variant="contained" size="large" onClick={handleClick}>ACEPTAR</Button>
             </Grid>
         </Grid>
     )

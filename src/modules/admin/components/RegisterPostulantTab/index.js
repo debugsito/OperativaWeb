@@ -16,20 +16,24 @@ const useStyles = makeStyles(theme => ({
         padding: "3rem"
     }
 }))
+const date = { startDate: "2021-03-19", finishDate: "2021-03-31" }
+
 export default function Index() {
     const classes = useStyles()
     const dispatch = useDispatch()
-    const date = { startDate: "2021-03-19", finishDate: "2021-03-31" }
 
     useEffect(() => {
-        console.log("ejecutando useEffect")
         dispatch(getReport(date))
     }, [])
+
+    const updateReport = (values) => {
+        dispatch(getReport(values))
+    }
 
     return (
         <Grid container spacing={2}>
             <Grid item xs={12}>
-                <DateForm />
+                <DateForm updateReport={updateReport} />
             </Grid>
             <Grid item xs={12}>
                 <Paper className={classes.paper}>
