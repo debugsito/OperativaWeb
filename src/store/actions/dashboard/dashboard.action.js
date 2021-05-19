@@ -40,6 +40,11 @@ export const setHistory = (payload) => ({
   payload
 });
 
+export const setReportByPostulantId = (payload) => ({
+  type: dashboardType.SET_REPORT_BY_POSTULANT_ID,
+  payload
+});
+
 export const setErrorFetch = (payload) => ({
   type: dashboardType.SET_ERROR_FETCH,
   payload

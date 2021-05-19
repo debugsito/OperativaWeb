@@ -2,10 +2,6 @@ import React from 'react'
 import { makeStyles } from "@material-ui/core/styles";
 import { Container, Grid, Paper } from "@material-ui/core";
 
-// graficos
-import Highcharts from "highcharts";
-import HighchartsReact from "highcharts-react-official";
-
 import { Breadcrumbs, Button} from "../../shared/components";
 import { ShowPosition, ReportChart } from "../components";
 import { SessionRoutes } from "../../shared/libs/sessionRoutes";

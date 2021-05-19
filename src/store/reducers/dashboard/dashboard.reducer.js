@@ -14,7 +14,8 @@ const initialState = {
     postulantsByPublicationId: {},
     postulantsByPublicationIdError: "",
     applicantProfile: {},
-    applicantProfileError: ""
+    applicantProfileError: "",
+    reportByPostulantId: []
 };
 
 const dashboardReducer = (state = initialState, action) => {
@@ -78,6 +79,11 @@ const dashboardReducer = (state = initialState, action) => {
             return {
                 ...state,
                 postHistory: action.payload,
+            };
+        case dashboardType.SET_REPORT_BY_POSTULANT_ID:
+            return {
+                ...state,
+                reportByPostulantId: action.payload,
             };
         case dashboardType.SET_ERROR_FETCH:
             return {

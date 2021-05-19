@@ -1,13 +1,15 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { DateTime } from "luxon";
 import { Divider, Grid, Typography } from "@material-ui/core";
 
 import { actions_Utils } from "../../../../store/actions";
+import { getRubroById } from "../../../shared/utils";
 
 export default function Index({ button }) {
     const dispatch = useDispatch()
     const { publicationSelected } = useSelector(state => state?.dashboard)
+    const { items } = useSelector(state => state?.utils)
 
     useEffect(() => {
         dispatch(actions_Utils.getDepartments());
@@ -60,7 +62,7 @@ export default function Index({ button }) {
                     <strong>Categoría</strong>
                 </Typography>
                 <Typography variant="body1" component="h6">
-                    Logistica - Distribucion
+                    {getRubroById(items, publicationSelected.rubro_id)}
                 </Typography>
                 <br />
 
@@ -90,7 +92,7 @@ export default function Index({ button }) {
                     <strong>Dirección</strong>
                 </Typography>
                 <Typography variant="body1" component="h6">
-                    Av. Industrial N° 1234
+                    {publicationSelected.address}
                 </Typography>
                 <br />
 
@@ -122,7 +124,7 @@ export default function Index({ button }) {
                     <strong>Periodo de permanencia</strong>
                 </Typography>
                 <Typography variant="body1" component="h6">
-                    1 año
+                    {publicationSelected.periodo}
                 </Typography>
                 <br />
 

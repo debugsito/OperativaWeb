@@ -57,8 +57,14 @@ const hireApplicant = async (body, publication_id) => {
 }
 
 //Obtener historial de publicaciones
-const getHistory = async (params) => {
+const getHistory = async () => {
     const response = await api.get(`/publications/history`);
+    return response;
+}
+
+//Obtener reporte por postulante_id
+const getReportByPostulantId = async (params) => {
+    const response = await api.get(`/publication/dashboard/${params.postulant_id}`);
     return response;
 }
 
@@ -75,5 +81,6 @@ export default {
     selectApplicant,
     denyApplicant,
     hireApplicant,
-    getHistory
+    getHistory,
+    getReportByPostulantId
 }
