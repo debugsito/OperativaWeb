@@ -11,8 +11,10 @@ import HighchartsReact from "highcharts-react-official";
 
 const useStyles = makeStyles(theme => ({
     title: {
-        width: "100%",
-        marginLeft: "7rem"
+        textAlign: "center"
+    },
+    subTitle: {
+        marginLeft: "5rem"
     }
 }))
 
@@ -74,46 +76,39 @@ export default function Index(props) {
 
     return (
         <Grid container>
+            <Grid item xs={12}>
+                <h2 className={classes.title}>REPORTE GENERAL</h2>
+            </Grid>
             <Grid item xs={6}>
-                <div className={classes.title}>
-                    <h3>Géneros</h3>
-                </div>
+                <h3 className={classes.subTitle}>Género</h3>
                 <HighchartsReact
                     highcharts={Highcharts}
                     options={ChartOptions("Géneros", genderData, ["#F3747D", "#0F8DC3", "#FCB81A"])}
                 />
             </Grid>
             <Grid item xs={6}>
-                <div className={classes.title}>
-                    <h3>Rubros</h3>
-                </div>
+                <h3 className={classes.subTitle}>Rubros</h3>
                 <HighchartsReact
                     highcharts={Highcharts}
                     options={ChartOptions("Rubros", rubroData, ["#CBE3E9", "#A2EE37", "#78957C", "#27EAF6", "#7F85FD"])}
                 />
             </Grid>
             <Grid item xs={6}>
-                <div className={classes.title}>
-                    <h3>Edades</h3>
-                </div>
+                <h3 className={classes.subTitle}>Edades</h3>
                 <HighchartsReact
                     highcharts={Highcharts}
                     options={ChartOptions("Edades", ageData, ["#C1953C", "#BAE7AF", "#A39470", "#F65470", "#7F85FD"])}
                 />
             </Grid>
             <Grid item xs={6}>
-                <div className={classes.title}>
-                    <h3>Provincias</h3>
-                </div>
+                <h3 className={classes.subTitle}>Provincias</h3>
                 <HighchartsReact
                     highcharts={Highcharts}
                     options={ChartOptions("Provincias", provinceData, ["#CBCAC8", "#A2EE37", "#FCB81A", "#F65470", "#7F85FD"])}
                 />
             </Grid>
             <Grid item xs={6} style={{ margin: "0 auto" }}>
-                <div className={classes.title}>
-                    <h3>Top 20 Distritos</h3>
-                </div>
+                <h3 className={classes.subTitle}>Top 20 Distritos</h3>
                 <HighchartsReact
                     highcharts={Highcharts}
                     options={ChartOptions("Top 20 Distritos", topDistrictsData, ["#CBCAC8", "#A2EE37", "#FCB81A", "#F65470", "#7F85FD"])}

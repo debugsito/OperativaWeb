@@ -54,7 +54,7 @@ export default function Index({ button }) {
                     <strong>Fecha de caducidad</strong>
                 </Typography>
                 <Typography variant="body1" component="h6">
-                    {DateTime.fromISO(publicationSelected.createdAt).toFormat("dd/LL/yyyy")}
+                    {DateTime.fromISO(publicationSelected.to_date).toFormat("dd/LL/yyyy")}
                 </Typography>
                 <br />
 
@@ -100,7 +100,7 @@ export default function Index({ button }) {
                     <strong>Distrito</strong>
                 </Typography>
                 <Typography variant="body1" component="h6">
-                    Ate
+                    {publicationSelected.name}
                 </Typography>
                 <br />
 
@@ -108,7 +108,7 @@ export default function Index({ button }) {
                     <strong>Salario</strong>
                 </Typography>
                 <Typography variant="body1" component="h6">
-                    1000
+                    {publicationSelected.salary}
                 </Typography>
                 <br />
 
@@ -116,7 +116,7 @@ export default function Index({ button }) {
                     <strong>Fecha de inicio</strong>
                 </Typography>
                 <Typography variant="body1" component="h6">
-                    01/12/2020
+                    {DateTime.fromISO(publicationSelected.from_date).toFormat("dd/LL/yyyy")}
                 </Typography>
                 <br />
 
