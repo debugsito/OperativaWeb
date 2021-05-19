@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Container, Grid, Paper } from "@material-ui/core";
 
 import { Breadcrumbs, Button} from "../../shared/components";
-import { ShowPosition, EditPositionForm } from "../components";
+import { ShowPositionHistory, EditPositionForm } from "../components";
 import { SessionRoutes } from "../../shared/libs/sessionRoutes";
 import { editIcon } from "../images";
 
@@ -43,7 +43,7 @@ export default function Republish(props) {
                                         handleExitForm={handleExitForm}
                                     />
                                     :
-                                    <ShowPosition 
+                                    <ShowPositionHistory 
                                         button={
                                             <Button color="black" onClick={handleOpenEditing}>
                                                 <img src={editIcon} />

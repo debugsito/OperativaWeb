@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Container, Grid, Paper } from "@material-ui/core";
 
 import { Breadcrumbs, Button} from "../../shared/components";
-import { ShowPosition, ReportChart } from "../components";
+import { ShowPositionHistory, ReportChartHistory } from "../components";
 import { SessionRoutes } from "../../shared/libs/sessionRoutes";
 import { downloadBlackIcon } from "../images";
 
@@ -28,7 +28,7 @@ export default function ShowPositionPage() {
                     <Grid container direction="column" justify="center" alignItems="center">
                         <Grid item xs={10}>
                             <Paper className={classes.paper}>
-                                <ShowPosition 
+                                <ShowPositionHistory 
                                     button={
                                         <Button color="black" onClick={() => console.log("descargando...")}>
                                             <img src={downloadBlackIcon} />
@@ -36,7 +36,7 @@ export default function ShowPositionPage() {
                                         </Button>
                                     }
                                 />
-                                <ReportChart />
+                                <ReportChartHistory />
                             </Paper>
                         </Grid>
                     </Grid>
