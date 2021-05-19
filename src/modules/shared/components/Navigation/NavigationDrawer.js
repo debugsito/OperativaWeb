@@ -161,7 +161,7 @@ export default function NavigationDrawer(props) {
         </IconButton>
       </div>
       <Divider />
-      <div class="side-bar">
+      <div className="side-bar">
         <List
           onMouseMove={() => setOpenDrawer(true)}
           onMouseLeave={() => setOpenDrawer(false)}

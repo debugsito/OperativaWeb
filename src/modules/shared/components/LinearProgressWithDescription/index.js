@@ -60,5 +60,5 @@ CustomLinearProgress.propTypes = {
     title: PropTypes.any.isRequired,
     description: PropTypes.any.isRequired,
     value: PropTypes.any.isRequired,
-    colorBar: PropTypes.PropTypes.oneOf(["celeste", "naranja", "verde"]).isRequired
+    colorBar: PropTypes.oneOf(["celeste", "naranja", "verde"]).isRequired
 };
