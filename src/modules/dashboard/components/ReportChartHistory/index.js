@@ -18,7 +18,15 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-export default function Index(props) {
+const REPORT_DATA = {
+    GENDER: 0,
+    RUBRO: 1,
+    AGE: 2,
+    PROVINCES: 3,
+    TOP_TEN_DISTRICTS: 4
+}
+
+export default function Index() {
     const classes = useStyles()
     const dispatch = useDispatch()
     const { publicationSelected, reportByPostulantId } = useSelector(state => state?.dashboard)
@@ -34,31 +42,31 @@ export default function Index(props) {
 
     useEffect(() => {
         if (reportByPostulantId.length > 0) {
-            const gender = reportByPostulantId[0]?.data?.map(item => (
+            const gender = reportByPostulantId[REPORT_DATA.GENDER]?.data?.map(item => (
                 {
                     name: item.genero,
                     y: Number(item.count)
                 }
             ))
-            const rubro = reportByPostulantId[1].data.map(item => (
+            const rubro = reportByPostulantId[REPORT_DATA.RUBRO]?.data.map(item => (
                 {
                     name: item.rubros,
                     y: Number(item.count)
                 }
             ))
-            const age = reportByPostulantId[2].data.map(item => (
+            const age = reportByPostulantId[REPORT_DATA.AGE]?.data.map(item => (
                 {
                     name: item.leyenda,
                     y: Number(item.count)
                 }
             ))
-            const provincias = reportByPostulantId[3].data.map(item => (
+            const provincias = reportByPostulantId[REPORT_DATA.PROVINCES]?.data.map(item => (
                 {
                     name: item.provincia,
                     y: Number(item.count)
                 }
             ))
-            const distritos = reportByPostulantId[4].data.map(item => (
+            const distritos = reportByPostulantId[REPORT_DATA.TOP_TEN_DISTRICTS]?.data.map(item => (
                 {
                     name: item.distrito,
                     y: Number(item.count)
@@ -108,7 +116,7 @@ export default function Index(props) {
                 />
             </Grid>
             <Grid item xs={6} style={{ margin: "0 auto" }}>
-                <h3 className={classes.subTitle}>Top 20 Distritos</h3>
+                <h3 className={classes.subTitle}>Top 10 Distritos</h3>
                 <HighchartsReact
                     highcharts={Highcharts}
                     options={ChartOptions("Top 20 Distritos", topDistrictsData, ["#CBCAC8", "#A2EE37", "#FCB81A", "#F65470", "#7F85FD"])}

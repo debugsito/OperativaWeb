@@ -18,6 +18,14 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
+const REPORT_DATA = {
+    SO: 0,
+    GENDER: 1,
+    RUBRO: 2,
+    AGE: 3,
+    PROVINCES: 4,
+    TOP_TEN_DISTRICTS: 5
+}
 
 export default function Index(props) {
     const classes = useStyles()
@@ -31,42 +39,42 @@ export default function Index(props) {
 
 
     useEffect(() => {
-        const SO = report.general[0]?.data?.map(so => (
+        const SO = report.general[REPORT_DATA.SO]?.data?.map(so => (
             {
                 name: so.operating_system,
                 y: Number(so.count)
             }
         ))
 
-        const gender = report.general[1]?.data?.map(item => (
+        const gender = report.general[REPORT_DATA.GENDER]?.data?.map(item => (
             {
                 name: item.genero,
                 y: Number(item.count)
             }
         ))
 
-        const rubros = report.general[2]?.data?.map(item => (
+        const rubros = report.general[REPORT_DATA.RUBRO]?.data?.map(item => (
             {
                 name: item.rubros,
                 y: Number(item.count)
             }
         ))
 
-        const age = report.general[3]?.data?.map(item => (
+        const age = report.general[REPORT_DATA.AGE]?.data?.map(item => (
             {
                 name: item.leyenda,
                 y: Number(item.count)
             }
         ))
 
-        const province = report.general[4]?.data?.map(item => (
+        const province = report.general[REPORT_DATA.PROVINCES]?.data?.map(item => (
             {
                 name: item.provincia,
                 y: Number(item.count)
             }
         ))
 
-        const topTen = report.general[5]?.data?.map(item => (
+        const topTen = report.general[REPORT_DATA.TOP_TEN_DISTRICTS]?.data?.map(item => (
             {
                 name: item.distrito,
                 y: Number(item.count)
