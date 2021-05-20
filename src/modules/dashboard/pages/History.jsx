@@ -36,15 +36,15 @@ export default function History() {
                 <Grid item xs={12}>
                     <Grid container direction="row" justify="space-between">
                         <Grid item xs={6}>
-                        <Button 
-                            startIcon={<img src={downloadIcon} alt="descargar" />} 
-                            variant="contained" 
-                            color="secondary" 
-                            size="large" 
-                            disabled={!(selectedRow.length > 0)}
-                            >
-                                DESCARGA
-                        </Button>
+                            {/* <Button 
+                                startIcon={<img src={downloadIcon} alt="descargar" />} 
+                                variant="contained" 
+                                color="secondary" 
+                                size="large" 
+                                disabled={!(selectedRow.length > 0)}
+                                >
+                                    DESCARGA
+                            </Button> */}
                         </Grid>
                         <Grid item xs={4}>
                             <Grid container alignItems="flex-end">
