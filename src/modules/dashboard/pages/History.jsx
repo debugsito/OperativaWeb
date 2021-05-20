@@ -4,7 +4,7 @@ import { Container, Grid } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 
 import { Breadcrumbs, Button, TextInput } from "../../shared/components";
-import { setReportByPostulantId } from "../../../store/actions/dashboard/dashboard.action";
+import { setReportByPostulantId, setRequestState } from "../../../store/actions/dashboard/dashboard.action";
 import { SessionRoutes } from "../../shared/libs/sessionRoutes";
 import {HistoryTable} from "../components"
 
@@ -20,6 +20,7 @@ export default function History() {
 
     useEffect(() => {
         dispatch(setReportByPostulantId([]))
+        dispatch(setRequestState({success:null}))
     },[])
 
     const handleEnableButton = (rowsSelected) => {

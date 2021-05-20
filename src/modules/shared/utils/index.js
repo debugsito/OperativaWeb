@@ -7,3 +7,11 @@ export const getRubroById = (array, rubro_id) => {
         return rubro[0]?.name
     }
 }
+
+export const convertStringToObject = (string) => {
+    if (string[0] === "[") {
+        return JSON.parse(string)
+    } else {
+        return [{ type: "paragraph", children: [{ text: string }] }]
+    }
+}

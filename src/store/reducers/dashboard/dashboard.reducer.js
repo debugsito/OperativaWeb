@@ -8,14 +8,17 @@ const initialState = {
         contratados: 0,
     },
     postHistory: [],
-    error: "",
     publicationsInfo: {},
     publicationSelected: "",
     postulantsByPublicationId: {},
     postulantsByPublicationIdError: "",
     applicantProfile: {},
     applicantProfileError: "",
-    reportByPostulantId: []
+    reportByPostulantId: [],
+    requestState: {
+        success: null
+    },
+    error: "",
 };
 
 const dashboardReducer = (state = initialState, action) => {
@@ -89,6 +92,11 @@ const dashboardReducer = (state = initialState, action) => {
             return {
                 ...state,
                 error: action.payload,
+            };
+        case dashboardType.SET_REQUEST_STATE:
+            return {
+                ...state,
+                requestState: action.payload,
             };
         default:
             return state;

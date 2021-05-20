@@ -1,0 +1,8 @@
+.snackbar__container_success .MuiSnackbar-root .MuiPaper-root.MuiSnackbarContent-root.MuiPaper-elevation6{
+    background-color: #46A9D4 !important;
+}
+.snackbar__container_success .MuiSnackbar-anchorOriginTopRight {
+    top: 70px !important;
+}
+
+

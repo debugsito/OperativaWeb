@@ -45,6 +45,11 @@ export const setReportByPostulantId = (payload) => ({
   payload
 });
 
+export const setRequestState = (payload) => ({
+  type: dashboardType.SET_REQUEST_STATE,
+  payload
+});
+
 export const setErrorFetch = (payload) => ({
   type: dashboardType.SET_ERROR_FETCH,
   payload
@@ -112,6 +117,7 @@ export const updatePublication = (params) => {
   };
 };
 
+//esta en middleware (repetido)
 export const savePublication = (body) => {
   return async (dispatch) => {
     try {

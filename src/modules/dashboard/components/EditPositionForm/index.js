@@ -13,7 +13,7 @@ const defaultValues = {
     job_title: "",
     description: "",
     requirements: "",
-    job_level_id: "",//rubro
+    rubro_id: "",//rubro
     address: "",
     district_id: "",
     period: "",
@@ -24,59 +24,19 @@ const defaultValues = {
     province_id: "",
 };
 
-const publicationSelected = {
-    id: 109,
-    description: "[{\"type\":\"paragraph\",\"children\":[{\"text\":\"asdasdasd\",\"bold\":true}]}]",
-    from_date: "2021-03-28T00:00:00.000Z",
-    to_date: "2021-06-26T00:00:00.000Z",
-    job_level_id: 5,
-    salary: 2000,
-    createdAt: "2021-03-30T14:25:56.000Z",
-    updatedAt: "2021-04-12T22:55:53.000Z",
-    job_title: "Frontend developer",
-    requirements: "[{\"type\":\"paragraph\",\"children\":[{\"text\":\"asdasdasd\",\"bold\":true}]}]",
-    address: "Jr. Arequipa 1116",
-    period: "1",
-    account_id: 549,
-    period_id: 1,
-    rubro_id: 5,
-    a_tratar: 0,
-    count_postulantes: 7,
-    district: {
-        id: 90110,
-        province_id: 901,
-        province: {
-            id: 901,
-            department_id: 9
-        }
-    }
-}
-export default function Index({ handleExitForm }) {
+export default function Index({ handleExitForm, data = null, handleSaveData }) {
     const dateLocal = DateTime.local().toFormat("yyyy-LL-dd")
     const dispatch = useDispatch();
+    const initialValues = data ? data : defaultValues
     const { departments, provinces, districts, rubrosOp, periods } = useSelector(state => state?.utils)
+    const { requestState } = useSelector(state => state?.dashboard)
 
     const [districtsList, setDistrictsList] = useState([])
     const [provincesList, setProvincesList] = useState([])
     const [openModal, setOpenModal] = useState(false)
     const [openConfirmationModal, setOpenConfirmationModal] = useState(false)
-    const [isActiveSalary, setIsActiveSalary] = useState(publicationSelected?.a_tratar)
-
-    const initialValues = publicationSelected ? {
-        job_title: publicationSelected.job_title,
-        description: JSON.parse(publicationSelected.description),
-        requirements: JSON.parse(publicationSelected.requirements),
-        job_level_id: publicationSelected.job_level_id,//rubro
-        address: publicationSelected.address,
-        period: publicationSelected.period,
-        salary: publicationSelected.salary,
-        from_date: DateTime.fromISO(publicationSelected.from_date).toFormat("yyyy-LL-dd"),
-        to_date: DateTime.fromISO(publicationSelected.to_date).toFormat("yyyy-LL-dd"),
-        department_id: publicationSelected.district.province.department_id,//EN DURO
-        province_id: publicationSelected.district.province_id, //EN DURO
-        rubro_id: publicationSelected.job_level_id,
-        period_id: publicationSelected.period,
-    } : defaultValues
+    const [openAlert, setOpenAlert] = useState(false)
+    const [isActiveSalary, setIsActiveSalary] = useState(false)
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
@@ -133,6 +93,12 @@ export default function Index({ handleExitForm }) {
     }, [])
 
     useEffect(() => {
+        if (requestState.success !== null) {
+            console.log("vacante guardada exitsamente")
+        }
+    }, [requestState.success])
+
+    useEffect(() => {
         filterProvinces()
     }, [provinces])
 
@@ -181,6 +147,15 @@ export default function Index({ handleExitForm }) {
         handleExitForm()
     }
 
+    const handleClickSave = () => {
+        let valuesTemp = { ...values }
+        valuesTemp.description = JSON.stringify(values.description)
+        valuesTemp.requirements = JSON.stringify(values.requirements)
+        valuesTemp.period_id = values.period
+        valuesTemp.a_tratar = isActiveSalary
+        handleSaveData(valuesTemp)
+        setOpenModal(false)
+    }
 
     return (
         <Grid container spacing={3}>
@@ -387,14 +362,14 @@ export default function Index({ handleExitForm }) {
             </Grid>
 
             <Modal open={openModal} handleCloseModal={() => setOpenModal(false)}>
-                <h3 id="simple-modal-title">{publicationSelected ? "¿Está seguro que desea guardar los cambios?" : "¿Esta seguro que desea publicar la vacante?"}</h3>
+                <h3 id="simple-modal-title">{true ? "¿Está seguro que desea guardar los cambios?" : "¿Esta seguro que desea publicar la vacante?"}</h3>
                 <Grid item xs={12}>
                     <Grid container spacing={3} className="justify-center">
                         <Grid item>
                             <Button variant="outlined" size="large" onClick={() => setOpenModal(false)}>NO</Button>
                         </Grid>
                         <Grid item>
-                            <Button variant="contained" size="large">SI, GUARDAR</Button>
+                            <Button variant="contained" size="large" onClick={handleClickSave}>SI, GUARDAR</Button>
                         </Grid>
                     </Grid>
                 </Grid>

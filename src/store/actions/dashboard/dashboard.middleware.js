@@ -1,5 +1,5 @@
 import { service_Dashboard } from "../../services";
-import { setErrorFetch, setHistory, setReportByPostulantId } from "./dashboard.action";
+import { setErrorFetch, setHistory, setReportByPostulantId, setRequestState } from "./dashboard.action";
 
 export const getHistory = () => {
   return async (dispatch) => {
@@ -35,6 +35,25 @@ export const getReportByPostulantId = (params) => {
           dispatch(setErrorFetch(error.response.data.message));
         } else {
           dispatch(setErrorFetch("Ha ocurrido un error interno."));
+        };
+      }
+    }
+  };
+};
+
+export const savePublication = (body) => {
+  return async (dispatch) => {
+    try {
+      await service_Dashboard.savePublication(body);
+      dispatch(setRequestState({ success: true })); //control de errores
+    } catch (error) {
+      if (!error.response) {
+        dispatch(setRequestState({ success: false, message: "Ha ocurrido un error interno" }));
+      } else {
+        if (error.response.status === 409) {
+          dispatch(setRequestState({ success: false, message: error.response.data.message }));
+        } else {
+          dispatch(setRequestState({ success: false, message: "Ha ocurrido un error interno" }));
         };
       }
     }

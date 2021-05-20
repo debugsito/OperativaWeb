@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import { DateTime } from "luxon";
 import { Divider, Grid, Typography } from "@material-ui/core";
+import { DateTime } from "luxon";
 
 import { actions_Utils } from "../../../../store/actions";
-import { getRubroById } from "../../../shared/utils";
+import { getRubroById, convertStringToObject } from "../../../shared/utils";
+import { RichText } from "../../../shared/components";
 
 export default function Index({ button }) {
     const dispatch = useDispatch()
@@ -69,23 +70,23 @@ export default function Index({ button }) {
                 <Typography variant="subtitle2" component="h6">
                     <strong>Descripción</strong>
                 </Typography>
-                <Typography variant="body1" component="h6">
-                    Somos Andes Perú, empresa peruana basada en la operación de negocios mineros de oro y plata en América.
-                    Nos encontramos en la búsqueda de MOTORIZADOS. <br />
-                    Vacante Disponible: <br />
-                    REPARTIDORES TIEMPO COMPLETO - ANDES LIMA.
-                </Typography>
+                <RichText
+                    label="Descripcion del puesto"
+                    name="description"
+                    valueText={convertStringToObject(publicationSelected.description)}
+                    readOnly
+                />
                 <br />
 
                 <Typography variant="subtitle2" component="h6">
                     <strong>Requisitos del puesto</strong>
                 </Typography>
-                <Typography variant="body1" component="h6">
-                    Contar con moto propia y documentos actualizados (licencia de conducir, tarjeta de propiedad y SOAT). <br />
-                    Tener disponibilidad trabajar part time 6 días a la semana en horario rotativo.<br />
-                    Experiencia mínima de 3 meses, de preferencia en el rubro de fast food y restaurantes.<br />
-                    Buena actitud, orientación al servicio, disposición para el aprendizaje y trabajo en equipo.<br />
-                </Typography>
+                <RichText
+                    label="requerimientos del puesto"
+                    name="requirements"
+                    valueText={convertStringToObject(publicationSelected.requirements)}
+                    readOnly
+                />
                 <br />
 
                 <Typography variant="subtitle2" component="h6">

@@ -107,7 +107,7 @@ export default function HistoryTable({ handleEnableButtonDownload, searchInput }
                 post.job_title,
                 DateTime.fromISO(post.createdAt).toFormat("DDD"),
                 post.account.user.fullname,
-                post.rubro.name,
+                post.rubro?.name,
                 post.alcanzados,
                 post.contratados,
                 post.en_progreso,
@@ -123,7 +123,8 @@ export default function HistoryTable({ handleEnableButtonDownload, searchInput }
                 ],
                 post
             )
-        ))
+        )
+        )
         setPublications(rows)
         setDataPublications(rows)
 
