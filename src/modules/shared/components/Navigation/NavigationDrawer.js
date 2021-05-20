@@ -37,6 +37,8 @@ const getAvatarIcon = (name) => {
       return <LockIcon />
     case 'Facturación':
       return <WidgetsIcon />
+    case 'Historial':
+      return <AssignmentIcon />
     default:
       return (<InboxIcon />);
   }
