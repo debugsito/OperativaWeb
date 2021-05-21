@@ -28,19 +28,20 @@ export default function Republish(props) {
     const routes = [{ name: "HISTORIAL", to: `${initRoute}/historial-de-publicaciones` }, { name: "REPUBLICAR", to: `${initRoute}/republicar-posicion` }];
 
     useEffect(() => {
+        const provinceTemp = publicationSelected.district.province;
         const defaultValues = {
             job_title: publicationSelected.job_title,
             description: convertStringToObject(publicationSelected.description),
             requirements: convertStringToObject(publicationSelected.requirements),
             rubro_id: publicationSelected.rubro_id,//rubro
             address: publicationSelected.address,
-            district_id: 150101,//publicationSelected.district.id,
+            district_id: publicationSelected.district.id,
             period: publicationSelected.period_id,
             salary: publicationSelected.salary,
             from_date: DateTime.fromISO(publicationSelected.from_date).toFormat("yyyy-LL-dd"),
             to_date: DateTime.fromISO(publicationSelected.to_date).toFormat("yyyy-LL-dd"),
-            department_id: 15,
-            province_id: 1501,
+            department_id: provinceTemp.department.id,
+            province_id: provinceTemp.id,
         };
         setData(defaultValues)
     }, [publicationSelected])
