@@ -19,27 +19,35 @@ const defaultValues = {
 export default function ApplicantEducationForm({ user, handleSaveEducation }) {
     let initialValues = user ? user : defaultValues;
     const [openAlert, setOpenAlert] = useState(false)
+    const [showSpeciality, setShowSpeciality] = useState(false)
+    const [showOtherSpeciality, setShowOtherSpeciality] = useState(false)
+    const [isWithoutEducation, setIsWithoutEducation] = useState(false)
+    const [academicLevels, setAcademicLevels] = useState([]);
+    const [specialties, setSpecialties] = useState([]);
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
         if ('level_id' in fieldValues)
             temp.level_id = fieldValues.level_id ? "" : "El campo es requerido."
-        if ('name_inst' in fieldValues)
-            temp.name_inst = fieldValues.name_inst ? "" : "El campo es requerido."
-        if ('from_year' in fieldValues)
-            temp.from_year = fieldValues.from_year ? (fieldValues.from_year.length === 4 ? "" : "Ejemplo: 1990") : "El campo es requerido. Ejemplo: 1990"
-        if ('endYear' in fieldValues)
-            temp.endYear = fieldValues.endYear ? (fieldValues.endYear.length === 4 ? "" : "Ejemplo: 1990") : "El campo es requerido.  Ejemplo: 1990"
-        if (showSpeciality) {
-            if ('speciality' in fieldValues) {
-                temp.speciality_id = fieldValues.speciality_id ? "" : "El campo es requerido"
+        if (!isWithoutEducation) {
+            if ('name_inst' in fieldValues)
+                temp.name_inst = fieldValues.name_inst ? "" : "El campo es requerido."
+            if ('from_year' in fieldValues)
+                temp.from_year = fieldValues.from_year ? (fieldValues.from_year.length === 4 ? "" : "Ejemplo: 1990") : "El campo es requerido. Ejemplo: 1990"
+            if ('endYear' in fieldValues)
+                temp.endYear = fieldValues.endYear ? (fieldValues.endYear.length === 4 ? "" : "Ejemplo: 1990") : "El campo es requerido.  Ejemplo: 1990"
+            if (showSpeciality) {
+                if ('speciality' in fieldValues) {
+                    temp.speciality_id = fieldValues.speciality_id ? "" : "El campo es requerido"
+                }
+            }
+            if (showOtherSpeciality) {
+                if ('speciality' in fieldValues) {
+                    temp.otherSpeciality = fieldValues.otherSpeciality ? "" : "El campo es requerido"
+                }
             }
         }
-        if (showOtherSpeciality) {
-            if ('speciality' in fieldValues) {
-                temp.otherSpeciality = fieldValues.otherSpeciality ? "" : "El campo es requerido"
-            }
-        }
+
 
 
         setErrors({ ...temp })
@@ -57,11 +65,6 @@ export default function ApplicantEducationForm({ user, handleSaveEducation }) {
         disabledButtonState,
     } = useForm(initialValues, true, validate);
 
-    const [showSpeciality, setShowSpeciality] = useState(false)
-    const [showOtherSpeciality, setShowOtherSpeciality] = useState(false)
-    const [academicLevels, setAcademicLevels] = useState([]);
-    const [specialties, setSpecialties] = useState([]);
-
     useEffect(() => {
         getAcademicLevels();
         getSpecialties();
@@ -71,11 +74,21 @@ export default function ApplicantEducationForm({ user, handleSaveEducation }) {
         const value = values.level_id
         if (value === ACADEMIC_LEVEL.INCOMPLETE_TECHNICIAN_ID || value === ACADEMIC_LEVEL.COMPLETE_TECHNICIAN_ID ||
             value === ACADEMIC_LEVEL.INCOMPLETE_UNIVERSITY_ID || value === ACADEMIC_LEVEL.COMPLETE_UNIVERSITY_ID) {
-            setValues({ ...values, speciality_id: "" })
+            console.log("if 1")
+            setValues({ ...values, speciality_id: "", name_inst: "", from_year: "", endYear: "" })
             setShowSpeciality(true)
+            setIsWithoutEducation(false)
+        } else if (value === ACADEMIC_LEVEL.WITHOUT_EDUCATION_ID) {
+            console.log("if 2")
+
+            setValues({ ...values, name_inst: null, from_year: null, endYear: null })
+            setIsWithoutEducation(true)
         } else {
-            setValues({ ...values, speciality_id: null })
+            console.log("if 3")
+
+            setValues({ ...values, speciality_id: null, name_inst: "", from_year: "", endYear: "" })
             setShowSpeciality(false)
+            setIsWithoutEducation(false)
         }
     }, [values.level_id])
 
@@ -137,78 +150,84 @@ export default function ApplicantEducationForm({ user, handleSaveEducation }) {
                     <FormHelperText>{errors.level_id}</FormHelperText>
                 </FormControl>
             </Grid>
-            <Grid item xs={12} md={6}>
-                <TextInput
-                    fullWidth
-                    label="Institución educativa"
-                    name="name_inst"
-                    value={values.name_inst}
-                    onChange={handleInputChange}
-                    error={errors.name_inst ? true : false}
-                    helperText={errors.name_inst}
-                />
-            </Grid>
             {
-                showSpeciality &&
-                <Grid item xs={12} md={6}>
-                    <FormControl variant="outlined" fullWidth error={errors.speciality ? true : false}>
-                        <InputLabel id="demo-simple-select-outlined-label">Especialidad</InputLabel>
-                        <Select
-                            labelId="demo-simple-select-outlined-label"
-                            id="demo-simple-select-outlined"
-                            name='speciality_id'
-                            value={values.speciality_id || ''}
+                !isWithoutEducation &&
+                <>
+                    <Grid item xs={12} md={6}>
+                        <TextInput
+                            fullWidth
+                            label="Institución educativa"
+                            name="name_inst"
+                            value={values.name_inst || ''}
                             onChange={handleInputChange}
-                            label="Especialidad"
-                        >
-                            {specialties.sort((a, b) => a.id - b.id).map(element =>
-                                <MenuItem key={element.id} value={element.id}>{element.name}</MenuItem>
-                            )}
-                        </Select>
-                        <FormHelperText>{errors.speciality_id}</FormHelperText>
-                    </FormControl>
-                </Grid>
+                            error={errors.name_inst ? true : false}
+                            helperText={errors.name_inst}
+                        />
+                    </Grid>
+                    {
+                        showSpeciality &&
+                        <Grid item xs={12} md={6}>
+                            <FormControl variant="outlined" fullWidth error={errors.speciality ? true : false}>
+                                <InputLabel id="demo-simple-select-outlined-label">Especialidad</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-outlined-label"
+                                    id="demo-simple-select-outlined"
+                                    name='speciality_id'
+                                    value={values.speciality_id || ''}
+                                    onChange={handleInputChange}
+                                    label="Especialidad"
+                                >
+                                    {specialties.sort((a, b) => a.id - b.id).map(element =>
+                                        <MenuItem key={element.id} value={element.id}>{element.name}</MenuItem>
+                                    )}
+                                </Select>
+                                <FormHelperText>{errors.speciality_id}</FormHelperText>
+                            </FormControl>
+                        </Grid>
+                    }
+                    {
+                        showOtherSpeciality &&
+                        <Grid item xs={12} md={6}>
+                            <TextInput
+                                fullWidth
+                                label="Especifique especialidad"
+                                name="otherSpeciality"
+                                value={values.otherSpeciality}
+                                onChange={handleInputChange}
+                                helperText={errors.otherSpeciality}
+                                error={errors.otherSpeciality ? true : false}
+                            />
+                        </Grid>
+                    }
+                    <Grid item xs={12} md={6}>
+                        <TextInput
+                            fullWidth
+                            type="text"
+                            label="Año de inicio"
+                            name="from_year"
+                            value={values.from_year || ''}
+                            onChange={handleInputChange}
+                            helperText={errors.from_year}
+                            error={errors.from_year ? true : false}
+                            onKeyPress={e => onlyNumbers(e)}
+                        />
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                        <TextInput
+                            fullWidth
+                            type="text"
+                            label="Año de fin"
+                            name="endYear"
+                            value={values.endYear || ''}
+                            onChange={handleInputChange}
+                            helperText={errors.endYear}
+                            error={errors.endYear ? true : false}
+                            onKeyPress={e => onlyNumbers(e)}
+                        />
+                    </Grid>
+                </>
             }
-            {
-                showOtherSpeciality &&
-                <Grid item xs={12} md={6}>
-                    <TextInput
-                        fullWidth
-                        label="Especifique especialidad"
-                        name="otherSpeciality"
-                        value={values.otherSpeciality}
-                        onChange={handleInputChange}
-                        helperText={errors.otherSpeciality}
-                        error={errors.otherSpeciality ? true : false}
-                    />
-                </Grid>
-            }
-            <Grid item xs={12} md={6}>
-                <TextInput
-                    fullWidth
-                    type="text"
-                    label="Año de inicio"
-                    name="from_year"
-                    value={values.from_year}
-                    onChange={handleInputChange}
-                    helperText={errors.from_year}
-                    error={errors.from_year ? true : false}
-                    onKeyPress={e => onlyNumbers(e)}
-                />
-            </Grid>
-            <Grid item xs={12} md={6}>
-                <TextInput
-                    fullWidth
-                    type="text"
-                    label="Año de fin"
-                    name="endYear"
-                    value={values.endYear}
-                    onChange={handleInputChange}
-                    helperText={errors.endYear}
-                    error={errors.endYear ? true : false}
-                    onKeyPress={e => onlyNumbers(e)}
-                />
-            </Grid>
+
             <Grid item xs={12} md={12} className="justify-end">
                 <Button variant="contained" size="large" onClick={handleClickSave}>Continuar</Button>
             </Grid>
