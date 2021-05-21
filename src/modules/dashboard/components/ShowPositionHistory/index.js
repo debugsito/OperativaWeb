@@ -21,7 +21,7 @@ export default function Index({ button = null }) {
     }, [])
 
     return (
-        <Grid container spacing={3}>
+        <Grid container spacing={3} justify="center">
             <Grid item xs={11}>
                 <Grid container direction="row" justify="space-between">
                     <Grid item xs={6}>

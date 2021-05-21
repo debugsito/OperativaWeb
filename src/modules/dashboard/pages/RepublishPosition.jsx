@@ -79,7 +79,7 @@ export default function Republish(props) {
                     <Breadcrumbs routes={routes} />
                 </Grid>
                 <Grid item xs={12}>
-                    <Grid container direction="column" justify="center" alignItems="center">
+                    <Grid container justify="center">
                         <Grid item xs={10}>
                             <Paper className={classes.paper}>
                                 {
