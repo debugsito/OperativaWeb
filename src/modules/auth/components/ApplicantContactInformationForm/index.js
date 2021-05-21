@@ -15,6 +15,13 @@ const defaultValues = {
     civil_id: "",
 }
 
+const DEPARTMENT = {
+    CALLAO: 7
+}
+const PROVINCE = {
+    CALLAO: 701
+}
+
 export default function ApplicantPersonalDataForm({ user, handleSaveContactInformation }) {
     // #region 
     let initialValues = user ? user : defaultValues;
@@ -76,10 +83,22 @@ export default function ApplicantPersonalDataForm({ user, handleSaveContactInfor
         getFilteredDistricts(values.province_id);
     }, [baseDistricts])
 
+    useEffect(() => {
+        if (values.department_id !== "") {
+            if (values.department_id === DEPARTMENT.CALLAO) {
+                const e = { target: { name: "", value: "" } }
+                e.target.name = "province_id"
+                e.target.value = PROVINCE.CALLAO
+                handleChangeSelectProvince(e)
+            }
+        }
+    }, [values.department_id])
+
     const handleChangeSelectDepartment = (e) => {
+        const departmen_id = e.target.value
         setValues({ ...values, district_id: "", province_id: "" })
         handleInputChange(e)
-        getFilteredProvinces(e.target.value);
+        getFilteredProvinces(departmen_id);
     }
 
     const handleChangeSelectProvince = (e) => {
