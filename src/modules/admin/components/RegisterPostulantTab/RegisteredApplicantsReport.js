@@ -12,9 +12,15 @@ const useStyles = makeStyles(theme => ({
         gridGap: "1rem",
         gridTemplateColumns: "2fr 3fr 4fr"
     },
+    containerBodyOne: {
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "flex",
+        alignItems: "center"
+    },
     bodyOne: {
         width: "90%",
-        height: "350px",
+        height: "250px",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -49,10 +55,19 @@ export default function RegisteredApplicantsReport(props) {
     return (
         <div className={classes.root}>
             <CardReport title="TOTAL DE POSTULANTES REGISTRADOS">
-                <div className={classes.bodyOne}>
-                    <div className={classes.box}>
-                        <Typography variant="h6">{report.postulantes}</Typography>
-                        <Typography variant="h6">POSTULANTES</Typography>
+                <div className={classes.containerBodyOne}>
+                    <div className={classes.bodyOne}>
+                        <div className={classes.box}>
+                            <Typography variant="h3">{report.registrados}</Typography>
+                            <Typography variant="body2">POSTULANTES CON CUENTA CREADA</Typography>
+                        </div>
+                    </div>
+
+                    <div className={classes.bodyOne}>
+                        <div className={classes.box}>
+                            <Typography variant="h3">{report.postulantes}</Typography>
+                            <Typography variant="body2">POSTULANTES CON DATOS DE REGISTRO COMPLETADO</Typography>
+                        </div>
                     </div>
                 </div>
             </CardReport>
