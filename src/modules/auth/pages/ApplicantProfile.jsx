@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Accordion, AccordionDetails, AccordionSummary, Grid, Typography } from '@material-ui/core';
@@ -7,12 +7,13 @@ import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
-import "../styles/ApplicantProfile.css";
-import { appManSVG, numberOneSVG, numberTwoSVG, numberThreeSVG, numberFourSVG, numberFiveSVG, highFiveSVG } from '../images';
-import { Button, LinearProgress, Backdrop } from '../../shared/components';
 import { ApplicantContactInformationForm, ApplicantEducationForm, ApplicantPersonalDataForm, ApplicantWorkExperienceForm, ApplicantAreasOfInterestForm } from '../components';
+import { Button, LinearProgress } from '../../shared/components';
+import { getOS } from '../../shared/utils';
 import { service_ApplicantProfile } from '../../../store/services';
 import { setUser, signOut } from '../../../store/actions/auth/auth.action';
+import { appManSVG, numberOneSVG, numberTwoSVG, numberThreeSVG, numberFourSVG, numberFiveSVG, highFiveSVG } from '../images';
+import "../styles/ApplicantProfile.css";
 
 const useStyle = makeStyles(theme => ({
     expandIcon:{
@@ -47,11 +48,13 @@ const ApplicantProfile = ({ history }) => {
 
     const handleSaveContactInformation = async (data) => {
         if (data) {
-            saveApplicantProfile('contactInformation', data)
-            setContactInformation(data)
+            const dataTemp = {...data}
+            dataTemp.operating_system = getOS()
+            saveApplicantProfile('contactInformation', dataTemp)
+            setContactInformation(dataTemp)
             setStep(3)
             try {
-                const response = await service_ApplicantProfile.applicantPersonalDataRegister({ ...personalData, ...data });
+                const response = await service_ApplicantProfile.applicantPersonalDataRegister({ ...personalData, ...dataTemp });
                 if (response.status === 200) {
                     setStep(3)
                 }
