@@ -39,6 +39,8 @@ export default function Index(props) {
 
 
     useEffect(() => {
+        if (!report.hasOwnProperty("general")) return
+
         const SO = report.general[REPORT_DATA.SO]?.data?.map(so => (
             {
                 name: so.operating_system,
@@ -87,7 +89,7 @@ export default function Index(props) {
         setAgeData(age)
         setProvinceData(province)
         setTopTenData(topTen)
-    }, [])
+    }, [report])
 
     return (
         <Grid container>
