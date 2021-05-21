@@ -35,8 +35,7 @@ export default function Index({ handleExitForm, data = null, handleSaveData }) {
     const [provincesList, setProvincesList] = useState([])
     const [openModal, setOpenModal] = useState(false)
     const [openConfirmationModal, setOpenConfirmationModal] = useState(false)
-    const [openAlert, setOpenAlert] = useState(false)
-    const [isActiveSalary, setIsActiveSalary] = useState(false)
+    const [isActiveSalary, setIsActiveSalary] = useState(data?.a_tratar)
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
@@ -46,8 +45,8 @@ export default function Index({ handleExitForm, data = null, handleSaveData }) {
             temp.description = fieldValues.description[0].children[0].text ? "" : "El campo es requerido."
         if ('requirements' in fieldValues)
             temp.requirements = fieldValues.requirements[0].children[0].text ? "" : "El campo es requerido."
-        if ('job_level_id' in fieldValues)
-            temp.job_level_id = fieldValues.job_level_id ? "" : "El campo es requerido."
+        if ('rubro_id' in fieldValues)
+            temp.rubro_id = fieldValues.rubro_id ? "" : "El campo es requerido."
         if ('address' in fieldValues)
             temp.address = fieldValues.address ? "" : "El campo es requerido."
         if ('district_id' in fieldValues)
@@ -152,8 +151,10 @@ export default function Index({ handleExitForm, data = null, handleSaveData }) {
         valuesTemp.description = JSON.stringify(values.description)
         valuesTemp.requirements = JSON.stringify(values.requirements)
         valuesTemp.period_id = values.period
+        valuesTemp.job_level_id = values.rubro_id
         valuesTemp.a_tratar = isActiveSalary
-        handleSaveData(valuesTemp)
+        console.log(valuesTemp)
+        // handleSaveData(valuesTemp)
         setOpenModal(false)
     }
 
@@ -192,11 +193,11 @@ export default function Index({ handleExitForm, data = null, handleSaveData }) {
             <Grid item xs={8} style={{ margin: "auto" }}>
                 <Select
                     label="Rubro"
-                    name="job_level_id"
-                    value={values.job_level_id}
+                    name="rubro_id"
+                    value={values.rubro_id}
                     onChange={handleInputChange}
-                    error={errors.job_level_id ? true : false}
-                    helperText={errors.job_level_id}
+                    error={errors.rubro_id ? true : false}
+                    helperText={errors.rubro_id}
                 >
                     {rubrosOp && rubrosOp.map(element =>
                         <MenuItem key={element.id} value={element.id}>{element.name}</MenuItem>

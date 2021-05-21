@@ -7,7 +7,7 @@ import { actions_Utils } from "../../../../store/actions";
 import { getRubroById, convertStringToObject } from "../../../shared/utils";
 import { RichText } from "../../../shared/components";
 
-export default function Index({ button }) {
+export default function Index({ button = null }) {
     const dispatch = useDispatch()
     const { publicationSelected } = useSelector(state => state?.dashboard)
     const { items } = useSelector(state => state?.utils)
@@ -101,7 +101,7 @@ export default function Index({ button }) {
                     <strong>Distrito</strong>
                 </Typography>
                 <Typography variant="body1" component="h6">
-                    {publicationSelected.name}
+                    {publicationSelected.district.name}
                 </Typography>
                 <br />
 

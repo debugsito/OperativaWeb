@@ -29,12 +29,12 @@ export default function ShowPositionPage() {
                         <Grid item xs={10}>
                             <Paper className={classes.paper}>
                                 <ShowPositionHistory 
-                                    button={
-                                        <Button color="black" onClick={() => console.log("descargando...")}>
-                                            <img src={downloadBlackIcon} />
-                                            <span className="dashboard-title">Descargar</span>
-                                        </Button>
-                                    }
+                                    // button={
+                                    //     <Button color="black" onClick={() => console.log("descargando...")}>
+                                    //         <img src={downloadBlackIcon} />
+                                    //         <span className="dashboard-title">Descargar</span>
+                                    //     </Button>
+                                    // }
                                 />
                                 <ReportChartHistory />
                             </Paper>

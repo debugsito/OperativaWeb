@@ -34,13 +34,13 @@ export default function Republish(props) {
             requirements: convertStringToObject(publicationSelected.requirements),
             rubro_id: publicationSelected.rubro_id,//rubro
             address: publicationSelected.address,
-            district_id: publicationSelected.district.id,
-            period: 1,//publicationSelected.periodo,
+            district_id: 150101,//publicationSelected.district.id,
+            period: publicationSelected.period_id,
             salary: publicationSelected.salary,
             from_date: DateTime.fromISO(publicationSelected.from_date).toFormat("yyyy-LL-dd"),
             to_date: DateTime.fromISO(publicationSelected.to_date).toFormat("yyyy-LL-dd"),
-            department_id: "",
-            province_id: "",
+            department_id: 15,
+            province_id: 1501,
         };
         setData(defaultValues)
     }, [publicationSelected])
