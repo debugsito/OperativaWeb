@@ -6,7 +6,7 @@ export default (name, data) => ({
         type: "pie",
         height: "230px",
     },
-    colors: ["#CBCAC8", "#A2EE37", "#FCB81A", "#F75470", "#7F85FD", "#373737"],
+    colors: ["#A2EE37", "#FCB81A", "#F75470", "#7F85FD", "#373737", "#27EAF6", "#0F8DC3", "#C1953C", "#CBCAC8", "#9400D3"],
     title: {
         text: "",
     },

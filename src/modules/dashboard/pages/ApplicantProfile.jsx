@@ -99,7 +99,7 @@ const ApplicantProfile = () => {
         <>
             <Container >
                 <Grid container spacing={3} className="postulant-perfil" style={{marginTop:"20%"}}>
-                    <Grid item xs={12} className="postulant-perfil__header" style={{ position:"fixed", top:"4rem", background:"white", width:"94%" }}>
+                    <Grid item xs={12} className="postulant-perfil__header" style={{ position:"fixed", top:"4rem", background:"white" }}>
                         <Grid container spacing={3}>
                             <Grid item xs={12}>
                                 <Breadcrumbs routes={routes} />
