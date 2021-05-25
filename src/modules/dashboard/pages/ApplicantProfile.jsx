@@ -99,7 +99,7 @@ const ApplicantProfile = () => {
         <>
             <Container >
                 <Grid container spacing={3} className="postulant-perfil" style={{marginTop:"20%"}}>
-                    <Grid item xs={12} className="postulant-perfil__header" style={{ position:"fixed", top:"4rem", background:"white" }}>
+                    <Grid item xs={12} className="postulant-perfil__header" style={{ position:"fixed", top:"4rem", background:"white", width:"94%" }}>
                         <Grid container spacing={3}>
                             <Grid item xs={12}>
                                 <Breadcrumbs routes={routes} />
@@ -285,7 +285,7 @@ const ApplicantProfile = () => {
                                     <strong>Cargo</strong>
                                 </Typography>
                                 <Typography variant="body1" component="h6">
-                                    {job && job[0]?.job_level.name}
+                                    {job && job[0]?.job_level?.name}
                                 </Typography>
                                 <br />
                                 <Typography variant="subtitle2" component="h6">
@@ -302,13 +302,13 @@ const ApplicantProfile = () => {
                                     {job && job[0]?.address}
                                 </Typography>
                                 <br />
-                                <Typography variant="subtitle2" component="h6">
+                                {/* <Typography variant="subtitle2" component="h6">
                                     <strong>Rubro</strong>
                                 </Typography>
                                 <Typography variant="body1" component="h6">
                                     ----------
                                 </Typography>
-                                <br />
+                                <br /> */}
                                 <Typography variant="subtitle2" component="h6">
                                     <strong>Fecha de inicio</strong>
                                 </Typography>
