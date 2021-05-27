@@ -11,7 +11,7 @@ const initialValues = {
     password: ""
 }
 
-export default function SignInForm() {
+export default function SignInForm({ setValue }) {
     const history = useHistory();
     const dispatch = useDispatch();
 
@@ -87,7 +87,7 @@ export default function SignInForm() {
             </Grid>
             <Grid item xs={12}>
                 <Typography align="center" variant="body1" component="p">
-                    <Link href="#" onClick={() => history.push("/recuperar-contraseña")} underline="always">¿No eres miembro? Regístrate</Link>
+                    <Link href="#" onClick={() => setValue(0)} underline="always">¿No eres miembro? Regístrate</Link>
                 </Typography>
             </Grid>
         </Grid>

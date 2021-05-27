@@ -4,7 +4,7 @@ import { Grid } from '@material-ui/core';
 import SignInForm from './SignInForm';
 import { facebookSVG, googleSVG, linkedingSVG } from '../../images2';
 
-export default function SignInTab(props) {
+export default function SignInTab({ setValue }) {
     const { isPostulant } = useSelector(state => state?.home)
 
     return (
@@ -23,7 +23,7 @@ export default function SignInTab(props) {
                 </Grid>
             </Grid>}
             <Grid item xs={12}>
-                <SignInForm />
+                <SignInForm setValue={setValue} />
             </Grid>
         </Grid>
     )
