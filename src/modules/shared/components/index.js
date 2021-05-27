@@ -9,6 +9,7 @@ export { default as Modal } from './Modal';
 export { default as Navigation } from './Navigation';
 export { default as Radio } from './Radio';
 export { default as TextInput } from './TextInput';
+export { default as TextSkyBlue } from './TextSkyBlue';
 export { default as Typography } from './Typography';
 export { default as Select } from './Select';
 export { default as DataGrid } from './DataGrid';

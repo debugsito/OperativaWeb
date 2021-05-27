@@ -12,7 +12,7 @@ import { Button, LinearProgress } from '../../shared/components';
 import { getOS } from '../../shared/utils';
 import { service_ApplicantProfile } from '../../../store/services';
 import { setUser, signOut } from '../../../store/actions/auth/auth.action';
-import { appManSVG, numberOneSVG, numberTwoSVG, numberThreeSVG, numberFourSVG, numberFiveSVG, highFiveSVG, successSVG } from '../images';
+import { filesSVG, numberOneSVG, numberTwoSVG, numberThreeSVG, numberFourSVG, numberFiveSVG, successSVG } from '../images';
 import "../styles/ApplicantProfile.css";
 
 const useStyle = makeStyles(theme => ({
@@ -154,12 +154,12 @@ const ApplicantProfile = ({ history }) => {
                             Hola, {user?.account?.name || user?.account?.email}:
                         </Typography>
                     </Grid>
-                    <Grid item xs={2} sm={2} md={2} lg={2} className="justify-center">
-                        <img src={appManSVG} width="120" alt="" />
+                    <Grid item xs={3} sm={2} md={2} className="justify-center">
+                        <img src={filesSVG} width="120" alt="" />
                     </Grid>
-                    <Grid item xs={10} sm={10} md={8} lg={8}>
+                    <Grid item xs={9} sm={10} md={10} >
                         <Typography variant="body1" component="p" className="title-color">
-                            Recuerda completar todos los campos del perfil del registro, para posicionarte como primero en las listas de contratación por miles de empresas
+                            Crear tu CV para ser visible por miles de empresas.
                         </Typography>
                     </Grid>
                     <Grid item xs={12} md={12} lg={12}>
