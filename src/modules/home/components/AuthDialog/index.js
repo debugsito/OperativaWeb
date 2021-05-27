@@ -1,13 +1,64 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types';
-import { Dialog, DialogTitle } from '@material-ui/core';
+import { useDispatch } from "react-redux";
+import { withStyles } from '@material-ui/core/styles';
+import { Dialog, Divider, makeStyles, Typography } from '@material-ui/core';
+import MuiDialogContent from '@material-ui/core/DialogContent';
 
+import SignInDialog from "./SignInDialog";
+import { setIsPostulant as setIsPostulantRedux } from "../../../../store/actions/home/home.action";
+
+const useStyles = makeStyles(theme => ({
+    paper: {
+        position: "fixed",
+        top: "20px",
+        right: "80px"
+    }
+
+}))
+
+const Text = withStyles((theme) => ({
+    root: {
+        margin: 2,
+        cursor: "pointer"
+    },
+}))(Typography);
 export default function SimpleDialog({ open, handleClose }) {
+    const classes = useStyles()
+    const dispatch = useDispatch()
+    const [isBusiness, setIsBusiness] = useState(false)
+    const [isPostulant, setIsPostulant] = useState(false)
+
+    const handleClick = () => {
+        dispatch(setIsPostulantRedux(true))
+        setIsPostulant(true)
+    }
+
+    const handleClickClose = () => {
+        dispatch(setIsPostulantRedux(false))
+        handleClose()
+        setIsPostulant(false)
+        setIsBusiness(false)
+    }
 
     return (
-        <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
-            <DialogTitle id="simple-dialog-title">Set backup account</DialogTitle>
-            Hola
+        <Dialog onClose={handleClickClose} aria-labelledby="signin-dialog" open={open}
+            fullWidth
+            maxWidth="xs"
+            classes={{ paper: classes.paper }}
+        >
+            <MuiDialogContent dividers>
+                {
+                    (isPostulant || isBusiness) ?
+                        <SignInDialog isPostulant={isPostulant} />
+                        :
+                        <>
+                            <Text variant="subtitle1" onClick={handleClick}>Postulante</Text>
+                            <Divider />
+                            <Text variant="subtitle1" onClick={() => setIsBusiness(true)}>Empresa / Municipalidad</Text>
+                        </>
+                }
+            </MuiDialogContent>
         </Dialog>
     )
 }
