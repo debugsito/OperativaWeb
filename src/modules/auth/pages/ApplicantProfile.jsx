@@ -12,7 +12,7 @@ import { Button, LinearProgress } from '../../shared/components';
 import { getOS } from '../../shared/utils';
 import { service_ApplicantProfile } from '../../../store/services';
 import { setUser, signOut } from '../../../store/actions/auth/auth.action';
-import { appManSVG, numberOneSVG, numberTwoSVG, numberThreeSVG, numberFourSVG, numberFiveSVG, highFiveSVG } from '../images';
+import { appManSVG, numberOneSVG, numberTwoSVG, numberThreeSVG, numberFourSVG, numberFiveSVG, highFiveSVG, successSVG } from '../images';
 import "../styles/ApplicantProfile.css";
 
 const useStyle = makeStyles(theme => ({
@@ -274,31 +274,36 @@ const ApplicantProfile = ({ history }) => {
                 </>
                 :
                 <>
-                    <Grid item xs={10} sm={6} md={5} lg={4} className="justify-center">
-                        <Grid container justify="center" alignItems="center" spacing={3} style={{ marginTop: "2rem" }}>
-                            <Grid item xs={12} md={12} lg={12}>
-                                <Typography variant="h5" component="h5" className="title-color">
-                                    Tus datos se completaron con éxito
-                                    </Typography>
+                    <Grid item xs={10} sm={6} md={5} lg={4}>
+                        <Grid container spacing={2} direction="column" justify="center" alignItems="center" style={{ marginTop: "2rem" }}>
+                            <Grid item xs={12} className="justify-center">
+                                <img src={successSVG} alt="" />
                             </Grid>
-                            <Grid item xs={12} md={12} lg={12}>
+                            <Grid item xs={12} className="text-center">
+                                <Typography variant="h4" component="h4">
+                                    Muchas gracias.
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={12} className="text-center">
+                                <Typography variant="h6" component="h6">
+                                    ¡Tu CV se guardó con éxito!
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={12} className="text-center">
                                 <Typography variant="body1" component="p">
-                                    Has dado el primer paso para conseguir el trabajo que tanto anhelas.
-                                    </Typography>
+                                    Pronto las empresas se pondrán en contacto contigo.
+                                </Typography>
                             </Grid>
-                            <Grid item xs={12} md={12} lg={12}>
-                                <Typography variant="body1" component="p">
-                                    Pronto se enviarán ofertas laborales a tu correo.
-                                    </Typography>
-                            </Grid>
-                            <Grid item xs={12} md={12} lg={12} className="justify-center">
-                                <img src={highFiveSVG} alt="" />
-                            </Grid>
-                            <Grid item>
-                                <Button fullWidth variant="contained" size="large" onClick={() => {
-                                    dispatch(signOut());
-                                    history.push("/")
-                                }}>finalizar</Button>
+                            <br />
+                            <Grid item xs={12}>
+                                <Button 
+                                    fullWidth 
+                                    size="large" 
+                                    variant="contained" 
+                                    onClick={() => {dispatch(signOut()); history.push("/")}}
+                                >
+                                    finalizar
+                                </Button>
                             </Grid>
                         </Grid>
                     </Grid>

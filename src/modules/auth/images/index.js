@@ -6,4 +6,5 @@ export { default as numberThreeSVG } from './numberThree.svg';
 export { default as numberFourSVG } from './numberFour.svg';
 export { default as numberFiveSVG } from './numberFive.svg';
 export { default as highFiveSVG } from './highFive.svg';
+export { default as successSVG } from './success.svg';
 
