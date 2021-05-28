@@ -56,10 +56,10 @@ export default function TabsDialog() {
                     }
                 </Tabs>
             </AppBar>
-            <TabPanel value={value} index={0}>
+            <TabPanel value={value} index={0} key={0}>
                 <RegisterForm />
             </TabPanel>
-            <TabPanel value={value} index={1}>
+            <TabPanel value={value} index={1} key={1}>
                 <SignInTab setValue={setValue} />
             </TabPanel>
         </div>
