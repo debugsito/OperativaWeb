@@ -1,2 +1,2 @@
-const HomeRoutes = ['/', '/authenticate'];
+const HomeRoutes = ['/', '/authenticate','/callbackFacebook'];
 export default HomeRoutes;

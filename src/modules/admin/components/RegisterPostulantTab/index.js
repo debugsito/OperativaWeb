@@ -38,7 +38,7 @@ export default function Index() {
             <Grid item xs={12}>
                 <Paper className={classes.paper}>
                     <Grid container spacing={3}>
-                        {/* <Grid item xs={12}>
+                        <Grid item xs={12}>
                             <div className="justify-end">
                                 <Button
                                     variant="contained"
@@ -47,7 +47,7 @@ export default function Index() {
                                     DESCARGAR
                                 </Button>
                             </div>
-                        </Grid> */}
+                        </Grid>
                         <Grid item xs={12}>
                             <RegisteredApplicantsReport />
                         </Grid>
