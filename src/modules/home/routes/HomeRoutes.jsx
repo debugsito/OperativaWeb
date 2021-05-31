@@ -1,2 +1,2 @@
-const HomeRoutes = ['/'];
+const HomeRoutes = ['/', '/authenticate'];
 export default HomeRoutes;

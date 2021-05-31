@@ -3,14 +3,20 @@ import { useSelector } from "react-redux";
 import { Grid } from '@material-ui/core';
 import SignInForm from './SignInForm';
 import { facebookSVG, googleSVG, linkedingSVG } from '../../images2';
-// import { parametersFB } from "../../../shared/config";
+import { LaptopWindows } from '@material-ui/icons';
+import { getFacebookLoginUrl, getGoogleLoginUrl } from "../../../shared/config";
 
 export default function SignInTab({ setValue }) {
     const { isPostulant } = useSelector(state => state?.home)
-    // console.log("parametersFB", parametersFB)
+    console.log("parametersFB", getFacebookLoginUrl())
+    console.log("getGoogleLoginUrl", getGoogleLoginUrl())
 
     const handleClickFacebook = () => {
+        window.location.href = getFacebookLoginUrl()
+    }
 
+    const handleClickGoogle = () => {
+        window.location.href = getGoogleLoginUrl()
     }
 
     return (
@@ -21,7 +27,7 @@ export default function SignInTab({ setValue }) {
                         <img src={facebookSVG} onClick={handleClickFacebook} />
                     </Grid>
                     <Grid item xs={4}>
-                        <img src={googleSVG} />
+                        <img src={googleSVG} onClick={handleClickGoogle} />
                     </Grid>
                     <Grid item xs={4}>
                         <img src={linkedingSVG} />
