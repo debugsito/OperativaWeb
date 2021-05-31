@@ -87,7 +87,7 @@ const headCells = [
         disablePadding: false,
         label: "Salario",
     },
-    { numeric: false, disablePadding: true },
+    { numeric: false, disablePadding: true, label: "Revisar publicación" },
 ]
 
 function EnhancedTableHead(props) {

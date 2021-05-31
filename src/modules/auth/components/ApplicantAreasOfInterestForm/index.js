@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux"
 
-import { Grid, MenuItem, Typography } from '@material-ui/core'
-import { Select, Button, Snackbars } from "../../../shared/components";
+import { Grid, MenuItem } from '@material-ui/core'
+import { Select, Button, Snackbars, Modal, Typography } from "../../../shared/components";
 
 import { actions_Utils } from "../../../../store/actions";
 import { useForm } from "../../../hooks";
@@ -15,6 +15,7 @@ export default function Index({ userData, handleSaveAreasOfInterest }) {
     const dispatch = useDispatch()
     const { items } = useSelector(state => state.utils)
     const [openAlert, setOpenAlert] = useState(false)
+    const [openModal, setOpenModal] = useState(false)
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
@@ -46,13 +47,35 @@ export default function Index({ userData, handleSaveAreasOfInterest }) {
 
     const handleClickFinish = () => {
         if (!disabledButtonState) {
-            handleSaveAreasOfInterest(values)
+            setOpenModal(true)
         } else {
             validate();
             setOpenAlert(true)
             return
         }
     }
+
+    const handleSaveOption = () => {
+        handleSaveAreasOfInterest(values)
+    }
+
+    const bodyModal = (
+        <Grid container spacing={3} direction="column" justify="center" alignItems="center">
+            <Grid item xs={12}>
+                <Typography variant="body1">La creación de tu CV se ha realizado con éxito. ¿Deseas guardar tu CV?</Typography>
+            </Grid>
+            <Grid item xs={12}>
+                <Grid container spacing={3} justify="center">
+                    <Grid item xs={6}>
+                        <Button variant="outlined" onClick={() => setOpenModal(false)}>CANCELAR</Button>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <Button variant="contained" onClick={handleSaveOption}>GUARDAR</Button>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
+    );
 
     return (
         <Grid container spacing={3} style={{ padding: 20 }}>
@@ -80,6 +103,11 @@ export default function Index({ userData, handleSaveAreasOfInterest }) {
                 {/* <Button variant="outlined" size="large" onClick={() => history.push('/')}>Cancelar</Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; */}
                 <Button variant="contained" size="large" onClick={handleClickFinish}>Finalizar</Button>
             </Grid>
+
+            <Modal open={openModal} handleCloseModal={() => setOpenModal(false)} >
+                {bodyModal}
+            </Modal>
+
             <Snackbars
                 open={openAlert}
                 onClose={handleCloseAlert}
