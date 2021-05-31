@@ -1,15 +1,22 @@
 import React from 'react'
 import { useSelector } from "react-redux";
-import { Grid } from '@material-ui/core';
+import { Grid, makeStyles } from '@material-ui/core';
 import SignInForm from './SignInForm';
 import { facebookSVG, googleSVG, linkedingSVG } from '../../images2';
-import { LaptopWindows } from '@material-ui/icons';
 import { getFacebookLoginUrl, getGoogleLoginUrl } from "../../../shared/config";
 
+
+const useStyles = makeStyles((theme) => ({
+    [theme.breakpoints.down('sm')]: {
+        root: {
+            width: "75px"
+        },
+    }
+}));
+
 export default function SignInTab({ setValue }) {
+    const classes = useStyles()
     const { isPostulant } = useSelector(state => state?.home)
-    console.log("parametersFB", getFacebookLoginUrl())
-    console.log("getGoogleLoginUrl", getGoogleLoginUrl())
 
     const handleClickFacebook = () => {
         window.location.href = getFacebookLoginUrl()
@@ -24,13 +31,13 @@ export default function SignInTab({ setValue }) {
             { isPostulant && <Grid item xs={12}>
                 <Grid container spacing={1} justify="center">
                     <Grid item xs={4}>
-                        <img src={facebookSVG} onClick={handleClickFacebook} />
+                        <img src={facebookSVG} onClick={handleClickFacebook} className={classes.root} />
                     </Grid>
                     <Grid item xs={4}>
-                        <img src={googleSVG} onClick={handleClickGoogle} />
+                        <img src={googleSVG} onClick={handleClickGoogle} className={classes.root} />
                     </Grid>
                     <Grid item xs={4}>
-                        <img src={linkedingSVG} />
+                        <img src={linkedingSVG} className={classes.root} />
                     </Grid>
                 </Grid>
             </Grid>}

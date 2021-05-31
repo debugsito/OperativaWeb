@@ -135,7 +135,6 @@ export default function SectionHeader() {
     }
 
     const handleOpenAuthDialog = () => {
-        console.log("hice click")
         setOpenAuthDialog(true)
     }
 
@@ -194,7 +193,9 @@ export default function SectionHeader() {
                         </div>
                         <div className={classes.containerButtons}>
                             <ButtonHome onClick={() => history.push('/tipo-de-cuenta')}>Regístrate</ButtonHome>
-                            {/* <ButtonHome onClick={() => history.push('/iniciar-sesion')}>Inicia sesión</ButtonHome> */}
+                            <Hidden mdUp>
+                                <ButtonHome onClick={handleOpenAuthDialog}>Inicia sesión</ButtonHome>
+                            </Hidden>
                         </div>
                         <div className={classes.containerCardsMovil}>
                             <FeatureCard text="Inmediatez de identificacion del personal requerido" img={featureOne} />

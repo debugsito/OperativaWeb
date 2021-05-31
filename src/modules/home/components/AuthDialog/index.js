@@ -10,12 +10,13 @@ import { setIsPostulant as setIsPostulantRedux } from "../../../../store/actions
 import { setUserError } from "../../../../store/actions/auth/auth.action";
 
 const useStyles = makeStyles(theme => ({
-    paper: {
-        position: "fixed",
-        top: "20px",
-        right: "80px"
+    [theme.breakpoints.up('md')]: {
+        paper: {
+            position: "fixed",
+            top: "20px",
+            right: "80px"
+        }
     }
-
 }))
 
 const Text = withStyles((theme) => ({
