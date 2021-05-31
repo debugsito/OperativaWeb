@@ -7,6 +7,7 @@ import MuiDialogContent from '@material-ui/core/DialogContent';
 
 import SignInDialog from "./SignInDialog";
 import { setIsPostulant as setIsPostulantRedux } from "../../../../store/actions/home/home.action";
+import { setUserError } from "../../../../store/actions/auth/auth.action";
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -39,6 +40,7 @@ export default function SimpleDialog({ open, handleClose }) {
         handleClose()
         setIsPostulant(false)
         setIsBusiness(false)
+        dispatch(setUserError(null))
     }
 
     return (

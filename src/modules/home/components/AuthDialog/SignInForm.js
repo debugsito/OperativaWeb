@@ -1,7 +1,7 @@
 import React from 'react'
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { Grid, FormControl } from '@material-ui/core';
+import { useDispatch, useSelector } from "react-redux";
+import { Grid, FormControl, FormHelperText } from '@material-ui/core';
 import { useForm } from "../../../hooks";
 import { Button, Checkbox, TextInput, TextInputPassword, Typography, Link } from "../../../shared/components";
 import { logIn } from "../../../../store/actions/auth/auth.middleware";
@@ -14,6 +14,7 @@ const initialValues = {
 export default function SignInForm({ setValue }) {
     const history = useHistory();
     const dispatch = useDispatch();
+    const { error } = useSelector((state) => state.auth);
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
@@ -76,6 +77,12 @@ export default function SignInForm({ setValue }) {
                         name="keepMySession"
                     />
                 </FormControl>
+            </Grid>
+            <Grid item xs={12}>
+                {
+                    error &&
+                    <FormHelperText error>{error}</FormHelperText>
+                }
             </Grid>
             <Grid item xs={12}>
                 <Button fullWidth variant="contained" size="large" onClick={handleLogin} disabled={disabledButtonState}>INGRESA</Button>
