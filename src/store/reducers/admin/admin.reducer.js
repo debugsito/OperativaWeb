@@ -2,6 +2,10 @@ import { adminType } from "../../types/admin";
 
 const initialState = {
     report: {},
+    dateOfReport: {
+        startDate: "2021-03-01",
+        finishDate: "2021-05-31"
+    },
     error: null,
 };
 
@@ -16,6 +20,14 @@ const adminTypeReducer = (state = initialState, action) => {
             return {
                 ...state,
                 report: action.payload,
+            };
+        case adminType.SET_DATE_OF_REPORT:
+            return {
+                ...state,
+                dateOfReport: {
+                    ...state.dateOfReport,
+                    ...action.payload
+                },
             };
 
         default:

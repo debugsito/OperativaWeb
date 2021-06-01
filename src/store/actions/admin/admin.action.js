@@ -9,3 +9,8 @@ export const setReport = (payload) => ({
     type: adminType.SET_REPORT,
     payload
 });
+
+export const setDateOfReport = (payload) => ({
+    type: adminType.SET_DATE_OF_REPORT,
+    payload
+});

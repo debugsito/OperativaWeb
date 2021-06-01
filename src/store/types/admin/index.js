@@ -1,4 +1,5 @@
 export const adminType = {
     SET_ERROR_FETCH: 'SET_ERROR_FETCH',
+    SET_DATE_OF_REPORT: 'SET_DATE_OF_REPORT',
     SET_REPORT: 'SET_REPORT',
 };

@@ -1,9 +1,11 @@
 import React from 'react'
 import { DateTime } from "luxon";
 import { Grid } from '@material-ui/core';
+import { useSelector, useDispatch } from "react-redux";
 
 import { useForm } from "../../../hooks";
 import { Button, TextInput } from "../../../shared/components";
+import { setDateOfReport } from "../../../../store/actions/admin/admin.action";
 
 const initialValues = {
     startDate: "2021-03-19",
@@ -11,7 +13,9 @@ const initialValues = {
 }
 
 export default function Dateform({ updateReport }) {
+    const dispatch = useDispatch()
     const dateMax = DateTime.utc().toFormat("yyyy-LL-dd")
+    const { dateOfReport } = useSelector(state => state?.admin)
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
@@ -35,7 +39,12 @@ export default function Dateform({ updateReport }) {
         setErrors,
         handleInputChange,
         disabledButtonState,
-    } = useForm(initialValues, true, validate);
+    } = useForm(dateOfReport, true, validate);
+
+    const handleChange = (e) => {
+        handleInputChange(e)
+        dispatch(setDateOfReport({ [e.target.name]: e.target.value }))
+    }
 
     const handleClick = () => {
         if (!disabledButtonState) {
@@ -56,7 +65,7 @@ export default function Dateform({ updateReport }) {
                     name="startDate"
                     label="Fecha de inicio"
                     value={values.startDate}
-                    onChange={handleInputChange}
+                    onChange={handleChange}
                     error={errors.startDate ? true : false}
                     helperText={errors.startDate}
                     InputLabelProps={{
@@ -75,7 +84,7 @@ export default function Dateform({ updateReport }) {
                     name="finishDate"
                     label="Fecha fin"
                     value={values.finishDate}
-                    onChange={handleInputChange}
+                    onChange={handleChange}
                     error={errors.finishDate ? true : false}
                     helperText={errors.finishDate}
                     InputLabelProps={{

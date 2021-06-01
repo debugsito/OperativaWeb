@@ -17,25 +17,22 @@ const useStyles = makeStyles(theme => ({
         padding: "3rem"
     }
 }))
-const date = { startDate: "2021-03-19", finishDate: "2021-03-31" }
 
 export default function Index() {
     const classes = useStyles()
     const dispatch = useDispatch()
-    const [values, setValues] = useState("")
+    const { dateOfReport } = useSelector(state => state?.admin)
 
     useEffect(() => {
-        dispatch(getReport(date))
+        dispatch(getReport(dateOfReport))
     }, [])
 
     const updateReport = (values) => {
         dispatch(getReport(values))
-        setValues(values)
-        console.log(":::::values:::::", values)
     }
 
     const handleDownload = async () => {
-        // await service_UserAdmin.getFileReport(date);
+        await service_UserAdmin.getFileReport(dateOfReport);
     }
 
     return (
