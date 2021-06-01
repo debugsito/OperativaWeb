@@ -66,6 +66,7 @@ export const applicantSignUp = (user) => {
     };
 };
 
+//Ya esta en middleware
 export const logIn = (user) => {
     return async (dispatch) => {
         try {

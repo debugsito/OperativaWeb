@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Hidden, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from "react-router-dom";
@@ -6,8 +6,9 @@ import { useHistory } from "react-router-dom";
 import bgImage from "../../assets/images/bg.png"
 import operativaLogo from "../../assets/images/operativa_logo.png"
 import sectoresGif from "../../assets/images/sectores.gif"
+import { Button } from "../../../shared/components";
 
-import { ButtonHome, FeatureCard } from "../";
+import { ButtonHome, FeatureCard, AuthDialog } from "../";
 import { featureOne, featureTwo, featureThree, backgroundMovil, logoMovil, sectorImgMovil } from "../../images2";
 
 const useStyles = makeStyles(theme => ({
@@ -18,10 +19,13 @@ const useStyles = makeStyles(theme => ({
         backgroundSize: 'cover',
         backgroundPosition: 'center center',
         display: 'grid',
-        gridTemplateRows: 'repeat(12,1fr)'
+        gridTemplateRows: 'repeat(12,1fr)',
     },
-    container: {
-        gridRow: '2/12'
+    containerBar: {
+        gridRow: '1/2'
+    },
+    containerMain: {
+        gridRow: '2/13'
     },
     gifScreen: {
         width: '30rem',
@@ -121,14 +125,29 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-export default function SectionHeader(props) {
+export default function SectionHeader() {
+    const [openAuthDialog, setOpenAuthDialog] = useState(false)
     const classes = useStyles();
-    const history = useHistory()
+    const history = useHistory();
+
+    const handleCloseAuthDialog = () => {
+        setOpenAuthDialog(false)
+    }
+
+    const handleOpenAuthDialog = () => {
+        setOpenAuthDialog(true)
+    }
+
     return (
         <>
             <Hidden smDown>
                 <div className={classes.root}>
-                    <Grid container alignItems="center" className={classes.container}>
+                    <Grid container direction="row" justify="flex-end" alignItems="center" className={classes.containerBar}>
+                        <Grid item xs={2}>
+                            <Button variant="outlined" onClick={handleOpenAuthDialog}>INICIA SESIÓN</Button>
+                        </Grid>
+                    </Grid>
+                    <Grid container alignItems="center" className={classes.containerMain}>
                         <Grid item xs={12} md={6}>
                             <div className={classes.content}>
                                 <img src={operativaLogo} />
@@ -138,9 +157,9 @@ export default function SectionHeader(props) {
                                     <div>
                                         <ButtonHome onClick={() => history.push('/tipo-de-cuenta')}>Regístrate</ButtonHome>
                                     </div>
-                                    <div className={classes.marginLeft}>
+                                    {/* <div className={classes.marginLeft}>
                                         <ButtonHome onClick={() => history.push('/iniciar-sesion')}>Inicia sesión</ButtonHome>
-                                    </div>
+                                    </div> */}
                                 </div>
 
 
@@ -174,7 +193,9 @@ export default function SectionHeader(props) {
                         </div>
                         <div className={classes.containerButtons}>
                             <ButtonHome onClick={() => history.push('/tipo-de-cuenta')}>Regístrate</ButtonHome>
-                            <ButtonHome onClick={() => history.push('/iniciar-sesion')}>Inicia sesión</ButtonHome>
+                            <Hidden mdUp>
+                                <ButtonHome onClick={handleOpenAuthDialog}>Inicia sesión</ButtonHome>
+                            </Hidden>
                         </div>
                         <div className={classes.containerCardsMovil}>
                             <FeatureCard text="Inmediatez de identificacion del personal requerido" img={featureOne} />
@@ -185,7 +206,7 @@ export default function SectionHeader(props) {
                     </div>
                 </div>
             </Hidden>
-
+            <AuthDialog open={openAuthDialog} handleClose={handleCloseAuthDialog} />
         </>
 
     )

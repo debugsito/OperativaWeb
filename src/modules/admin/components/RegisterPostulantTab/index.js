@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Grid, Paper } from '@material-ui/core';
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,6 +10,7 @@ import RegisteredApplicantsReport from "./RegisteredApplicantsReport";
 import { getReport } from "../../../../store/actions/admin/admin.midleware";
 import { Button } from "../../../shared/components";
 import { downloadSVG } from "../../../shared/images";
+import { service_UserAdmin } from "../../../../store/services";
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -21,6 +22,7 @@ const date = { startDate: "2021-03-19", finishDate: "2021-03-31" }
 export default function Index() {
     const classes = useStyles()
     const dispatch = useDispatch()
+    const [values, setValues] = useState("")
 
     useEffect(() => {
         dispatch(getReport(date))
@@ -28,6 +30,12 @@ export default function Index() {
 
     const updateReport = (values) => {
         dispatch(getReport(values))
+        setValues(values)
+        console.log(":::::values:::::", values)
+    }
+
+    const handleDownload = async () => {
+        // await service_UserAdmin.getFileReport(date);
     }
 
     return (
@@ -38,16 +46,18 @@ export default function Index() {
             <Grid item xs={12}>
                 <Paper className={classes.paper}>
                     <Grid container spacing={3}>
-                        {/* <Grid item xs={12}>
+                        <Grid item xs={12}>
                             <div className="justify-end">
                                 <Button
-                                    variant="contained"
                                     size="large"
-                                    startIcon={<img src={downloadSVG} alt="descargar" />}>
+                                    variant="contained"
+                                    onClick={handleDownload}
+                                    startIcon={<img src={downloadSVG} alt="descargar" />}
+                                >
                                     DESCARGAR
                                 </Button>
                             </div>
-                        </Grid> */}
+                        </Grid>
                         <Grid item xs={12}>
                             <RegisteredApplicantsReport />
                         </Grid>

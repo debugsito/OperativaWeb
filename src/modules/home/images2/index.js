@@ -35,6 +35,10 @@ export { default as imgThree } from './carousel/img03.svg';
 export { default as imgFour } from './carousel/img04.svg';
 export { default as imgFive } from './carousel/img05.svg';
 
+export { default as facebookSVG } from './redes/facebook.svg';
+export { default as googleSVG } from './redes/google.svg';
+export { default as linkedingSVG } from './redes/linkeding.svg';
+
 export { default as img1 } from './municipalidades/1.png';
 export { default as img2 } from './municipalidades/2.png';
 export { default as img3 } from './municipalidades/3.png';

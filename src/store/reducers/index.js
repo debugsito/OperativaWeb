@@ -7,6 +7,7 @@ import auth from './auth/auth.reducer';
 import dashboard from './dashboard/dashboard.reducer';
 import utils from './utils/utils.reducer';
 import global from './global';
+import home from './home/home.reducers';
 
 const rootReducer = combineReducers({
   admin,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   dashboard,
   utils,
   applicant,
-  global
+  global,
+  home
 });
 
 const reducers = (state, action) => {
