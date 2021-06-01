@@ -29,6 +29,10 @@ const MyAccountRouter = () => {
                     exact
                     path={HomeRoutes[2]}
                     component={Authenticate} />
+                <PrivateRoute
+                    exact
+                    path={HomeRoutes[3]}
+                    component={Authenticate} />
             </Switch>
         </>
     );
