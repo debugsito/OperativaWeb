@@ -12,7 +12,7 @@ import DOCUMENT_TYPE from "../../../global/constants/types/documentsTypes";
 const defaultValues = {
     first_name: "",
     last_name: "",
-    type_doc: "",
+    document_id: "",
     document_number: "",
     birth_date: "",
     gender: "",
@@ -39,10 +39,10 @@ export default function ApplicantContactInformationForm({ user, handleSavePerson
             temp.gender = fieldValues.gender ? "" : "El campo es requerido."
         if ('last_name' in fieldValues)
             temp.last_name = fieldValues.last_name ? "" : "El campo es requerido."
-        if ('type_doc' in fieldValues)
-            temp.type_doc = fieldValues.type_doc ? "" : "El campo es requerido."
+        if ('document_id' in fieldValues)
+            temp.document_id = fieldValues.document_id ? "" : "El campo es requerido."
         if ('document_number' in fieldValues) {
-            if (values.type_doc === 1) {
+            if (values.document_id === 1) {
                 temp.document_number = fieldValues.document_number ? (isDni(fieldValues.document_number) ? "" : "Numero de DNI inválido") : "El campo es requerido."
             } else {
                 temp.document_number = fieldValues.document_number ? "" : "El campo es requerido."
@@ -156,13 +156,13 @@ export default function ApplicantContactInformationForm({ user, handleSavePerson
                 />
             </Grid>
             <Grid item xs={12} md={6}>
-                <FormControl variant="outlined" fullWidth error={errors.type_doc ? true : false}>
+                <FormControl variant="outlined" fullWidth error={errors.document_id ? true : false}>
                     <InputLabel id="demo-simple-select-outlined-label">Tipo de documento</InputLabel>
                     <Select
                         labelId="demo-simple-select-outlined-label"
                         id="demo-simple-select-outlined"
-                        name="type_doc"
-                        value={values.type_doc}
+                        name="document_id"
+                        value={values.document_id}
                         onChange={(e) => handleSelectTypeDocument(e)}
                         label="Tipo de documento"
                     >
@@ -170,7 +170,7 @@ export default function ApplicantContactInformationForm({ user, handleSavePerson
                             <MenuItem key={element.id} value={element.id}>{element.name}</MenuItem>
                         )}
                     </Select>
-                    <FormHelperText>{errors.type_doc}</FormHelperText>
+                    <FormHelperText>{errors.document_id}</FormHelperText>
                 </FormControl>
             </Grid>
             <Grid item xs={12} md={6}>

@@ -8,6 +8,15 @@ export const getRubroById = (array, rubro_id) => {
     }
 }
 
+export const getNameById = (array, id) => {
+    if (id === "") {
+        return ""
+    } else {
+        const rubro = array.filter(item => item.id === id)
+        return rubro[0]?.name
+    }
+}
+
 export const convertStringToObject = (string) => {
     if (string[0] === "[") {
         return JSON.parse(string)

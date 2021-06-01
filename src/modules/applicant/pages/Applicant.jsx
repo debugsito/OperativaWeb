@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Container, Grid, makeStyles } from "@material-ui/core";
 
 import { Breadcrumbs, Typography } from "../../shared/components";
@@ -7,6 +7,8 @@ import { SessionRoutes } from "../../shared/libs/sessionRoutes";
 import { CustomCard } from "../../dashboard/components";
 import { ApplicantDataTable } from '../components'
 import { filesSVG, phoneSVG, agreementSVG } from "../../shared/images";
+import { getDocumentsType } from "../../../store/actions/utils/utils.action";
+import { getNameById } from "../../shared/utils";
 import '../styles/index.css'
 
 const useStyles = makeStyles(theme => ({
@@ -19,10 +21,15 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const Applicant  = () => {
+    const dispatch = useDispatch()
     const classes = useStyles()
-    const { user } = useSelector(state => state?.auth);
+    const { auth: {user}, utils:{documentsType} } = useSelector(state => state);
     const initRoute = SessionRoutes().initRoute;
     const routes = [{ name: "Mis postulaciones", to: `${initRoute}` }];
+
+    useEffect(() => {
+        dispatch(getDocumentsType())
+    },[])
 
     return (
         <Container className="applicant-container">
@@ -38,8 +45,7 @@ const Applicant  = () => {
                                 {user?.account?.user?.fullname}
                                 </Typography>
                                 <Typography variant="body1" className="title-color">
-                                {/* cambiar ruc a dinamico */}
-                                DNI: {user?.account?.user?.document_number}
+                                {`${getNameById(documentsType.documents,user.account.user.document_id)}: ${user?.account?.user?.document_number}`}
                                 </Typography>
                             </CustomCard>
                         </Grid>
