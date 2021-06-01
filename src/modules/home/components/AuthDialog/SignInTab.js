@@ -9,7 +9,8 @@ import { getFacebookLoginUrl, getGoogleLoginUrl } from "../../../shared/config";
 const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down('sm')]: {
         root: {
-            width: "75px"
+            width: "100px",
+
         },
     }
 }));
@@ -30,15 +31,15 @@ export default function SignInTab({ setValue }) {
         <Grid container spacing={1} justify="center">
             { isPostulant && <Grid item xs={12}>
                 <Grid container spacing={1} justify="center">
-                    <Grid item xs={4}>
+                    <Grid item xs={6} className="text-center">
                         <img src={facebookSVG} onClick={handleClickFacebook} className={classes.root} />
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs={6} className="text-center">
                         <img src={googleSVG} onClick={handleClickGoogle} className={classes.root} />
                     </Grid>
-                    <Grid item xs={4}>
+                    {/* <Grid item xs={4}>
                         <img src={linkedingSVG} className={classes.root} />
-                    </Grid>
+                    </Grid> */}
                 </Grid>
             </Grid>}
             <Grid item xs={12}>

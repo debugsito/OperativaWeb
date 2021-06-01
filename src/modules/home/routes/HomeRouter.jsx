@@ -24,7 +24,7 @@ const MyAccountRouter = () => {
                 <PrivateRoute
                     exact
                     path={HomeRoutes[1]}
-                    component={AuthRedirect} />
+                    component={Authenticate} />
                 <PrivateRoute
                     exact
                     path={HomeRoutes[2]}
