@@ -2,7 +2,8 @@ import React, { useEffect } from 'react'
 import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { Backdrop } from "../../shared/components";
-import { logIn } from "../../../store/actions/auth/auth.middleware";
+import AppSession from "../../shared/libs/session/AppSession";
+import { setUser } from "../../../store/actions/auth/auth.action";
 
 export default function Authenticate(props) {
     const dispatch = useDispatch()
@@ -17,19 +18,20 @@ export default function Authenticate(props) {
     useEffect(() => {
         console.log("::::::::::::::USE_EFFECT:::::::::::::::")
         if(location.search !== ""){
-            const values = {
+            AppSession.create(query.get("token"))
+            const user = {
+                account:{
+                    rol_usuario:"Administrador",
+                    email: query.get("email"),
+                    role: query.get("role")
+                },
                 token:query.get("token"),
-                email: query.get("email"),
-                role: query.get("role")
             }
-            dispatch(logIn(values))
-            console.log("values",values)
-
+            dispatch(setUser(user))
         }
 
     },[location.search])
 
-    console.log("location",location)
 
     const handleClose = () => {
         // setOpen(false);
