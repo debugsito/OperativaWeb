@@ -8,9 +8,9 @@ export const getRubroById = (array, rubro_id) => {
     }
 }
 
-export const getNameById = (array, id) => {
-    if (id === "") {
-        return ""
+export const getNameById = (array = [], id) => {
+    if (!id || array.length === 0) {
+        return "DNI"
     } else {
         const rubro = array.filter(item => item.id === id)
         return rubro[0]?.name
