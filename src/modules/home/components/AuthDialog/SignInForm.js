@@ -64,6 +64,7 @@ export default function SignInForm({ setValue }) {
                     onChange={handleInputChange}
                     error={errors.password ? true : false}
                     helperText={errors.password}
+                    labelWidth={90}
                 />
             </Grid>
             <Grid item xs={12}>

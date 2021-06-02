@@ -1,28 +1,19 @@
 import React from 'react'
-import { FormControl, FormHelperText, IconButton, InputAdornment, InputLabel, OutlinedInput } from '@material-ui/core';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
-import { makeStyles } from '@material-ui/core/styles';
+import { FormControl, FormHelperText, IconButton, InputAdornment, InputLabel, OutlinedInput } from '@material-ui/core';
 
-const useStyles = makeStyles((theme) => ({
-    textField: {
-        width: '100%',
-    },
-}));
-
-export default function Index({ error, label, helperText, ...props }) {
-    const classes = useStyles()
+export default function Index({ error, label, helperText, labelWidth = 127, ...props }) {
     const [showPassword, setShowPassword] = React.useState(false)
 
     return (
         <FormControl variant="outlined" fullWidth error={error}>
-            <InputLabel htmlFor="outlined-password" >{label}</InputLabel>
+            <InputLabel htmlFor="password" >{label}</InputLabel>
             <OutlinedInput
+                labelWidth={labelWidth}
                 type={showPassword ? 'text' : 'password'}
-                {...props}
                 endAdornment={
                     <InputAdornment position="end">
                         <IconButton
-                            id="outlined-password-icon"
                             aria-label="toggle password visibility"
                             onClick={() => setShowPassword(prevState => !prevState)}
                             edge="end"
@@ -31,7 +22,7 @@ export default function Index({ error, label, helperText, ...props }) {
                         </IconButton>
                     </InputAdornment>
                 }
-                labelWidth={127}
+                {...props}
             />
             <FormHelperText>{helperText}</FormHelperText>
         </FormControl>
