@@ -1,17 +1,14 @@
-import React, { useEffect } from 'react';
-import { useHistory, Redirect, useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from 'react-redux';
-import { makeStyles } from '@material-ui/core/styles';
-import { AccountCircle } from '@material-ui/icons';
-import MenuIcon from '@material-ui/icons/Menu';
+import React from 'react';
 import clsx from 'clsx';
-import { AppBar, CssBaseline, ClickAwayListener, Grid, Grow, IconButton, MenuList, MenuItem, Paper, Popper, Toolbar, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import { useDispatch, useSelector } from 'react-redux';
+import { Redirect, useLocation } from "react-router-dom";
+import { AppBar, CssBaseline, Grid, Toolbar, Typography } from '@material-ui/core';
 
 
-import { Link } from '..';
+import ButtonLogout from "./ButtonLogout";
 import { logoSVG } from '../../images';
 import AppSession from '../../libs/session/AppSession';
-import { SessionRoutes } from '../../libs/sessionRoutes';
 import { MenuRoutes } from "../../libs/menuRoutes";
 import { signOut } from '../../../../store/actions/auth/auth.action';
 
@@ -51,53 +48,22 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Navigation({ children }) {
-  const location = useLocation()
-  const history = useHistory();
-  const session = AppSession.get();
-  const initRoute = SessionRoutes.initRoute
-  const hasDashboard = MenuRoutes().hasDashboard;
-  const dispatch = useDispatch();
-  const { user, showLoading } = useSelector(state => state?.auth);
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const location = useLocation()
+  const session = AppSession.get();
+  const hasDashboard = MenuRoutes().hasDashboard;
+  const { user } = useSelector(state => state?.auth);
+
   const [open, setOpen] = React.useState(false);
-  const [anchorEl, setAnchorEl] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(false);
 
-  const [openMenu, setOpenMenu] = React.useState(false);
-  const anchorRef = React.useRef(null);
 
-  // useEffect(() => {
-  //   if (showLoading) {
-  //     console.log("logout...")
-  //     setIsLoading(true)
-  //     dispatch(signOut());
-  //   }
-  // }, [showLoading])
-
-  const handleSignOut = () => {
-    // setIsLoading(true)
+  const handleSignOut = (event) => {
+    event.preventDefault();
     dispatch(signOut());
-    // history.push("/")
     return <Redirect to="/" />
   }
-
-  const handleToggle = () => {
-    setOpenMenu((prevOpen) => !prevOpen);
-  };
-
-  function handleListKeyDown(event) {
-    if (event.key === 'Tab') {
-      event.preventDefault();
-      setOpenMenu(false);
-    }
-  }
-
-  const handleCloseMenu = (event) => {
-    if (anchorRef.current && anchorRef.current.contains(event.target)) {
-      return;
-    }
-    setOpenMenu(false);
-  };
 
   return (
     <div className={classes.root}>
@@ -117,69 +83,20 @@ export default function Navigation({ children }) {
                     <a href={session ? '/' : process.env.REACT_APP_PATH_LANDING} ><img src={logoSVG} alt="Operativa" /></a>
                   </Typography>
                 </Grid>
-                {session && !hasDashboard && (
-                  <Grid item>
-                    <IconButton
-                      ref={anchorRef}
-                      aria-controls={open ? 'menu-list-grow' : undefined}
-                      aria-haspopup="true"
-                      color="inherit"
-                      aria-label="cerrar sesión"
-                      edge="end"
-                      onClick={handleToggle}
-                    >
-                      <MenuIcon fontSize="large" />
-                    </IconButton>
-                    <Popper open={openMenu} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
-                      {({ TransitionProps, placement }) => (
-                        <Grow
-                          {...TransitionProps}
-                          style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
-                        >
-                          <Paper>
-                            <ClickAwayListener onClickAway={handleCloseMenu}>
-                              <MenuList autoFocusItem={openMenu} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                                <MenuItem onClick={handleSignOut}>Cerrar Sesión</MenuItem>
-                              </MenuList>
-                            </ClickAwayListener>
-                          </Paper>
-                        </Grow>
-                      )}
-                    </Popper>
-                  </Grid>
-                )
-                }
                 {
-                  hasDashboard &&
-                  (
-                    <Grid item>
-                      <Grid container justify="flex-end" alignItems="center" spacing={1}>
-                        <Grid item>
-                          <Typography paragraph className="color-white navigation-text">
-                            {user.account.email}
-                          </Typography>
-                          <Link className="color-white navigation-text" onClick={handleSignOut}>Cerrar sesión</Link>
-                        </Grid>
-                        <Grid item>
-                          <AccountCircle fontSize="large" />
-                        </Grid>
-                      </Grid>
-                    </Grid>
-                  )
+                  session &&
+                  <Grid item>
+                    <ButtonLogout email={user.account.email} handleSignOut={handleSignOut} />
+                  </Grid>
                 }
               </Grid>
             </Toolbar>
           </AppBar>
         </>
-
-
-
       }
-
       {
         hasDashboard &&
         <NavigationDrawer />
-
       }
       <main className={classes.content}>
         <div className={`${location.pathname !== "/" ? classes.toolbar : ''}`} />

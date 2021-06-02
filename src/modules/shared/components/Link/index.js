@@ -6,7 +6,8 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
     root: {
-        color: 'var(--secondaryButtonColor) !important',
+        color: 'var(--secondaryButtonColor)',
+        cursor: "pointer"
     }
 
 }))
@@ -16,6 +17,7 @@ export default function CustomLink({ children, ...props }) {
     return (
         <Link
             className={classes.root}
+            classes={{ root: classes.root }}
             {...props}>
             {children}
         </Link>
