@@ -8,7 +8,7 @@ import operativaLogo from "../../assets/images/operativa_logo.png"
 import sectoresGif from "../../assets/images/sectores.gif"
 import { Button } from "../../../shared/components";
 
-import { ButtonHome, FeatureCard, AuthDialog } from "../";
+import { ButtonHome, ButtonRegister, FeatureCard, AuthDialog } from "../";
 import { featureOne, featureTwo, featureThree, backgroundMovil, logoMovil, sectorImgMovil } from "../../images2";
 
 const useStyles = makeStyles(theme => ({
@@ -144,7 +144,7 @@ export default function SectionHeader() {
                 <div className={classes.root}>
                     <Grid container direction="row" justify="flex-end" alignItems="center" className={classes.containerBar}>
                         <Grid item xs={2}>
-                            <Button variant="outlined" onClick={handleOpenAuthDialog}>INICIA SESIÓN</Button>
+                            <Button variant="contained" size="large" onClick={handleOpenAuthDialog}>INICIA SESIÓN</Button>
                         </Grid>
                     </Grid>
                     <Grid container alignItems="center" className={classes.containerMain}>
@@ -155,7 +155,7 @@ export default function SectionHeader() {
                                 <h1 className={classes.titleLight}>inteligente de reclutamiento</h1>
                                 <div className={classes.contentButtons}>
                                     <div>
-                                        <ButtonHome onClick={() => history.push('/tipo-de-cuenta')}>Regístrate</ButtonHome>
+                                        <ButtonRegister onClick={() => history.push('/tipo-de-cuenta')}>Regístrate</ButtonRegister>
                                     </div>
                                     {/* <div className={classes.marginLeft}>
                                         <ButtonHome onClick={() => history.push('/iniciar-sesion')}>Inicia sesión</ButtonHome>
@@ -165,7 +165,7 @@ export default function SectionHeader() {
 
                             </div>
                         </Grid>
-                        <Grid item xs={12} md={6}>
+                        <Grid item xs={12} md={6} className="justify-center">
                             <img src={sectoresGif} className={classes.gifScreen} />
                         </Grid>
                         <Grid item xs={12} md={10}>

@@ -14,19 +14,10 @@ const useStyles = makeStyles(theme => ({
         fontWeight: 600,
         padding: '.55rem 2.5rem',
         fontSize: '1.15rem',
+        [theme.breakpoints.down('sm')]: {
+            padding: '.375rem 0.75rem',
+        }
     },
-    buttonMovil: {
-        border: '3px solid #fff',
-        '&:hover': {
-            border: '3px solid #72b924',
-            background: '#72b924'
-        },
-        borderRadius: '7px',
-        color: '#fff !important',
-        fontWeight: 600,
-        padding: '.375rem 0.75rem',
-        fontSize: '1.15rem',
-    }
 
 }))
 
@@ -47,7 +38,7 @@ export default function ButtonHome({ children, ...props }) {
             </Hidden>
             <Hidden mdUp>
                 <Link
-                    className={classes.buttonMovil}
+                    className={classes.button}
                     component="button"
                     variant="body2"
                     underline="none"
