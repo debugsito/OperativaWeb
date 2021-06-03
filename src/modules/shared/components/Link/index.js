@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
     root: {
-        color: 'var(--secondaryButtonColor)',
+        color: 'var(--secondaryButtonColor) !important',
         cursor: "pointer"
     }
 

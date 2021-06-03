@@ -1,3 +1,9 @@
 .home__image-container img{
     width: 100%;
 }
+@media (min-width: 600px){
+    .MuiBackdrop-root{
+        height: 100%;
+        top:8% !important;
+    }
+}
