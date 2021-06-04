@@ -8,6 +8,15 @@ export const getRubroById = (array, rubro_id) => {
     }
 }
 
+export const getPeriodoById = (array, period_id) => {
+    if (period_id === "") {
+        return ""
+    } else {
+        const periodo = array.filter(item => item.id == period_id)
+        return periodo[0]?.name
+    }
+}
+
 export const getNameById = (array = [], id) => {
     if (!id || array.length === 0) {
         return "DNI"
