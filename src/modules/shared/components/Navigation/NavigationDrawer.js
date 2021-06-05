@@ -39,6 +39,8 @@ const getAvatarIcon = (name) => {
       return <WidgetsIcon />
     case 'Historial':
       return <AssignmentIcon />
+    case 'En Proceso':
+      return <AssignmentIcon />
     default:
       return (<InboxIcon />);
   }

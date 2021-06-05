@@ -51,7 +51,7 @@ export function MenuRoutes() {
             case 'postulante':
                 if (user.account.user) {
                     list = [
-                        { name: "En Progreso", to: `postulante/postulaciones` }
+                        { id: "proccess", name: "En Proceso", to: `postulante/postulaciones` }
                     ]
                     hasDashboard = true
                 }
