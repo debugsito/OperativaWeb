@@ -75,7 +75,7 @@ export default function HistoryTable({ handleEnableButtonDownload, searchInput }
         const rows = publicationsAccount?.data?.map(({ publication }) => (
             createData(
                 publication.job_title,
-                "Empresa X",
+                publication.company,
                 DateTime.fromISO(publication.createdAt).toFormat("DDD"),
                 publication.salary,
                 publication.a_tratar,

@@ -17,6 +17,15 @@ export const getPeriodoById = (array, period_id) => {
     }
 }
 
+export const getDistrictById = (array, district_id) => {
+    if (district_id === "") {
+        return ""
+    } else {
+        const distrtict = array.filter(item => item.id == district_id)
+        return distrtict[0]?.name
+    }
+}
+
 export const getNameById = (array = [], id) => {
     if (!id || array.length === 0) {
         return "DNI"

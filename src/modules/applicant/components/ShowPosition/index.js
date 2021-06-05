@@ -4,13 +4,13 @@ import { Divider, Grid, Typography } from "@material-ui/core";
 import { DateTime } from "luxon";
 
 import { actions_Utils } from "../../../../store/actions";
-import { getRubroById, getPeriodoById, convertStringToObject } from "../../../shared/utils";
+import { getRubroById, getPeriodoById, getDistrictById, convertStringToObject } from "../../../shared/utils";
 import { RichText } from "../../../shared/components";
 
 export default function Index() {
     const dispatch = useDispatch()
     const { publicationSelected } = useSelector(state => state?.applicant)
-    const { items, periods } = useSelector(state => state?.utils)
+    const { items, periods, districts } = useSelector(state => state?.utils)
 
     useEffect(() => {
         dispatch(actions_Utils.getDepartments());
@@ -94,13 +94,14 @@ export default function Index() {
                 </Typography>
                 <br />
 
-                {/* <Typography variant="subtitle2" component="h6">
+                <Typography variant="subtitle2" component="h6">
                     <strong>Distrito</strong>
                 </Typography>
                 <Typography variant="body1" component="h6">
+                    {getDistrictById(districts, publicationSelected?.district_id)}
                     {publicationSelected?.district?.name}
                 </Typography>
-                <br /> */}
+                <br />
 
                 <Typography variant="subtitle2" component="h6">
                     <strong>Salario</strong>
