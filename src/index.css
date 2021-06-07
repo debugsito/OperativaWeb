@@ -33,6 +33,11 @@ code {
   align-items: center;
 }
 
+.align-items-end {
+  display: flex;
+  align-items: center;
+}
+
 .justify-center {
   display: flex;
   justify-content: center;

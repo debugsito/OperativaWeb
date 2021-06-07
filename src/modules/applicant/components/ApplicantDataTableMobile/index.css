@@ -1,0 +1,26 @@
+.open-positions-table .text-with-icon-container {
+    display: flex;
+    align-items: center;
+}
+
+.open-positions-table .text-with-icon-container img {
+    margin-right: .5rem;
+}
+
+.open-positions-table .table-pagination {
+    background: var(--paragraphColor);
+    color: #ffffff;
+}
+
+.open-positions-table .table-pagination p, .open-positions-table .table-pagination svg {
+    color: #ffffff !important;
+}
+
+.open-positions-table .MuiToolbar-root:first-child .MuiTypography-root {
+    color: #ffffff !important;
+    margin-left: .5rem;
+}
+
+.open-positions-table .MuiTableRow-root.Mui-selected{
+    background-color: transparent !important;
+}

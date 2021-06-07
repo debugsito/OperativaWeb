@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Container, Grid, makeStyles } from "@material-ui/core";
+import { Container, Grid, Hidden ,makeStyles } from "@material-ui/core";
 
 import { Breadcrumbs, Typography } from "../../shared/components";
 import { SessionRoutes } from "../../shared/libs/sessionRoutes";
 import { CustomCard } from "../../dashboard/components";
-import { ApplicantDataTable } from '../components'
+import { ApplicantDataTable, ApplicantDataTableMobile } from '../components'
 import { filesSVG, phoneSVG, agreementSVG } from "../../shared/images";
 import { getDocumentsType } from "../../../store/actions/utils/utils.action";
 import { getNameById } from "../../shared/utils";
@@ -57,7 +57,7 @@ const Applicant  = () => {
                                         Debes tener en cuenta lo siguiente:
                                     </Typography>
                                 </Grid>
-                                <Grid item xs={4}>
+                                <Grid item xs={12} md={4}>
                                     <Grid container direction="column" justify="center" alignItems="center">
                                         <Grid item xs={12}>
                                             <img src={filesSVG} className={classes.img}/>
@@ -70,7 +70,7 @@ const Applicant  = () => {
                                         </Grid>
                                     </Grid>
                                 </Grid>
-                                <Grid item xs={4}>
+                                <Grid item xs={12} md={4}>
                                     <Grid container direction="column" justify="center" alignItems="center">
                                         <Grid item xs={12}>
                                             <img src={phoneSVG} className={classes.img}/>
@@ -83,7 +83,7 @@ const Applicant  = () => {
                                         </Grid>
                                     </Grid>
                                 </Grid>
-                                <Grid item xs={4}>
+                                <Grid item xs={12} md={4}>
                                     <Grid container direction="column" justify="center" alignItems="center">
                                         <Grid item xs={12}>
                                             <img src={agreementSVG} className={classes.img}/>
@@ -97,7 +97,16 @@ const Applicant  = () => {
                                     </Grid>
                                 </Grid>
                                 <Grid item xs={12}>
-                                   <ApplicantDataTable />
+                                    <Hidden smDown>
+                                        <ApplicantDataTable />
+                                    </Hidden>
+                                    <Hidden mdUp>
+                                            <ApplicantDataTableMobile />
+                                    {/* <Grid container>
+                                        <Grid item xs={12}>
+                                        </Grid>
+                                    </Grid> */}
+                                    </Hidden>
                                 </Grid>
                             </Grid>
                         </Grid>

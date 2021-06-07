@@ -1,2 +1,3 @@
 export { default as ApplicantDataTable } from './ApplicantDataTable';
+export { default as ApplicantDataTableMobile } from './ApplicantDataTableMobile';
 export { default as ShowPosition } from './ShowPosition';
