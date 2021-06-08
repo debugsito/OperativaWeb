@@ -92,7 +92,7 @@ const Applicant  = () => {
                                             <Typography variant="body2" classes={{body2:classes.body2}}>Las empresas te contactarán</Typography>
                                         </Grid>
                                         <Grid item xs={12}>
-                                            <Typography variant="body2">para invitarte al proceso de selecion.</Typography>
+                                            <Typography variant="body2">para invitarte al proceso de selección.</Typography>
                                         </Grid>
                                     </Grid>
                                 </Grid>
@@ -101,11 +101,7 @@ const Applicant  = () => {
                                         <ApplicantDataTable />
                                     </Hidden>
                                     <Hidden mdUp>
-                                            <ApplicantDataTableMobile />
-                                    {/* <Grid container>
-                                        <Grid item xs={12}>
-                                        </Grid>
-                                    </Grid> */}
+                                        <ApplicantDataTableMobile />
                                     </Hidden>
                                 </Grid>
                             </Grid>
