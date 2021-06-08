@@ -89,6 +89,7 @@ export default function HistoryTable({ handleEnableButtonDownload, searchInput }
             )
         ))
         setPublications(rows)
+        console.log("setPublications", rows)
 
     }, [publicationsAccount])
 
@@ -173,6 +174,7 @@ export default function HistoryTable({ handleEnableButtonDownload, searchInput }
                                 {stableSort(publications, getComparator(order, orderBy))
                                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map((row, index) => {
+                                        console.log("TableBody")
                                         const isItemSelected = isSelected(row.data.id);
                                         const labelId = `enhanced-table-checkbox-${index}`;
                                         return (

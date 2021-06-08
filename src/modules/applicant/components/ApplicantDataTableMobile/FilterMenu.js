@@ -1,8 +1,24 @@
 import React from 'react'
-import { Menu, MenuItem, Typography } from '@material-ui/core';
+import { makeStyles, Menu, MenuItem, Typography } from '@material-ui/core';
 import { Checkbox } from "../../../shared/components";
 
-export default function FilterMenu({ anchorEl, handleClose }) {
+const useStyles = makeStyles(theme => ({
+  paper: {
+    width: "84%",
+    left: "8% !important",
+  }
+}))
+
+export default function FilterMenu({ anchorEl, handleClose, list = [], onRequestSort }) {
+  const classes = useStyles()
+
+  console.log("resolucion", window.screen.width)
+  console.log("ratio", devicePixelRatio)
+  console.log("multiplicacion", devicePixelRatio * window.screen.width)
+
+  const createSortHandler = (property) => (event) => {
+    onRequestSort(event, property);
+  };
 
   return (
     <Menu
@@ -11,27 +27,23 @@ export default function FilterMenu({ anchorEl, handleClose }) {
       keepMounted
       open={Boolean(anchorEl)}
       onClose={handleClose}
+      classes={{ paper: classes.paper }}
     >
-      <MenuItem onClick={handleClose}>
-        <Checkbox
-          label={
-            <Typography variant="body2" component="p">
-              Titulo de publicación
+      {
+        list.map((item, index) => (
+          <MenuItem onClick={handleClose} key={index}>
+            <Checkbox
+              onChange={createSortHandler(item.id)}
+              label={
+                <Typography variant="body2" component="p">
+                  {item.label}
                 </Typography>
-          }
-          name="title"
-        />
-      </MenuItem>
-      <MenuItem onClick={handleClose}>
-        <Checkbox
-          label={
-            <Typography variant="body2" component="p">
-              Fecha de publicación
-            </Typography>
-          }
-          name="fecha"
-        />
-      </MenuItem>
+              }
+              name={item.name}
+            />
+          </MenuItem>
+        ))
+      }
     </Menu>
   )
 }

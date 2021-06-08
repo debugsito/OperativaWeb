@@ -22,7 +22,7 @@ export default function Index() {
 
     return (
         <Grid container spacing={3} justify="center">
-            <Grid item xs={11}>
+            <Grid item xs={12} sm={11}>
                 <Grid container direction="row" justify="space-between">
                     <Grid item xs={6}>
                         <Typography variant="h6" component="h6">
@@ -32,7 +32,7 @@ export default function Index() {
                 </Grid>
                 <Divider />
             </Grid>
-            <Grid item xs={11}>
+            <Grid item xs={12} sm={11}>
                 {/* <Typography variant="subtitle2" component="h6">
                     <strong>Creado por</strong>
                 </Typography>

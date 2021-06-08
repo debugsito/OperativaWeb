@@ -13,6 +13,11 @@ const headCells = [
     },
 ];
 
+const menuOrder = [
+    { label: "Titulo de publicación", name: "title", id: "job_title" },
+    { label: "Fecha de publicación", name: "date", id: "publicationDate" }
+]
+
 const useStyles = makeStyles(theme => ({
     headerTable: {
         display: "flex",
@@ -48,9 +53,9 @@ function EnhancedTableHead(props) {
     const classes = useStyles()
     const [anchorEl, setAnchorEl] = React.useState(null);
 
-    const createSortHandler = (property) => (event) => {
-        onRequestSort(event, property);
-    };
+    // const createSortHandler = (property) => (event) => {
+    //     onRequestSort(event, property);
+    // };
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -63,14 +68,6 @@ function EnhancedTableHead(props) {
     return (
         <TableHead>
             <TableRow>
-                {/* <TableCell padding="checkbox" size="small" align="center">
-                    <Checkbox
-                        indeterminate={numSelected > 0 && numSelected < rowCount}
-                        checked={rowCount > 0 && numSelected === rowCount}
-                        onChange={onSelectAllClick}
-                        inputProps={{ "aria-label": "select all desserts" }}
-                    />
-                </TableCell> */}
                 {headCells.map((headCell) => (
                     <TableCell
                         key={headCell.id}
@@ -83,16 +80,9 @@ function EnhancedTableHead(props) {
                             <span className={classes.headCellLabel}>{headCell.label}</span>
                             <div>
                                 <ExpandMoreIcon onClick={handleClick} />
-                                <FilterMenu anchorEl={anchorEl} handleClose={handleClose} />
+                                <FilterMenu anchorEl={anchorEl} handleClose={handleClose} list={menuOrder} onRequestSort={onRequestSort} />
                             </div>
                         </div>
-                        {/* <TableSortLabel
-                            active={false}
-                            direction={orderBy === headCell.id ? order : "asc"}
-                            onClick={createSortHandler(headCell.id)}
-                        >
-                            
-                        </TableSortLabel> */}
                     </TableCell>
                 ))}
             </TableRow>

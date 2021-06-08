@@ -26,7 +26,7 @@ const ShowPublication  = () => {
                     </Grid>
                     <Grid item xs={12}>
                     <Grid container justify="center">
-                        <Grid item xs={10}>
+                        <Grid item xs={11} sm={10}>
                             <Paper className={classes.paper}>
                                 <ShowPosition />
                             </Paper>

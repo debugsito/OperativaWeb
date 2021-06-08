@@ -62,7 +62,7 @@ export default function CustomDataTable({ handleEnableButtonDownload, searchInpu
             createData(
                 publication.job_title,
                 publication.company,
-                DateTime.fromISO(publication.createdAt).toFormat("dd-LL-yyyy"),
+                DateTime.fromISO(publication.createdAt).toFormat("DDD"),
                 publication.salary,
                 publication.a_tratar,
                 [
@@ -129,10 +129,9 @@ export default function CustomDataTable({ handleEnableButtonDownload, searchInpu
     const emptyRows =
         rowsPerPage - Math.min(rowsPerPage, publications?.length - page * rowsPerPage);
 
-    const executeAction = (event, id, publication) => {
-        event.preventDefault();
+    const handleClickPostulation = (publication) => {
         dispatch(setPublicationSelected(publication));
-        if (id === "see_more") history.push(`/postulante/postulaciones/ver-publicacion`);
+        history.push(`/postulante/postulaciones/ver-publicacion`);
     }
 
     return (
@@ -148,7 +147,6 @@ export default function CustomDataTable({ handleEnableButtonDownload, searchInpu
                             aria-label="enhanced table"
                         >
                             <EnhancedTableHead
-                                // classes={classes}
                                 numSelected={selected.length}
                                 order={order}
                                 orderBy={orderBy}
@@ -178,17 +176,14 @@ export default function CustomDataTable({ handleEnableButtonDownload, searchInpu
                                                     scope="row"
                                                 // padding="none"
                                                 >
-                                                    <Grid container>
-                                                        <Grid item xs={12}>
-                                                            <Typography variant="h6" component="h6">{row.job_title}</Typography>
-                                                        </Grid>
-                                                        <Grid item xs={8}>
+                                                    <Grid container onClick={() => handleClickPostulation(row.data)}>
+                                                        <Grid item xs={7}>
                                                             <Grid container>
                                                                 <Grid item xs={12}>
-                                                                    <Typography variant="body2" component="span">{row.nameBusiness}</Typography>
+                                                                    <Typography variant="h6" component="h6">{row.job_title}</Typography>
                                                                 </Grid>
                                                                 <Grid item xs={12}>
-                                                                    <Typography variant="body2" component="span">{`Salario: ${row.a_tratar ? "A tratar" : `S/ ${row.salary}`}`}</Typography>
+                                                                    <Typography variant="body2" component="span">{row.nameBusiness}</Typography>
                                                                 </Grid>
                                                                 <Grid item xs={12} className="text-with-icon-container">
                                                                     <img src={calendarIconSVG} alt="calendario" />
@@ -196,10 +191,8 @@ export default function CustomDataTable({ handleEnableButtonDownload, searchInpu
                                                                 </Grid>
                                                             </Grid>
                                                         </Grid>
-                                                        <Grid item xs={4} className="align-items-center justify-end">
-                                                            {row.actions.map((action, index) => (
-                                                                <Chip key={index} onClick={(event) => executeAction(event, action.id, row.data)} label={action.name} color={"primary"} />
-                                                            ))}
+                                                        <Grid item xs={5} className="align-items-end justify-end">
+                                                            <Typography variant="body2" component="span">{`Salario: ${row.a_tratar ? "A tratar" : `S/ ${row.salary}`}`}</Typography>
                                                         </Grid>
                                                     </Grid>
 
@@ -225,7 +218,7 @@ export default function CustomDataTable({ handleEnableButtonDownload, searchInpu
                         onChangePage={handleChangePage}
                         onChangeRowsPerPage={handleChangeRowsPerPage}
                         labelRowsPerPage="Filas por página"
-                        labelDisplayedRows={({ from, to, count }) => `${from}-${to} de ${count !== -1 ? count : to}`}
+                        labelDisplayedRows={({ from, to, count }) => ``}
                     />
                 </Paper>
             </div>
