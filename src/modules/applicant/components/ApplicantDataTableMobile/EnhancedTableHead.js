@@ -42,11 +42,8 @@ const useStyles = makeStyles(theme => ({
 
 function EnhancedTableHead(props) {
     const {
-        onSelectAllClick,
         order,
         orderBy,
-        numSelected,
-        rowCount,
         onRequestSort,
     } = props;
 
@@ -93,11 +90,7 @@ function EnhancedTableHead(props) {
 export default EnhancedTableHead
 
 EnhancedTableHead.propTypes = {
-    classes: PropTypes.object.isRequired,
-    numSelected: PropTypes.number.isRequired,
     onRequestSort: PropTypes.func.isRequired,
-    onSelectAllClick: PropTypes.func.isRequired,
     order: PropTypes.oneOf(["asc", "desc"]).isRequired,
     orderBy: PropTypes.string.isRequired,
-    rowCount: PropTypes.number.isRequired,
 };

@@ -12,10 +12,6 @@ const useStyles = makeStyles(theme => ({
 export default function FilterMenu({ anchorEl, handleClose, list = [], onRequestSort }) {
   const classes = useStyles()
 
-  console.log("resolucion", window.screen.width)
-  console.log("ratio", devicePixelRatio)
-  console.log("multiplicacion", devicePixelRatio * window.screen.width)
-
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };

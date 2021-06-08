@@ -1,12 +1,10 @@
 import React from 'react';
 import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, useLocation } from "react-router-dom";
-import { AppBar, CssBaseline, Grid, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, CssBaseline, Grid, Hidden, Toolbar, Typography, makeStyles } from '@material-ui/core';
 
-
-import ButtonLogout from "./ButtonLogout";
+import HamburgerMenu from "./HamburgerMenu";
 import { logoSVG } from '../../images';
 import AppSession from '../../libs/session/AppSession';
 import { MenuRoutes } from "../../libs/menuRoutes";
@@ -86,7 +84,7 @@ export default function Navigation({ children }) {
                 {
                   session &&
                   <Grid item>
-                    <ButtonLogout email={user.account.email} handleSignOut={handleSignOut} />
+                    <HamburgerMenu email={user.account.email} handleSignOut={handleSignOut} />
                   </Grid>
                 }
               </Grid>
@@ -96,7 +94,9 @@ export default function Navigation({ children }) {
       }
       {
         hasDashboard &&
-        <NavigationDrawer />
+        <Hidden smDown>
+          <NavigationDrawer />
+        </Hidden>
       }
       <main className={classes.content}>
         <div className={`${location.pathname !== "/" ? classes.toolbar : ''}`} />

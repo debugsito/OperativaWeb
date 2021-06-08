@@ -53,7 +53,7 @@ export function MenuRoutes() {
                     list = [
                         { id: "proccess", name: "En Proceso", to: `postulante/postulaciones` }
                     ]
-                    hasDashboard = false
+                    hasDashboard = true
                 }
                 break;
             default:
