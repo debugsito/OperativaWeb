@@ -3,20 +3,18 @@ import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { Backdrop } from "../../shared/components";
 import AppSession from "../../shared/libs/session/AppSession";
-import { setUser } from "../../../store/actions/auth/auth.action";
+import { setUser, getAccount} from "../../../store/actions/auth/auth.action";
 
 export default function Authenticate(props) {
     const dispatch = useDispatch()
     const location = useLocation()
     const [open, setOpen] = React.useState(true);
 
-    console.log("location",location)
     const useQuery = () => new URLSearchParams(location.search);
 
     let query = useQuery();
 
     useEffect(() => {
-        console.log("::::::::::::::USE_EFFECT:::::::::::::::")
         if(location.search !== ""){
             AppSession.create(query.get("token"))
             const user = {
@@ -27,7 +25,11 @@ export default function Authenticate(props) {
                 },
                 token:query.get("token"),
             }
+        if(Number(query.get("user"))){
+            dispatch(getAccount())
+        }else{
             dispatch(setUser(user))
+        }
         }
 
     },[location.search])
