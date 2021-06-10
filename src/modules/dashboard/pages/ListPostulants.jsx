@@ -95,8 +95,8 @@ export default function Listpostulants({ history }) {
                             <DataGrid
                                 rows={rows}
                                 columns={columns}
-                                pageSize={10}
-                                rowsPerPageOptions={[10, 20, 30]}
+                                pageSize={60}
+                                rowsPerPageOptions={[10, 30, 60]}
                                 hideFooterSelectedRowCount 
                                 autoHeight
                             />

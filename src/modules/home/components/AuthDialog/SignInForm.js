@@ -48,6 +48,7 @@ export default function SignInForm({ setValue }) {
                 <TextInput
                     fullWidth
                     name="email"
+                    type="email"
                     label="Correo electrónico"
                     value={values.email}
                     onChange={handleInputChange}

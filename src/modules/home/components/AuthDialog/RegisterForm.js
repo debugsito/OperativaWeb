@@ -10,7 +10,7 @@ import { setAccountType } from "../../../../store/actions/auth/auth.action";
 const initialValues = {
     accountType: "",
 }
-export default function SignInPostulantDialog(props) {
+export default function SignInPostulantDialog() {
     const dispatch = useDispatch()
     const history = useHistory()
 
@@ -35,7 +35,21 @@ export default function SignInPostulantDialog(props) {
     } = useForm(initialValues, true, validate);
 
     const handleClickAccept = () => {
-        dispatch(setAccountType(values.accountType))
+        let accountType = ""
+        switch (values.accountType) {
+            case "empresa":
+                accountType = "company"
+                break;
+            case "municipalidad":
+                accountType = "municipality"
+                break;
+            case "postulante":
+                accountType = "applicant"
+                break;
+            default:
+                break;
+        }
+        dispatch(setAccountType(accountType))
         history.push(`/${values.accountType}/registro`, { type: values.accountType })
     }
 
