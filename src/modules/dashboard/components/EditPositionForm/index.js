@@ -92,12 +92,6 @@ export default function Index({ handleExitForm, data = null, handleSaveData }) {
     }, [])
 
     useEffect(() => {
-        if (requestState.success !== null) {
-            console.log("vacante guardada exitsamente")
-        }
-    }, [requestState.success])
-
-    useEffect(() => {
         filterProvinces()
     }, [provinces])
 
@@ -153,7 +147,6 @@ export default function Index({ handleExitForm, data = null, handleSaveData }) {
         valuesTemp.period_id = values.period
         valuesTemp.job_level_id = values.rubro_id
         valuesTemp.a_tratar = isActiveSalary
-        console.log(valuesTemp)
         // handleSaveData(valuesTemp)
         setOpenModal(false)
     }

@@ -52,7 +52,7 @@ export default function SectorList(props) {
     return (
         <div className={classes.root}>
             {
-                list.map((sector, index) => <SectorCard text={sector.text} image={sector.image} index={index} />)
+                list.map((sector, index) => <SectorCard text={sector.text} image={sector.image} index={index} key={index} />)
             }
         </div>
     )

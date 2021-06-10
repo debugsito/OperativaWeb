@@ -35,22 +35,18 @@ const ApplicantProfile = () => {
     const handleSaveOption = async (method) => {
         
         const {id : user_id} = applicantProfile.user;
-        // console.log(applicantProfile);
         let obj ={ 
             user_id
         }
          switch (method) {
              case 'select':
                 let response = await service_Dashboard.selectApplicant(obj,publication_id);
-                console.log(response);
                  break;
              case 'deny':
                 let response2 = await service_Dashboard.denyApplicant(obj,publication_id);
-                console.log(response2);
                  break;
              case 'hire':
                 let response3 = await service_Dashboard.hireApplicant(obj,publication_id);
-                console.log(response3);
                  break
              default:
                  break;

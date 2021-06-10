@@ -95,7 +95,6 @@ export const changePasswordFromDashboard = (data) => {
             let response = await service_Auth.changePasswordFromDashboard(data);
             dispatch(setAlert({ state: true, title: 'Éxito', type: 'success', message: response.data.message }));
         } catch (error) {
-            console.log("error", error.response)
             if (!error.response) {
                 dispatch(setAlert({ state: true, title: 'Error', type: 'error', message: 'Ha ocurrido un error interno, inténtalo mas tarde.' }));
             } else {

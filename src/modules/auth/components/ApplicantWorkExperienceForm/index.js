@@ -42,10 +42,8 @@ export default function ApplicantWorkExperienceForm({ userData = initialValues, 
     // const validateHasExperience = (value = hasExperience.value) => setHasExperience({ value: value, error: !value });
 
     const handleCheckBox = (value = hasExperience.value) => {
-        console.log("value", value)
         setHasExperience({ value: value, error: !value })
         if (value == "withExperience") {
-            console.log("Con experiencia")
             handleUpdateWorkExperience(initialValues)
         }
     }

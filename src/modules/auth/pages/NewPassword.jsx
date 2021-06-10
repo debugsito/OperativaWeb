@@ -62,7 +62,6 @@ export default function Index(props) {
             if (error.response.status === 401) {
                 setError(`${error.response.data.message}, el token a expirado.` )
             } else {
-                console.log("error", error)
             }
         }
     }

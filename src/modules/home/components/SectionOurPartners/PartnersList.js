@@ -45,7 +45,7 @@ export default function Partnerslist(props) {
         >
             {
                 slidesTemp.map((slides, index) =>
-                    <SlideGenerator data={slides} index={index} />
+                    <SlideGenerator data={slides} index={index} key={index} />
                 )
             }
         </Carousel>

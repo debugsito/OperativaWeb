@@ -74,18 +74,13 @@ export default function ApplicantEducationForm({ user, handleSaveEducation }) {
         const value = values.level_id
         if (value === ACADEMIC_LEVEL.INCOMPLETE_TECHNICIAN_ID || value === ACADEMIC_LEVEL.COMPLETE_TECHNICIAN_ID ||
             value === ACADEMIC_LEVEL.INCOMPLETE_UNIVERSITY_ID || value === ACADEMIC_LEVEL.COMPLETE_UNIVERSITY_ID) {
-            console.log("if 1")
             setValues({ ...values, speciality_id: "", name_inst: "", from_year: "", endYear: "" })
             setShowSpeciality(true)
             setIsWithoutEducation(false)
         } else if (value === ACADEMIC_LEVEL.WITHOUT_EDUCATION_ID) {
-            console.log("if 2")
-
             setValues({ ...values, name_inst: null, from_year: null, endYear: null })
             setIsWithoutEducation(true)
         } else {
-            console.log("if 3")
-
             setValues({ ...values, speciality_id: null, name_inst: "", from_year: "", endYear: "" })
             setShowSpeciality(false)
             setIsWithoutEducation(false)

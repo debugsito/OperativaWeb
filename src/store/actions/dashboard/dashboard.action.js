@@ -59,7 +59,6 @@ export const getJobsInfo = () => {
   return async (dispatch) => {
     try {
       const response = await service_Dashboard.getJobs();
-      console.log("response getInfo", response)
       dispatch(setJobsInfo(response.data));
       dispatch(setJobsInfoError(null)); //control de errores
     } catch (error) {

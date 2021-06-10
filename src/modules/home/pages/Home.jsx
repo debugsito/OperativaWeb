@@ -8,7 +8,6 @@ const Home = () => {
     
     useState(() => {
         dispatch(resetStore())
-        console.log("REFRESCO HOME")
     },[])
 
     return (

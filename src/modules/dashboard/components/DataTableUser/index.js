@@ -50,12 +50,10 @@ const EnhancedTableToolbar = ({ returnFromToolbar, ...props }) => {
       let response = await service_Subuser_Business.deleteSubUser({ users: rowIds, password: password });
       if (response) {
         returnFromToolbar(true)
-        console.log(response);
       }
     } catch (error) {
       returnFromToolbar(false)
       if (error.response.status === 401) {
-        console.log(error);
       } else {
         console.log("Ha ocurrido un error interno.");
       };
@@ -76,8 +74,8 @@ const EnhancedTableToolbar = ({ returnFromToolbar, ...props }) => {
           </IconButton>
         </Tooltip>
       ) : (
-          ""
-        )}
+        ""
+      )}
       <DeleteSubUserModal open={openModalDeleteSubUserModal} handleCloseModal={() => setOpenDeleteSubUserModal(false)} executeAction={executeAction} />
     </Toolbar>
 
@@ -148,11 +146,9 @@ export default function DataTable() {
       let response = await service_Subuser_Business.createSubUser(value);
       if (response) {
         getAccount();
-        console.log(response);
       }
     } catch (error) {
       if (error.response.status === 401) {
-        console.log(error);
       } else {
         console.log("Ha ocurrido un error interno.");
       };

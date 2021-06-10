@@ -107,7 +107,7 @@ export default function Slides() {
             <div className={classes.controls}>
                 {
                     slidesData.map((slide, index) =>
-                        <div data={index} className={`${classes.control} ${index === current ? classes.activeControl : ''}`} onClick={handleClick}></div>
+                        <div key={index} data={index} className={`${classes.control} ${index === current ? classes.activeControl : ''}`} onClick={handleClick}></div>
                     )
                 }
             </div>
