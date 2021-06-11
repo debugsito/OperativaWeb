@@ -11,7 +11,7 @@ export default (name, data) => ({
         text: "",
     },
     tooltip: {
-        pointFormat: "{series.name}: <b>{point.percentage:.1f}%</b>",
+        pointFormat: "{series.name}: <b>{point.y}</b>",
     },
     accessibility: {
         point: {
@@ -25,7 +25,7 @@ export default (name, data) => ({
         x: 10,
         y: 0,
         labelFormatter: function () {
-            return this.name + " " + Math.round(this.percentage) + "%";
+            return `${Math.round(this.percentage)}% - ${this.name}`
         }
     },
     plotOptions: {

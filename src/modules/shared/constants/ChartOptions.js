@@ -22,7 +22,7 @@ export default (name, data, colors) => ({
         align: "right",
         layout: "vertical",
         verticalAlign: "middle",
-        width: '50%',
+        width: '40%',
         labelFormatter: function () {
             return `${Math.round(this.percentage)}% - ${this.name}`
         }
@@ -46,27 +46,27 @@ export default (name, data, colors) => ({
         },
     ],
 
-    responsive: {
-        rules: [{
-            condition: {
-                maxWidth: 500,
-                maxHeight: 500,
-            },
-            chartOptions: {
-                legend: {
-                    width: '100%',
-                    align: 'center',
-                    verticalAlign: 'bottom',
-                    layout: 'horizontal',
-                },
-                subtitle: {
-                    text: null
-                },
-                credits: {
-                    enabled: false
-                }
-            }
-        }]
-    }
+    // responsive: {
+    //     rules: [{
+    //         condition: {
+    //             maxWidth: 600,
+    //             // maxHeight: 500,
+    //         },
+    //         chartOptions: {
+    //             legend: {
+    //                 width: '100%',
+    //                 align: 'center',
+    //                 verticalAlign: 'bottom',
+    //                 layout: 'horizontal',
+    //             },
+    //             subtitle: {
+    //                 text: null
+    //             },
+    //             credits: {
+    //                 enabled: false
+    //             }
+    //         }
+    //     }]
+    // }
 
 });
