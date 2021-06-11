@@ -453,8 +453,7 @@ export default function OpenPositionsTable() {
                                                                     alt="postulantes"
                                                                 />}
                                                         >
-                                                            {row.applicants} postulante
-                                                        {row.applicants > 1 ? "s" : ""}
+                                                            {`ver postulante${row.applicants > 1 ? "s" : ""} (${row.applicants})`}
                                                         </Button>
                                                         {/* <img src={registeredIcon} alt="Registro" />
                                                         <Typography variant="body2" component="span">
