@@ -10,7 +10,12 @@ const useStyles = makeStyles(theme => ({
     root: {
         display: 'grid',
         gridGap: "1rem",
-        gridTemplateColumns: "2fr 3fr 4fr"
+        [theme.breakpoints.down('sm')]: {
+            gridTemplateColumns: "1fr",
+        },
+        [theme.breakpoints.up('md')]: {
+            gridTemplateColumns: "2fr 3fr 4fr",
+        },
     },
     containerBodyOne: {
         display: "flex",

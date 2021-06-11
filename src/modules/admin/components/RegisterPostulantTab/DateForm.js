@@ -57,7 +57,7 @@ export default function Dateform({ updateReport }) {
 
     return (
         <Grid container spacing={2} alignItems="center">
-            <Grid item xs={4}>
+            <Grid item xs={12} md={4}>
                 <TextInput
                     id="date"
                     fullWidth
@@ -76,7 +76,7 @@ export default function Dateform({ updateReport }) {
                     }}
                 />
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={12} md={4}>
                 <TextInput
                     id="date"
                     fullWidth
@@ -95,7 +95,7 @@ export default function Dateform({ updateReport }) {
                     }}
                 />
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={12} md={4}>
                 <Button variant="contained" size="large" onClick={handleClick}>ACEPTAR</Button>
             </Grid>
         </Grid>

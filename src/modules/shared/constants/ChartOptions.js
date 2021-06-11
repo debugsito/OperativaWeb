@@ -4,14 +4,14 @@ export default (name, data, colors) => ({
         plotBorderWidth: null,
         plotShadow: false,
         type: "pie",
-        height: "230px",
+        height: "240rem",//230px
     },
     colors: colors,//["#CBCAC8", "#A2EE37", "#FCB81A", "#F75470", "#7F85FD", "#373737"],
     title: {
         text: "",
     },
     tooltip: {
-        pointFormat: "{series.name}: <b>{point.percentage:.1f}%</b>",
+        pointFormat: "{series.name}: <b>{point.y}</b>",
     },
     accessibility: {
         point: {
@@ -22,9 +22,9 @@ export default (name, data, colors) => ({
         align: "right",
         layout: "vertical",
         verticalAlign: "middle",
-        width: '40%',
+        width: '50%',
         labelFormatter: function () {
-            return this.name + " " + Math.round(this.percentage) + "%";
+            return `${Math.round(this.percentage)}% - ${this.name}`
         }
     },
     plotOptions: {
@@ -45,4 +45,28 @@ export default (name, data, colors) => ({
             data,
         },
     ],
+
+    responsive: {
+        rules: [{
+            condition: {
+                maxWidth: 500,
+                maxHeight: 500,
+            },
+            chartOptions: {
+                legend: {
+                    width: '100%',
+                    align: 'center',
+                    verticalAlign: 'bottom',
+                    layout: 'horizontal',
+                },
+                subtitle: {
+                    text: null
+                },
+                credits: {
+                    enabled: false
+                }
+            }
+        }]
+    }
+
 });

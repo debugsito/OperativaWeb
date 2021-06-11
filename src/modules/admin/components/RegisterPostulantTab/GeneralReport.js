@@ -14,7 +14,12 @@ const useStyles = makeStyles(theme => ({
         textAlign: "center"
     },
     subTitle: {
-        marginLeft: "5rem"
+        [theme.breakpoints.down('sm')]: {
+            textAlign: "center"
+        },
+        [theme.breakpoints.up('md')]: {
+            marginLeft: "5rem",
+        },
     }
 }))
 
@@ -96,42 +101,42 @@ export default function Index(props) {
             <Grid item xs={12}>
                 <h2 className={classes.title}>REPORTE GENERAL</h2>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
                 <h3 className={classes.subTitle}>Usuarios por sistema operativo</h3>
                 <HighchartsReact
                     highcharts={Highcharts}
                     options={ChartOptions("Usuarios por sistema operativo", systemOperation, ["#CBE3E9", "#A2EE37", "#78957C", "27EAF6", "7F85FD"])}
                 />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
                 <h3 className={classes.subTitle}>Géneros</h3>
                 <HighchartsReact
                     highcharts={Highcharts}
                     options={ChartOptions("Géneros", genderData, ["#F3747D", "#0F8DC3", "#FCB81A", , "27EAF6", "7F85FD"])}
                 />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
                 <h3 className={classes.subTitle}>Rubros</h3>
                 <HighchartsReact
                     highcharts={Highcharts}
                     options={ChartOptions("Rubros", rubrosData, ["#CBE3E9", "#A2EE37", "#78957C", "#27EAF6", "#7F85FD"])}
                 />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
                 <h3 className={classes.subTitle}>Edades</h3>
                 <HighchartsReact
                     highcharts={Highcharts}
                     options={ChartOptions("Edades", ageData, ["#C1953C", "#BAE7AF", "#A39470", "#F65470", "#7F85FD"])}
                 />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
                 <h3 className={classes.subTitle}>Provincias</h3>
                 <HighchartsReact
                     highcharts={Highcharts}
                     options={ChartOptions("Provincias", provinceData, ["#CBCAC8", "#A2EE37", "#FCB81A", "#F65470", "#7F85FD"])}
                 />
             </Grid>
-            <Grid item xs={6} style={{ margin: "0 auto" }}>
+            <Grid item xs={12} md={6}>
                 <h3 className={classes.subTitle}>Top 20 Distritos</h3>
                 <HighchartsReact
                     highcharts={Highcharts}
