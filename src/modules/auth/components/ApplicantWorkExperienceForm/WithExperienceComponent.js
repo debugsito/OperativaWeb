@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Divider, FormControl, FormControlLabel, FormHelperText, FormLabel, Grid, InputLabel, MenuItem, RadioGroup, Select, Typography } from '@material-ui/core';
-import { Button, Checkbox, Radio, TextInput, Modal, Snackbars } from '../../../shared/components';
-import { areasList, itemsList, jobLevelsList, withdrawalReasonsList } from '../../../../store/services/utils.service';
+import { Autocomplete, Button, Checkbox, Radio, TextInput, Modal, Snackbars } from '../../../shared/components';
+import { itemsList, jobLevelsList, withdrawalReasonsList } from '../../../../store/services/utils.service';
 import { onlyNumbers, onlyLetters } from '../../../shared/libs/validators';
 import { useForm } from "../../../hooks/useForm";
 import { DateTime } from "luxon";
@@ -9,7 +9,7 @@ import { DateTime } from "luxon";
 const defaultValues = {
     position: "",
     company: "",
-    companyAddress: "",
+    district_id: "",
     rubro_id: "",
     startDate: "",
     finishDate: "",
@@ -37,8 +37,8 @@ export default function WithExperienceComponent({ handleDeleteWorkExperience, ha
             temp.position = fieldValues.position ? "" : "El campo es requerido."
         if ('company' in fieldValues)
             temp.company = fieldValues.company ? "" : "El campo es requerido."
-        if ('companyAddress' in fieldValues)
-            temp.companyAddress = fieldValues.companyAddress ? "" : "El campo es requerido."
+        if ('district_id' in fieldValues)
+            temp.district_id = fieldValues.district_id ? "" : "El campo es requerido."
         if ('rubro_id' in fieldValues)
             temp.rubro_id = fieldValues.rubro_id ? "" : "El campo es requerido."
         if ('startDate' in fieldValues)
@@ -193,7 +193,15 @@ export default function WithExperienceComponent({ handleDeleteWorkExperience, ha
                 />
             </Grid>
             <Grid item xs={12} md={6}>
-                <TextInput
+                <Autocomplete
+                    label="Distrito"
+                    name="district_id"
+                    value={values.district_id}
+                    handleChange={handleInputChange}
+                    error={errors.district_id ? true : false}
+                    helperText={errors.district_id}
+                />
+                {/* <TextInput
                     fullWidth
                     label="Dirección de la empresa"
                     name="companyAddress"
@@ -202,7 +210,7 @@ export default function WithExperienceComponent({ handleDeleteWorkExperience, ha
                     error={errors.companyAddress ? true : false}
                     helperText={errors.companyAddress}
                     onKeyPress={e => onlyLetters(e)}
-                />
+                /> */}
             </Grid>
             <Grid item xs={12} md={6}>
                 <FormControl variant="outlined" fullWidth error={errors.rubro_id ? true : false}>
