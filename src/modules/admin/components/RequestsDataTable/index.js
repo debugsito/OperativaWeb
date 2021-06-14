@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import * as moment from 'moment';
+import { DateTime } from "luxon";
 import { FormControl, FormControlLabel, Grid, Radio, RadioGroup } from '@material-ui/core';
 import { Button, DataGrid, Modal } from '../../../shared/components';
 
@@ -39,7 +39,7 @@ export default function DataTable() {
       }
     },
     { field: 'email', headerName: 'Correo', sortable: false, width: 160 },
-    { field: 'updatedAt', headerName: 'Fecha', width: 120, valueGetter: (params) => moment(params.value).format("YYYY-MM-DD") },
+    { field: 'updatedAt', headerName: 'Fecha', width: 120, valueGetter: (params) => DateTime.fromISO(params.value).toFormat("yyyy-LL-dd") }, // moment(params.value).format("YYYY-MM-DD")
     {
       field: 'action', headerName: 'Accion', width: 100, sortable: false, renderCell: (params) => {
         const { id } = params.row

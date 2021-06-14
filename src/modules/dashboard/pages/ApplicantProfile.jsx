@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import * as moment from 'moment';
-import {Container,Divider,Grid,makeStyles,Typography} from "@material-ui/core";
+import { DateTime } from "luxon";
+import { Container, Divider, Grid, Typography } from "@material-ui/core";
 
 import { Button, Breadcrumbs, Modal } from '../../shared/components';
 import { checkCircleIcon, closeIcon, registeredIcon } from "../images";
@@ -13,47 +13,47 @@ import { service_Dashboard } from "../../../store/services";
 import { useHistory } from "react-router-dom";
 
 const ApplicantProfile = () => {
-    const {postulant_id} = useParams()
+    const { postulant_id } = useParams()
     const dispatch = useDispatch();
-    const {applicantProfile, applicantProfile:{user,job,education},publicationSelected} = useSelector(state => state.dashboard)
+    const { applicantProfile, applicantProfile: { user, job, education }, publicationSelected } = useSelector(state => state.dashboard)
     const [openModal, setOpenModal] = useState(false);
-    const [modalData, setModalData] = useState({title:"", body:"",method:""})
-    const {id:publication_id} = publicationSelected.data;
+    const [modalData, setModalData] = useState({ title: "", body: "", method: "" })
+    const { id: publication_id } = publicationSelected.data;
     const history = useHistory();
     const initRoute = SessionRoutes().initRoute;
     const routes = [
-    { name: "Incio", to: `${initRoute}` },
-    { name: "Postulantes", to: `${initRoute}/postulantes`},
-    { name: "Perfil", to: `${initRoute}/postulante/perfil` }
+        { name: "Incio", to: `${initRoute}` },
+        { name: "Postulantes", to: `${initRoute}/postulantes` },
+        { name: "Perfil", to: `${initRoute}/postulante/perfil` }
     ];
 
     useEffect(() => {
-        dispatch(getApplicantProfile({postulant_id}))
-    },[])
+        dispatch(getApplicantProfile({ postulant_id }))
+    }, [])
 
 
     const handleSaveOption = async (method) => {
-        
-        const {id : user_id} = applicantProfile.user;
-        let obj ={ 
+
+        const { id: user_id } = applicantProfile.user;
+        let obj = {
             user_id
         }
-         switch (method) {
-             case 'select':
-                let response = await service_Dashboard.selectApplicant(obj,publication_id);
-                 break;
-             case 'deny':
-                let response2 = await service_Dashboard.denyApplicant(obj,publication_id);
-                 break;
-             case 'hire':
-                let response3 = await service_Dashboard.hireApplicant(obj,publication_id);
-                 break
-             default:
-                 break;
-         }
+        switch (method) {
+            case 'select':
+                let response = await service_Dashboard.selectApplicant(obj, publication_id);
+                break;
+            case 'deny':
+                let response2 = await service_Dashboard.denyApplicant(obj, publication_id);
+                break;
+            case 'hire':
+                let response3 = await service_Dashboard.hireApplicant(obj, publication_id);
+                break
+            default:
+                break;
+        }
         setOpenModal(false);
         history.push({ pathname: `${initRoute}/postulantes`, state: { publication_id } })
-      }
+    }
 
     const modalBody = (
         <>
@@ -85,7 +85,7 @@ const ApplicantProfile = () => {
                         onClick={() => handleSaveOption(modalData.method)}
                     >
                         guardar
-                </Button>
+                    </Button>
                 </Grid>
             </Grid>
         </>
@@ -94,8 +94,8 @@ const ApplicantProfile = () => {
     return (
         <>
             <Container >
-                <Grid container spacing={3} className="postulant-perfil" style={{marginTop:"20%"}}>
-                    <Grid item xs={12} className="postulant-perfil__header" style={{ position:"fixed", top:"4rem", background:"white" }}>
+                <Grid container spacing={3} className="postulant-perfil" style={{ marginTop: "20%" }}>
+                    <Grid item xs={12} className="postulant-perfil__header" style={{ position: "fixed", top: "4rem", background: "white" }}>
                         <Grid container spacing={3}>
                             <Grid item xs={12}>
                                 <Breadcrumbs routes={routes} />
@@ -107,10 +107,10 @@ const ApplicantProfile = () => {
                                             <Grid item spacing={3}>
                                                 <Button
                                                     color="default"
-                                                    onClick={() =>
-                                                        {setModalData({
+                                                    onClick={() => {
+                                                        setModalData({
                                                             title: "Seleccionar postulante",
-                                                            body:`Ud. ha seleccionado a ${user?.fullname}`,
+                                                            body: `Ud. ha seleccionado a ${user?.fullname}`,
                                                             method: 'select',
                                                             cancelAction: () =>
                                                                 setModalData({ ...modalData, show: false }),
@@ -124,14 +124,14 @@ const ApplicantProfile = () => {
                                                     <img src={registeredIcon} />
                                                     <span className="dashboard-applicant-options">
                                                         seleccionar
-                                        </span>
+                                                    </span>
                                                 </Button>
                                             </Grid>
                                             <Grid item spacing={3}>
                                                 <Button
                                                     color="default"
-                                                    onClick={() =>
-                                                        {setModalData({
+                                                    onClick={() => {
+                                                        setModalData({
                                                             title: "Descartar postulante",
                                                             body: `Ud. ha descartado a ${user?.fullname}`,
                                                             method: 'deny',
@@ -139,23 +139,23 @@ const ApplicantProfile = () => {
                                                                 setModalData({ ...modalData, show: false }),
                                                             saveAction: () =>
                                                                 setModalData({ ...modalData, show: false }),
-                                                            
+
                                                         })
                                                         setOpenModal(true)
-                                                        }
+                                                    }
                                                     }
                                                 >
                                                     <img src={closeIcon} />
                                                     <span className="dashboard-applicant-options">
                                                         descartar
-                                        </span>
+                                                    </span>
                                                 </Button>
                                             </Grid>
                                             <Grid item spacing={3}>
                                                 <Button
-                                                      color="default"
-                                                    onClick={() =>
-                                                        {setModalData({
+                                                    color="default"
+                                                    onClick={() => {
+                                                        setModalData({
                                                             title: "Contratar postulante",
                                                             body: `Ud. desea contratar a ${user?.fullname}`,
                                                             method: 'hire',
@@ -165,13 +165,13 @@ const ApplicantProfile = () => {
                                                                 setModalData({ ...modalData, show: false }),
                                                         })
                                                         setOpenModal(true)
-                                                        }
+                                                    }
                                                     }
                                                 >
                                                     <img src={checkCircleIcon} />
                                                     <span className="dashboard-applicant-options dark-gray">
                                                         contratar
-                                        </span>
+                                                    </span>
                                                 </Button>
                                             </Grid>
                                         </Grid>
@@ -207,14 +207,16 @@ const ApplicantProfile = () => {
                                     <strong>Numero de documento</strong>
                                 </Typography>
                                 <Typography variant="body1" component="h6">
-                                    76443280
+                                    {user.document_number}
                                 </Typography>
                                 <br />
                                 <Typography variant="subtitle2" component="h6">
                                     <strong>Fecha de nacimiento</strong>
                                 </Typography>
                                 <Typography variant="body1" component="h6">
-                                {moment(user?.birth_date).format("YYYY-MM-DD")}
+                                    {
+                                        DateTime.fromISO(user?.birth_date).toFormat("yyyy-LL-dd")
+                                    }
                                 </Typography>
                                 <br />
                                 <Typography variant="subtitle2" component="h6">
@@ -231,13 +233,13 @@ const ApplicantProfile = () => {
                                     {user?.address}
                                 </Typography>
                                 <br />
-                                <Typography variant="subtitle2" component="h6">
+                                {/* <Typography variant="subtitle2" component="h6">
                                     <strong>Referencias</strong>
                                 </Typography>
                                 <Typography variant="body1" component="h6">
                                     -----
                                 </Typography>
-                                <br />
+                                <br /> */}
                                 <Typography variant="subtitle2" component="h6">
                                     <strong>teléfono</strong>
                                 </Typography>
@@ -263,7 +265,9 @@ const ApplicantProfile = () => {
                                     <strong>Fecha de postulación</strong>
                                 </Typography>
                                 <Typography variant="body1" component="h6">
-                                    {moment(user?.updatedAt).format("YYYY-MM-DD")}
+                                    {
+                                        DateTime.fromISO(user?.updatedAt).toFormat("yyyy-LL-dd")
+                                    }
                                 </Typography>
                             </Grid>
                             <Grid item xs={1}>
@@ -313,7 +317,7 @@ const ApplicantProfile = () => {
                                 </Typography>
                                 <br />
                                 <Typography variant="subtitle2" component="h6">
-                                    <strong>fecha de fin</strong>
+                                    <strong>Fecha de culminación</strong>
                                 </Typography>
                                 <Typography variant="body1" component="h6">
                                     {job && job[0]?.to_year}
@@ -337,18 +341,17 @@ const ApplicantProfile = () => {
                                     <strong>¿Trabajaste horas extras?</strong>
                                 </Typography>
                                 <Typography variant="body1" component="h6">
-                                    { job && job[0]?.over_time}
+                                    {job && job[0]?.over_time? "Si": "No"}
                                 </Typography>
                                 <br />
                                 <Typography variant="subtitle2" component="h6">
-                                    <strong>¿Cómo calificaría su grado de compromiso con la empresa
-                                    </strong>
+                                    <strong>¿Cómo calificaría su grado de compromiso con la empresa</strong>
                                 </Typography>
                                 <Typography variant="caption" component="p">
                                     Del 1 al 5 siendo 1 totalmente descomprometido y 5 totalmente comprometido
                                 </Typography>
                                 <Typography variant="body1" component="h6">
-                                    {job && job[0]?.involvement || "----------"}
+                                    {job && (job[0]?.job_involvement || "----------")}
                                 </Typography>
                                 <br />
                                 <Typography variant="subtitle2" component="h6">
@@ -358,11 +361,11 @@ const ApplicantProfile = () => {
                                     Del 1 al 5 siendo 1 totalmente descomprometido y 5 totalmente comprometido
                                 </Typography>
                                 <Typography variant="body1" component="h6">
-                                {job && job[0]?.job_sati}
+                                    {job && (job[0]?.job_sati || "----------")}
                                 </Typography>
                                 <br />
                                 <br />
-                                
+
 
                                 <Typography variant="h6" component="h6">
                                     <strong>Estudios</strong>
@@ -378,7 +381,7 @@ const ApplicantProfile = () => {
                                     <strong>Institución educativa</strong>
                                 </Typography>
                                 <Typography variant="body1" component="h6">
-                                    { education && education[0]?.name_inst}
+                                    {education && education[0]?.name_inst}
                                 </Typography>
                                 <br />
                                 <Typography variant="subtitle2" component="h6">
@@ -388,7 +391,7 @@ const ApplicantProfile = () => {
                                     {job && job[0]?.from_year}
                                 </Typography>
                                 <br />
-                                
+
                             </Grid>
 
                         </Grid>

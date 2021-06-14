@@ -44,6 +44,7 @@ export default function TabsDialog() {
                     {
                         TABS.map((item, index) => (
                             <Tab
+                                key={index}
                                 classes={{
                                     root: classes.rootTab,
                                     textColorPrimary: classes.textColorPrimary,

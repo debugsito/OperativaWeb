@@ -10,7 +10,7 @@ import WorkExperienceListComponent from "./WorkExperienceListComponent";
 const defaultValues = {
     position: "",
     company: "",
-    companyAddress: "",
+    district_id: "",
     rubro_id: "",
     startDate: "",
     finishDate: "",

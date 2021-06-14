@@ -199,8 +199,6 @@ export default function ApplicantContactInformationForm({ user, handleSavePerson
                     onChange={handleInputChange}
                     error={errors.birth_date ? true : false}
                     helperText={errors.birth_date}
-                    // max={moment().toDate()}
-                    // defaultValue={birthdate.value}
                     InputLabelProps={{
                         shrink: true,
                     }}
