@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
+import { DateTime } from "luxon";
 import clsx from "clsx";
-import moment from 'moment';
-import 'moment/locale/es';
-import { lighten, makeStyles } from "@material-ui/core/styles";
-import VisibilityIcon from '@material-ui/icons/Visibility';
-import DeleteIcon from "@material-ui/icons/Delete";
 
 import "./index.css";
 import {
@@ -257,7 +254,8 @@ export default function OpenPositionsTable() {
     const [page, setPage] = useState(0);
     const [dense, setDense] = useState(false);
     const [rowsPerPage, setRowsPerPage] = useState(5);
-    const [publications, setPublications] = useState([createData("", "", "", moment().format('LL'), 0, false, [], { id: "" })]);
+    // const [publications, setPublications] = useState([createData("", "", "", moment().format('LL'), 0, false, [], { id: "" })]);
+    const [publications, setPublications] = useState([createData("", "", "", DateTime.local().toFormat("DDD"), 0, false, [], { id: "" })]);
 
     const { publicationsInfo } = useSelector(state => state?.dashboard);
     const dispatch = useDispatch();
@@ -269,31 +267,33 @@ export default function OpenPositionsTable() {
     }, [])
 
     useEffect(() => {
-        const rows = publicationsInfo?.publications?.map(publication => (
-            createData(
-                publication.job_title,
-                moment(publication.to_date).utc().format('LL'),
-                publication.account?.user?.fullname,
-                moment(publication.createdAt).format('LL'),
-                publication.count_postulantes,
-                moment(publication.to_date).utc().format('X') > moment().utc().format('X'), //como se si esta activo
-                [
-                    {
-                        id: "edit",
-                        name: "Editar",
-                    },
-                    {
-                        id: "archive",
-                        name: "Archivar",
-                    },
-                    {
-                        id: "show",
-                        name: "Mostrar ",
-                    },
-                ],
-                publication
+        const rows = publicationsInfo?.publications?.map(publication => {
+            return (
+                createData(
+                    publication.job_title,
+                    DateTime.fromISO(publication.to_date).toFormat("DDD"),//moment(publication.to_date).utc().format('LL'),
+                    publication.account?.user?.fullname,
+                    DateTime.fromISO(publication.createdAt).toFormat("DDD"),//moment(publication.createdAt).format('LL'),
+                    publication.count_postulantes,
+                    DateTime.fromISO(publication.to_date).toMillis() > DateTime.local().toMillis() ? true : false,//moment(publication.to_date).utc().format('X') > moment().utc().format('X'), //como se si esta activo
+                    [
+                        {
+                            id: "edit",
+                            name: "Editar",
+                        },
+                        {
+                            id: "archive",
+                            name: "Archivar",
+                        },
+                        {
+                            id: "show",
+                            name: "Mostrar ",
+                        },
+                    ],
+                    publication
+                )
             )
-        ))
+        })
         setPublications(rows)
     }, [publicationsInfo])
 

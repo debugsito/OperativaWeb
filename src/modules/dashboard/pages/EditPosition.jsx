@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from 'react'
-import { Container, Grid, MenuItem, Checkbox, Typography, FormControlLabel } from "@material-ui/core";
-import { Breadcrumbs, TextInput, Button, Select, Modal, RichText } from "../../shared/components";
-import { useForm } from "../../hooks";
-import { getPeriods } from "../../../store/services/utils.service";
-import { updatePublication, savePublication, getJobsInfo } from "../../../store/actions/dashboard/dashboard.action";
 import { DateTime } from "luxon";
-import * as moment from 'moment';
 import { useDispatch, useSelector } from "react-redux";
-import { actions_Utils } from "../../../store/actions";
+import { Container, Grid, MenuItem, Checkbox, Typography, FormControlLabel } from "@material-ui/core";
+
+import { updatePublication, savePublication, getJobsInfo } from "../../../store/actions/dashboard/dashboard.action";
+import { Breadcrumbs, TextInput, Button, Select, Modal, RichText } from "../../shared/components";
+import { getPeriods } from "../../../store/services/utils.service";
 import { SessionRoutes } from '../../shared/libs/sessionRoutes';
 import { onlyNumbers } from '../../shared/libs/validators';
+import { actions_Utils } from "../../../store/actions";
+import { useForm } from "../../hooks";
 
 const defaultValues = {
     job_title: "",
     description: "",
     requirements: "",
-    job_level_id: "",//rubro
+    job_level_id: "",
     address: "",
     district_id: "",
     period: "",
@@ -49,21 +49,13 @@ export default function EditPosition({ history }) {
         district_id: publicationSelected.district.id,
         period: publicationSelected.period,
         salary: publicationSelected.salary,
-        from_date: moment(publicationSelected.from_date).format("YYYY-MM-DD"),
-        to_date: moment(publicationSelected.to_date).format("YYYY-MM-DD"),
-        department_id: publicationSelected.district.province.department_id,//EN DURO
-        province_id: publicationSelected.district.province_id, //EN DURO
+        from_date: DateTime.fromISO(publicationSelected.from_date).toFormat("yyyy-LL-dd"),//moment(publicationSelected.from_date).format("YYYY-MM-DD"),
+        to_date: DateTime.fromISO(publicationSelected.to_date).toFormat("yyyy-LL-dd"),
+        department_id: publicationSelected.district.province.department_id,
+        province_id: publicationSelected.district.province_id,
         rubro_id: publicationSelected.job_level_id,
         period_id: publicationSelected.period,
     } : defaultValues
-
-    const convertJson = (str) =>{
-        try {
-            return JSON.parse(str)
-        } catch (error) {
-            return str
-        }
-    } 
 
     const goForward = () => history.push(initRoute);
 
@@ -168,7 +160,6 @@ export default function EditPosition({ history }) {
         valuesTemp.period_id = values?.period;
         if (publicationSelected) {
             const params = { publication_id: publicationSelected.id, body: { status: 1, ...valuesTemp, a_tratar:isActiveSalary} }
-
             dispatch(updatePublication(params))
         } else {
             dispatch(savePublication({...valuesTemp,a_tratar:isActiveSalary}))
@@ -217,7 +208,6 @@ export default function EditPosition({ history }) {
                 </Grid>
                 <Grid item xs={8} style={{ margin: "auto" }}>
                     <TextInput
-                        id="date"
                         fullWidth
                         type="date"
                         name="to_date"
