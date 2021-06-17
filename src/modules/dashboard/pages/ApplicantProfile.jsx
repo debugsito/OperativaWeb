@@ -207,7 +207,7 @@ const ApplicantProfile = () => {
                                     <strong>Numero de documento</strong>
                                 </Typography>
                                 <Typography variant="body1" component="h6">
-                                    {user.document_number}
+                                    {user?.document_number}
                                 </Typography>
                                 <br />
                                 <Typography variant="subtitle2" component="h6">
