@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import * as moment from 'moment';
+// import * as moment from 'moment';
+import { DateTime } from 'luxon'
 import { useDispatch, useSelector } from "react-redux";
 import { Container, Grid } from "@material-ui/core";
 
@@ -73,7 +74,7 @@ export default function Listpostulants({ history }) {
         { field: 'fullName', headerName: 'Nombres del postulantes', width: 300, sortable: false },
         // { field: 'academicLevel', headerName: 'Nivel de estudio', width: 220 },
         { field: 'experience', headerName: 'Experiencia', width: 180, sortable: false },
-        { field: 'date', headerName: 'Fecha de postulación', width: 200, sortable: false, valueGetter: (params) => moment(params.value).format("YYYY-MM-DD") },
+        { field: 'date', headerName: 'Fecha de postulación', width: 200, sortable: false, valueGetter: (params) => DateTime.fromISO(params.value).toFormat("yyyy-LL-dd")},//moment(params.value).format("YYYY-MM-DD") ,
         {
             field: 'state', headerName: 'Estado', width: 130, sortable: false, renderCell: (params) => {
                 const { postulant_id, state } = params.row

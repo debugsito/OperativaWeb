@@ -26,7 +26,7 @@ const defaultValues = {
 };
 
 export default function EditPosition({ history }) {
-    const dateLocal = DateTime.local().toFormat("yyyy-LL-dd") //Don't use momentjs, will soon be deprecated
+    const dateLocal = DateTime.local().toFormat("yyyy-LL-dd")
     const dispatch = useDispatch();
     const { departments, provinces, districts, rubrosOp } = useSelector(state => state?.utils)
     const { publicationSelected } = useSelector(state => state?.dashboard)
@@ -55,14 +55,6 @@ export default function EditPosition({ history }) {
         rubro_id: publicationSelected.job_level_id,
         period_id: publicationSelected.period,
     } : defaultValues
-
-    const convertJson = (str) =>{
-        try {
-            return JSON.parse(str)
-        } catch (error) {
-            return str
-        }
-    } 
 
     const goForward = () => history.push(initRoute);
 
