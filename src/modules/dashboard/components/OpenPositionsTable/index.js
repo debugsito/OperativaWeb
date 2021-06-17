@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
-import moment from 'moment';
-import 'moment/locale/es';
-import { lighten, makeStyles } from "@material-ui/core/styles";
-import VisibilityIcon from '@material-ui/icons/Visibility';
-import DeleteIcon from "@material-ui/icons/Delete";
+import { DateTime } from "luxon";
+import { makeStyles } from "@material-ui/core/styles";
 
 import "./index.css";
 import {
@@ -257,7 +254,7 @@ export default function OpenPositionsTable() {
     const [page, setPage] = useState(0);
     const [dense, setDense] = useState(false);
     const [rowsPerPage, setRowsPerPage] = useState(5);
-    const [publications, setPublications] = useState([createData("", "", "", moment().format('LL'), 0, false, [], { id: "" })]);
+    const [publications, setPublications] = useState([createData("", "", "", DateTime.local().toFormat("DDD"), 0, false, [], { id: "" })]);
 
     const { publicationsInfo } = useSelector(state => state?.dashboard);
     const dispatch = useDispatch();
@@ -272,11 +269,15 @@ export default function OpenPositionsTable() {
         const rows = publicationsInfo?.publications?.map(publication => (
             createData(
                 publication.job_title,
-                moment(publication.to_date).utc().format('LL'),
+                //Existe datos con expiration_date = null
+                //moment(publication.expiration_date? publication.expiration_date : publication.from_date).utc().format('LL'),
+                DateTime.fromISO(publication.expiration_date ? publication.expiration_date : publication.from_date).toFormat("DDD"),
                 publication.account?.user?.fullname,
-                moment(publication.createdAt).format('LL'),
+                //moment(publication.createdAt).format('LL'),
+                DateTime.fromISO(publication.createdAt).toFormat("DDD"),
                 publication.count_postulantes,
-                moment(publication.to_date).utc().format('X') > moment().utc().format('X'), //como se si esta activo
+                //moment(publication.to_date).utc().format('X') > moment().utc().format('X'), //como se si esta activo
+                DateTime.fromISO(publication.expiration_date ? publication.expiration_date : publication.from_date).toMillis() > DateTime.local().toMillis(), //como se si esta activo
                 [
                     {
                         id: "edit",

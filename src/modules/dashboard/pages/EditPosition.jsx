@@ -5,7 +5,6 @@ import { useForm } from "../../hooks";
 import { getPeriods } from "../../../store/services/utils.service";
 import { updatePublication, savePublication, getJobsInfo } from "../../../store/actions/dashboard/dashboard.action";
 import { DateTime } from "luxon";
-import * as moment from 'moment';
 import { useDispatch, useSelector } from "react-redux";
 import { actions_Utils } from "../../../store/actions";
 import { SessionRoutes } from '../../shared/libs/sessionRoutes';
@@ -21,7 +20,7 @@ const defaultValues = {
     period: "",
     salary: "",
     from_date: "",
-    to_date: "",
+    expiration_date: "",
     department_id: "",
     province_id: "",
 };
@@ -49,8 +48,8 @@ export default function EditPosition({ history }) {
         district_id: publicationSelected.district.id,
         period: publicationSelected.period,
         salary: publicationSelected.salary,
-        from_date: moment(publicationSelected.from_date).format("YYYY-MM-DD"),
-        to_date: moment(publicationSelected.to_date).format("YYYY-MM-DD"),
+        from_date: DateTime.fromISO(publicationSelected?.from_date).toFormat("yyyy-LL-dd"),//moment(publicationSelected.from_date).format("YYYY-MM-DD"),
+        expiration_date: DateTime.fromISO(publicationSelected?.expiration_date).toFormat("yyyy-LL-dd"),//moment(publicationSelected.to_date).format("YYYY-MM-DD"),
         department_id: publicationSelected.district.province.department_id,//EN DURO
         province_id: publicationSelected.district.province_id, //EN DURO
         rubro_id: publicationSelected.job_level_id,
@@ -89,8 +88,8 @@ export default function EditPosition({ history }) {
         }
         if ('from_date' in fieldValues)
             temp.from_date = fieldValues.from_date ? "" : "El campo es requerido."
-        if ('to_date' in fieldValues)
-            temp.to_date = fieldValues.to_date ? "" : "El campo es requerido."
+        if ('expiration_date' in fieldValues)
+            temp.expiration_date = fieldValues.expiration_date ? "" : "El campo es requerido."
         if ('department_id' in fieldValues)
             temp.department_id = fieldValues.department_id ? "" : "El campo es requerido."
         if ('province_id' in fieldValues)
@@ -220,12 +219,12 @@ export default function EditPosition({ history }) {
                         id="date"
                         fullWidth
                         type="date"
-                        name="to_date"
+                        name="expiration_date"
                         label="Fecha de caducidad"
-                        value={values.to_date}
+                        value={values.expiration_date}
                         onChange={handleInputChange}
-                        error={errors.to_date ? true : false}
-                        helperText={errors.to_date || "Programa la fecha fin de tu publicación"}
+                        error={errors.expiration_date ? true : false}
+                        helperText={errors.expiration_date || "Programa la fecha fin de tu publicación"}
                         InputLabelProps={{
                             shrink: true,
                         }}
