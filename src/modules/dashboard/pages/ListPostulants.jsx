@@ -7,6 +7,7 @@ import { Breadcrumbs, Button, DataGrid, FabLights } from "../../shared/component
 import { SessionRoutes } from '../../shared/libs/sessionRoutes';
 
 import { getPostulantsByPublicationId } from "../../../store/actions/dashboard/dashboard.action";
+import { actions_Utils } from "../../../store/actions";
 
 const getStatus = (state) => {
     switch (state) {
@@ -39,6 +40,10 @@ export default function Listpostulants({ history }) {
     const initRoute = SessionRoutes().initRoute;
     const routes = [{ name: "Inicio", to: `${initRoute}` }, { name: "Postulantes", to: `${initRoute}/postulantes` }];
     const [rows, setRows] = useState([])
+
+    useEffect(() => {
+        dispatch(actions_Utils.getDistricts)
+    }, [])
 
     useEffect(() => {
         dispatch(getPostulantsByPublicationId({ publication_id }))
@@ -75,9 +80,9 @@ export default function Listpostulants({ history }) {
         { field: 'experience', headerName: 'Experiencia', width: 180, sortable: false },
         { field: 'date', headerName: 'Fecha de postulación', width: 200, sortable: false, valueGetter: (params) => moment(params.value).format("YYYY-MM-DD") },
         {
-            field: 'state', headerName: 'Estado', width: 130, sortable: false, renderCell: (params) => {
+            field: 'state', headerName: 'Estado', width: 130, sortable: false, renderCell: (params, index) => {
                 const { postulant_id, state } = params.row
-                return <Button color="primary" onClick={() => history.push({ pathname: `${initRoute}/postulante/perfil/${postulant_id}`, state: { postulant_id: postulant_id } })}>{state}</Button>
+                return <Button color="primary" onClick={() => history.push({ pathname: `${initRoute}/postulante/perfil/${postulant_id}` })}>{state}</Button>
                 // return <Button color="primary" onClick={() => console.log("hice click")}>Registrado</Button>
             }
         },

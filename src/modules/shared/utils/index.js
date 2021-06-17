@@ -1,3 +1,4 @@
+const GENDER = [{ id: 1, name: "Masculino" }, { id: 2, name: "Femenino" }, { id: 3, name: "Otro" }]
 
 export const getRubroById = (array, rubro_id) => {
     if (rubro_id === "") {
@@ -18,7 +19,7 @@ export const getPeriodoById = (array, period_id) => {
 }
 
 export const getDistrictById = (array, district_id) => {
-    if (district_id === "") {
+    if (!district_id || array.length == 0) {
         return ""
     } else {
         const distrtict = array.filter(item => item.id == district_id)
@@ -32,6 +33,15 @@ export const getNameById = (array = [], id) => {
     } else {
         const rubro = array.filter(item => item.id === id)
         return rubro[0]?.name
+    }
+}
+
+export const getGenderById = (gender_id) => {
+    if (gender_id || gender_id === 0) {
+        return "No específico"
+    } else {
+        const gender = GENDER.filter(item => item.id === gender_id)
+        return gender[0]?.name
     }
 }
 

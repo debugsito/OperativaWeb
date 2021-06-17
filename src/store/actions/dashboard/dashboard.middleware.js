@@ -1,5 +1,5 @@
 import { service_Dashboard } from "../../services";
-import { setErrorFetch, setHistory, setReportByPostulantId, setRequestState } from "./dashboard.action";
+import { setErrorFetch, setHistory, setReportByPostulantId, setRequestState, setProfileOfApplicant, setProfileApplicantError } from "./dashboard.action";
 
 export const getHistory = () => {
   return async (dispatch) => {
@@ -54,6 +54,29 @@ export const savePublication = (body) => {
           dispatch(setRequestState({ success: false, message: error.response.data.message }));
         } else {
           dispatch(setRequestState({ success: false, message: "Ha ocurrido un error interno" }));
+        };
+      }
+    }
+  };
+};
+
+export const getProfileOfApplicant = (body) => {
+  console.log("getProfileOfApplicant", body)
+  return async (dispatch) => {
+    try {
+      const response = await service_Dashboard.getProfileOfApplicantById(body);
+      console.log("response", response)
+      dispatch(setProfileOfApplicant(response.data.profile));
+      dispatch(setProfileApplicantError(null)); //control de errores
+    } catch (error) {
+      if (!error.response) {
+        console.log("error", error)
+        dispatch(setProfileApplicantError("Ha ocurrido un error interno.1"));
+      } else {
+        if (error.response.status === 409) {
+          dispatch(setProfileApplicantError(error.response.data.message));
+        } else {
+          dispatch(setProfileApplicantError("Ha ocurrido un error interno.2"));
         };
       }
     }

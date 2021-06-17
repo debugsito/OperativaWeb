@@ -215,31 +215,11 @@ export const getPostulantsByPublicationId = (body) => {
   };
 };
 
-export const setApplicantProfileError = (payload) => ({
-  type: dashboardType.SET_APPLICANT_PROFILE_ERROR,
+export const setProfileApplicantError = (payload) => ({
+  type: dashboardType.SET_PROFILE_OF_APPLICANT_ERROR,
   payload
 });
-export const setApplicantProfile = (payload) => ({
-  type: dashboardType.SET_APPLICANT_PROFILE,
+export const setProfileOfApplicant = (payload) => ({
+  type: dashboardType.SET_PROFILE_OF_APPLICANT,
   payload
 });
-
-export const getApplicantProfile = (body) => {
-  return async (dispatch) => {
-    try {
-      const response = await service_Dashboard.getApplicantProfile(body);
-      dispatch(setApplicantProfile(response.data.profile));
-      dispatch(setApplicantProfileError(null)); //control de errores
-    } catch (error) {
-      if (!error.response) {
-        dispatch(setApplicantProfileError("Ha ocurrido un error interno.1"));
-      } else {
-        if (error.response.status === 409) {
-          dispatch(setApplicantProfileError(error.response.data.message));
-        } else {
-          dispatch(setApplicantProfileError("Ha ocurrido un error interno.2"));
-        };
-      }
-    }
-  };
-};

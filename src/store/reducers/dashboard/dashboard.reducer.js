@@ -68,12 +68,12 @@ const dashboardReducer = (state = initialState, action) => {
                 ...state,
                 postulantsByPublicationIdError: action.payload,
             };
-        case dashboardType.SET_APPLICANT_PROFILE_ERROR:
+        case dashboardType.SET_PROFILE_OF_APPLICANT_ERROR:
             return {
                 ...state,
                 applicantProfileError: action.payload,
             };
-        case dashboardType.SET_APPLICANT_PROFILE:
+        case dashboardType.SET_PROFILE_OF_APPLICANT:
             return {
                 ...state,
                 applicantProfile: action.payload,

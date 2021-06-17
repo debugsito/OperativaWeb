@@ -1,26 +1,48 @@
 import React, { useEffect, useState } from "react";
 import { DateTime } from "luxon";
-import { Container, Divider, Grid, Typography } from "@material-ui/core";
+import { useHistory, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Container, Divider, Grid, Typography, makeStyles } from "@material-ui/core";
 
 import { Button, Breadcrumbs, Modal } from '../../shared/components';
 import { checkCircleIcon, closeIcon, registeredIcon } from "../images";
-
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import { getApplicantProfile } from "../../../store/actions/dashboard/dashboard.action";
+import { getProfileOfApplicant } from "../../../store/actions/dashboard/dashboard.middleware";
 import { SessionRoutes } from '../../shared/libs/sessionRoutes';
 import { service_Dashboard } from "../../../store/services";
-import { useHistory } from "react-router-dom";
+import { getDistrictById, getGenderById } from "../../shared/utils";
+
+const useStyles = makeStyles(theme => ({
+    header:{
+        width:"90%",
+        padding:"1rem",
+        position:"fixed",
+        top:"4rem",
+        backgroundColor:"#fff",
+    },
+    body:{
+        padding:"1rem",
+        marginTop:"10.5rem"
+    },
+    containerImgWithText:{
+        display:"flex",
+        '& img':{
+            marginRight:"4px"
+        }
+    }
+}))
 
 const ApplicantProfile = () => {
-    const { postulant_id } = useParams()
+    const classes = useStyles();
+    const history = useHistory();
     const dispatch = useDispatch();
-    const { applicantProfile, applicantProfile: { user, job, education }, publicationSelected } = useSelector(state => state.dashboard)
+    let { postulant_id } = useParams()
+    const initRoute = SessionRoutes().initRoute;
+    const { applicantProfile, applicantProfile:{ user, job, education}, publicationSelected, postulantsByPublicationId } = useSelector(state => state.dashboard)
+    const { districts } = useSelector(state => state.utils)
+
     const [openModal, setOpenModal] = useState(false);
     const [modalData, setModalData] = useState({ title: "", body: "", method: "" })
-    const { id: publication_id } = publicationSelected.data;
-    const history = useHistory();
-    const initRoute = SessionRoutes().initRoute;
+    const { id: publication_id } = publicationSelected.data; //publication_id => ID de la publicacion
     const routes = [
         { name: "Incio", to: `${initRoute}` },
         { name: "Postulantes", to: `${initRoute}/postulantes` },
@@ -28,31 +50,47 @@ const ApplicantProfile = () => {
     ];
 
     useEffect(() => {
-        dispatch(getApplicantProfile({ postulant_id }))
-    }, [])
+        if(postulant_id) {
+            dispatch(getProfileOfApplicant({ postulant_id }))
+        }
+    }, [postulant_id])
+
+    
 
 
     const handleSaveOption = async (method) => {
 
-        const { id: user_id } = applicantProfile.user;
+        const { id: user_id } = applicantProfile?.user;
         let obj = {
             user_id
         }
         switch (method) {
             case 'select':
-                let response = await service_Dashboard.selectApplicant(obj, publication_id);
+                await service_Dashboard.selectApplicant(obj, publication_id);
                 break;
             case 'deny':
-                let response2 = await service_Dashboard.denyApplicant(obj, publication_id);
+                await service_Dashboard.denyApplicant(obj, publication_id);
                 break;
             case 'hire':
-                let response3 = await service_Dashboard.hireApplicant(obj, publication_id);
+                await service_Dashboard.hireApplicant(obj, publication_id);
                 break
             default:
                 break;
         }
         setOpenModal(false);
         history.push({ pathname: `${initRoute}/postulantes`, state: { publication_id } })
+    }
+
+    const handleClickNext = () => {
+        const index = postulantsByPublicationId?.data?.findIndex(item => item.user.account_id == postulant_id)
+        if(index === postulantsByPublicationId.data.length - 1) return
+        const { account_id } = postulantsByPublicationId?.data[index + 1].user
+        postulant_id = account_id
+        history.push( `${initRoute}/postulante/perfil/${postulant_id}`)
+    }
+
+    const handleClickGoToPrevious = () => {
+        history.goBack()
     }
 
     const modalBody = (
@@ -93,10 +131,10 @@ const ApplicantProfile = () => {
 
     return (
         <>
-            <Container >
-                <Grid container spacing={3} className="postulant-perfil" style={{ marginTop: "20%" }}>
-                    <Grid item xs={12} className="postulant-perfil__header" style={{ position: "fixed", top: "4rem", background: "white" }}>
-                        <Grid container spacing={3}>
+            <Container className="dashboard-container">
+                
+                    <div className={classes.header}>
+                        <Grid container>
                             <Grid item xs={12}>
                                 <Breadcrumbs routes={routes} />
                             </Grid>
@@ -121,10 +159,12 @@ const ApplicantProfile = () => {
                                                     }
                                                     }
                                                 >
-                                                    <img src={registeredIcon} />
-                                                    <span className="dashboard-applicant-options">
-                                                        seleccionar
-                                                    </span>
+                                                    <div className={classes.containerImgWithText}>
+                                                        <img src={registeredIcon} />
+                                                        <span className="dashboard-applicant-options">
+                                                            seleccionar
+                                                        </span>
+                                                    </div>
                                                 </Button>
                                             </Grid>
                                             <Grid item spacing={3}>
@@ -145,10 +185,12 @@ const ApplicantProfile = () => {
                                                     }
                                                     }
                                                 >
-                                                    <img src={closeIcon} />
-                                                    <span className="dashboard-applicant-options">
-                                                        descartar
-                                                    </span>
+                                                    <div className={classes.containerImgWithText}>
+                                                        <img src={closeIcon} />
+                                                        <span className="dashboard-applicant-options">
+                                                            descartar
+                                                        </span>
+                                                    </div>
                                                 </Button>
                                             </Grid>
                                             <Grid item spacing={3}>
@@ -168,10 +210,12 @@ const ApplicantProfile = () => {
                                                     }
                                                     }
                                                 >
-                                                    <img src={checkCircleIcon} />
-                                                    <span className="dashboard-applicant-options dark-gray">
-                                                        contratar
-                                                    </span>
+                                                    <div className={classes.containerImgWithText}>
+                                                        <img src={checkCircleIcon} />
+                                                        <span className="dashboard-applicant-options dark-gray">
+                                                            contratar
+                                                        </span>
+                                                    </div>
                                                 </Button>
                                             </Grid>
                                         </Grid>
@@ -186,10 +230,8 @@ const ApplicantProfile = () => {
                                 </Grid>
                             </Grid>
                         </Grid>
-
-                    </Grid>
-
-                    <Grid item xs={12} className="postulant-perfil__content" style={{ margin: "1rem" }}>
+                    </div>
+                    <div className={classes.body}>
                         <Grid container spacing={3}>
                             <Grid item xs={4}>
                                 <Typography variant="h6" component="h6">
@@ -207,7 +249,7 @@ const ApplicantProfile = () => {
                                     <strong>Numero de documento</strong>
                                 </Typography>
                                 <Typography variant="body1" component="h6">
-                                    {user.document_number}
+                                    {user?.document_number}
                                 </Typography>
                                 <br />
                                 <Typography variant="subtitle2" component="h6">
@@ -233,13 +275,7 @@ const ApplicantProfile = () => {
                                     {user?.address}
                                 </Typography>
                                 <br />
-                                {/* <Typography variant="subtitle2" component="h6">
-                                    <strong>Referencias</strong>
-                                </Typography>
-                                <Typography variant="body1" component="h6">
-                                    -----
-                                </Typography>
-                                <br /> */}
+                                
                                 <Typography variant="subtitle2" component="h6">
                                     <strong>teléfono</strong>
                                 </Typography>
@@ -259,6 +295,13 @@ const ApplicantProfile = () => {
                                 </Typography>
                                 <Typography variant="body1" component="h6">
                                     {user?.civil?.name}
+                                </Typography>
+                                <br />
+                                <Typography variant="subtitle2" component="h6">
+                                    <strong>Género</strong>
+                                </Typography>
+                                <Typography variant="body1" component="h6">
+                                    {getGenderById(user?.gender)}
                                 </Typography>
                                 <br />
                                 <Typography variant="subtitle2" component="h6">
@@ -296,19 +339,13 @@ const ApplicantProfile = () => {
                                 </Typography>
                                 <br />
                                 <Typography variant="subtitle2" component="h6">
-                                    <strong>Dirección de la empresa</strong>
+                                    <strong>Distrito</strong>
                                 </Typography>
                                 <Typography variant="body1" component="h6">
-                                    {job && job[0]?.address}
+                                    {job && getDistrictById(districts, job[0]?.district_id)}
                                 </Typography>
                                 <br />
-                                {/* <Typography variant="subtitle2" component="h6">
-                                    <strong>Rubro</strong>
-                                </Typography>
-                                <Typography variant="body1" component="h6">
-                                    ----------
-                                </Typography>
-                                <br /> */}
+                                
                                 <Typography variant="subtitle2" component="h6">
                                     <strong>Fecha de inicio</strong>
                                 </Typography>
@@ -393,11 +430,19 @@ const ApplicantProfile = () => {
                                 <br />
 
                             </Grid>
-
+                            <Grid item xs={12}>
+                                <Grid container justify="flex-end">
+                                    <Grid item xs={2}>
+                                        <Button variant="outlined" size="large" onClick={handleClickGoToPrevious}>Anterior</Button>
+                                    </Grid>
+                                    <Grid item xs={2}>
+                                        <Button variant="contained" size="large" onClick={handleClickNext}>Siguiente</Button>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
                         </Grid>
-                    </Grid>
-
-                </Grid>
+                    </div>
+            
             </Container>
             <Modal
                 open={openModal}
