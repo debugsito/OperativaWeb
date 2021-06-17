@@ -89,8 +89,8 @@ export default function HistoryTable({ handleEnableButtonDownload, searchInput }
     const [page, setPage] = useState(0);
     const [dense, setDense] = useState(false);
     const [rowsPerPage, setRowsPerPage] = useState(5);
-    const [publications, setPublications] = useState([createData("", DateTime.utc().toFormat("DDD"), "", "", "", "", "", [], { id: "" })]);
-    const [dataPublications, setDataPublications] = useState([createData("", DateTime.utc().toFormat("DDD"), "", "", "", "", "", [], { id: "" })])
+    const [publications, setPublications] = useState([createData("", DateTime.local().toFormat("DDD"), "", "", "", "", "", [], { id: "" })]);
+    const [dataPublications, setDataPublications] = useState([createData("", DateTime.local().toFormat("DDD"), "", "", "", "", "", [], { id: "" })])
 
     const { postHistory } = useSelector(state => state?.dashboard);
     const dispatch = useDispatch();

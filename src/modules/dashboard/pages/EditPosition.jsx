@@ -21,13 +21,13 @@ const defaultValues = {
     period: "",
     salary: "",
     from_date: "",
-    to_date: "",
+    expiration_date: "",
     department_id: "",
     province_id: "",
 };
 
 export default function EditPosition({ history }) {
-    const dateLocal = DateTime.local().toFormat("yyyy-LL-dd") //Don't use momentjs, will soon be deprecated
+    const dateLocal = DateTime.local().toFormat("yyyy-LL-dd")
     const dispatch = useDispatch();
     const { departments, provinces, districts, rubrosOp } = useSelector(state => state?.utils)
     const { publicationSelected } = useSelector(state => state?.dashboard)
@@ -49,10 +49,10 @@ export default function EditPosition({ history }) {
         district_id: publicationSelected.district.id,
         period: publicationSelected.period,
         salary: publicationSelected.salary,
-        from_date: DateTime.fromISO(publicationSelected.from_date).toFormat("yyyy-LL-dd"),//moment(publicationSelected.from_date).format("YYYY-MM-DD"),
-        to_date: DateTime.fromISO(publicationSelected.to_date).toFormat("yyyy-LL-dd"),
-        department_id: publicationSelected.district.province.department_id,
-        province_id: publicationSelected.district.province_id,
+        from_date: DateTime.fromISO(publicationSelected?.from_date).toFormat("yyyy-LL-dd"),//moment(publicationSelected.from_date).format("YYYY-MM-DD"),
+        expiration_date: DateTime.fromISO(publicationSelected?.expiration_date).toFormat("yyyy-LL-dd"),//moment(publicationSelected.to_date).format("YYYY-MM-DD"),
+        department_id: publicationSelected.district.province.department_id,//EN DURO
+        province_id: publicationSelected.district.province_id, //EN DURO
         rubro_id: publicationSelected.job_level_id,
         period_id: publicationSelected.period,
     } : defaultValues
@@ -81,8 +81,8 @@ export default function EditPosition({ history }) {
         }
         if ('from_date' in fieldValues)
             temp.from_date = fieldValues.from_date ? "" : "El campo es requerido."
-        if ('to_date' in fieldValues)
-            temp.to_date = fieldValues.to_date ? "" : "El campo es requerido."
+        if ('expiration_date' in fieldValues)
+            temp.expiration_date = fieldValues.expiration_date ? "" : "El campo es requerido."
         if ('department_id' in fieldValues)
             temp.department_id = fieldValues.department_id ? "" : "El campo es requerido."
         if ('province_id' in fieldValues)
@@ -210,12 +210,12 @@ export default function EditPosition({ history }) {
                     <TextInput
                         fullWidth
                         type="date"
-                        name="to_date"
+                        name="expiration_date"
                         label="Fecha de caducidad"
-                        value={values.to_date}
+                        value={values.expiration_date}
                         onChange={handleInputChange}
-                        error={errors.to_date ? true : false}
-                        helperText={errors.to_date || "Programa la fecha fin de tu publicación"}
+                        error={errors.expiration_date ? true : false}
+                        helperText={errors.expiration_date || "Programa la fecha fin de tu publicación"}
                         InputLabelProps={{
                             shrink: true,
                         }}

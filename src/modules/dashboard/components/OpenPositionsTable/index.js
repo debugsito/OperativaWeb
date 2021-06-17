@@ -254,7 +254,6 @@ export default function OpenPositionsTable() {
     const [page, setPage] = useState(0);
     const [dense, setDense] = useState(false);
     const [rowsPerPage, setRowsPerPage] = useState(5);
-    // const [publications, setPublications] = useState([createData("", "", "", moment().format('LL'), 0, false, [], { id: "" })]);
     const [publications, setPublications] = useState([createData("", "", "", DateTime.local().toFormat("DDD"), 0, false, [], { id: "" })]);
 
     const { publicationsInfo } = useSelector(state => state?.dashboard);
@@ -267,33 +266,35 @@ export default function OpenPositionsTable() {
     }, [])
 
     useEffect(() => {
-        const rows = publicationsInfo?.publications?.map(publication => {
-            return (
-                createData(
-                    publication.job_title,
-                    DateTime.fromISO(publication.to_date).toFormat("DDD"),//moment(publication.to_date).utc().format('LL'),
-                    publication.account?.user?.fullname,
-                    DateTime.fromISO(publication.createdAt).toFormat("DDD"),//moment(publication.createdAt).format('LL'),
-                    publication.count_postulantes,
-                    DateTime.fromISO(publication.to_date).toMillis() > DateTime.local().toMillis() ? true : false,//moment(publication.to_date).utc().format('X') > moment().utc().format('X'), //como se si esta activo
-                    [
-                        {
-                            id: "edit",
-                            name: "Editar",
-                        },
-                        {
-                            id: "archive",
-                            name: "Archivar",
-                        },
-                        {
-                            id: "show",
-                            name: "Mostrar ",
-                        },
-                    ],
-                    publication
-                )
+        const rows = publicationsInfo?.publications?.map(publication => (
+            createData(
+                publication.job_title,
+                //Existe datos con expiration_date = null
+                //moment(publication.expiration_date? publication.expiration_date : publication.from_date).utc().format('LL'),
+                DateTime.fromISO(publication.expiration_date ? publication.expiration_date : publication.from_date).toFormat("DDD"),
+                publication.account?.user?.fullname,
+                //moment(publication.createdAt).format('LL'),
+                DateTime.fromISO(publication.createdAt).toFormat("DDD"),
+                publication.count_postulantes,
+                //moment(publication.to_date).utc().format('X') > moment().utc().format('X'), //como se si esta activo
+                DateTime.fromISO(publication.expiration_date ? publication.expiration_date : publication.from_date).toMillis() > DateTime.local().toMillis(), //como se si esta activo
+                [
+                    {
+                        id: "edit",
+                        name: "Editar",
+                    },
+                    {
+                        id: "archive",
+                        name: "Archivar",
+                    },
+                    {
+                        id: "show",
+                        name: "Mostrar ",
+                    },
+                ],
+                publication
             )
-        })
+        ))
         setPublications(rows)
     }, [publicationsInfo])
 

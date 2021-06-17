@@ -1,15 +1,14 @@
 import React, {useEffect} from 'react'
 import { Container,Divider, Grid, Typography } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
-// import { DateTime } from "luxon";
-import * as moment from 'moment';
+import { DateTime } from "luxon";
 import { useDispatch, useSelector } from "react-redux";
 import { actions_Utils } from "../../../store/actions";
 import { Breadcrumbs, Button, RichText } from "../../shared/components";
 import { SessionRoutes } from '../../shared/libs/sessionRoutes';
 
 
-export default function ShowPositionDetail(props) {
+export default function ShowPositionDetail() {
     const dispatch = useDispatch()
     const history = useHistory()
     const initRoute = SessionRoutes().initRoute;
@@ -27,7 +26,7 @@ export default function ShowPositionDetail(props) {
 
     const getNameById = (id,array=[]) => {
         const result = array.filter(element => element.id == id)
-        return result.length >0 ?result[0]?.name:"----"
+        return result.length > 0 ?result[0]?.name:"----"
     }
 
     return (
@@ -53,8 +52,7 @@ export default function ShowPositionDetail(props) {
                                         <strong>Fecha de caducidad:</strong>
                                     </Typography>
                                     <Typography variant="body1" component="h6">
-                                        {moment(publicationSelected.to_date).utc().format("LL")}
-                                        {/* {DateTime.fromISO(publicationSelected.to_date).toFormat("DDD")} */}
+                                        {DateTime.fromISO(publicationSelected.expiration_date? publicationSelected.expiration_date : publicationSelected.from_date).toFormat("DDD")}
                                     </Typography>
                                 </Grid>
                                 <Grid item xs={6}>
@@ -88,7 +86,10 @@ export default function ShowPositionDetail(props) {
                                         <strong>Fecha de inicio:</strong>
                                     </Typography>
                                     <Typography variant="body1" component="h6">
-                                        {moment(publicationSelected.from_date).utc().format("LL")}
+                                        {/* {moment(publicationSelected.from_date).utc().format("LL")} */}
+                                        {
+                                            DateTime.fromISO(publicationSelected.from_date).toFormat("DDD")
+                                        }
                                     </Typography>
                                 </Grid >
                                 
