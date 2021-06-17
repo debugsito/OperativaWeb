@@ -271,7 +271,7 @@ export default function OpenPositionsTable() {
                 publication.job_title,
                 //Existe datos con expiration_date = null
                 //moment(publication.expiration_date? publication.expiration_date : publication.from_date).utc().format('LL'),
-                DateTime.fromISO(publication.expiration_date ? publication.expiration_date : publication.from_date).toFormat("DDD"),
+                DateTime.fromISO(publication.expiration_date ? publication.expiration_date : publication.from_date).toUTC().toFormat("DDD"),
                 publication.account?.user?.fullname,
                 //moment(publication.createdAt).format('LL'),
                 DateTime.fromISO(publication.createdAt).toFormat("DDD"),
