@@ -9,6 +9,7 @@ const AuthRoutes = [
     '/recuperar-contraseña',
     '/new-password',
     '/terminos-y-condiciones-operativa',
+    '/politicas-de-privacidad',
 ];
 
 export default AuthRoutes;
