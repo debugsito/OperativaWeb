@@ -52,7 +52,7 @@ export default function ShowPositionDetail() {
                                         <strong>Fecha de caducidad:</strong>
                                     </Typography>
                                     <Typography variant="body1" component="h6">
-                                        {DateTime.fromISO(publicationSelected.expiration_date? publicationSelected.expiration_date : publicationSelected.from_date).toFormat("DDD")}
+                                        {DateTime.fromISO(publicationSelected.expiration_date? publicationSelected.expiration_date : publicationSelected.from_date).toUTC().toFormat("DDD")}
                                     </Typography>
                                 </Grid>
                                 <Grid item xs={6}>
@@ -86,9 +86,8 @@ export default function ShowPositionDetail() {
                                         <strong>Fecha de inicio:</strong>
                                     </Typography>
                                     <Typography variant="body1" component="h6">
-                                        {/* {moment(publicationSelected.from_date).utc().format("LL")} */}
                                         {
-                                            DateTime.fromISO(publicationSelected.from_date).toFormat("DDD")
+                                            DateTime.fromISO(publicationSelected.from_date).toUTC().toFormat("DDD")
                                         }
                                     </Typography>
                                 </Grid >
@@ -132,17 +131,6 @@ export default function ShowPositionDetail() {
                                         valueText={JSON.parse(publicationSelected.description)}
                                         readOnly
                                     />
-                                    {/* <TextInput
-                                        fullWidth
-                                        label=""
-                                        multiline
-                                        variant="filled"
-                                        name="requirements"
-                                        value={publicationSelected.description}
-                                        InputProps={{
-                                            readOnly: true,
-                                          }}
-                                    /> */}
                                 </Grid>
                                 <Grid item xs={12}>
                                     <Typography variant="subtitle2" component="h6">
@@ -153,6 +141,18 @@ export default function ShowPositionDetail() {
                                         label="Requisitos del puesto"
                                         name="description"
                                         valueText={JSON.parse(publicationSelected.requirements)}
+                                        readOnly
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Typography variant="subtitle2" component="h6">
+                                        <strong>Beneficios:</strong>
+                                    </Typography>
+                                    <br />
+                                    <RichText 
+                                        label="Beneficios"
+                                        name="benefits"
+                                        valueText={JSON.parse(publicationSelected.benefits)}
                                         readOnly
                                     />
                                 </Grid>

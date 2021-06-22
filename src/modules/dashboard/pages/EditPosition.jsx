@@ -15,6 +15,7 @@ const defaultValues = {
     job_title: "",
     description: "",
     requirements: "",
+    benefits:"",
     job_level_id: "",
     address: "",
     district_id: "",
@@ -44,15 +45,16 @@ export default function EditPosition({ history }) {
         job_title: publicationSelected.job_title,
         description: JSON.parse(publicationSelected.description),
         requirements: JSON.parse(publicationSelected.requirements),
+        benefits: JSON.parse(publicationSelected.benefits),
         job_level_id: publicationSelected.job_level_id,//rubro
         address: publicationSelected.address,
         district_id: publicationSelected.district.id,
         period: publicationSelected.period,
         salary: publicationSelected.salary,
-        from_date: DateTime.fromISO(publicationSelected?.from_date).toFormat("yyyy-LL-dd"),//moment(publicationSelected.from_date).format("YYYY-MM-DD"),
-        expiration_date: DateTime.fromISO(publicationSelected?.expiration_date).toFormat("yyyy-LL-dd"),//moment(publicationSelected.to_date).format("YYYY-MM-DD"),
-        department_id: publicationSelected.district.province.department_id,//EN DURO
-        province_id: publicationSelected.district.province_id, //EN DURO
+        from_date: DateTime.fromISO(publicationSelected?.from_date).toUTC().toFormat("yyyy-LL-dd"),
+        expiration_date: DateTime.fromISO(publicationSelected?.expiration_date).toUTC().toFormat("yyyy-LL-dd"),
+        department_id: publicationSelected.district.province.department_id,
+        province_id: publicationSelected.district.province_id,
         rubro_id: publicationSelected.job_level_id,
         period_id: publicationSelected.period,
     } : defaultValues
@@ -67,6 +69,8 @@ export default function EditPosition({ history }) {
             temp.description = fieldValues.description[0].children[0].text ? "" : "El campo es requerido."
         if ('requirements' in fieldValues)
             temp.requirements = fieldValues.requirements[0].children[0].text ? "" : "El campo es requerido."
+        if ('benefits' in fieldValues)
+            temp.benefits = fieldValues.benefits[0].children[0].text ? "" : "El campo es requerido."
         if ('job_level_id' in fieldValues)
             temp.job_level_id = fieldValues.job_level_id ? "" : "El campo es requerido."
         if ('address' in fieldValues)
@@ -156,6 +160,7 @@ export default function EditPosition({ history }) {
         let valuesTemp = {...values}
         valuesTemp.description = JSON.stringify(values.description)
         valuesTemp.requirements = JSON.stringify(values.requirements)
+        valuesTemp.benefits = JSON.stringify(values.benefits)
         valuesTemp.rubro_id = values?.job_level_id;
         valuesTemp.period_id = values?.period;
         if (publicationSelected) {
@@ -268,19 +273,16 @@ export default function EditPosition({ history }) {
                         error={errors.requirements ? true : false}
                         helperText={errors.requirements}
                     />
-                    {/* <TextInput
-                        fullWidth
-                        id="outlined-multiline-static"
-                        label="Requisitos del puesto"
-                        multiline
-                        rows={8}
-                        variant="outlined"
-                        name="requirements"
-                        value={values.requirements}
-                        onChange={handleInputChange}
-                        error={errors.requirements ? true : false}
-                        helperText={errors.requirements}
-                    /> */}
+                </Grid>
+                <Grid item xs={8} style={{ margin: "auto" }}>
+                    <RichText 
+                        label="Beneficios"
+                        name="benefits"
+                        valueText={values.benefits}
+                        handleInputChange={handleInputChange}
+                        error={errors.benefits ? true : false}
+                        helperText={errors.benefits}
+                    />
                 </Grid>
                 <Grid item xs={8} style={{ margin: "auto" }}>
                     <TextInput
