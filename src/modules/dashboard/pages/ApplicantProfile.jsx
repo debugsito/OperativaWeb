@@ -298,6 +298,13 @@ const ApplicantProfile = () => {
                                 </Typography>
                                 <br />
                                 <Typography variant="subtitle2" component="h6">
+                                    <strong>Edad</strong>
+                                </Typography>
+                                <Typography variant="body1" component="h6">
+                                    {user?.age}
+                                </Typography>
+                                <br />
+                                <Typography variant="subtitle2" component="h6">
                                     <strong>Género</strong>
                                 </Typography>
                                 <Typography variant="body1" component="h6">
