@@ -131,7 +131,7 @@ export default function CustomDataTable({ handleEnableButtonDownload, searchInpu
 
     const handleClickPostulation = (publication) => {
         dispatch(setPublicationSelected(publication));
-        history.push(`/postulante/postulaciones/ver-publicacion`);
+        history.push(`/postulante/ver-publicacion`);
     }
 
     return (

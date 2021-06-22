@@ -1,0 +1,1 @@
+export { default as checkImg } from "./check.svg"

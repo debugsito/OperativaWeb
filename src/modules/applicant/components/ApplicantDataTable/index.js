@@ -146,7 +146,7 @@ export default function HistoryTable({ handleEnableButtonDownload, searchInput }
     const executeAction = (event, id, publication) => {
         event.preventDefault();
         dispatch(setPublicationSelected(publication));
-        if (id === "see_more") history.push(`/postulante/postulaciones/ver-publicacion`);
+        if (id === "see_more") history.push(`/postulante/ver-publicacion`);
     }
 
     return (
