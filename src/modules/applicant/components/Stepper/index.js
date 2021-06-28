@@ -2,7 +2,7 @@ import React from 'react'
 import { Typography, makeStyles } from "@material-ui/core";
 import { checkImg } from "../../../shared/images/postulant";
 
-const STEP = ['Datos personales', 'Datos de contacto', 'Educación', 'Experiencia laboral', 'Rubro de interés']
+
 
 const useStyles = makeStyles(theme => ({
     rootStepper: {
@@ -18,15 +18,15 @@ const useStyles = makeStyles(theme => ({
         alignItems: "center"
     },
     img: {
-        width: "50px"
+        width: "45px"
     }
 }))
 
-function CustomStepper() {
+function CustomStepper({ step }) {
     const classes = useStyles()
     return (
         <div className={classes.rootStepper}>
-            {STEP.map((item, index) => (
+            {step.map((item, index) => (
                 <div key={index} className={classes.containerStep}>
                     <img src={checkImg} className={classes.img} />
                     <Typography variant="body1">{item}</Typography>

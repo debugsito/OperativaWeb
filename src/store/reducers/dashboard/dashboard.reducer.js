@@ -12,7 +12,7 @@ const initialState = {
     publicationSelected: "",
     postulantsByPublicationId: {},
     postulantsByPublicationIdError: "",
-    applicantProfile: {},
+    applicantProfile: null,
     applicantProfileError: "",
     reportByPostulantId: [],
     requestState: {

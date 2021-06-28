@@ -21,7 +21,7 @@ const getDocumentsType = () => {
     return async (dispatch) => {
         try {
             const response = await documentsTypeList();
-            dispatch(setDocumentsType(response.data));
+            dispatch(setDocumentsType(response.data.documents));
             dispatch(setError(null));
         } catch (error) {
             if (!error.response) {
@@ -186,7 +186,7 @@ const getAcademicLevels = () => {
     return async (dispatch) => {
         try {
             const response = await academicLevelsList();
-            dispatch(setAcademicLevels(response.data));
+            dispatch(setAcademicLevels(response.data.levels));
             dispatch(setError(null));
         } catch (error) {
             if (!error.response) {
@@ -261,7 +261,7 @@ const getProviders = () => {
     return async (dispatch) => {
         try {
             const response = await providerList();
-            dispatch(setProviders(response.data));
+            dispatch(setProviders(response.data.providers));
             dispatch(setError(null));
         } catch (error) {
             if (!error.response) {
