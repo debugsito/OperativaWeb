@@ -3,6 +3,7 @@ import { Divider, Grid } from "@material-ui/core";
 import { Button, Typography } from "../../../shared/components";
 import { editIcon } from "../../images";
 import { useSelector } from 'react-redux';
+import UploadImage from "./UploadImage";
 
 
 export default function Showprofile({ setIsEditActive, userData }) {
@@ -38,7 +39,7 @@ export default function Showprofile({ setIsEditActive, userData }) {
             <Grid item xs={12}>
                 <Divider />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={8}>
                 <Typography variant="subtitle2" component="h6">
                     <strong>Razón social</strong>
                 </Typography>
@@ -72,6 +73,9 @@ export default function Showprofile({ setIsEditActive, userData }) {
                     </>
                 }
 
+            </Grid>
+            <Grid item xs={4}>
+                <UploadImage />
             </Grid>
             <Grid item xs={12}>
                 <Typography variant="h6" component="h6">

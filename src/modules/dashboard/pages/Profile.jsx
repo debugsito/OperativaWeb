@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Grid } from "@material-ui/core";
+import { Container, Grid, Paper, makeStyles } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
 
 import { EditProfileForm, ShowProfile } from "../components";
@@ -11,7 +11,14 @@ import { actions_Utils } from "../../../store/actions";
 
 const routes = [{ name: "Perfil", to: "/dashboard" }];
 
+const useStyles = makeStyles(theme => ({
+    paper:{
+        padding:"4rem"
+    }
+}))
+
 const Profile = () => {
+    const classes = useStyles()
     const dispatch = useDispatch();
     const {user} = useSelector(state => state?.auth)
     const [isEditActive, setIsEditActive] = useState(false);
@@ -58,22 +65,16 @@ const Profile = () => {
                             <Grid container spacing={3}>
                                 <Grid item xs={2}></Grid>
                                 <Grid item xs={8}>
-                                    {
-                                        openAlert && AlertMessage()
-                                    }
-                                    <Grid
-                                        container
-                                        spacing={3}
-                                        alignContent="center"
-                                        justify="center"
-                                    >
-
-                                        {
-                                            isEditActive ?
-                                                <EditProfileForm setIsEditActive={setIsEditActive} userData={userData} setOpenAlert={setOpenAlert} /> :
-                                                <ShowProfile setIsEditActive={setIsEditActive} userData={userData} />
-                                        }
-                                    </Grid>
+                                    <Paper className={classes.paper}>
+                                        { openAlert && AlertMessage() }
+                                        <Grid container spacing={3} alignContent="center" justify="center">
+                                            {
+                                                isEditActive ?
+                                                    <EditProfileForm setIsEditActive={setIsEditActive} userData={userData} setOpenAlert={setOpenAlert} /> :
+                                                    <ShowProfile setIsEditActive={setIsEditActive} userData={userData} />
+                                            }
+                                        </Grid>
+                                    </Paper>
                                 </Grid>
                             </Grid>
                         </Grid>
