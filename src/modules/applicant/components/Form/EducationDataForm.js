@@ -16,7 +16,7 @@ export default function EducationDataForm({ isReadOnly, handleChangeIndex }) {
 
     const { academicLevels, specialties } = useSelector(state => state?.utils)
     const { applicantProfile } = useSelector(state => state?.dashboard)
-    let initialValues = normalize.educationData(applicantProfile.education[0])
+    let initialValues = normalize.educationData(applicantProfile)
 
     const [isWithoutEducation, setIsWithoutEducation] = useState(false)
     const [showSpeciality, setShowSpeciality] = useState(initialValues.level_id > ACADEMIC_LEVEL.INCOMPLETE_TECHNICIAN_ID)
@@ -65,9 +65,9 @@ export default function EducationDataForm({ isReadOnly, handleChangeIndex }) {
         dispatch(getSpecialties())
     }, [])
 
-    const handleChangeAcademicLevel = (e) => {
-        const LEVEL_TEMP = e.target.value
-        if (LEVEL_TEMP > ACADEMIC_LEVEL.INCOMPLETE_TECHNICIAN_ID) { //SI TIENE EL NIVEL ACADEMICO MAYOR QUE TECNICO INCOMPLETO || TECNICO || UNIV...
+    useEffect(() => {
+        const LEVEL_TEMP = values.level_id
+        if (LEVEL_TEMP >= ACADEMIC_LEVEL.INCOMPLETE_TECHNICIAN_ID) { //SI TIENE EL NIVEL ACADEMICO MAYOR QUE TECNICO INCOMPLETO || TECNICO || UNIV...
             setValues({ ...values, speciality_id: "", name_inst: "", from_year: "", endYear: "" })
             setShowSpeciality(true)
             setIsWithoutEducation(false)
@@ -79,11 +79,11 @@ export default function EducationDataForm({ isReadOnly, handleChangeIndex }) {
             setShowSpeciality(false)
             setIsWithoutEducation(false)
         }
-        handleInputChange(e)
-    }
 
-    const handleChangeSpeciality = (e) => {
-        const SPECIALITY_TEMP = e.target.value
+    }, [values.level_id])
+
+    useEffect(() => {
+        const SPECIALITY_TEMP = values.speciality_id
         if (SPECIALITY_TEMP == SPECIALITY.OTHERS) {
             setShowOtherSpeciality(true)
             setValues({ ...values, otherSpeciality: "" })
@@ -92,9 +92,7 @@ export default function EducationDataForm({ isReadOnly, handleChangeIndex }) {
             setErrors({ ...errors, otherSpeciality: "" })
             setValues({ ...values, otherSpeciality: null })
         }
-        handleInputChange(e)
-    }
-
+    }, [values.speciality_id])
 
     return (
         <Grid container spacing={3}>
@@ -103,7 +101,7 @@ export default function EducationDataForm({ isReadOnly, handleChangeIndex }) {
                     label="Nivel máximo alcanzado"
                     name="level_id"
                     value={values.level_id}
-                    onChange={handleChangeAcademicLevel}
+                    onChange={handleInputChange}
                     error={errors.level_id ? true : false}
                     helperText={errors.level_id}
                     inputProps={{
@@ -140,7 +138,7 @@ export default function EducationDataForm({ isReadOnly, handleChangeIndex }) {
                                 label="Especialidad"
                                 name="speciality_id"
                                 value={values.speciality_id}
-                                onChange={handleChangeSpeciality}
+                                onChange={handleInputChange}
                                 error={errors.speciality_id ? true : false}
                                 helperText={errors.speciality_id}
                                 inputProps={{

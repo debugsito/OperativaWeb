@@ -25,9 +25,9 @@ export default function Index({ activeIndex, handleChangeIndex, title }) {
             case 1:
                 return <ContactDataForm isReadOnly={isReadOnly} handleChangeIndex={handleChangeIndex} />
             case 2:
-                return <EducationDataForm />
+                return <EducationDataForm isReadOnly={isReadOnly} handleChangeIndex={handleChangeIndex} />
             case 3:
-                return <WorkExperienceDataForm />
+                return <WorkExperienceDataForm isReadOnly={isReadOnly} handleChangeIndex={handleChangeIndex} />
             case 4:
                 return <RubroForm />
             default:

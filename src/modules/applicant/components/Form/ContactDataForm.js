@@ -59,16 +59,16 @@ export default function ContactDataForm({ isReadOnly, handleChangeIndex }) {
     }, [])
 
     useEffect(() => {
-        if (values.department_id) {
+        if (departments.length > 0) {
             setFilteredProvinces(values.department_id)
         }
-    }, [values.department_id])
+    }, [departments])
 
     useEffect(() => {
-        if (values.province_id) {
+        if (provinces.length > 0) {
             setFilteredDistricts(values.province_id)
         }
-    }, [values.province_id])
+    }, [provinces])
 
     const setFilteredProvinces = (department_id) => {
         setDistrictsList([]);
