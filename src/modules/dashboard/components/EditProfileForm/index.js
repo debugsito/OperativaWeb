@@ -8,7 +8,7 @@ import { isEmail, isRuc } from "../../../shared/libs/validators";
 
 import { updateAccount } from "../../../../store/actions/auth/auth.action";
 
-export default function Editprofile({ setIsEditActive, userData, setOpenAlert }) {
+export default function Editprofile({ updateAccount, userData }) {
     const { auth: { user: { account } }, utils: { items } } = useSelector(state => state);
     const dispatch = useDispatch();
 
@@ -52,7 +52,7 @@ export default function Editprofile({ setIsEditActive, userData, setOpenAlert })
     } = useForm(userData, true, validate);
 
     const handleUpdate = async () => {
-        let body = {
+        body = {
             email: values.email,
             razon_social: values.razon_social,
             user: {
@@ -65,10 +65,7 @@ export default function Editprofile({ setIsEditActive, userData, setOpenAlert })
                 interest_rubro_id: values.rubro
             }
         }
-        dispatch(updateAccount(body))
-        setIsEditActive(false)
-        setOpenAlert(true)
-
+        updateAccount(body)
     }
 
 

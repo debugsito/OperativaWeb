@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import UploadImage from "./UploadImage";
 
 
-export default function Showprofile({ setIsEditActive, userData }) {
+export default function Showprofile({ updateAccount, setIsEditActive, userData }) {
     const { auth: { user: { account } }, utils: { items } } = useSelector(state => state);
 
     const getNameSpecialityById = (rubro_id) => {
@@ -75,7 +75,7 @@ export default function Showprofile({ setIsEditActive, userData }) {
 
             </Grid>
             <Grid item xs={4}>
-                <UploadImage />
+                <UploadImage updateAccount={updateAccount} imageUrl={userData.image_url} />
             </Grid>
             <Grid item xs={12}>
                 <Typography variant="h6" component="h6">

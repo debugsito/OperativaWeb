@@ -45,10 +45,10 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-export default function UploadImage() {
+export default function UploadImage({ updateAccount, imageUrl }) {
     const classes = useStyles()
     const [hover, setHover] = useState(false)
-    const [profileImg, setProfileImg] = useState(null)
+    const [profileImg, setProfileImg] = useState(imageUrl)
 
     const handleMouse = () => {
         setHover(prevState => !prevState)
@@ -68,7 +68,8 @@ export default function UploadImage() {
                 setProfileImg(reader.result)
                 try {
                     const response = await service_Resources.saveImage(formData)
-                    console.log(response)
+                    updateAccount(response.data)
+                    console.log(response.data)
                 } catch (error) {
                     console.log("ERROR....")
                     console.log("error", error)

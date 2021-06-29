@@ -101,6 +101,11 @@ export const getAccount = async () => {
     return response;
 }
 
+export const saveAccount = async () => {
+    const response = await api.post('/account');
+    return response;
+}
+
 //servicio que obtiene la lista de periodos (tiempo de permanencia)
 export const getPeriods = async () => {
     const response = await api.get('/periods');
