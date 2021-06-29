@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Typography, makeStyles } from "@material-ui/core";
 import { service_Resources } from "../../../../store/services";
 import { camaraIcon } from "../../images";
@@ -45,34 +45,37 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-export default function UploadImage({ updateAccount, imageUrl }) {
+export default function UploadImage({ updateAccount, imageUrl, handleAlertError }) {
     const classes = useStyles()
     const [hover, setHover] = useState(false)
-    const [profileImg, setProfileImg] = useState(imageUrl)
+    const [profileImg, setProfileImg] = useState(null)
 
     const handleMouse = () => {
         setHover(prevState => !prevState)
     }
+
+    useEffect(() => {
+        if (imageUrl) {
+            setProfileImg(imageUrl)
+        }
+    }, [imageUrl])
 
     //evento al cargar una img
     const handleUploadImage = async (e) => {
         const reader = new FileReader()
         const formData = new FormData();
         const file_data = e.target.files[0]
-        formData.append("name", "image upload")
         formData.append("image", file_data)
 
-        //este metodo lo hago para que cargue la img
+        //metodo de FileReader
         reader.onload = async () => {
             if (reader.readyState === FILE_STATUS.DONE) {
-                setProfileImg(reader.result)
                 try {
                     const response = await service_Resources.saveImage(formData)
+                    setProfileImg(reader.result)
                     updateAccount(response.data)
-                    console.log(response.data)
                 } catch (error) {
-                    console.log("ERROR....")
-                    console.log("error", error)
+                    handleAlertError()
                 }
             }
         }

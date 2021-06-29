@@ -16,13 +16,18 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
+const ALERT = {
+    SUCCESS : "success",
+    ERROR : "error"
+}
+
 const Profile = () => {
     const classes = useStyles()
     const dispatch = useDispatch();
     const {user} = useSelector(state => state?.auth)
     const [isEditActive, setIsEditActive] = useState(false);
     const [userData, setUserData] = useState({})
-    const [openAlert, setOpenAlert] = useState(false)
+    const [openAlert, setOpenAlert] = useState({state: false})
 
     useEffect(() => {
         dispatch(actions_Utils.getItems())
@@ -67,14 +72,22 @@ const Profile = () => {
         }
         dispatch(updateAccount(body))
         setIsEditActive(false)
-        setOpenAlert(true)
+        handleAlertSuccess()
+    }
+
+    const handleAlertSuccess = () => {
+        setOpenAlert({state:true, type:ALERT.SUCCESS})
+    }
+
+    const handleAlertError = () => {
+        setOpenAlert({state:true, type:ALERT.ERROR})
     }
 
     const AlertMessage = () => (
         <div className="alert-container">
-            <Alert icon={false} severity="success" color="info" onClose={() => setOpenAlert(false)}>
-                Los cambios se guardaron con éxito
-          </Alert>
+            <Alert icon={false} severity={openAlert.type} onClose={() => setOpenAlert({state:false})}>
+                {openAlert.type === "success" ? "Los cambios se guardaron con éxito" : "Ocurrio un error, recargue la página y vuelva a intentarlo"}
+            </Alert>
         </div>
     );
 
@@ -91,12 +104,12 @@ const Profile = () => {
                                 <Grid item xs={2}></Grid>
                                 <Grid item xs={8}>
                                     <Paper className={classes.paper}>
-                                        { openAlert && AlertMessage() }
+                                        { openAlert.state && AlertMessage() }
                                         <Grid container spacing={3} alignContent="center" justify="center">
                                             {
                                                 isEditActive ?
                                                     <EditProfileForm updateAccount={updateData} userData={userData} /> :
-                                                    <ShowProfile updateAccount={updateData} setIsEditActive={setIsEditActive} userData={userData} />
+                                                    <ShowProfile updateAccount={updateData} setIsEditActive={setIsEditActive} userData={userData} handleAlertError={handleAlertError}/>
                                             }
                                         </Grid>
                                     </Paper>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Divider, Grid } from "@material-ui/core";
 import { Button, Typography } from "../../../shared/components";
 import { editIcon } from "../../images";
@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import UploadImage from "./UploadImage";
 
 
-export default function Showprofile({ updateAccount, setIsEditActive, userData }) {
+export default function Showprofile({ updateAccount, setIsEditActive, userData, handleAlertError }) {
     const { auth: { user: { account } }, utils: { items } } = useSelector(state => state);
 
     const getNameSpecialityById = (rubro_id) => {
@@ -75,7 +75,7 @@ export default function Showprofile({ updateAccount, setIsEditActive, userData }
 
             </Grid>
             <Grid item xs={4}>
-                <UploadImage updateAccount={updateAccount} imageUrl={userData.image_url} />
+                <UploadImage updateAccount={updateAccount} imageUrl={userData?.image_url} handleAlertError={handleAlertError} />
             </Grid>
             <Grid item xs={12}>
                 <Typography variant="h6" component="h6">
