@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Typography, makeStyles } from "@material-ui/core";
+import { service_Resources } from "../../../../store/services";
 import { camaraIcon } from "../../images";
 
 const FILE_STATUS = {
@@ -53,14 +54,28 @@ export default function UploadImage() {
         setHover(prevState => !prevState)
     }
 
-    const handleUploadImage = (e) => {
+    //evento al cargar una img
+    const handleUploadImage = async (e) => {
         const reader = new FileReader()
-        reader.onload = () => {
+        const formData = new FormData();
+        const file_data = e.target.files[0]
+        formData.append("name", "image upload")
+        formData.append("image", file_data)
+
+        //este metodo lo hago para que cargue la img
+        reader.onload = async () => {
             if (reader.readyState === FILE_STATUS.DONE) {
                 setProfileImg(reader.result)
+                try {
+                    const response = await service_Resources.saveImage(formData)
+                    console.log(response)
+                } catch (error) {
+                    console.log("ERROR....")
+                    console.log("error", error)
+                }
             }
         }
-        reader.readAsDataURL(e.target.files[0])
+        reader.readAsDataURL(file_data)
     }
 
     return (
