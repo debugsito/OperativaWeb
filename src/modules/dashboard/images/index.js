@@ -11,3 +11,4 @@ export { default as showIcon } from './show.svg';
 export { default as downloadIcon } from './download.svg';
 export { default as downloadBlackIcon } from './downloadBlack.svg';
 export { default as republishIcon } from './republish.svg';
+export { default as camaraIcon } from './camara.svg';
