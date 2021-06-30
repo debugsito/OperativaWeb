@@ -13,10 +13,16 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { Container, Grid } from "@material-ui/core";
 import { Breadcrumbs, Button, Typography } from "../../shared/components";
-import { CustomCard, OpenPositionsTable } from "../components";
+import { CustomCard, InputDashboard, OpenPositionsTable } from "../components";
 
 import jobManagementChartOptions from "../constants/jobManagementChartOptions";
 import { SessionRoutes } from "../../shared/libs/sessionRoutes";
+
+//initial values
+const initialValues = {
+  from_date:"2020-01-01",
+  to_date:"2020-06-30"
+}
 
 const Dashboard = ({ history }) => {
   const { user } = useSelector(state => state?.auth);
@@ -29,7 +35,7 @@ const Dashboard = ({ history }) => {
 
   useEffect(() => {
     dispatch(setPublicationSelected(""));
-    dispatch(getJobsInfo())
+    dispatch(getJobsInfo(initialValues))
   }, [])
 
   useEffect(() => {
@@ -39,6 +45,10 @@ const Dashboard = ({ history }) => {
     }))
     setJobManagementInfo(jobsInfo);
   }, [jobsInfo])
+
+  const getJobs = (values) => {
+    dispatch(getJobsInfo(values))
+  }
 
   const goToPublishEmployment = () => history.push(`${initRoute}/posicion`);
 
@@ -69,7 +79,10 @@ const Dashboard = ({ history }) => {
                   <Grid item xs={12}>
                     <Typography variant="h6" component="h6" className="title-color">
                       Gestión de empleos
-                  </Typography>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <InputDashboard initialValues={initialValues} getJobs={getJobs}/>
                   </Grid>
                   <Grid item xs={12}>
                     <CustomCard borderRadius="4px">

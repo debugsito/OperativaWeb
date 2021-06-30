@@ -55,10 +55,10 @@ export const setErrorFetch = (payload) => ({
   payload
 });
 
-export const getJobsInfo = () => {
+export const getJobsInfo = (params) => {
   return async (dispatch) => {
     try {
-      const response = await service_Dashboard.getJobs();
+      const response = await service_Dashboard.getJobs(params);
       dispatch(setJobsInfo(response.data));
       dispatch(setJobsInfoError(null)); //control de errores
     } catch (error) {

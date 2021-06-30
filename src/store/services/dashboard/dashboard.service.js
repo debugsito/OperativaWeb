@@ -1,8 +1,8 @@
 
 import api from "../../../modules/shared/libs/api";
 
-const getJobs = async () => {
-    const response = await api.get('/dashboard/jobs');
+const getJobs = async (params) => {
+    const response = await api.get(`/dashboard/jobs/${params.from_date}/${params.to_date}`);
     return response;
 }
 

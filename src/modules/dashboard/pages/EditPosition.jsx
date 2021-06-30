@@ -52,7 +52,7 @@ export default function EditPosition({ history }) {
         period: publicationSelected.period,
         salary: publicationSelected.salary,
         from_date: DateTime.fromISO(publicationSelected?.from_date).toUTC().toFormat("yyyy-LL-dd"),
-        expiration_date: DateTime.fromISO(publicationSelected?.expiration_date).toUTC().toFormat("yyyy-LL-dd"),
+        expiration_date: DateTime.fromISO(publicationSelected?.expiration_date?publicationSelected?.expiration_date: publicationSelected?.from_date).toUTC().toFormat("yyyy-LL-dd"),
         department_id: publicationSelected.district.province.department_id,
         province_id: publicationSelected.district.province_id,
         rubro_id: publicationSelected.job_level_id,
@@ -169,13 +169,12 @@ export default function EditPosition({ history }) {
         } else {
             dispatch(savePublication({...valuesTemp,a_tratar:isActiveSalary}))
         }
-        dispatch(getJobsInfo())
-        goForward(false)
+        goForward()
     }
 
     const handleExit = () => {
         setOpenConfirmationModal(false)
-        goForward(false)
+        goForward()
     }
 
     const handleChangeDepartments = (event) => {

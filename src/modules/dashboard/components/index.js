@@ -7,3 +7,4 @@ export { default as HistoryTable } from './HistoryTable';
 export { default as ShowPositionHistory } from './ShowPositionHistory';
 export { default as EditPositionForm } from './EditPositionForm';
 export { default as ReportChartHistory } from './ReportChartHistory';
+export { default as InputDashboard } from './InputDashboard';

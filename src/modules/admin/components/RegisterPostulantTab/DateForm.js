@@ -7,11 +7,6 @@ import { useForm } from "../../../hooks";
 import { Button, TextInput } from "../../../shared/components";
 import { setDateOfReport } from "../../../../store/actions/admin/admin.action";
 
-const initialValues = {
-    startDate: "2021-03-19",
-    finishDate: "2021-03-31",
-}
-
 export default function Dateform({ updateReport }) {
     const dispatch = useDispatch()
     const dateMax = DateTime.utc().toFormat("yyyy-LL-dd")

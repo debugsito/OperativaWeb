@@ -247,6 +247,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function OpenPositionsTable() {
+    // console.log("Actualizando tabla")
     const classes = useStyles();
     const [order, setOrder] = useState("asc");
     const [orderBy, setOrderBy] = useState("");
