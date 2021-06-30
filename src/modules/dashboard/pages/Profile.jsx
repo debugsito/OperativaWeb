@@ -108,7 +108,7 @@ const Profile = () => {
                                         <Grid container spacing={3} alignContent="center" justify="center">
                                             {
                                                 isEditActive ?
-                                                    <EditProfileForm updateAccount={updateData} userData={userData} /> :
+                                                    <EditProfileForm updateAccount={updateData} userData={userData} setIsEditActive={setIsEditActive}/> :
                                                     <ShowProfile updateAccount={updateData} setIsEditActive={setIsEditActive} userData={userData} handleAlertError={handleAlertError}/>
                                             }
                                         </Grid>

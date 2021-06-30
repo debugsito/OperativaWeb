@@ -1,16 +1,13 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { FormControl, FormHelperText, Grid, InputLabel, MenuItem, Select } from "@material-ui/core";
 
 import { Button, TextInput } from "../../../shared/components";
 import { useForm } from "../../../hooks";
 import { isEmail, isRuc } from "../../../shared/libs/validators";
 
-import { updateAccount } from "../../../../store/actions/auth/auth.action";
-
-export default function Editprofile({ updateAccount, userData }) {
+export default function Editprofile({ updateAccount, userData, setIsEditActive }) {
     const { auth: { user: { account } }, utils: { items } } = useSelector(state => state);
-    const dispatch = useDispatch();
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
@@ -52,7 +49,7 @@ export default function Editprofile({ updateAccount, userData }) {
     } = useForm(userData, true, validate);
 
     const handleUpdate = async () => {
-        body = {
+        let body = {
             email: values.email,
             razon_social: values.razon_social,
             user: {
@@ -67,8 +64,6 @@ export default function Editprofile({ updateAccount, userData }) {
         }
         updateAccount(body)
     }
-
-
 
     return (
         <>
