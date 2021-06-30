@@ -18,6 +18,7 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 import SettingsIcon from '@material-ui/icons/Settings';
 import LockIcon from '@material-ui/icons/Lock';
 import WidgetsIcon from '@material-ui/icons/Widgets';
+import ListIcon from '@material-ui/icons/List';
 
 const drawerWidth = 230;
 
@@ -39,8 +40,8 @@ const getAvatarIcon = (name) => {
       return <WidgetsIcon />
     case 'Historial':
       return <AssignmentIcon />
-    case 'En Proceso':
-      return <AssignmentIcon />
+    case 'Mis postulaciones':
+      return <ListIcon />
     default:
       return (<InboxIcon />);
   }
