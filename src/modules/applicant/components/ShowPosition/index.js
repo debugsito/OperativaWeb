@@ -1,15 +1,27 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import { Divider, Grid, Typography } from "@material-ui/core";
+import { Divider, Grid, Typography, makeStyles } from "@material-ui/core";
 import { DateTime } from "luxon";
 
 import { actions_Utils } from "../../../../store/actions";
 import { getRubroById, getPeriodoById, getDistrictById, convertStringToObject } from "../../../shared/utils";
 import { RichText } from "../../../shared/components";
 
+const useStyles = makeStyles(theme => ({
+    containerImg: {
+        margin: "auto"
+    },
+    profileImg: {
+        width: "10rem",
+        height: "10rem",
+        objectFit: "cover"
+    },
+}))
+
 export default function Index() {
+    const classes = useStyles()
     const dispatch = useDispatch()
-    const { publicationSelected } = useSelector(state => state?.applicant)
+    const { publicationSelected, publicationSelected: { account } } = useSelector(state => state?.applicant)
     const { items, periods, districts } = useSelector(state => state?.utils)
 
     useEffect(() => {
@@ -33,37 +45,47 @@ export default function Index() {
                 <Divider />
             </Grid>
             <Grid item xs={12} sm={11}>
-                {/* <Typography variant="subtitle2" component="h6">
-                    <strong>Creado por</strong>
-                </Typography>
-                <Typography variant="body1" component="h6">
-                    {publicationSelected?.account?.user?.fullname}
-                </Typography>
-                <br /> */}
-                <Typography variant="subtitle2" component="h6">
-                    <strong>Fecha de publicación</strong>
-                </Typography>
-                <Typography variant="body1" component="h6">
-                    {DateTime.fromISO(publicationSelected?.createdAt).toFormat("DDD")}
-                </Typography>
-                <br />
+                <Grid container>
+                    <Grid item xs={12} sm={7}>
+                        <Typography variant="subtitle2" component="h6">
+                            <strong>Fecha de publicación</strong>
+                        </Typography>
+                        <Typography variant="body1" component="h6">
+                            {DateTime.fromISO(publicationSelected?.createdAt).toFormat("DDD")}
+                        </Typography>
+                        <br />
 
-                <Typography variant="subtitle2" component="h6">
-                    <strong>Fecha de caducidad</strong>
-                </Typography>
-                <Typography variant="body1" component="h6">
-                    {DateTime.fromISO(publicationSelected?.to_date).toFormat("DDD")}
-                </Typography>
-                <br />
+                        <Typography variant="subtitle2" component="h6">
+                            <strong>Fecha de caducidad</strong>
+                        </Typography>
+                        <Typography variant="body1" component="h6">
+                            {DateTime.fromISO(publicationSelected?.to_date).toFormat("DDD")}
+                        </Typography>
+                        <br />
 
-                <Typography variant="subtitle2" component="h6">
-                    <strong>Categoría</strong>
-                </Typography>
-                <Typography variant="body1" component="h6">
-                    {getRubroById(items, publicationSelected?.rubro_id)}
-                </Typography>
-                <br />
+                        <Typography variant="subtitle2" component="h6">
+                            <strong>Categoría</strong>
+                        </Typography>
+                        <Typography variant="body1" component="h6">
+                            {getRubroById(items, publicationSelected?.rubro_id)}
+                        </Typography>
+                    </Grid >
+                    <Grid item xs={12} sm={5}>
+                        {
+                            account.user.image_key &&
+                            (
+                                <div className={classes.containerImg}>
+                                    <img src={account.user.image_key} className={classes.profileImg} alt="logo" />
+                                </div>
+                            )
+                        }
 
+                    </Grid>
+                </Grid>
+            </Grid>
+
+
+            <Grid item xs={12} sm={11}>
                 <Typography variant="subtitle2" component="h6">
                     <strong>Descripción</strong>
                 </Typography>
@@ -126,7 +148,6 @@ export default function Index() {
                     {getPeriodoById(periods, publicationSelected?.period)}
                 </Typography>
                 <br />
-
             </Grid>
         </Grid>
     )
