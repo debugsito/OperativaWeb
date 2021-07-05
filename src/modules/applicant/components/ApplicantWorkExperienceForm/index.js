@@ -46,6 +46,7 @@ export default function ApplicantWorkExperienceForm({ userData = initialValues, 
 
     const handleSaveExperience = async () => {
         const body = userData.map(data => ({
+            id: data?.id,
             name_inst: data.company,
             district_id: data.district.id,
             rubro_id: parseInt(data.rubro_id),

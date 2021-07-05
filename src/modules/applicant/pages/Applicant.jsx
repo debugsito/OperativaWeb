@@ -8,8 +8,10 @@ import { CustomCard } from "../../dashboard/components";
 import { ApplicantDataTable, ApplicantDataTableMobile } from '../components'
 import { filesSVG, phoneSVG, agreementSVG } from "../../shared/images";
 import { getDocumentsType } from "../../../store/actions/utils/utils.action";
+import { setProfileOfApplicant } from "../../../store/actions/dashboard/dashboard.action";
 import { getNameById } from "../../shared/utils";
 import '../styles/index.css'
+import { SignalCellularNullOutlined } from "@material-ui/icons";
 
 const useStyles = makeStyles(theme => ({
     body2:{
@@ -29,6 +31,7 @@ const Applicant  = () => {
 
     useEffect(() => {
         dispatch(getDocumentsType())
+        dispatch(setProfileOfApplicant(null))
     },[])
 
     return (
