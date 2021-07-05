@@ -61,16 +61,13 @@ export const savePublication = (body) => {
 };
 
 export const getProfileOfApplicant = (body) => {
-  console.log("getProfileOfApplicant", body)
   return async (dispatch) => {
     try {
       const response = await service_Dashboard.getProfileOfApplicantById(body);
-      console.log("response", response)
       dispatch(setProfileOfApplicant(response.data.profile));
       dispatch(setProfileApplicantError(null)); //control de errores
     } catch (error) {
       if (!error.response) {
-        console.log("error", error)
         dispatch(setProfileApplicantError("Ha ocurrido un error interno.1"));
       } else {
         if (error.response.status === 409) {

@@ -22,9 +22,8 @@ export const SessionRoutes = () => {
                 break;
             case 'postulante':
                 routeType = 'postulante';
-                //Solucion temporal, cambiara en el siguiente sprint (4)
                 if (user.account.user) {
-                    initRoute = '/postulante/postulaciones'
+                    initRoute = '/postulante'
                 }
                 else {
                     initRoute = '/postulante/inicio';

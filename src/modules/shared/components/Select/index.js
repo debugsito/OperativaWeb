@@ -9,14 +9,14 @@ export default function Index({ children, error, helperText, MenuItem, label, ..
             <InputLabel id="demo-simple-select-outlined-label">{label}</InputLabel>
             <Select
                 labelId="demo-simple-select-outlined-label"
-                id="demo-simple-select-outlined"
+                // id="demo-simple-select-outlined"
                 label={label}
                 {...props}
 
             >
                 {children}
             </Select>
-            <FormHelperText>{helperText}</FormHelperText>
+            {error && <FormHelperText>{helperText}</FormHelperText>}
         </FormControl>
     )
 }

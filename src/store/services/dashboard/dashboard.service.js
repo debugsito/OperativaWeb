@@ -37,7 +37,6 @@ const getPostulantsByPublicationId = async (params) => {
 }
 
 const getProfileOfApplicantById = async (params) => {
-    console.log("getProfileOfApplicantById", params)
     const response = await api.get(`/account/user/profile/${params.postulant_id}`);
     return response;
 }

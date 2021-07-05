@@ -16,7 +16,7 @@ const useStyles = makeStyles( theme => ({
 const ShowPublication  = () => {
     const classes = useStyles()
     const initRoute = SessionRoutes().initRoute;
-    const routes = [{ name: "MIS POSTULACIONES", to: `${initRoute}/postulante/postulaciones` }, { name: "PRE SELECCIÓN", to: `${initRoute}/postulante/postulaciones/ver-publicacion` }];
+    const routes = [{ name: "MIS POSTULACIONES", to: `${initRoute}` }, { name: "PRE SELECCIÓN", to: `${initRoute}/postulante/postulaciones/ver-publicacion` }];
 
 
     return( <Container className="dashboard-container">

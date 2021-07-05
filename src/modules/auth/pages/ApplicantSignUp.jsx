@@ -38,7 +38,7 @@ const SignUp = ({ history }) => {
 
     useEffect(() => {
         if(signUpSucces){
-            history.push('/postulante/inicio')
+            history.push('/user/inicio')
         }
 
     },[signUpSucces])

@@ -1,7 +1,6 @@
 const ApplicantRoutes = [
-    '/postulante/perfil',
-    '/postulante/postulaciones',
-    '/postulante/configuracion',
-    '/postulante/postulaciones/ver-publicacion'
+    '/postulante',
+    '/postulante/ver-publicacion',
+    '/postulante/mi-perfil',
 ];
 export default ApplicantRoutes;
