@@ -7,24 +7,27 @@ import { actions_Utils } from "../../../../store/actions";
 import debounce from 'lodash/debounce'
 
 //value = {id:12354, name: "Leoncio prado"}
-export default function Asynchronous({ value = null, label, handleChange, name, ...restProps }) {
+export default function Asynchronous({ value, label, handleChange, name, ...restProps }) {
     const dispatch = useDispatch();
     const { districts } = useSelector(state => state?.utils)
     const [open, setOpen] = React.useState(false);
     const [loading, setLoading] = React.useState(false)
-    const [val, setVal] = React.useState(null)
+    // const [val, setVal] = React.useState(null)
+    const [inputValue, setInputValue] = React.useState("");
 
     React.useEffect(() => {
-        dispatch(actions_Utils.getDistrictsByText({ text: value ? value.name : "" }))
+        dispatch(actions_Utils.getDistrictsByText({ text: value?.name ? value.name : "" }));
+        setLoading(false)
     }, [])
 
-    React.useEffect(() => {
-        if (value) {
-            //Si existe mas de 2 distritos con el mismo nombre, pero tienen diferente ID. Selecciono el que tenga el mismo ID
-            const district_temp = districts?.find((element) => element.id === value.id)
-            setVal(district_temp)
-        }
-    }, [value])
+    // React.useEffect(() => {
+    //     if (value) {
+    //         console.log("autocomplete", value)
+    //         //Si existe mas de 2 distritos con el mismo nombre, pero tienen diferente ID. Selecciono el que tenga el mismo ID
+    //         const district_temp = districts?.find((element) => element.id === value.id)
+    //         setVal(district_temp)
+    //     }
+    // }, [value])
 
     React.useEffect(() => {
         if (districts.length > 1) {
@@ -55,7 +58,8 @@ export default function Asynchronous({ value = null, label, handleChange, name, 
                 loadingText="Cargando..."
                 noOptionsText="Sin opciones"
                 open={open}
-                value={val}
+                value={value}
+                inputValue={inputValue}
                 loading={loading}
                 options={districts}
                 onOpen={() => { setOpen(true) }}
@@ -67,7 +71,9 @@ export default function Asynchronous({ value = null, label, handleChange, name, 
                 getOptionLabel={(option) => option.name}
                 onChange={(event, newValue) => handleOnChange(event, newValue)}
                 onInputChange={(event, newInputValue) => {
+                    console.log("input", newInputValue);
                     setLoading(true)
+                    setInputValue(newInputValue)
                     debouncedLog(newInputValue)
                 }}
                 renderInput={(params) =>

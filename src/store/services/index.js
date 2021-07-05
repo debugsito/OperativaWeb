@@ -18,5 +18,3 @@ export { default as service_ApplicantPublication } from './applicant/applicantPu
 //:::::::::::::::::::::::::::::::::REFACTOR:::::::::::::::::
 
 export { default as service_Auth } from './auth'
-
-

@@ -90,6 +90,10 @@ export default function WithExperienceComponent({ handleDeleteWorkExperience, ha
         handleUpdateWorkExperience(values, index)
     }, [values, index]);
 
+    useEffect(() => {
+        console.log(`${user.id} RENDER WORK`)
+    });
+
     const getRubros = async () => {
         const response = await itemsList();
         setRubros(response?.rubros);
@@ -147,9 +151,6 @@ export default function WithExperienceComponent({ handleDeleteWorkExperience, ha
 
     return (
         <>
-            {
-                JSON.stringify(values)
-            }
             {!showCheckBox &&
                 <Grid item xs={12} md={12} className="justify-center">
                     <FormControl variant="outlined">
@@ -398,15 +399,7 @@ export default function WithExperienceComponent({ handleDeleteWorkExperience, ha
                 open={openAlert}
                 onClose={handleCloseAlert}
             />
-            {/* <Grid item xs={12} md={12} lg={12}>
-                <Divider />
-            </Grid>
-            {
-                showButtons &&
-                <Grid item xs={12} md={12} lg={12}>
-                    <Button color="primary" onClick={() => handleDeleteWorkExperience(index)}>eliminar experiencia</Button>
-                </Grid>
-            } */}
+
         </>
     )
 }

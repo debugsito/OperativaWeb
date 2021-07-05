@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Divider, FormControl, FormControlLabel, FormHelperText, FormLabel, Grid, InputLabel, MenuItem, RadioGroup, Select, Typography } from '@material-ui/core';
-
+//Componentes
 import { Radio } from '../../../shared/components';
 import WithoutExperienceComponent from './WithoutExperienceComponent';
 import WorkExperienceListComponent from "./WorkExperienceListComponent";
+import { FormControl, FormControlLabel, Grid, RadioGroup } from '@material-ui/core';
+
+//Utils
+import { normalize } from "../../../shared/utils/postulantForm.utils";
+
+//Services
+import { service_ApplicantProfile } from '../../../../store/services';
+import { deleteWorkExperience } from '../../../../store/services/applicant/perfil.service';
 
 const defaultValues = {
     position: "",
@@ -23,29 +30,33 @@ const defaultValues = {
 
 const initialValues = [defaultValues]
 
-export default function ApplicantWorkExperienceForm({ userData = initialValues, handleSaveWorkExperience, handleUpdateWorkExperience, history }) {
+export default function ApplicantWorkExperienceForm({ userData = initialValues, history, setStep }) {
     const [hasExperience, setHasExperience] = useState({ value: '', error: false });
+    const [workExperience, setWorkExperience] = useState([]);
     // const [disabledButton, setDisabledButton] = useState(false);
 
     useEffect(() => {
-        setHasExperience({ ...hasExperience, value: !Array.isArray(userData) ? 'withoutExperience' : 'withExperience' });
+        const workExperience_temp = normalize.workExperienceData(userData)
+        setHasExperience({ ...hasExperience, value: !Array.isArray(workExperience_temp) ? 'withoutExperience' : 'withExperience' });
+        setWorkExperience(workExperience_temp)
         // getAccount();
     }, [userData])
 
-    useEffect(() => {
-        console.log("[4] RENDER WORK")
-    });
+    // useEffect(() => {
+    //     console.log("[4] RENDER WORK")
+    // });
 
 
     const handleCheckBox = (value = hasExperience.value) => {
         setHasExperience({ value: value, error: !value })
         if (value == "withExperience") {
-            handleUpdateWorkExperience(initialValues)
+            setWorkExperience(initialValues)
+            // handleUpdateWorkExperience(initialValues)
         }
     }
 
     const handleSaveExperience = async () => {
-        const body = userData.map(data => ({
+        const body = workExperience.map(data => ({
             id: data?.id,
             name_inst: data.company,
             district_id: data.district.id,
@@ -72,23 +83,59 @@ export default function ApplicantWorkExperienceForm({ userData = initialValues, 
     }
 
     const handleAddWorkExperience = () => {
-        let userDataTemp = [...userData];
+        let userDataTemp = [...workExperience];
         userDataTemp.push(defaultValues);
-        handleUpdateWorkExperience(userDataTemp)
+        setWorkExperience(userDataTemp)
+        // handleUpdateWorkExperience(userDataTemp)
     }
 
-    const handleDeleteWorkExperience = (index) => {
-        let userDataTemp = [...userData];
+    const handleDeleteWorkExperience = async (index) => {
+        let userDataTemp = [...workExperience];
+        const body = { job_id: userDataTemp[index].id }
+        console.log("Eliminando....", body)
         userDataTemp.splice(index, 1)
-        handleUpdateWorkExperience(userDataTemp)
+        try {
+            const responseEducation = await deleteWorkExperience(body)
+            if (responseEducation.status === 200) setWorkExperience(userDataTemp)
+        } catch (error) {
+            console.log("ERROR")
+        }
+
+        // handleUpdateWorkExperience(userDataTemp)
     }
 
     const handleUpdateWorkExperienceTemp = (values, index) => {
-        let userDataTemp = [...userData];
+        let userDataTemp = [...workExperience];
         userDataTemp[index] = values;
         // const isButtonDisabled = userDataTemp.map(data => (Object.values(data).includes(""))).includes(true)
         // setDisabledButton(isButtonDisabled)
-        handleUpdateWorkExperience(userDataTemp)
+        setWorkExperience(userDataTemp)
+        // handleUpdateWorkExperience(userDataTemp)
+    }
+
+    const handleSaveWorkExperience = async (data, hasExperience) => {
+        console.log("data", data)
+        console.log("hasExperience", hasExperience)
+        if (data) {
+            setHasExperience(hasExperience.value)
+            setWorkExperience(data);
+            // setStep(5)
+            // saveApplicantProfile('workExperience', data);
+            if (hasExperience.value === "withExperience") {
+                try {
+                    const responseEducation = await service_ApplicantProfile.applicantWithExperienceRegister(data);
+                    if (responseEducation.status === 200) setStep(5)
+                } catch (error) {
+                }
+            } else if (hasExperience.value === "withoutExperience") {
+                try {
+                    const responseEducation = await service_ApplicantProfile.applicantWithoutExperienceRegister(data);
+                    if (responseEducation.status === 200) setStep(5)
+                } catch (error) {
+
+                }
+            }
+        }
     }
 
     return (
@@ -104,12 +151,12 @@ export default function ApplicantWorkExperienceForm({ userData = initialValues, 
             {hasExperience.value === "withoutExperience" &&
                 <WithoutExperienceComponent
                     history={history}
-                    user={userData}
+                    user={workExperience}
                     handleFinish={handleSaveWithoutExperience}
                 />}
             {hasExperience.value === "withExperience" &&
                 <WorkExperienceListComponent
-                    workExperienceList={userData}
+                    workExperienceList={workExperience}
                     handleSaveExperience={handleSaveExperience}
                     handleAddWorkExperience={handleAddWorkExperience}
                     handleDeleteWorkExperience={handleDeleteWorkExperience}

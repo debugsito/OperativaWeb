@@ -107,13 +107,10 @@ const Profile = ({ history }) => {
     }
 
     const handleSaveWorkExperience = async (data, hasExperience) => {
-        console.log("data",data)
-        console.log("hasExperience",hasExperience)
         if (data) {
             setHasExperience(hasExperience.value)
             setWorkExperience(data);
             setStep(5)
-            // saveApplicantProfile('workExperience', data);
             if (hasExperience.value === "withExperience") {
                 try {
                     const responseEducation = await service_ApplicantProfile.applicantWithExperienceRegister(data);
@@ -241,12 +238,14 @@ const Profile = ({ history }) => {
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                    { workExperience &&
+                    { profile &&
                         <ApplicantWorkExperienceForm
                             history={history}
-                            userData={workExperience}
-                            handleSaveWorkExperience={handleSaveWorkExperience}
-                            handleUpdateWorkExperience={(data) => setWorkExperience(data)} />
+                            userData={profile}
+                            setStep={setStep}
+                            // handleSaveWorkExperience={handleSaveWorkExperience}
+                            // handleUpdateWorkExperience={(data) => setWorkExperience(data)} 
+                        />
                     }
                     </AccordionDetails>
                 </Accordion>
