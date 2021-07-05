@@ -7,7 +7,7 @@ import PrivateRoute from '../../../routers/PrivateRoute';
 
 import Applicant from '../pages/Applicant'
 import ShowPublication from '../pages/ShowPublication'
-import Profile from '../pages/Profile'
+import Profile from '../pages/ProfileTemp'
 
 const MyAccountRouter = () => {
     return (

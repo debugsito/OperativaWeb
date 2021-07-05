@@ -28,7 +28,10 @@ export function useForm(initialValues, validateOnChange = false, validate) {
         const getValue = () => {
             if (type === "checkbox") {
                 return e.target.checked
-            } else {
+            } else if (type === "autocomplete") {
+                return e.target.valueTemp
+            }
+            else {
                 return e.target.value
             }
         }

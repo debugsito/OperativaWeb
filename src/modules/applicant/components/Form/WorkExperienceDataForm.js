@@ -5,6 +5,7 @@ import WithWorkExperiencie from "./WithWorkExperiencie";
 
 //COSAS POR HACER:
 //Obtener la data
+//Normalizar
 //Condicional para renderizar: componente con o sin Experiencia (WithWorkExperience o WithoutWorkExperience)
 //Pasar por props la data
 
@@ -14,7 +15,7 @@ export default function WorkExperienceDataForm(props) {
 
     return (
         <>
-            <WithWorkExperiencie data={applicantProfile} />
+
         </>
     )
 }

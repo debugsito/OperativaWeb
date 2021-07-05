@@ -307,7 +307,7 @@ export default function Index({ handleExitForm, data = null, handleSaveData }) {
                         <FormControlLabel control={<Checkbox name="isActiveSalary" size="small" checked={isActiveSalary} onChange={handleChangeCheckBox} />} label={
                             <Typography variant="body2" component="p">
                                 No mostrar salario en la publicación
-                                </Typography>
+                            </Typography>
                         } />
                     </Grid>
                 </Grid>
@@ -352,7 +352,7 @@ export default function Index({ handleExitForm, data = null, handleSaveData }) {
             </Grid>
             <Grid item xs={8} style={{ display: 'flex', justifyContent: 'center', margin: "auto" }} >
                 <Button variant="outlined" size="large" onClick={() => setOpenConfirmationModal(true)}>CANCELAR</Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <Button variant="contained" size="large" onClick={() => setOpenModal(true)} disabled={disabledButtonState}>REPUBLICAR</Button>
+                <Button variant="contained" size="large" onClick={() => setOpenModal(true)} disabled={disabledButtonState}>REPUBLICAR</Button>
             </Grid>
 
             <Modal open={openModal} handleCloseModal={() => setOpenModal(false)}>
