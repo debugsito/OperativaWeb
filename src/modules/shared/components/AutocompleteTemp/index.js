@@ -71,7 +71,6 @@ export default function Asynchronous({ value, label, handleChange, name, ...rest
                 getOptionLabel={(option) => option.name}
                 onChange={(event, newValue) => handleOnChange(event, newValue)}
                 onInputChange={(event, newInputValue) => {
-                    console.log("input", newInputValue);
                     setLoading(true)
                     setInputValue(newInputValue)
                     debouncedLog(newInputValue)

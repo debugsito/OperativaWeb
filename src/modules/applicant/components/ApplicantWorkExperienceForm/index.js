@@ -87,7 +87,6 @@ export default function ApplicantWorkExperienceForm({ userData = initialValues, 
     const handleDeleteWorkExperience = async (index) => {
         let userDataTemp = [...workExperience];
         const body = { job_id: userDataTemp[index].id }
-        console.log("Eliminando....", body)
         userDataTemp.splice(index, 1)
         try {
             const responseEducation = await deleteWorkExperience(body)
@@ -109,8 +108,6 @@ export default function ApplicantWorkExperienceForm({ userData = initialValues, 
     }
 
     const handleSaveWorkExperience = async (data, hasExperience) => {
-        console.log("data", data)
-        console.log("hasExperience", hasExperience)
         if (data) {
             setHasExperience(hasExperience.value)
             setWorkExperience(data);

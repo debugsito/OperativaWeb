@@ -33,7 +33,6 @@ export default function Error() {
     const classes = useStyles();
     const history = useHistory();
     const initRoute = SessionRoutes().initRoute;
-    console.log("initRoute",initRoute)
 
     const handleRedirect = () => {
         history.push(initRoute)

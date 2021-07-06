@@ -13,7 +13,6 @@ const api = axios.create({
 
 api.interceptors.request.use(async (config) => {
     const newConfig = { ...config };
-    console.log("config", newConfig)
     const token = AppSession.get();
     if (token) {
         newConfig.headers.Authorization = `${token}`;

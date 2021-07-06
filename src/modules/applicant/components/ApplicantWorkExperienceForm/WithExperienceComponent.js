@@ -90,10 +90,6 @@ export default function WithExperienceComponent({ handleDeleteWorkExperience, ha
         handleUpdateWorkExperience(values, index)
     }, [values, index]);
 
-    useEffect(() => {
-        console.log(`${user.id} RENDER WORK`)
-    });
-
     const getRubros = async () => {
         const response = await itemsList();
         setRubros(response?.rubros);
@@ -125,7 +121,6 @@ export default function WithExperienceComponent({ handleDeleteWorkExperience, ha
 
     const handleClickAddExperience = () => {
         if (!disabledButtonState) {
-            console.log("ADD")
             handleAddWorkExperience()
         } else {
             validate();
