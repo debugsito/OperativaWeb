@@ -134,7 +134,6 @@ export const getAccount = () => {
     return async (dispatch) => {
         try {
             const response = await service_Auth.getAccount();
-            console.log("response getAccount:  ", response)
             dispatch(setUser(response.data));
             dispatch(setUserError(null));
         } catch (error) {

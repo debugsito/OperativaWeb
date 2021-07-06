@@ -14,7 +14,7 @@ import { Button, LinearProgress } from '../../shared/components';
 //Servicios
 import { service_ApplicantProfile } from '../../../store/services';
 import { getProfileOfApplicant } from "../../../store/actions/dashboard/dashboard.middleware";
-import { setUser, signOut } from '../../../store/actions/auth/auth.action';
+import { getAccount } from "../../../store/actions/auth/auth.middleware";
 import { filesSVG, numberOneSVG, numberTwoSVG, numberThreeSVG, numberFourSVG, numberFiveSVG } from '../../shared/images/postulant';
 
 //UTILS
@@ -61,10 +61,19 @@ const Profile = ({ history }) => {
         }
     },[applicantProfile])
 
-    const handleSavePersonalData = (data) => {
+    const handleSavePersonalData = async (data) => {
         if (data) {
             // saveApplicantProfile('personalData', data)
             setPersonalData(data)
+            try {
+                const response = await service_ApplicantProfile.applicantPersonalDataRegister(data);
+                if (response.status === 200) {
+                    dispatch(getAccount())
+                    setStep(2)
+                }
+            } catch (error) {
+                // MensajeError(error.response.data.message);
+            }
             setStep(2)
         }
     }
@@ -77,7 +86,7 @@ const Profile = ({ history }) => {
             setContactInformation(dataTemp)
             setStep(3)
             try {
-                const response = await service_ApplicantProfile.applicantPersonalDataRegister({ ...personalData, ...dataTemp });
+                const response = await service_ApplicantProfile.applicantPersonalDataRegister(dataTemp);
                 if (response.status === 200) {
                     setStep(3)
                 }

@@ -38,23 +38,27 @@ const ApplicantProfile = ({ history }) => {
     const [areasOfInterest, setAreasOfInterest] = useState()
     const [hasExperience, setHasExperience] = useState()
 
-    const handleSavePersonalData = (data) => {
+    const handleSavePersonalData = async (data) => {
         if (data) {
             saveApplicantProfile('personalData', data)
             setPersonalData(data)
-            setStep(2)
+            try {
+                const response = await service_ApplicantProfile.applicantPersonalDataRegister(data);
+                if (response.status === 200) setStep(2)
+            } catch (error) {
+                // MensajeError(error.response.data.message);
+            }
         }
     }
 
     const handleSaveContactInformation = async (data) => {
         if (data) {
-            const dataTemp = {...data}
+            let dataTemp = {...data}
             dataTemp.operating_system = getOS()
             saveApplicantProfile('contactInformation', dataTemp)
             setContactInformation(dataTemp)
-            setStep(3)
             try {
-                const response = await service_ApplicantProfile.applicantPersonalDataRegister({ ...personalData, ...dataTemp });
+                const response = await service_ApplicantProfile.applicantPersonalDataRegister(dataTemp);
                 if (response.status === 200) {
                     setStep(3)
                 }
