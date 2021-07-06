@@ -84,10 +84,6 @@ const ApplicantContactInformationForm = React.memo(({ user, handleSavePersonalDa
         getDocumentsTypeList();
     }, []);
 
-    useEffect(() => {
-        console.log("[1] RENDER PERSONAL DATA")
-    });
-
     const getProviderList = async () => {
         const response = await providerList();
         setProviders(response?.providers);
@@ -283,12 +279,3 @@ const ApplicantContactInformationForm = React.memo(({ user, handleSavePersonalDa
 })
 
 export default ApplicantContactInformationForm
-
-// export default React.memo(ApplicantContactInformationForm, (prevProps, nextProps) => {
-//     console.log("prevProps", prevProps)
-//     console.log("nextProps", nextProps)
-//     if (prevProps.data.user === nextProps.data.user) {
-//         return true
-//     }
-//     return false
-// })

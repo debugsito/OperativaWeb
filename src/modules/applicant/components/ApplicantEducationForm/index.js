@@ -71,10 +71,6 @@ export default function ApplicantEducationForm({ user, handleSaveEducation }) {
     }, []);
 
     useEffect(() => {
-        console.log("[3] RENDER EDUCATION")
-    });
-
-    useEffect(() => {
         const value = values.level_id
         if (value === ACADEMIC_LEVEL.INCOMPLETE_TECHNICIAN_ID || value === ACADEMIC_LEVEL.COMPLETE_TECHNICIAN_ID ||
             value === ACADEMIC_LEVEL.INCOMPLETE_UNIVERSITY_ID || value === ACADEMIC_LEVEL.COMPLETE_UNIVERSITY_ID) {

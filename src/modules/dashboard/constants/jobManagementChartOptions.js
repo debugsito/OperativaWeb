@@ -4,14 +4,20 @@ export default (name, data) => ({
         plotBorderWidth: null,
         plotShadow: false,
         type: "pie",
-        height: "230px",
+        height: "250px",//230px
     },
     colors: ["#A2EE37", "#FCB81A", "#F75470", "#7F85FD", "#373737", "#27EAF6", "#0F8DC3", "#C1953C", "#CBCAC8", "#9400D3"],
     title: {
-        text: "",
+        text: "<b>Total de postulantes registrados</b>",
+        margin: 0,
+        align: "left",
+        style: {
+            "color": "#222121",
+        },
+        x: 60
     },
     tooltip: {
-        pointFormat: "{series.name}: <b>{point.y}</b>",
+        pointFormat: "{series.name}: <b>{point.y} personas</b>",
     },
     accessibility: {
         point: {
@@ -19,10 +25,13 @@ export default (name, data) => ({
         },
     },
     legend: {
+        title: {
+            text: "<b>Rubro de interés<b/>"
+        },
         align: "right",
         layout: "vertical",
         verticalAlign: "middle",
-        x: 10,
+        x: 0,
         y: 0,
         labelFormatter: function () {
             return `${Math.round(this.percentage)}% - ${this.name}`
@@ -43,7 +52,28 @@ export default (name, data) => ({
         {
             name,
             colorByPoint: true,
-            data,
+            data
+            // data: [{
+            //     name: 'Chrome',
+            //     y: 61,
+            //     // sliced: true,
+            //     // selected: true
+            // }, {
+            //     name: 'Internet Explorer',
+            //     y: 12
+            // }, {
+            //     name: 'Firefox',
+            //     y: 11
+            // }, {
+            //     name: 'Edge',
+            //     y: 5
+            // }, {
+            //     name: 'Safari',
+            //     y: 5
+            // }, {
+            //     name: 'Other',
+            //     y: 8
+            // }],
         },
     ],
 });

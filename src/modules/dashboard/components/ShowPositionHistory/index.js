@@ -40,7 +40,7 @@ export default function Index({ button = null }) {
                     <strong>Creado por</strong>
                 </Typography>
                 <Typography variant="body1" component="h6">
-                    {publicationSelected.account.user.fullname}
+                    {publicationSelected?.account?.user?.fullname}
                 </Typography>
                 <br />
                 <Typography variant="subtitle2" component="h6">

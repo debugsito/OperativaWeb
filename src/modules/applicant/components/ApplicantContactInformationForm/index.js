@@ -94,10 +94,6 @@ export default function ApplicantPersonalDataForm({ user, handleSaveContactInfor
     //     }
     // }, [values.department_id])
 
-    useEffect(() => {
-        console.log("[2] RENDER CONTACT DATA")
-    });
-
     const handleChangeSelectDepartment = (e) => {
         const departmen_id = e.target.value
         setValues({ ...values, district_id: "", province_id: "" })

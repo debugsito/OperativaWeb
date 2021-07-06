@@ -42,11 +42,6 @@ export default function ApplicantWorkExperienceForm({ userData = initialValues, 
         // getAccount();
     }, [userData])
 
-    // useEffect(() => {
-    //     console.log("[4] RENDER WORK")
-    // });
-
-
     const handleCheckBox = (value = hasExperience.value) => {
         setHasExperience({ value: value, error: !value })
         if (value == "withExperience") {

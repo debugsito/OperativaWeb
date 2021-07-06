@@ -52,10 +52,6 @@ const Profile = ({ history }) => {
     useEffect(() => {
         dispatch(getProfileOfApplicant({postulant_id:user.account.id}))
     },[])
-
-    useEffect(() => {
-        console.log("[0] RENDER MAIN")
-    })
     
     useEffect(() => {
         if(applicantProfile){

@@ -106,7 +106,7 @@ export default function HistoryTable({ handleEnableButtonDownload, searchInput }
             createData(
                 post.job_title,
                 DateTime.fromISO(post.createdAt).toFormat("DDD"),
-                post.account.user.fullname,
+                post.account?.user?.fullname,
                 post.rubro?.name,
                 post.alcanzados,
                 post.contratados,

@@ -8,10 +8,10 @@ export default (name, data, colors) => ({
     },
     colors: colors,//["#CBCAC8", "#A2EE37", "#FCB81A", "#F75470", "#7F85FD", "#373737"],
     title: {
-        text: "",
+
     },
     tooltip: {
-        pointFormat: "{series.name}: <b>{point.y}</b>",
+        pointFormat: "{series.name}: <b>{point.y} personas</b> ",
     },
     accessibility: {
         point: {
@@ -19,6 +19,9 @@ export default (name, data, colors) => ({
         },
     },
     legend: {
+        title: {
+            text: "<b>Rubro de interés<b/>"
+        },
         align: "right",
         layout: "vertical",
         verticalAlign: "middle",
