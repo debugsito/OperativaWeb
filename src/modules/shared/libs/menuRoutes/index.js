@@ -51,8 +51,8 @@ export function MenuRoutes() {
             case 'postulante':
                 if (user.account.user) {
                     list = [
-                        { id: "proccess", name: "En Proceso", to: `${route}` },
-                        { id: "my-profile", name: "Mi Perfil", to: `${route}/mi-perfil` }
+                        { id: "proccess", name: "Mis postulaciones", to: `${route}` },
+                        { id: "my-cv", name: "Mi currículum", to: `${route}/mi-perfil` }
                     ]
                     hasDashboard = true
                 }
