@@ -1,17 +1,23 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Container, Grid, Hidden ,makeStyles } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 
-import { Breadcrumbs, Typography } from "../../shared/components";
-import { SessionRoutes } from "../../shared/libs/sessionRoutes";
+//Components
 import { CustomCard } from "../../dashboard/components";
+import { Container, Grid, Hidden ,makeStyles } from "@material-ui/core";
 import { ApplicantDataTable, ApplicantDataTableMobile } from '../components'
+import { Breadcrumbs, Button, Modal, TextSkyBlue, Typography } from "../../shared/components";
+
+//imgs
 import { filesSVG, phoneSVG, agreementSVG } from "../../shared/images";
-import { getDocumentsType } from "../../../store/actions/utils/utils.action";
-import { setProfileOfApplicant } from "../../../store/actions/dashboard/dashboard.action";
+
+//Utils
 import { getNameById } from "../../shared/utils";
+import { SessionRoutes } from "../../shared/libs/sessionRoutes";
+import { getDocumentsType } from "../../../store/actions/utils/utils.action";
+import { getProfileOfApplicant } from "../../../store/actions/dashboard/dashboard.middleware";
+import { setProfileOfApplicant } from "../../../store/actions/dashboard/dashboard.action";
 import '../styles/index.css'
-import { SignalCellularNullOutlined } from "@material-ui/icons";
 
 const useStyles = makeStyles(theme => ({
     body2:{
@@ -19,20 +25,52 @@ const useStyles = makeStyles(theme => ({
     },
     img:{
         height:"120px"
+    },
+    modal:{
+        display:"flex",
+        flexDirection:"column",
+        alignItems:"center",
+        justifyContent:"center",
+        "& p":{
+            textAlign:"center",
+            margin: "1rem 1rem",
+        }
     }
 }))
 
 const Applicant  = () => {
     const dispatch = useDispatch()
+    const history = useHistory()
     const classes = useStyles()
     const { auth: {user}, utils:{documentsType} } = useSelector(state => state);
+    const { applicantProfile } = useSelector(state => state?.dashboard);
     const initRoute = SessionRoutes().initRoute;
     const routes = [{ name: "Mis postulaciones", to: `${initRoute}` }];
+    const [openModal, setOpenModal] = useState(false)
 
     useEffect(() => {
         dispatch(getDocumentsType())
-        dispatch(setProfileOfApplicant(null))
+        // dispatch(setProfileOfApplicant(null))
+        dispatch(getProfileOfApplicant({postulant_id:user.account.id}))
     },[])
+
+    useEffect(() => {
+        if(applicantProfile){
+            checkingData()
+        }
+    },[applicantProfile])
+
+    const checkingData = () => {
+        const user_temp =  applicantProfile?.user
+        let status = false
+        if(!user_temp?.first_name || !user_temp?.last_name) status = true
+        else if(!user_temp?.department_id || !user_temp?.province_id) status = true
+        else if(applicantProfile?.education.length == 0) status = true
+        else if(applicantProfile?.job.length == 0) status = true
+        else if(!user_temp.interest_rubro_id) status = true
+
+        setOpenModal(status)
+    }
 
     return (
         <Container className="applicant-container">
@@ -112,6 +150,13 @@ const Applicant  = () => {
                     </Grid>
                 </Grid>
             </Grid>
+            <Modal open={openModal} handleCloseModal={() => setOpenModal(false)}>
+                <div className={classes.modal}>
+                    <Typography variant="h6">{`${user?.account?.user?.first_name}, completa tu perfil`}</Typography>
+                    <Typography variant="body2">Te tomará solo 8 minutos colocar tus <TextSkyBlue>datos actualizados</TextSkyBlue>, para que las empresas contacten contigo.</Typography>
+                    <Button variant="contained" size="large" onClick={() => history.push(`${initRoute}/mi-perfil`)}>Empezar</Button>
+                </div>
+            </Modal>
         </Container>
     )
 }

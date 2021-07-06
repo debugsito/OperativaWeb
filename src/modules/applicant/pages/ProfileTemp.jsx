@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo  } from 'react';
+import React, { useState, useEffect } from 'react';
 
 //Librerias
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,13 +9,13 @@ import { Accordion, AccordionDetails, AccordionSummary, Grid, Typography, makeSt
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import { Button, LinearProgress } from '../../shared/components';
+import { Button, Modal, LinearProgress } from '../../shared/components';
 
 //Servicios
 import { service_ApplicantProfile } from '../../../store/services';
 import { getProfileOfApplicant } from "../../../store/actions/dashboard/dashboard.middleware";
 import { getAccount } from "../../../store/actions/auth/auth.middleware";
-import { filesSVG, numberOneSVG, numberTwoSVG, numberThreeSVG, numberFourSVG, numberFiveSVG } from '../../shared/images/postulant';
+import { numberOneSVG, numberTwoSVG, numberThreeSVG, numberFourSVG, numberFiveSVG } from '../../shared/images/postulant';
 
 //UTILS
 import { getOS } from '../../shared/utils';
@@ -50,7 +50,7 @@ const Profile = ({ history }) => {
     const [hasExperience, setHasExperience] = useState()
 
     useEffect(() => {
-        dispatch(getProfileOfApplicant({postulant_id:user.account.id}))
+        // dispatch(getProfileOfApplicant({postulant_id:user.account.id}))
     },[])
     
     useEffect(() => {
@@ -107,30 +107,6 @@ const Profile = ({ history }) => {
                 }
             } catch (error) {
                 // MensajeError(error.response.data.message);
-            }
-        }
-    }
-
-    const handleSaveWorkExperience = async (data, hasExperience) => {
-        if (data) {
-            setHasExperience(hasExperience.value)
-            setWorkExperience(data);
-            setStep(5)
-            if (hasExperience.value === "withExperience") {
-                try {
-                    const responseEducation = await service_ApplicantProfile.applicantWithExperienceRegister(data);
-                    if (responseEducation.status === 200) {
-                        setStep(5)
-                    }
-                } catch (error) {
-                }
-            } else if(hasExperience.value === "withoutExperience"){
-                try {
-                    const responseEducation = await service_ApplicantProfile.applicantWithoutExperienceRegister(data);
-                    if (responseEducation.status === 200) setStep(5)
-                } catch (error) {
-                    
-                }
             }
         }
     }
