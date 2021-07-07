@@ -47,13 +47,13 @@ export const normalize = {
     },
     contactData(data) {
         return {
-            department_id: data?.user?.department_id,
-            province_id: data?.user?.province_id,
-            district_id: data?.user?.district_id,
-            address: data?.user?.address,
+            department_id: data?.user?.department_id ? data?.user?.department_id : "",
+            province_id: data?.user?.province_id ? data?.user?.province_id : "",
+            district_id: data?.user?.district_id ? data?.user?.district_id : "",
+            address: data?.user?.address ? data?.user?.address : "",
             //reference: "Referencia en duro", //En duro
-            phone: data?.user?.phone,
-            civil_id: data?.user?.civil_id,
+            phone: data?.user?.phone ? data?.user?.phone : "",
+            civil_id: data?.user?.civil_id ? data?.user?.civil_id : "",
         }
     },
     educationData(data) {
@@ -103,7 +103,7 @@ export const normalize = {
     },
     rubroOfinterestData(data) {
         return {
-            interest_rubro_id: data?.user?.interest_rubro_id
+            interest_rubro_id: data?.user?.interest_rubro_id ? data?.user?.interest_rubro_id : ""
         }
     }
 }

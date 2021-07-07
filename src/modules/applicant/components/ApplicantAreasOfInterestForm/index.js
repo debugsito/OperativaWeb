@@ -48,15 +48,13 @@ export default function Index({ userData, handleSaveAreasOfInterest }) {
         dispatch(actions_Utils.getItems())
     }, [])
 
-    useEffect(() => {
-
-    }, [])
-
     const handleCloseAlert = () => {
         setOpenAlert(false)
     }
 
     const handleClickFinish = () => {
+        console.log("disabledButtonState", disabledButtonState)
+        console.log("values", values)
         if (!disabledButtonState) {
             setOpenModal(true)
         } else {

@@ -101,14 +101,12 @@ export default function ApplicantWorkExperienceForm({ userData = initialValues, 
     const handleSaveWorkExperience = async (data, hasExperience) => {
         if (data) {
             if (hasExperience.value === "withExperience") {
-                console.log("withExperience")
                 try {
                     const responseEducation = await service_ApplicantProfile.applicantWithExperienceRegister(data);
                     if (responseEducation.status === 200) setStep(5)
                 } catch (error) {
                 }
             } else if (hasExperience.value === "withoutExperience") {
-                console.log("withoutExperience")
                 const data_temp = { ...data, experience: 0 }//sin experiencia
                 setWorkExperience(data_temp);
                 try {
