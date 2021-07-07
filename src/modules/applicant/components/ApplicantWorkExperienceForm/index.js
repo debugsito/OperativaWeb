@@ -31,16 +31,8 @@ const defaultValues = {
 const initialValues = [defaultValues]
 
 export default function ApplicantWorkExperienceForm({ userData = initialValues, history, setStep }) {
-    const [hasExperience, setHasExperience] = useState({ value: '', error: false });
-    const [workExperience, setWorkExperience] = useState([]);
-    // const [disabledButton, setDisabledButton] = useState(false);
-
-    useEffect(() => {
-        const workExperience_temp = normalize.workExperienceData(userData)
-        setHasExperience({ ...hasExperience, value: !Array.isArray(workExperience_temp) ? 'withoutExperience' : 'withExperience' });
-        setWorkExperience(workExperience_temp)
-        // getAccount();
-    }, [userData])
+    const [hasExperience, setHasExperience] = useState({ value: !Array.isArray(userData) ? 'withoutExperience' : 'withExperience', error: false });
+    const [workExperience, setWorkExperience] = useState(userData);
 
     const handleCheckBox = (value = hasExperience.value) => {
         setHasExperience({ value: value, error: !value })
@@ -86,42 +78,41 @@ export default function ApplicantWorkExperienceForm({ userData = initialValues, 
 
     const handleDeleteWorkExperience = async (index) => {
         let userDataTemp = [...workExperience];
-        const body = { job_id: userDataTemp[index].id }
+        const workExperience_id = workExperience[index]?.id
+        const body = { job_id: workExperience_id }
         userDataTemp.splice(index, 1)
-        try {
-            const responseEducation = await deleteWorkExperience(body)
-            if (responseEducation.status === 200) setWorkExperience(userDataTemp)
-        } catch (error) {
-            console.log("ERROR")
+        setWorkExperience(userDataTemp)
+        if (workExperience_id) {
+            try {
+                await deleteWorkExperience(body)
+                // if (responseEducation.status === 200) setWorkExperience(userDataTemp)
+            } catch (error) {
+                console.log("ERROR")
+            }
         }
-
-        // handleUpdateWorkExperience(userDataTemp)
     }
 
     const handleUpdateWorkExperienceTemp = (values, index) => {
         let userDataTemp = [...workExperience];
         userDataTemp[index] = values;
-        // const isButtonDisabled = userDataTemp.map(data => (Object.values(data).includes(""))).includes(true)
-        // setDisabledButton(isButtonDisabled)
         setWorkExperience(userDataTemp)
-        // handleUpdateWorkExperience(userDataTemp)
     }
 
     const handleSaveWorkExperience = async (data, hasExperience) => {
         if (data) {
-            setHasExperience(hasExperience.value)
-            setWorkExperience(data);
-            // setStep(5)
-            // saveApplicantProfile('workExperience', data);
             if (hasExperience.value === "withExperience") {
+                console.log("withExperience")
                 try {
                     const responseEducation = await service_ApplicantProfile.applicantWithExperienceRegister(data);
                     if (responseEducation.status === 200) setStep(5)
                 } catch (error) {
                 }
             } else if (hasExperience.value === "withoutExperience") {
+                console.log("withoutExperience")
+                const data_temp = { ...data, experience: 0 }//sin experiencia
+                setWorkExperience(data_temp);
                 try {
-                    const responseEducation = await service_ApplicantProfile.applicantWithoutExperienceRegister(data);
+                    const responseEducation = await service_ApplicantProfile.applicantWithoutExperienceRegister(data_temp);
                     if (responseEducation.status === 200) setStep(5)
                 } catch (error) {
 

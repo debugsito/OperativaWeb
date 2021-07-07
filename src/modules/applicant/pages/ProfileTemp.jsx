@@ -113,8 +113,6 @@ const Profile = ({ history }) => {
 
     const handleSaveAreasOfInterest = async (data) => {
         let body = {id:profile.id ,...data}
-        console.log("handleSaveAreasOfInterest",body)
-
             try {
                 const response = await service_ApplicantProfile.applicantPersonalDataRegister(body);
                 if (response.status === 200) {
@@ -141,7 +139,7 @@ const Profile = ({ history }) => {
     )
 
     return (
-        <Grid container justify="center" alignItems="center" spacing={2} style={{ padding: 20 }}>
+        <Grid container justify="center" alignItems="center" style={{ padding: 20 }}>
             <Grid item xs={12} md={12} lg={12}>
                 <LinearProgress variant="determinate" value={(step - 1) * 20} />
             </Grid>
@@ -222,7 +220,7 @@ const Profile = ({ history }) => {
                     { profile &&
                         <ApplicantWorkExperienceForm
                             history={history}
-                            userData={profile}
+                            userData={normalize.workExperienceData(profile)}
                             setStep={setStep}
                             // handleSaveWorkExperience={handleSaveWorkExperience}
                             // handleUpdateWorkExperience={(data) => setWorkExperience(data)} 
