@@ -66,7 +66,7 @@ const Applicant  = () => {
         if(!user_temp?.first_name || !user_temp?.last_name) status = true
         else if(!user_temp?.department_id || !user_temp?.province_id) status = true
         else if(applicantProfile?.education.length == 0) status = true
-        else if(applicantProfile?.job.length == 0) status = true
+        else if(applicantProfile?.job.length == 0 && user_temp?.volunteering === null && user_temp?.volunteering === null && user_temp?.extra_hours) status = true
         else if(!user_temp.interest_rubro_id) status = true
 
         setOpenModal(status)
