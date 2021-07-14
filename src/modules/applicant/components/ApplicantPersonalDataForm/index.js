@@ -22,6 +22,7 @@ const defaultValues = {
 
 
 const ApplicantContactInformationForm = React.memo(({ user, handleSavePersonalData }) => {
+    console.log("user", user)
     // console.log("ApplicantContactInformationForm", user)
     // #region 
     let initialValues = user ? user : defaultValues;
@@ -196,7 +197,7 @@ const ApplicantContactInformationForm = React.memo(({ user, handleSavePersonalDa
                     type="date"
                     name="birth_date"
                     label="Fecha de nacimiento"
-                    value="2003-05-24"//{values.birth_date}
+                    value={values.birth_date}
                     onChange={handleInputChange}
                     error={errors.birth_date ? true : false}
                     helperText={errors.birth_date}

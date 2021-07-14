@@ -39,7 +39,7 @@ export const normalize = {
             last_name: data?.user?.last_name,
             document_id: data?.user?.document_id,
             document_number: data?.user?.document_number,
-            birth_date: DateTime.fromISO(data?.user?.birth_date).toFormat("yyyy/LL/dd"),
+            birth_date: DateTime.fromISO(data?.user?.birth_date).toUTC().toFormat("yyyy-LL-dd"),
             gender: data?.user?.gender,
             provider_id: data?.user?.provider_id,
             //providerSpecification: null,//En duro
@@ -71,8 +71,6 @@ export const normalize = {
             }
         }
     },
-    //No estas enviando la info cuando cuando el postulante no tiene experiencia
-    //Solo estas enviando la ultima expereriencia
     workExperienceData(data) {
         if (data.user.experience === USER.WITHOUT_EXPERIENCE) {
             return {
