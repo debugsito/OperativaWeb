@@ -1,7 +1,6 @@
 import React from 'react'
 import Carousel from "react-material-ui-carousel"
 import SlideGenerator from "./SlideGenerator";
-import "./index.css"
 import {
     img1, img2, img3, img4, img5, img6,
     img7, img8, img9, img10, img11, img12,

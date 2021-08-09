@@ -4,14 +4,14 @@
 }
 
 .slide__title-bold{
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--fontFamily);
   font-weight: 900;
   font-size: 2rem;
   line-height: 1rem;
 }
 
 .slide__title-light{
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--fontFamily);
   font-weight: 300;
   font-size: 1.7rem;
 }

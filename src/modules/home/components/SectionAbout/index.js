@@ -7,9 +7,9 @@ import { about } from "../../images2";
 const useStyles = makeStyles(theme => ({
     root: {
         height: '100vh',
-        // backgroundImage: `url(${about})`,
-        // backgroundRepeat: 'no-repeat',
-        // backgroundSize: 'cover',
+        [theme.breakpoints.down('sm')]: {
+            marginTop: "2rem",
+        },
     },
 
     containerText: {
@@ -18,14 +18,14 @@ const useStyles = makeStyles(theme => ({
             width: '85%',
         },
         [theme.breakpoints.up('md')]: {
-            width: '60%',
+            width: '80%',
         },
     },
-    text: {
-        fontFamily: 'Roboto, sans-serif',
+    textParrafo: {
+        // fontFamily: "var(--fontFamily)",
         color: "#373737",
         [theme.breakpoints.down('sm')]: {
-            fontSize: '0.8rem',
+            fontSize: '0.9rem',
             lineHeight: '1.5rem'
             // fontWeight: 400,
         },
@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
             fontWeight: 300,
             lineHeight: '2rem'
         },
-        textShadow: '0px 3px 56px #ffffffa8',
+        // textShadow: '0px 3px 56px #ffffffa8',
         textAlign: 'justify',
 
 
@@ -50,14 +50,14 @@ export default function SectionAbout(props) {
                 Sobre Nosotros
             </TitleWithLine>
             <div className={classes.containerText}>
-                <p className={classes.text}>
-                    <strong>INNOVATE PERÚ</strong> y el <strong>MINISTERIO DE LA PRODUCCIÓN</strong> denominan ganador a <strong>OPERATIVA</strong>, como la <strong>1era Plataforma Tecnológica con IA que automatiza los procesos masivos de reclutamiento operario</strong>, segmentada por sectores productivos y que predice el tiempo de permanencia del trabajador en la empresa.
+                <p className={classes.textParrafo}>
+                    <b>INNOVATE PERÚ</b> y el <strong>MINISTERIO DE LA PRODUCCIÓN</strong> denominan ganador a <strong>OPERATIVA</strong>, como la <strong>1era Plataforma Tecnológica con IA que automatiza los procesos masivos de reclutamiento operario</strong>, segmentada por sectores productivos y que predice el tiempo de permanencia del trabajador en la empresa.
                 </p>
-                <p className={classes.text}>
-                    <strong>OPERATIVA</strong> nace ante la necesidad de vincular a las personas que buscan empleo operario y a las empresas de sector productivo, de tal manera que los primeros encuentren un trabajo formal y los segundos cubran sus vacantes operarias mediante un proceso rápido y seguro en un entorno digital.
+                <p className={classes.textParrafo}>
+                    <b>OPERATIVA</b> nace ante la necesidad de vincular a las personas que buscan empleo operario y a las empresas de sector productivo, de tal manera que los primeros encuentren un trabajo formal y los segundos cubran sus vacantes operarias mediante un proceso rápido y seguro en un entorno digital.
                 </p>
-                <p className={classes.text}>
-                    <strong>OPERATIVA</strong> en joint venture con la Universidad Católica y la start-up VERIFICATIVA buscan desarrollar una solución de reclutamiento masivo de selección de personal operario en Perú, con un impacto social que permitirá una mejora sustancial en la forma y modo en que las personas buscan y aspiran a un trabajo formal de acorde a sus expectativas y en la coyuntura actual.
+                <p className={classes.textParrafo}>
+                    <b>OPERATIVA</b> en joint venture con la Universidad Católica y la start-up VERIFICATIVA buscan desarrollar una solución de reclutamiento masivo de selección de personal operario en Perú, con un impacto social que permitirá una mejora sustancial en la forma y modo en que las personas buscan y aspiran a un trabajo formal de acorde a sus expectativas y en la coyuntura actual.
                 </p>
             </div>
         </div>

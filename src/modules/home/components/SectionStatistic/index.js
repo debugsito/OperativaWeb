@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         padding: '1rem 1rem 0 1rem',
-        fontFamily: 'Roboto, sans-serif',
+        fontFamily: "var(--fontFamily)",
         color: "#212529"
     },
     containerCards: {

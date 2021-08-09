@@ -8,7 +8,7 @@ const useStyles = makeStyles(theme => ({
         height: '100vh',
         display: 'grid',
         gridTemplateRows: '1fr 6fr 1fr',
-        fontFamily: 'Roboto, sans-serif',
+        fontFamily: "var(--fontFamily)",
     },
     cardContainer: {
         [theme.breakpoints.down('sm')]: {

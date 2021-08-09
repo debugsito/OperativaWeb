@@ -6,7 +6,7 @@ import PartnersList from "./PartnersList";
 const useStyles = makeStyles(theme => ({
     root: {
         height: '100vh',
-        fontFamily: 'Roboto, sans-serif',
+        fontFamily: "var(--fontFamily)",
     },
     containerText: {
         margin: '2rem auto',

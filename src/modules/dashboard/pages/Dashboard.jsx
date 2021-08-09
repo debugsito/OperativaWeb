@@ -20,7 +20,7 @@ import { SessionRoutes } from "../../shared/libs/sessionRoutes";
 
 //initial values
 const initialValues = {
-  from_date:"2020-01-01",
+  from_date:"2019-01-01",
   to_date:"2020-06-30"
 }
 

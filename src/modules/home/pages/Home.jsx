@@ -13,7 +13,7 @@ const Home = () => {
     return (
         <>
             <SectionHeader />
-            {/* <SectionAbout /> */}
+            <SectionAbout />
             <SectionOurProcess />
             <SectionStatistic />
             <SectionOurPartners />

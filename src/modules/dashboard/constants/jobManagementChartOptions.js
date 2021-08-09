@@ -25,9 +25,6 @@ export default (name, data) => ({
         },
     },
     legend: {
-        title: {
-            text: "<b>Rubro de interés<b/>"
-        },
         align: "right",
         layout: "vertical",
         verticalAlign: "middle",

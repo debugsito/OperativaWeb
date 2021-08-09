@@ -37,7 +37,8 @@ const ApplicantProfile = () => {
     const dispatch = useDispatch();
     let { postulant_id } = useParams()
     const initRoute = SessionRoutes().initRoute;
-    const { applicantProfile, applicantProfile:{ user, job, education}, publicationSelected, postulantsByPublicationId } = useSelector(state => state.dashboard)
+    const { applicantProfile, publicationSelected, postulantsByPublicationId } = useSelector(state => state.dashboard)
+    const {user, job, education} = applicantProfile??applicantProfile;
     const { districts } = useSelector(state => state.utils)
 
     const [openModal, setOpenModal] = useState(false);

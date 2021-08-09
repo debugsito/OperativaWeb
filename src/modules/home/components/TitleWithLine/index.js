@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
             fontSize: '3rem',
         },
         marginBottom: '0.5rem',
-        fontFamily: 'Roboto-Bold, sans-serif',
+        fontFamily: "var(--fontFamily)",
         textAlign: 'center',
         color: props.colorText
     }),

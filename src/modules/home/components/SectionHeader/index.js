@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
         height: '430px'
     },
     titleBold: {
-        fontFamily: 'Roboto-Bold, sans-serif',
+        fontFamily: "var(--fontFamily)",
         marginBottom: '0.5rem',
         fontSize: '2.5rem',
         color: '#fff',

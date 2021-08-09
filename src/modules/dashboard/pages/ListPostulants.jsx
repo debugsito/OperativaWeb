@@ -58,7 +58,7 @@ export default function Listpostulants({ history }) {
                     fullName: `${item.user.first_name} ${item.user.last_name}`,
                     academicLevel: item.user.level_name || "",
                     experience: item.user.experience == 1 ? "Con experiencia" : "Sin experiencia",
-                    date: item.createAt,
+                    date: DateTime.fromISO(item.createdAt).toUTC().toFormat("yyyy-LL-dd")??"--",
                     state: getStatus(item.estado),
                     postulant_id: item.user.account_id,
                     similarity: item.user.similarity,
@@ -79,12 +79,11 @@ export default function Listpostulants({ history }) {
         { field: 'fullName', headerName: 'Nombres del postulantes', width: 300, sortable: false },
         // { field: 'academicLevel', headerName: 'Nivel de estudio', width: 220 },
         { field: 'experience', headerName: 'Experiencia', width: 180, sortable: false },
-        { field: 'date', headerName: 'Fecha de postulación', width: 200, sortable: false, valueGetter: (params) => DateTime.fromISO(params.value).toFormat("yyyy-LL-dd")},//moment(params.value).format("YYYY-MM-DD") ,
+        { field: 'date', headerName: 'Fecha de postulación', width: 200, type: 'date', sortable: false},
         {
             field: 'state', headerName: 'Estado', width: 130, sortable: false, renderCell: (params, index) => {
                 const { postulant_id, state } = params.row
                 return <Button color="primary" onClick={() => history.push({ pathname: `${initRoute}/postulante/perfil/${postulant_id}` })}>{state}</Button>
-                // return <Button color="primary" onClick={() => console.log("hice click")}>Registrado</Button>
             }
         },
     ];

@@ -8,7 +8,7 @@ export default (name, data, colors) => ({
     },
     colors: colors,//["#CBCAC8", "#A2EE37", "#FCB81A", "#F75470", "#7F85FD", "#373737"],
     title: {
-
+        text: "",
     },
     tooltip: {
         pointFormat: "{series.name}: <b>{point.y} personas</b> ",
