@@ -1,17 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import './index.css';
-// import 'fontsource-roboto';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import storeConfig from './store/store';
 
+const theme = createMuiTheme({
+  typography: {
+    fontFamily: "var(--fontFamily)",
+  }
+})
+
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={storeConfig}>
-      <App />
-    </Provider>
+    <ThemeProvider theme={theme}>
+      <Provider store={storeConfig}>
+        <App />
+      </Provider>
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
