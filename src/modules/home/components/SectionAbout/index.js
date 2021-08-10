@@ -22,12 +22,10 @@ const useStyles = makeStyles(theme => ({
         },
     },
     textParrafo: {
-        // fontFamily: "var(--fontFamily)",
         color: "#373737",
         [theme.breakpoints.down('sm')]: {
-            fontSize: '0.9rem',
-            lineHeight: '1.5rem'
-            // fontWeight: 400,
+            fontSize: '0.85rem',
+            lineHeight: '1.4rem'
         },
         [theme.breakpoints.up('md')]: {
             fontSize: '1.3rem',

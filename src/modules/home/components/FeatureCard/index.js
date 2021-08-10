@@ -8,7 +8,7 @@ const useStyles = makeStyles(theme => ({
         boxShadow: '0px 3px 6px #2958a329',
         borderRadius: '11px',
         padding: '0.5rem',
-        width: '260px',
+        width: '18rem',//'260px',
         display: 'flex',
         [theme.breakpoints.down('sm')]: {
             padding: '0.2rem',

@@ -38,7 +38,6 @@ const ApplicantProfile = () => {
     let { postulant_id } = useParams()
     const initRoute = SessionRoutes().initRoute;
     const { applicantProfile, publicationSelected, postulantsByPublicationId } = useSelector(state => state.dashboard)
-    const {user, job, education} = applicantProfile??applicantProfile;
     const { districts } = useSelector(state => state.utils)
 
     const [openModal, setOpenModal] = useState(false);
@@ -149,7 +148,7 @@ const ApplicantProfile = () => {
                                                     onClick={() => {
                                                         setModalData({
                                                             title: "Seleccionar postulante",
-                                                            body: `Ud. ha seleccionado a ${user?.fullname}`,
+                                                            body: `Ud. ha seleccionado a ${applicantProfile?.user?.fullname}`,
                                                             method: 'select',
                                                             cancelAction: () =>
                                                                 setModalData({ ...modalData, show: false }),
@@ -174,7 +173,7 @@ const ApplicantProfile = () => {
                                                     onClick={() => {
                                                         setModalData({
                                                             title: "Descartar postulante",
-                                                            body: `Ud. ha descartado a ${user?.fullname}`,
+                                                            body: `Ud. ha descartado a ${applicantProfile?.user?.fullname}`,
                                                             method: 'deny',
                                                             cancelAction: () =>
                                                                 setModalData({ ...modalData, show: false }),
@@ -200,7 +199,7 @@ const ApplicantProfile = () => {
                                                     onClick={() => {
                                                         setModalData({
                                                             title: "Contratar postulante",
-                                                            body: `Ud. desea contratar a ${user?.fullname}`,
+                                                            body: `Ud. desea contratar a ${applicantProfile?.user?.fullname}`,
                                                             method: 'hire',
                                                             cancelAction: () =>
                                                                 setModalData({ ...modalData, show: false }),
@@ -223,7 +222,7 @@ const ApplicantProfile = () => {
                                     </Grid>
                                     <Grid item xs={4}>
                                         <Typography variant="h4" component="h4">
-                                            <strong>{user?.fullname}</strong>
+                                            <strong>{applicantProfile?.user?.fullname}</strong>
                                         </Typography>
                                     </Grid>
                                     <Grid item xs={8}>
@@ -250,7 +249,7 @@ const ApplicantProfile = () => {
                                     <strong>Numero de documento</strong>
                                 </Typography>
                                 <Typography variant="body1" component="h6">
-                                    {user?.document_number}
+                                    {applicantProfile?.user?.document_number}
                                 </Typography>
                                 <br />
                                 <Typography variant="subtitle2" component="h6">
@@ -258,7 +257,7 @@ const ApplicantProfile = () => {
                                 </Typography>
                                 <Typography variant="body1" component="h6">
                                     {
-                                        DateTime.fromISO(user?.birth_date).toFormat("yyyy-LL-dd")
+                                        DateTime.fromISO(applicantProfile?.user?.birth_date).toFormat("yyyy-LL-dd")
                                     }
                                 </Typography>
                                 <br />
@@ -266,14 +265,14 @@ const ApplicantProfile = () => {
                                     <strong>Departamento/Provincia/Distrito</strong>
                                 </Typography>
                                 <Typography variant="body1" component="h6">
-                                    {`${user?.department?.name}/${user?.province?.name}/${user?.district?.name}`}
+                                    {`${applicantProfile?.user?.department?.name}/${applicantProfile?.user?.province?.name}/${applicantProfile?.user?.district?.name}`}
                                 </Typography>
                                 <br />
                                 <Typography variant="subtitle2" component="h6">
                                     <strong>Dirección</strong>
                                 </Typography>
                                 <Typography variant="body1" component="h6">
-                                    {user?.address}
+                                    {applicantProfile?.user?.address}
                                 </Typography>
                                 <br />
                                 
@@ -281,7 +280,7 @@ const ApplicantProfile = () => {
                                     <strong>teléfono</strong>
                                 </Typography>
                                 <Typography variant="body1" component="h6">
-                                    {user?.phone}
+                                    {applicantProfile?.user?.phone}
                                 </Typography>
                                 <br />
                                 <Typography variant="subtitle2" component="h6">
@@ -295,21 +294,21 @@ const ApplicantProfile = () => {
                                     <strong>Estado civil</strong>
                                 </Typography>
                                 <Typography variant="body1" component="h6">
-                                    {user?.civil?.name}
+                                    {applicantProfile?.user?.civil?.name}
                                 </Typography>
                                 <br />
                                 <Typography variant="subtitle2" component="h6">
                                     <strong>Edad</strong>
                                 </Typography>
                                 <Typography variant="body1" component="h6">
-                                    {user?.age}
+                                    {applicantProfile?.user?.age}
                                 </Typography>
                                 <br />
                                 <Typography variant="subtitle2" component="h6">
                                     <strong>Género</strong>
                                 </Typography>
                                 <Typography variant="body1" component="h6">
-                                    {getGenderById(user?.gender)}
+                                    {getGenderById(applicantProfile?.user?.gender)}
                                 </Typography>
                                 <br />
                                 <Typography variant="subtitle2" component="h6">
@@ -317,7 +316,7 @@ const ApplicantProfile = () => {
                                 </Typography>
                                 <Typography variant="body1" component="h6">
                                     {
-                                        DateTime.fromISO(user?.updatedAt).toFormat("yyyy-LL-dd")
+                                        DateTime.fromISO(applicantProfile?.user?.updatedAt).toFormat("yyyy-LL-dd")
                                     }
                                 </Typography>
                             </Grid>
@@ -336,21 +335,21 @@ const ApplicantProfile = () => {
                                     <strong>Cargo</strong>
                                 </Typography>
                                 <Typography variant="body1" component="h6">
-                                    {job && job[0]?.job_level?.name}
+                                    {applicantProfile?.job && applicantProfile?.job[0]?.job_level?.name}
                                 </Typography>
                                 <br />
                                 <Typography variant="subtitle2" component="h6">
                                     <strong>Empresa</strong>
                                 </Typography>
                                 <Typography variant="body1" component="h6">
-                                    {job && job[0]?.name_inst}
+                                    {applicantProfile?.job && applicantProfile?.job[0]?.name_inst}
                                 </Typography>
                                 <br />
                                 <Typography variant="subtitle2" component="h6">
                                     <strong>Distrito</strong>
                                 </Typography>
                                 <Typography variant="body1" component="h6">
-                                    {job && getDistrictById(districts, job[0]?.district_id)}
+                                    {applicantProfile?.job && getDistrictById(districts, applicantProfile?.job[0]?.district_id)}
                                 </Typography>
                                 <br />
                                 
@@ -358,35 +357,35 @@ const ApplicantProfile = () => {
                                     <strong>Fecha de inicio</strong>
                                 </Typography>
                                 <Typography variant="body1" component="h6">
-                                    {job && job[0]?.from_year}
+                                    {applicantProfile?.job && applicantProfile?.job[0]?.from_year}
                                 </Typography>
                                 <br />
                                 <Typography variant="subtitle2" component="h6">
                                     <strong>Fecha de culminación</strong>
                                 </Typography>
                                 <Typography variant="body1" component="h6">
-                                    {job && job[0]?.to_year}
+                                    {applicantProfile?.job && applicantProfile?.job[0]?.to_year}
                                 </Typography>
                                 <br />
                                 <Typography variant="subtitle2" component="h6">
-                                    <strong>Promedio de horas semanales</strong>
+                                     <strong>Promedio de horas semanales</strong>
                                 </Typography>
                                 <Typography variant="body1" component="h6">
-                                    {job && job[0]?.hour_rate}
+                                    {applicantProfile?.job && applicantProfile?.job[0]?.hour_rate}
                                 </Typography>
                                 <br />
                                 <Typography variant="subtitle2" component="h6">
                                     <strong>Ingreso Mensual</strong>
                                 </Typography>
                                 <Typography variant="body1" component="h6">
-                                    {job && job[0]?.monthly_income}
+                                    {applicantProfile?.job && applicantProfile?.job[0]?.monthly_income}
                                 </Typography>
                                 <br />
                                 <Typography variant="subtitle2" component="h6">
                                     <strong>¿Trabajaste horas extras?</strong>
                                 </Typography>
                                 <Typography variant="body1" component="h6">
-                                    {job && job[0]?.over_time? "Si": "No"}
+                                    {applicantProfile?.job && applicantProfile?.job[0]?.over_time? "Si": "No"}
                                 </Typography>
                                 <br />
                                 <Typography variant="subtitle2" component="h6">
@@ -396,7 +395,7 @@ const ApplicantProfile = () => {
                                     Del 1 al 5 siendo 1 totalmente descomprometido y 5 totalmente comprometido
                                 </Typography>
                                 <Typography variant="body1" component="h6">
-                                    {job && (job[0]?.job_involvement || "----------")}
+                                    {applicantProfile?.job && (applicantProfile?.job[0]?.job_involvement || "----------")}
                                 </Typography>
                                 <br />
                                 <Typography variant="subtitle2" component="h6">
@@ -406,7 +405,7 @@ const ApplicantProfile = () => {
                                     Del 1 al 5 siendo 1 totalmente descomprometido y 5 totalmente comprometido
                                 </Typography>
                                 <Typography variant="body1" component="h6">
-                                    {job && (job[0]?.job_sati || "----------")}
+                                    {applicantProfile?.job && (applicantProfile?.job[0]?.job_sati || "----------")}
                                 </Typography>
                                 <br />
                                 <br />
@@ -419,21 +418,21 @@ const ApplicantProfile = () => {
                                     <strong>Nivel máximo alcanzado</strong>
                                 </Typography>
                                 <Typography variant="body1" component="h6">
-                                    {education && education[0]?.level?.name}
+                                    {applicantProfile?.education && applicantProfile?.education[0]?.level?.name}
                                 </Typography>
                                 <br />
                                 <Typography variant="subtitle2" component="h6">
                                     <strong>Institución educativa</strong>
                                 </Typography>
                                 <Typography variant="body1" component="h6">
-                                    {education && education[0]?.name_inst}
+                                    {applicantProfile?.education && applicantProfile?.education[0]?.name_inst}
                                 </Typography>
                                 <br />
                                 <Typography variant="subtitle2" component="h6">
                                     <strong>Año de inicio</strong>
                                 </Typography>
                                 <Typography variant="body1" component="h6">
-                                    {job && job[0]?.from_year}
+                                    {applicantProfile?.education && applicantProfile?.education[0]?.from_year}
                                 </Typography>
                                 <br />
 

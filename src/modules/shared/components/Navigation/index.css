@@ -7,7 +7,7 @@
 .side-bar .MuiListItem-root:hover,.side-bar .MuiListItem-root:active,
 .side-bar .MuiListItem-root:visited,.side-bar .MuiListItem-root:focus-within,
 .side-bar .MuiListItem-root:focus-visible{ 
-    color: #373737;
+    color: #fff;
 }
 
 .side-bar .MuiListItemIcon-root{
@@ -23,7 +23,7 @@
   
 }
 
-.side-bar .MuiSvgIcon-root{
+/* .side-bar .MuiSvgIcon-root{
     position: static;
     left: 20%;
     right: 12%;
@@ -43,7 +43,7 @@
     flex-grow: 0;
     margin: 0px 16px;
     color: white;
-}
+} */
 
 .side-bar .MuiListItem-root.Mui-selected, .MuiListItem-root.Mui-selected:hover {
     background-color:white !important;
@@ -72,7 +72,7 @@
 .side-bar .MuiButtonBase-root {
     border-radius: 0px !important;
 }
-.side-bar .MuiListItem-button{
+/* .side-bar .MuiListItem-button{
     flex: none;
     order: 2;
     flex-grow: 0;
@@ -82,7 +82,7 @@
     height: 56px;
     left: 0px;
     top: 128px;
-}
+} */
 
 .side-bar .MuiList-padding {
     padding-top: 0px; 

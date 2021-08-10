@@ -19,9 +19,9 @@ export default (name, data, colors) => ({
         },
     },
     legend: {
-        title: {
-            text: "<b>Rubro de interés<b/>"
-        },
+        // title: {
+        //     text: "<b>Rubro de interés<b/>"
+        // },
         align: "right",
         layout: "vertical",
         verticalAlign: "middle",

@@ -11,6 +11,7 @@ const useStyles = makeStyles(theme => ({
         borderRadius: '25px',
         color: props.button ? '#fff' : '#373737',
         border: 0,
+        fontFamily: 'var(--fontFamily)',
         fontSize: '1rem',
         fontWeight: 400,
         lineHeight: 1.5,

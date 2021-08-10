@@ -88,6 +88,10 @@ const useStyles = makeStyles((theme) => ({
   nested: {
     paddingLeft: theme.spacing(4),
   },
+  gutters: {
+    color: "#fff",
+    paddingRight: 0,
+  },
 }));
 
 export default function NavigationDrawer(props) {
@@ -120,11 +124,11 @@ export default function NavigationDrawer(props) {
     return (
       <>
         <LinkRouter key={item.name} to={item.nestedList ? "#" : item.to} style={{ textDecoration: 'none' }}>
-          <ListItem button key={item.name} selected={!item.nestedList && selectedIndex === index} onClick={() => handleListItemClick(item, index)}>
+          <ListItem button classes={{ gutters: classes.gutters }} key={item.name} selected={!item.nestedList && selectedIndex === index} onClick={() => handleListItemClick(item, index)}>
             <ListItemIcon>{getAvatarIcon(item.name)}</ListItemIcon>
             <ListItemText primary={item.name} />
-            {item.nestedList && (openNestedList ? <ExpandLess /> : <ExpandMore />)}
-            {selectedIndex === index && <ArrowLeftIcon style={{ position: "relative", top: "0%" }} />}
+            {(!item.nestedList && selectedIndex === index) && <ArrowLeftIcon />}
+            {item.nestedList && (openNestedList ? <ExpandLess /> : <ExpandMore />)} {/* Para los subItems */}
           </ListItem>
         </LinkRouter>
         {
