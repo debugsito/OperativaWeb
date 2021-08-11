@@ -10,8 +10,14 @@ import { SessionRoutes } from '../../shared/libs/sessionRoutes';
 import { onlyNumbers } from '../../shared/libs/validators';
 import { actions_Utils } from "../../../store/actions";
 import { useForm } from "../../hooks";
+import { SignalCellularNullSharp } from '@material-ui/icons';
 
 const defaultValues = {
+    number_registered:"",
+    gender:"",
+    edad_min:null,
+    edad_max:null,
+
     job_title: "",
     description: "",
     requirements: "",
@@ -21,7 +27,7 @@ const defaultValues = {
     district_id: "",
     period: "",
     salary: "",
-    from_date: "",
+    // from_date: "",
     expiration_date: "",
     department_id: "",
     province_id: "",
@@ -51,7 +57,7 @@ export default function EditPosition({ history }) {
         district_id: publicationSelected.district.id,
         period: publicationSelected.period,
         salary: publicationSelected.salary,
-        from_date: DateTime.fromISO(publicationSelected?.from_date).toUTC().toFormat("yyyy-LL-dd"),
+        // from_date: DateTime.fromISO(publicationSelected?.from_date).toUTC().toFormat("yyyy-LL-dd"),
         expiration_date: DateTime.fromISO(publicationSelected?.expiration_date?publicationSelected?.expiration_date: publicationSelected?.from_date).toUTC().toFormat("yyyy-LL-dd"),
         department_id: publicationSelected.district.province.department_id,
         province_id: publicationSelected.district.province_id,
@@ -211,7 +217,20 @@ export default function EditPosition({ history }) {
                     <Breadcrumbs routes={routes} />
                 </Grid>
                 <Grid item xs={8} style={{ margin: "auto" }}>
-                    <TextInput
+                    <Grid container spacing={2}>
+                    <Grid item xs={6}>
+                        <TextInput
+                                fullWidth
+                                name="number_registered"
+                                label="Cantidad de registrados"
+                                value={values.number_registered}
+                                onChange={handleInputChange}
+                                error={errors.number_registered ? true : false}
+                                helperText={errors.number_registered || "Ingresa la cantidad de registrados a mostrar"}
+                            />
+                    </Grid>
+                    </Grid>
+                    {/* <TextInput
                         fullWidth
                         type="date"
                         name="expiration_date"
@@ -226,7 +245,7 @@ export default function EditPosition({ history }) {
                         inputProps={{
                             min: dateLocal
                         }}
-                    />
+                    /> */}
                 </Grid>
                 <Grid item xs={8} style={{ margin: "auto" }}>
                     <TextInput
@@ -364,12 +383,65 @@ export default function EditPosition({ history }) {
                             } />
                         </Grid>
                     </Grid>
-
+                </Grid>
+                <Grid item xs={8} style={{ margin: "auto" }}>
+                    <Grid container spacing={2}>
+                        <Grid item xs={6}>
+                        <Select
+                            label="Genero"
+                            name="gender"
+                            value={values.gender}
+                            onChange={handleInputChange}
+                            error={errors.gender ? true : false}
+                            helperText={errors.gender}
+                        >
+                            <MenuItem value={2}>Femenino</MenuItem>
+                            <MenuItem value={1}>Masculino</MenuItem>
+                            <MenuItem value={3}>Otro</MenuItem>
+                        </Select>
+                        </Grid>
+                        <Grid item xs={3}>
+                            <TextInput
+                                fullWidth
+                                name="edad_min"
+                                label="Edad minimo"
+                                value={values.edad_min}
+                                onChange={handleInputChange}
+                                helperText="Ej. 18(Opcional)"
+                            />
+                        </Grid>
+                        <Grid item xs={3}>
+                            <TextInput
+                                fullWidth
+                                name="edad_max"
+                                label="Edad máxima"
+                                value={values.edad_max}
+                                onChange={handleInputChange}
+                                helperText="Ej. 30(Opcional)"
+                            />
+                        </Grid>
+                    </Grid>
                 </Grid>
                 <Grid item xs={8} style={{ margin: "auto" }}>
                     <Grid container spacing={2}>
                         <Grid item xs={6}>
                             <TextInput
+                                fullWidth
+                                type="date"
+                                name="expiration_date"
+                                label="Fecha de caducidad"
+                                value={values.expiration_date}
+                                onChange={handleInputChange}
+                                error={errors.expiration_date ? true : false}
+                                helperText={errors.expiration_date || "Programa la fecha fin de tu publicación"}
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                                inputProps={{
+                                    min: dateLocal
+                                }}
+                            />
+                            {/* <TextInput
                                 fullWidth
                                 type="date"
                                 name="from_date"
@@ -384,7 +456,7 @@ export default function EditPosition({ history }) {
                                 inputProps={{
                                     min: dateLocal
                                 }}
-                            />
+                            /> */}
 
                         </Grid>
                         <Grid item xs={6}>
