@@ -6,6 +6,11 @@ const getAccounts = async () => {
     return response;
 }
 
+const getUsers = async (params) => {
+    const response = await api.get(`/account/users?start=${params.page}0&length=${params.rowsPerPage}`);
+    return response;
+}
+
 const acceptAccount = async (body) => {
     const response = await api.post('/account/accept', body);
     return response;
@@ -30,5 +35,6 @@ export default {
     acceptAccount,
     denyAccount,
     getReport,
-    getFileReport
+    getFileReport,
+    getUsers
 }

@@ -22,5 +22,6 @@ export function stableSort(array = [], comparator) {
         if (order !== 0) return order;
         return a[1] - b[1];
     });
+    console.log("return map", stabilizedThis.map((el) => el[0]))
     return stabilizedThis.map((el) => el[0]);
 }
