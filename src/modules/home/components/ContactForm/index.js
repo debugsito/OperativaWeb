@@ -1,13 +1,15 @@
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core';
 import { ButtonContact, TextInput } from "../";
 import { useForm } from "../../../hooks";
+import { sendEmailOfBusiness, sendEmailOfPostulant } from "../../../../store/actions/home/home.middleware";
 
 const initialValues = {
-    full_name: "",
+    name: "",
     razon_social: null,
-    dni: null,
+    document: null,
     phone: "",
     email: "",
     message: "",
@@ -80,19 +82,21 @@ const useStyles = makeStyles(theme => ({
 
 }))
 
-export default function ContactForm(props) {
+export default function ContactForm() {
     const classes = useStyles()
+    const dispatch = useDispatch()
+    const { error, status } = useSelector(state => state?.home)
     const [business, setBusiness] = useState(true)
-    const [municipality, setMunicipality] = useState(false)
+    const [postulant, setPostulant] = useState(false)
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
-        if ('full_name' in fieldValues)
-            temp.full_name = fieldValues.full_name ? "" : "El campo es requerido."
+        if ('name' in fieldValues)
+            temp.name = fieldValues.name ? "" : "El campo es requerido."
         if ('razon_social' in fieldValues)
             temp.razon_social = fieldValues.razon_social ? "" : "El campo es requerido."
-        if ('dni' in fieldValues)
-            temp.dni = fieldValues.dni ? "" : "El campo es requerido."
+        if ('document' in fieldValues)
+            temp.document = fieldValues.document ? "" : "El campo es requerido."
         if ('phone' in fieldValues)
             temp.phone = fieldValues.phone ? "" : "El campo es requerido."
         if ('email' in fieldValues)
@@ -117,12 +121,23 @@ export default function ContactForm(props) {
 
     const handleClickBusiness = () => {
         setBusiness(true)
-        setMunicipality(false)
+        setPostulant(false)
+        setValues({ ...values, document: null })
     }
 
-    const handleClickMunicipality = () => {
+    const handleClickPostulante = () => {
         setBusiness(false)
-        setMunicipality(true)
+        setPostulant(true)
+        setValues({ ...values, razon_social: null })
+    }
+
+    const handleChangeSendEmail = () => {
+        if (business) {
+            dispatch(sendEmailOfBusiness(values))
+        } else if (postulant) {
+            dispatch(sendEmailOfPostulant(values))
+        }
+
     }
 
     return (
@@ -134,7 +149,7 @@ export default function ContactForm(props) {
                     </div>
                     <div className={classes.containerButton}>
                         <ButtonContact active={business} handleClick={handleClickBusiness}>Empresa</ButtonContact>
-                        <ButtonContact active={municipality} handleClick={handleClickMunicipality}>Postulante</ButtonContact>
+                        <ButtonContact active={postulant} handleClick={handleClickPostulante}>Postulante</ButtonContact>
                     </div>
                 </div>
             </div>
@@ -143,9 +158,9 @@ export default function ContactForm(props) {
                     <Grid item xs={10}>
                         <TextInput
                             type="text"
-                            name="full_name"
+                            name="name"
                             placeholder="Nombre y apellido"
-                            value={values.full_name}
+                            value={values.name}
                             onChange={handleInputChange}
                         />
                     </Grid>
@@ -160,11 +175,11 @@ export default function ContactForm(props) {
                             />
                         }
                         {
-                            municipality &&
+                            postulant &&
                             <TextInput
                                 placeholder="DNI (Opcional)"
-                                name="dni"
-                                value={values.dni || ""}
+                                name="document"
+                                value={values.document || ""}
                                 onChange={handleInputChange}
                             />
                         }
@@ -206,14 +221,20 @@ export default function ContactForm(props) {
                         >
                         </textarea>
                     </Grid>
-                    <Grid item xs={3}>
+                    <Grid item xs={3} className="align-items-center">
                         <TextInput
                             type="button"
                             name="send"
                             value="Enviar"
-                            onClick={() => console.log("hice Click")}
+                            onClick={handleChangeSendEmail}
                             button
                         />
+                    </Grid>
+                    <Grid item xs={7}>
+                        {
+                            error &&
+                            <p>{error.message}...</p>
+                        }
                     </Grid>
 
                 </Grid>

@@ -2,7 +2,8 @@ import { homeType } from "../../types/home";
 
 const initialState = {
     isPostulant: false,
-    error: null,
+    status: 'idle',
+    error: null
 };
 
 const homeTypeReducer = (state = initialState, action) => {
@@ -16,6 +17,28 @@ const homeTypeReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isPostulant: action.payload,
+            };
+        case homeType.SEND_EMAIL:
+            return {
+                ...state,
+                status: 'loading',
+            };
+
+
+        case homeType.SET_FETCH_LOADING:
+            return {
+                ...state,
+                status: 'loading',
+            };
+        case homeType.SET_FETCH_SUCCESS:
+            return {
+                ...state,
+                status: 'success',
+            };
+        case homeType.SET_FETCH_ERROR:
+            return {
+                ...state,
+                status: 'failure',
             };
 
         default:
