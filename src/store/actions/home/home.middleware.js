@@ -10,7 +10,6 @@ export const sendEmailOfBusiness = (data) => {
             const response = await service_Home.sendEmailOfBusiness(data);
             if (response.status == 200) {
                 dispatch(fetchSuccess())
-                dispatch(setErrorFetch(response.data)); //control de errores
             }
         } catch (error) {
             dispatch(fetchError())

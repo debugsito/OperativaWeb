@@ -16,6 +16,10 @@ export const fetchSuccess = (payload) => ({
     type: homeType.SET_FETCH_SUCCESS,
     payload
 });
+export const fetchIdle = (payload) => ({
+    type: homeType.SET_FETCH_IDLE,
+    payload
+});
 
 export const sendEmail = (payload) => ({
     type: homeType.SEND_EMAIL,

@@ -40,6 +40,11 @@ const homeTypeReducer = (state = initialState, action) => {
                 ...state,
                 status: 'failure',
             };
+        case homeType.SET_FETCH_IDLE:
+            return {
+                ...state,
+                status: 'idle',
+            };
 
         default:
             return state;

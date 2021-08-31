@@ -232,9 +232,18 @@ export default function ContactForm() {
                     </Grid>
                     <Grid item xs={7}>
                         {
-                            error &&
-                            <p>{error.message}...</p>
+                            status === "loading" &&
+                            <p>Enviando...</p>
                         }
+                        {
+                            (status === "success" && status !== "failure") &&
+                            <p>Mensaje enviado</p>
+                        }
+                        {
+                            error &&
+                            <p>{error.message}</p>
+                        }
+
                     </Grid>
 
                 </Grid>

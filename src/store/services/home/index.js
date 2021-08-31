@@ -1,12 +1,12 @@
 import api from "../../../modules/shared/libs/api";
 
-const sendEmailOfBusiness = async (params) => {
-    const response = await api.post(`/contact/business`, params.body);
+const sendEmailOfBusiness = async (body) => {
+    const response = await api.post(`/contact/business`, body);
     return response;
 }
 
-const sendEmailOfPostulant = async (params) => {
-    const response = await api.post(`/contact/postulante`, params.body);
+const sendEmailOfPostulant = async (body) => {
+    const response = await api.post(`/contact/postulante`, body);
     return response;
 }
 
