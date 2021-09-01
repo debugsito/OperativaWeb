@@ -1,4 +1,4 @@
-import { changePassword, changePasswordFromDashboard, logIn, recoverPassword } from "./auth.service"
+import { changePassword, changePasswordFromDashboard, logIn, loginAs, recoverPassword } from "./auth.service"
 import { updateAccount, getAccount } from "./user.service"
 
 export default {
@@ -7,6 +7,6 @@ export default {
     recoverPassword,
     updateAccount,
     getAccount,
-    changePasswordFromDashboard
-
+    changePasswordFromDashboard,
+    loginAs,
 }

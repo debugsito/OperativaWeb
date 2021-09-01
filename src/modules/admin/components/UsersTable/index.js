@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { DateTime } from "luxon";
-import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { stableSort, getComparator } from "../../../shared/utils/table.utils";
-import { Button, Checkbox, Typography, EnhancedTableHead } from "../../../shared/components";
+import { Typography, EnhancedTableHead, Link } from "../../../shared/components";
 import { Grid, Table, TableBody, TableCell, TableContainer, TablePagination, TableRow, Paper } from "@material-ui/core";
 
 import { SessionRoutes } from "../../../shared/libs/sessionRoutes";
 import { getUsers } from "../../../../store/actions/admin/admin.midleware";
+import { loginAs } from "../../../../store/actions/auth/auth.middleware";
 
 const headCells = [
     {
@@ -82,26 +82,20 @@ export default function HistoryTable({ handleEnableButtonDownload }) {
     const classes = useStyles();
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
-    const [total, setTotal] = useState(10)
     const [order, setOrder] = useState("asc");
     const [orderBy, setOrderBy] = useState("");
     const [selected, setSelected] = useState([]);
-    const [dense, setDense] = useState(false);
     const [users, setUsers] = useState([createData({ id: "" }, "", "", "", "", "", "", { id: "" })]);
 
     const { listUsers } = useSelector(state => state?.admin);
     const dispatch = useDispatch();
-    const history = useHistory();
-    const initRoute = SessionRoutes().initRoute;
 
     useEffect(() => {
         dispatch(getUsers({ page, rowsPerPage }))
     }, [])
 
     useEffect(() => {
-        console.log("UseEffect", listUsers)
         if (listUsers.data) {
-            console.log("UseEffect2")
             const rows = listUsers?.data?.map(user => {
                 return (createData(
                     {
@@ -109,17 +103,16 @@ export default function HistoryTable({ handleEnableButtonDownload }) {
                         name: "EDITOR",
                     },
                     user.role,
-                    user.user.fullname,
+                    user?.user?.fullname,
                     "AREA DE PRUEBA",
-                    user.user.last_name,
-                    user.user.first_name,
-                    user.user.document_number,
+                    user.user?.last_name,
+                    user.user?.first_name,
+                    user.user?.document_number,
                     user
                 )
                 )
             })
             setUsers(rows)
-            setTotal(listUsers.count)
         }
 
     }, [listUsers.data])
@@ -162,8 +155,6 @@ export default function HistoryTable({ handleEnableButtonDownload }) {
     };
 
     const handleChangePage = (event, newPage) => {
-        console.log("newPage", newPage)
-        console.log("event", event)
         dispatch(getUsers({ page: newPage, rowsPerPage }))
         setPage(newPage);
     };
@@ -173,27 +164,24 @@ export default function HistoryTable({ handleEnableButtonDownload }) {
         setPage(0);
     };
 
-    const handleChangeDense = (event) => {
-        setDense(event.target.checked);
-    };
+    const handleClickLoginAs = async (data) => {
+        await dispatch(loginAs({ account_id: data.id }))
+        window.location.reload();
+    }
 
     const isSelected = (id) => selected.indexOf(id) !== -1;
 
     const emptyRows =
-        rowsPerPage - Math.min(rowsPerPage, users?.length - page * rowsPerPage);
+        rowsPerPage - Math.min(rowsPerPage, users?.length);
 
     return (
         <div className="open-positions-table">
             <div className={classes.root}>
                 <Paper className={classes.paper}>
-                    {/* {selected?.length > 0 && (
-                        <EnhancedTableToolbar numSelected={selected?.length} selected={selected} />
-                    )} */}
                     <TableContainer>
                         <Table
                             className={classes.table}
                             aria-labelledby="tableTitle"
-                            size={dense ? "small" : "medium"}
                             aria-label="enhanced table"
                         >
                             <EnhancedTableHead
@@ -203,13 +191,11 @@ export default function HistoryTable({ handleEnableButtonDownload }) {
                                 orderBy={orderBy}
                                 onSelectAllClick={handleSelectAllClick}
                                 onRequestSort={handleRequestSort}
-                                // rowCount={users?.length}
                                 headCells={headCells}
                             />
                             <TableBody>
                                 {
                                     stableSort(users, getComparator(order, orderBy))
-                                        // .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                         .map((row, index) => {
                                             const isItemSelected = isSelected(row.data.id);
                                             const labelId = `enhanced-table-checkbox-${index}`;
@@ -223,13 +209,6 @@ export default function HistoryTable({ handleEnableButtonDownload }) {
                                                     selected={isItemSelected}
 
                                                 >
-                                                    {/* <TableCell padding="checkbox" size="small" align="center">
-                                                    <Checkbox
-                                                        onClick={(event) => handleClickSelectedRow(event, row.data.id)}
-                                                        checked={isItemSelected}
-                                                        inputProps={{ "aria-labelledby": labelId }}
-                                                    />
-                                                </TableCell> */}
                                                     <TableCell
                                                         component="th"
                                                         id={labelId}
@@ -237,7 +216,7 @@ export default function HistoryTable({ handleEnableButtonDownload }) {
                                                         padding="normal"
                                                     >
                                                         <Grid item xs={12}>
-                                                            <Typography variant="body1" component="span">EDITOR</Typography>
+                                                            <Link href="#" onClick={() => handleClickLoginAs(row.data)}>EDITOR</Link>
                                                         </Grid>
                                                     </TableCell>
                                                     <TableCell
@@ -305,7 +284,7 @@ export default function HistoryTable({ handleEnableButtonDownload }) {
                                         })
                                 }
                                 {emptyRows > 0 && (
-                                    <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
+                                    <TableRow style={{ height: 53 * emptyRows }}>
                                         <TableCell colSpan={6} />
                                     </TableRow>
                                 )}
