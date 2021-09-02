@@ -10,7 +10,6 @@ import { SessionRoutes } from '../../shared/libs/sessionRoutes';
 import { onlyNumbers } from '../../shared/libs/validators';
 import { actions_Utils } from "../../../store/actions";
 import { useForm } from "../../hooks";
-import { SignalCellularNullSharp } from '@material-ui/icons';
 
 const defaultValues = {
     number_registered:"",
@@ -33,7 +32,7 @@ const defaultValues = {
     province_id: "",
 };
 
-export default function EditPosition({ history }) {
+export default function Position({ history }) {
     const dateLocal = DateTime.local().toFormat("yyyy-LL-dd")
     const dispatch = useDispatch();
     const { departments, provinces, districts, rubrosOp } = useSelector(state => state?.utils)
@@ -48,6 +47,11 @@ export default function EditPosition({ history }) {
     const initRoute = SessionRoutes().initRoute;
     const routes = [{ name: "Inicio", to: `${initRoute}` }, { name: publicationSelected ? "Editar posición" : "Publicar empleo", to: `${initRoute}/editar-posicion` }];
     const initialValues = publicationSelected ? {
+        number_registered:publicationSelected.number_registered?? "null",
+        gender:publicationSelected.gender,
+        edad_min:publicationSelected.edad_min?? null,
+        edad_max:publicationSelected.edad_max?? null,
+
         job_title: publicationSelected.job_title,
         description: JSON.parse(publicationSelected.description),
         requirements: JSON.parse(publicationSelected.requirements),
@@ -57,7 +61,6 @@ export default function EditPosition({ history }) {
         district_id: publicationSelected.district.id,
         period: publicationSelected.period,
         salary: publicationSelected.salary,
-        // from_date: DateTime.fromISO(publicationSelected?.from_date).toUTC().toFormat("yyyy-LL-dd"),
         expiration_date: DateTime.fromISO(publicationSelected?.expiration_date?publicationSelected?.expiration_date: publicationSelected?.from_date).toUTC().toFormat("yyyy-LL-dd"),
         department_id: publicationSelected.district.province.department_id,
         province_id: publicationSelected.district.province_id,
@@ -114,10 +117,6 @@ export default function EditPosition({ history }) {
         handleInputChange,
         disabledButtonState,
     } = useForm(initialValues, true, validate);
-
-    // useEffect(() => {
-    //     setIsActiveSalary(publicationSelected.a_tratar===1? false: true)
-    // },[publicationSelected])
 
     useEffect(() => {
         getPeriodsList();
@@ -230,22 +229,6 @@ export default function EditPosition({ history }) {
                             />
                     </Grid>
                     </Grid>
-                    {/* <TextInput
-                        fullWidth
-                        type="date"
-                        name="expiration_date"
-                        label="Fecha de caducidad"
-                        value={values.expiration_date}
-                        onChange={handleInputChange}
-                        error={errors.expiration_date ? true : false}
-                        helperText={errors.expiration_date || "Programa la fecha fin de tu publicación"}
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                        inputProps={{
-                            min: dateLocal
-                        }}
-                    /> */}
                 </Grid>
                 <Grid item xs={8} style={{ margin: "auto" }}>
                     <TextInput
@@ -441,23 +424,6 @@ export default function EditPosition({ history }) {
                                     min: dateLocal
                                 }}
                             />
-                            {/* <TextInput
-                                fullWidth
-                                type="date"
-                                name="from_date"
-                                label="Fecha de inicio"
-                                value={values.from_date}
-                                onChange={handleInputChange}
-                                error={errors.from_date ? true : false}
-                                helperText={errors.from_date || "Fecha de inicio de labores"}
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                                inputProps={{
-                                    min: dateLocal
-                                }}
-                            /> */}
-
                         </Grid>
                         <Grid item xs={6}>
                             <Select
