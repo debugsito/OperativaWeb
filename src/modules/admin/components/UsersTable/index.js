@@ -171,41 +171,49 @@ export default function UsersTable({ setOpenModal, setAccountId }) {
                             />
                             <TableBody>
                                 {
-                                    stableSort(users, getComparator(order, orderBy))
-                                        .map((row, index) => {
-                                            const isItemSelected = isSelected(row.data.id);
-                                            const labelId = `enhanced-table-checkbox-${index}`;
-                                            return (
-                                                <TableRow
-                                                    hover
-                                                    role="checkbox"
-                                                    aria-checked={isItemSelected}
-                                                    tabIndex={-1}
-                                                    key={row.data.id}
-                                                    selected={isItemSelected}
+                                    users.length < 1 ?
+                                        <TableRow
+                                            component="tr"
+                                            hover
+                                        >
+                                            <p className="text-center">No se encuentra en la base de datos</p>
+                                        </TableRow>
+                                        :
+                                        stableSort(users, getComparator(order, orderBy))
+                                            .map((row, index) => {
+                                                const isItemSelected = isSelected(row.data.id);
+                                                const labelId = `enhanced-table-checkbox-${index}`;
+                                                return (
+                                                    <TableRow
+                                                        hover
+                                                        role="checkbox"
+                                                        aria-checked={isItemSelected}
+                                                        tabIndex={-1}
+                                                        key={row.data.id}
+                                                        selected={isItemSelected}
 
-                                                >
-                                                    <TableCell
-                                                        component="th"
-                                                        id={labelId}
-                                                        scope="row"
-                                                        padding="normal"
                                                     >
-                                                        <Grid item xs={12}>
-                                                            <Link href="#" onClick={() => handleClickLoginAs(row.data)}>EDITOR</Link>
-                                                        </Grid>
-                                                    </TableCell>
-                                                    <TableCell
-                                                        component="th"
-                                                        id={labelId}
-                                                        scope="row"
-                                                        padding="none"
-                                                    >
-                                                        <Grid item xs={12}>
-                                                            <Typography variant="body1" component="span">{row.role}</Typography>
-                                                        </Grid>
-                                                    </TableCell>
-                                                    {/* <TableCell
+                                                        <TableCell
+                                                            component="th"
+                                                            id={labelId}
+                                                            scope="row"
+                                                            padding="normal"
+                                                        >
+                                                            <Grid item xs={12}>
+                                                                <Link href="#" onClick={() => handleClickLoginAs(row.data)}>EDITOR</Link>
+                                                            </Grid>
+                                                        </TableCell>
+                                                        <TableCell
+                                                            component="th"
+                                                            id={labelId}
+                                                            scope="row"
+                                                            padding="none"
+                                                        >
+                                                            <Grid item xs={12}>
+                                                                <Typography variant="body1" component="span">{row.role}</Typography>
+                                                            </Grid>
+                                                        </TableCell>
+                                                        {/* <TableCell
                                                         component="th"
                                                         id={labelId}
                                                         scope="row"
@@ -215,49 +223,49 @@ export default function UsersTable({ setOpenModal, setAccountId }) {
                                                             <Typography variant="body1" component="span">{row.account}</Typography>
                                                         </Grid>
                                                     </TableCell> */}
-                                                    <TableCell
-                                                        component="th"
-                                                        id={labelId}
-                                                        scope="row"
-                                                        padding="none"
-                                                    >
-                                                        <Grid item xs={12}>
-                                                            <Typography variant="body1" component="span">{row.area}</Typography>
-                                                        </Grid>
-                                                    </TableCell>
-                                                    <TableCell
-                                                        component="th"
-                                                        id={labelId}
-                                                        scope="row"
-                                                        padding="none"
-                                                    >
-                                                        <Grid item xs={12}>
-                                                            <Typography variant="body1" component="span">{row.lastName}</Typography>
-                                                        </Grid>
-                                                    </TableCell>
-                                                    <TableCell
-                                                        component="th"
-                                                        id={labelId}
-                                                        scope="row"
-                                                        padding="none"
-                                                    >
-                                                        <Grid item xs={12}>
-                                                            <Typography variant="body1" component="span">{row.firstName}</Typography>
-                                                        </Grid>
-                                                    </TableCell>
-                                                    <TableCell
-                                                        component="th"
-                                                        id={labelId}
-                                                        scope="row"
-                                                        padding="none"
-                                                    >
-                                                        <Grid item xs={12}>
-                                                            <Typography variant="body1" component="span">{row.document}</Typography>
-                                                        </Grid>
-                                                    </TableCell>
-                                                </TableRow>
-                                            );
-                                        })
+                                                        <TableCell
+                                                            component="th"
+                                                            id={labelId}
+                                                            scope="row"
+                                                            padding="none"
+                                                        >
+                                                            <Grid item xs={12}>
+                                                                <Typography variant="body1" component="span">{row.area}</Typography>
+                                                            </Grid>
+                                                        </TableCell>
+                                                        <TableCell
+                                                            component="th"
+                                                            id={labelId}
+                                                            scope="row"
+                                                            padding="none"
+                                                        >
+                                                            <Grid item xs={12}>
+                                                                <Typography variant="body1" component="span">{row.lastName}</Typography>
+                                                            </Grid>
+                                                        </TableCell>
+                                                        <TableCell
+                                                            component="th"
+                                                            id={labelId}
+                                                            scope="row"
+                                                            padding="none"
+                                                        >
+                                                            <Grid item xs={12}>
+                                                                <Typography variant="body1" component="span">{row.firstName}</Typography>
+                                                            </Grid>
+                                                        </TableCell>
+                                                        <TableCell
+                                                            component="th"
+                                                            id={labelId}
+                                                            scope="row"
+                                                            padding="none"
+                                                        >
+                                                            <Grid item xs={12}>
+                                                                <Typography variant="body1" component="span">{row.document}</Typography>
+                                                            </Grid>
+                                                        </TableCell>
+                                                    </TableRow>
+                                                );
+                                            })
                                 }
                                 {emptyRows > 0 && (
                                     <TableRow style={{ height: 53 * emptyRows }}>
