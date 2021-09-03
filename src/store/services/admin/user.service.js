@@ -6,8 +6,8 @@ const getAccounts = async () => {
     return response;
 }
 
-const getUsers = async (params) => {
-    const response = await api.get(`/account/users?start=${params.page}0&length=${params.rowsPerPage}`);
+const getUsers = async (query) => {
+    const response = await api.get(`/account/users?${query}`);
     return response;
 }
 

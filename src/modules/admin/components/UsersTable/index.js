@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { stableSort, getComparator } from "../../../shared/utils/table.utils";
 import { Typography, EnhancedTableHead, Link } from "../../../shared/components";
 import { Grid, Table, TableBody, TableCell, TableContainer, TablePagination, TableRow, Paper } from "@material-ui/core";
 
-import { SessionRoutes } from "../../../shared/libs/sessionRoutes";
 import { getUsers } from "../../../../store/actions/admin/admin.midleware";
-import { loginAs } from "../../../../store/actions/auth/auth.middleware";
+import { setPage as setPageAction, setRowsPerPage as setRowsPerPageAction } from "../../../../store/actions/admin/admin.action";
+
 
 const headCells = [
     {
@@ -19,17 +18,17 @@ const headCells = [
         label: "Entrar como",
     },
     {
-        id: "typeOfUser",
+        id: "rol",
         numeric: false,
         disablePadding: false,
-        label: "tipo",
+        label: "Rol",
     },
-    {
-        id: "account",
-        numeric: false,
-        disablePadding: false,
-        label: "Cuenta",
-    },
+    // {
+    //     id: "account",
+    //     numeric: false,
+    //     disablePadding: false,
+    //     label: "Cuenta",
+    // },
     { id: "area", numeric: false, disablePadding: false, label: "Área" },
     { id: "lastName", numeric: false, disablePadding: false, label: "Apellidos" },
     // { id: "motherLastName", numeric: false, disablePadding: false, label: "Apellido materno" },
@@ -78,7 +77,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function HistoryTable({ handleEnableButtonDownload }) {
+export default function UsersTable({ setOpenModal, setAccountId }) {
     const classes = useStyles();
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -87,24 +86,25 @@ export default function HistoryTable({ handleEnableButtonDownload }) {
     const [selected, setSelected] = useState([]);
     const [users, setUsers] = useState([createData({ id: "" }, "", "", "", "", "", "", { id: "" })]);
 
-    const { listUsers } = useSelector(state => state?.admin);
+    const { listUsers, usersTable } = useSelector(state => state?.admin);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getUsers({ page, rowsPerPage }))
+        const query = `page=${page}&size=${rowsPerPage}`
+        dispatch(getUsers(query))
     }, [])
 
     useEffect(() => {
-        if (listUsers.data) {
-            const rows = listUsers?.data?.map(user => {
+        if (listUsers.rows) {
+            const rows = listUsers?.rows?.map(user => {
                 return (createData(
                     {
                         id: "editor",
                         name: "EDITOR",
                     },
-                    user.role,
+                    user.rol_query,
                     user?.user?.fullname,
-                    "AREA DE PRUEBA",
+                    user?.user?.area_text,
                     user.user?.last_name,
                     user.user?.first_name,
                     user.user?.document_number,
@@ -115,7 +115,7 @@ export default function HistoryTable({ handleEnableButtonDownload }) {
             setUsers(rows)
         }
 
-    }, [listUsers.data])
+    }, [listUsers.rows])
 
     const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === "asc";
@@ -123,56 +123,33 @@ export default function HistoryTable({ handleEnableButtonDownload }) {
         setOrderBy(property);
     };
 
-    const handleSelectAllClick = (event) => {
-        if (event.target.checked) {
-            const newSelecteds = users.map((n) => n.data.id);
-            setSelected(newSelecteds);
-            handleEnableButtonDownload(newSelecteds)
-            return;
-        }
-        setSelected([]);
-        handleEnableButtonDownload([])
-    };
-
-    const handleClickSelectedRow = (event, id) => {
-        const selectedIndex = selected.indexOf(id);
-        let newSelected = [];
-
-        if (selectedIndex === -1) {
-            newSelected = newSelected.concat(selected, id);
-        } else if (selectedIndex === 0) {
-            newSelected = newSelected.concat(selected.slice(1));
-        } else if (selectedIndex === selected.length - 1) {
-            newSelected = newSelected.concat(selected.slice(0, -1));
-        } else if (selectedIndex > 0) {
-            newSelected = newSelected.concat(
-                selected.slice(0, selectedIndex),
-                selected.slice(selectedIndex + 1)
-            );
-        }
-        handleEnableButtonDownload(newSelected)
-        setSelected(newSelected);
-    };
-
     const handleChangePage = (event, newPage) => {
-        dispatch(getUsers({ page: newPage, rowsPerPage }))
-        setPage(newPage);
+        const pagination = `page=${newPage}&size=${rowsPerPage}`
+        const query = usersTable.query ? `${usersTable.query}&${pagination}` : `${pagination}`
+        dispatch(getUsers(query))
+        setPage(newPage)
+        dispatch(setPageAction(newPage))
     };
 
     const handleChangeRowsPerPage = (event) => {
-        setRowsPerPage(parseInt(event.target.value, 10));
+        const rowsPerPageTemp = parseInt(event.target.value, 10)
+        const pagination = `page=${0}&size=${rowsPerPageTemp}`
+        const query = usersTable.query ? `${usersTable.query}&${pagination}` : `${pagination}`
         setPage(0);
+        setRowsPerPage(rowsPerPageTemp);
+        dispatch(getUsers(query))
+        dispatch(setPageAction(0))
+        dispatch(setRowsPerPageAction(rowsPerPageTemp))
     };
 
-    const handleClickLoginAs = async (data) => {
-        await dispatch(loginAs({ account_id: data.id }))
-        window.location.reload();
+    const handleClickLoginAs = (data) => {
+        setOpenModal(true)
+        setAccountId({ account_id: data.id })
     }
 
     const isSelected = (id) => selected.indexOf(id) !== -1;
 
-    const emptyRows =
-        rowsPerPage - Math.min(rowsPerPage, users?.length);
+    const emptyRows = rowsPerPage - Math.min(rowsPerPage, users?.length);
 
     return (
         <div className="open-positions-table">
@@ -189,7 +166,6 @@ export default function HistoryTable({ handleEnableButtonDownload }) {
                                 numSelected={selected.length}
                                 order={order}
                                 orderBy={orderBy}
-                                onSelectAllClick={handleSelectAllClick}
                                 onRequestSort={handleRequestSort}
                                 headCells={headCells}
                             />
@@ -229,7 +205,7 @@ export default function HistoryTable({ handleEnableButtonDownload }) {
                                                             <Typography variant="body1" component="span">{row.role}</Typography>
                                                         </Grid>
                                                     </TableCell>
-                                                    <TableCell
+                                                    {/* <TableCell
                                                         component="th"
                                                         id={labelId}
                                                         scope="row"
@@ -238,7 +214,7 @@ export default function HistoryTable({ handleEnableButtonDownload }) {
                                                         <Grid item xs={12}>
                                                             <Typography variant="body1" component="span">{row.account}</Typography>
                                                         </Grid>
-                                                    </TableCell>
+                                                    </TableCell> */}
                                                     <TableCell
                                                         component="th"
                                                         id={labelId}
