@@ -6,7 +6,7 @@ import AuthRoutes from './AdminRoutes';
 
 //Pages
 import Requests from '../pages/Requests';
-import Home from '../pages/Home';
+import Users from '../pages/Users';
 import Billing from '../pages/Billing';
 import PrivateRoute from '../../../routers/PrivateRoute';
 
@@ -32,6 +32,12 @@ const MyAccountRouter = () => {
                     needAccountType
                     path={AuthRoutes[1]}
                     component={Billing} />
+                <PrivateRoute
+                    exact
+                    needSession
+                    needAccountType
+                    path={AuthRoutes[2]}
+                    component={Users} />
             </Switch>
         </>
     );

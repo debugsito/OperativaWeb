@@ -15,6 +15,12 @@ const logIn = async (body) => {
     return response;
 }
 
+const loginAs = async (body) => {
+    console.log("making request...")
+    const response = await api.post('/login-as', body);
+    return response;
+}
+
 const recoverPassword = async (body) => {
     const response = await api.post('/recover_password', body);
     return response;
@@ -24,5 +30,6 @@ export {
     changePassword,
     changePasswordFromDashboard,
     logIn,
-    recoverPassword
+    recoverPassword,
+    loginAs
 }

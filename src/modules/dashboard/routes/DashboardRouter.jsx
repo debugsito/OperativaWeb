@@ -8,7 +8,7 @@ import PrivateRoute from '../../../routers/PrivateRoute';
 //Pages
 import Dashboard from '../pages/Dashboard';
 import DataTableUser from '../components/DataTableUser'; //cambiar a page
-import EditPosition from '../pages/EditPosition';
+import Position from '../pages/Position';
 import ListPostulants from '../pages/ListPostulants';
 import ApplicantProfile from '../pages/ApplicantProfile';
 import Profile from '../pages/Profile';
@@ -58,12 +58,12 @@ const MyAccountRouter = () => {
                     needSession
                     exact
                     path={DashboardRoutes[6]}
-                    component={EditPosition} />
+                    component={Position} />
                 <PrivateRoute
                     needSession
                     exact
                     path={DashboardRoutes[7]}
-                    component={EditPosition} />
+                    component={Position} />
                 <PrivateRoute
                     needSession
                     exact

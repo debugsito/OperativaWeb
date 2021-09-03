@@ -39,6 +39,11 @@ code {
   align-items: flex-end;
 }
 
+.align-items-start {
+  display: flex;
+  align-items: flex-start;
+}
+
 .justify-center {
   display: flex;
   justify-content: center;
@@ -47,6 +52,11 @@ code {
 .justify-end {
   display: flex;
   justify-content: flex-end;
+}
+
+.justify-start {
+  display: flex;
+  justify-content: flex-start;
 }
 
 .text-center{

@@ -45,6 +45,7 @@ export function MenuRoutes() {
                     // { name: "Inicio", to: `${route}` },
                     { name: "Solicitudes", to: `${route}` },
                     { name: "Facturación", to: `${route}/facturacion` },
+                    { name: "Usuarios", to: `${route}/usuarios` },
                 ]
                 hasDashboard = true
                 break;

@@ -13,7 +13,7 @@ export { default as service_Subuser_Business } from './business/subuser.service'
 
 
 export { default as service_Dashboard } from './dashboard/dashboard.service';
-export { default as service_ApplicantPublication } from './applicant/applicantPublication.service'
+export { default as service_Applicant } from './applicant/applicantPublication.service'
 
 //:::::::::::::::::::::::::::::::::REFACTOR:::::::::::::::::
 

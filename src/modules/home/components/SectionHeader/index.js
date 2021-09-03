@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
         color: '#fff',
     },
     titleLight: {
-        fontWeight: 100,
+        fontWeight: 200,
         marginTop: '0.5rem',
         fontSize: '2.5rem',
         color: '#fff',

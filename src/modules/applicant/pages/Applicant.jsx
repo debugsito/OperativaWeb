@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 import { CustomCard } from "../../dashboard/components";
 import { Container, Grid, Hidden ,makeStyles } from "@material-ui/core";
 import { ApplicantDataTable, ApplicantDataTableMobile } from '../components'
-import { Breadcrumbs, Button, Modal, TextSkyBlue, Typography } from "../../shared/components";
+import { Breadcrumbs, Button, Modal, SnackbarsAlert ,TextSkyBlue, Typography } from "../../shared/components";
 
 //imgs
 import { filesSVG, phoneSVG, agreementSVG } from "../../shared/images";
@@ -16,8 +16,15 @@ import { getNameById } from "../../shared/utils";
 import { SessionRoutes } from "../../shared/libs/sessionRoutes";
 import { getDocumentsType } from "../../../store/actions/utils/utils.action";
 import { getProfileOfApplicant } from "../../../store/actions/dashboard/dashboard.middleware";
-import { setProfileOfApplicant } from "../../../store/actions/dashboard/dashboard.action";
+import { setDisableNotificationOfApplicant } from "../../../store/actions/applicant/applicant.midleware";
 import '../styles/index.css'
+
+// Task: Notification - Cada cierto tiempo el sistema debe recordarle que actualice su CV:
+// Cuantas veces debe mostrarse la alerta al postulante(notificación), es decir:
+// 1. El postulante se loguea y le redirige a la vista de [Mis Postulaciones], aqui le muestra la notificación.
+// 2. El postulante se va a la página [Mi curriculum] ¿Aqui debe mostrarle la notificación?
+// 3. El postulante regresa a la página [Mis postulaciones], ¿Le debe mostrar la notificacion?
+// 4. El usuario cierra session y mas tarde vuelve a entrar, ¿Le debe mostrar la notificación?
 
 const useStyles = makeStyles(theme => ({
     body2:{
@@ -42,17 +49,38 @@ const Applicant  = () => {
     const dispatch = useDispatch()
     const history = useHistory()
     const classes = useStyles()
-    const { auth: {user}, utils:{documentsType} } = useSelector(state => state);
-    const { applicantProfile } = useSelector(state => state?.dashboard);
     const initRoute = SessionRoutes().initRoute;
     const routes = [{ name: "Mis postulaciones", to: `${initRoute}` }];
+    const { applicantProfile } = useSelector(state => state?.dashboard);
+    const { auth: {user}, utils:{documentsType} } = useSelector(state => state);
+
     const [openModal, setOpenModal] = useState(false)
+    const [notification, setNotification] = useState({
+        open:false,
+        message:`¡Hola ${user?.account?.user?.first_name}! Te recordamos actualizar tu CV, para que las empresas te contacten rápidamente.`,
+        vertical: 'top',
+        horizontal: 'right',
+        severity:"info"
+    })
+
+    const {horizontal, vertical, open, message, severity} = notification;
 
     useEffect(() => {
         dispatch(getDocumentsType())
-        // dispatch(setProfileOfApplicant(null))
         dispatch(getProfileOfApplicant({postulant_id:user.account.id}))
+        showNotification()
     },[])
+
+    function showNotification(){
+        if(user.account.cv_update){
+            setNotification({...notification,open:true})
+        }
+    }
+
+    const handleClose = () => {
+        setNotification({...notification,open:false})
+        dispatch(setDisableNotificationOfApplicant())
+    }
 
     useEffect(() => {
         if(applicantProfile){
@@ -157,6 +185,13 @@ const Applicant  = () => {
                     <Button variant="contained" size="large" onClick={() => history.push(`${initRoute}/mi-perfil`)}>Empezar</Button>
                 </div>
             </Modal>
+            <SnackbarsAlert 
+                open={open}
+                anchorOrigin={{ vertical, horizontal }}
+                message={message}
+                handleClose={handleClose}
+                severity={severity}
+            />
         </Container>
     )
 }
