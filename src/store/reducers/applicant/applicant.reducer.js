@@ -3,30 +3,39 @@ import { ApplicantType } from "../../types/applicant";
 const initialState = {
     error: "",
     publicationsAccount: "",
-    publicationSelected: ""
+    publicationSelected: "",
+    fetch: {
+        status: "idle",
+        message: null
+    },
 };
 
 
 
 
-const applicationReducer =(state= initialState,action)=>{
+const applicationReducer = (state = initialState, action) => {
 
-    switch(action.type){
-        case ApplicantType.SET_PUBLICATIONS_ACCOUNT: 
-                return{
-                    ...state,
-                    publicationsAccount:action.payload,
-                };
+    switch (action.type) {
+        case ApplicantType.SET_PUBLICATIONS_ACCOUNT:
+            return {
+                ...state,
+                publicationsAccount: action.payload,
+            };
         case ApplicantType.SET_PUBLICATIONS_ACCOUNT_ERROR:
-                return{
-                    ...state,
-                    error:action.payload,
-                };
+            return {
+                ...state,
+                error: action.payload,
+            };
         case ApplicantType.SET_PUBLICATION_SELECTED:
-                return{
-                    ...state,
-                    publicationSelected:action.payload
-                }
+            return {
+                ...state,
+                publicationSelected: action.payload
+            }
+        case ApplicantType.SET_STATUS:
+            return {
+                ...state,
+                fetch: action.payload
+            }
         default:
             return state;
 

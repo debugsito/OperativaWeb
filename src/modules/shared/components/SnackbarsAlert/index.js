@@ -31,7 +31,7 @@ export default function PositionedSnackbar({ message, handleClose, ...props }) {
         <Snackbar
             {...props}
             classes={{ root: classes.rootSnackbar }}
-            onClose={handleClose}
+            // onClose={handleClose}
             action={
                 <IconButton
                     aria-label="close"

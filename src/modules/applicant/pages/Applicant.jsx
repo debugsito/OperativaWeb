@@ -16,7 +16,7 @@ import { getNameById } from "../../shared/utils";
 import { SessionRoutes } from "../../shared/libs/sessionRoutes";
 import { getDocumentsType } from "../../../store/actions/utils/utils.action";
 import { getProfileOfApplicant } from "../../../store/actions/dashboard/dashboard.middleware";
-import { setProfileOfApplicant } from "../../../store/actions/dashboard/dashboard.action";
+import { setDisableNotificationOfApplicant } from "../../../store/actions/applicant/applicant.midleware";
 import '../styles/index.css'
 
 // Task: Notification - Cada cierto tiempo el sistema debe recordarle que actualice su CV:
@@ -67,17 +67,19 @@ const Applicant  = () => {
 
     useEffect(() => {
         dispatch(getDocumentsType())
-        // dispatch(setProfileOfApplicant(null))
         dispatch(getProfileOfApplicant({postulant_id:user.account.id}))
         showNotification()
     },[])
 
     function showNotification(){
-        setNotification({...notification,open:true})
+        if(user.account.cv_update){
+            setNotification({...notification,open:true})
+        }
     }
 
     const handleClose = () => {
         setNotification({...notification,open:false})
+        dispatch(setDisableNotificationOfApplicant())
     }
 
     useEffect(() => {

@@ -5,6 +5,12 @@ const getApplicantPublication = async () => {
     return response;
 }
 
+const setNotificacionPostulant = async () => {
+    const response = await api.post('/account/cancel_cv_notification');
+    return response;
+}
+
 export default {
     getApplicantPublication,
+    setNotificacionPostulant
 }
