@@ -164,10 +164,14 @@ export default function DataTable() {
         </Grid>
       </Grid>
       <div style={{ height: 400, width: '100%', background: "white" }}>
-        <EnhancedTableToolbar numSelected={selected.length} rowIds={selected} returnFromToolbar={returnFromToolbar} />
-        <DataGrid rows={accounts} columns={columns} pageSize={10} checkboxSelection={true} rowsPerPageOptions={[5, 10, 20]} onSelectionChange={(newSelection) => {
-          setSelected(newSelection.rowIds);
-        }} />
+        <EnhancedTableToolbar numSelected={selected?.length} rowIds={selected} returnFromToolbar={returnFromToolbar} />
+        <DataGrid
+          rows={accounts}
+          columns={columns}
+          pageSize={10}
+          checkboxSelection={true} rowsPerPageOptions={[5, 10, 20]} onSelectionChange={(newSelection) => {
+            setSelected(newSelection.rowIds);
+          }} />
         <SubUserModal open={openSubUserModal} handleCloseModal={() => setOpenSubUserModal(false)} executeAction={executeAction} />
       </div>
     </>

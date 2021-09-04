@@ -7,7 +7,7 @@ const getAccounts = async () => {
 }
 
 const getUsers = async (query) => {
-    const response = await api.get(`/account/users?${query}`);
+    const response = await api.get(`/account/allusers?${query}`);
     return response;
 }
 
