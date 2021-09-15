@@ -18,7 +18,6 @@ import Users from '../pages/Users';
 import History from '../pages/History';
 import RepublishPosition from '../pages/RepublishPosition';
 import ShowPosition from '../pages/ShowPosition';
-// import Home from '../components/Home'; //cambiar a page
 
 const MyAccountRouter = () => {
     return (

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { DateTime } from "luxon";
 import { useDispatch, useSelector } from "react-redux";
-import { Container, Grid, MenuItem, Checkbox, Typography, FormControlLabel } from "@material-ui/core";
+import { Grid, MenuItem, Checkbox, Typography, FormControlLabel } from "@material-ui/core";
 
-import { updatePublication, savePublication, getJobsInfo } from "../../../store/actions/dashboard/dashboard.action";
-import { Breadcrumbs, TextInput, Button, Select, Modal, RichText } from "../../shared/components";
+import { updatePublication, savePublication } from "../../../store/actions/dashboard/dashboard.action";
+import { Breadcrumbs, Container, TextInput, Button, Select, Modal, RichText } from "../../shared/components";
 import { getPeriods } from "../../../store/services/utils.service";
 import { SessionRoutes } from '../../shared/libs/sessionRoutes';
 import { onlyNumbers } from '../../shared/libs/validators';
@@ -26,7 +26,6 @@ const defaultValues = {
     district_id: "",
     period: "",
     salary: "",
-    // from_date: "",
     expiration_date: "",
     department_id: "",
     province_id: "",
@@ -210,7 +209,7 @@ export default function Position({ history }) {
     }
 
     return (
-        <Container className="dashboard-container">
+        <Container>
             <Grid container spacing={3}>
                 <Grid item xs={12}>
                     <Breadcrumbs routes={routes} />

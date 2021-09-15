@@ -42,6 +42,7 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     flexGrow: 1,
+    height: '100vh',
   },
 }));
 
@@ -65,7 +66,7 @@ export default function Navigation({ children }) {
 
   return (
     <div className={classes.root}>
-      { location.pathname !== "/" &&
+      {location.pathname !== "/" &&
         <>
           <CssBaseline />
           <AppBar

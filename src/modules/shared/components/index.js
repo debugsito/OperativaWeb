@@ -25,3 +25,4 @@ export { default as SnackbarsSuccess } from './SnackbarsSuccess';
 export { default as LinearProgressWithDescription } from './LinearProgressWithDescription';
 export { default as LinearProgressMunicipality } from './LinearProgressMunicipality';
 export { default as EnhancedTableHead } from './EnhancedTableHead';
+export { default as Container } from './Container';

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Container, Grid, Typography } from "@material-ui/core";
-// import { Alert, AlertTitle } from '@material-ui/lab';
-import { Alert, Breadcrumbs, Button, TextInputPassword } from "../../shared/components";
+import { Grid, Typography } from "@material-ui/core";
+import { Alert, Breadcrumbs, Button, Container, TextInputPassword } from "../../shared/components";
 import { SessionRoutes } from '../../shared/libs/sessionRoutes';
 import { useForm } from "../../hooks";
 import { useDispatch, useSelector } from "react-redux";
@@ -66,7 +65,7 @@ export default function Setting(props) {
     }
 
     return (
-        <Container className="dashboard-container">
+        <Container>
             <Grid container spacing={0}>
                 <Grid item xs={12}>
                     <Breadcrumbs routes={routes} />
