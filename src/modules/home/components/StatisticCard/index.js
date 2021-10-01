@@ -1,7 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
-import { statisticOne } from "../../images2";
-import "./index.css"
+import { AnimatedCounter } from '../';
 
 const useStyles = makeStyles(theme => ({
     rootCard: {
@@ -65,17 +64,17 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-export default function StatisticCard({ image, number, text, cssName, inView = false }) {
+export default function StatisticCard({ image, number, text, inView }) {
     const classes = useStyles();
     return (
         <div className={classes.rootCard}>
             <div className={classes.imgCard}>
                 <img src={image} />
             </div>
-            <div className={classes.numberCard + ` ${inView ? cssName : ''}`}>
-                {/* Show index.css */}
-                {/* {number} */}
-            </div>
+            {
+                inView &&
+                <AnimatedCounter number={number} duration={5000} />
+            }
             <div className={classes.textCard}>
                 {text}
             </div>

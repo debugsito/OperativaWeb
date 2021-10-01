@@ -3,9 +3,12 @@ import { Hidden, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from "react-router-dom";
 
-import bgImage from "../../assets/images/bg.png"
+import bgImage from "../../assets/images/background_home.webp"
 import operativaLogo from "../../assets/images/operativa_logo.png"
 import sectoresGif from "../../assets/images/sectores.gif"
+import LogoInnovate from "../../assets/images/LOGO_PROINNÓVATE.png"
+import LogoPucp from "../../assets/images/LOGO_PUCP.png"
+import LogoVerificativa from "../../assets/images/LOGO_VERIFICATIVA.png"
 import { Button } from "../../../shared/components";
 
 import { ButtonHome, ButtonRegister, FeatureCard, AuthDialog } from "../";
@@ -16,21 +19,28 @@ const useStyles = makeStyles(theme => ({
         minHeight: '100vh',
         backgroundImage: `url(${bgImage})`,
         backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center center',
+        backgroundPosition: 'top left',
+        backgroundColor: '#e0e0e0',
         display: 'grid',
         gridTemplateRows: 'repeat(12,1fr)',
+
     },
     containerBar: {
         gridRow: '1/2'
     },
     containerMain: {
-        gridRow: '2/13'
+        gridRow: '2/13',
+        marginTop: '1rem'
     },
     gifScreen: {
         width: '30rem',
         margin: '0 auto',
         height: '430px'
+    },
+    textF: {
+        color: "#757575",
+        fontWeight: 600,
+        marginLeft: "5rem",
     },
     titleBold: {
         fontFamily: "var(--fontFamily)",
@@ -147,7 +157,7 @@ export default function SectionHeader() {
                             <Button variant="contained" size="large" onClick={handleOpenAuthDialog}>INICIA SESIÓN</Button>
                         </Grid>
                     </Grid>
-                    <Grid container alignItems="center" className={classes.containerMain}>
+                    <Grid container className={classes.containerMain}>
                         <Grid item xs={12} md={6}>
                             <div className={classes.content}>
                                 <img src={operativaLogo} />
@@ -157,22 +167,21 @@ export default function SectionHeader() {
                                     <div>
                                         <ButtonRegister onClick={() => history.push('/tipo-de-cuenta')}>Regístrate</ButtonRegister>
                                     </div>
-                                    {/* <div className={classes.marginLeft}>
-                                        <ButtonHome onClick={() => history.push('/iniciar-sesion')}>Inicia sesión</ButtonHome>
-                                    </div> */}
                                 </div>
-
-
                             </div>
                         </Grid>
                         <Grid item xs={12} md={6} className="justify-center">
                             <img src={sectoresGif} className={classes.gifScreen} />
                         </Grid>
-                        <Grid item xs={12} md={10}>
+                        <Grid item xs={12} md={5}>
+                            <p className={classes.textF}>Financiado por:</p>
                             <div className={classes.containerCards}>
-                                <FeatureCard text="Inmediatez de identificacion del personal requerido" img={featureOne} />
+                                <img src={LogoInnovate} alt="Pro Innóvate" />
+                                <img src={LogoPucp} alt="PUCP" />
+                                <img src={LogoVerificativa} alt="Verificativa" />
+                                {/* <FeatureCard text="Inmediatez de identificacion del personal requerido" img={featureOne} />
                                 <FeatureCard text="Trabajo segmentado por sectores productivos" img={featureTwo} />
-                                <FeatureCard text="Prediccion de tiempo de contratación" img={featureThree} />
+                                <FeatureCard text="Prediccion de tiempo de contratación" img={featureThree} /> */}
                             </div>
                         </Grid>
                     </Grid>

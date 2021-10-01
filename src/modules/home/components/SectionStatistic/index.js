@@ -98,27 +98,24 @@ export default function SectionStatistic(props) {
                 <div className={classes.itemCardOne}>
                     <StatisticCard
                         image={statisticOne}
-                        number="5000"
+                        number={5000}
                         text={<small>Registro de <strong>postulantes</strong></small>}
-                        cssName="counterOne"
                         inView={inView}
                     />
                 </div>
                 <div className={classes.itemCardTwo}>
                     <StatisticCard
                         image={statisticTwo}
-                        number="500"
+                        number={500}
                         text={<small>Socios <strong>estratégicos</strong></small>}
-                        cssName="counterTwo"
                         inView={inView}
                     />
                 </div>
                 <div className={classes.itemCardThree}>
                     <StatisticCard
                         image={statisticThree}
-                        number="600"
+                        number={600}
                         text={<small>Cantidad de <strong>colocaciones</strong></small>}
-                        cssName="counterThree"
                         inView={inView}
                     />
                 </div>

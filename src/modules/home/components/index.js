@@ -10,6 +10,7 @@ export { default as FooterMain } from './FooterMain';
 
 
 export { default as SectionHeader } from './SectionHeader';
+export { default as SectionLogos } from './SectionLogos';
 export { default as SectionAbout } from './SectionAbout';
 export { default as SectionOurProcess } from './SectionOurProcess';
 export { default as SectionStatistic } from './SectionStatistic';
@@ -23,3 +24,4 @@ export { default as SectorList } from './SectorList';
 export { default as ContactForm } from './ContactForm';
 export { default as ProcessCorousel } from './ProcessCorousel';
 export { default as AuthDialog } from './AuthDialog';
+export { default as AnimatedCounter } from './AnimatedCounter';

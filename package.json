@@ -18,6 +18,7 @@
     "highcharts-react-official": "^3.0.0",
     "luxon": "^1.25.0",
     "react": "^17.0.1",
+    "react-animated-number": "^0.4.4",
     "react-dom": "^17.0.1",
     "react-hook-form": "^6.12.2",
     "react-material-ui-carousel": "^2.2.4",

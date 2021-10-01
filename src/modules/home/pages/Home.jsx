@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from "react-redux";
 import { resetStore } from "../../../store/actions/global";
-import { SectionHeader, SectionOurProcess, SectionAbout, SectionStatistic, SectionOurPartners, SectionContact } from "../components";
+import { SectionHeader, SectionLogos, SectionOurProcess, SectionAbout, SectionStatistic, SectionOurPartners, SectionContact } from "../components";
 
 const Home = () => {
     const dispatch = useDispatch()
@@ -13,6 +13,7 @@ const Home = () => {
     return (
         <>
             <SectionHeader />
+            <SectionLogos />
             <SectionAbout />
             <SectionOurProcess />
             <SectionStatistic />
