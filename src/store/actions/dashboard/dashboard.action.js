@@ -45,6 +45,16 @@ export const setReportByPostulantId = (payload) => ({
   payload
 });
 
+export const setPublicationId = (payload) => ({
+  type: dashboardType.SET_PUBLICATION_ID,
+  payload
+});
+
+export const setStatus = (payload) => ({
+  type: dashboardType.SET_STATUS,
+  payload
+});
+
 export const setRequestState = (payload) => ({
   type: dashboardType.SET_REQUEST_STATE,
   payload
@@ -91,45 +101,6 @@ export const getPublicationsInfo = () => {
           dispatch(setPublicationsErrorInfo(error.response.data.message));
         } else {
           dispatch(setPublicationsErrorInfo("Ha ocurrido un error interno."));
-        };
-      }
-    }
-  };
-};
-
-export const updatePublication = (params) => {
-  return async (dispatch) => {
-    try {
-      const response = await service_Dashboard.updatePublication(params);
-      dispatch(setUpdatePublicationError(null)); //control de errores
-    } catch (error) {
-      if (!error.response) {
-        dispatch(setUpdatePublicationError("Ha ocurrido un error interno."));
-      } else {
-        if (error.response.status === 401) {
-          dispatch(setUpdatePublicationError(error.response.data.message));
-        } else {
-          dispatch(setUpdatePublicationError("Ha ocurrido un error interno."));
-        };
-      }
-    }
-  };
-};
-
-//esta en middleware (repetido)
-export const savePublication = (body) => {
-  return async (dispatch) => {
-    try {
-      const response = await service_Dashboard.savePublication(body);
-      dispatch(setSavePublicationError(null)); //control de errores
-    } catch (error) {
-      if (!error.response) {
-        dispatch(setSavePublicationError("Ha ocurrido un error interno.1"));
-      } else {
-        if (error.response.status === 409) {
-          dispatch(setSavePublicationError(error.response.data.message));
-        } else {
-          dispatch(setSavePublicationError("Ha ocurrido un error interno.2"));
         };
       }
     }

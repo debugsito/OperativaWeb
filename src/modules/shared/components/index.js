@@ -9,7 +9,7 @@ export { default as Modal } from './Modal';
 export { default as Navigation } from './Navigation';
 export { default as Radio } from './Radio';
 export { default as TextInput } from './TextInput';
-export { default as TextSkyBlue } from './TextSkyBlue';
+export { default as TextCustom } from './TextCustom';
 export { default as Typography } from './Typography';
 export { default as Select } from './Select';
 export { default as DataGrid } from './DataGrid';
@@ -26,3 +26,7 @@ export { default as LinearProgressWithDescription } from './LinearProgressWithDe
 export { default as LinearProgressMunicipality } from './LinearProgressMunicipality';
 export { default as EnhancedTableHead } from './EnhancedTableHead';
 export { default as Container } from './Container';
+export { default as TitlePage } from './TitlePage';
+export { default as Paper } from './Paper';
+export { default as CircularProgressWithLabel } from './CircularProgressWithLabel';
+export { default as TabPanel } from './TabPanel';

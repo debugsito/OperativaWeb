@@ -50,7 +50,7 @@ const Dashboard = ({ history }) => {
     dispatch(getJobsInfo(values))
   }
 
-  const goToPublishEmployment = () => history.push(`${initRoute}/posicion`);
+  const goToPublishEmployment = () => history.push(`${initRoute}/crear-empleo`);
 
   return (
     <Container>
@@ -118,7 +118,7 @@ const Dashboard = ({ history }) => {
                 </Grid>
                 <Grid item xs={6}>
                   <Grid container direction="row" justify="flex-end">
-                    <Button variant="contained" color="secondary" size="large" onClick={goToPublishEmployment}>PUBLICAR EMPLEO</Button>
+                    <Button variant="contained" color="primary" size="large" onClick={goToPublishEmployment}>PUBLICAR EMPLEO</Button>
                   </Grid>
                 </Grid>
                 <Grid item xs={12}>

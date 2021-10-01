@@ -8,3 +8,6 @@ export { default as ShowPositionHistory } from './ShowPositionHistory';
 export { default as EditPositionForm } from './EditPositionForm';
 export { default as ReportChartHistory } from './ReportChartHistory';
 export { default as InputDashboard } from './InputDashboard';
+export { default as JobForm } from './JobForm';
+export { default as CardsFeatures } from './CardsFeatures';
+export { default as ApplicantsTabs } from './ApplicantsTabs';
