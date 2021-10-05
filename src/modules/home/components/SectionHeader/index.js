@@ -3,7 +3,7 @@ import { Hidden, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from "react-router-dom";
 
-import bgImage from "../../assets/images/background_home.webp"
+import bgImage from "../../assets/images/background_home.png"
 import operativaLogo from "../../assets/images/operativa_logo.png"
 import sectoresGif from "../../assets/images/sectores.gif"
 import LogoInnovate from "../../assets/images/LOGO_PROINNÓVATE.png"
