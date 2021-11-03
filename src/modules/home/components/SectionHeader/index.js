@@ -7,7 +7,7 @@ import bgImage from "../../assets/images/background_home.png"
 import operativaLogo from "../../assets/images/operativa_logo.png"
 import sectoresGif from "../../assets/images/sectores.gif"
 import LogoInnovate from "../../assets/images/LOGO_PROINNÓVATE.png"
-import LogoPucp from "../../assets/images/LOGO_PUCP.png"
+import LogoPucp from "../../assets/images/pucp.png"
 import LogoVerificativa from "../../assets/images/LOGO_VERIFICATIVA.png"
 import { Button } from "../../../shared/components";
 

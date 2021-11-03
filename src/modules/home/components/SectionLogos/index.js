@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 //IMAGES
 import LogoInnovate from "../../assets/images/LOGO_PROINNÓVATE.png"
-import LogoPucp from "../../assets/images/LOGO_PUCP.png"
+import LogoPucp from "../../assets/images/pucp.png"
 import LogoVerificativa from "../../assets/images/LOGO_VERIFICATIVA.png"
 
 const useStyles = makeStyles(theme => ({
