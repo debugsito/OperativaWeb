@@ -1,5 +1,5 @@
 import { service_Dashboard } from "../../services";
-import { setErrorFetch, setHistory, setReportByPostulantId, setRequestState, setProfileOfApplicant, setProfileApplicantError, setStatus, setPublicationId } from "./dashboard.action";
+import { setErrorFetch, setHistory, setReportByPostulantId, setRequestState, setProfileOfApplicant, setProfileApplicantError, setStatus, setPublicationId, setUpdatePublicationError } from "./dashboard.action";
 
 export const getHistory = () => {
   return async (dispatch) => {
