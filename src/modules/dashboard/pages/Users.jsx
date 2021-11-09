@@ -1,6 +1,6 @@
 import React from 'react'
-import { Container, Grid } from "@material-ui/core";
-import { Breadcrumbs } from "../../shared/components";
+import { Grid } from "@material-ui/core";
+import { Breadcrumbs, Container } from "../../shared/components";
 import { DataTableUser } from "../components";
 
 const routes = [{ name: "Usuarios", to: "/dashboard" }];
@@ -8,7 +8,7 @@ const routes = [{ name: "Usuarios", to: "/dashboard" }];
 export default function Users(props) {
 
     return (
-        <Container className="dashboard-container">
+        <Container>
             <Grid container spacing={0}>
                 <Grid item xs={12}>
                     <Breadcrumbs routes={routes} />

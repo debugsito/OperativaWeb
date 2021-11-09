@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 // import * as moment from 'moment';
 import { DateTime } from 'luxon'
 import { useDispatch, useSelector } from "react-redux";
-import { Container, Grid } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 
-import { Breadcrumbs, Button, DataGrid, FabLights } from "../../shared/components";
+import { Breadcrumbs, Button, Container, DataGrid, FabLights } from "../../shared/components";
 import { SessionRoutes } from '../../shared/libs/sessionRoutes';
 
 import { getPostulantsByPublicationId } from "../../../store/actions/dashboard/dashboard.action";
@@ -77,7 +77,6 @@ export default function Listpostulants({ history }) {
         }},
         { field: 'residenceTime', headerName: 'Tiempo de permanencia', width: 180, sortable: false },
         { field: 'fullName', headerName: 'Nombres del postulantes', width: 300, sortable: false },
-        // { field: 'academicLevel', headerName: 'Nivel de estudio', width: 220 },
         { field: 'experience', headerName: 'Experiencia', width: 180, sortable: false },
         { field: 'date', headerName: 'Fecha de postulación', width: 200, type: 'date', sortable: false},
         {
@@ -89,7 +88,7 @@ export default function Listpostulants({ history }) {
     ];
 
     return (
-        <Container className="dashboard-container">
+        <Container>
             <Grid container spacing={3}>
                 <Grid item xs={12}>
                     <Breadcrumbs routes={routes} />

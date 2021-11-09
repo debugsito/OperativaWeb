@@ -11,8 +11,8 @@ import { checkIcon, fileIcon, registeredIcon } from "../images";
 // components
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import { Container, Grid } from "@material-ui/core";
-import { Breadcrumbs, Button, Typography } from "../../shared/components";
+import { Grid } from "@material-ui/core";
+import { Breadcrumbs, Button, Container, Typography } from "../../shared/components";
 import { CustomCard, InputDashboard, OpenPositionsTable } from "../components";
 
 import jobManagementChartOptions from "../constants/jobManagementChartOptions";
@@ -50,10 +50,10 @@ const Dashboard = ({ history }) => {
     dispatch(getJobsInfo(values))
   }
 
-  const goToPublishEmployment = () => history.push(`${initRoute}/posicion`);
+  const goToPublishEmployment = () => history.push(`${initRoute}/crear-empleo`);
 
   return (
-    <Container className="dashboard-container">
+    <Container>
       <Grid container spacing={0}>
         <Grid item xs={12}>
           <Breadcrumbs routes={routes} />
@@ -118,7 +118,7 @@ const Dashboard = ({ history }) => {
                 </Grid>
                 <Grid item xs={6}>
                   <Grid container direction="row" justify="flex-end">
-                    <Button variant="contained" color="secondary" size="large" onClick={goToPublishEmployment}>PUBLICAR EMPLEO</Button>
+                    <Button variant="contained" color="primary" size="large" onClick={goToPublishEmployment}>PUBLICAR EMPLEO</Button>
                   </Grid>
                 </Grid>
                 <Grid item xs={12}>

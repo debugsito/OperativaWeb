@@ -5,7 +5,7 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
 import "../styles/ApplicantSignUp.css";
 import { teamSVG } from '../images';
-import { Button, TextSkyBlue } from '../../shared/components';
+import { Button, TextCustom } from '../../shared/components';
 
 const ApplicantHome = ({ history }) => {
     return (
@@ -24,12 +24,12 @@ const ApplicantHome = ({ history }) => {
                         <Grid container spacing={1}>
                             <Grid item xs={12}>
                                 <Typography variant="body1" component="p">
-                                Para poder conectarte con tu trabajo ideal <TextSkyBlue>crea tu CV</TextSkyBlue> en nuestra plataforma. 
+                                Para poder conectarte con tu trabajo ideal <TextCustom color="secondary">crea tu CV</TextCustom> en nuestra plataforma. 
                                 </Typography>
                             </Grid>
                             <Grid item xs={12}>
                                 <Typography variant="body1" component="p">
-                                Es <TextSkyBlue>muy importante colocar tus datos actualizados</TextSkyBlue>, así será más fácil que las empresas puedan contactarse contigo.
+                                Es <TextCustom color="secondary">muy importante colocar tus datos actualizados</TextCustom>, así será más fácil que las empresas puedan contactarse contigo.
                                 </Typography>
                             </Grid>
                             <Grid item xs={12}>

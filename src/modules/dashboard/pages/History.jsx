@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import SearchIcon from '@material-ui/icons/Search';
-import { Container, Grid } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 
-import { Breadcrumbs, Button, TextInput } from "../../shared/components";
+import { Breadcrumbs, Container, TextInput } from "../../shared/components";
 import { setReportByPostulantId, setRequestState } from "../../../store/actions/dashboard/dashboard.action";
 import { SessionRoutes } from "../../shared/libs/sessionRoutes";
 import {HistoryTable} from "../components"
@@ -28,7 +28,7 @@ export default function History() {
     }
 
     return (
-        <Container className="dashboard-container">
+        <Container>
             <Grid container spacing={2}>
                 <Grid item xs={12}>
                     <Breadcrumbs routes={routes} />

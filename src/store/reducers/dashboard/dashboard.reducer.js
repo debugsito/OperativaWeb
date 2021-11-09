@@ -15,10 +15,14 @@ const initialState = {
     applicantProfile: null,
     applicantProfileError: "",
     reportByPostulantId: [],
+    job_position: {
+        id: null
+    },
     requestState: {
         success: null
     },
     error: "",
+    status: 'idle',
 };
 
 const dashboardReducer = (state = initialState, action) => {
@@ -87,6 +91,16 @@ const dashboardReducer = (state = initialState, action) => {
             return {
                 ...state,
                 reportByPostulantId: action.payload,
+            };
+        case dashboardType.SET_PUBLICATION_ID:
+            return {
+                ...state,
+                job_position: { ...state.job_position, id: action.payload },
+            };
+        case dashboardType.SET_STATUS:
+            return {
+                ...state,
+                status: action.payload,
             };
         case dashboardType.SET_ERROR_FETCH:
             return {

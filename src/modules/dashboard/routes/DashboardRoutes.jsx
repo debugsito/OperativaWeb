@@ -5,8 +5,10 @@ const DashboardRoutes = [
     '/empresa/dashboard/perfil',
     '/municipalidad/dashboard/usuarios',
     '/empresa/dashboard/usuarios',
-    '/municipalidad/dashboard/posicion',
-    '/empresa/dashboard/posicion',
+    '/municipalidad/dashboard/crear-empleo',
+    '/empresa/dashboard/crear-empleo',
+    '/municipalidad/dashboard/editar-empleo',
+    '/empresa/dashboard/editar-empleo',
     '/municipalidad/dashboard/postulantes',
     '/empresa/dashboard/postulantes',
     '/municipalidad/dashboard/postulante/perfil/:postulant_id',
@@ -21,5 +23,9 @@ const DashboardRoutes = [
     '/municipalidad/dashboard/republicar-posicion',
     '/empresa/dashboard/ver-detalles-de-posicion',
     '/municipalidad/dashboard/ver-detalles-de-posicion',
+    '/empresa/dashboard/empleo-registrado',
+    '/municipalidad/dashboard/empleo-registrado',
+    '/empresa/dashboard/lista-de-postulantes',
+    '/municipalidad/dashboard/lista-de-postulantes',
 ];
 export default DashboardRoutes;

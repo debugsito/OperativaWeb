@@ -357,7 +357,7 @@ export default function OpenPositionsTable() {
     const executeAction = (event, id, publication) => {
         event.preventDefault();
         dispatch(setPublicationSelected(publication));
-        if (id === "edit") history.push(`${initRoute}/posicion`);
+        if (id === "edit") history.push(`${initRoute}/editar-empleo`);
         if (id === "show") history.push(`${initRoute}/ver-posicion`);
         if (id === "archive") dispatch(archivePublication({ id: publication.id }));
     }

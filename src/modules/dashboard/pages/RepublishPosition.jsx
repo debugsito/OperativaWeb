@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { Container, Grid, Paper } from "@material-ui/core";
+import { Grid, Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useSelector, useDispatch } from "react-redux";
 import { DateTime } from "luxon";
 
-import { Breadcrumbs, Button, SnackbarsSuccess, Snackbars } from "../../shared/components";
+import { Breadcrumbs, Button, Container, SnackbarsSuccess, Snackbars } from "../../shared/components";
 import { ShowPositionHistory, EditPositionForm } from "../components";
 import { SessionRoutes } from "../../shared/libs/sessionRoutes";
 import { convertStringToObject } from "../../shared/utils";
@@ -73,7 +73,7 @@ export default function Republish(props) {
     }
 
     return (
-        <Container className="dashboard-container">
+        <Container>
             <Grid container spacing={2}>
                 <Grid item xs={12}>
                     <Breadcrumbs routes={routes} />
