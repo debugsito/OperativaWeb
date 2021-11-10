@@ -123,7 +123,7 @@ export default function NavigationDrawer(props) {
   const navigation = menuList?.map((item, index) => {
     return (
       <>
-        <LinkRouter key={item.name} to={item.nestedList ? "#" : item.to} style={{ textDecoration: 'none' }}>
+        <LinkRouter key={index} to={item.nestedList ? "#" : item.to} style={{ textDecoration: 'none' }}>
           <ListItem button classes={{ gutters: classes.gutters }} key={item.name} selected={!item.nestedList && selectedIndex === index} onClick={() => handleListItemClick(item, index)}>
             <ListItemIcon>{getAvatarIcon(item.name)}</ListItemIcon>
             <ListItemText primary={item.name} />
@@ -133,7 +133,7 @@ export default function NavigationDrawer(props) {
         </LinkRouter>
         {
           item.nestedList && item.nestedList.map((element, index2) => (
-            <Collapse in={openNestedList} timeout="auto" unmountOnExit key={element.name}>
+            <Collapse in={openNestedList} timeout="auto" unmountOnExit key={index2}>
               <LinkRouter key={element.name} to={element.to} style={{ textDecoration: 'none' }}>
                 <List component="div" disablePadding>
                   <ListItem button selected={selectedSubMenuIndex === index2} className={classes.nested} onClick={() => handleClickSubItem(index2)}>

@@ -76,7 +76,7 @@ export default function Navigation({ children }) {
             })}
           >
             <Toolbar>
-              <Grid container justify="space-between" alignItems="center" spacing={1}>
+              <Grid container justifyContent="space-between" alignItems="center" spacing={1}>
                 <Grid item>
                   <Typography variant="h6" noWrap>
                     <a href={session ? '/' : process.env.REACT_APP_PATH_LANDING} ><img src={logoSVG} alt="Operativa" /></a>

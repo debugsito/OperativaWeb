@@ -35,7 +35,7 @@ export default function Buttonlogout({ email, handleSignOut }) {
             {/* Vista para Laptops */}
             <Hidden smDown>
                 <Grid item>
-                    <Grid container justify="flex-end" alignItems="center" spacing={1}>
+                    <Grid container justifyContent="flex-end" alignItems="center" spacing={1}>
                         <Grid item>
                             <Typography paragraph className="color-white navigation-text">
                                 {email}

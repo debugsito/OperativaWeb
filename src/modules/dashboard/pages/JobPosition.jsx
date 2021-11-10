@@ -8,23 +8,32 @@ import { SessionRoutes } from '../../shared/libs/sessionRoutes';
 import { makeStyles } from '@material-ui/styles';
 
 const defaultValues = {
-    number_registered:"",
-    gender:"",
+    isNameHidden:false,
+    type_contract:"",
+    type_pay:"",
+    vacantes:"",
+    postulants:"",
+
+    otherRequiriments:"",
+    gender:null,
     edad_min:null,
     edad_max:null,
+    type_time:null,
+    quantity:null,
+    level_education:null,
 
     job_title: "",
     description: "",
     requirements: "",
     benefits:"",
     job_level_id: "",
-    address: "",
-    district_id: "",
-    period: "",
+    // address: "",
+    // period: "",
     salary: "",
     expiration_date: "",
     department_id: "",
     province_id: "",
+    district_id: "",
 };
 
 const useStyles = makeStyles(theme => ({
