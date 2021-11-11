@@ -8,13 +8,13 @@ import { SessionRoutes } from '../../shared/libs/sessionRoutes';
 import { makeStyles } from '@material-ui/styles';
 
 const defaultValues = {
-    isNameHidden:false,
+    // isNameHidden:false,
     type_contract:"",
     type_pay:"",
     vacantes:"",
     postulants:"",
 
-    otherRequiriments:"",
+    otherRequiriments:"no",
     gender:null,
     edad_min:null,
     edad_max:null,

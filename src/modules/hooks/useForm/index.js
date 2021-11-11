@@ -24,7 +24,6 @@ export function useForm(initialValues, validateOnChange = false, validate) {
 
     const handleInputChange = e => {
         const { type, name } = e.target
-        console.log(e)
         const getValue = () => {
             if (type === "checkbox") {
                 return e.target.checked

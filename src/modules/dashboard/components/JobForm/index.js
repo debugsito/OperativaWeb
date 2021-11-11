@@ -20,6 +20,7 @@ export default function JobForm({ initialValues, initRoute, isEditing = null }) 
     const [periods, setPeriods] = useState([])
     const [districtsList, setDistrictsList] = useState([])
     const [provincesList, setProvincesList] = useState([])
+    const [publicationHidden, setPublicationHidden] = useState(false)
     const [openModal, setOpenModal] = useState(false)
     const [openConfirmationModal, setOpenConfirmationModal] = useState(false)
     const [isActiveSalary, setIsActiveSalary] = useState(initialValues.a_tratar)
@@ -61,8 +62,8 @@ export default function JobForm({ initialValues, initRoute, isEditing = null }) 
         if ('postulants' in fieldValues)
             temp.postulants = fieldValues.postulants ? "" : "El campo es requerido."
 
-        if ('otherRequiriments' in fieldValues)
-            temp.otherRequiriments = fieldValues.otherRequiriments ? "" : "El campo es requerido."
+        // if ('otherRequiriments' in fieldValues)
+        //     temp.otherRequiriments = fieldValues.otherRequiriments === "" ? "" : "El campo es requerido."
         if (values.otherRequiriments) {
             if ('gender' in fieldValues)
                 temp.gender = fieldValues.gender ? "" : "El campo es requerido."
@@ -79,7 +80,7 @@ export default function JobForm({ initialValues, initRoute, isEditing = null }) 
         }
 
         if ('isNameHidden' in fieldValues)
-            temp.isNameHidden = fieldValues.isNameHidden ? "" : "Acepte los términos y condiciones."
+            temp.isNameHidden = fieldValues.isNameHidden ? "" : "El campo es requerido."
 
 
         setErrors({
@@ -141,7 +142,7 @@ export default function JobForm({ initialValues, initRoute, isEditing = null }) 
             valuesTemp.requirements = JSON.stringify(values.requirements)
             valuesTemp.benefits = JSON.stringify(values.benefits)
             valuesTemp.rubro_id = values?.job_level_id;
-            valuesTemp.period_id = values?.period;
+            valuesTemp.publicationHidden = publicationHidden;
             if (isEditing) {
                 const params = { publication_id: initialValues.id, body: { status: 1, ...valuesTemp, a_tratar: isActiveSalary } }
                 dispatch(updatePublication(params))
@@ -197,7 +198,7 @@ export default function JobForm({ initialValues, initRoute, isEditing = null }) 
                 <Typography variant="body2">Ingresa los datos principales del aviso.</Typography>
             </Grid>
             <Grid item xs={12} md={12} className="justify-center">
-                <FormControl variant="outlined" fullWidth error={errors.isNameHidden ? true : false}>
+                <FormControl variant="outlined" fullWidth >
                     <Checkbox
                         label={
                             <Typography variant="body2" component="p">
@@ -205,8 +206,8 @@ export default function JobForm({ initialValues, initRoute, isEditing = null }) 
                             </Typography>
                         }
                         name="isNameHidden"
-                        checked={values.isNameHidden}
-                        onChange={handleInputChange}
+                        checked={publicationHidden}
+                        onChange={() => setPublicationHidden(prevState => !prevState)}
                     />
                 </FormControl>
             </Grid>
@@ -434,14 +435,14 @@ export default function JobForm({ initialValues, initRoute, isEditing = null }) 
                 <Typography variant="body2">Ingresa los datos principales del aviso</Typography>
                 <FormControl component="fieldset" error={errors.otherRequiriments ? true : false}>
                     <RadioGroup row aria-label="otherRequiriments" name="otherRequiriments" value={values.otherRequiriments} onChange={handleInputChange}>
-                        <FormControlLabel value="1" control={<Radio />} label="Sí" />
-                        <FormControlLabel value="0" control={<Radio />} label="No" />
+                        <FormControlLabel value="si" control={<Radio />} label="Sí" />
+                        <FormControlLabel value="no" control={<Radio />} label="No" />
                     </RadioGroup>
                     <FormHelperText>{errors.otherRequiriments}</FormHelperText>
                 </FormControl>
             </Grid>
             {
-                values.otherRequiriments === "1" && // 1 === SI
+                values.otherRequiriments == "si" && // 1 === SI
                 <>
                     <Grid item xs={12}>
                         <Grid container spacing={2}>

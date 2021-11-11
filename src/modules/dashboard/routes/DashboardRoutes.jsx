@@ -27,5 +27,7 @@ const DashboardRoutes = [
     '/municipalidad/dashboard/empleo-registrado',
     '/empresa/dashboard/lista-de-postulantes',
     '/municipalidad/dashboard/lista-de-postulantes',
+    '/empresa/dashboard/multiposting',
+    '/municipalidad/dashboard/multiposting',
 ];
 export default DashboardRoutes;

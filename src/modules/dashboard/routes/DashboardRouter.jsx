@@ -21,6 +21,7 @@ import ShowPosition from '../pages/ShowPosition';
 import EditJobPosition from '../pages/EditJobPosition';
 import JobPositionCreated from '../pages/JobPositionCreated';
 import ListOfApplicants from '../pages/ListOfApplicants';
+import Multiposting from '../pages/Multiposting';
 
 const MyAccountRouter = () => {
     return (
@@ -166,6 +167,16 @@ const MyAccountRouter = () => {
                     exact
                     path={DashboardRoutes[27]}
                     component={ListOfApplicants} />
+                <PrivateRoute
+                    needSession
+                    exact
+                    path={DashboardRoutes[28]}
+                    component={Multiposting} />
+                <PrivateRoute
+                    needSession
+                    exact
+                    path={DashboardRoutes[29]}
+                    component={Multiposting} />
             </Switch>
         </>
     );
