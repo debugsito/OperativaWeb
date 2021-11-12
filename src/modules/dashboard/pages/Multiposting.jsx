@@ -1,8 +1,7 @@
 import React from 'react'
 import { useHistory } from "react-router-dom";
 import { AppBar, Grid, Paper, Tabs, Tab, makeStyles } from "@material-ui/core";
-import {  } from '@material-ui/core';
-
+import { FormRedes, FormStrategicContacts } from "../components";
 import { Breadcrumbs, Container, TabPanel, TitlePage } from "../../shared/components";
 import { SessionRoutes } from '../../shared/libs/sessionRoutes';
 
@@ -10,13 +9,21 @@ const useStyles = makeStyles(theme => ({
     paper: {
         padding: "3rem"
     },
-    root: {
-        flexGrow: 1,
-        backgroundColor: theme.palette.background.paper,
+
+    rootAppBar: {
+        boxShadow: "none"
     },
-    rootTabs: {
-        background: "#E7EAF1",
-    }
+    indicator:{
+        background: "#fff",
+    },
+    rootTab:{
+        background: "#ebebeb",
+        '&$selected':{
+            color:"var(--paragraphColor)",
+            background: "#fff",
+        }
+    },
+    selected:{},
 }))
 
 export default function Multiposting(props) {
@@ -46,26 +53,27 @@ export default function Multiposting(props) {
                         Difusión por Multiposting
                     </TitlePage>
                 </Grid>
-                <Grid item xs={8}>
-                    <Paper>
-                        <AppBar position="static">
+                <Grid item xs={10}>
+                    <Paper elevation={2}>
+                        <AppBar position="static" classes={{root: classes.rootAppBar}}>
                             <Tabs
                                 value={value}
                                 onChange={handleChange}
                                 aria-label="multiposting tabs"
                                 variant="fullWidth"
+                                textColor="primary"
                                 wrapped
-                                classes={{ root: classes.rootTabs }}
+                                classes={{ indicator: classes.indicator }}
                             >
-                                <Tab label="Compartir en redes" {...a11yProps(0)} />
-                                <Tab label="Publicar en nuestra Red de Contactos Estratégicos" {...a11yProps(1)} />
+                                <Tab classes={{root: classes.rootTab, selected: classes.selected}} label="Compartir en redes" {...a11yProps(0)} />
+                                <Tab classes={{root: classes.rootTab, selected: classes.selected}} label="Publicar en nuestra Red de Contactos Estratégicos" {...a11yProps(1)} />
                             </Tabs>
                         </AppBar>
                         <TabPanel value={value} index={0}>
-                            Item One
+                            <FormRedes />
                         </TabPanel>
                         <TabPanel value={value} index={1}>
-                            Item Two
+                            <FormStrategicContacts />
                         </TabPanel>
                     </Paper>
                 </Grid>

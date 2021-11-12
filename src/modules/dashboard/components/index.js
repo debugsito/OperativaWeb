@@ -11,3 +11,5 @@ export { default as InputDashboard } from './InputDashboard';
 export { default as JobForm } from './JobForm';
 export { default as CardsFeatures } from './CardsFeatures';
 export { default as ApplicantsTabs } from './ApplicantsTabs';
+export { default as FormRedes } from './FormRedes';
+export { default as FormStrategicContacts } from './FormStrategicContacts';

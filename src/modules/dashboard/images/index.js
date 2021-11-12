@@ -18,3 +18,8 @@ export { default as CardPremiumIconOne } from './card_premium_1.svg';
 export { default as CardPremiumIconTwo } from './card_premium_2.svg';
 export { default as CardPremiumIconThree } from './card_premium_3.svg';
 export { default as CardPremiumIconFour } from './card_premium_4.svg';
+
+export { default as FbIcon } from './multiposting/facebook.png';
+export { default as InIcon } from './multiposting/linkedin.png';
+export { default as MailIcon } from './multiposting/mail.png';
+export { default as TwIcon } from './multiposting/twiter.png';
