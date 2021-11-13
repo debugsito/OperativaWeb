@@ -23,3 +23,4 @@ export { default as FbIcon } from './multiposting/facebook.png';
 export { default as InIcon } from './multiposting/linkedin.png';
 export { default as MailIcon } from './multiposting/mail.png';
 export { default as TwIcon } from './multiposting/twiter.png';
+export { default as InfoPremiumImg } from './multiposting/info_premium_image.webp';

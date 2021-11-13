@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { Grid, MenuItem, makeStyles } from "@material-ui/core";
 import { Button, Select, TextInput, Typography } from "../../../shared/components";
+import { DialogInfoPremium } from "../";
 
 //Redux actions
 import { useDispatch, useSelector } from "react-redux";
 import { actions_Utils } from "../../../../store/actions";
 import { useForm } from "../../../hooks";
-import { classnames } from '@material-ui/data-grid';
 
 const useStyles = makeStyles(theme => ({
     containerMessage: {
@@ -37,6 +37,7 @@ export default function Index(props) {
     const { departments, provinces, districts } = useSelector(state => state?.utils)
     const [districtsList, setDistrictsList] = useState([])
     const [provincesList, setProvincesList] = useState([])
+    const [openDialog, setOpenDialog] = useState(false)
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
@@ -255,10 +256,11 @@ export default function Index(props) {
                         <Button variant="outlined" size="large">CANCELAR</Button>
                     </Grid>
                     <Grid item>
-                        <Button variant="contained" size="large">ENVIAR</Button>
+                        <Button variant="contained" size="large" onClick={() => setOpenDialog(true)}>ENVIAR</Button>
                     </Grid>
                 </Grid>
             </Grid>
+            <DialogInfoPremium open={openDialog} onClose={() => setOpenDialog(false)} />
         </Grid>
     )
 }

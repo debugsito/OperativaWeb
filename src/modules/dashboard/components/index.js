@@ -13,3 +13,4 @@ export { default as CardsFeatures } from './CardsFeatures';
 export { default as ApplicantsTabs } from './ApplicantsTabs';
 export { default as FormRedes } from './FormRedes';
 export { default as FormStrategicContacts } from './FormStrategicContacts';
+export { default as DialogInfoPremium } from './DialogInfoPremium';
