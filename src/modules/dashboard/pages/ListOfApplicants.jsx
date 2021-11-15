@@ -6,6 +6,10 @@ import { ApplicantsTabs } from "../components";
 import { Button, Breadcrumbs, Container, Paper, TitlePage, Typography } from "../../shared/components";
 import { SessionRoutes } from '../../shared/libs/sessionRoutes';
 
+//Images, icons
+import ShareIcon from '@material-ui/icons/Share';
+import TuneIcon from '@material-ui/icons/Tune';
+
 const useStyles = makeStyles(theme => ({
 
 }))
@@ -44,13 +48,13 @@ export default function JobPositionCreatedPage() {
                         </li>
                     </ul>
                 </Grid>
-                <Grid item xs={8}>
+                <Grid item xs={7}>
                 </Grid>
                 <Grid item xs={2}>
-                    <Button size="large" variant="outlined">Multiposting</Button>
+                    <Button startIcon={<ShareIcon />} size="large" variant="outlined">Multiposting</Button>
                 </Grid>
-                <Grid item xs={2}>
-                    <Button size="large" variant="contained" color="secondary">Filtro avanzado</Button>
+                <Grid item xs={3}>
+                    <Button startIcon={<TuneIcon />} size="large" variant="contained" color="secondary">Filtro avanzado</Button>
                 </Grid>
                 <Grid item xs={12}>
                     <Paper className={classes.paper}>

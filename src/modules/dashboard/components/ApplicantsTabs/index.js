@@ -2,14 +2,6 @@ import React from "react";
 import { AppBar, Tabs, Tab, makeStyles } from '@material-ui/core';
 import { TabPanel } from "../../../shared/components";
 
-
-function a11yProps(index) {
-    return {
-        id: `simple-tab-${index}`,
-        'aria-controls': `simple-tabpanel-${index}`,
-    };
-}
-
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
@@ -17,7 +9,14 @@ const useStyles = makeStyles((theme) => ({
     },
     rootTabs: {
         background: "#E7EAF1",
-    }
+    },
+    rootTab: {
+        '&$selected': {
+            color: "var(--paragraphColor)",
+            background: "#fff",
+        }
+    },
+    selected: {},
 }));
 
 export default function ApplicantsTabs() {
@@ -36,14 +35,15 @@ export default function ApplicantsTabs() {
                     value={value}
                     onChange={handleChange}
                     aria-label="applicants tabs"
-                    indicatorColor="secondary"
-                    textColor="secondary"
+                    indicatorColor="primary"
+                    variant="fullWidth"
+                    textColor="primary"
                     classes={{ root: classes.rootTabs }}
                 >
-                    <Tab label="Postulantes" {...a11yProps(0)} />
-                    <Tab label="En Proceso" {...a11yProps(1)} />
-                    <Tab label="Finalista" {...a11yProps(2)} />
-                    <Tab label="Descartado" {...a11yProps(3)} />
+                    <Tab classes={{ root: classes.rootTab, selected: classes.selected }} label="Postulantes" {...a11yProps(0)} />
+                    <Tab classes={{ root: classes.rootTab, selected: classes.selected }} label="En Proceso" {...a11yProps(1)} />
+                    <Tab classes={{ root: classes.rootTab, selected: classes.selected }} label="Finalista" {...a11yProps(2)} />
+                    <Tab classes={{ root: classes.rootTab, selected: classes.selected }} label="Descartado" {...a11yProps(3)} />
                 </Tabs>
             </AppBar>
             <TabPanel value={value} index={0}>
@@ -61,4 +61,11 @@ export default function ApplicantsTabs() {
         </>
         //   </div>
     );
+}
+
+function a11yProps(index) {
+    return {
+        id: `simple-tab-${index}`,
+        'aria-controls': `simple-tabpanel-${index}`,
+    };
 }

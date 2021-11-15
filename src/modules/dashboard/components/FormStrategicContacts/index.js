@@ -3,6 +3,8 @@ import { Grid, MenuItem, makeStyles } from "@material-ui/core";
 import { Button, Select, TextInput, Typography } from "../../../shared/components";
 import { DialogInfoPremium } from "../";
 
+import { useHistory } from "react-router-dom";
+
 //Redux actions
 import { useDispatch, useSelector } from "react-redux";
 import { actions_Utils } from "../../../../store/actions";
@@ -28,10 +30,17 @@ const initialValues = {
     department_id: "",
     province_id: "",
     district_id: "",
-    text: ""
+    text: "",
+    municipalities: "",
+    ongs: "",
+    institutes: "",
+    universities: ""
+
+
 }
 
 export default function Index(props) {
+    const history = useHistory();
     const classes = useStyles()
     const dispatch = useDispatch();
     const { departments, provinces, districts } = useSelector(state => state?.utils)
@@ -48,6 +57,14 @@ export default function Index(props) {
             temp.province_id = fieldValues.province_id ? "" : "El campo es requerido."
         if ('district_id' in fieldValues)
             temp.district_id = fieldValues.district_id ? "" : "El campo es requerido."
+        if ('municipalities' in fieldValues)
+            temp.municipalities = fieldValues.municipalities ? "" : "El campo es requerido."
+        if ('ongs' in fieldValues)
+            temp.ongs = fieldValues.ongs ? "" : "El campo es requerido."
+        if ('institutes' in fieldValues)
+            temp.institutes = fieldValues.institutes ? "" : "El campo es requerido."
+        if ('universities' in fieldValues)
+            temp.universities = fieldValues.universities ? "" : "El campo es requerido."
 
         setErrors({ ...temp })
 
@@ -167,16 +184,58 @@ export default function Index(props) {
                 <Grid container spacing={2}>
                     <Grid item xs={6}>
                         <Select
-                            name="entitys"
-                            label="Entidades"
-                            value={values.entitys}
+                            name="municipalities"
+                            label="municipalidades"
+                            value={values.municipalities}
                             onChange={handleInputChange}
-                            error={errors.entitys ? true : false}
-                            helperText={errors.entitys}
+                            error={errors.municipalities ? true : false}
+                            helperText={errors.municipalities}
                         >
-                            <MenuItem value="muni">Municipalidades</MenuItem>
-                            <MenuItem value="muni">ONG's</MenuItem>
-                            <MenuItem value="muni">Universidades</MenuItem>
+                            <MenuItem value="muni">Municipalidad de Leoncio Prado</MenuItem>
+                            <MenuItem value="muni">Municipalidad de Lima</MenuItem>
+                            <MenuItem value="muni">Municipalidad de Aucayacu</MenuItem>
+                        </Select>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <Select
+                            name="ongs"
+                            label="ONG's"
+                            value={values.ongs}
+                            onChange={handleInputChange}
+                            error={errors.ongs ? true : false}
+                            helperText={errors.ongs}
+                        >
+                            <MenuItem value="muni">ONG 1</MenuItem>
+                            <MenuItem value="muni">ONG 2</MenuItem>
+                            <MenuItem value="muni">ONG 3</MenuItem>
+                        </Select>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <Select
+                            name="institutes"
+                            label="Instituo"
+                            value={values.institutes}
+                            onChange={handleInputChange}
+                            error={errors.institutes ? true : false}
+                            helperText={errors.institutes}
+                        >
+                            <MenuItem value="muni">Instituo 1</MenuItem>
+                            <MenuItem value="muni">Instituo 2</MenuItem>
+                            <MenuItem value="muni">Instituo 3</MenuItem>
+                        </Select>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <Select
+                            name="universities"
+                            label="Universidades"
+                            value={values.universities}
+                            onChange={handleInputChange}
+                            error={errors.universities ? true : false}
+                            helperText={errors.universities}
+                        >
+                            <MenuItem value="muni">Universidades 1</MenuItem>
+                            <MenuItem value="muni">UNI</MenuItem>
+                            <MenuItem value="muni">UNAS</MenuItem>
                         </Select>
                     </Grid>
                 </Grid>
@@ -253,7 +312,7 @@ export default function Index(props) {
             <Grid item xs={12}>
                 <Grid container spacing={3} justifyContent="flex-end">
                     <Grid item>
-                        <Button variant="outlined" size="large">CANCELAR</Button>
+                        <Button variant="outlined" size="large" onClick={() => history.push("/")}>CANCELAR</Button>
                     </Grid>
                     <Grid item>
                         <Button variant="contained" size="large" onClick={() => setOpenDialog(true)}>ENVIAR</Button>
