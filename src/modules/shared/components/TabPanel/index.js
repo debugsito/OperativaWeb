@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
 export default function TabPanel(props) {
-    const { children, value, index, ...other } = props;
+    const { children, value, index, padding = 3, ...other } = props;
 
     return (
         <div
@@ -15,8 +15,8 @@ export default function TabPanel(props) {
             {...other}
         >
             {value === index && (
-                <Box p={3}>
-                    <Typography>{children}</Typography>
+                <Box p={padding} pt={3}>
+                    {children}
                 </Box>
             )}
         </div>
@@ -27,4 +27,5 @@ TabPanel.propTypes = {
     children: PropTypes.node,
     index: PropTypes.any.isRequired,
     value: PropTypes.any.isRequired,
+    p: PropTypes.any.isRequired,
 };

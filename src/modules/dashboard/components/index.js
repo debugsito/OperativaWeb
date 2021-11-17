@@ -14,3 +14,5 @@ export { default as ApplicantsTabs } from './ApplicantsTabs';
 export { default as FormRedes } from './FormRedes';
 export { default as FormStrategicContacts } from './FormStrategicContacts';
 export { default as DialogInfoPremium } from './DialogInfoPremium';
+export { default as TableListPostulants } from './TableListPostulants';
+export { default as TablePostulantsInProgress } from './TablePostulantsInProgress';

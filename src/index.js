@@ -10,7 +10,8 @@ import storeConfig from './store/store';
 const theme = createTheme({
   typography: {
     fontFamily: "var(--fontFamily)",
-  }
+  },
+
 })
 
 ReactDOM.render(

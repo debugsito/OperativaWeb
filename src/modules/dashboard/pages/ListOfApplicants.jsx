@@ -11,7 +11,9 @@ import ShareIcon from '@material-ui/icons/Share';
 import TuneIcon from '@material-ui/icons/Tune';
 
 const useStyles = makeStyles(theme => ({
-
+    paper:{
+        padding: 0,
+    }
 }))
 
 export default function JobPositionCreatedPage() {
@@ -57,9 +59,9 @@ export default function JobPositionCreatedPage() {
                     <Button startIcon={<TuneIcon />} size="large" variant="contained" color="secondary">Filtro avanzado</Button>
                 </Grid>
                 <Grid item xs={12}>
-                    <Paper className={classes.paper}>
                         <ApplicantsTabs />
-                    </Paper>
+                    {/* <Paper className={classes.paper}>
+                    </Paper> */}
                 </Grid>
             </Grid>
         </Container>

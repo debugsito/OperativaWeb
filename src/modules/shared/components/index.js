@@ -10,6 +10,7 @@ export { default as Container } from './Container';
 export { default as DataGrid } from './DataGrid';
 export { default as Dialog } from './Dialog';
 export { default as EnhancedTableHead } from './EnhancedTableHead';
+export { default as EnhancedTableToolbar } from './EnhancedTableToolbar';
 export { default as FabLights } from './FabLights';
 export { default as LinearProgress } from './LinearProgress';
 export { default as Link } from './Link';

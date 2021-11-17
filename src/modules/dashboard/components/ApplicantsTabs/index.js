@@ -1,6 +1,7 @@
 import React from "react";
 import { AppBar, Tabs, Tab, makeStyles } from '@material-ui/core';
 import { TabPanel } from "../../../shared/components";
+import { TableListPostulants, TablePostulantsInProgress } from "../";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -46,11 +47,12 @@ export default function ApplicantsTabs() {
                     <Tab classes={{ root: classes.rootTab, selected: classes.selected }} label="Descartado" {...a11yProps(3)} />
                 </Tabs>
             </AppBar>
-            <TabPanel value={value} index={0}>
-                Item One
+            <TabPanel value={value} index={0} padding={0}>
+                {/* Item Two */}
+                <TableListPostulants />
             </TabPanel>
             <TabPanel value={value} index={1}>
-                Item Two
+                <TablePostulantsInProgress />
             </TabPanel>
             <TabPanel value={value} index={2}>
                 Item Three
