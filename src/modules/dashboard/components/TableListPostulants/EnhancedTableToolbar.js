@@ -11,7 +11,7 @@ export default function EnhancedTableToolbarCustom(props) {
             <div className="align-items-center">
                 <Typography
                     className={`color-white`}
-                    color="textSecondary"
+                    // color="textSecondary"
                     variant="subtitle1"
                     component="div"
                 >

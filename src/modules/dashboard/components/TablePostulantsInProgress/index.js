@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, IconButton, Table, TableBody, TableCell, TableContainer, TablePagination, TableRow, makeStyles, Paper } from "@material-ui/core";
+import { Grid, Table, TableBody, TableCell, TableContainer, TablePagination, TableRow, makeStyles, Paper } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { stableSort, getComparator } from "../../../shared/utils/table.utils";
-import { Checkbox, CircularProgressWithLabel, EnhancedTableHead, Typography } from "../../../shared/components";
+import { Checkbox, CircularProgressWithLabel, EnhancedTableHead, ToolTip, Typography } from "../../../shared/components";
 import EnhancedTableToolbar from "./EnhancedTableToolbar";
+import { DialogSendMessages } from "../";
+import { DialogImbox } from "../";
 
 import { getPostulantsByPublicationId } from "../../../../store/actions/dashboard/dashboard.action";
 
 //Images,icon
 import EmailIcon from '@material-ui/icons/Email';
-import DraftsIcon from '@material-ui/icons/Drafts';
+import { DoneIcon, AlertIcon } from "../../images";
 
 function createData(
     similarity,
@@ -47,6 +49,20 @@ const useStyles = makeStyles((theme) => ({
         color: "#222121",
         fontSize: 16,
     },
+    chips: {
+        display: "grid",
+        gridAutoFlow: "column",
+        gridGap: "0.5rem"
+    },
+    chip: {
+        display: "flex",
+        background: "#EBEBEB",
+        padding: "0.5em",
+        borderRadius: "10px",
+        justifyContent: "center",
+        gridGap: "0.2rem",
+        cursor: "pointer",
+    }
 }));
 
 const STATE_OF_EVALUATIONS = [
@@ -66,7 +82,9 @@ export default function TableListPostulants(props) {
     const [order, setOrder] = useState("asc");
     const [orderBy, setOrderBy] = useState("");
     const [selected, setSelected] = useState([]);
-    const [postulants, setPostulants] = useState([createData({ id: "" }, "", "", "", "", "", "", "", { id: "" })]);
+    const [postulants, setPostulants] = useState([createData("", "", "", [], { id: "" })]);
+    const [openModal, setOpenModal] = useState(false)
+    const [openImbox, setOpenImbox] = useState(false)
 
     useEffect(() => {
         dispatch(getPostulantsByPublicationId({ publication_id: "154" })) //EN DURO
@@ -78,7 +96,7 @@ export default function TableListPostulants(props) {
                 return (createData(
                     item?.similarity,
                     item?.user?.first_name + " " + item?.user?.last_name,
-                    item?.user?.experience ? 0 : 2, //Messages
+                    item?.user?.experience ? 2 : 0, //Messages
                     STATE_OF_EVALUATIONS,
                     item,
                 )
@@ -137,7 +155,13 @@ export default function TableListPostulants(props) {
     const emptyRows =
         rowsPerPage - Math.min(rowsPerPage, postulants?.length - page * rowsPerPage);
 
-    // const emptyRows = rowsPerPage - Math.min(rowsPerPage, postulants.length);
+    const handleClickMessage = (message) => {
+        if (message === 0) {
+            setOpenModal(true)
+        } else {
+            setOpenImbox(true)
+        }
+    }
 
     return (
         <div className={classes.root}>
@@ -185,50 +209,46 @@ export default function TableListPostulants(props) {
                                                         inputProps={{ "aria-labelledby": labelId }}
                                                     />
                                                 </TableCell>
-                                                <TableCell
-                                                    id={labelId}
-                                                    scope="row"
-                                                    padding="none"
-                                                >
+                                                <TableCell id={labelId} scope="row" padding="none">
                                                     <Grid item xs={12}>
-                                                        <CircularProgressWithLabel value={row.similarity} />
+                                                        <CircularProgressWithLabel value={row.similarity * 1} />
                                                     </Grid>
                                                 </TableCell>
-                                                <TableCell
-                                                    id={labelId}
-                                                    scope="row"
-                                                    padding="normal"
-                                                    align="left"
-                                                >
+                                                <TableCell id={labelId} scope="row" padding="none" align="left">
                                                     <Grid item xs={12}>
                                                         <Typography variant="body2">{row.fullname}</Typography>
                                                     </Grid>
                                                 </TableCell>
-                                                <TableCell
-                                                    id={labelId}
-                                                    scope="row"
-                                                    padding="none"
-                                                >
+                                                <TableCell id={labelId} scope="row" padding="none">
                                                     <Grid item xs={12} >
-                                                        {
-                                                            row.messages === 0 ?
-                                                                <IconButton aria-label="email" color="inherit">
-                                                                    <EmailIcon />
-                                                                </IconButton> :
-                                                                <IconButton aria-label="email" disabled>
-                                                                    <DraftsIcon />
-                                                                </IconButton>
-                                                        }
+                                                        <div className="align-items-center">
+                                                            <ToolTip aria-label="mensajes"
+                                                                title={row.messages === 0 ? 'Enviar mensaje' : 'Ver mensajes'}
+                                                                color={row.messages === 0 ? 'default' : 'inherit'}
+                                                                onClick={() => handleClickMessage(row.messages)}>
+                                                                <EmailIcon />
+                                                            </ToolTip>
+                                                            <Typography variant="body2">{row.messages}</Typography>
+                                                        </div>
                                                     </Grid>
                                                 </TableCell>
 
                                                 <TableCell
                                                     id={labelId}
                                                     scope="row"
-                                                    padding="none"
+                                                    padding="normal"
                                                 >
                                                     <Grid item xs={12}>
-                                                        hello2
+                                                        <div className={classes.chips}>
+                                                            {
+                                                                row.stateOfEvaluations.map((item, index) => (
+                                                                    <div className={classes.chip} key={index}>
+                                                                        <img src={item.status ? DoneIcon : AlertIcon} alt="icon" />
+                                                                        <Typography variant="body2">{item.text}</Typography>
+                                                                    </div>
+                                                                ))
+                                                            }
+                                                        </div>
                                                     </Grid>
                                                 </TableCell>
                                             </TableRow>
@@ -256,6 +276,8 @@ export default function TableListPostulants(props) {
                     labelDisplayedRows={({ from, to, count }) => `${from}-${to} de ${count !== -1 ? count : to}`}
                 />
             </Paper>
+            <DialogSendMessages open={openModal} onClose={() => setOpenModal(false)} />
+            <DialogImbox open={openImbox} onClose={() => setOpenImbox(false)} />
         </div>
     )
 }
@@ -264,5 +286,5 @@ const headCells = [
     { id: "match", numeric: false, disablePadding: true, label: "Match", width: 75 },
     { id: "postulant", numeric: false, disablePadding: true, label: "Postulante", width: 200 },
     { id: "messages", numeric: false, disablePadding: true, label: "Mensajes", width: 80 },
-    { id: "stateOfEvaluations", numeric: false, disablePadding: true, label: "Estado de las evaluaciones" },
+    { id: "stateOfEvaluations", numeric: false, disablePadding: false, label: "Estado de las evaluaciones" },
 ];

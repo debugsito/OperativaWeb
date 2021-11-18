@@ -1,15 +1,25 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { Typography, makeStyles } from '@material-ui/core';
 import Dialog from '@material-ui/core/Dialog';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
         padding: "0",
     },
-
+    closeButton: {
+        position: 'absolute',
+        right: theme.spacing(1),
+        top: theme.spacing(1),
+        color: "#fff",
+    },
+    dialogTitle: {
+        background: "#ED1D40",
+        color: "#fff",
+    }
 }));
 
 export default function CustomDialog({ children, open, onClose, dialogTitle = false, ...props }) {
@@ -25,15 +35,17 @@ export default function CustomDialog({ children, open, onClose, dialogTitle = fa
                 classes={{ root: classes.root }}
             >
                 {
-                    dialogTitle && <DialogTitle onClose={onClose}>Optional sizes</DialogTitle>
+                    dialogTitle &&
+                    <DialogTitle classes={{ root: classes.dialogTitle }} disableTypography>
+                        <Typography variant="h6" className="color-white">{dialogTitle}</Typography>
+                        <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
+                            <CloseIcon />
+                        </IconButton>
+                    </DialogTitle>
                 }
-
-                {/* <DialogContent> */}
                 {
                     children
                 }
-
-                {/* </DialogContent> */}
             </Dialog>
         </React.Fragment>
     );

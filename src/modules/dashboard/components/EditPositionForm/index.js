@@ -350,7 +350,7 @@ export default function Index({ handleExitForm, data = null, handleSaveData }) {
                     </Grid>
                 </Grid>
             </Grid>
-            <Grid item xs={8} style={{ display: 'flex', justifyContent: 'center', margin: "auto" }} >
+            <Grid item xs={8} className="justify-end" >
                 <Button variant="outlined" size="large" onClick={() => setOpenConfirmationModal(true)}>CANCELAR</Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <Button variant="contained" size="large" onClick={() => setOpenModal(true)} disabled={disabledButtonState}>REPUBLICAR</Button>
             </Grid>

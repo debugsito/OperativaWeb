@@ -11,16 +11,28 @@ import ShareIcon from '@material-ui/icons/Share';
 import TuneIcon from '@material-ui/icons/Tune';
 
 const useStyles = makeStyles(theme => ({
-    paper:{
+    paper: {
         padding: 0,
     }
 }))
+
+const TAB = {
+    POSTULANT: 0,
+    POSTULANT_IN_PROCESS: 1,
+    POSTULANT_FINALISTS: 2,
+    POSTULNAT_DISCARDED: 3
+}
 
 export default function JobPositionCreatedPage() {
     const classes = useStyles();
     const history = useHistory()
     const initRoute = SessionRoutes().initRoute;
     const routes = [{ name: "Inicio", to: `${initRoute}` }, { name: "Postulantes", to: `${initRoute}/lista-de-postulantes` }];
+    const [value, setValue] = React.useState(TAB.POSTULANT);
+
+    const handleChange = (newValue) => {
+        setValue(newValue);
+    }
 
     return (
         <Container>
@@ -29,7 +41,7 @@ export default function JobPositionCreatedPage() {
                     <Breadcrumbs routes={routes} />
                 </Grid>
                 <Grid item xs={12}>
-                    <TitlePage 
+                    <TitlePage
                         description={<><b>Creado por: </b> Marco Antonio Pérez Diaz</>}
                         handleClick={() => history.push(initRoute)}
                     >
@@ -50,16 +62,21 @@ export default function JobPositionCreatedPage() {
                         </li>
                     </ul>
                 </Grid>
-                <Grid item xs={7}>
-                </Grid>
-                <Grid item xs={2}>
-                    <Button startIcon={<ShareIcon />} size="large" variant="outlined">Multiposting</Button>
-                </Grid>
-                <Grid item xs={3}>
-                    <Button startIcon={<TuneIcon />} size="large" variant="contained" color="secondary">Filtro avanzado</Button>
-                </Grid>
+                {
+                    value === TAB.POSTULANT &&
+                    <>
+                        <Grid item xs={7}>
+                        </Grid>
+                        <Grid item xs={2}>
+                            <Button startIcon={<ShareIcon />} size="large" variant="outlined">Multiposting</Button>
+                        </Grid>
+                        <Grid item xs={3}>
+                            <Button startIcon={<TuneIcon />} size="large" variant="contained" color="secondary">Filtro avanzado</Button>
+                        </Grid>
+                    </>
+                }
                 <Grid item xs={12}>
-                        <ApplicantsTabs />
+                    <ApplicantsTabs onChangeTab={handleChange} tabValue={value}/>
                     {/* <Paper className={classes.paper}>
                     </Paper> */}
                 </Grid>

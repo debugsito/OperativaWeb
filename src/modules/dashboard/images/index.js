@@ -24,3 +24,6 @@ export { default as InIcon } from './multiposting/linkedin.png';
 export { default as MailIcon } from './multiposting/mail.png';
 export { default as TwIcon } from './multiposting/twiter.png';
 export { default as InfoPremiumImg } from './multiposting/info_premium_image.webp';
+
+export { default as AlertIcon } from './icons/AlertIcon.svg';
+export { default as DoneIcon } from './icons/DoneIcon.svg';

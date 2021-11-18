@@ -203,7 +203,7 @@ export default function TableListPostulants(props) {
                                                     padding="none"
                                                 >
                                                     <Grid item xs={12}>
-                                                        <CircularProgressWithLabel value={row.similarity} />
+                                                        <CircularProgressWithLabel value={row.similarity * 1} />
                                                     </Grid>
                                                 </TableCell>
                                                 <TableCell

@@ -33,4 +33,5 @@ export { default as TextCustom } from './TextCustom';
 export { default as TextInput } from './TextInput';
 export { default as TextInputPassword } from './TextInputPassword';
 export { default as TitlePage } from './TitlePage';
+export { default as ToolTip } from './ToolTip';
 export { default as Typography } from './Typography';

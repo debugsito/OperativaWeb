@@ -20,12 +20,11 @@ const useStyles = makeStyles((theme) => ({
     selected: {},
 }));
 
-export default function ApplicantsTabs() {
+export default function ApplicantsTabs({ onChangeTab, tabValue }) {
     const classes = useStyles();
-    const [value, setValue] = React.useState(0);
 
     const handleChange = (event, newValue) => {
-        setValue(newValue);
+        onChangeTab(newValue)
     };
 
     return (
@@ -33,7 +32,7 @@ export default function ApplicantsTabs() {
         <>
             <AppBar position="static">
                 <Tabs
-                    value={value}
+                    value={tabValue}
                     onChange={handleChange}
                     aria-label="applicants tabs"
                     indicatorColor="primary"
@@ -47,17 +46,17 @@ export default function ApplicantsTabs() {
                     <Tab classes={{ root: classes.rootTab, selected: classes.selected }} label="Descartado" {...a11yProps(3)} />
                 </Tabs>
             </AppBar>
-            <TabPanel value={value} index={0} padding={0}>
+            <TabPanel value={tabValue} index={0} padding={0}>
                 {/* Item Two */}
                 <TableListPostulants />
             </TabPanel>
-            <TabPanel value={value} index={1}>
+            <TabPanel value={tabValue} index={1}>
                 <TablePostulantsInProgress />
             </TabPanel>
-            <TabPanel value={value} index={2}>
+            <TabPanel value={tabValue} index={2}>
                 Item Three
             </TabPanel>
-            <TabPanel value={value} index={3}>
+            <TabPanel value={tabValue} index={3}>
                 Item Four
             </TabPanel>
         </>
