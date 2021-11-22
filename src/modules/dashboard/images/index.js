@@ -27,3 +27,4 @@ export { default as InfoPremiumImg } from './multiposting/info_premium_image.web
 
 export { default as AlertIcon } from './icons/AlertIcon.svg';
 export { default as DoneIcon } from './icons/DoneIcon.svg';
+export { default as MessageSentIcon } from './icons/MessageSent.svg';

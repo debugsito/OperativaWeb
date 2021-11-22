@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     selected: {},
 }));
 
-export default function ApplicantsTabs({ onChangeTab, tabValue }) {
+export default function ApplicantsTabs({ onChangeTab, tabValue, ...props }) {
     const classes = useStyles();
 
     const handleChange = (event, newValue) => {
@@ -51,7 +51,7 @@ export default function ApplicantsTabs({ onChangeTab, tabValue }) {
                 <TableListPostulants />
             </TabPanel>
             <TabPanel value={tabValue} index={1}>
-                <TablePostulantsInProgress />
+                <TablePostulantsInProgress {...props} />
             </TabPanel>
             <TabPanel value={tabValue} index={2}>
                 Item Three

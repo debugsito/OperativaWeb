@@ -10,6 +10,9 @@ const useStyles = makeStyles((theme) => ({
     root: {
         padding: "0",
     },
+    paper: {
+        borderRadius: "10px",
+    },
     closeButton: {
         position: 'absolute',
         right: theme.spacing(1),
@@ -32,7 +35,7 @@ export default function CustomDialog({ children, open, onClose, dialogTitle = fa
                 open={open}
                 onClose={onClose}
                 aria-labelledby="max-width-dialog-title"
-                classes={{ root: classes.root }}
+                classes={{ root: classes.root, paper: classes.paper }}
             >
                 {
                     dialogTitle &&

@@ -5,3 +5,7 @@
 .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline{
     border-color: var(--secondaryButtonColor) !important;
 }
+
+.MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-fullWidth.MuiInputBase-formControl.MuiInputBase-multiline.MuiOutlinedInput-multiline {
+    line-height: 1.5;
+}

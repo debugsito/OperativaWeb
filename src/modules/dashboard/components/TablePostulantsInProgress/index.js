@@ -3,13 +3,14 @@ import { Grid, Table, TableBody, TableCell, TableContainer, TablePagination, Tab
 import { useDispatch, useSelector } from "react-redux";
 import { stableSort, getComparator } from "../../../shared/utils/table.utils";
 import { Checkbox, CircularProgressWithLabel, EnhancedTableHead, ToolTip, Typography } from "../../../shared/components";
-import EnhancedTableToolbar from "./EnhancedTableToolbar";
+// import EnhancedTableToolbar from "./EnhancedTableToolbar";
 import { DialogSendMessages } from "../";
 import { DialogImbox } from "../";
 
 import { getPostulantsByPublicationId } from "../../../../store/actions/dashboard/dashboard.action";
 
 //Images,icon
+import IconButton from '@material-ui/core/IconButton';
 import EmailIcon from '@material-ui/icons/Email';
 import { DoneIcon, AlertIcon } from "../../images";
 
@@ -73,7 +74,7 @@ const STATE_OF_EVALUATIONS = [
     { text: "Entrevista", status: false },
 ]
 
-export default function TableListPostulants(props) {
+export default function TableListPostulants({ selected, handleClickCheckbox, handleSelectAllClick }) {
     const classes = useStyles();
     const dispatch = useDispatch()
     const { postulantsByPublicationId } = useSelector(state => state?.dashboard)
@@ -81,7 +82,7 @@ export default function TableListPostulants(props) {
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [order, setOrder] = useState("asc");
     const [orderBy, setOrderBy] = useState("");
-    const [selected, setSelected] = useState([]);
+    // const [selected, setSelected] = useState([]);
     const [postulants, setPostulants] = useState([createData("", "", "", [], { id: "" })]);
     const [openModal, setOpenModal] = useState(false)
     const [openImbox, setOpenImbox] = useState(false)
@@ -121,54 +122,18 @@ export default function TableListPostulants(props) {
         setPage(0);
     };
 
-    const handleClickCheckbox = (event, id) => {
-        const selectedIndex = selected.indexOf(id);
-        let newSelected = [];
-
-        if (selectedIndex === -1) {
-            newSelected = newSelected.concat(selected, id);
-        } else if (selectedIndex === 0) {
-            newSelected = newSelected.concat(selected.slice(1));
-        } else if (selectedIndex === selected.length - 1) {
-            newSelected = newSelected.concat(selected.slice(0, -1));
-        } else if (selectedIndex > 0) {
-            newSelected = newSelected.concat(
-                selected.slice(0, selectedIndex),
-                selected.slice(selectedIndex + 1)
-            );
-        }
-
-        setSelected(newSelected);
-    };
-
-    const handleSelectAllClick = (event) => {
-        if (event.target.checked) {
-            const newSelecteds = postulants.map((n) => n.data.id);
-            setSelected(newSelecteds);
-            return;
-        }
-        setSelected([]);
-    };
-
     const isSelected = (id) => selected.indexOf(id) !== -1;
 
     const emptyRows =
         rowsPerPage - Math.min(rowsPerPage, postulants?.length - page * rowsPerPage);
 
-    const handleClickMessage = (message) => {
-        if (message === 0) {
-            setOpenModal(true)
-        } else {
-            setOpenImbox(true)
-        }
-    }
 
     return (
         <div className={classes.root}>
             <Paper className={classes.paper}>
-                {selected?.length > 0 && (
+                {/* {selected?.length > 0 && (
                     <EnhancedTableToolbar numSelected={selected?.length} />
-                )}
+                )} */}
                 <TableContainer>
                     <Table
                         className={classes.table}
@@ -182,7 +147,7 @@ export default function TableListPostulants(props) {
                             onRequestSort={handleRequestSort}
                             headCells={headCells}
                             columnCheckbox
-                            onSelectAllClick={handleSelectAllClick}
+                            onSelectAllClick={(e) => handleSelectAllClick(e, postulants)}
                             numSelected={selected?.length}
                             rowCount={postulants?.length}
                         />
@@ -222,11 +187,10 @@ export default function TableListPostulants(props) {
                                                 <TableCell id={labelId} scope="row" padding="none">
                                                     <Grid item xs={12} >
                                                         <div className="align-items-center">
-                                                            <ToolTip aria-label="mensajes"
-                                                                title={row.messages === 0 ? 'Enviar mensaje' : 'Ver mensajes'}
-                                                                color={row.messages === 0 ? 'default' : 'inherit'}
-                                                                onClick={() => handleClickMessage(row.messages)}>
-                                                                <EmailIcon />
+                                                            <ToolTip title={row.messages === 0 ? 'Enviar mensaje' : 'Ver mensajes'}>
+                                                                <IconButton aria-label="mensajes" color={row.messages === 0 ? 'default' : 'inherit'} onClick={() => setOpenImbox(true)}>
+                                                                    <EmailIcon />
+                                                                </IconButton>
                                                             </ToolTip>
                                                             <Typography variant="body2">{row.messages}</Typography>
                                                         </div>
