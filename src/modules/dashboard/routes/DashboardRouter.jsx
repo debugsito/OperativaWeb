@@ -7,7 +7,6 @@ import PrivateRoute from '../../../routers/PrivateRoute';
 
 //Pages
 import Dashboard from '../pages/Dashboard';
-import DataTableUser from '../components/DataTableUser'; //cambiar a page
 import JobPosition from '../pages/JobPosition';
 import ListPostulants from '../pages/ListPostulants';
 import ApplicantProfile from '../pages/ApplicantProfile';
@@ -22,6 +21,7 @@ import EditJobPosition from '../pages/EditJobPosition';
 import JobPositionCreated from '../pages/JobPositionCreated';
 import ListOfApplicants from '../pages/ListOfApplicants';
 import Multiposting from '../pages/Multiposting';
+import AssignEvaluations from '../pages/AssignEvaluations';
 
 const MyAccountRouter = () => {
     return (
@@ -177,6 +177,16 @@ const MyAccountRouter = () => {
                     exact
                     path={DashboardRoutes[29]}
                     component={Multiposting} />
+                <PrivateRoute
+                    needSession
+                    exact
+                    path={DashboardRoutes[30]}
+                    component={AssignEvaluations} />
+                <PrivateRoute
+                    needSession
+                    exact
+                    path={DashboardRoutes[31]}
+                    component={AssignEvaluations} />
             </Switch>
         </>
     );

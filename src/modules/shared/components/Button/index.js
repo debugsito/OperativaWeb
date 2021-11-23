@@ -9,6 +9,9 @@ const useStyles = makeStyles(theme => ({
     textPrimary: {
         color: "var(--primaryButtonColor)",
     },
+    textSecondary: {
+        color: "var(--secondaryButtonColor)",
+    },
     outlinedPrimary: {
         color: "var(--primaryButtonColor)",
         border: "1px solid var(--primaryButtonColor)",
@@ -45,14 +48,7 @@ export default function CustomButton({ children, color = "primary", ...props }) 
     return (
         <Button
             color={color} {...props}
-            classes={{
-                root: classes.root,
-                textPrimary: classes.textPrimary,
-                outlinedPrimary: classes.outlinedPrimary,
-                outlinedSecondary: classes.outlinedSecondary,
-                containedPrimary: classes.containedPrimary,
-                containedSecondary: classes.containedSecondary
-            }}
+            classes={classes}
         >
             {children}
         </Button>

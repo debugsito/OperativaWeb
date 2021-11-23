@@ -4,15 +4,6 @@ export function useForm(initialValues, validateOnChange = false, validate) {
 
     const [values, setValues] = useState(initialValues);
     const [errors, setErrors] = useState({});
-    // useEffect(() => {
-    //     if (handleDisabledButtonState) {
-    //         if (Object.values(values).every(x => (x != "" || x != false)) && Object.values(errors).every(x => x == "")) {
-    //             setDisabledButtonState(false)
-    //         } else {
-    //             setDisabledButtonState(true)
-    //         }
-    //     }
-    // }, [values])
 
     const disabledButtonState = useMemo(() => {
         const validValues = Object.values(values).every((x) => x != "") //|| x != false
