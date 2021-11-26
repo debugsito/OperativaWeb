@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { FormControl, FormGroup, Grid, makeStyles } from "@material-ui/core";
 import { Button, Checkbox, TextInput, Typography } from "../../../shared/components";
-import { MedalInfo } from "../";
+import { MedalInfo, DialogMessageSentEvaluativa } from "../";
 
 //images
 import { ClientIcon, WarningIcon } from "../../images";
@@ -46,9 +46,14 @@ const useStyles = makeStyles(theme => ({
 export default function TabVerificativa({ nextTab }) {
     const classes = useStyles()
     const [showForm, setShowForm] = useState(false)
+    const [openDialog, setOpenDialog] = useState(false)
 
     const goVerification = () => {
         setShowForm(true)
+    }
+
+    const handleNextTab = () => {
+        setOpenDialog(true)
     }
 
     return (
@@ -107,18 +112,20 @@ export default function TabVerificativa({ nextTab }) {
                     </div>
             }
 
-
             <div className={classes.buttons}>
                 <Grid container spacing={2} justifyContent="flex-end">
                     <Grid item xs={2}>
                         <Button variant="outlined" size="large">CANCELAR</Button>
                     </Grid>
                     <Grid item xs={2}>
-                        <Button variant="contained" size="large" onClick={nextTab}>CONTINUAR</Button>
+                        <Button variant="contained" size="large" onClick={handleNextTab}>CONTINUAR</Button>
                     </Grid>
                 </Grid>
             </div>
 
+            <DialogMessageSentEvaluativa open={openDialog} onClose={() => setOpenDialog(false)} nextTab={nextTab} title="Verificativa"/>
         </div>
     )
 }
+
+

@@ -56,7 +56,9 @@ const VideoPlayer = ({ openVideo, onClose, url="https://www.youtube.com/watch?v=
 }
 
 VideoPlayer.propTypes = {
-
+    openVideo: PropTypes.bool.isRequired,
+    onClose: PropTypes.func.isRequired,
+    url: PropTypes.string.isRequired
 }
 
 export default VideoPlayer
