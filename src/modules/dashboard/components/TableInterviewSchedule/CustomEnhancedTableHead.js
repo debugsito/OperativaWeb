@@ -45,6 +45,7 @@ function CustomEnhancedTableHead({ order, orderBy, onRequestSort, headCells, onS
                                     inputProps={{ "aria-label": "select all" }}
                                     label={<span className={classes.headCellLabel}>{headCell.label}</span>}
                                     onChange={onSelectAllClick}
+                                    name={headCell.id}
                                 />
                             </TableCell>
                             :

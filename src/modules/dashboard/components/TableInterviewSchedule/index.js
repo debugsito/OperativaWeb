@@ -21,8 +21,8 @@ function createData(
 }
 
 const DATA_INTERVIEWS = [
-    { id: 123, virtual: false, presencial: true, fullName: "Jose Luis Merino Salazar", url: "" },
-    { id: 125, virtual: false, presencial: true, fullName: "Jose Luis Merino Salazar", url: "" },
+    { id: 123, virtual: false, presencial: false, fullName: "Jose Luis Merino Salazar", url: "" },
+    { id: 125, virtual: false, presencial: false, fullName: "Jose Luis Merino Salazar", url: "" },
 ]
 
 const useStyles = makeStyles((theme) => ({
@@ -80,16 +80,11 @@ export default function Index() {
     }
 
     const handleSelectAllClick = (e) => {
-        console.log("e.target.checked", e.target.checked)
-        const newInterviews = interviews.map(item => {
-            return item[e.target.name] = e.target.checked
-        })
-        console.log(newInterviews)
-        // setInterviews(newInterviews)
-        // setInterviews(currentValue => produce(currentValue => {
-
-
-        // }))
+        const newInterviews = [...interviews]
+        for (let index = 0; index < newInterviews.length; index++) {
+            newInterviews[index][e.target.name]= e.target.checked;
+        }
+        setInterviews(newInterviews)
     }
 
 
@@ -116,7 +111,6 @@ export default function Index() {
 
     return (
         <div className={classes.root}>
-            {JSON.stringify(interviews)}
             <Paper className={classes.paper}>
                 {/* {selected?.length > 0 && (
                     <EnhancedTableToolbar numSelected={selected?.length} />
@@ -133,7 +127,6 @@ export default function Index() {
                             orderBy={orderBy}
                             onRequestSort={handleRequestSort}
                             headCells={headCells}
-                            // columnCheckbox
                             onSelectAllClick={handleSelectAllClick}
                         // numSelected={selected?.length}
                         // rowCount={interviews?.length}

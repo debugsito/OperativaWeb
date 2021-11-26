@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { FormControl, FormGroup, Grid, makeStyles } from "@material-ui/core";
-import { Button, Checkbox, TextInput, Typography } from "../../../shared/components";
+import { Grid, makeStyles } from "@material-ui/core";
+import { Button, Typography } from "../../../shared/components";
 import { MedalInfo, TableInterviewSchedule } from "../";
 
 //images
@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
     },
     buttons: {
         marginTop: "2rem"
-    }
+    },
 
 }))
 
@@ -64,6 +64,8 @@ export default function TabVerificativa({ nextTab }) {
                     </Grid>
                 </Grid>
             </div>
+
+
 
         </div>
     )
