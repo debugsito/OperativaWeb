@@ -3,6 +3,9 @@ import { AppBar, Tabs, Tab, makeStyles } from '@material-ui/core';
 import { TabPanel } from "../../../shared/components";
 import TabEvaluation from "./TabEvaluation";
 import TabVerificativa from "./TabVerificativa";
+import TabMedico from "./TabMedico";
+import TabEvaluativa from "./TabEvaluativa";
+import TabEntrevista from "./TabEntrevista";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -57,16 +60,16 @@ export default function ApplicantsTabs(props) {
                 <TabEvaluation nextTab={nextTab} />
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <TabVerificativa />
+                <TabVerificativa nextTab={nextTab} />
             </TabPanel>
             <TabPanel value={value} index={2}>
-                Item Three
+                <TabMedico nextTab={nextTab} />
             </TabPanel>
             <TabPanel value={value} index={3}>
-                Item Four
+                <TabEvaluativa nextTab={nextTab} />
             </TabPanel>
             <TabPanel value={value} index={4}>
-                Item Four
+                <TabEntrevista />
             </TabPanel>
         </>
         //   </div>

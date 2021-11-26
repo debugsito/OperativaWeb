@@ -23,3 +23,5 @@ export { default as DialogMessageSent } from './DialogMessageSent';
 export { default as TableImbox } from './TableImbox';
 export { default as FormAddQuestion } from './FormAddQuestion';
 export { default as DialogQuestion } from './DialogQuestion';
+export { default as MedalInfo } from './MedalInfo';
+export { default as TableInterviewSchedule } from './TableInterviewSchedule';

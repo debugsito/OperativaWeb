@@ -4,7 +4,6 @@ import { stableSort, getComparator } from "../../../shared/utils/table.utils";
 import { Checkbox, EnhancedTableHead, TablePagination, Typography } from "../../../shared/components";
 import { DialogSendMessages } from "../";
 import { DialogImbox } from "../";
-import { DateTime } from "luxon";
 
 
 
@@ -71,7 +70,6 @@ export default function Index() {
     const [openImbox, setOpenImbox] = useState(false)
 
     useEffect(() => {
-        console.log("DATA_MESSAGES", DATA_MESSAGES)
         const rows = DATA_MESSAGES.map(item => {
             return (createData(
                 item?.subject,
