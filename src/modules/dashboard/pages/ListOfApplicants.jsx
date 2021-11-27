@@ -1,20 +1,14 @@
 import React, { useState } from 'react'
-import { Grid, MenuItem, makeStyles } from "@material-ui/core";
+import { Grid, MenuItem } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 
-import { ApplicantsTabs, DialogSendMessages } from "../components";
+import { ApplicantsTabs, DialogSendMessages, DrawerFilter } from "../components";
 import { Button, Breadcrumbs, Container, MenuList, TitlePage, Typography, ToolTip } from "../../shared/components";
 import { SessionRoutes } from '../../shared/libs/sessionRoutes';
 
 //Images, icons
 import TuneIcon from '@material-ui/icons/Tune';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
-const useStyles = makeStyles(theme => ({
-    paper: {
-        padding: 0,
-    }
-}))
 
 const TAB = {
     POSTULANT: 0,
@@ -29,8 +23,8 @@ export default function JobPositionCreatedPage() {
     const [anchorEl, setAnchorEl] = useState(null);
     const [openModal, setOpenModal] = useState(false)
     const [openModalFill, setOpenModalFill] = useState(false)
+    const [openDrawer, setOpenDrawer] = useState(false)
 
-    const classes = useStyles();
     const history = useHistory()
     const initRoute = SessionRoutes().initRoute;
     const routes = [{ name: "Inicio", to: `${initRoute}` }, { name: "Postulantes", to: `${initRoute}/lista-de-postulantes` }];
@@ -85,6 +79,10 @@ export default function JobPositionCreatedPage() {
         setAnchorEl(null);
     }
 
+    const handleOpenDrawer = () => {
+        console.log("hice click")
+        setOpenDrawer(true)
+    }
 
     return (
         <Container>
@@ -101,23 +99,23 @@ export default function JobPositionCreatedPage() {
                     </TitlePage>
                 </Grid>
                 <Grid item xs={12}>
-                    <Typography variant="body2"><b>Filtrar los postulantes que hagan match con tu requerimiento.</b></Typography>
+                    <Typography variant="body1"><b>Filtrar los postulantes que hagan match con tu requerimiento.</b></Typography>
                     <ul>
                         <li>
-                            <Typography variant="body2">Filtrar los postulantes que hagan match con tu requerimiento.</Typography>
+                            <Typography variant="body1">Filtrar los postulantes que hagan match con tu requerimiento.</Typography>
                         </li>
                         <li>
-                            <Typography variant="body2">Puedes contactar a tu postulantes o postulantes</Typography>
+                            <Typography variant="body1">Puedes contactar a tu postulantes o postulantes</Typography>
                         </li>
                         <li>
-                            <Typography variant="body2">Asigna las evaluaciones a los postulantes que cumplan con tu requerimiento</Typography>
+                            <Typography variant="body1">Asigna las evaluaciones a los postulantes que cumplan con tu requerimiento</Typography>
                         </li>
                     </ul>
                 </Grid>
                 {
                     value === TAB.POSTULANT &&
                     <Grid item xs={12} className="justify-end">
-                        <Button startIcon={<TuneIcon />} size="large" variant="contained" color="secondary">Filtro avanzado</Button>
+                        <Button startIcon={<TuneIcon />} size="large" variant="contained" color="secondary" onClick={handleOpenDrawer}>Filtro avanzado</Button>
                     </Grid>
                 }
                 {
@@ -155,6 +153,7 @@ export default function JobPositionCreatedPage() {
             </Grid>
             <DialogSendMessages open={openModal} onClose={() => setOpenModal(false)} />
             <DialogSendMessages open={openModalFill} onClose={() => setOpenModalFill(false)} fill />
+            <DrawerFilter openDrawer={openDrawer} handleClose={() => setOpenDrawer(false)}/>
         </Container>
     )
 }

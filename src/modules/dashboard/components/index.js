@@ -26,3 +26,4 @@ export { default as DialogQuestion } from './DialogQuestion';
 export { default as MedalInfo } from './MedalInfo';
 export { default as TableInterviewSchedule } from './TableInterviewSchedule';
 export { default as DialogMessageSentEvaluativa } from './DialogMessageSentEvaluativa';
+export { default as DrawerFilter } from './DrawerFilter';
