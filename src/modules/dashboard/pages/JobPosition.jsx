@@ -1,11 +1,10 @@
 import React from 'react'
 import { useHistory } from "react-router-dom";
-import { Grid, Paper } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 
 import { JobForm } from "../components";
 import { Breadcrumbs, Container, TitlePage } from "../../shared/components";
 import { SessionRoutes } from '../../shared/libs/sessionRoutes';
-import { makeStyles } from '@material-ui/styles';
 
 const defaultValues = {
     // isNameHidden:false,
@@ -27,8 +26,6 @@ const defaultValues = {
     requirements: "",
     benefits:"",
     job_level_id: "",
-    // address: "",
-    // period: "",
     salary: "",
     expiration_date: "",
     department_id: "",
@@ -36,14 +33,7 @@ const defaultValues = {
     district_id: "",
 };
 
-const useStyles = makeStyles(theme => ({
-    paper: {
-        padding: "3rem"
-    }
-}))
-
 export default function Position() {
-    const classes = useStyles()
     const history = useHistory()
     const initRoute = SessionRoutes().initRoute;
     const routes = [{ name: "Inicio", to: `${initRoute}` }, { name: "Publicar empleo", to: `${initRoute}/editar-posicion` }];
@@ -63,9 +53,8 @@ export default function Position() {
                     </TitlePage>
                 </Grid>
                 <Grid item xs={8}>
-                    <Paper className={classes.paper}>
                         <JobForm initialValues={defaultValues} initRoute={initRoute}/>
-                    </Paper>
+                    
                 </Grid>
             </Grid>
         </Container>

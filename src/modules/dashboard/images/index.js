@@ -32,3 +32,4 @@ export { default as MessageSentIcon } from './icons/MessageSent.svg';
 export { default as ClientIcon } from './icons/ClientIcon.svg';
 export { default as MedalIcon } from './icons/MedalIcon.svg';
 export { default as WarningIcon } from './icons/WarningIcon.svg';
+export { default as WarningBlackIcon } from './icons/WarningBlackIcon.svg';

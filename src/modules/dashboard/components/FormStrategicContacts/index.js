@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Grid, MenuItem, makeStyles } from "@material-ui/core";
-import { Button, Select, TextInput, Typography } from "../../../shared/components";
+import { Grid, MenuItem, FormControl, InputLabel, makeStyles, Input, ListItemText } from "@material-ui/core";
+import { Button, Checkbox, Select, TextInput, Typography } from "../../../shared/components";
 import { DialogInfoPremium } from "../";
 
 import { useHistory } from "react-router-dom";
@@ -31,7 +31,7 @@ const initialValues = {
     province_id: "",
     district_id: "",
     text: "",
-    municipalities: "",
+    municipalities: [],
     ongs: "",
     institutes: "",
     universities: ""
@@ -180,10 +180,32 @@ export default function Index(props) {
                 <Typography variant="h6">Contactos estratégicos</Typography>
                 <Typography variant="body">¿Qué entidades quieres que compartan tu publicación?</Typography>
             </Grid>
+            {JSON.stringify(values)}
             <Grid item xs={12}>
                 <Grid container spacing={2}>
                     <Grid item xs={6}>
                         <Select
+                            name="municipalities"
+                            label="municipalidades"
+                            labelId="demo-mutiple-checkbox-municipalities"
+                            multiple
+                            value={values.municipalities}
+                            onChange={handleInputChange}
+                            // input={<Input />}
+                            renderValue={(selected) => {
+                                console.log(selected)
+                               return selected.join(', ')}
+                            }
+                        // MenuProps={MenuProps}
+                        >
+                            {departments && departments.map(element =>
+                                <MenuItem key={element.id} value={element.id}>
+                                    <Checkbox checked={values.municipalities.indexOf(element.name) > -1} />
+                                    <ListItemText primary={element.name} />
+                                </MenuItem>
+                            )}
+                        </Select>
+                        {/* <Select
                             name="municipalities"
                             label="municipalidades"
                             value={values.municipalities}
@@ -194,7 +216,7 @@ export default function Index(props) {
                             <MenuItem value="muni">Municipalidad de Leoncio Prado</MenuItem>
                             <MenuItem value="muni">Municipalidad de Lima</MenuItem>
                             <MenuItem value="muni">Municipalidad de Aucayacu</MenuItem>
-                        </Select>
+                        </Select> */}
                     </Grid>
                     <Grid item xs={6}>
                         <Select

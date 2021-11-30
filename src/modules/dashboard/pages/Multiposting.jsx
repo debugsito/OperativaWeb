@@ -24,6 +24,11 @@ const useStyles = makeStyles(theme => ({
         }
     },
     selected:{},
+    paper: {
+        marginBottom: "2rem",
+        boxShadow: "0px 4px 14px -5px #D0D4DF",
+    }
+    
 }))
 
 export default function Multiposting(props) {
@@ -54,7 +59,7 @@ export default function Multiposting(props) {
                     </TitlePage>
                 </Grid>
                 <Grid item xs={10}>
-                    <Paper elevation={2}>
+                    <Paper elevation={2} className={classes.paper}>
                         <AppBar position="static" classes={{root: classes.rootAppBar}}>
                             <Tabs
                                 value={value}

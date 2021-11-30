@@ -6,6 +6,9 @@ const useStyles = makeStyles(theme => ({
     root: {
         borderRadius: "10px",
     },
+    sizeLarge:{
+        padding:"8px 32px"
+    },
     textPrimary: {
         color: "var(--primaryButtonColor)",
     },
