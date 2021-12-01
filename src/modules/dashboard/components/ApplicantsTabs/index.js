@@ -7,6 +7,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
         backgroundColor: theme.palette.background.paper,
+       
     },
     rootTabs: {
         background: "#E7EAF1",
@@ -15,7 +16,9 @@ const useStyles = makeStyles((theme) => ({
         '&$selected': {
             color: "var(--paragraphColor)",
             background: "#fff",
-        }
+        },
+        fontSize: "12px",
+        fontWeight: 700
     },
     selected: {},
 }));
@@ -50,7 +53,7 @@ export default function ApplicantsTabs({ onChangeTab, tabValue, ...props }) {
                 {/* Item Two */}
                 <TableListPostulants />
             </TabPanel>
-            <TabPanel value={tabValue} index={1}>
+            <TabPanel value={tabValue} index={1} padding={0}>
                 <TablePostulantsInProgress {...props} />
             </TabPanel>
             <TabPanel value={tabValue} index={2}>

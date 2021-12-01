@@ -4,7 +4,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import { AccountCircle } from '@material-ui/icons';
 import { Divider, Hidden, Grid, IconButton, Menu, MenuItem, Typography, makeStyles } from '@material-ui/core';
 
-import { Link } from '..';
+import { Link } from '../';
 import { MenuRoutes } from "../../libs/menuRoutes";
 
 const useStyles = makeStyles(theme => ({

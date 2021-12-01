@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, Table, TableBody, TableCell, TableContainer, TablePagination, TableRow, makeStyles, Paper } from "@material-ui/core";
+import { Grid, Table, TableBody, TableCell, TableContainer, TableRow, makeStyles, Paper } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { stableSort, getComparator } from "../../../shared/utils/table.utils";
-import { Checkbox, CircularProgressWithLabel, EnhancedTableHead, ToolTip, Typography } from "../../../shared/components";
+import { Checkbox, CircularProgressWithLabel, EnhancedTableHead, ToolTip, Typography, TablePagination } from "../../../shared/components";
 // import EnhancedTableToolbar from "./EnhancedTableToolbar";
 import { DialogSendMessages } from "../";
 import { DialogImbox } from "../";
@@ -12,6 +12,8 @@ import { getPostulantsByPublicationId } from "../../../../store/actions/dashboar
 //Images,icon
 import IconButton from '@material-ui/core/IconButton';
 import EmailIcon from '@material-ui/icons/Email';
+import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
+import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck';
 import { DoneIcon, AlertIcon } from "../../images";
 
 function createData(
@@ -19,9 +21,10 @@ function createData(
     fullname,
     messages,
     stateOfEvaluations,
+    actions,
     data
 ) {
-    return { similarity, fullname, messages, stateOfEvaluations, data };
+    return { similarity, fullname, messages, stateOfEvaluations, actions, data };
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -83,7 +86,7 @@ export default function TableListPostulants({ selected, handleClickCheckbox, han
     const [order, setOrder] = useState("asc");
     const [orderBy, setOrderBy] = useState("");
     // const [selected, setSelected] = useState([]);
-    const [postulants, setPostulants] = useState([createData("", "", "", [], { id: "" })]);
+    const [postulants, setPostulants] = useState([createData("", "", "", [], [], { id: "" })]);
     const [openModal, setOpenModal] = useState(false)
     const [openImbox, setOpenImbox] = useState(false)
 
@@ -99,6 +102,7 @@ export default function TableListPostulants({ selected, handleClickCheckbox, han
                     item?.user?.first_name + " " + item?.user?.last_name,
                     item?.user?.experience ? 2 : 0, //Messages
                     STATE_OF_EVALUATIONS,
+                    [{ id: "finalizar", label: "Pasar a Finalista" }, { id: "descartar", label: "Descartar postulante" }],
                     item,
                 )
                 )
@@ -215,6 +219,19 @@ export default function TableListPostulants({ selected, handleClickCheckbox, han
                                                         </div>
                                                     </Grid>
                                                 </TableCell>
+                                                <TableCell id={labelId} scope="row" padding="normal">
+                                                    <Grid item xs={12}>
+                                                        {
+                                                            row.actions.map((item) => (
+                                                                <ToolTip title={item.label}>
+                                                                <IconButton aria-label="delete" key={item.id} color="inherit">
+                                                                    {item.id === "finalizar"? <PlaylistAddCheckIcon/> : <RemoveCircleIcon/>}
+                                                                </IconButton>
+                                                                </ToolTip>
+                                                            ))
+                                                        }
+                                                    </Grid>
+                                                </TableCell>
                                             </TableRow>
                                         );
                                     })
@@ -228,16 +245,12 @@ export default function TableListPostulants({ selected, handleClickCheckbox, han
                     </Table>
                 </TableContainer>
                 <TablePagination
-                    className="table-pagination"
                     rowsPerPageOptions={[5, 10, 25]}
-                    component="div"
                     count={postulants.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     onPageChange={handleChangePage}
                     onRowsPerPageChange={handleChangeRowsPerPage}
-                    labelRowsPerPage="Filas por página"
-                    labelDisplayedRows={({ from, to, count }) => `${from}-${to} de ${count !== -1 ? count : to}`}
                 />
             </Paper>
             <DialogSendMessages open={openModal} onClose={() => setOpenModal(false)} />
@@ -251,4 +264,5 @@ const headCells = [
     { id: "postulant", numeric: false, disablePadding: true, label: "Postulante", width: 200 },
     { id: "messages", numeric: false, disablePadding: true, label: "Mensajes", width: 80 },
     { id: "stateOfEvaluations", numeric: false, disablePadding: false, label: "Estado de las evaluaciones" },
+    { id: "actions", numeric: false, disablePadding: false, label: "Acciones" },
 ];

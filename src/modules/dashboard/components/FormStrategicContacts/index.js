@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { Grid, MenuItem, FormControl, InputLabel, makeStyles, Input, ListItemText } from "@material-ui/core";
+import { Grid, MenuItem, makeStyles, ListItemText } from "@material-ui/core";
 import { Button, Checkbox, Select, TextInput, Typography } from "../../../shared/components";
-import { DialogInfoPremium } from "../";
+import { DialogInfoPremium, Chips } from "../";
 
 import { useHistory } from "react-router-dom";
 
@@ -32,14 +32,31 @@ const initialValues = {
     district_id: "",
     text: "",
     municipalities: [],
-    ongs: "",
-    institutes: "",
-    universities: ""
-
-
+    ongs: [],
+    institutes: [],
+    universities: []
 }
 
-export default function Index(props) {
+const DATA_ONGS = [
+    { id: 1, name: "ONG ONE" },
+    { id: 2, name: "ONG DOS" },
+    { id: 3, name: "ONG TRES" },
+    { id: 4, name: "ONG CUATRO" },
+]
+const DATA_INSTITUTES = [
+    { id: 1, name: "Instituto Nacional ONE" },
+    { id: 2, name: "Instituto Nacional DOS" },
+    { id: 3, name: "Instituto Nacional TRES" },
+    { id: 4, name: "Instituto Nacional CUATRO" },
+]
+const DATA_UNIVERSITY = [
+    { id: 1, name: "Universidad ONE" },
+    { id: 2, name: "Universidad DOS" },
+    { id: 3, name: "Universidad TRES" },
+    { id: 4, name: "Universidad CUATRO" },
+]
+
+export default function Index() {
     const history = useHistory();
     const classes = useStyles()
     const dispatch = useDispatch();
@@ -47,6 +64,7 @@ export default function Index(props) {
     const [districtsList, setDistrictsList] = useState([])
     const [provincesList, setProvincesList] = useState([])
     const [openDialog, setOpenDialog] = useState(false)
+    const [chipData, setChipData] = useState([]);
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
@@ -88,6 +106,10 @@ export default function Index(props) {
     }, [])
 
     useEffect(() => {
+       console.log("values.municipalities",values.municipalities)
+    }, [values.municipalities])
+
+    useEffect(() => {
         filterProvinces()
     }, [provinces])
 
@@ -123,12 +145,26 @@ export default function Index(props) {
         handleInputChange(event)
     }
 
+    const handleDelete = (chipToDelete) => () => {
+        setChipData((chips) => chips.filter((chip) => chip.key !== chipToDelete.key));
+    };
+
+    const handleRenderValue = (selected) => {
+        let newArray = []
+        const arrayTemp = [...departments]
+        for (const department_id of selected) {
+            const element = arrayTemp.find(department => department.id == department_id)
+            newArray.push(element.name)
+        }
+        return newArray.join(', ')
+    }
+
 
     return (
-        <Grid container spacing={2}>
+        <Grid container spacing={3}>
             <Grid item xs={12}>
                 <Typography variant="h6">Ubicación</Typography>
-                <Typography variant="body">¿Donde quieres difundir tu publicación?</Typography>
+                <Typography variant="body1">¿Donde quieres difundir tu publicación?</Typography>
             </Grid>
             <Grid item xs={12}>
                 <Grid container spacing={2}>
@@ -178,86 +214,108 @@ export default function Index(props) {
             </Grid>
             <Grid item xs={12}>
                 <Typography variant="h6">Contactos estratégicos</Typography>
-                <Typography variant="body">¿Qué entidades quieres que compartan tu publicación?</Typography>
+                <Typography variant="body1">¿Qué entidades quieres que compartan tu publicación?</Typography>
             </Grid>
-            {JSON.stringify(values)}
             <Grid item xs={12}>
                 <Grid container spacing={2}>
                     <Grid item xs={6}>
                         <Select
                             name="municipalities"
-                            label="municipalidades"
+                            label="Municipalidades"
                             labelId="demo-mutiple-checkbox-municipalities"
                             multiple
                             value={values.municipalities}
                             onChange={handleInputChange}
-                            // input={<Input />}
-                            renderValue={(selected) => {
-                                console.log(selected)
-                               return selected.join(', ')}
-                            }
-                        // MenuProps={MenuProps}
+                            renderValue={(selected) => handleRenderValue(selected)}
                         >
                             {departments && departments.map(element =>
                                 <MenuItem key={element.id} value={element.id}>
-                                    <Checkbox checked={values.municipalities.indexOf(element.name) > -1} />
+                                    <Checkbox checked={values.municipalities.indexOf(element.id) > -1} />
                                     <ListItemText primary={element.name} />
                                 </MenuItem>
                             )}
                         </Select>
-                        {/* <Select
-                            name="municipalities"
-                            label="municipalidades"
-                            value={values.municipalities}
-                            onChange={handleInputChange}
-                            error={errors.municipalities ? true : false}
-                            helperText={errors.municipalities}
-                        >
-                            <MenuItem value="muni">Municipalidad de Leoncio Prado</MenuItem>
-                            <MenuItem value="muni">Municipalidad de Lima</MenuItem>
-                            <MenuItem value="muni">Municipalidad de Aucayacu</MenuItem>
-                        </Select> */}
+                        {/* <Chips chipData={chipData} handleDelete={handleDelete} /> */}
                     </Grid>
                     <Grid item xs={6}>
                         <Select
                             name="ongs"
                             label="ONG's"
+                            labelId="demo-mutiple-checkbox-ongs"
+                            multiple
                             value={values.ongs}
                             onChange={handleInputChange}
-                            error={errors.ongs ? true : false}
-                            helperText={errors.ongs}
+                            renderValue={(selected) => {
+                                let newArray = []
+                                const arrayTemp = [...DATA_ONGS]
+                                for (const ong_id of selected) {
+                                    const element = arrayTemp.find(ong => ong.id == ong_id)
+                                    newArray.push(element.name)
+                                }
+                                return newArray.join(', ')
+                            }
+                            }
                         >
-                            <MenuItem value="muni">ONG 1</MenuItem>
-                            <MenuItem value="muni">ONG 2</MenuItem>
-                            <MenuItem value="muni">ONG 3</MenuItem>
+                            {DATA_ONGS.map(element =>
+                                <MenuItem key={element.id} value={element.id}>
+                                    <Checkbox checked={values.ongs.indexOf(element.id) > -1} />
+                                    <ListItemText primary={element.name} />
+                                </MenuItem>
+                            )}
                         </Select>
                     </Grid>
                     <Grid item xs={6}>
                         <Select
                             name="institutes"
-                            label="Instituo"
+                            label="Institutos"
+                            labelId="demo-mutiple-checkbox-institutes"
+                            multiple
                             value={values.institutes}
                             onChange={handleInputChange}
-                            error={errors.institutes ? true : false}
-                            helperText={errors.institutes}
+                            renderValue={(selected) => {
+                                let newArray = []
+                                const arrayTemp = [...DATA_INSTITUTES]
+                                for (const institute_id of selected) {
+                                    const element = arrayTemp.find(institute => institute.id == institute_id)
+                                    newArray.push(element.name)
+                                }
+                                return newArray.join(', ')
+                            }
+                            }
                         >
-                            <MenuItem value="muni">Instituo 1</MenuItem>
-                            <MenuItem value="muni">Instituo 2</MenuItem>
-                            <MenuItem value="muni">Instituo 3</MenuItem>
+                            {DATA_INSTITUTES.map(element =>
+                                <MenuItem key={element.id} value={element.id}>
+                                    <Checkbox checked={values.institutes.indexOf(element.id) > -1} />
+                                    <ListItemText primary={element.name} />
+                                </MenuItem>
+                            )}
                         </Select>
                     </Grid>
                     <Grid item xs={6}>
                         <Select
                             name="universities"
                             label="Universidades"
+                            labelId="demo-mutiple-checkbox-universities"
+                            multiple
                             value={values.universities}
                             onChange={handleInputChange}
-                            error={errors.universities ? true : false}
-                            helperText={errors.universities}
+                            renderValue={(selected) => {
+                                let newArray = []
+                                const arrayTemp = [...DATA_INSTITUTES]
+                                for (const university_id of selected) {
+                                    const element = arrayTemp.find(university => university.id == university_id)
+                                    newArray.push(element.name)
+                                }
+                                return newArray.join(', ')
+                            }
+                            }
                         >
-                            <MenuItem value="muni">Universidades 1</MenuItem>
-                            <MenuItem value="muni">UNI</MenuItem>
-                            <MenuItem value="muni">UNAS</MenuItem>
+                            {DATA_UNIVERSITY.map(element =>
+                                <MenuItem key={element.id} value={element.id}>
+                                    <Checkbox checked={values.universities.indexOf(element.id) > -1} />
+                                    <ListItemText primary={element.name} />
+                                </MenuItem>
+                            )}
                         </Select>
                     </Grid>
                 </Grid>

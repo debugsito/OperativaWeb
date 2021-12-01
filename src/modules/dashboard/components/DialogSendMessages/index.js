@@ -100,7 +100,7 @@ export default function Index({ fill = false, ...props }) {
                                 </Grid>
                             </Grid>
                             <Grid item xs={12} className="justify-end">
-                                <Button variant="outlined" size="large">CANCELAR</Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <Button variant="outlined" size="large" onClick={props.onClose}>CANCELAR</Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <Button variant="contained" size="large" disabled={disabledButtonState} onClick={() => setOpenModalSuccess(true)}>ENVIAR</Button>
                             </Grid>
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Grid, Table, TableBody, TableCell, TableContainer, TablePagination, TableRow, makeStyles, Paper } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { stableSort, getComparator } from "../../../shared/utils/table.utils";
-import { Checkbox, CircularProgressWithLabel, EnhancedTableHead, Typography } from "../../../shared/components";
+import { Checkbox, CircularProgressWithLabel, EnhancedTableHead, LinkRouter ,Typography } from "../../../shared/components";
 import EnhancedTableToolbar from "./EnhancedTableToolbar";
 import { DateTime } from "luxon";
 
@@ -53,19 +53,19 @@ const useStyles = makeStyles((theme) => ({
     },
     chip: {
         textAlign: "center",
-        padding: "0.5rem 1.3rem",
+        padding: "0.2rem 1.5rem",
         background: "#ebebeb",
         borderRadius: "100px",
     },
     chipActive: {
         textAlign: "center",
-        padding: "0.5rem 1.3rem",
+        padding: "0.2rem 1.5rem",
         background: "#B8EA71",
         borderRadius: "100px",
     }
 }));
 
-export default function TableListPostulants(props) {
+export default function TableListPostulants() {
     const classes = useStyles();
     const dispatch = useDispatch()
     const { postulantsByPublicationId } = useSelector(state => state?.dashboard)
@@ -213,7 +213,7 @@ export default function TableListPostulants(props) {
                                                     align="left"
                                                 >
                                                     <Grid item xs={12}>
-                                                        <Typography variant="body2">{row.fullname}</Typography>
+                                                        <LinkRouter to={`/lista-de-postulantes/${row.data.user_id}/perfil`}><b>{row.fullname}</b></LinkRouter>
                                                     </Grid>
                                                 </TableCell>
                                                 <TableCell
@@ -304,7 +304,7 @@ export default function TableListPostulants(props) {
 
 const headCells = [
     { id: "match", numeric: false, disablePadding: true, label: "Match", width: 75 },
-    { id: "postulant", numeric: false, disablePadding: true, label: "Postulante", width: 150 },
+    { id: "postulant", numeric: false, disablePadding: false, label: "Postulante", width: 150 },
     { id: "experience", numeric: false, disablePadding: true, label: "Experiencia", width: 80 },
     { id: "createdAt", numeric: false, disablePadding: true, label: "Fecha de postulación", width: 120 },
     { id: "education", numeric: false, disablePadding: true, label: "Estudios", width: 80 },

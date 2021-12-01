@@ -13,7 +13,7 @@ export { default as EnhancedTableHead } from './EnhancedTableHead';
 export { default as EnhancedTableToolbar } from './EnhancedTableToolbar';
 export { default as FabLights } from './FabLights';
 export { default as LinearProgress } from './LinearProgress';
-export { default as Link } from './Link';
+export { default as Link } from './LinkBlue';
 export { default as LinearProgressWithDescription } from './LinearProgressWithDescription';
 export { default as LinearProgressMunicipality } from './LinearProgressMunicipality';
 export { default as Modal } from './Modal';
@@ -39,3 +39,4 @@ export { default as ToolTip } from './ToolTip';
 export { default as Typography } from './Typography';
 
 export { default as VideoPlayer } from './VideoPlayer';
+export { default as LinkRouter } from './LinkRouter';

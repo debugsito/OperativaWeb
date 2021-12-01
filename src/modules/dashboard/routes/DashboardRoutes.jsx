@@ -31,5 +31,7 @@ const DashboardRoutes = [
     '/municipalidad/dashboard/multiposting',
     '/empresa/dashboard/asignar-evaluaciones',
     '/municipalidad/dashboard/asignar-evaluaciones',
+    '/municipalidad/dashboard/lista-de-postulantes/:postulant_id/perfil',
+    '/empresa/dashboard/lista-de-postulantes/:postulant_id/perfil',
 ];
 export default DashboardRoutes;

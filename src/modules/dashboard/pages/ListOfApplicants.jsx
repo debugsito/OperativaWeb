@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
-import { Grid, MenuItem } from "@material-ui/core";
+import { InputAdornment, Grid, MenuItem } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 
 import { ApplicantsTabs, DialogSendMessages, DrawerFilter } from "../components";
-import { Button, Breadcrumbs, Container, MenuList, TitlePage, Typography, ToolTip } from "../../shared/components";
+import { Button, Breadcrumbs, Container, MenuList, TextInput, TitlePage, Typography, ToolTip } from "../../shared/components";
 import { SessionRoutes } from '../../shared/libs/sessionRoutes';
 
 //Images, icons
 import TuneIcon from '@material-ui/icons/Tune';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import SearchIcon from '@material-ui/icons/Search';
 
 const TAB = {
     POSTULANT: 0,
@@ -114,9 +115,26 @@ export default function JobPositionCreatedPage() {
                 </Grid>
                 {
                     value === TAB.POSTULANT &&
-                    <Grid item xs={12} className="justify-end">
-                        <Button startIcon={<TuneIcon />} size="large" variant="contained" color="secondary" onClick={handleOpenDrawer}>Filtro avanzado</Button>
-                    </Grid>
+                    <>
+                        <Grid item xs={4}>
+                            <TextInput
+                                fullWidth
+                                size="small"
+                                label="Buscar por nombre, experiencia o palabra clave "
+                                type="search"
+                                InputProps={{
+                                    endAdornment: (
+                                        <InputAdornment position="end">
+                                            <SearchIcon />
+                                        </InputAdornment>
+                                    ),
+                                }}
+                            />
+                        </Grid>
+                        <Grid item xs={8} className="justify-end">
+                            <Button startIcon={<TuneIcon />} size="large" variant="contained" color="secondary" onClick={handleOpenDrawer}>Filtro avanzado</Button>
+                        </Grid>
+                    </>
                 }
                 {
                     value === TAB.POSTULANT_IN_PROCESS &&
@@ -153,7 +171,7 @@ export default function JobPositionCreatedPage() {
             </Grid>
             <DialogSendMessages open={openModal} onClose={() => setOpenModal(false)} />
             <DialogSendMessages open={openModalFill} onClose={() => setOpenModalFill(false)} fill />
-            <DrawerFilter openDrawer={openDrawer} handleClose={() => setOpenDrawer(false)}/>
+            <DrawerFilter openDrawer={openDrawer} handleClose={() => setOpenDrawer(false)} />
         </Container>
     )
 }

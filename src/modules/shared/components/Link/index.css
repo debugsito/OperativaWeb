@@ -1,7 +1,0 @@
-.MuiTypography-root.MuiLink-root {
-    color: var(--secondaryButtonColor) !important;
-}
-
-.MuiTypography-root.MuiLink-root.color-white {
-    color: #ffffff !important;
-}

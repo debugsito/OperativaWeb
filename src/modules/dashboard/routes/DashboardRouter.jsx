@@ -22,6 +22,7 @@ import JobPositionCreated from '../pages/JobPositionCreated';
 import ListOfApplicants from '../pages/ListOfApplicants';
 import Multiposting from '../pages/Multiposting';
 import AssignEvaluations from '../pages/AssignEvaluations';
+import ApplicantCv from '../pages/ApplicantCv';
 
 const MyAccountRouter = () => {
     return (
@@ -187,6 +188,16 @@ const MyAccountRouter = () => {
                     exact
                     path={DashboardRoutes[31]}
                     component={AssignEvaluations} />
+                <PrivateRoute
+                    needSession
+                    exact
+                    path={DashboardRoutes[32]}
+                    component={ApplicantCv} />
+                <PrivateRoute
+                    needSession
+                    exact
+                    path={DashboardRoutes[33]}
+                    component={ApplicantCv} />
             </Switch>
         </>
     );
