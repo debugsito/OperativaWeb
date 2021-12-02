@@ -72,6 +72,7 @@ function InputResidence({values, handleInputChange, setValues}) {
             </Grid>
             <Grid item xs={12}>
                 <Select
+                size="small"
                     label="Provincia"
                     name="province_id"
                     value={values.province_id}

@@ -3,8 +3,15 @@ import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
+{/* 
+CASO 1, Quiero que tenga solo espacio arriba y que los costados no tengan espacio
+CASO 1, No quiero que tenga espacio en ningun lado
+
+SOL: agregar un contenedor, agregarle padding y margin segun necesite
+*/}
+
 export default function TabPanel(props) {
-    const { children, value, index, padding = 3, ...other } = props;
+    const { children, value, index, ...other } = props;
 
     return (
         <div
@@ -15,7 +22,7 @@ export default function TabPanel(props) {
             {...other}
         >
             {value === index && (
-                <Box p={padding} pt={3}>
+                <Box>
                     {children}
                 </Box>
             )}

@@ -138,32 +138,35 @@ export default function JobPositionCreatedPage() {
                 }
                 {
                     value === TAB.POSTULANT_IN_PROCESS &&
-                    <>
-                        <Grid item xs={9} className="justify-end">
-                            {
-                                selected.length > 0 ?
-                                    <div>
-                                        <Button endIcon={<ExpandMoreIcon />} size="large" variant="outlined"
-                                            aria-controls="menu-send-message"
-                                            aria-haspopup="true"
-                                            onClick={handleToggle}
-                                        >
-                                            ENVIAR MENSAJE
-                                        </Button>
-                                        <MenuList anchorEl={anchorEl} handleClose={handleClose}>
-                                            <MenuItem onClick={() => handleOpenModal("dialog_empty")}>Personalizado</MenuItem>
-                                            <MenuItem onClick={() => handleOpenModal("dialog_fill")}>De agradecimiento</MenuItem>
-                                        </MenuList>
-                                    </div> :
-                                    <ToolTip title="Seleccione uno o mas usuarios">
-                                        <Button endIcon={<ExpandMoreIcon />} size="large" variant="outlined">CONTACTAR</Button>
-                                    </ToolTip>
-                            }
+                    <Grid item xs={12}>
+                        <Grid container spacing={2} justify="flex-end">
+                            <Grid item>
+                                {
+                                    selected.length > 0 ?
+                                        <div>
+                                            <Button endIcon={<ExpandMoreIcon />} size="large" variant="outlined"
+                                                aria-controls="menu-send-message"
+                                                aria-haspopup="true"
+                                                onClick={handleToggle}
+                                            >
+                                                ENVIAR MENSAJE
+                                            </Button>
+                                            <MenuList anchorEl={anchorEl} handleClose={handleClose}>
+                                                <MenuItem onClick={() => handleOpenModal("dialog_empty")}>Personalizado</MenuItem>
+                                                <MenuItem onClick={() => handleOpenModal("dialog_fill")}>De agradecimiento</MenuItem>
+                                            </MenuList>
+                                        </div> :
+                                        <ToolTip title="Seleccione uno o mas usuarios">
+                                            <Button endIcon={<ExpandMoreIcon />} size="large" variant="outlined">CONTACTAR</Button>
+                                        </ToolTip>
+                                }
+                            </Grid>
+                            <Grid item>
+                                <Button size="large" variant="contained">ASIGNAR EVALUACIONES</Button>
+                            </Grid>
                         </Grid>
-                        <Grid item xs={3}>
-                            <Button size="large" variant="contained">ASIGNAR EVALUACIONES</Button>
-                        </Grid>
-                    </>
+
+                    </Grid>
                 }
                 <Grid item xs={12}>
                     <ApplicantsTabs onChangeTab={handleChange} tabValue={value} selected={selected} handleClickCheckbox={handleClickCheckbox} handleSelectAllClick={handleSelectAllClick} />

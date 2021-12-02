@@ -81,10 +81,12 @@ export default function Index() {
 
     const handleSelectAllClick = (e) => {
         const newInterviews = [...interviews]
+        let newArray = []
         for (let index = 0; index < newInterviews.length; index++) {
-            newInterviews[index][e.target.name]= e.target.checked;
+            const newInterview = {...newInterviews[index], [e.target.name]:e.target.checked}
+            newArray = [...newArray, newInterview]
         }
-        setInterviews(newInterviews)
+        setInterviews(newArray)
     }
 
 
@@ -111,6 +113,7 @@ export default function Index() {
 
     return (
         <div className={classes.root}>
+            {JSON.stringify(interviews)}
             <Paper className={classes.paper}>
                 {/* {selected?.length > 0 && (
                     <EnhancedTableToolbar numSelected={selected?.length} />

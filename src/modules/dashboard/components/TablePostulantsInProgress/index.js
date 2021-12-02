@@ -30,6 +30,7 @@ function createData(
 const useStyles = makeStyles((theme) => ({
     root: {
         width: "100%",
+        marginTop: "1rem"
     },
     paper: {
         width: "100%",

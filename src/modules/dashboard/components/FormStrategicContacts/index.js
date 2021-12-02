@@ -145,10 +145,6 @@ export default function Index() {
         handleInputChange(event)
     }
 
-    const handleDelete = (chipToDelete) => () => {
-        setChipData((chips) => chips.filter((chip) => chip.key !== chipToDelete.key));
-    };
-
     const handleRenderValue = (selected) => {
         let newArray = []
         const arrayTemp = [...departments]

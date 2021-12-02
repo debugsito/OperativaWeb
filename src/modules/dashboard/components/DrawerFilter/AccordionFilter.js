@@ -31,14 +31,14 @@ const useStyles = makeStyles(theme => ({
     },
     heading: {
         color: "#5D5FEF",
-        fontSize: theme.typography.pxToRem(16),
-        fontWeight: theme.typography.fontWeightRegular,
+        fontSize: theme.typography.pxToRem(14),
+        fontWeight: 700,
     },
-    controls:{
-        padding:"1.5rem",
-        display:"flex",
+    controls: {
+        padding: "1.5rem",
+        display: "flex",
         justifyContent: "space-around"
-    }
+    },
 }))
 
 const initialValues = {
@@ -50,16 +50,13 @@ const initialValues = {
 
 
 
-export default function AccordionCustom() {
+export default function AccordionFilter() {
     const classes = useStyles()
 
     const {
         values,
         setValues,
-        errors,
-        setErrors,
         handleInputChange,
-        disabledButtonState,
     } = useForm(initialValues, false, false);
 
 
@@ -98,7 +95,7 @@ export default function AccordionCustom() {
                     <Typography className={classes.heading}>Experiencia</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                    <InputExperience values={values} handleInputChange={handleInputChange}/>
+                    <InputExperience values={values} handleInputChange={handleInputChange} />
                 </AccordionDetails>
             </Accordion>
             <Accordion>
@@ -110,7 +107,7 @@ export default function AccordionCustom() {
                     <Typography className={classes.heading}>Rubro de interés</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                    <InputRubro values={values} handleInputChange={handleInputChange}/>
+                    <InputRubro values={values} handleInputChange={handleInputChange} />
                 </AccordionDetails>
             </Accordion>
             <Accordion>
@@ -122,7 +119,7 @@ export default function AccordionCustom() {
                     <Typography className={classes.heading}>Laboral</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                    <InputLabor values={values} handleInputChange={handleInputChange}/>
+                    <InputLabor values={values} handleInputChange={handleInputChange} />
                 </AccordionDetails>
             </Accordion>
             <Accordion>
@@ -134,7 +131,7 @@ export default function AccordionCustom() {
                     <Typography className={classes.heading}>Economía</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                    <InputEconomy values={values} handleInputChange={handleInputChange}/>
+                    <InputEconomy values={values} handleInputChange={handleInputChange} />
                 </AccordionDetails>
             </Accordion>
             <Accordion>
@@ -146,7 +143,7 @@ export default function AccordionCustom() {
                     <Typography className={classes.heading}>Expectativa salarial</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                    <InputSalaryExpectations values={values} handleInputChange={handleInputChange}/>
+                    <InputSalaryExpectations values={values} handleInputChange={handleInputChange} />
                 </AccordionDetails>
             </Accordion>
             <Accordion>
@@ -158,7 +155,7 @@ export default function AccordionCustom() {
                     <Typography className={classes.heading}>Educación</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                <InputEducation values={values} handleInputChange={handleInputChange}/>
+                    <InputEducation values={values} handleInputChange={handleInputChange} />
                 </AccordionDetails>
             </Accordion>
             <Accordion>
@@ -170,7 +167,7 @@ export default function AccordionCustom() {
                     <Typography className={classes.heading}>Edad</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                   <InputAge values={values} handleInputChange={handleInputChange}/>
+                    <InputAge values={values} handleInputChange={handleInputChange} />
                 </AccordionDetails>
             </Accordion>
             <Accordion>
@@ -182,7 +179,7 @@ export default function AccordionCustom() {
                     <Typography className={classes.heading}>Género</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                   <InputGender values={values} handleInputChange={handleInputChange}/>
+                    <InputGender values={values} handleInputChange={handleInputChange} />
                 </AccordionDetails>
             </Accordion>
             <Accordion>
@@ -194,7 +191,7 @@ export default function AccordionCustom() {
                     <Typography className={classes.heading}>Preguntas adicionales</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                    <InputQuestionAditional values={values} handleInputChange={handleInputChange}/>
+                    <InputQuestionAditional values={values} handleInputChange={handleInputChange} />
                 </AccordionDetails>
             </Accordion>
             <Accordion>
@@ -206,7 +203,7 @@ export default function AccordionCustom() {
                     <Typography className={classes.heading}>Familia</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                    <InputFamily values={values} handleInputChange={handleInputChange}/>
+                    <InputFamily values={values} handleInputChange={handleInputChange} />
                 </AccordionDetails>
             </Accordion>
             <Accordion>
@@ -218,7 +215,7 @@ export default function AccordionCustom() {
                     <Typography className={classes.heading}>Salud</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                    <InputHealth values={values} handleInputChange={handleInputChange}/>
+                    <InputHealth values={values} handleInputChange={handleInputChange} />
                 </AccordionDetails>
             </Accordion>
             <Accordion>
@@ -230,17 +227,18 @@ export default function AccordionCustom() {
                     <Typography className={classes.heading}>Personal</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                    <InputPersonal values={values} handleInputChange={handleInputChange}/>
+                    <InputPersonal values={values} handleInputChange={handleInputChange} />
                 </AccordionDetails>
             </Accordion>
             <div className={classes.controls}>
                 <Button size="large" variant="outlined" color="secondary">
-                  LIMPIAR
+                    LIMPIAR
                 </Button>
                 <Button size="large" variant="contained" color="secondary">
-                  APLICAR
+                    APLICAR
                 </Button>
             </div>
         </div>
     )
 }
+

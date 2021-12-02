@@ -48,7 +48,7 @@ export default function AssignEvaluations() {
                     <Grid container>
                         <Grid item xs={9}>
                             <TitlePage
-                                description="A continuacion, asignasr las evaluaciones a tus postulantes"
+                                description="A continuacion, asignar evaluaciones a tus postulantes"
                                 handleClick={() => history.push(initRoute)}
                             >
                                 Motorizados

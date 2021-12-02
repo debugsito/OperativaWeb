@@ -7,7 +7,7 @@ export default function InputLabor({values,handleInputChange}) {
         <Grid container spacing={2}>
             <Grid item xs={12}>
                 <FormControl component="fieldset">
-                <FormLabel><b>1. ¿Tiene hijos?</b></FormLabel>
+                <FormLabel>1. ¿Tiene hijos?</FormLabel>
                     <RadioGroup row aria-label="¿Tiene hijos?" name="hasChildren" value={values.hasChildren} onChange={handleInputChange}>
                         <FormControlLabel value="Si" control={<Radio />} label="Si" />
                         <FormControlLabel value="No" control={<Radio />} label="No" />
@@ -16,7 +16,7 @@ export default function InputLabor({values,handleInputChange}) {
             </Grid>
             <Grid item xs={12}>
                 <FormControl component="fieldset">
-                <FormLabel><b>2. ¿Tiene alguna persona bajo su responsabilidad?</b></FormLabel>
+                <FormLabel>2. ¿Tiene alguna persona bajo su responsabilidad?</FormLabel>
                     <RadioGroup row aria-label="¿Tiene alguna persona bajo su responsabilidad?" name="hasResponsabilityPerson" value={values.hasResponsabilityPerson} onChange={handleInputChange}>
                         <FormControlLabel value="Si" control={<Radio />} label="Si" />
                         <FormControlLabel value="No" control={<Radio />} label="No" />
@@ -25,7 +25,7 @@ export default function InputLabor({values,handleInputChange}) {
             </Grid>
             <Grid item xs={12}>
                 <FormControl component="fieldset">
-                <FormLabel><b>3. Vive solo/a.</b></FormLabel>
+                <FormLabel>3. Vive solo/a.</FormLabel>
                     <RadioGroup row aria-label="Vive solo/a" name="hasAlone" value={values.hasAlone} onChange={handleInputChange}>
                         <FormControlLabel value="Si" control={<Radio />} label="Si" />
                         <FormControlLabel value="No" control={<Radio />} label="No" />

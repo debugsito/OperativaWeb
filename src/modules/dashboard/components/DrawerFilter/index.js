@@ -1,10 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Drawer from '@material-ui/core/Drawer';
-import Grid from '@material-ui/core/Grid'
 import { makeStyles } from '@material-ui/styles';
 import Typography from '@material-ui/core/Typography';
-import AccordionCustom from './AccordionCustom'
+import AccordionFilter from './AccordionFilter'
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -20,8 +21,10 @@ const useStyles = makeStyles(theme => ({
         borderRadius: "10px 0px 0px 0px",
 
         display: "flex",
+        justifyContent:"space-between",
         alignItems: "center",
         paddingLeft: "1.5em",
+        color:"#fff"
     },
 }))
 
@@ -38,9 +41,12 @@ const DrawerFilter = ({ openDrawer, handleClose }) => {
         >
             <div className={classes.container}>
                 <div className={classes.header}>
-                    <Typography variant="h6" className="color-white">Filtar por:</Typography>
+                    <Typography variant="h6" className="color-white">Filtrar por:</Typography>
+                    <IconButton aria-label="close" className={classes.closeButton} onClick={handleClose} color="inherit">
+                        <CloseIcon />
+                    </IconButton>
                 </div>
-                <AccordionCustom />
+                <AccordionFilter />
             </div>
         </Drawer>
     )
