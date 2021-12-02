@@ -1,8 +1,7 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import { SessionRoutes } from '../../../shared/libs/sessionRoutes';
 import { Typography, makeStyles } from '@material-ui/core';
 import { CardPremiumIconOne, CardPremiumIconTwo, CardPremiumIconThree, CardPremiumIconFour } from "../../images";
+import { LinkRouter } from '../../../shared/components'
 
 const CARDS = [
     { id: 0, icon: CardPremiumIconOne, description: "Multiposting (N días de búsqueda en redes)", to:`/multiposting` },
@@ -23,26 +22,22 @@ const useStyles = makeStyles(theme => ({
         margin: "0.5rem",
         padding: "2rem 1rem",
     },
-    link:{
-        textDecoration: 'none', color: "#000000DE"
-    }
 
 }))
 
 export default function CardsFeatures(props) {
     const classes = useStyles()
-    const initRoute = SessionRoutes().initRoute;
 
     return (
         <div className={classes.containerCard}>
             {
                 CARDS.map((item, index) => (
-                    <Link to={`${initRoute}${item.to}`} className={classes.link}>
+                    <LinkRouter to={item.to} key={index}>
                         <div className={classes.card}>
                             <img src={item.icon} />
                             <Typography>{item.description}</Typography>
                         </div>
-                    </Link>
+                    </LinkRouter>
                 ))
             }
         </div>
