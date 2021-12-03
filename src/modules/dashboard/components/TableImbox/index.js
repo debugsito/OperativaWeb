@@ -2,10 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Grid, Table, TableBody, TableCell, TableContainer, TableRow, makeStyles, Paper } from "@material-ui/core";
 import { stableSort, getComparator } from "../../../shared/utils/table.utils";
 import { Checkbox, EnhancedTableHead, TablePagination, Typography } from "../../../shared/components";
-import { DialogSendMessages } from "../";
-import { DialogImbox } from "../";
-
-
+import { DialogSeeMessage, DialogImbox, DialogSendMessages } from "../";
 
 const DATA_MESSAGES = [
     { id: 123, subject: "Agradecimiento", message: "Gracias por la respuesta, espero poder participar en procesos de selección a futuro.", createdAt: "8:17pm" },
@@ -41,19 +38,8 @@ const useStyles = makeStyles((theme) => ({
         color: "#222121",
         fontSize: 16,
     },
-    chips: {
-        display: "grid",
-        gridAutoFlow: "column",
-        gridGap: "0.5rem"
-    },
-    chip: {
-        display: "flex",
-        background: "#EBEBEB",
-        padding: "0.5em",
-        borderRadius: "10px",
-        justifyContent: "center",
-        gridGap: "0.2rem",
-        cursor: "pointer",
+    row:{
+        cursor:"pointer",
     }
 }));
 
@@ -64,19 +50,19 @@ export default function Index() {
     const [order, setOrder] = useState("asc");
     const [orderBy, setOrderBy] = useState("");
     const [selected, setSelected] = useState([]);
-    const [messages, setMessages] = useState([createData("", "", "", "", { id: "" })]);
+    const [messages, setMessages] = useState([createData("", "", "", "", "")]);
 
     const [openModal, setOpenModal] = useState(false)
     const [openImbox, setOpenImbox] = useState(false)
+    const [message, setMessage] = useState({state:false,subject:"", text:""})
 
     useEffect(() => {
         const rows = DATA_MESSAGES.map(item => {
-            return (createData(
+            return createData(
                 item?.subject,
                 item?.message,
                 item?.createdAt,
-                item,
-            )
+                item?.id,
             )
         })
         setMessages(rows)
@@ -131,6 +117,10 @@ export default function Index() {
     const emptyRows =
         rowsPerPage - Math.min(rowsPerPage, messages?.length - page * rowsPerPage);
 
+    const handleShowMessage = (row) => {
+        console.log(row)
+        setMessage({state:true, subject: row.subject, message:row.message})
+    }
 
     return (
         <div className={classes.root}>
@@ -160,7 +150,7 @@ export default function Index() {
                                 stableSort(messages, getComparator(order, orderBy))
                                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map((row, index) => {
-                                        const isItemSelected = isSelected(row.data.id);
+                                        const isItemSelected = isSelected(row.id);
                                         const labelId = `enhanced-table-checkbox-${index}`;
                                         return (
                                             <TableRow
@@ -168,12 +158,14 @@ export default function Index() {
                                                 role="checkbox"
                                                 aria-checked={isItemSelected}
                                                 tabIndex={-1}
-                                                key={row.data.id}
+                                                key={row.id}
                                                 selected={isItemSelected}
+                                                onClick={() => handleShowMessage(row)}
+                                                className={classes.row}
                                             >
                                                 <TableCell padding="checkbox" align="center">
                                                     <Checkbox
-                                                        onClick={(event) => handleClickCheckbox(event, row.data.id)}
+                                                        onClick={(event) => handleClickCheckbox(event, row.id)}
                                                         checked={isItemSelected}
                                                         inputProps={{ "aria-labelledby": labelId }}
                                                     />
@@ -216,6 +208,7 @@ export default function Index() {
             </Paper>
             <DialogSendMessages open={openModal} onClose={() => setOpenModal(false)} />
             <DialogImbox open={openImbox} onClose={() => setOpenImbox(false)} />
+            <DialogSeeMessage open={message.state} data={message} onClose={() => setMessage({state:false})} />
         </div>
     )
 }
@@ -230,7 +223,7 @@ function createData(
     subject,
     message,
     date,
-    data
+    id
 ) {
-    return { subject, message, date, data };
+    return { subject, message, date, id };
 }

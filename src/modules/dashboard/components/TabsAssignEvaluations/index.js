@@ -56,7 +56,7 @@ export default function ApplicantsTabs(props) {
                     <Tab classes={{ root: classes.rootTab, selected: classes.selected }} label="Entrevista" {...a11yProps(4)} />
                 </Tabs>
             </AppBar>
-            <TabPanel value={value} index={0} padding={0}>
+            <TabPanel value={value} index={0}>
                 <TabEvaluation nextTab={nextTab} />
             </TabPanel>
             <TabPanel value={value} index={1}>

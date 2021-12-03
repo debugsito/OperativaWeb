@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Grid, Table, TableBody, TableCell, TableContainer, TableRow, makeStyles, Paper } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { stableSort, getComparator } from "../../../shared/utils/table.utils";
-import { Checkbox, CircularProgressWithLabel, EnhancedTableHead, ToolTip, Typography, TablePagination } from "../../../shared/components";
+import { Checkbox, CircularProgressWithLabel, EnhancedTableHead, LinkRouter, ToolTip, Typography, TablePagination } from "../../../shared/components";
 // import EnhancedTableToolbar from "./EnhancedTableToolbar";
 import { DialogSendMessages } from "../";
 import { DialogImbox } from "../";
@@ -186,7 +186,7 @@ export default function TableListPostulants({ selected, handleClickCheckbox, han
                                                 </TableCell>
                                                 <TableCell id={labelId} scope="row" padding="none" align="left">
                                                     <Grid item xs={12}>
-                                                        <Typography variant="body2">{row.fullname}</Typography>
+                                                        <LinkRouter to={`/lista-de-postulantes/${row.data.user_id}/perfil`}><b>{row.fullname}</b></LinkRouter>
                                                     </Grid>
                                                 </TableCell>
                                                 <TableCell id={labelId} scope="row" padding="none">

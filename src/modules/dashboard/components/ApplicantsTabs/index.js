@@ -50,7 +50,6 @@ export default function ApplicantsTabs({ onChangeTab, tabValue, ...props }) {
                 </Tabs>
             </AppBar>
             <TabPanel value={tabValue} index={0} padding={0}>
-                {/* Item Two */}
                 <TableListPostulants />
             </TabPanel>
             <TabPanel value={tabValue} index={1} padding={0}>

@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types";
-import { TableCell, TableHead, TableRow, TableSortLabel, makeStyles } from "@material-ui/core";
-import { Checkbox } from "../../../shared/components";
+import { FormControlLabel, RadioGroup, TableCell, TableHead, TableRow, TableSortLabel, makeStyles } from "@material-ui/core";
+import { Radio } from "../../../shared/components";
 
 const useStyles = makeStyles((theme) => ({
     tableHead: {
@@ -23,9 +23,12 @@ const useStyles = makeStyles((theme) => ({
         fontSize: 16,
         fontWeight: 500
     },
+    rootRadioGroup:{
+        flexDirection: "row"
+    }
 }));
 
-function CustomEnhancedTableHead({ order, orderBy, onRequestSort, headCells, onSelectAllClick }) {
+function CustomEnhancedTableHead({ order, orderBy, onRequestSort, headCells, onSelectAllClick, meeting }) {
     const classes = useStyles()
 
     const createSortHandler = (property) => (event) => {
@@ -39,14 +42,18 @@ function CustomEnhancedTableHead({ order, orderBy, onRequestSort, headCells, onS
 
                 {
                     headCells.map((headCell) => (
-                        headCell.checkbox ?
+                        headCell.radioGroup ?
                             <TableCell padding="normal" size="small" align="center" key={headCell.id}>
-                                <Checkbox
+                                {/* <Checkbox
                                     inputProps={{ "aria-label": "select all" }}
                                     label={<span className={classes.headCellLabel}>{headCell.label}</span>}
                                     onChange={onSelectAllClick}
                                     name={headCell.id}
-                                />
+                                /> */}
+                                <RadioGroup aria-label="tipo de reunión" onChange={onSelectAllClick} classes={{ root: classes.rootRadioGroup }}>
+                                    <FormControlLabel value="virtual" control={<Radio />} label="Virtual" />
+                                    <FormControlLabel value="presencial" control={<Radio />} label="Presencial" />
+                                </RadioGroup>
                             </TableCell>
                             :
                             <TableCell

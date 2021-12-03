@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { DateTime } from "luxon";
-import { Grid, Table, TableBody, TableCell, TableContainer, TableRow, makeStyles, Paper } from "@material-ui/core";
+import { FormControlLabel, Grid, Table, TableBody, TableCell, TableContainer, TableRow, RadioGroup, makeStyles, Paper } from "@material-ui/core";
 import { stableSort, getComparator } from "../../../shared/utils/table.utils";
-import { Checkbox, TablePagination, TextInput, Typography } from "../../../shared/components";
+import { Radio, TablePagination, TextInput, Typography } from "../../../shared/components";
 import { DialogSendMessages } from "../";
 import { DialogImbox } from "../";
 import EnhancedTableHead from "./CustomEnhancedTableHead";
@@ -10,19 +10,18 @@ import EnhancedTableHead from "./CustomEnhancedTableHead";
 import { produce } from "immer";
 
 function createData(
-    virtual,
-    presencial,
+    type_meet,
     fullName,
     url,
     date,
     data
 ) {
-    return { virtual, presencial, fullName, url, date, data };
+    return { type_meet, fullName, url, date, data };
 }
 
 const DATA_INTERVIEWS = [
-    { id: 123, virtual: false, presencial: false, fullName: "Jose Luis Merino Salazar", url: "" },
-    { id: 125, virtual: false, presencial: false, fullName: "Jose Luis Merino Salazar", url: "" },
+    { id: 123, type_meet: "", fullName: "Jose Luis Merino Salazar", url: "" },
+    { id: 125, type_meet: "", fullName: "Jose Luis Merino Salazar", url: "" },
 ]
 
 const useStyles = makeStyles((theme) => ({
@@ -36,6 +35,9 @@ const useStyles = makeStyles((theme) => ({
     table: {
         minWidth: 750,
     },
+    rootRadioGroup: {
+        flexDirection: "row"
+    }
 }));
 
 export default function Index() {
@@ -44,8 +46,8 @@ export default function Index() {
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [order, setOrder] = useState("asc");
     const [orderBy, setOrderBy] = useState("");
-    const [selected, setSelected] = useState([]);
-    const [interviews, setInterviews] = useState([createData("", "", "", "", "", { id: "" })]);
+    const [interviews, setInterviews] = useState([createData("", "", "", "", { id: "" })]);
+   const [meeting, setMeeting] = useState("")
 
     const [openModal, setOpenModal] = useState(false)
     const [openImbox, setOpenImbox] = useState(false)
@@ -55,8 +57,7 @@ export default function Index() {
     useEffect(() => {
         const rows = DATA_INTERVIEWS.map(item => {
             return (createData(
-                item?.virtual,
-                item?.presencial,
+                item?.type_meet,
                 item?.fullName,
                 "",//URL
                 "",//DATE
@@ -66,6 +67,14 @@ export default function Index() {
         })
         setInterviews(rows)
     }, [])
+
+    
+
+    const isSelectAll = useMemo(() => {
+        console.log("ejecuntado isSelectAll")
+        
+        return true
+    }, [interviews])
 
     const handleOnChange = (e, index) => {
         setInterviews(currentValue => produce(currentValue, (v) => {
@@ -80,15 +89,14 @@ export default function Index() {
     }
 
     const handleSelectAllClick = (e) => {
-        const newInterviews = [...interviews]
+        const interviewsTemp = [...interviews]
         let newArray = []
-        for (let index = 0; index < newInterviews.length; index++) {
-            const newInterview = {...newInterviews[index], [e.target.name]:e.target.checked}
+        for (let index = 0; index < interviewsTemp.length; index++) {
+            const newInterview = { ...interviewsTemp[index], ["type_meet"]: e.target.value }
             newArray = [...newArray, newInterview]
         }
         setInterviews(newArray)
     }
-
 
     const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === "asc";
@@ -105,15 +113,11 @@ export default function Index() {
         setPage(0);
     };
 
-    const isSelected = (id) => selected.indexOf(id) !== -1;
-
     const emptyRows =
         rowsPerPage - Math.min(rowsPerPage, interviews?.length - page * rowsPerPage);
 
-
     return (
         <div className={classes.root}>
-            {JSON.stringify(interviews)}
             <Paper className={classes.paper}>
                 {/* {selected?.length > 0 && (
                     <EnhancedTableToolbar numSelected={selected?.length} />
@@ -122,7 +126,7 @@ export default function Index() {
                     <Table
                         className={classes.table}
                         aria-labelledby="tableMessages"
-                        aria-label="table messages"
+                        aria-label="tabla de postulantes"
                     >
                         <EnhancedTableHead
                             classes={classes}
@@ -131,68 +135,48 @@ export default function Index() {
                             onRequestSort={handleRequestSort}
                             headCells={headCells}
                             onSelectAllClick={handleSelectAllClick}
-                        // numSelected={selected?.length}
-                        // rowCount={interviews?.length}
+                            meeting={meeting}
                         />
                         <TableBody>
                             {
                                 stableSort(interviews, getComparator(order, orderBy))
                                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map((row, index) => {
-                                        const isItemSelected = isSelected(row.data.id);
                                         const labelId = `enhanced-table-checkbox-${index}`;
                                         return (
                                             <TableRow
                                                 hover
-                                                role="checkbox"
-                                                aria-checked={isItemSelected}
+                                                // role="checkbox"
                                                 tabIndex={-1}
                                                 key={row.data.id}
-                                                selected={isItemSelected}
                                             >
-                                                <TableCell padding="normal" align="left" width="10%">
-                                                    <Checkbox
-                                                        name="virtual"
-                                                        onClick={(event) => handleOnChecked(event, index)}
-                                                        checked={interviews[index].virtual}
-                                                        inputProps={{ "aria-labelledby": labelId }}
-                                                    />
+                                                <TableCell padding="normal" align="left" width="25%">
+                                                    <RadioGroup aria-label="tipo de reunión" classes={{ root: classes.rootRadioGroup }} name="type_meet" value={interviews[index].type_meet} onChange={(e) => handleOnChange(e, index)}>
+                                                        <FormControlLabel value="virtual" control={<Radio />} label="Virtual" />
+                                                        <FormControlLabel value="presencial" control={<Radio />} label="Presencial" />
+                                                    </RadioGroup>
                                                 </TableCell>
-                                                <TableCell padding="normal" align="left" width="10%">
-                                                    <Checkbox
-                                                        name="presencial"
-                                                        onClick={(event) => handleOnChecked(event, index)}
-                                                        checked={interviews[index].presencial}
-                                                        inputProps={{ "aria-labelledby": labelId }}
-                                                    />
-                                                </TableCell>
-                                                <TableCell id={labelId} scope="row" padding="none" width="25%">
-                                                    <Grid item xs={12}>
-                                                        <Typography variant="body2">{row.fullName}</Typography>
-                                                    </Grid>
+                                                <TableCell id={labelId} scope="row" padding="none" width="20%">
+                                                    <Typography variant="body2">{row.fullName}</Typography>
                                                 </TableCell>
                                                 <TableCell id={labelId} scope="row" padding="normal" width="30%">
-                                                    <Grid item xs={12}>
-                                                        <TextInput name="url" size="small" fullWidth onChange={(e) => handleOnChange(e, index)} value={interviews[index].url} />
-                                                    </Grid>
+                                                    <TextInput name="url" size="small" fullWidth onChange={(e) => handleOnChange(e, index)} value={interviews[index].url} />
                                                 </TableCell>
                                                 <TableCell id={labelId} scope="row" padding="normal" width="25%">
-                                                    <Grid item xs={12} >
-                                                        <TextInput
-                                                            fullWidth
-                                                            type="datetime-local"
-                                                            name="date"
-                                                            size="small"
-                                                            onChange={(e) => handleOnChange(e, index)}
-                                                            value={interviews[index].date}
-                                                            InputLabelProps={{
-                                                                shrink: true,
-                                                            }}
-                                                            inputProps={{
-                                                                min: dateMin,
-                                                            }}
-                                                        />
-                                                    </Grid>
+                                                    <TextInput
+                                                        fullWidth
+                                                        type="datetime-local"
+                                                        name="date"
+                                                        size="small"
+                                                        onChange={(e) => handleOnChange(e, index)}
+                                                        value={interviews[index].date}
+                                                        InputLabelProps={{
+                                                            shrink: true,
+                                                        }}
+                                                        inputProps={{
+                                                            min: dateMin,
+                                                        }}
+                                                    />
                                                 </TableCell>
                                             </TableRow>
                                         );
@@ -222,8 +206,7 @@ export default function Index() {
 }
 
 const headCells = [
-    { id: "virtual", numeric: false, disablePadding: true, label: "Virtual", checkbox: true },
-    { id: "presencial", numeric: false, disablePadding: true, label: "Presencial", checkbox: true },
+    { id: "type_meet", numeric: false, disablePadding: false, label: "Tipo de reunion", radioGroup:true },
     { id: "postulante", numeric: false, disablePadding: true, label: "Postulante" },
     { id: "url", numeric: false, disablePadding: false, label: "URL", },
     { id: "date", numeric: false, disablePadding: false, label: "Fecha y hora", },

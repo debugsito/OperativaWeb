@@ -49,7 +49,7 @@ export default function AssignEvaluations() {
                         <Grid item xs={9}>
                             <TitlePage
                                 description="A continuacion, asignar evaluaciones a tus postulantes"
-                                handleClick={() => history.push(initRoute)}
+                                handleClick={() => history.goBack()}
                             >
                                 Motorizados
                             </TitlePage>

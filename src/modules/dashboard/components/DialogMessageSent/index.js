@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Button, Dialog, Typography } from "../../../shared/components";
-import { DialogSendMessages, TableImbox } from "../";
 import { Grid, makeStyles, MenuItem } from '@material-ui/core';
 import DialogContent from '@material-ui/core/DialogContent';
 

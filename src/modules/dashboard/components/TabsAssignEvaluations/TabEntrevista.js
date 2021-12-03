@@ -56,10 +56,10 @@ export default function TabVerificativa({ nextTab }) {
 
             <div className={classes.buttons}>
                 <Grid container spacing={2} justifyContent="flex-end">
-                    <Grid item xs={2}>
+                    <Grid item>
                         <Button variant="outlined" size="large">CANCELAR</Button>
                     </Grid>
-                    <Grid item xs={2}>
+                    <Grid item>
                         <Button variant="contained" size="large" onClick={nextTab}>CONTINUAR</Button>
                     </Grid>
                 </Grid>

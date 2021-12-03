@@ -28,3 +28,4 @@ export { default as TableInterviewSchedule } from './TableInterviewSchedule';
 export { default as DialogMessageSentEvaluativa } from './DialogMessageSentEvaluativa';
 export { default as DrawerFilter } from './DrawerFilter';
 export { default as Chips } from './Chips';
+export { default as DialogSeeMessage } from './DialogSeeMessage';

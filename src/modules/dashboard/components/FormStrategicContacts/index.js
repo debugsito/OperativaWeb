@@ -11,6 +11,9 @@ import { actions_Utils } from "../../../../store/actions";
 import { useForm } from "../../../hooks";
 
 const useStyles = makeStyles(theme => ({
+    container:{
+        padding:"3rem"
+    },
     containerMessage: {
         margin: "1.5em",
         padding: "2em",
@@ -157,6 +160,9 @@ export default function Index() {
 
 
     return (
+        <div className={classes.container}>
+
+        
         <Grid container spacing={3}>
             <Grid item xs={12}>
                 <Typography variant="h6">Ubicación</Typography>
@@ -397,5 +403,6 @@ export default function Index() {
             </Grid>
             <DialogInfoPremium open={openDialog} onClose={() => setOpenDialog(false)} />
         </Grid>
+        </div>
     )
 }

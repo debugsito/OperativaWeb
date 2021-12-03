@@ -15,7 +15,8 @@ const useStyles = makeStyles(theme => ({
         padding: "2rem",
     },
     buttons: {
-        marginTop: "1rem"
+        marginTop: "1rem",
+        width:"100%"
     }
 }))
 
@@ -116,7 +117,7 @@ export default function TabEvaluation({ nextTab }) {
     }
 
     return (
-        <div className={classes.main}>
+        <div>
             {
                 showInfo &&
                 <div className={classes.form}>
@@ -201,10 +202,14 @@ export default function TabEvaluation({ nextTab }) {
                         </Grid>
                     </div>
                     <div className={classes.buttons}>
-                        <Grid container spacing={2} direction="column" alignItems="flex-end">
-                            <Grid item xs={6}>
-                                <Button variant="outlined" size="large">CANCELAR</Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <Button variant="outlined" size="large" onClick={cleanForm}>Limpiar</Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <Grid container spacing={2} justifyContent="flex-end">
+                            <Grid item>
+                                <Button variant="outlined" size="large">CANCELAR</Button>
+                            </Grid>
+                            <Grid item>
+                                <Button variant="outlined" size="large" onClick={cleanForm}>Limpiar</Button>
+                            </Grid>
+                            <Grid item>
                                 <Button variant="contained" size="large" onClick={nextTab}>Continuar</Button>
                             </Grid>
                         </Grid>

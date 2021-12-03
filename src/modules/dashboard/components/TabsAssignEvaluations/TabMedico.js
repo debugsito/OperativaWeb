@@ -108,6 +108,13 @@ export default function Tabmedico({ nextTab }) {
                             helperText={errors.recomendation}
                         />
                     </Grid>
+                    <Grid item xs={12}>
+                        
+                        <TextInput
+                            type="file"
+                            name="recomendation"
+                        />
+                    </Grid>
 
 
                 </Grid>
@@ -115,10 +122,10 @@ export default function Tabmedico({ nextTab }) {
 
             <div className={classes.buttons}>
                 <Grid container spacing={2} justifyContent="flex-end">
-                    <Grid item xs={2}>
+                    <Grid item>
                         <Button variant="outlined" size="large">CANCELAR</Button>
                     </Grid>
-                    <Grid item xs={2}>
+                    <Grid item>
                         <Button variant="contained" size="large" onClick={saveForm}>CONTINUAR</Button>
                     </Grid>
                 </Grid>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { InputAdornment, Grid, MenuItem } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 
@@ -162,7 +163,7 @@ export default function JobPositionCreatedPage() {
                                 }
                             </Grid>
                             <Grid item>
-                                <Button size="large" variant="contained">ASIGNAR EVALUACIONES</Button>
+                                <Button size="large" variant="contained" component={Link} to={`${initRoute}/asignar-evaluaciones`}>ASIGNAR EVALUACIONES</Button>
                             </Grid>
                         </Grid>
 

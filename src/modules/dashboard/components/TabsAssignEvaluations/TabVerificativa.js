@@ -39,6 +39,10 @@ const useStyles = makeStyles(theme => ({
     },
     buttons: {
         marginTop: "2rem"
+    },
+    cleanLink:{
+        textDecoration: 'none',
+        color: "inherit"
     }
 
 }))
@@ -65,10 +69,12 @@ export default function TabVerificativa({ nextTab }) {
                             <img src={ClientIcon} alt="icono" />
                             <Typography variant="h6"><b>Soy cliente nuevo</b></Typography>
                         </div>
+                        <a href="https://plataforma.verificativa.com/login" target="_blank" rel="noopener noreferrer" className={classes.cleanLink}>
                         <div className={classes.card}>
                             <img src={ClientIcon} alt="icono" />
                             <Typography variant="h6"><b>Ya soy cliente</b></Typography>
                         </div>
+                        </a>
                     </div>
                     :
                     <div className={classes.form}>
@@ -114,10 +120,10 @@ export default function TabVerificativa({ nextTab }) {
 
             <div className={classes.buttons}>
                 <Grid container spacing={2} justifyContent="flex-end">
-                    <Grid item xs={2}>
+                    <Grid item>
                         <Button variant="outlined" size="large">CANCELAR</Button>
                     </Grid>
-                    <Grid item xs={2}>
+                    <Grid item>
                         <Button variant="contained" size="large" onClick={handleNextTab}>CONTINUAR</Button>
                     </Grid>
                 </Grid>

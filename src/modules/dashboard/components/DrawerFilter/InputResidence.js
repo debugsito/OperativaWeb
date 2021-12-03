@@ -1,14 +1,30 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { MenuItem, Grid } from '@material-ui/core'
-import { Select } from '../../../shared/components'
+import { MenuItem, Grid, makeStyles } from '@material-ui/core'
+import { Button, Chip, Select } from '../../../shared/components'
 import { getDepartments, getProvinces, getDistricts } from '../../../../store/actions/utils/utils.action';
 
-function InputResidence({values, handleInputChange, setValues}) {
+const useStyles = makeStyles((theme) => ({
+    root: {
+        display: 'flex',
+        justifyContent: 'center',
+        flexWrap: 'wrap',
+        listStyle: 'none',
+        padding: theme.spacing(0.5),
+        margin: 0,
+    },
+    chip: {
+        margin: theme.spacing(0.5),
+    },
+}));
+
+function InputResidence({ values, handleInputChange, setValues }) {
+    const classes = useStyles()
     const dispatch = useDispatch()
     const { departments, provinces, districts } = useSelector(state => state?.utils)
     const [provincesList, setProvincesList] = useState([])
     const [districtsList, setDistrictsList] = useState([])
+    const [chipData, setChipData] = useState([])
 
     useEffect(() => {
         dispatch(getDepartments())
@@ -54,8 +70,12 @@ function InputResidence({values, handleInputChange, setValues}) {
         setFilteredDistricts(e.target.value);
     }
 
+    const handleDelete = (chipToDelete) => () => {
+        // setChipData((chips) => chips.filter((chip) => chip.key !== chipToDelete.key));
+    };
+
     return (
-        
+
         <Grid container spacing={3}>
             <Grid item xs={12}>
                 <Select
@@ -72,7 +92,7 @@ function InputResidence({values, handleInputChange, setValues}) {
             </Grid>
             <Grid item xs={12}>
                 <Select
-                size="small"
+                    size="small"
                     label="Provincia"
                     name="province_id"
                     value={values.province_id}
@@ -95,7 +115,27 @@ function InputResidence({values, handleInputChange, setValues}) {
                     )}
                 </Select>
             </Grid>
-            
+            <Grid item xs={12}>
+                <Button color="secondary" size="large" variant="contained">AGREGAR</Button>
+            </Grid>
+            <Grid item xs={12}>
+                <div component="ul" className={classes.root}>
+                    {
+                        chipData.map((data) => {
+                            return (
+                                <li key={data.key}>
+                                    <Chip
+                                        label={data.label}
+                                        onDelete={handleDelete(data)}
+                                        className={classes.chip}
+                                    />
+                                </li>
+                            );
+                        })
+                    }
+                </div>
+            </Grid>
+
         </Grid>
     )
 }

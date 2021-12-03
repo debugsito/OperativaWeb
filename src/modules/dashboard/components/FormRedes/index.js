@@ -10,7 +10,7 @@ const REDES_SOCIALES = [
 
 const useStyles = makeStyles(theme => ({
     container: {
-        padding: "1em",
+        padding: "3rem",
     },
     containerRedes: {
         display: "flex",
