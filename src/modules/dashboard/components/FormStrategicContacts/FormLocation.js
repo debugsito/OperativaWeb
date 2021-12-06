@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { MenuItem, Grid, makeStyles } from '@material-ui/core'
-import { Button, Chip, Select, Location } from '../../../shared/components'
+import { Grid, MenuItem, makeStyles } from "@material-ui/core";
+import { Button, Chip, Select, Location } from "../../../shared/components";
 import { produce } from "immer";
 
 const useStyles = makeStyles((theme) => ({
@@ -22,13 +22,12 @@ const initialValues = {
     district_id: "",
 }
 
-function InputResidence() {
+export default function FormLocation() {
     const classes = useStyles()
-    const [chipData, setChipData] = useState([])
     const [districtName, setDistrictName] = useState("")
+    const [chipData, setChipData] = useState([])
 
     const handleDelete = (chipToDelete) => () => {
-        console.log(chipToDelete)
         setChipData(currentArray => produce(currentArray, draft => {
             const index = draft.findIndex(chip => chip.key === chipToDelete.key)
             if (index !== -1) draft.splice(index, 1)
@@ -37,63 +36,68 @@ function InputResidence() {
 
     return (
         <Location>
-            {(
-                values,
-                setValues,
-                errors,
-                isCompleted,
-                handleInputChange,
-                handleChangeDepartments,
-                handleChangeProvinces,
-                departments,
-                provincesList,
-                districtsList
-            ) => {
-                const handleChangeSelectDistrict = (e) => {
-                    handleInputChange(e)
-                    const district = districtsList.find(item => item.id == e.target.value)
-                    setDistrictName(district)
-                }
+            {
+                (
+                    values,
+                    setValues,
+                    errors,
+                    isCompleted,
+                    handleInputChange,
+                    handleChangeDepartments,
+                    handleChangeProvinces,
+                    departments,
+                    provincesList,
+                    districtsList
+                ) => {
+                    const handleChangeSelectDistrict = (e) => {
+                        handleInputChange(e)
+                        const district = districtsList.find(item => item.id == e.target.value)
+                        setDistrictName(district)
+                    }
 
-                const handleAddChip = () => {
-                    const newChip = { ...values, key: districtName.id, label: districtName.name }
-                    setChipData([...chipData, newChip])
-                    setValues(initialValues)
-                }
-                return (
-                    <Grid container spacing={3}>
-                        <Grid item xs={12}>
+                    const handleAddChip = () => {
+                        const newChip = { ...values, key: districtName.id, label: districtName.name }
+                        setChipData([...chipData, newChip])
+                        setValues(initialValues)
+                    }
+
+                    return (<Grid container spacing={2}>
+                        <Grid item xs={4}>
                             <Select
-                                label="Departamento"
                                 name="department_id"
+                                label="Departamento"
                                 value={values.department_id}
-                                onChange={handleChangeDepartments}
+                                onChange={(e) => handleChangeDepartments(e)}
+                                error={errors.department_id ? true : false}
+                                helperText={errors.department_id}
                             >
-                                {departments.length > 0 && departments.map(element =>
+                                {departments && departments.map(element =>
                                     <MenuItem key={element.id} value={element.id}>{element.name}</MenuItem>
                                 )}
-
                             </Select>
                         </Grid>
-                        <Grid item xs={12}>
+                        <Grid item xs={4}>
                             <Select
-                                size="small"
-                                label="Provincia"
                                 name="province_id"
+                                label="Provincia"
                                 value={values.province_id}
-                                onChange={handleChangeProvinces}
+                                onChange={(e) => handleChangeProvinces(e)}
+                                error={errors.province_id ? true : false}
+                                helperText={errors.province_id}
                             >
-                                {provincesList.length > 0 && provincesList.map(element =>
+                                {provincesList && provincesList.map(element =>
                                     <MenuItem key={element.id} value={element.id}>{element.name}</MenuItem>
                                 )}
                             </Select>
                         </Grid>
-                        <Grid item xs={12}>
+                        <Grid item xs={4}>
                             <Select
-                                label="Distrito"
                                 name="district_id"
+                                label="Distrito"
                                 value={values.district_id}
                                 onChange={handleChangeSelectDistrict}
+                                error={errors.district_id ? true : false}
+                                helperText={errors.district_id}
                             >
                                 {districtsList.length > 0 && districtsList.map(element =>
                                     <MenuItem key={element.id} value={element.id}>{element.name}</MenuItem>
@@ -120,12 +124,10 @@ function InputResidence() {
                                 }
                             </div>
                         </Grid>
-
-                    </Grid>
-                )
-            }}
+                    </Grid>)
+                }
+            }
         </Location>
+
     )
 }
-
-export default InputResidence

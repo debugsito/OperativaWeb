@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Grid, MenuItem, makeStyles, ListItemText } from "@material-ui/core";
 import { Button, Checkbox, Select, TextInput, Typography } from "../../../shared/components";
-import { DialogInfoPremium, Chips } from "../";
+import { DialogInfoPremium } from "../";
+import FormLocation from "./FormLocation";
 
 import { useHistory } from "react-router-dom";
 
@@ -30,9 +31,6 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const initialValues = {
-    department_id: "",
-    province_id: "",
-    district_id: "",
     text: "",
     municipalities: [],
     ongs: [],
@@ -63,21 +61,18 @@ export default function Index() {
     const history = useHistory();
     const classes = useStyles()
     const dispatch = useDispatch();
-    const { departments, provinces, districts } = useSelector(state => state?.utils)
-    const [districtsList, setDistrictsList] = useState([])
-    const [provincesList, setProvincesList] = useState([])
     const [openDialog, setOpenDialog] = useState(false)
+    const { departments} = useSelector(state => state?.utils)
     const [chipData, setChipData] = useState([]);
+    const [location, setLocation] = useState({
+        department_id: "",
+        province_id: "",
+        district_id: "",
+    })
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
 
-        if ('department_id' in fieldValues)
-            temp.department_id = fieldValues.department_id ? "" : "El campo es requerido."
-        if ('province_id' in fieldValues)
-            temp.province_id = fieldValues.province_id ? "" : "El campo es requerido."
-        if ('district_id' in fieldValues)
-            temp.district_id = fieldValues.district_id ? "" : "El campo es requerido."
         if ('municipalities' in fieldValues)
             temp.municipalities = fieldValues.municipalities ? "" : "El campo es requerido."
         if ('ongs' in fieldValues)
@@ -102,52 +97,6 @@ export default function Index() {
         disabledButtonState,
     } = useForm(initialValues, true, validate);
 
-    useEffect(() => {
-        dispatch(actions_Utils.getDepartments());
-        dispatch(actions_Utils.getProvinces());
-        dispatch(actions_Utils.getDistricts());
-    }, [])
-
-    useEffect(() => {
-       console.log("values.municipalities",values.municipalities)
-    }, [values.municipalities])
-
-    useEffect(() => {
-        filterProvinces()
-    }, [provinces])
-
-    useEffect(() => {
-        filterDistricts()
-    }, [districts])
-
-    const filterProvinces = () => {
-        let filteredProvinces = provinces.filter(item => item.department_id == values.department_id);
-        setProvincesList(filteredProvinces);
-    }
-
-    const filterDistricts = () => {
-        let filteredDistricts = districts.filter(item => item.province_id == values.province_id);
-        setDistrictsList(filteredDistricts);
-    }
-
-    const handleChangeDepartments = (event) => {
-        setValues({ ...values, province_id: "", district_id: "" })
-        setDistrictsList([])
-        const { value } = event.target
-        let provincesTemp = provinces.filter((province) => province.department_id == value)
-        setProvincesList(provincesTemp)
-        handleInputChange(event)
-
-    }
-
-    const handleChangeProvinces = (event) => {
-        setValues({ ...values, district_id: "" })
-        const { value } = event.target
-        let districtsTemp = districts.filter((district) => district.province_id == value)
-        setDistrictsList(districtsTemp)
-        handleInputChange(event)
-    }
-
     const handleRenderValue = (selected) => {
         let newArray = []
         const arrayTemp = [...departments]
@@ -169,50 +118,7 @@ export default function Index() {
                 <Typography variant="body1">¿Donde quieres difundir tu publicación?</Typography>
             </Grid>
             <Grid item xs={12}>
-                <Grid container spacing={2}>
-                    <Grid item xs={4}>
-                        <Select
-                            name="department_id"
-                            label="Departamento"
-                            value={values.department_id}
-                            onChange={(e) => handleChangeDepartments(e)}
-                            error={errors.department_id ? true : false}
-                            helperText={errors.department_id}
-                        >
-                            {departments && departments.map(element =>
-                                <MenuItem key={element.id} value={element.id}>{element.name}</MenuItem>
-                            )}
-                        </Select>
-                    </Grid>
-                    <Grid item xs={4}>
-                        <Select
-                            name="province_id"
-                            label="Provincia"
-                            value={values.province_id}
-                            onChange={(e) => handleChangeProvinces(e)}
-                            error={errors.province_id ? true : false}
-                            helperText={errors.province_id}
-                        >
-                            {provincesList && provincesList.map(element =>
-                                <MenuItem key={element.id} value={element.id}>{element.name}</MenuItem>
-                            )}
-                        </Select>
-                    </Grid>
-                    <Grid item xs={4}>
-                        <Select
-                            name="district_id"
-                            label="Distrito"
-                            value={values.district_id}
-                            onChange={handleInputChange}
-                            error={errors.district_id ? true : false}
-                            helperText={errors.district_id}
-                        >
-                            {districtsList.length > 0 && districtsList.map(element =>
-                                <MenuItem key={element.id} value={element.id}>{element.name}</MenuItem>
-                            )}
-                        </Select>
-                    </Grid>
-                </Grid>
+                <FormLocation />
             </Grid>
             <Grid item xs={12}>
                 <Typography variant="h6">Contactos estratégicos</Typography>

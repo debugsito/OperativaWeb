@@ -40,3 +40,4 @@ export { default as Typography } from './Typography';
 
 export { default as VideoPlayer } from './VideoPlayer';
 export { default as LinkRouter } from './LinkRouter';
+export { default as Location } from './Location';

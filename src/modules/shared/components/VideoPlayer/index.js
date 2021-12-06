@@ -45,6 +45,7 @@ const VideoPlayer = ({ openVideo, onClose, url="https://www.youtube.com/watch?v=
     return (
         <div className={classes.containerVideo}>
             <iframe id="player" type="text/html"
+            allowfullscreen='allowfullscreen'
                 // width="640" height="360"
                 style={{ width: "100%", height: "100%" }}
                 src={`http://www.youtube.com/embed/${youTubeGetID(url)}`}
