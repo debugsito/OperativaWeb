@@ -36,6 +36,10 @@ export default function ApplicantsTabs(props) {
         setValue(currentValue => currentValue + 1);
     }
 
+    const backTab = () => {
+        setValue(currentValue => currentValue - 1);
+    }
+
     return (
         //   <div className={classes.root}>
         <>
@@ -60,16 +64,16 @@ export default function ApplicantsTabs(props) {
                 <TabEvaluation nextTab={nextTab} />
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <TabVerificativa nextTab={nextTab} />
+                <TabVerificativa nextTab={nextTab} backTab={backTab}/>
             </TabPanel>
             <TabPanel value={value} index={2}>
-                <TabMedico nextTab={nextTab} />
+                <TabMedico nextTab={nextTab} backTab={backTab}/>
             </TabPanel>
             <TabPanel value={value} index={3}>
-                <TabEvaluativa nextTab={nextTab} />
+                <TabEvaluativa nextTab={nextTab} backTab={backTab}/>
             </TabPanel>
             <TabPanel value={value} index={4}>
-                <TabEntrevista />
+                <TabEntrevista backTab={backTab}/>
             </TabPanel>
         </>
         //   </div>

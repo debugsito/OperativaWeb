@@ -20,7 +20,7 @@ const initialValues = {
     recomendation: ""
 }
 
-export default function Tabmedico({ nextTab }) {
+export default function Tabmedico({ nextTab, backTab }) {
     const classes = useStyles()
 
     const validate = (fieldValues = values) => {
@@ -123,7 +123,7 @@ export default function Tabmedico({ nextTab }) {
             <div className={classes.buttons}>
                 <Grid container spacing={2} justifyContent="flex-end">
                     <Grid item>
-                        <Button variant="outlined" size="large">CANCELAR</Button>
+                        <Button variant="outlined" size="large" onClick={backTab}>REGRESAR</Button>
                     </Grid>
                     <Grid item>
                         <Button variant="contained" size="large" onClick={saveForm}>CONTINUAR</Button>

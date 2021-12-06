@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
 
 }))
 
-export default function TabVerificativa({ nextTab }) {
+export default function TabVerificativa({ nextTab, backTab }) {
     const classes = useStyles()
 
     return (
@@ -57,7 +57,7 @@ export default function TabVerificativa({ nextTab }) {
             <div className={classes.buttons}>
                 <Grid container spacing={2} justifyContent="flex-end">
                     <Grid item>
-                        <Button variant="outlined" size="large">CANCELAR</Button>
+                        <Button variant="outlined" size="large" onClick={backTab}>REGRESAR</Button>
                     </Grid>
                     <Grid item>
                         <Button variant="contained" size="large" onClick={nextTab}>CONTINUAR</Button>
