@@ -1,15 +1,25 @@
 import React from 'react'
+import { useForm, useFieldArray, Controller } from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as Yup from "yup";
+
 import { Grid, makeStyles } from "@material-ui/core";
-import { Button, TextInput, Typography } from "../../../shared/components";
-import { useForm } from "../../../hooks";
+import DeleteIcon from '@material-ui/icons/Delete';
+import { Button, Typography, TextInput } from "../../../shared/components";
 
 const useStyles = makeStyles(theme => ({
+    buttons: {
+        marginTop: "2rem"
+    },
     form: {
         background: "#fff",
         padding: "3rem",
+        margin: "1rem 0"
     },
-    buttons: {
-        marginTop: "2rem"
+    buttonAdd: {
+        display: "flex",
+        justifyContent: "flex-end",
+        margin: "1rem 0"
     }
 }))
 
@@ -20,117 +30,163 @@ const initialValues = {
     recomendation: ""
 }
 
-export default function Tabmedico({ nextTab, backTab }) {
+
+export default function TabMedico({ nextTab, backTab }) {
     const classes = useStyles()
+    const validationSchema = Yup.object().shape({
+        addresses: Yup.array().of(
+            Yup.object().shape({
+                name: Yup.string().required('Campo requerido'),
+                address: Yup.string().required('Campo requerido'),
+                reference: Yup.string().required("Campo requerido"),
+                recomendation: Yup.string().required("Campo requerido"),
+            })
+        ),
+    });
 
-    const validate = (fieldValues = values) => {
-        let temp = { ...errors }
+    const { control, handleSubmit, reset, trigger, formState: { errors, isSubmitting } } = useForm({
+        mode: "onChange",
+        resolver: yupResolver(validationSchema),
+        defaultValues: {
+            addresses: [initialValues]
+        }
+    });
 
-        if ('name' in fieldValues)
-            temp.name = fieldValues.name ? "" : "El campo es requerido."
-        if ('address' in fieldValues)
-            temp.address = fieldValues.address ? "" : "El campo es requerido."
-        if ('reference' in fieldValues)
-            temp.reference = fieldValues.reference ? "" : "El campo es requerido."
-        if ('recomendation' in fieldValues)
-            temp.recomendation = fieldValues.recomendation ? "" : "El campo es requerido."
+    const { fields, append, remove } = useFieldArray({
+        control,
+        name: "addresses"
+    });
 
-
-        setErrors({ ...temp })
-
-        if (fieldValues == values)
-            return Object.values(temp).every(x => x == "")
-    }
-
-    const {
-        values,
-        errors,
-        setErrors,
-        handleInputChange,
-        disabledButtonState,
-    } = useForm(initialValues, true, validate);
-
-    const saveForm = () => {
-        if (!disabledButtonState) {
-            nextTab()
-        } else {
-            validate()
+    const handleAddAddress = async () => {
+        const length = fields.length - 1
+        const isValid = await trigger([`addresses.${length}.name`, `addresses.${length}.address`, `addresses.${length}.reference`, `addresses.${length}.recomendation`]);
+        if (isValid) {
+            append(initialValues)
         }
     }
 
+    const handleRemoveAddress = (index) => {
+        remove(index)
+    }
+
+    const onSubmit = async(data) => {
+        await sleep(3000)
+        // console.log(data);
+    }
+
+    const sleep = (delay) =>
+    new Promise(resolve => setTimeout(resolve, delay));
+
     return (
         <div>
-            <div className={classes.form}>
-                <Grid container spacing={2}>
-                    <Grid item xs={12}>
-                        <Typography variant="subtitle1" color="secondary"><b>Análisis médico</b></Typography>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Typography variant="body2">Indica a tu postulante la clinica y direccion donde realizará su evaluación médica</Typography>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <TextInput
-                            fullWidth
-                            name="name"
-                            label="Nombre de la clínica"
-                            onChange={handleInputChange}
-                            error={errors.name ? true : false}
-                            helperText={errors.name}
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <TextInput
-                            fullWidth
-                            name="address"
-                            label="Dirección"
-                            onChange={handleInputChange}
-                            error={errors.address ? true : false}
-                            helperText={errors.address}
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <TextInput
-                            fullWidth
-                            name="reference"
-                            label="Referencia"
-                            onChange={handleInputChange}
-                            error={errors.reference ? true : false}
-                            helperText={errors.reference}
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <TextInput
-                            fullWidth
-                            name="recomendation"
-                            label="Recomendaciones para el examen"
-                            onChange={handleInputChange}
-                            error={errors.recomendation ? true : false}
-                            helperText={errors.recomendation}
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        
-                        <TextInput
-                            type="file"
-                            name="recomendation"
-                        />
-                    </Grid>
-
-
-                </Grid>
+            {
+                fields.map((field, index) => (
+                    <div className={classes.form} key={field.id}>
+                        <Grid container spacing={3}>
+                            <Grid item xs={10}>
+                                <Typography variant="subtitle1" color="secondary"><b>Análisis médico</b></Typography>
+                            </Grid>
+                            {
+                                fields.length > 1 &&
+                                <Grid item xs={2}>
+                                    <Button startIcon={<DeleteIcon />} color="primary" size="large" onClick={() => handleRemoveAddress(index)}>Eliminar</Button>
+                                </Grid>
+                            }
+                            <Grid item xs={12}>
+                                <Typography variant="body2">Indica a tu postulante la clinica y dirección donde realizará su evaluación médica</Typography>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Controller
+                                    control={control}
+                                    name={`addresses.${index}.name`}
+                                    render={({ field }) => (
+                                        <TextInput
+                                            {...field}
+                                            fullWidth
+                                            label="Nombre"
+                                            error={!!errors?.addresses?.[index]?.name}
+                                            helperText={errors?.addresses?.[index]?.name?.message}
+                                        />
+                                    )}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Controller
+                                    control={control}
+                                    name={`addresses.${index}.address`}
+                                    render={({ field }) => (
+                                        <TextInput
+                                            fullWidth
+                                            {...field}
+                                            label="Dirección"
+                                            error={!!errors?.addresses?.[index]?.address}
+                                            helperText={errors?.addresses?.[index]?.address?.message} />
+                                    )}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Controller
+                                    control={control}
+                                    name={`addresses.${index}.reference`}
+                                    render={({ field }) => (
+                                        <TextInput
+                                            fullWidth
+                                            {...field}
+                                            label="Referencia"
+                                            error={!!errors?.addresses?.[index]?.reference}
+                                            helperText={errors?.addresses?.[index]?.reference?.message} />
+                                    )}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Controller
+                                    control={control}
+                                    name={`addresses.${index}.recomendation`}
+                                    render={({ field }) => (
+                                        <TextInput
+                                            fullWidth
+                                            {...field}
+                                            label="Recomendaciones para el examen"
+                                            error={!!errors?.addresses?.[index]?.recomendation}
+                                            helperText={errors?.addresses?.[index]?.recomendation?.message}
+                                        />
+                                    )}
+                                />
+                            </Grid>
+                            <Grid item xs={8}>
+                                <TextInput
+                                    fullWidth
+                                    name="file"
+                                    label="Subir archivo"
+                                    type="file"
+                                    InputLabelProps={{
+                                        shrink: true
+                                    }}
+                                />
+                            </Grid>
+                        </Grid>
+                    </div>
+                ))
+            }
+            <div className={classes.buttonAdd}>
+                <Button color="secondary" size="large" onClick={handleAddAddress}> + AÑADIR DIRECCION</Button>
             </div>
-
             <div className={classes.buttons}>
                 <Grid container spacing={2} justifyContent="flex-end">
                     <Grid item>
                         <Button variant="outlined" size="large" onClick={backTab}>REGRESAR</Button>
                     </Grid>
                     <Grid item>
-                        <Button variant="contained" size="large" onClick={saveForm}>CONTINUAR</Button>
+                        <Button variant="outlined" size="large" onClick={() => reset()}>LIMPIAR</Button>
+                    </Grid>
+                    <Grid item>
+                        <Button variant="contained" size="large" onClick={handleSubmit(onSubmit)}>{isSubmitting?"GUARDANDO...":"GUARDAR"}</Button>
+                    </Grid>
+                    <Grid item>
+                        <Button variant="outlined" size="large" onClick={nextTab}>CONTINUAR</Button>
                     </Grid>
                 </Grid>
             </div>
-
         </div>
     )
 }
