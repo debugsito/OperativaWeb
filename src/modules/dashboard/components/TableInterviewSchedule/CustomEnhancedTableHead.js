@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types";
 import { FormControlLabel, RadioGroup, TableCell, TableHead, TableRow, TableSortLabel, makeStyles } from "@material-ui/core";
-import { Radio } from "../../../shared/components";
+import { Radio, Checkbox } from "../../../shared/components";
 
 const useStyles = makeStyles((theme) => ({
     tableHead: {
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function CustomEnhancedTableHead({ order, orderBy, onRequestSort, headCells, onSelectAllClick, meeting }) {
+function CustomEnhancedTableHead({ order, orderBy, onRequestSort, headCells, onSelectAllClick }) {
     const classes = useStyles()
 
     const createSortHandler = (property) => (event) => {
@@ -42,18 +42,25 @@ function CustomEnhancedTableHead({ order, orderBy, onRequestSort, headCells, onS
 
                 {
                     headCells.map((headCell) => (
-                        headCell.radioGroup ?
-                            <TableCell padding="normal" size="small" align="center" key={headCell.id}>
-                                {/* <Checkbox
+                        headCell.checkbox ?
+                            <TableCell padding="normal" size="small" align="left" key={headCell.id}>
+                                <Checkbox
                                     inputProps={{ "aria-label": "select all" }}
-                                    label={<span className={classes.headCellLabel}>{headCell.label}</span>}
+                                    label={<span className={classes.headCellLabel}>Virtual</span>}
                                     onChange={onSelectAllClick}
-                                    name={headCell.id}
-                                /> */}
-                                <RadioGroup aria-label="tipo de reunión" onChange={onSelectAllClick} classes={{ root: classes.rootRadioGroup }}>
+                                    name="virtual"
+                                />
+                                <Checkbox
+                                    inputProps={{ "aria-label": "select all" }}
+                                    label={<span className={classes.headCellLabel}>Presencial</span>}
+                                    onChange={onSelectAllClick}
+                                    name="presencial"
+                                />
+                                
+                                {/* <RadioGroup aria-label="tipo de reunión" onChange={onSelectAllClick} classes={{ root: classes.rootRadioGroup }}>
                                     <FormControlLabel value="virtual" control={<Radio />} label="Virtual" />
                                     <FormControlLabel value="presencial" control={<Radio />} label="Presencial" />
-                                </RadioGroup>
+                                </RadioGroup> */}
                             </TableCell>
                             :
                             <TableCell

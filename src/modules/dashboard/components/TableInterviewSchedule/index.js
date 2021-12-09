@@ -47,7 +47,6 @@ export default function Index() {
     const [order, setOrder] = useState("asc");
     const [orderBy, setOrderBy] = useState("");
     const [interviews, setInterviews] = useState([createData("", "", "", "", { id: "" })]);
-   const [meeting, setMeeting] = useState("")
 
     const [openModal, setOpenModal] = useState(false)
     const [openImbox, setOpenImbox] = useState(false)
@@ -89,10 +88,13 @@ export default function Index() {
     }
 
     const handleSelectAllClick = (e) => {
+        const {name, checked} = e.target
+        const type_meet= checked? name: ""
+
         const interviewsTemp = [...interviews]
         let newArray = []
         for (let index = 0; index < interviewsTemp.length; index++) {
-            const newInterview = { ...interviewsTemp[index], ["type_meet"]: e.target.value }
+            const newInterview = { ...interviewsTemp[index], ["type_meet"]: type_meet }
             newArray = [...newArray, newInterview]
         }
         setInterviews(newArray)
@@ -135,7 +137,6 @@ export default function Index() {
                             onRequestSort={handleRequestSort}
                             headCells={headCells}
                             onSelectAllClick={handleSelectAllClick}
-                            meeting={meeting}
                         />
                         <TableBody>
                             {
@@ -206,7 +207,7 @@ export default function Index() {
 }
 
 const headCells = [
-    { id: "type_meet", numeric: false, disablePadding: false, label: "Tipo de reunion", radioGroup:true },
+    { id: "type_meet", numeric: false, disablePadding: false, label: "Tipo de reunion", checkbox:true },
     { id: "postulante", numeric: false, disablePadding: true, label: "Postulante" },
     { id: "url", numeric: false, disablePadding: false, label: "URL", },
     { id: "date", numeric: false, disablePadding: false, label: "Fecha y hora", },
