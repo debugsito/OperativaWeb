@@ -67,10 +67,9 @@ export default function Navigation({ children }) {
   const session = AppSession.get();
   const hasDashboard = MenuRoutes().hasDashboard;
   const { user } = useSelector(state => state?.auth);
+  const isSubjetBusiness = user.account.rol_usuario === "business" || user.account.rol_usuario === "muni"
 
-  const [open, setOpen] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
-
 
   const handleSignOut = (event) => {
     event.preventDefault();
@@ -85,16 +84,25 @@ export default function Navigation({ children }) {
           <CssBaseline />
           <AppBar
             position="fixed"
-            className={clsx(classes.appBar, {
-              [classes.appBarShift]: open,
-            })}
+            className={classes.appBar}
           >
             <Toolbar classes={{ root: classes.rootToolbar }}>
               <Grid container justifyContent="space-between" alignItems="center" spacing={1}>
                 <Grid item>
-                  <div className={classes.containerLogo}>
-                    <a href={session ? '/' : process.env.REACT_APP_PATH_LANDING} ><img src={logoSVG} alt="Operativa" /></a>
-                  </div>
+                  <Grid container spacing={2}>
+                    <Grid item>
+                      <div className={classes.containerLogo}>
+                        <a href={session ? '/' : process.env.REACT_APP_PATH_LANDING} ><img src={logoSVG} alt="Operativa" /></a>
+                      </div>
+                    </Grid>
+                    {
+                      (hasDashboard && isSubjetBusiness) &&
+                      < Grid item>
+                        <Typography variant='subtitle1'>{user.account.razon_social}</Typography>
+                        <Typography variant='subtitle1'>RUC: {user?.account?.user?.document_number}</Typography>
+                      </Grid>
+                    }
+                  </Grid>
                 </Grid>
                 {
                   session &&
