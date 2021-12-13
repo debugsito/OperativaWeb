@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link as LinkRouter } from "react-router-dom";
 import MenuIcon from '@material-ui/icons/Menu';
 import { AccountCircle } from '@material-ui/icons';
 import { Divider, Hidden, Grid, IconButton, Menu, MenuItem, Typography, makeStyles } from '@material-ui/core';
 
-import { Link } from '../';
+import { Link, AccountType, Button, MenuList } from '../';
 import { MenuRoutes } from "../../libs/menuRoutes";
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -14,13 +15,17 @@ const useStyles = makeStyles(theme => ({
         top: "60px !important",
         left: "0px !important",
         borderRadius: "0 0 8px 8px"
+    },
+    color:{
+        color:"#757575"
     }
 }))
 
-export default function Buttonlogout({ email, handleSignOut }) {
+export default function Buttonlogout({ account, handleSignOut }) {
     const classes = useStyles()
     const menuList = MenuRoutes().list
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const [menu, setMenu] = useState(null)
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -30,20 +35,40 @@ export default function Buttonlogout({ email, handleSignOut }) {
         setAnchorEl(null);
     };
 
+    const handleClickMenu = () => {
+
+    }
+
     return (
         <>
             {/* Vista para Laptops */}
             <Hidden smDown>
                 <Grid item>
-                    <Grid container justifyContent="flex-end" alignItems="center" spacing={1}>
+                    <Grid container justifyContent="flex-end" alignItems="center" spacing={2}>
                         <Grid item>
-                            <Typography paragraph className="color-white navigation-text">
-                                {email}
-                            </Typography>
-                            <Link className="color-white navigation-text" onClick={handleSignOut}>Cerrar sesión</Link>
+                            <AccountType text="Cuenta" account="Básica" />
+                        </Grid>
+                        <Grid item>
+                            <Button variant="outlined">CAMBIAR DE PLAN</Button>
                         </Grid>
                         <Grid item>
                             <AccountCircle fontSize="large" />
+                        </Grid>
+                        <Grid item>
+                            <Typography variant='body1' className={classes.color}>
+                                Bienvenido
+                            </Typography>
+                            <Typography variant='body1'>
+                                <b>{account?.user?.first_name}</b>
+                            </Typography>
+                        </Grid>
+                        <Grid item>
+                            <IconButton aria-label="abrir menu" onClick={(event) => setMenu(event.currentTarget)}>
+                                <KeyboardArrowDownIcon />
+                            </IconButton>
+                            <MenuList anchorEl={menu} handleClose={() => setMenu(null)}>
+                                <MenuItem onClick={handleSignOut}>Cerrar Sesión</MenuItem>
+                            </MenuList>
                         </Grid>
                     </Grid>
                 </Grid>

@@ -24,7 +24,8 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    background: "var(--principalColor)"
+    background: "#fff",
+    boxShadow: "0px 1px 10px rgba(0, 0, 0, 0.1);",
   },
   menuButton: {
     marginRight: 36,
@@ -44,6 +45,19 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     height: '100vh',
   },
+  containerLogo: {
+    height: "64px",
+    background: "var(--principalColor)",
+    width: 230,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
+
+  },
+  rootToolbar: {
+    padding: "0 1rem 0 0",
+    color: "var(--paragraphColor)"
+  }
 }));
 
 export default function Navigation({ children }) {
@@ -75,17 +89,17 @@ export default function Navigation({ children }) {
               [classes.appBarShift]: open,
             })}
           >
-            <Toolbar>
+            <Toolbar classes={{ root: classes.rootToolbar }}>
               <Grid container justifyContent="space-between" alignItems="center" spacing={1}>
                 <Grid item>
-                  <Typography variant="h6" noWrap>
+                  <div className={classes.containerLogo}>
                     <a href={session ? '/' : process.env.REACT_APP_PATH_LANDING} ><img src={logoSVG} alt="Operativa" /></a>
-                  </Typography>
+                  </div>
                 </Grid>
                 {
                   session &&
                   <Grid item>
-                    <HamburgerMenu email={user.account.email} handleSignOut={handleSignOut} />
+                    <HamburgerMenu account={user.account} handleSignOut={handleSignOut} />
                   </Grid>
                 }
               </Grid>

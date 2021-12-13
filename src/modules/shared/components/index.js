@@ -1,4 +1,5 @@
 export { default as Alert } from './Alert';
+export { default as AccountType } from './AccountType';
 export { default as Autocomplete } from './Autocomplete';
 export { default as AutocompleteTemp } from './AutocompleteTemp';
 export { default as Button } from './Button';
