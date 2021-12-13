@@ -14,24 +14,26 @@ import {
     deleteIcon,
     showIcon,
 } from "../../images";
-import { Grid, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TableSortLabel, Toolbar, Paper, Tooltip, IconButton } from "@material-ui/core";
-import { Button, Checkbox, Chip, Typography } from "../../../shared/components";
+import { Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TableSortLabel, Toolbar, Paper, Tooltip, IconButton, MenuItem } from "@material-ui/core";
+import { Button, Checkbox, Chip, MenuList, TablePagination, Typography } from "../../../shared/components";
 import { useDispatch, useSelector } from "react-redux";
 import { archivePublication, deletePublication, getPublicationsInfo, setPublicationSelected } from "../../../../store/actions/dashboard/dashboard.action";
 import { SessionRoutes } from "../../../shared/libs/sessionRoutes";
 import { useHistory } from "react-router-dom";
 
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+
 function createData(
     title,
-    date,
+    publicationFinishDate,
     createBy,
-    publicationDate,
+    createdAt,
     applicants,
     state,
     actions,
     data
 ) {
-    return { title, date, createBy, publicationDate, applicants, state, actions, data };
+    return { title, publicationFinishDate, createBy, createdAt, applicants, state, actions, data };
 }
 
 function descendingComparator(a, b, orderBy) {
@@ -68,10 +70,16 @@ const headCells = [
         label: "Título de la publicación",
     },
     {
-        id: "publicationDate",
+        id: "createdAt",
         numeric: false,
         disablePadding: false,
-        label: "Fecha de publicación",
+        label: "Creación",
+    },
+    {
+        id: "publicationFinishDate",
+        numeric: false,
+        disablePadding: false,
+        label: "Caducidad",
     },
     {
         id: "applicants",
@@ -79,6 +87,7 @@ const headCells = [
         disablePadding: false,
         label: "Postulantes",
     },
+    { id: "cv", numeric: false, disablePadding: false, label: "Curriculum" },
     { id: "state", numeric: false, disablePadding: false, label: "Estado" },
     { id: "action", numeric: false, disablePadding: false, label: "Acciones" },
 ];
@@ -114,7 +123,7 @@ function EnhancedTableHead(props) {
                         align={headCell.numeric ? "right" : "left"}
                         padding={headCell.disablePadding ? "none" : "default"}
                         sortDirection={orderBy === headCell.id ? order : false}
-                        style={{ width: 100 }}
+                        // style={{ width: 150 }}
                     >
                         <TableSortLabel
                             active={orderBy === headCell.id}
@@ -244,6 +253,10 @@ const useStyles = makeStyles((theme) => ({
         color: "#222121",
         fontSize: 16,
     },
+    link: {
+        textDecoration: "underline",
+        cursor: "pointer"
+    }
 }));
 
 export default function OpenPositionsTable() {
@@ -256,6 +269,7 @@ export default function OpenPositionsTable() {
     const [dense, setDense] = useState(false);
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [publications, setPublications] = useState([createData("", "", "", DateTime.local().toFormat("DDD"), 0, false, [], { id: "" })]);
+    const [menuEl, setMenuEl] = useState(null)
 
     const { publicationsInfo } = useSelector(state => state?.dashboard);
     const dispatch = useDispatch();
@@ -270,14 +284,10 @@ export default function OpenPositionsTable() {
         const rows = publicationsInfo?.publications?.map(publication => (
             createData(
                 publication.job_title,
-                //Existe datos con expiration_date = null
-                //moment(publication.expiration_date? publication.expiration_date : publication.from_date).utc().format('LL'),
-                DateTime.fromISO(publication.expiration_date ? publication.expiration_date : publication.from_date).toUTC().toFormat("DDD"),
+                DateTime.fromISO(publication.expiration_date ? publication.expiration_date : publication.from_date).toUTC().toFormat("dd LLL yyyy"),
                 publication.account?.user?.fullname,
-                //moment(publication.createdAt).format('LL'),
-                DateTime.fromISO(publication.createdAt).toFormat("DDD"),
+                DateTime.fromISO(publication.createdAt).toFormat("dd LLL yyyy"),
                 publication.count_postulantes,
-                //moment(publication.to_date).utc().format('X') > moment().utc().format('X'), //como se si esta activo
                 DateTime.fromISO(publication.expiration_date ? publication.expiration_date : publication.from_date).toMillis() > DateTime.local().toMillis(), //como se si esta activo
                 [
                     {
@@ -415,7 +425,7 @@ export default function OpenPositionsTable() {
                                                     />
                                                 </TableCell>
                                                 <TableCell
-                                                    component="th"
+                                                    // component="td"
                                                     id={labelId}
                                                     scope="row"
                                                     padding="none"
@@ -426,62 +436,58 @@ export default function OpenPositionsTable() {
                                                                 {row.title}
                                                             </Typography>
                                                         </Grid>
-                                                        <Grid item xs={12} className="text-with-icon-container">
-                                                            <img src={calendarIcon} alt="Calendario" />{" "}
-                                                            <Typography variant="body2" component="span">Caduca {row.date}</Typography>
-                                                        </Grid>
                                                         <Grid item xs={12}>
                                                             <Typography variant="body2" component="span">
-                                                                Creado por {row.createBy}
+                                                                Creado por: <b>{row.createBy}</b>
                                                             </Typography>
                                                         </Grid>
                                                     </Grid>
                                                 </TableCell>
-                                                <TableCell align="left">
-                                                    <Grid item xs={12} className="text-with-icon-container">
+                                                <TableCell align="left" scope="row">
+                                                    <div className="text-with-icon-container">
                                                         <img src={calendarIcon} alt="Calendario" />{" "}
-                                                        <Typography variant="body2" component="span">{row.publicationDate}</Typography>
-                                                    </Grid>
+                                                        <Typography variant="body2" component="span">{row.createdAt}</Typography>
+                                                    </div>
                                                 </TableCell>
                                                 <TableCell align="left">
-                                                    <Grid item xs={12} className="text-with-icon-container">
-                                                        <Button
-                                                            onClick={(e) => goToPostulants(row)}
-                                                            key={index}
-                                                            color=""
-                                                            startIcon={
-                                                                <img
-                                                                    src={registeredIcon}
-                                                                    alt="postulantes"
-                                                                />}
-                                                        >
-                                                            {`ver postulante${row.applicants > 1 ? "s" : ""} (${row.applicants})`}
-                                                        </Button>
-                                                        {/* <img src={registeredIcon} alt="Registro" />
-                                                        <Typography variant="body2" component="span">
-                                                            {row.applicants} postulante
-                                                        {row.applicants > 1 ? "s" : ""}
-                                                        </Typography> */}
-                                                    </Grid>
+                                                    <div className="text-with-icon-container">
+                                                        <img src={calendarIcon} alt="Calendario" />{" "}
+                                                        <Typography variant="body2" component="span">{row.publicationFinishDate}</Typography>
+                                                    </div>
+                                                </TableCell>
+                                                <TableCell align="left">
+                                                    <div
+                                                        className={classes.link}
+                                                        onClick={(e) => goToPostulants(row)}
+                                                    >
+                                                        <Typography variant="body1">
+                                                            <b>{`${row.applicants} postulante${row.applicants > 1 ? "s" : ""}`}
+                                                            </b>
+                                                        </Typography>
+                                                    </div>
+                                                </TableCell>
+                                                <TableCell align="left">
+                                                    <Typography variant="body1">
+                                                        10 Leídos
+                                                    </Typography>
+                                                    <Typography variant="body1">
+                                                        <u><b>30 por leer</b></u>
+                                                    </Typography>
                                                 </TableCell>
                                                 <TableCell align="left">
                                                     <Chip label={row.state ? "Activo" : "Inactivo"} color={row.state ? "primary" : ""} />
                                                 </TableCell>
-                                                <TableCell align="left" style={{ display: "flex", flexDirection: "column", alignItems: "start" }}>
-                                                    {row.actions.map((action, index) => (
-                                                        <Button
-                                                            onClick={(event) => executeAction(event, action.id, row.data)}
-                                                            key={index}
-                                                            color=""
-                                                            startIcon={
-                                                                <img
-                                                                    src={action.id === "edit" ? editIcon : (action.id === "archive" ? fileIcon : showIcon)}
-                                                                    alt="Calendario"
-                                                                />}
-                                                        >
-                                                            {action.name}
-                                                        </Button>
-                                                    ))}
+                                                <TableCell align="center">
+                                                    <IconButton aria-label="acciones" onClick={(e) => setMenuEl(e.currentTarget)}>
+                                                        <MoreVertIcon />
+                                                    </IconButton>
+                                                        <MenuList anchorEl={menuEl} handleClose={(e) => setMenuEl(null)}>
+                                                            {
+                                                                row.actions.map((action, index) => (
+                                                                    <MenuItem onClick={(event) => executeAction(event, action.id, row.data)} key={index}>{action.name}</MenuItem>
+                                                                ))
+                                                            }
+                                                        </MenuList>
                                                 </TableCell>
                                             </TableRow>
                                         );
@@ -495,16 +501,12 @@ export default function OpenPositionsTable() {
                         </Table>
                     </TableContainer>
                     <TablePagination
-                        className="table-pagination"
                         rowsPerPageOptions={[5, 10, 25]}
-                        component="div"
                         count={publications?.length}
                         rowsPerPage={rowsPerPage}
                         page={page}
                         onChangePage={handleChangePage}
                         onChangeRowsPerPage={handleChangeRowsPerPage}
-                        labelRowsPerPage="Filas por página"
-                        labelDisplayedRows={({ from, to, count }) => `${from}-${to} de ${count !== -1 ? count : to}`}
                     />
                 </Paper>
             </div>
