@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Grid, makeStyles } from "@material-ui/core";
 import { Button, Typography, SnackbarsAlert } from "../../../shared/components";
 import { FormAddQuestion, DialogQuestion } from "../";
@@ -40,6 +40,13 @@ export default function TabEvaluation({ nextTab }) {
     })
 
     const { horizontal, vertical, open, message, severity } = notification;
+
+    useEffect(() => {
+        const index = values.length - 1
+        if(values[index].type_question === "answer-multiple"){
+            console.log("eleji pregunta multiple")
+        }
+    }, [values])
 
     const addValues = () => {
         if (validate(values)) {
@@ -118,6 +125,9 @@ export default function TabEvaluation({ nextTab }) {
 
     return (
         <div>
+            {
+                JSON.stringify(values)
+            }
             {
                 showInfo &&
                 <div className={classes.form}>
@@ -210,7 +220,10 @@ export default function TabEvaluation({ nextTab }) {
                                 <Button variant="outlined" size="large" onClick={cleanForm}>Limpiar</Button>
                             </Grid>
                             <Grid item>
-                                <Button variant="contained" size="large" onClick={nextTab}>Continuar</Button>
+                                <Button variant="contained" size="large" onClick={nextTab}>Guardar</Button>
+                            </Grid>
+                            <Grid item>
+                                <Button variant="outlined" size="large" onClick={nextTab}>Continuar</Button>
                             </Grid>
                         </Grid>
                     </div>
