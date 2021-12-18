@@ -12,7 +12,7 @@ import { checkIcon, fileIcon, registeredIcon } from "../images";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { Grid } from "@material-ui/core";
-import { Breadcrumbs, Button, Container, Typography } from "../../shared/components";
+import { Breadcrumbs, Button, Container, Typography, TitlePage } from "../../shared/components";
 import { CustomCard, InputDashboard, OpenPositionsTable } from "../components";
 
 import jobManagementChartOptions from "../constants/jobManagementChartOptions";
@@ -112,9 +112,11 @@ const Dashboard = ({ history }) => {
             <Grid item xs={12}>
               <Grid container spacing={3}>
                 <Grid item xs={6}>
-                  <Typography variant="h6" component="h6" className="title-color">
-                    Posiciones abiertas
-                  </Typography>
+                    <TitlePage
+                        description="A continuación podrás ver el listado de las publicaciones realizadas"
+                    >
+                        Posiciones abiertas
+                    </TitlePage>
                 </Grid>
                 <Grid item xs={6}>
                   <Grid container direction="row" justify="flex-end">

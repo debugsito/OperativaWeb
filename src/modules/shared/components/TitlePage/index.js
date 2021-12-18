@@ -19,15 +19,18 @@ const useStyles = makeStyles(theme => ({
         marginRight: "0.5rem"
     },
 }))
-export default function TitlePage({ children, description = null, handleClick }) {
+export default function TitlePage({ children, description = null, handleClick = null }) {
     const classes = useStyles()
 
     return (
         <div className={classes.title}>
             <div className={classes.titleMain}>
-                <div className={classes.titleButton} onClick={handleClick}>
-                    <img src={BackButton} alt="atras" />
-                </div>
+                {
+                    handleClick &&
+                    <div className={classes.titleButton} onClick={handleClick}>
+                        <img src={BackButton} alt="atras" />
+                    </div>
+                }
                 <div className={classes.titleText}>
                     <Typography variant="h4"><b>{children}</b></Typography>
                 </div>
