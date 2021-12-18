@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { InputAdornment, Grid, MenuItem } from "@material-ui/core";
+import { InputAdornment, Grid, MenuItem ,makeStyles} from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 
 import { ApplicantsTabs, DialogSendMessages, DrawerFilter } from "../components";
 import { Button, Breadcrumbs, Container, MenuList, TextInput, TitlePage, Typography, ToolTip } from "../../shared/components";
 import { SessionRoutes } from '../../shared/libs/sessionRoutes';
-
+import InputBase from '@material-ui/core/InputBase';
+import Paper from '@material-ui/core/Paper';
+import IconButton from '@material-ui/core/IconButton';
 //Images, icons
 import TuneIcon from '@material-ui/icons/Tune';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -18,8 +20,18 @@ const TAB = {
     POSTULANT_FINALISTS: 2,
     POSTULNAT_DISCARDED: 3
 }
-
+const useStyles = makeStyles(theme => ({
+    searchField: {
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        borderRadius: 30,
+        paddingLeft: 5,
+        paddingRight:10
+    }
+}))
 export default function JobPositionCreatedPage() {
+    const classes = useStyles();
     const [value, setValue] = useState(TAB.POSTULANT);
     const [selected, setSelected] = useState([]);
     const [anchorEl, setAnchorEl] = useState(null);
@@ -118,10 +130,23 @@ export default function JobPositionCreatedPage() {
                     value === TAB.POSTULANT &&
                     <>
                         <Grid item xs={4}>
-                            <TextInput
+                            <Paper
+                                className={classes.searchField}
+                            >
+                                <IconButton type="submit" aria-label="search">
+                                    <SearchIcon />
+                                </IconButton>
+                                <InputBase
+                                    sx={{ ml: 1, flex: 1 }}
+                                    placeholder="Buscar por nombre, experiencia o palabra clave"
+                                    fullWidth  
+                                />
+                            </Paper>
+                            
+                            {/* <TextInput
                                 fullWidth
                                 size="small"
-                                label="Buscar por nombre, experiencia o palabra clave "
+                                label="Buscar por nombre, experiencia o palabra clave"
                                 type="search"
                                 InputProps={{
                                     endAdornment: (
@@ -130,7 +155,7 @@ export default function JobPositionCreatedPage() {
                                         </InputAdornment>
                                     ),
                                 }}
-                            />
+                            /> */}
                         </Grid>
                         <Grid item xs={8} className="justify-end">
                             <Button startIcon={<TuneIcon />} size="large" variant="contained" color="secondary" onClick={handleOpenDrawer}>Filtro avanzado</Button>
