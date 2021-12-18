@@ -51,12 +51,21 @@ const useStyles = makeStyles((theme) => ({
     width: 230,
     display: "flex",
     justifyContent: "center",
-    alignItems: "center"
-
+    alignItems: "center",
+    borderRadius: "0 10px 0 0"
   },
   rootToolbar: {
     padding: "0 1rem 0 0",
     color: "var(--paragraphColor)"
+  },
+  containerInfo:{
+    display:"flex",
+    flexDirection:"column",
+    justifyContent:"center"
+  },
+  info:{
+    fontWeight:500,
+    lineHeight:1.5
   }
 }));
 
@@ -97,9 +106,9 @@ export default function Navigation({ children }) {
                     </Grid>
                     {
                       (hasDashboard && isSubjetBusiness) &&
-                      < Grid item>
-                        <Typography variant='subtitle1'>{user.account.razon_social}</Typography>
-                        <Typography variant='subtitle1'>RUC: {user?.account?.user?.document_number}</Typography>
+                      <Grid item className={classes.containerInfo}>
+                          <Typography variant='body2' className={classes.info}>{user.account.razon_social}</Typography>
+                          <Typography variant='body2' className={classes.info}>RUC: {user?.account?.user?.document_number}</Typography>
                       </Grid>
                     }
                   </Grid>

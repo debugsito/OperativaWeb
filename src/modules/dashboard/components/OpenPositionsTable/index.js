@@ -432,8 +432,8 @@ export default function OpenPositionsTable() {
                                                 >
                                                     <Grid container spacing={0}>
                                                         <Grid item xs={12}>
-                                                            <Typography variant="h6" component="span">
-                                                                {row.title}
+                                                            <Typography variant="subtitle1">
+                                                                <b>{row.title}</b>
                                                             </Typography>
                                                         </Grid>
                                                         <Grid item xs={12}>
