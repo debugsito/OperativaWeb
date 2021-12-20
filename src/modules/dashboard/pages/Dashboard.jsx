@@ -61,17 +61,6 @@ const Dashboard = ({ history }) => {
         <Grid item xs={12} style={{ margin: "1rem" }}>
 
           <Grid container spacing={3}>
-            <Grid item xs={12}>
-              <CustomCard className="dashboard-municipality-card" borderRadius="10px">
-                <Typography variant="h5" component="h5" className="title-color">
-                  {user?.account?.razon_social}
-                </Typography>
-                <Typography variant="body1" className="title-color">
-                  {/* cambiar ruc a dinamico */}
-                  RUC: {user?.account?.user?.document_number}
-                </Typography>
-              </CustomCard>
-            </Grid>
             {
              ( user.account.role === "muni" || user.account.role === "sub-muni") &&
               <Grid item xs={12}>
