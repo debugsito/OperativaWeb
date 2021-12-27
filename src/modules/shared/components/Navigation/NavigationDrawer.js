@@ -187,6 +187,9 @@ export default function NavigationDrawer(props) {
                     className={classes.nested}
                     onClick={() => handleClickSubItem(index2)}
                   >
+                    {!element.nestedList && selectedSubMenuIndex === index2 && (
+                      <div className={classes.activeTag} />
+                    )}
                     <ListItemIcon>{getAvatarIcon(element.name)}</ListItemIcon>
                     <ListItemText primary={element.name} />
                   </ListItem>
