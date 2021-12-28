@@ -179,7 +179,7 @@ export default function TabEvaluation({ nextTab }) {
   const onSubmit = (data) => console.log(data);
   return (
     <div>
-      {JSON.stringify(values)}
+      {/* {JSON.stringify(values)} */}
       {showInfo && (
         <div className={classes.form}>
           <Grid container spacing={3}>
@@ -204,10 +204,6 @@ export default function TabEvaluation({ nextTab }) {
                     <li>
                       <b>Pregunta cerrada:</b> El postulante tendrán que elgir
                       solo una opción
-                    </li>
-                    <li>
-                      <b>Pregunta múltiple:</b> El postulante podrá elegir entre
-                      1 o más opciones
                     </li>
                   </ul>
                 </Grid>
@@ -282,7 +278,7 @@ export default function TabEvaluation({ nextTab }) {
               </Grid>
               <Grid item xs={12}>
                 <Grid container spacing={3}>
-                  {fields.map((item, index) => (
+                  {/* {fields.map((item, index) => (
                     <FormAddQuestion
                       key={index}
                       index={index}
@@ -290,15 +286,21 @@ export default function TabEvaluation({ nextTab }) {
                       handleChange={handleFields}
                       deletedValues={deletedFields}
                     />
-                  ))}
+                  ))} */}
+                  <NewFormAddQuestion
+                    control={formMethods.control}
+                    name="extra"
+                    setNotification={setNotification}
+                    notification={notification}
+                  />
                 </Grid>
               </Grid>
-              <Grid item xs={3}>
+              {/* <Grid item xs={3}>
                 <Button color="secondary" size="large" onClick={addFields}>
                   {" "}
                   + AÑADIR PREGUNTA
                 </Button>
-              </Grid>
+              </Grid> */}
             </Grid>
           </div>
           <div className={classes.buttons}>

@@ -48,10 +48,6 @@ const New = ({ control, name, setNotification, notification }) => {
                   value: "answer-closed",
                   label: "Respuesta Cerrada",
                 },
-                {
-                  value: "answer-multiple",
-                  label: "Con varias opciones",
-                },
               ]}
               margin="normal"
             />
@@ -68,7 +64,7 @@ const New = ({ control, name, setNotification, notification }) => {
             </Grid>
           )}
           <Grid item xs={8}>
-            {values[index]?.type_question === "answer-multiple" && (
+            {values[index]?.type_question === "answer-closed" && (
               <Options
                 nestedIndex={index}
                 control={control}

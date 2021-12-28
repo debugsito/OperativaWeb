@@ -1,9 +1,36 @@
-.editor [contenteditable="false"], .editor-label{
-    color: rgba(0, 0, 0, 0.54);
-    padding: 0;
-    font-size: 1rem;
-    font-family: "var(--fontFamily)";
-    font-weight: 400;
-    line-height: 1;
-    letter-spacing: 0.00938em;
+.editor [contenteditable="false"],
+.editor-label {
+  color: rgba(0, 0, 0, 0.54);
+  padding: 0;
+  font-size: 1rem;
+  font-family: "var(--fontFamily)";
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.00938em;
+}
+.editor-text-wrapper {
+  display: flex;
+  flex-direction: column-reverse;
+  position: relative;
+}
+.editor-text-wrapper > div:focus-within + label {
+  transform: translateY(10px) scale(1);
+  padding: 0 5px;
+  background: white;
+}
+.rich-text-placeholder {
+  position: absolute;
+  top: 0;
+  font-size: 0.85rem;
+  padding: 0 14px;
+  transition: all 0.2s;
+  touch-action: manipulation;
+  transform: translateY(30px) scale(1);
+  color: rgba(0, 0, 0, 0.54);
+}
+.rich-text-placeholder.with-effect {
+  transform: translate(9px, -9px);
+  background: white;
+  z-index: 1;
+  padding: 0 5px;
 }
