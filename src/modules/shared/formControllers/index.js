@@ -3,6 +3,7 @@ import TextInput from "./TextInput";
 import Select from "./Select";
 import RadioButtonsGroup from "./RadioButtons";
 import Radio from "./Radio";
+import Checkbox from "./Checkbox";
 const FormController = ({ type, ...rest }) => {
   switch (type) {
     case "input":
@@ -13,6 +14,10 @@ const FormController = ({ type, ...rest }) => {
       return <Radio {...rest} />;
     case "radioButtons":
       return <RadioButtonsGroup {...rest} />;
+    case "checkbox":
+      return <Checkbox {...rest} />;
+    default:
+      return null;
   }
 };
 

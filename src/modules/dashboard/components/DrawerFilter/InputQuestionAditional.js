@@ -1,21 +1,38 @@
-import React from 'react'
-import { FormGroup, Grid, Typography } from '@material-ui/core';
-import { Checkbox } from '../../../shared/components';
+import React from "react";
+import { FormGroup, Grid, Typography } from "@material-ui/core";
+import { Checkbox } from "../../../shared/components";
+import FormController from "../../../shared/formControllers";
 
 export default function InputRubro({ values, handleInputChange }) {
-    return (
-        <Grid container>
-            <Grid item xs={12}>
-                <Typography variant="body1">El postulante manifiesta:</Typography>
-            </Grid>
-            <Grid item xs={12}>
-                <FormGroup>
-                    <Checkbox label="Viajaría al interior del país" name="question_one" onChange={handleInputChange} checked={values.question_one} />
-                    <Checkbox label="Trabajar en horarios rotativos" name="question_two" onChange={handleInputChange} checked={values.question_two}/>
-                    <Checkbox label="Trabajar horas extras" name="question_three" onChange={handleInputChange} checked={values.rubro_call_center}/>
-                    <Checkbox label="Trabajar fines de semana?" name="question_four" onChange={handleInputChange} checked={values.question_three}/>
-                </FormGroup>
-            </Grid>
-        </Grid>
-    )
+  return (
+    <Grid container>
+      <Grid item xs={12}>
+        <Typography variant="body1">El postulante manifiesta:</Typography>
+      </Grid>
+      <Grid item xs={12}>
+        <FormGroup>
+          <FormController
+            type="checkbox"
+            label="Viajaría al interior del país"
+            name="extra.answers.question_one"
+          />
+          <FormController
+            type="checkbox"
+            label="Trabajar en horarios rotativos"
+            name="extra.answers.question_two"
+          />
+          <FormController
+            type="checkbox"
+            label="Trabajar horas extras"
+            name="extra.answers.question_three"
+          />
+          <FormController
+            type="checkbox"
+            label="Trabajar fines de semana?"
+            name="extra.answers.question_four"
+          />
+        </FormGroup>
+      </Grid>
+    </Grid>
+  );
 }

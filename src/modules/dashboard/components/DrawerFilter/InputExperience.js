@@ -1,33 +1,80 @@
-import React from 'react'
-import { FormGroup, Grid, Typography } from '@material-ui/core';
-import { Checkbox } from '../../../shared/components';
+import React from "react";
+import {
+  FormControlLabel,
+  FormGroup,
+  Grid,
+  Typography,
+} from "@material-ui/core";
+import { Checkbox } from "../../../shared/components";
+import { useController, useFormContext } from "react-hook-form";
+import FormController from "../../../shared/formControllers";
 
-export default function InputExperience({ values, handleInputChange }) {
-    return (
-        <Grid container spacing={2}>
-            <Grid item xs={12}>
-                <Typography variant="subtitle1"><b>Con experiencia:</b></Typography>
-            </Grid>
-            <Grid item xs={12}>
-                <FormGroup>
-                    <Checkbox label="Menos de 6 meses" name="experience_one" onChange={handleInputChange} checked={values.experience_one} />
-                    <Checkbox label="1 año" name="experience_two" onChange={handleInputChange} checked={values.experience_two}/>
-                    <Checkbox label="2 años" name="experience_three" onChange={handleInputChange} checked={values.experience_three}/>
-                    <Checkbox label="3 años a más" name="experience_four" onChange={handleInputChange} checked={values.experience_four}/>
-                </FormGroup>
-            </Grid>
-            <Grid item xs={12}>
-                <Typography variant="subtitle1"><b>Sin experiencia:</b></Typography>
-            </Grid>
-            <Grid item xs={12}>
-                <FormGroup>
-                    <Checkbox label="Realizó Voluntariado" name="whitout_experience_one" onChange={handleInputChange} checked={values.whitout_experience_one} />
-                    <Checkbox label="Disponible para horario rotativos" name="whitout_experience_two" onChange={handleInputChange} checked={values.whitout_experience_two}/>
-                    <Checkbox label="Disponible para horas extras." name="whitout_experience_three" onChange={handleInputChange} checked={values.whitout_experience_three}/>
-                    <Checkbox label="Disponible para fines de semana." name="whitout_experience_four" onChange={handleInputChange} checked={values.whitout_experience_four}/>
-                    <Checkbox label="Disponible para viajar." name="whitout_experience_five" onChange={handleInputChange} checked={values.whitout_experience_five}/>
-                </FormGroup>
-            </Grid>
-        </Grid>
-    )
+export default function InputExperience() {
+  return (
+    <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <Typography variant="subtitle1">
+          <b>Con experiencia:</b>
+        </Typography>
+      </Grid>
+      <Grid item xs={12}>
+        <FormGroup>
+          <FormController
+            name="experience.answers.with_experience_one"
+            type="checkbox"
+            label="Menos de 6 meses"
+          />
+          <FormController
+            name="experience.answers.with_experience_two"
+            type="checkbox"
+            label="1 año"
+          />
+          <FormController
+            name="experience.answers.with_experience_three"
+            type="checkbox"
+            label="2 años"
+          />
+          <FormController
+            name="experience.answers.with_experience_four"
+            type="checkbox"
+            label="3 años a más"
+          />
+        </FormGroup>
+      </Grid>
+      <Grid item xs={12}>
+        <Typography variant="subtitle1">
+          <b>Sin experiencia:</b>
+        </Typography>
+      </Grid>
+      <Grid item xs={12}>
+        <FormGroup>
+          <FormController
+            type="checkbox"
+            label="Realizó Voluntariado"
+            name="experience.answers.whitout_experience_one"
+          />
+          <FormController
+            type="checkbox"
+            label="Disponible para horario rotativos"
+            name="experience.answers.whitout_experience_two"
+          />
+          <FormController
+            type="checkbox"
+            label="Disponible para horas extras."
+            name="experience.answers.whitout_experience_three"
+          />
+          <FormController
+            type="checkbox"
+            label="Disponible para fines de semana."
+            name="experience.answers.whitout_experience_four"
+          />
+          <FormController
+            type="checkbox"
+            label="Disponible para viajar."
+            name="experience.answers.whitout_experience_five"
+          />
+        </FormGroup>
+      </Grid>
+    </Grid>
+  );
 }

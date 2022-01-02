@@ -1,21 +1,50 @@
-import React from 'react'
-import { FormGroup, Grid } from '@material-ui/core';
-import { Checkbox } from '../../../shared/components';
+import React from "react";
+import { FormGroup, Grid } from "@material-ui/core";
+import { Checkbox } from "../../../shared/components";
+import FormController from "../../../shared/formControllers";
 
-export default function InputEducation({ values, handleInputChange }) {
-    return (
-        <Grid container>
-            <Grid item xs={12}>
-                <FormGroup>
-                    <Checkbox label="Sin Estudios" name="education_whitout" onChange={handleInputChange} checked={values.education_whitout} />
-                    <Checkbox label="Primaria incompleta" name="education_primary_incomplete" onChange={handleInputChange} checked={values.education_primary_incomplete}/>
-                    <Checkbox label="Primaria completa" name="education_primary_complete" onChange={handleInputChange} checked={values.education_primary_complete}/>
-                    <Checkbox label="Secundaria incompleta" name="education_secundary_incomplete" onChange={handleInputChange} checked={values.education_secundary_incomplete}/>
-                    <Checkbox label="Secundaria completa" name="education_secundary_complete" onChange={handleInputChange} checked={values.education_secundary_complete}/>
-                    <Checkbox label="Técnico superior incompleto" name="education_tecnic_incomplete" onChange={handleInputChange} checked={values.education_tecnic_incomplete}/>
-                    <Checkbox label="Técnico superior completo" name="education_tecnic_complete" onChange={handleInputChange} checked={values.education_tecnic_complete}/>
-                </FormGroup>
-            </Grid>
-        </Grid>
-    )
+export default function InputEducation() {
+  return (
+    <Grid container>
+      <Grid item xs={12}>
+        <FormGroup>
+          <FormController
+            type="checkbox"
+            label="Sin Estudios"
+            name="education.answers.whitout_education"
+          />
+          <FormController
+            type="checkbox"
+            label="Primaria incompleta"
+            name="education.answers.education_primary_incomplete"
+          />
+          <FormController
+            type="checkbox"
+            label="Primaria completa"
+            name="education.answers.education_primary_complete"
+          />
+          <FormController
+            type="checkbox"
+            label="Secundaria incompleta"
+            name="education.answers.education_secundary_incomplete"
+          />
+          <FormController
+            type="checkbox"
+            label="Secundaria completa"
+            name="education.answers.education_secundary_complete"
+          />
+          <FormController
+            type="checkbox"
+            label="Técnico superior incompleto"
+            name="education.answers.education_tecnic_incomplete"
+          />
+          <FormController
+            type="checkbox"
+            label="Técnico superior completo"
+            name="education.answers.education_tecnic_complete"
+          />
+        </FormGroup>
+      </Grid>
+    </Grid>
+  );
 }
