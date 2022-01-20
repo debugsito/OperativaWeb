@@ -27,6 +27,7 @@ import IconButton from "@material-ui/core/IconButton";
 import TuneIcon from "@material-ui/icons/Tune";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import SearchIcon from "@material-ui/icons/Search";
+import { useSelector } from "react-redux";
 
 const TAB = {
   POSTULANT: 0,
@@ -52,7 +53,7 @@ export default function JobPositionCreatedPage() {
   const [openModal, setOpenModal] = useState(false);
   const [openModalFill, setOpenModalFill] = useState(false);
   const [openDrawer, setOpenDrawer] = useState(false);
-
+  const { publicationSelected } = useSelector((state) => state.dashboard);
   const history = useHistory();
   const initRoute = SessionRoutes().initRoute;
   const routes = [
@@ -126,12 +127,12 @@ export default function JobPositionCreatedPage() {
             <TitlePage
               description={
                 <>
-                  <b>Creado por: </b> Marco Antonio Pérez Diaz
+                  <b>Creado por: </b> {publicationSelected.createBy}
                 </>
               }
               handleClick={() => history.push(initRoute)}
             >
-              Motorizados
+              {publicationSelected.title}
             </TitlePage>
           </Grid>
           <Grid item xs={12}>
@@ -203,7 +204,6 @@ export default function JobPositionCreatedPage() {
 
           {value === TAB.POSTULANT && (
             <Grid item xs={12}>
-              
               <AdvanceFilter />
             </Grid>
           )}
@@ -262,6 +262,7 @@ export default function JobPositionCreatedPage() {
               </Grid>
             </Grid>
           )}
+
           <Grid item xs={12}>
             <ApplicantsTabs
               onChangeTab={handleChange}
