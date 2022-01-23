@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 import { Button, CircularProgressWithLabel, Container, Paper, Typography, TextCustom } from "../../shared/components";
 import { CardsFeatures } from "../components";
 import { SessionRoutes } from '../../shared/libs/sessionRoutes';
-import { setPublicationId, setStatus } from '../../../store/actions/dashboard/dashboard.action';
+import { setPublicationId, setStatus, getPostulantsByPublicationId } from '../../../store/actions/dashboard/dashboard.action';
 import { GirlImage, JobCreatedIcon } from "../images";
 
 const useStyles = makeStyles(theme => ({
@@ -21,7 +21,7 @@ export default function JobPositionCreatedPage() {
     const history = useHistory()
     const [progress, setProgress] = useState(0);
     const initRoute = SessionRoutes().initRoute;
-    const {job_position} = useSelector(state => state.dashboard)
+    const { job_position, postulantsByPublicationId } = useSelector(state => state.dashboard)
 
     useEffect(() => {
         let counter = 0
@@ -32,6 +32,8 @@ export default function JobPositionCreatedPage() {
           }
           counter+=10
         }, 1000);
+
+        
         return () => {
           clearInterval(timer);
           dispatch(setPublicationId(null))
@@ -69,7 +71,7 @@ export default function JobPositionCreatedPage() {
                                                <img src={JobCreatedIcon} alt="success"/>
                                             </Grid>    
                                             <Grid item xs={12}>
-                                                <Typography variant="h4">Encontramos <TextCustom color="primary" weight={700}>40 postulantes</TextCustom> que cumplen con tus requerimientos</Typography>
+                                                <Typography variant="h4">Encontramos <TextCustom color="primary" weight={700}>{postulantsByPublicationId?.totalItems} postulantes</TextCustom> que cumplen con tus requerimientos</Typography>
                                             </Grid>    
                                             <Grid item xs={12}>
                                                 <Button variant="contained" size="large" onClick={goListOfApplicants}>Ver resultados</Button>

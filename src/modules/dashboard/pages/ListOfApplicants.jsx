@@ -58,7 +58,7 @@ export default function JobPositionCreatedPage() {
   const initRoute = SessionRoutes().initRoute;
   const routes = [
     { name: "Inicio", to: `${initRoute}` },
-    { name: "Postulantes", to: `${initRoute}/lista-de-postulantes` },
+    { name: "Postulantes", to: `${initRoute}/publicacion/180/lista-de-postulantes` },
   ];
 
   const handleChange = (newValue) => {

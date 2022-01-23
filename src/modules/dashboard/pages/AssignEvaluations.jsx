@@ -31,7 +31,7 @@ export default function AssignEvaluations() {
     const classes = useStyles();
     const history = useHistory()
     const initRoute = SessionRoutes().initRoute;
-    const routes = [{ name: "Inicio", to: `${initRoute}` }, { name: "Postulantes", to: `${initRoute}/lista-de-postulantes` }];
+    const routes = [{ name: "Inicio", to: `${initRoute}` }, { name: "Postulantes", to: `${initRoute}/publicacion/:publication_id/lista-de-postulantes` }];
     const [openVideo, setOpenVideo] = useState(false)
 
     const handleOpenVideo = () => {

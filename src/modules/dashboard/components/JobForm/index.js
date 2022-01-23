@@ -51,9 +51,8 @@ export default function JobForm({
   const history = useHistory();
   const dispatch = useDispatch();
   const dateLocal = DateTime.local().toFormat("yyyy-LL-dd");
-  const { departments, provinces, districts, rubrosOp, academicLevels } =
+  const { departments, provinces, districts, rubrosOp, academicLevels, periods } =
     useSelector((state) => state?.utils);
-  const [periods, setPeriods] = useState([]);
   const [districtsList, setDistrictsList] = useState([]);
   const [provincesList, setProvincesList] = useState([]);
   const [publicationHidden, setPublicationHidden] = useState(false);
@@ -153,7 +152,6 @@ export default function JobForm({
   } = useForm(initialValues, true, validate);
 
   useEffect(() => {
-    getPeriodsList();
     dispatch(actions_Utils.getAllPeriods());
     dispatch(actions_Utils.getDepartments());
     dispatch(actions_Utils.getProvinces());
@@ -184,15 +182,10 @@ export default function JobForm({
     setDistrictsList(filteredDistricts);
   };
 
-  const getPeriodsList = async () => {
-    let response = await getPeriods();
-    setPeriods(response.periods);
-  };
-
   const goForward = () => history.push(initRoute);
 
   const handleClickSave = () => {
-    console.log("values", values);
+    
     if (!disabledButtonState) {
       let valuesTemp = { ...values };
       valuesTemp.description = JSON.stringify(values.description);
@@ -482,15 +475,34 @@ export default function JobForm({
                   helperText={errors.postulants}
                 />
               </Grid>
-              <Grid item xs={2} className="align-items-center">
+              
+              <Grid item xs={1} className="align-items-center">
                 <ToolTip title="Ingresa la cantidad de registrados a evaluar por la Inteligencia Artificial Operativa">
                   <img src={WarningBlackIcon} alt="icono" />
                 </ToolTip>
               </Grid>
+              
             </Grid>
           </Grid>
           <Grid item xs={12}>
             <Grid container spacing={2}>
+            <Grid item xs={4}>
+                <Select
+                  name="period_id"
+                  label="Periodo de permanencia"
+                  value={values.period_id}
+                  onChange={handleInputChange}
+                  error={errors.period_id ? true : false}
+                  helperText={errors.period_id}
+                >
+                  {periods.length > 0 &&
+                    periods.map((element) => (
+                      <MenuItem key={element.id} value={element.id}>
+                        {element.name}
+                      </MenuItem>
+                    ))}
+                </Select>
+              </Grid>
               <Grid item xs={6}>
                 <TextInput
                   fullWidth

@@ -53,7 +53,7 @@ const ApplicantCv = () => {
 
     const routes = [
         { name: "Incio", to: `${initRoute}` },
-        { name: "Postulantes", to: `${initRoute}/lista-de-postulantes` },
+        { name: "Postulantes", to: `${initRoute}/publicacion/:publication_id/lista-de-postulantes` },
         { name: "CV", to: `${initRoute}/lista-de-postulantes/perfil` }
     ];
 

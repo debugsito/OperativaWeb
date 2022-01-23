@@ -1,5 +1,17 @@
 import { service_Dashboard } from "../../services";
-import { setErrorFetch, setHistory, setReportByPostulantId, setRequestState, setProfileOfApplicant, setProfileApplicantError, setStatus, setPublicationId, setUpdatePublicationError } from "./dashboard.action";
+import { 
+  setErrorFetch,
+  setHistory,
+  setReportByPostulantId,
+  setRequestState,
+  setProfileOfApplicant,
+  setProfileApplicantError,
+  setStatus,
+  setPublicationId,
+  setUpdatePublicationError,
+  setPostulantsByPublicationId,
+  setPostulantsByPublicationIdError  
+ } from "./dashboard.action";
 
 export const getHistory = () => {
   return async (dispatch) => {
@@ -46,8 +58,9 @@ export const savePublication = (body) => {
     try {
       dispatch(setStatus({ code: "loading" }))
       const response = await service_Dashboard.savePublication(body);
-      console.log("response.data", response.data)
-      dispatch(setPublicationId(response.data.publication.id))
+      const publication_id = response.data.publication.id
+      dispatch(setPublicationId(publication_id))
+      dispatch(getPostulantsByPublicationId({publication_id}))
       dispatch(setStatus({ code: "idle", message: "Publicación creada exitosamente." }))
       dispatch(setRequestState({ success: true }));
     } catch (error) {
@@ -78,6 +91,27 @@ export const updatePublication = (params) => {
           dispatch(setUpdatePublicationError(error.response.data.message));
         } else {
           dispatch(setUpdatePublicationError("Ha ocurrido un error interno."));
+        };
+      }
+    }
+  };
+};
+
+export const getPostulantsByPublicationId = (params) => {
+  return async (dispatch) => {
+    try {
+      console.log("ejecutando getPostulantsByPublicationId ", params)
+      const response = await service_Dashboard.getPostulantsByPublicationId(params);
+      dispatch(setPostulantsByPublicationId(response.data));
+      dispatch(setPostulantsByPublicationIdError(null)); //control de errores
+    } catch (error) {
+      if (!error.response) {
+        dispatch(setPostulantsByPublicationIdError("Ha ocurrido un error interno.1"));
+      } else {
+        if (error.response.status === 409) {
+          dispatch(setPostulantsByPublicationIdError(error.response.data.message));
+        } else {
+          dispatch(setPostulantsByPublicationIdError("Ha ocurrido un error interno.2"));
         };
       }
     }
