@@ -10,6 +10,7 @@ import {
   makeStyles,
   Paper,
 } from "@material-ui/core";
+import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { stableSort, getComparator } from "../../../shared/utils/table.utils";
 import {
@@ -98,15 +99,15 @@ export default function TableListPostulants() {
   const { publicationSelected, postulantsByPublicationId } = useSelector(
     (state) => state?.dashboard
   );
-  const publication_id = publicationSelected.data.id;
+  // const publication_id = publicationSelected.data.id;
+  const {publication_id} = useParams();
+
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("");
   const [selected, setSelected] = useState([]);
-  const [postulants, setPostulants] = useState([
-    createData({ id: "" }, "", "", "", "", "", "", "", { id: "" }),
-  ]);
+  const [postulants, setPostulants] = useState([]);
 
   useEffect(() => {
     dispatch(getPostulantsByPublicationId({ publication_id })); //EN DURO
