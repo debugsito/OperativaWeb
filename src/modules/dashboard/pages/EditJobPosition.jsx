@@ -43,25 +43,16 @@ export default function Position() {
     const routes = [{ name: "Inicio", to: `${initRoute}` }, { name: "Editar posición", to: `${initRoute}/editar-posicion` }];
     
     const initialValues = {
-        id:publicationSelected.id,
-        number_registered:publicationSelected.number_registered?? "null",
-        gender:publicationSelected.gender,
+        ...publicationSelected,
         edad_min:publicationSelected.edad_min?? null,
         edad_max:publicationSelected.edad_max?? null,
-        job_title: publicationSelected.job_title,
         description: JSON.parse(publicationSelected.description),
         requirements: JSON.parse(publicationSelected.requirements),
         benefits: JSON.parse(publicationSelected.benefits),
-        job_level_id: publicationSelected.job_level_id,//rubro
-        address: publicationSelected.address,
+        expiration_date: DateTime.fromISO(publicationSelected.expiration_date? publicationSelected.expiration_date: publicationSelected.from_date).toUTC().toFormat("yyyy-LL-dd"),
         district_id: publicationSelected.district.id,
-        period: publicationSelected.period,
-        salary: publicationSelected.salary,
-        expiration_date: DateTime.fromISO(publicationSelected?.expiration_date?publicationSelected?.expiration_date: publicationSelected?.from_date).toUTC().toFormat("yyyy-LL-dd"),
         department_id: publicationSelected.district.province.department_id,
         province_id: publicationSelected.district.province_id,
-        rubro_id: publicationSelected.job_level_id,
-        period_id: publicationSelected.period,
     }
 
     return (

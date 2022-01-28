@@ -412,12 +412,13 @@ export default function OpenPositionsTable() {
     rowsPerPage -
     Math.min(rowsPerPage, publications?.length - page * rowsPerPage);
 
-  const executeAction = (event, id, publication) => {
+  const executeAction = (event, action, publication) => {
+    console.log("publication",publication)
     event.preventDefault();
     dispatch(setPublicationSelected(publication));
-    if (id === "edit") history.push(`${initRoute}/editar-empleo`);
-    if (id === "show") history.push(`${initRoute}/ver-posicion`);
-    if (id === "archive") dispatch(archivePublication({ id: publication.id }));
+    if (action === "edit") history.push(`${initRoute}/editar-empleo`);
+    if (action === "show") history.push(`${initRoute}/ver-posicion`);
+    if (action === "archive") dispatch(archivePublication({ id: publication.id }));
   };
 
   const goToPostulants = (publication) => {
@@ -458,7 +459,7 @@ export default function OpenPositionsTable() {
                   .map((row, index) => {
                     const isItemSelected = isSelected(row.data.id);
                     const labelId = `enhanced-table-checkbox-${index}`;
-
+                    console.log("row",row)
                     return (
                       <TableRow
                         hover
