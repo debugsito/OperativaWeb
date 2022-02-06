@@ -10,7 +10,7 @@ import {
   makeStyles,
   Paper,
 } from "@material-ui/core";
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { stableSort, getComparator } from "../../../shared/utils/table.utils";
 import {
@@ -19,38 +19,17 @@ import {
   EnhancedTableHead,
   LinkRouter,
   Typography,
+  SnackbarsAlert
 } from "../../../shared/components";
 import EnhancedTableToolbar from "./EnhancedTableToolbar";
 import { DateTime } from "luxon";
 
 import { getPostulantsByPublicationId } from "../../../../store/actions/dashboard/dashboard.action";
+import { actions_Utils } from "../../../../store/actions";
+import { service_Dashboard } from "../../../../store/services"
 
 //Images,icon
 import TodayIcon from "@material-ui/icons/Today";
-
-function createData(
-  similarity,
-  fullname,
-  experience,
-  createdAt,
-  education,
-  resident,
-  source,
-  stateCv,
-  data
-) {
-  return {
-    similarity,
-    fullname,
-    experience,
-    createdAt,
-    education,
-    resident,
-    source,
-    stateCv,
-    data,
-  };
-}
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -96,50 +75,70 @@ const useStyles = makeStyles((theme) => ({
 export default function TableListPostulants() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const { publicationSelected, postulantsByPublicationId } = useSelector(
-    (state) => state?.dashboard
-  );
-  // const publication_id = publicationSelected.data.id;
-  const {publication_id} = useParams();
+  const { publicationSelected, postulantsByPublicationId } = useSelector((state) => state?.dashboard);
+  const { departments, provinces, districts } = useSelector(state => state?.utils)
+  const publication_id = publicationSelected.data.id;
+
+  const [notification, setNotification] = useState({
+    open: false,
+    message: "",
+    vertical: 'top',
+    horizontal: 'right',
+    severity: "success"
+  })
+
+  const { horizontal, vertical, open, message, severity } = notification;
+
 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("");
   const [selected, setSelected] = useState([]);
-  const [postulants, setPostulants] = useState([]);
+  const [postulants, setPostulants] = useState([createData("", "", "", "", "", "", "", "", { id: "" })]);
 
   useEffect(() => {
-    dispatch(getPostulantsByPublicationId({ publication_id })); //EN DURO
-  }, [publication_id]);
+    const pagination = `page=${page}&size=${rowsPerPage}`
+    dispatch(getPostulantsByPublicationId({ publication_id, query: pagination }));
+    dispatch(actions_Utils.getDepartments());
+    dispatch(actions_Utils.getProvinces());
+    dispatch(actions_Utils.getDistricts());
+  }, [])
 
   useEffect(() => {
-    const rows = postulantsByPublicationId?.rows?.map((item) => {
-      // return createData(
-      //   item?.similarity,
-      //   item?.user?.first_name + " " + item?.user?.last_name,
-      //   item?.user?.experience ? "Si" : "No",
-      //   DateTime.fromISO(item.createdAt).toFormat("dd LLL yyyy"),
-      //   "Técnico",
-      //   "Lima, Lima, Los Olivos",
-      //   "Multiposting",
-      //   item?.user?.experience, //EN DURO
-      //   item
-      // );
-      return {
-        similarity: item?.similarity,
-        fullname: item.user.fullname,
-        experience: item.user.experience ? "Si" : "No",
-        createdAt: DateTime.fromISO(item.createdAt).toFormat("dd LLL yyyy"),
-        education: item.user.level_name ? item.user.level_name : "-",
-        resident: `${item.user.department_id} ${item.user.province_id} ${item.user.district_id}`,
-        source: "Multiposting",
-        stateCv: item.user.experience,
-        data: item,
-      };
-    });
-    setPostulants(rows);
-  }, [postulantsByPublicationId]);
+    if (postulantsByPublicationId.rows) {
+      const rows = postulantsByPublicationId?.rows?.map((item) => {
+        return {
+          similarity: item?.similarity,
+          fullname: item.user.fullname,
+          experience: item.user.experience ? "Si" : "No",
+          createdAt: DateTime.fromISO(item.createdAt).toFormat("dd LLL yyyy"),
+          education: item.user.level_name ? item.user.level_name : "-",
+          resident: `${getDepartmentById(item?.user?.department_id)}, ${getProvinceById(item?.user?.province_id)}, ${getDistrictById(item?.user?.district_id)}`,
+          source: "Multiposting",
+          stateCv: item.user.experience,
+          data: item,
+        };
+      });
+      console.log("postulantsByPublicationId rows", rows)
+      setPostulants(rows);
+    }
+  }, [postulantsByPublicationId.rows]);
+
+  const getDistrictById = (district_id) => {
+    const distric_temp = districts.find(item => item.id == district_id);
+    return distric_temp.name
+  }
+
+  const getProvinceById = (province_id) => {
+    const province_temp = provinces.find(item => item.id == province_id);
+    return province_temp.name
+  }
+
+  const getDepartmentById = (department_id) => {
+    const department_temp = departments.find(item => item.id == department_id)
+    return department_temp.name
+  }
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -148,12 +147,17 @@ export default function TableListPostulants() {
   };
 
   const handleChangePage = (event, newPage) => {
+    const pagination = `page=${newPage}&size=${rowsPerPage}`
     setPage(newPage);
+    dispatch(getPostulantsByPublicationId({ publication_id, query: pagination }));
   };
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
+    const rowsPerPageTemp = parseInt(event.target.value, 10)
+    const pagination = `page=${0}&size=${rowsPerPageTemp}`
+    setRowsPerPage(rowsPerPageTemp);
     setPage(0);
+    dispatch(getPostulantsByPublicationId({ publication_id, query: pagination }));
   };
 
   const handleClickCheckbox = (event, id) => {
@@ -185,19 +189,35 @@ export default function TableListPostulants() {
     setSelected([]);
   };
 
+  const sendPostulantAProcess = () => {
+    const body = selected.map(item => (
+      {
+        publication_account_id: item
+      }
+    ))
+    service_Dashboard.selectApplicant(body, publication_id)
+      .then(() => {
+        setNotification({ ...notification, open: true, message: "Se guardo correctamente los datos. Puede verificar dirigiendose a la pestaña: En Proceso" })
+      })
+      .catch(error => {
+        setNotification({ ...notification, open: true, severity: "error", message: "Ocurrio un error al guardar, intentalos mas tarde." })
+      })
+
+  }
+
   const isSelected = (id) => selected.indexOf(id) !== -1;
 
-  const emptyRows =
-    rowsPerPage -
-    Math.min(rowsPerPage, postulants?.length - page * rowsPerPage);
+  // const emptyRows =
+  //   rowsPerPage -
+  //   Math.min(rowsPerPage, postulants?.length - page * rowsPerPage);
 
-  // const emptyRows = rowsPerPage - Math.min(rowsPerPage, postulants.length);
+  const emptyRows = rowsPerPage - Math.min(rowsPerPage, postulants.length);
 
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
         {selected?.length > 0 && (
-          <EnhancedTableToolbar numSelected={selected?.length} />
+          <EnhancedTableToolbar handleClick={sendPostulantAProcess} numSelected={selected?.length} />
         )}
         <TableContainer>
           <Table
@@ -218,7 +238,7 @@ export default function TableListPostulants() {
             />
             <TableBody>
               {stableSort(postulants, getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                // .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
                   const isItemSelected = isSelected(row.data.id);
                   const labelId = `enhanced-table-checkbox-${index}`;
@@ -321,7 +341,7 @@ export default function TableListPostulants() {
           className="table-pagination"
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
-          count={postulants.length}
+          count={postulantsByPublicationId?.totalItems}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
@@ -330,8 +350,16 @@ export default function TableListPostulants() {
           labelDisplayedRows={({ from, to, count }) =>
             `${from}-${to} de ${count !== -1 ? count : to}`
           }
+          hideNextButton
         />
       </Paper>
+      <SnackbarsAlert
+        open={open}
+        anchorOrigin={{ vertical, horizontal }}
+        message={message}
+        handleClose={() => setNotification({...notification,open:false})}
+        severity={severity}
+      />
     </div>
   );
 }
@@ -394,3 +422,17 @@ const headCells = [
     width: 100,
   },
 ];
+
+function createData(
+  similarity,
+  fullname,
+  experience,
+  createdAt,
+  education,
+  resident,
+  source,
+  stateCv,
+  data
+) {
+  return { similarity, fullname, experience, createdAt, education, resident, source, stateCv, data };
+}

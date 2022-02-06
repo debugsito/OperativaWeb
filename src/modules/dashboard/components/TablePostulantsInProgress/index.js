@@ -15,6 +15,7 @@ import EmailIcon from '@material-ui/icons/Email';
 import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
 import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck';
 import { DoneIcon, AlertIcon } from "../../images";
+import { service_Dashboard } from "../../../../store/services";
 
 function createData(
     similarity,
@@ -78,10 +79,12 @@ const STATE_OF_EVALUATIONS = [
     { text: "Entrevista", status: false },
 ]
 
+const ACTIONS = [{ id: "finalizar", label: "Pasar a Finalista" }, { id: "descartar", label: "Descartar postulante" }]
+
 export default function TableListPostulants({ selected, handleClickCheckbox, handleSelectAllClick }) {
     const classes = useStyles();
     const dispatch = useDispatch()
-    const { postulantsByPublicationId } = useSelector(state => state?.dashboard)
+    const { postulantsByPublicationId, publicationSelected } = useSelector(state => state?.dashboard)
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [order, setOrder] = useState("asc");
@@ -91,26 +94,25 @@ export default function TableListPostulants({ selected, handleClickCheckbox, han
     const [openModal, setOpenModal] = useState(false)
     const [openImbox, setOpenImbox] = useState(false)
 
+    const publication_id = publicationSelected.data.id;
+
     useEffect(() => {
-        dispatch(getPostulantsByPublicationId({ publication_id: "154" })) //EN DURO
+        const pagination = `estado=2&page=${page}&size=${rowsPerPage}`
+        dispatch(getPostulantsByPublicationId({ publication_id, query: pagination })) //EN DURO
     }, [])
 
     useEffect(() => {
-        if (postulantsByPublicationId.count > 1) {
-            const rows = postulantsByPublicationId?.data?.map(item => {
-                return (createData(
-                    item?.similarity,
-                    item?.user?.first_name + " " + item?.user?.last_name,
-                    item?.user?.experience ? 2 : 0, //Messages
-                    STATE_OF_EVALUATIONS,
-                    [{ id: "finalizar", label: "Pasar a Finalista" }, { id: "descartar", label: "Descartar postulante" }],
-                    item,
-                )
-                )
-            })
+        if (postulantsByPublicationId.rows) {
+            const rows = postulantsByPublicationId?.rows?.map(item => ({
+                similarity: item.similarity,
+                fullname: item.user.first_name + " " + item.user.last_name,
+                messages: item.user.experience ? 2 : 0,
+                stateOfEvaluations: STATE_OF_EVALUATIONS,
+                data: item
+            }))
             setPostulants(rows)
         }
-    }, [postulantsByPublicationId])
+    }, [postulantsByPublicationId.rows])
 
     const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === "asc";
@@ -119,18 +121,23 @@ export default function TableListPostulants({ selected, handleClickCheckbox, han
     };
 
     const handleChangePage = (event, newPage) => {
+        const pagination = `estado=2&page=${newPage}&size=${rowsPerPage}`
         setPage(newPage);
+        dispatch(getPostulantsByPublicationId({ publication_id, query: pagination }));
     };
 
     const handleChangeRowsPerPage = (event) => {
-        setRowsPerPage(parseInt(event.target.value, 10));
+        const rowsPerPageTemp = parseInt(event.target.value, 10)
+        const pagination = `estado=2&page=${page}&size=${rowsPerPage}`
+        setRowsPerPage(rowsPerPageTemp);
         setPage(0);
+        dispatch(getPostulantsByPublicationId({ publication_id, query: pagination }));
     };
 
     const isSelected = (id) => selected.indexOf(id) !== -1;
 
-    const emptyRows =
-        rowsPerPage - Math.min(rowsPerPage, postulants?.length - page * rowsPerPage);
+    // const emptyRows = rowsPerPage - Math.min(rowsPerPage, postulants?.length - page * rowsPerPage);
+    const emptyRows = rowsPerPage - Math.min(rowsPerPage, postulants?.length);
 
 
     return (
@@ -159,7 +166,7 @@ export default function TableListPostulants({ selected, handleClickCheckbox, han
                         <TableBody>
                             {
                                 stableSort(postulants, getComparator(order, orderBy))
-                                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                    // .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map((row, index) => {
                                         const isItemSelected = isSelected(row.data.id);
                                         const labelId = `enhanced-table-checkbox-${index}`;
@@ -223,11 +230,11 @@ export default function TableListPostulants({ selected, handleClickCheckbox, han
                                                 <TableCell id={labelId} scope="row" padding="normal">
                                                     <Grid item xs={12}>
                                                         {
-                                                            row.actions.map((item) => (
+                                                            ACTIONS.map((item) => (
                                                                 <ToolTip title={item.label}>
-                                                                <IconButton aria-label="delete" key={item.id} color="inherit">
-                                                                    {item.id === "finalizar"? <PlaylistAddCheckIcon/> : <RemoveCircleIcon/>}
-                                                                </IconButton>
+                                                                    <IconButton aria-label="delete" key={item.id} color="inherit">
+                                                                        {item.id === "finalizar" ? <PlaylistAddCheckIcon /> : <RemoveCircleIcon />}
+                                                                    </IconButton>
                                                                 </ToolTip>
                                                             ))
                                                         }
@@ -247,7 +254,7 @@ export default function TableListPostulants({ selected, handleClickCheckbox, han
                 </TableContainer>
                 <TablePagination
                     rowsPerPageOptions={[5, 10, 25]}
-                    count={postulants.length}
+                    count={postulantsByPublicationId?.totalItems}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     onPageChange={handleChangePage}

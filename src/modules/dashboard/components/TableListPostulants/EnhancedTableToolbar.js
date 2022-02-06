@@ -3,7 +3,7 @@ import { EnhancedTableToolbar, Typography } from "../../../shared/components";
 import { Tooltip, IconButton } from "@material-ui/core";
 import SendIcon from '@material-ui/icons/Send';
 
-export default function EnhancedTableToolbarCustom(props) {
+export default function EnhancedTableToolbarCustom({handleClick, ...props}) {
 
 
     return (
@@ -18,7 +18,7 @@ export default function EnhancedTableToolbarCustom(props) {
                     Llevar masivamente a <b>"En proceso"</b>
                 </Typography>
                 <Tooltip title="enviar">
-                    <IconButton aria-label="Enviar" color="inherit">
+                    <IconButton aria-label="Enviar" color="inherit" onClick={handleClick}>
                         <SendIcon />
                     </IconButton>
                 </Tooltip>

@@ -32,7 +32,7 @@ const deletePublication = async (params) => {
 }
 
 const getPostulantsByPublicationId = async (params) => {
-    const response = await api.get(`/publication/${params.publication_id}/postulantes`);
+    const response = await api.get(`/publication/${params.publication_id}/postulantes${params.query?"?"+params.query:""}`);
     return response;
 }
 

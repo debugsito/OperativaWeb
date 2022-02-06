@@ -169,7 +169,6 @@ export const setPostulantsByPublicationId = (payload) => ({
 export const getPostulantsByPublicationId = (params) => {
   return async (dispatch) => {
     try {
-      console.log("ejecutando getPostulantsByPublicationId ", params)
       const response = await service_Dashboard.getPostulantsByPublicationId(params);
       dispatch(setPostulantsByPublicationId(response.data));
       dispatch(setPostulantsByPublicationIdError(null)); //control de errores

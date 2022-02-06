@@ -53,8 +53,6 @@ export default function Index({ userData, handleSaveAreasOfInterest }) {
     }
 
     const handleClickFinish = () => {
-        console.log("disabledButtonState", disabledButtonState)
-        console.log("values", values)
         if (!disabledButtonState) {
             setOpenModal(true)
         } else {
