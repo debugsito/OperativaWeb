@@ -8,7 +8,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-export default function Index({ children, anchorEl, handleClose }) {
+export default function Index({ children, anchorEl, handleClose, ...props }) {
     const classes = useStyles
 
     return (
@@ -16,7 +16,6 @@ export default function Index({ children, anchorEl, handleClose }) {
             elevation={1}
             classes={classes}
             getContentAnchorEl={null}
-            id="simple-menu"
             anchorEl={anchorEl}
             open={Boolean(anchorEl)}
             onClose={handleClose}
@@ -28,6 +27,7 @@ export default function Index({ children, anchorEl, handleClose }) {
                 vertical: "top",
                 horizontal: "center"
             }}
+            {...props}
         >
             {children}
         </Menu>

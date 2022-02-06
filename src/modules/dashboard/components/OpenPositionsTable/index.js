@@ -28,6 +28,7 @@ import {
   Tooltip,
   IconButton,
   MenuItem,
+  Menu
 } from "@material-ui/core";
 import {
   Button,
@@ -48,6 +49,21 @@ import { SessionRoutes } from "../../../shared/libs/sessionRoutes";
 import { useHistory } from "react-router-dom";
 
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+
+const OPTIONS = [
+  {
+    id: "edit",
+    name: "Editar",
+  },
+  {
+    id: "archive",
+    name: "Archivar",
+  },
+  {
+    id: "show",
+    name: "Mostrar ",
+  },
+]
 
 function createData(
   title,
@@ -158,7 +174,7 @@ function EnhancedTableHead(props) {
             align={headCell.numeric ? "right" : "left"}
             padding={headCell.disablePadding ? "none" : "default"}
             sortDirection={orderBy === headCell.id ? order : false}
-            // style={{ width: 150 }}
+          // style={{ width: 150 }}
           >
             <TableSortLabel
               active={orderBy === headCell.id}
@@ -197,13 +213,13 @@ const useToolbarStyles = makeStyles((theme) => ({
   highlight:
     theme.palette.type === "light"
       ? {
-          color: "#FFFFFF !important",
-          backgroundColor: "var(--secondaryButtonColor)",
-        }
+        color: "#FFFFFF !important",
+        backgroundColor: "var(--secondaryButtonColor)",
+      }
       : {
-          color: "#FFFFFF !important",
-          backgroundColor: "var(--secondaryButtonColor)",
-        },
+        color: "#FFFFFF !important",
+        backgroundColor: "var(--secondaryButtonColor)",
+      },
   title: {
     flex: "1 1 100%",
   },
@@ -413,7 +429,8 @@ export default function OpenPositionsTable() {
     Math.min(rowsPerPage, publications?.length - page * rowsPerPage);
 
   const executeAction = (event, action, publication) => {
-    console.log("publication",publication)
+    console.log("publication", publication)
+    console.log("event", event)
     event.preventDefault();
     dispatch(setPublicationSelected(publication));
     if (action === "edit") history.push(`${initRoute}/editar-empleo`);
@@ -424,7 +441,7 @@ export default function OpenPositionsTable() {
   const goToPostulants = (publication) => {
     dispatch(setPublicationSelected(publication));
     // history.push({ pathname: `${initRoute}/postulantes` })
-    history.push({ pathname: `${initRoute}/publicacion/183/lista-de-postulantes` });
+    history.push({ pathname: `${initRoute}/publicacion/${publication.data.id}/lista-de-postulantes` });
   };
 
   return (
@@ -459,7 +476,7 @@ export default function OpenPositionsTable() {
                   .map((row, index) => {
                     const isItemSelected = isSelected(row.data.id);
                     const labelId = `enhanced-table-checkbox-${index}`;
-                    console.log("row",row)
+                    // console.log("row",row)
                     return (
                       <TableRow
                         hover
@@ -522,9 +539,8 @@ export default function OpenPositionsTable() {
                           >
                             <Typography variant="body1">
                               <b>
-                                {`${row.applicants} postulante${
-                                  row.applicants > 1 ? "s" : ""
-                                }`}
+                                {`${row.applicants} postulante${row.applicants > 1 ? "s" : ""
+                                  }`}
                               </b>
                             </Typography>
                           </div>
@@ -543,28 +559,52 @@ export default function OpenPositionsTable() {
                             color={row.state ? "primary" : ""}
                           />
                         </TableCell>
-                        <TableCell align="center">
-                          <IconButton
+                        <TableCell align="left">
+                          <Grid container direction="column" spacing={0}>
+                            {
+                              OPTIONS.map((action, index) => (
+                                <Grid item>
+                                  <Button
+                                    onClick={(event) => executeAction(event, action.id, row.data)}
+                                    key={index}
+                                    color="black"
+                                    startIcon={
+                                      <img
+                                        src={action.id === "edit" ? editIcon : (action.id === "archive" ? fileIcon : showIcon)}
+                                        alt={action.name}
+                                      />}
+                                  >
+                                    {action.name}
+                                  </Button>
+                                </Grid>
+                              ))
+                            }
+
+                          </Grid>
+
+                          {/* <IconButton
                             aria-label="acciones"
-                            onClick={(e) => setMenuEl(e.currentTarget)}
+                            onClick={(e) => { setMenuEl(e.currentTarget) }}
                           >
                             <MoreVertIcon />
                           </IconButton>
                           <MenuList
                             anchorEl={menuEl}
-                            handleClose={(e) => setMenuEl(null)}
+                            handleClose={() => setMenuEl(null)}
                           >
-                            {row.actions.map((action, index) => (
-                              <MenuItem
-                                onClick={(event) =>
-                                  executeAction(event, action.id, row.data)
-                                }
-                                key={index}
-                              >
-                                {action.name}
-                              </MenuItem>
-                            ))}
-                          </MenuList>
+                            {
+                              OPTIONS.map((action, index2) => {
+                                return (
+                                  <MenuItem
+                                    onClick={(event) => executeAction(event, action.id, row.data)}
+                                    key={index2}
+                                  >
+                                    {action.name + " " + row.data.id}
+                                  </MenuItem>
+                                )
+                              })
+                            }
+                          </MenuList> */}
                         </TableCell>
                       </TableRow>
                     );

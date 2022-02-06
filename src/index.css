@@ -29,6 +29,16 @@ code {
     monospace;
 }
 
+.flex-direction-column{
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-direction-row{
+  display: flex;
+  flex-direction: row;
+}
+
 .align-items-center {
   display: flex;
   align-items: center;
