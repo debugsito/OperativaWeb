@@ -28,7 +28,7 @@ import {
   Typography,
   ToolTip,
 } from "../../../shared/components";
-import { getPeriods } from "../../../../store/services/utils.service";
+import { TYPE_OF_CONTRACT, TYPE_PAYMENT } from "../../../shared/constants";
 import { onlyNumbers } from "../../../shared/libs/validators";
 import { actions_Utils } from "../../../../store/actions";
 import { useForm } from "../../../hooks";
@@ -47,12 +47,13 @@ export default function JobForm({
   initRoute,
   isEditing = null,
 }) {
+  console.log("initialValues",initialValues)
+  console.log("isEditing",isEditing)
   const classes = useStyles();
   const history = useHistory();
   const dispatch = useDispatch();
   const dateLocal = DateTime.local().toFormat("yyyy-LL-dd");
-  const { departments, provinces, districts, rubrosOp, academicLevels, periods } =
-    useSelector((state) => state?.utils);
+  const { departments, provinces, districts, rubrosOp, academicLevels, periods } = useSelector((state) => state?.utils);
   const [districtsList, setDistrictsList] = useState([]);
   const [provincesList, setProvincesList] = useState([]);
   const [publicationHidden, setPublicationHidden] = useState(false);
@@ -64,10 +65,8 @@ export default function JobForm({
     let temp = { ...errors };
     if ("job_title" in fieldValues)
       temp.job_title = fieldValues.job_title ? "" : "El campo es requerido.";
-    if ("job_level_id" in fieldValues)
-      temp.job_level_id = fieldValues.job_level_id
-        ? ""
-        : "El campo es requerido.";
+    if ("rubro_id" in fieldValues)
+      temp.rubro_id = fieldValues.rubro_id? "" : "El campo es requerido.";
     if ("description" in fieldValues)
       temp.description = fieldValues.description[0]?.children[0]?.text
         ? ""
@@ -112,6 +111,8 @@ export default function JobForm({
       temp.vacantes = fieldValues.vacantes ? "" : "El campo es requerido.";
     if ("postulants" in fieldValues)
       temp.postulants = fieldValues.postulants ? "" : "El campo es requerido.";
+    if ("period_id" in fieldValues)
+      temp.period_id = fieldValues.period_id ? "" : "El campo es requerido.";
 
     if (values.otherRequiriments === "si") {
       if ("gender" in fieldValues)
@@ -168,6 +169,17 @@ export default function JobForm({
     filterDistricts();
   }, [districts]);
 
+  useEffect(() => {
+    if(isEditing){
+      setTypeOFContract()
+
+    }
+  },[initialValues.type_contract])
+
+  function setTypeOFContract(){
+    
+  }
+
   const filterProvinces = () => {
     let filteredProvinces = provinces.filter(
       (item) => item.department_id == values.department_id
@@ -185,13 +197,12 @@ export default function JobForm({
   const goForward = () => history.push(initRoute);
 
   const handleClickSave = () => {
-    
+
     if (!disabledButtonState) {
       let valuesTemp = { ...values };
       valuesTemp.description = JSON.stringify(values.description);
       valuesTemp.requirements = JSON.stringify(values.requirements);
       valuesTemp.benefits = JSON.stringify(values.benefits);
-      valuesTemp.rubro_id = values?.job_level_id;
       valuesTemp.publicationHidden = publicationHidden;
       if (isEditing) {
         const params = {
@@ -290,11 +301,11 @@ export default function JobForm({
               <Grid item xs={6}>
                 <Select
                   label="Rubro"
-                  name="job_level_id"
-                  value={values.job_level_id}
+                  name="rubro_id"
+                  value={values.rubro_id}
                   onChange={handleInputChange}
-                  error={errors.job_level_id ? true : false}
-                  helperText={errors.job_level_id}
+                  error={errors.rubro_id ? true : false}
+                  helperText={errors.rubro_id}
                 >
                   {rubrosOp &&
                     rubrosOp.map((element) => (
@@ -347,10 +358,11 @@ export default function JobForm({
                   error={errors.type_contract ? true : false}
                   helperText={errors.type_contract}
                 >
-                  <MenuItem value="Full-time">Full-time</MenuItem>
-                  <MenuItem value="Part-Time">Part-Time</MenuItem>
-                  <MenuItem value="Por horas">Por horas</MenuItem>
-                  <MenuItem value="Fin de semana">Fin de semana</MenuItem>
+                  {
+                    TYPE_OF_CONTRACT.map(item => (
+                      <MenuItem key={item.id} value={item.id}>{item.name}</MenuItem>
+                    ))
+                  }
                 </Select>
               </Grid>
               <Grid item xs={2}>
@@ -362,8 +374,11 @@ export default function JobForm({
                   error={errors.type_pay ? true : false}
                   helperText={errors.type_pay}
                 >
-                  <MenuItem value="contrato-11">Soles</MenuItem>
-                  <MenuItem value="contrato-2">USD</MenuItem>
+                  {
+                    TYPE_PAYMENT.map(item => (
+                      <MenuItem key={item.id} value={item.id}>{item.name}</MenuItem>
+                    ))
+                  }
                 </Select>
               </Grid>
               <Grid item xs={4}>
@@ -475,18 +490,18 @@ export default function JobForm({
                   helperText={errors.postulants}
                 />
               </Grid>
-              
+
               <Grid item xs={1} className="align-items-center">
                 <ToolTip title="Ingresa la cantidad de registrados a evaluar por la Inteligencia Artificial Operativa">
                   <img src={WarningBlackIcon} alt="icono" />
                 </ToolTip>
               </Grid>
-              
+
             </Grid>
           </Grid>
           <Grid item xs={12}>
             <Grid container spacing={2}>
-            <Grid item xs={4}>
+              <Grid item xs={4}>
                 <Select
                   name="period_id"
                   label="Periodo de permanencia"

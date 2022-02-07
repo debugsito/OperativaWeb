@@ -28,6 +28,7 @@ import {
   Tooltip,
   IconButton,
   MenuItem,
+  Menu,
 } from "@material-ui/core";
 import {
   Button,
@@ -48,6 +49,21 @@ import { SessionRoutes } from "../../../shared/libs/sessionRoutes";
 import { useHistory } from "react-router-dom";
 
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+
+const OPTIONS = [
+  {
+    id: "edit",
+    name: "Editar",
+  },
+  {
+    id: "archive",
+    name: "Archivar",
+  },
+  {
+    id: "show",
+    name: "Mostrar ",
+  },
+];
 
 function createData(
   title,
@@ -412,19 +428,22 @@ export default function OpenPositionsTable() {
     rowsPerPage -
     Math.min(rowsPerPage, publications?.length - page * rowsPerPage);
 
-  const executeAction = (event, id, publication) => {
+  const executeAction = (event, action, publication) => {
+    console.log("publication", publication);
+    console.log("event", event);
     event.preventDefault();
     dispatch(setPublicationSelected(publication));
-    if (id === "edit") history.push(`${initRoute}/editar-empleo`);
-    if (id === "show") history.push(`${initRoute}/ver-posicion`);
-    if (id === "archive") dispatch(archivePublication({ id: publication.id }));
+    if (action === "edit") history.push(`${initRoute}/editar-empleo`);
+    if (action === "show") history.push(`${initRoute}/ver-posicion`);
+    if (action === "archive")
+      dispatch(archivePublication({ id: publication.id }));
   };
 
   const goToPostulants = (publication) => {
     dispatch(setPublicationSelected(publication));
     // history.push({ pathname: `${initRoute}/postulantes` })
     history.push({
-      pathname: `${initRoute}/publicacion/183/lista-de-postulantes`,
+      pathname: `${initRoute}/publicacion/${publication.data.id}/lista-de-postulantes`,
     });
   };
 
@@ -544,28 +563,58 @@ export default function OpenPositionsTable() {
                             color={row.state ? "primary" : ""}
                           />
                         </TableCell>
-                        <TableCell align="center">
-                          <IconButton
+                        <TableCell align="left">
+                          <Grid container direction="column" spacing={0}>
+                            {OPTIONS.map((action, index) => (
+                              <Grid item>
+                                <Button
+                                  onClick={(event) =>
+                                    executeAction(event, action.id, row.data)
+                                  }
+                                  key={index}
+                                  color="black"
+                                  startIcon={
+                                    <img
+                                      src={
+                                        action.id === "edit"
+                                          ? editIcon
+                                          : action.id === "archive"
+                                          ? fileIcon
+                                          : showIcon
+                                      }
+                                      alt={action.name}
+                                    />
+                                  }
+                                >
+                                  {action.name}
+                                </Button>
+                              </Grid>
+                            ))}
+                          </Grid>
+
+                          {/* <IconButton
                             aria-label="acciones"
-                            onClick={(e) => setMenuEl(e.currentTarget)}
+                            onClick={(e) => { setMenuEl(e.currentTarget) }}
                           >
                             <MoreVertIcon />
                           </IconButton>
                           <MenuList
                             anchorEl={menuEl}
-                            handleClose={(e) => setMenuEl(null)}
+                            handleClose={() => setMenuEl(null)}
                           >
-                            {row.actions.map((action, index) => (
-                              <MenuItem
-                                onClick={(event) =>
-                                  executeAction(event, action.id, row.data)
-                                }
-                                key={index}
-                              >
-                                {action.name}
-                              </MenuItem>
-                            ))}
-                          </MenuList>
+                            {
+                              OPTIONS.map((action, index2) => {
+                                return (
+                                  <MenuItem
+                                    onClick={(event) => executeAction(event, action.id, row.data)}
+                                    key={index2}
+                                  >
+                                    {action.name + " " + row.data.id}
+                                  </MenuItem>
+                                )
+                              })
+                            }
+                          </MenuList> */}
                         </TableCell>
                       </TableRow>
                     );
