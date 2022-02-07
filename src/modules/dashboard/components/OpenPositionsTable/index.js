@@ -28,7 +28,7 @@ import {
   Tooltip,
   IconButton,
   MenuItem,
-  Menu
+  Menu,
 } from "@material-ui/core";
 import {
   Button,
@@ -63,7 +63,7 @@ const OPTIONS = [
     id: "show",
     name: "Mostrar ",
   },
-]
+];
 
 function createData(
   title,
@@ -174,7 +174,7 @@ function EnhancedTableHead(props) {
             align={headCell.numeric ? "right" : "left"}
             padding={headCell.disablePadding ? "none" : "default"}
             sortDirection={orderBy === headCell.id ? order : false}
-          // style={{ width: 150 }}
+            // style={{ width: 150 }}
           >
             <TableSortLabel
               active={orderBy === headCell.id}
@@ -213,13 +213,13 @@ const useToolbarStyles = makeStyles((theme) => ({
   highlight:
     theme.palette.type === "light"
       ? {
-        color: "#FFFFFF !important",
-        backgroundColor: "var(--secondaryButtonColor)",
-      }
+          color: "#FFFFFF !important",
+          backgroundColor: "var(--secondaryButtonColor)",
+        }
       : {
-        color: "#FFFFFF !important",
-        backgroundColor: "var(--secondaryButtonColor)",
-      },
+          color: "#FFFFFF !important",
+          backgroundColor: "var(--secondaryButtonColor)",
+        },
   title: {
     flex: "1 1 100%",
   },
@@ -429,19 +429,22 @@ export default function OpenPositionsTable() {
     Math.min(rowsPerPage, publications?.length - page * rowsPerPage);
 
   const executeAction = (event, action, publication) => {
-    console.log("publication", publication)
-    console.log("event", event)
+    console.log("publication", publication);
+    console.log("event", event);
     event.preventDefault();
     dispatch(setPublicationSelected(publication));
     if (action === "edit") history.push(`${initRoute}/editar-empleo`);
     if (action === "show") history.push(`${initRoute}/ver-posicion`);
-    if (action === "archive") dispatch(archivePublication({ id: publication.id }));
+    if (action === "archive")
+      dispatch(archivePublication({ id: publication.id }));
   };
 
   const goToPostulants = (publication) => {
     dispatch(setPublicationSelected(publication));
     // history.push({ pathname: `${initRoute}/postulantes` })
-    history.push({ pathname: `${initRoute}/publicacion/${publication.data.id}/lista-de-postulantes` });
+    history.push({
+      pathname: `${initRoute}/publicacion/${publication.data.id}/lista-de-postulantes`,
+    });
   };
 
   return (
@@ -476,7 +479,7 @@ export default function OpenPositionsTable() {
                   .map((row, index) => {
                     const isItemSelected = isSelected(row.data.id);
                     const labelId = `enhanced-table-checkbox-${index}`;
-                    // console.log("row",row)
+                    console.log("row", row);
                     return (
                       <TableRow
                         hover
@@ -539,8 +542,9 @@ export default function OpenPositionsTable() {
                           >
                             <Typography variant="body1">
                               <b>
-                                {`${row.applicants} postulante${row.applicants > 1 ? "s" : ""
-                                  }`}
+                                {`${row.applicants} postulante${
+                                  row.applicants > 1 ? "s" : ""
+                                }`}
                               </b>
                             </Typography>
                           </div>
@@ -561,25 +565,31 @@ export default function OpenPositionsTable() {
                         </TableCell>
                         <TableCell align="left">
                           <Grid container direction="column" spacing={0}>
-                            {
-                              OPTIONS.map((action, index) => (
-                                <Grid item>
-                                  <Button
-                                    onClick={(event) => executeAction(event, action.id, row.data)}
-                                    key={index}
-                                    color="black"
-                                    startIcon={
-                                      <img
-                                        src={action.id === "edit" ? editIcon : (action.id === "archive" ? fileIcon : showIcon)}
-                                        alt={action.name}
-                                      />}
-                                  >
-                                    {action.name}
-                                  </Button>
-                                </Grid>
-                              ))
-                            }
-
+                            {OPTIONS.map((action, index) => (
+                              <Grid item>
+                                <Button
+                                  onClick={(event) =>
+                                    executeAction(event, action.id, row.data)
+                                  }
+                                  key={index}
+                                  color="black"
+                                  startIcon={
+                                    <img
+                                      src={
+                                        action.id === "edit"
+                                          ? editIcon
+                                          : action.id === "archive"
+                                          ? fileIcon
+                                          : showIcon
+                                      }
+                                      alt={action.name}
+                                    />
+                                  }
+                                >
+                                  {action.name}
+                                </Button>
+                              </Grid>
+                            ))}
                           </Grid>
 
                           {/* <IconButton

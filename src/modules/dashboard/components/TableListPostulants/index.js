@@ -10,7 +10,7 @@ import {
   makeStyles,
   Paper,
 } from "@material-ui/core";
-// import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { stableSort, getComparator } from "../../../shared/utils/table.utils";
 import {
@@ -80,7 +80,8 @@ export default function TableListPostulants() {
   const dispatch = useDispatch();
   const { publicationSelected, postulantsByPublicationId } = useSelector((state) => state?.dashboard);
   const { departments, provinces, districts } = useSelector(state => state?.utils)
-  const publication_id = publicationSelected.data.id;
+  // const publication_id = publicationSelected.data.id;
+  const { publication_id } = useParams();
   const { values } = useContext(Context);
 
   console.log("Context",values)
@@ -101,21 +102,15 @@ export default function TableListPostulants() {
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("");
   const [selected, setSelected] = useState([]);
-  const [postulants, setPostulants] = useState([createData("", "", "", "", "", "", "", "", { id: "" })]);
+  const [postulants, setPostulants] = useState([]);
+  //[createData("", "", "", "", "", "", "", "", { id: "" })]
 
   useEffect(() => {
-    const pagination = `page=${page}&size=${rowsPerPage}`
-    dispatch(getPostulantsByPublicationId({ publication_id, query: pagination }));
+    dispatch(getPostulantsByPublicationId({ publication_id, params: { page, size: rowsPerPage} }));
     dispatch(actions_Utils.getDepartments());
     dispatch(actions_Utils.getProvinces());
     dispatch(actions_Utils.getDistricts());
   }, [])
-
-  useEffect(() => {
-    if(values){
-      
-    }
-  },[values])
 
   useEffect(() => {
     if (postulantsByPublicationId.rows) {
@@ -132,24 +127,23 @@ export default function TableListPostulants() {
           data: item,
         };
       });
-      console.log("postulantsByPublicationId rows", rows)
       setPostulants(rows);
     }
   }, [postulantsByPublicationId.rows]);
 
   const getDistrictById = (district_id) => {
     const distric_temp = districts.find(item => item.id == district_id);
-    return distric_temp.name
+    return distric_temp?.name
   }
 
   const getProvinceById = (province_id) => {
     const province_temp = provinces.find(item => item.id == province_id);
-    return province_temp.name
+    return province_temp?.name
   }
 
   const getDepartmentById = (department_id) => {
     const department_temp = departments.find(item => item.id == department_id)
-    return department_temp.name
+    return department_temp?.name
   }
 
   const handleRequestSort = (event, property) => {
