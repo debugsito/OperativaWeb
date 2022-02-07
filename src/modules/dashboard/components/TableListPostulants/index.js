@@ -106,7 +106,7 @@ export default function TableListPostulants() {
   //[createData("", "", "", "", "", "", "", "", { id: "" })]
 
   useEffect(() => {
-    dispatch(getPostulantsByPublicationId({ publication_id, params: { page, size: rowsPerPage} }));
+    dispatch(getPostulantsByPublicationId({ publication_id, params: { estado: 1, page, size: rowsPerPage} }));
     dispatch(actions_Utils.getDepartments());
     dispatch(actions_Utils.getProvinces());
     dispatch(actions_Utils.getDistricts());
@@ -153,17 +153,15 @@ export default function TableListPostulants() {
   };
 
   const handleChangePage = (event, newPage) => {
-    const pagination = `page=${newPage}&size=${rowsPerPage}`
     setPage(newPage);
-    dispatch(getPostulantsByPublicationId({ publication_id, query: pagination }));
+    dispatch(getPostulantsByPublicationId({ publication_id, params: { estado: 1, page: newPage, size: rowsPerPage } }));
   };
 
   const handleChangeRowsPerPage = (event) => {
     const rowsPerPageTemp = parseInt(event.target.value, 10)
-    const pagination = `page=${0}&size=${rowsPerPageTemp}`
     setRowsPerPage(rowsPerPageTemp);
     setPage(0);
-    dispatch(getPostulantsByPublicationId({ publication_id, query: pagination }));
+    dispatch(getPostulantsByPublicationId({ publication_id, params: { estado: 1, page: 0, size: rowsPerPageTemp } }));
   };
 
   const handleClickCheckbox = (event, id) => {

@@ -139,10 +139,6 @@ export default function TableListPostulants({ selected, handleClickCheckbox, han
           item?.user?.first_name + " " + item?.user?.last_name,
           item?.user?.experience ? 2 : 0, //Messages
           STATE_OF_EVALUATIONS,
-          [
-            { id: "finalizar", label: "Pasar a Finalista" },
-            { id: "descartar", label: "Descartar postulante" },
-          ],
           item
         );
       });
