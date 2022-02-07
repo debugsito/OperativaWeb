@@ -423,7 +423,9 @@ export default function OpenPositionsTable() {
   const goToPostulants = (publication) => {
     dispatch(setPublicationSelected(publication));
     // history.push({ pathname: `${initRoute}/postulantes` })
-    history.push({ pathname: `${initRoute}/publicacion/183/lista-de-postulantes` });
+    history.push({
+      pathname: `${initRoute}/publicacion/183/lista-de-postulantes`,
+    });
   };
 
   return (
@@ -458,7 +460,7 @@ export default function OpenPositionsTable() {
                   .map((row, index) => {
                     const isItemSelected = isSelected(row.data.id);
                     const labelId = `enhanced-table-checkbox-${index}`;
-
+                    console.log("row", row);
                     return (
                       <TableRow
                         hover

@@ -10,7 +10,7 @@ import {
   makeStyles,
   Paper,
 } from "@material-ui/core";
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { stableSort, getComparator } from "../../../shared/utils/table.utils";
 import {
@@ -100,7 +100,7 @@ export default function TableListPostulants() {
     (state) => state?.dashboard
   );
   // const publication_id = publicationSelected.data.id;
-  const {publication_id} = useParams();
+  const { publication_id } = useParams();
 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -108,36 +108,39 @@ export default function TableListPostulants() {
   const [orderBy, setOrderBy] = useState("");
   const [selected, setSelected] = useState([]);
   const [postulants, setPostulants] = useState([]);
-
+  console.log("postulants", postulants);
   useEffect(() => {
-    dispatch(getPostulantsByPublicationId({ publication_id })); //EN DURO
+    dispatch(
+      getPostulantsByPublicationId({ publication_id, params: { estado: 1 } })
+    ); //EN DURO
   }, [publication_id]);
 
   useEffect(() => {
-    const rows = postulantsByPublicationId?.rows?.map((item) => {
-      // return createData(
-      //   item?.similarity,
-      //   item?.user?.first_name + " " + item?.user?.last_name,
-      //   item?.user?.experience ? "Si" : "No",
-      //   DateTime.fromISO(item.createdAt).toFormat("dd LLL yyyy"),
-      //   "Técnico",
-      //   "Lima, Lima, Los Olivos",
-      //   "Multiposting",
-      //   item?.user?.experience, //EN DURO
-      //   item
-      // );
-      return {
-        similarity: item?.similarity,
-        fullname: item.user.fullname,
-        experience: item.user.experience ? "Si" : "No",
-        createdAt: DateTime.fromISO(item.createdAt).toFormat("dd LLL yyyy"),
-        education: item.user.level_name ? item.user.level_name : "-",
-        resident: `${item.user.department_id} ${item.user.province_id} ${item.user.district_id}`,
-        source: "Multiposting",
-        stateCv: item.user.experience,
-        data: item,
-      };
-    });
+    const rows =
+      postulantsByPublicationId?.rows?.map((item) => {
+        // return createData(
+        //   item?.similarity,
+        //   item?.user?.first_name + " " + item?.user?.last_name,
+        //   item?.user?.experience ? "Si" : "No",
+        //   DateTime.fromISO(item.createdAt).toFormat("dd LLL yyyy"),
+        //   "Técnico",
+        //   "Lima, Lima, Los Olivos",
+        //   "Multiposting",
+        //   item?.user?.experience, //EN DURO
+        //   item
+        // );
+        return {
+          similarity: item?.similarity,
+          fullname: item.user.fullname,
+          experience: item.user.experience ? "Si" : "No",
+          createdAt: DateTime.fromISO(item.createdAt).toFormat("dd LLL yyyy"),
+          education: item.user.level_name ? item.user.level_name : "-",
+          resident: `${item.user.department_id} ${item.user.province_id} ${item.user.district_id}`,
+          source: "Multiposting",
+          stateCv: item.user.experience,
+          data: item,
+        };
+      }) || [];
     setPostulants(rows);
   }, [postulantsByPublicationId]);
 
