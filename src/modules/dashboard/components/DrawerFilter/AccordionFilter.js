@@ -113,7 +113,6 @@ export default function AccordionFilter({ apply }) {
     apply();
   };
   const valuesForm = methods.watch();
-  console.log("valuesForm", valuesForm);
   return (
     <div className={classes.root}>
       <FormProvider {...methods}>

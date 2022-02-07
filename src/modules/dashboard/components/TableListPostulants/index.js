@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   Grid,
   Table,
@@ -27,6 +27,9 @@ import { DateTime } from "luxon";
 import { getPostulantsByPublicationId } from "../../../../store/actions/dashboard/dashboard.action";
 import { actions_Utils } from "../../../../store/actions";
 import { service_Dashboard } from "../../../../store/services"
+
+//context
+import { Context } from "../../context/AdvanceFilterContext";
 
 //Images,icon
 import TodayIcon from "@material-ui/icons/Today";
@@ -78,6 +81,9 @@ export default function TableListPostulants() {
   const { publicationSelected, postulantsByPublicationId } = useSelector((state) => state?.dashboard);
   const { departments, provinces, districts } = useSelector(state => state?.utils)
   const publication_id = publicationSelected.data.id;
+  const { values } = useContext(Context);
+
+  console.log("Context",values)
 
   const [notification, setNotification] = useState({
     open: false,
@@ -104,6 +110,12 @@ export default function TableListPostulants() {
     dispatch(actions_Utils.getProvinces());
     dispatch(actions_Utils.getDistricts());
   }, [])
+
+  useEffect(() => {
+    if(values){
+      
+    }
+  },[values])
 
   useEffect(() => {
     if (postulantsByPublicationId.rows) {

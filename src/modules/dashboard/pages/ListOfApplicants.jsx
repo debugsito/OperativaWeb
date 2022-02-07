@@ -112,7 +112,6 @@ export default function JobPositionCreatedPage() {
   };
 
   const handleOpenDrawer = () => {
-    console.log("hice click");
     setOpenDrawer(true);
   };
 
@@ -173,20 +172,6 @@ export default function JobPositionCreatedPage() {
                     fullWidth
                   />
                 </Paper>
-
-                {/* <TextInput
-                                fullWidth
-                                size="small"
-                                label="Buscar por nombre, experiencia o palabra clave"
-                                type="search"
-                                InputProps={{
-                                    endAdornment: (
-                                        <InputAdornment position="end">
-                                            <SearchIcon />
-                                        </InputAdornment>
-                                    ),
-                                }}
-                            /> */}
               </Grid>
               <Grid item xs={8} className="justify-end">
                 <Button

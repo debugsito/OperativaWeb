@@ -29,7 +29,7 @@ const StyleChip = withStyles({
 export default function OutlinedChips() {
   const classes = useStyles();
   const { values, resetItem } = useContext(Context);
-  console.log(values);
+  
   const handleDelete = (index) => {
     console.info("You clicked the delete icon.");
   };
