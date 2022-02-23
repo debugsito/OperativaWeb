@@ -48,7 +48,6 @@ export default function JobForm({
   isEditing = null,
 }) {
   console.log("initialValues",initialValues)
-  console.log("isEditing",isEditing)
   const classes = useStyles();
   const history = useHistory();
   const dispatch = useDispatch();
@@ -197,25 +196,30 @@ export default function JobForm({
   const goForward = () => history.push(initRoute);
 
   const handleClickSave = () => {
-
+    
     if (!disabledButtonState) {
+      console.log("values 1",values)
       let valuesTemp = { ...values };
       valuesTemp.description = JSON.stringify(values.description);
       valuesTemp.requirements = JSON.stringify(values.requirements);
       valuesTemp.benefits = JSON.stringify(values.benefits);
       valuesTemp.publicationHidden = publicationHidden;
       if (isEditing) {
-        const params = {
+        console.log("values 2",values)
+        const body = {
           publication_id: initialValues.id,
           body: { status: 1, ...valuesTemp, a_tratar: isActiveSalary },
         };
-        dispatch(updatePublication(params));
+        dispatch(updatePublication(body));
         goForward();
       } else {
+        console.log("values 3",values)
+        console.log("valuesTemp",valuesTemp)
         dispatch(savePublication({ ...valuesTemp, a_tratar: isActiveSalary }));
         history.push(`${initRoute}/empleo-registrado`);
       }
     } else {
+      console.log("values 4",values)
       validate();
       setOpenModal(false);
       return;

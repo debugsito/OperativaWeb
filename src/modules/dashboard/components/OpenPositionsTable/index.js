@@ -311,7 +311,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function OpenPositionsTable() {
-  // console.log("Actualizando tabla")
   const classes = useStyles();
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("");
@@ -429,8 +428,6 @@ export default function OpenPositionsTable() {
     Math.min(rowsPerPage, publications?.length - page * rowsPerPage);
 
   const executeAction = (event, action, publication) => {
-    console.log("publication", publication);
-    console.log("event", event);
     event.preventDefault();
     dispatch(setPublicationSelected(publication));
     if (action === "edit") history.push(`${initRoute}/editar-empleo`);
@@ -479,7 +476,6 @@ export default function OpenPositionsTable() {
                   .map((row, index) => {
                     const isItemSelected = isSelected(row.data.id);
                     const labelId = `enhanced-table-checkbox-${index}`;
-                    console.log("row", row);
                     return (
                       <TableRow
                         hover

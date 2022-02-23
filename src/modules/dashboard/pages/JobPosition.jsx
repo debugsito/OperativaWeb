@@ -25,12 +25,13 @@ const defaultValues = {
     description: "",
     requirements: "",
     benefits:"",
-    job_level_id: "",
+    rubro_id: "",
     salary: "",
     expiration_date: "",
     department_id: "",
     province_id: "",
     district_id: "",
+    period_id:"",
 };
 
 export default function Position() {

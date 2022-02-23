@@ -21,6 +21,7 @@ const updatePublication = async (params) => {
 };
 
 const savePublication = async (body) => {
+  console.log("body",body)
   const response = await api.post(`/publication`, body);
   return response;
 };
