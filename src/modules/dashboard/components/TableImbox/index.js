@@ -118,7 +118,6 @@ export default function Index() {
         rowsPerPage - Math.min(rowsPerPage, messages?.length - page * rowsPerPage);
 
     const handleShowMessage = (row) => {
-        console.log(row)
         setMessage({state:true, subject: row.subject, message:row.message})
     }
 

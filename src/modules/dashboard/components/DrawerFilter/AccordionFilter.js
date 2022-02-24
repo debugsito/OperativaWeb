@@ -70,6 +70,7 @@ export default function AccordionFilter({ apply }) {
   };
   const onSubmit = (data) => {
     const newValue = { ...values };
+    console.log("data",data)
 
     if (dirtyFields.residence) {
       if (data?.residence?.locations.length) {

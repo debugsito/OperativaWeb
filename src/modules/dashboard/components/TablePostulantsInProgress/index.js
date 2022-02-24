@@ -112,7 +112,8 @@ export default function TableListPostulants({ selected, handleClickCheckbox, han
   const [openModal, setOpenModal] = useState(false)
   const [openImbox, setOpenImbox] = useState(false)
 
-  const publication_id = publicationSelected.data.id;
+  // const publication_id = publicationSelected.data.id;
+  const { publication_id } = useParams();
 
   useEffect(() => {
     dispatch(getPostulantsByPublicationId({ publication_id, params: { estado: 2, page, size: rowsPerPage } })) //EN DURO
