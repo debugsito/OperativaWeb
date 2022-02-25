@@ -38,7 +38,7 @@ export default function TabVerificativa({ nextTab, backTab }) {
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <Typography variant="h6" color="secondary">
-              Evaluacion
+              Evaluación
             </Typography>
           </Grid>
           <Grid item xs={10}>

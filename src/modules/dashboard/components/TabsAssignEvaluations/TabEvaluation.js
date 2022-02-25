@@ -185,7 +185,7 @@ export default function TabEvaluation({ nextTab }) {
           <Grid container spacing={3}>
             <Grid item xs={12}>
               <Typography variant="body1">
-                Realiza una evaluación tecnico a tu postulante
+                Realiza una evaluación técnica a tu postulante
               </Typography>
             </Grid>
             <section className={classes.sectionInfo}>
@@ -238,7 +238,7 @@ export default function TabEvaluation({ nextTab }) {
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <Typography variant="h6" color="secondary">
-                  Crea un formulario para la Evaluación de experiencia
+                  Crea un formulario para la <strong>Evaluación de experiencia</strong>
                 </Typography>
               </Grid>
               <Grid item xs={12}>
@@ -273,7 +273,7 @@ export default function TabEvaluation({ nextTab }) {
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <Typography variant="h6" color="secondary">
-                  Crea un formulario para Preguntas adicionales
+                  Crea un formulario para <strong>Preguntas adicionales</strong>
                 </Typography>
               </Grid>
               <Grid item xs={12}>

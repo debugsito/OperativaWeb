@@ -146,7 +146,7 @@ export default function TabMedico({ nextTab, backTab }) {
                                         <TextInput
                                             fullWidth
                                             {...field}
-                                            label="Recomendaciones para el examen"
+                                            label="Recomendaciones para el examén"
                                             error={!!errors?.addresses?.[index]?.recomendation}
                                             helperText={errors?.addresses?.[index]?.recomendation?.message}
                                         />

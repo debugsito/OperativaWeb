@@ -32,19 +32,19 @@ export default function TabVerificativa({ nextTab, backTab }) {
             <div className={classes.form}>
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
-                        <Typography variant="h6" color="secondary">Evaluacion</Typography>
+                        <Typography variant="h6" color="secondary">Evaluación</Typography>
                     </Grid>
                     <Grid item xs={10}>
                         <section className={classes.sectionInfo}>
                             <img src={WarningIcon} alt="icono" />
-                            <Typography variant="body2">Recuerda que esta etapa de la evaluación es realizada por Verificativa, recuerda que este paso es opcional al proceso...</Typography>
+                            <Typography variant="body2">Recuerda que este paso es opcional al proceso.</Typography>
                         </section>
                     </Grid>
                     <Grid item xs={2} className="justify-center">
                         <MedalInfo text="Solo con" account="Premium" />
                     </Grid>
                     <Grid item xs={12}>
-                        <Typography variant="h6">La entrevista será</Typography>
+                        <Typography variant="h6">La entrevista será:</Typography>
                     </Grid>
                     <Grid item xs={12}>
                         <TableInterviewSchedule />
