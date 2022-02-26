@@ -32,6 +32,7 @@ import { service_Dashboard } from "../../../../store/services"
 import { Context } from "../../context/AdvanceFilterContext";
 import { ContextNotification } from "../../context/NotificationAlertContext";
 import { POSTULANTS } from "../../constants/Dashboard";
+import { messageSuccessful, messageError } from "../../utils/notification";
 
 //Images,icon
 import TodayIcon from "@material-ui/icons/Today";
@@ -85,7 +86,6 @@ export default function TableListPostulants() {
   const { values } = useContext(Context);
   
   const { notification, setNotification } = useContext(ContextNotification);
-  const { horizontal, vertical, open, message, severity } = notification;
   
   // const publication_id = publicationSelected.data.id;
   const { publication_id } = useParams();
@@ -195,10 +195,10 @@ export default function TableListPostulants() {
       .then(() => {
         setSelected([]);
         dispatch(getPostulantsByPublicationId({ publication_id, params: { estado: POSTULANTS.current, page, size: rowsPerPage} }));
-        setNotification({ ...notification, open: true, message: "Se guardo correctamente los datos. Puede verificar dirigiendose a la pestaña: En Proceso" })
+        setNotification({ ...notification, ...messageSuccessful("Dirigase a la pestaña: EN PROCESO") })
       })
       .catch(error => {
-        setNotification({ ...notification, open: true, severity: "error", message: "Ocurrio un error al guardar, intentalos mas tarde." })
+        setNotification({ ...notification, ...messageError() })
       })
 
   }

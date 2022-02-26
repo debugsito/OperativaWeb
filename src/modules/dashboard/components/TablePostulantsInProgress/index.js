@@ -35,6 +35,7 @@ import { service_Dashboard } from "../../../../store/services";
 //Context || conts
 import { ContextNotification } from "../../context/NotificationAlertContext";
 import { POSTULANTS } from "../../constants/Dashboard";
+import { messageSuccessful, messageError } from "../../utils/notification";
 
 function createData(
   similarity,
@@ -134,21 +135,6 @@ export default function TableListPostulants({ selected, setSelected, handleClick
     }
   }, [postulantsByPublicationId.rows])
 
-  // useEffect(() => {
-  //   if (postulantsByPublicationId.count > 1) {
-  //     const rows = postulantsByPublicationId?.data?.map((item) => {
-  //       return createData(
-  //         item?.similarity,
-  //         item?.user?.first_name + " " + item?.user?.last_name,
-  //         item?.user?.experience ? 2 : 0, //Messages
-  //         STATE_OF_EVALUATIONS,
-  //         item
-  //       );
-  //     });
-  //     setPostulants(rows);
-  //   }
-  // }, [postulantsByPublicationId]);
-
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
     dispatch(getPostulantsByPublicationId({ publication_id, params: { estado: POSTULANTS.inProgress, page: newPage, size: rowsPerPage } }));
@@ -172,10 +158,10 @@ export default function TableListPostulants({ selected, setSelected, handleClick
     .then(() => {
       setSelected([]);
       dispatch(getPostulantsByPublicationId({ publication_id, params: { estado: POSTULANTS.inProgress, page, size: rowsPerPage } }))
-      setNotification({ ...notification, open: true, message: "Se guardo correctamente los datos. Puede verificar dirigiendose a la pestaña: Finalista" })
+      setNotification({ ...notification, ...messageSuccessful("Dirigase a la pestaña FINALISTA") })
     })
     .catch(error => {
-      setNotification({ ...notification, open: true, severity: "error", message: "Ocurrio un error al guardar, intentalos mas tarde." })
+      setNotification({ ...notification, ...messageError() })
     })
   }
 
@@ -185,10 +171,10 @@ export default function TableListPostulants({ selected, setSelected, handleClick
     .then(() => {
       setSelected([]);
       dispatch(getPostulantsByPublicationId({ publication_id, params: { estado: POSTULANTS.inProgress, page, size: rowsPerPage } }))
-      setNotification({ ...notification, open: true, message: "Se guardo correctamente los datos. Puede verificar dirigiendose a la pestaña: Descartado" })
+      setNotification({ ...notification, ...messageSuccessful("Dirigase a la pestaña DESCARTADO") })
     })
     .catch(error => {
-      setNotification({ ...notification, open: true, severity: "error", message: "Ocurrio un error al guardar, intentalos mas tarde." })
+      setNotification({ ...notification, ...messageError() })
     })
   }
 
