@@ -446,9 +446,9 @@ export default function OpenPositionsTable() {
 
   const goToPostulants = (publication) => {
     dispatch(setPublicationSelected(publication));
-    // history.push({ pathname: `${initRoute}/postulantes` })
     history.push({
       pathname: `${initRoute}/publicacion/${publication.data.id}/lista-de-postulantes`,
+      state: {createBy:publication.createBy,title:publication.title}
     });
   };
 
