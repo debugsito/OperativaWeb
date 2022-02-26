@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { InputAdornment, Grid, MenuItem, makeStyles } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
-import ProviderFilter, { Context } from "../context/AdvanceFilterContext";
 import AdvanceFilter from "../components/AdvanceFilter";
 import {
   ApplicantsTabs,
@@ -18,6 +17,7 @@ import {
   TitlePage,
   Typography,
   ToolTip,
+  SnackbarsAlert
 } from "../../shared/components";
 import { SessionRoutes } from "../../shared/libs/sessionRoutes";
 import InputBase from "@material-ui/core/InputBase";
@@ -29,12 +29,17 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import SearchIcon from "@material-ui/icons/Search";
 import { useSelector } from "react-redux";
 
+//Context
+import ProviderFilter from "../context/AdvanceFilterContext";
+import ProviderNotification from "../context/NotificationAlertContext";
+
 const TAB = {
   POSTULANT: 0,
   POSTULANT_IN_PROCESS: 1,
   POSTULANT_FINALISTS: 2,
   POSTULNAT_DISCARDED: 3,
 };
+
 const useStyles = makeStyles((theme) => ({
   searchField: {
     display: "flex",
@@ -45,6 +50,7 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: 10,
   },
 }));
+
 export default function JobPositionCreatedPage() {
   const classes = useStyles();
   const [value, setValue] = useState(TAB.POSTULANT);
@@ -117,161 +123,166 @@ export default function JobPositionCreatedPage() {
 
   return (
     <ProviderFilter>
-      <Container>
-        <Grid container spacing={3} justifyContent="center">
-          <Grid item xs={12}>
-            <Breadcrumbs routes={routes} />
-          </Grid>
-          <Grid item xs={12}>
-            <TitlePage
-              description={
-                <>
-                  <b>Creado por: </b> {publicationSelected.createBy}
-                </>
-              }
-              handleClick={() => history.push(initRoute)}
-            >
-              {publicationSelected.title}
-            </TitlePage>
-          </Grid>
-          <Grid item xs={12}>
-            <Typography variant="body1">
-              <b>
-                Filtrar los postulantes que hagan match con tu requerimiento.
-              </b>
-            </Typography>
-            <ul>
-              <li>
-                <Typography variant="body1">
-                  Filtrar los postulantes que hagan match con tu requerimiento.
-                </Typography>
-              </li>
-              <li>
-                <Typography variant="body1">
-                  Puedes contactar a tu postulantes o postulantes
-                </Typography>
-              </li>
-              <li>
-                <Typography variant="body1">
-                  Asigna las evaluaciones a los postulantes que cumplan con tu
-                  requerimiento
-                </Typography>
-              </li>
-            </ul>
-          </Grid>
-          {value === TAB.POSTULANT && (
-            <>
-              <Grid item xs={4}>
-                <Paper className={classes.searchField}>
-                  <IconButton type="submit" aria-label="search">
-                    <SearchIcon />
-                  </IconButton>
-                  <InputBase
-                    sx={{ ml: 1, flex: 1 }}
-                    placeholder="Buscar por nombre, experiencia o palabra clave"
-                    fullWidth
-                  />
-                </Paper>
-              </Grid>
-              <Grid item xs={8} className="justify-end">
-                <Button
-                  startIcon={<TuneIcon />}
-                  size="large"
-                  variant="contained"
-                  color="secondary"
-                  onClick={handleOpenDrawer}
-                >
-                  Filtro avanzado
-                </Button>
-              </Grid>
-            </>
-          )}
-
-          {value === TAB.POSTULANT && (
+      <ProviderNotification>
+        <Container>
+          <Grid container spacing={3} justifyContent="center">
             <Grid item xs={12}>
-              <AdvanceFilter />
+              <Breadcrumbs routes={routes} />
             </Grid>
-          )}
-
-          {value === TAB.POSTULANT_IN_PROCESS && (
             <Grid item xs={12}>
-              <Grid container spacing={2} justify="flex-end">
-                <Grid item>
-                  {selected.length > 0 ? (
-                    <div>
-                      <Button
-                        endIcon={<ExpandMoreIcon />}
-                        size="large"
-                        variant="outlined"
-                        aria-controls="menu-send-message"
-                        aria-haspopup="true"
-                        onClick={handleToggle}
-                      >
-                        ENVIAR MENSAJE
-                      </Button>
-                      <MenuList anchorEl={anchorEl} handleClose={handleClose}>
-                        <MenuItem
-                          onClick={() => handleOpenModal("dialog_empty")}
-                        >
-                          Personalizado
-                        </MenuItem>
-                        <MenuItem
-                          onClick={() => handleOpenModal("dialog_fill")}
-                        >
-                          De agradecimiento
-                        </MenuItem>
-                      </MenuList>
-                    </div>
-                  ) : (
-                    <ToolTip title="Seleccione uno o mas usuarios">
-                      <Button
-                        endIcon={<ExpandMoreIcon />}
-                        size="large"
-                        variant="outlined"
-                      >
-                        CONTACTAR
-                      </Button>
-                    </ToolTip>
-                  )}
+              <TitlePage
+                description={
+                  <>
+                    <b>Creado por: </b> {publicationSelected.createBy}
+                  </>
+                }
+                handleClick={() => history.push(initRoute)}
+              >
+                {publicationSelected.title}
+              </TitlePage>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography variant="body1">
+                <b>
+                  Filtrar los postulantes que hagan match con tu requerimiento.
+                </b>
+              </Typography>
+              <ul>
+                <li>
+                  <Typography variant="body1">
+                    Filtrar los postulantes que hagan match con tu requerimiento.
+                  </Typography>
+                </li>
+                <li>
+                  <Typography variant="body1">
+                    Puedes contactar a tu postulantes o postulantes
+                  </Typography>
+                </li>
+                <li>
+                  <Typography variant="body1">
+                    Asigna las evaluaciones a los postulantes que cumplan con tu
+                    requerimiento
+                  </Typography>
+                </li>
+              </ul>
+            </Grid>
+            {value === TAB.POSTULANT && (
+              <>
+                <Grid item xs={4}>
+                  <Paper className={classes.searchField}>
+                    <IconButton type="submit" aria-label="search">
+                      <SearchIcon />
+                    </IconButton>
+                    <InputBase
+                      sx={{ ml: 1, flex: 1 }}
+                      placeholder="Buscar por nombre, experiencia o palabra clave"
+                      fullWidth
+                    />
+                  </Paper>
                 </Grid>
-                <Grid item>
+                <Grid item xs={8} className="justify-end">
                   <Button
+                    startIcon={<TuneIcon />}
                     size="large"
                     variant="contained"
-                    component={Link}
-                    to={`${initRoute}/asignar-evaluaciones`}
+                    color="secondary"
+                    onClick={handleOpenDrawer}
                   >
-                    ASIGNAR EVALUACIONES
+                    Filtro avanzado
                   </Button>
                 </Grid>
-              </Grid>
-            </Grid>
-          )}
+              </>
+            )}
 
-          <Grid item xs={12}>
-            <ApplicantsTabs
-              onChangeTab={handleChange}
-              tabValue={value}
-              selected={selected}
-              handleClickCheckbox={handleClickCheckbox}
-              handleSelectAllClick={handleSelectAllClick}
-            />
+            {value === TAB.POSTULANT && (
+              <Grid item xs={12}>
+                <AdvanceFilter />
+              </Grid>
+            )}
+
+            {value === TAB.POSTULANT_IN_PROCESS && (
+              <Grid item xs={12}>
+                <Grid container spacing={2} justify="flex-end">
+                  <Grid item>
+                    {selected.length > 0 ? (
+                      <div>
+                        <Button
+                          endIcon={<ExpandMoreIcon />}
+                          size="large"
+                          variant="outlined"
+                          aria-controls="menu-send-message"
+                          aria-haspopup="true"
+                          onClick={handleToggle}
+                        >
+                          ENVIAR MENSAJE
+                        </Button>
+                        <MenuList anchorEl={anchorEl} handleClose={handleClose}>
+                          <MenuItem
+                            onClick={() => handleOpenModal("dialog_empty")}
+                          >
+                            Personalizado
+                          </MenuItem>
+                          <MenuItem
+                            onClick={() => handleOpenModal("dialog_fill")}
+                          >
+                            De agradecimiento
+                          </MenuItem>
+                        </MenuList>
+                      </div>
+                    ) : (
+                      <ToolTip title="Seleccione uno o mas usuarios">
+                        <Button
+                          endIcon={<ExpandMoreIcon />}
+                          size="large"
+                          variant="outlined"
+                        >
+                          CONTACTAR
+                        </Button>
+                      </ToolTip>
+                    )}
+                  </Grid>
+                  <Grid item>
+                    <Button
+                      size="large"
+                      variant="contained"
+                      component={Link}
+                      to={`${initRoute}/asignar-evaluaciones`}
+                    >
+                      ASIGNAR EVALUACIONES
+                    </Button>
+                  </Grid>
+                </Grid>
+              </Grid>
+            )}
+
+            <Grid item xs={12}>
+              <ApplicantsTabs
+                onChangeTab={handleChange}
+                tabValue={value}
+                selected={selected}
+                setSelected={setSelected}
+                handleClickCheckbox={handleClickCheckbox}
+                handleSelectAllClick={handleSelectAllClick}
+              />
+            </Grid>
           </Grid>
-        </Grid>
-        <DialogSendMessages
-          open={openModal}
-          onClose={() => setOpenModal(false)}
-        />
-        <DialogSendMessages
-          open={openModalFill}
-          onClose={() => setOpenModalFill(false)}
-          fill
-        />
-        <DrawerFilter
-          openDrawer={openDrawer}
-          handleClose={() => setOpenDrawer(false)}
-        />
-      </Container>
+          <DialogSendMessages
+            open={openModal}
+            onClose={() => setOpenModal(false)}
+          />
+          <DialogSendMessages
+            open={openModalFill}
+            onClose={() => setOpenModalFill(false)}
+            fill
+          />
+          <DrawerFilter
+            openDrawer={openDrawer}
+            handleClose={() => setOpenDrawer(false)}
+          />
+
+          
+        </Container>
+      </ProviderNotification>
     </ProviderFilter>
   );
 }

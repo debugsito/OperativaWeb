@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { AppBar, Tabs, Tab, makeStyles } from '@material-ui/core';
-import { TabPanel } from "../../../shared/components";
-import { TableListPostulants, TablePostulantsInProgress } from "../";
+import { TabPanel, SnackbarsAlert } from "../../../shared/components";
+import { TableListPostulants, TablePostulantsInProgress, TableHiredApplicants, TableRejectedPostulants } from "../";
+import { ContextNotification } from "../../context/NotificationAlertContext";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -25,6 +26,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ApplicantsTabs({ onChangeTab, tabValue, ...props }) {
     const classes = useStyles();
+    const {notification, setNotification} = useContext(ContextNotification)
+    const { horizontal, vertical, open, message, severity } = notification;
 
     const handleChange = (event, newValue) => {
         onChangeTab(newValue)
@@ -55,12 +58,19 @@ export default function ApplicantsTabs({ onChangeTab, tabValue, ...props }) {
             <TabPanel value={tabValue} index={1} padding={0}>
                 <TablePostulantsInProgress {...props} />
             </TabPanel>
-            <TabPanel value={tabValue} index={2}>
-                Item Three
+            <TabPanel value={tabValue} index={2} padding={0}>
+                <TableHiredApplicants />
             </TabPanel>
-            <TabPanel value={tabValue} index={3}>
-                Item Four
+            <TabPanel value={tabValue} index={3} padding={0}>
+                <TableRejectedPostulants />
             </TabPanel>
+            <SnackbarsAlert
+            open={open}
+            anchorOrigin={{ vertical, horizontal }}
+            message={message}
+            handleClose={() => setNotification({ ...notification, open: false })}
+            severity={severity}
+          />
         </>
         //   </div>
     );
