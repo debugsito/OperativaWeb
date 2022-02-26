@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { InputAdornment, Grid, MenuItem, makeStyles } from "@material-ui/core";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import AdvanceFilter from "../components/AdvanceFilter";
 import {
   ApplicantsTabs,
@@ -17,7 +17,6 @@ import {
   TitlePage,
   Typography,
   ToolTip,
-  SnackbarsAlert
 } from "../../shared/components";
 import { SessionRoutes } from "../../shared/libs/sessionRoutes";
 import InputBase from "@material-ui/core/InputBase";
@@ -27,7 +26,6 @@ import IconButton from "@material-ui/core/IconButton";
 import TuneIcon from "@material-ui/icons/Tune";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import SearchIcon from "@material-ui/icons/Search";
-import { useSelector } from "react-redux";
 
 //Context
 import ProviderFilter from "../context/AdvanceFilterContext";
@@ -59,8 +57,8 @@ export default function JobPositionCreatedPage() {
   const [openModal, setOpenModal] = useState(false);
   const [openModalFill, setOpenModalFill] = useState(false);
   const [openDrawer, setOpenDrawer] = useState(false);
-  const { publicationSelected } = useSelector((state) => state.dashboard);
   const history = useHistory();
+  const location = useLocation();
   const initRoute = SessionRoutes().initRoute;
   const routes = [
     { name: "Inicio", to: `${initRoute}` },
@@ -133,12 +131,12 @@ export default function JobPositionCreatedPage() {
               <TitlePage
                 description={
                   <>
-                    <b>Creado por: </b> {publicationSelected.createBy}
+                    <b>Creado por: </b> {location.state.createBy}
                   </>
                 }
                 handleClick={() => history.push(initRoute)}
               >
-                {publicationSelected.title}
+                {location.state.title}
               </TitlePage>
             </Grid>
             <Grid item xs={12}>
@@ -280,7 +278,7 @@ export default function JobPositionCreatedPage() {
             handleClose={() => setOpenDrawer(false)}
           />
 
-          
+
         </Container>
       </ProviderNotification>
     </ProviderFilter>
