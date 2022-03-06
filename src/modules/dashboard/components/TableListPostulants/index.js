@@ -83,8 +83,8 @@ export default function TableListPostulants() {
   const dispatch = useDispatch();
   const { publicationSelected, postulantsByPublicationId } = useSelector((state) => state?.dashboard);
   const { departments, provinces, districts } = useSelector(state => state?.utils)
-  const { values } = useContext(Context);
-  
+
+  const { values, queryParams } = useContext(Context);
   const { notification, setNotification } = useContext(ContextNotification);
   
   // const publication_id = publicationSelected.data.id;
@@ -98,11 +98,17 @@ export default function TableListPostulants() {
   const [postulants, setPostulants] = useState([]);
 
   useEffect(() => {
-    dispatch(getPostulantsByPublicationId({ publication_id, params: { estado: POSTULANTS.current, page, size: rowsPerPage} }));
     dispatch(actions_Utils.getDepartments());
     dispatch(actions_Utils.getProvinces());
     dispatch(actions_Utils.getDistricts());
+    dispatch(getPostulantsByPublicationId({ publication_id, params: { estado: POSTULANTS.current, page, size: rowsPerPage} }));
   }, [])
+  
+  useEffect(() => {
+    console.log("values ha cambiado..", values)
+    console.log("queryParams ha cambiado..", queryParams)
+    dispatch(getPostulantsByPublicationId({ publication_id, params: { estado: POSTULANTS.current, page, size: rowsPerPage, ...queryParams} }));
+  },[queryParams])
 
   useEffect(() => {
     if (postulantsByPublicationId.rows) {

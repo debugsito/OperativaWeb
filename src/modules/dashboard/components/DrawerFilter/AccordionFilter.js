@@ -29,7 +29,10 @@ import {
   useFormContext,
   useFormState,
 } from "react-hook-form";
+
 import { Context, defaultValues } from "../../context/AdvanceFilterContext";
+import { FILTER_BY } from "../../constants/Dashboard";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -55,64 +58,101 @@ const initialValues = {
 
 export default function AccordionFilter({ apply }) {
   const classes = useStyles();
-  const { values, resetItem, setValues } = useContext(Context);
-  // const { values, setValues, handleInputChange } = useForm(
-  //   initialValues,
-  //   false,
-  //   false
-  // );
+  const { values, resetItem, setValues, queryParams, setQueryParams } = useContext(Context);
   const methods = useForm({ mode: "onSubmit", defaultValues: values });
   const { dirtyFields } = useFormState({
     control: methods.control,
   });
+
   const resetForm = () => {
     setValues(defaultValues);
   };
+
   const onSubmit = (data) => {
-    const newValue = { ...values };
+    let newValue = { ...values };
+    console.log("dirtyFields",dirtyFields)
+    console.log("newValue",newValue)
     console.log("data",data)
+    // if (dirtyFields.residence) {
+    //   if (data?.residence?.locations.length) {
+    //     newValue.residence = {
+    //       ...data.residence,
+    //       active: true,
+    //     };
+    //   } else {
+    //     resetItem("residence");
+    //   }
+    // }
+    // if (dirtyFields.transport) {
+    //   if (data?.transport?.has_transport) {
+    //     newValue.transport = {
+    //       ...data.transport,
+    //       active: true,
+    //     };
+    //   } else {
+    //     resetItem("transport");
+    //   }
+    // }
+    // Object.keys(data).forEach((item) => {
+    //   if (item !== "residence" && item !== "transport") {
+    //     if (dirtyFields[item]) {
+    //       const valid = Object.values(data[item].answers).some(
+    //         (value) => value.active
+    //       );
+    //       console.log("valid",valid)
+    //       if (valid) {
+    //         newValue[item] = {
+    //           ...data[item],
+    //           active: true,
+    //         };
+    //       } else {
+    //         resetItem(item);
+    //       }
+    //     }
+    //   }
+    // });
 
-    if (dirtyFields.residence) {
-      if (data?.residence?.locations.length) {
-        newValue.residence = {
-          ...data.residence,
-          active: true,
-        };
-      } else {
-        resetItem("residence");
-      }
-    }
-    if (dirtyFields.transport) {
-      if (data?.transport?.has_transport) {
-        newValue.transport = {
-          ...data.transport,
-          active: true,
-        };
-      } else {
-        resetItem("transport");
-      }
-    }
-    Object.keys(data).forEach((item) => {
-      if (item !== "residence" && item !== "transport") {
-        if (dirtyFields[item]) {
-          const valid = Object.values(data[item].answers).some(
-            (value) => value
-          );
-          if (valid) {
-            newValue[item] = {
-              ...data[item],
-              active: true,
-            };
-          } else {
-            resetItem(item);
-          }
-        }
-      }
-    });
-
-    setValues(newValue);
     apply();
+    setValues(data);
+    updateQueryParams(data)
   };
+
+  const updateQueryParams = (newValue) => {
+    const newQueryParams = buildQueryParams(newValue)
+    setQueryParams(prevState => ({...prevState, ...newQueryParams}))
+  }
+
+  const buildQueryParams = (newValue) => {
+    const valueTemp = {...newValue}
+    // let queryParamsTemp = {gender:"",level_id:"",interest_rubro_id:"", experience:""}
+    let queryParamsTemp = {}
+    Object.keys(valueTemp).forEach((key) => {
+      if(key == "gender" || key == "education" || key == "rubro" || key== "experience"){
+        const queryParam = valueTemp[key]?.queryParam
+        const options = valueTemp[key]?.answers;
+          Object.keys(options).forEach((item) => {
+            const element = options[item]
+            if (element?.active) {
+              queryParamsTemp[queryParam] = `${queryParamsTemp[queryParam]? queryParamsTemp[queryParam] + ",":""}${element.value}`
+            }
+          })
+      }
+    })
+    // for (const key in valueTemp) {
+    //   if (Object.hasOwnProperty.call(valueTemp, key)) {
+    //     const element = valueTemp[key];
+    //     if(element.active){
+    //       queryParamsTemp[element.queryParam] = element.active
+    //     }
+
+        
+
+    //   }
+    // }
+    console.log("queryParamsTemp",queryParamsTemp)
+    return queryParamsTemp
+  }
+
   const valuesForm = methods.watch();
   return (
     <div className={classes.root}>

@@ -131,12 +131,12 @@ export default function JobPositionCreatedPage() {
               <TitlePage
                 description={
                   <>
-                    <b>Creado por: </b> {location.state.createBy}
+                    <b>Creado por: </b> {location?.state?.createBy}
                   </>
                 }
                 handleClick={() => history.push(initRoute)}
               >
-                {location.state.title}
+                {location?.state?.title}
               </TitlePage>
             </Grid>
             <Grid item xs={12}>

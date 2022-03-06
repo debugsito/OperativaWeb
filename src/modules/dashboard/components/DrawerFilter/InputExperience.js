@@ -20,22 +20,22 @@ export default function InputExperience() {
       <Grid item xs={12}>
         <FormGroup>
           <FormController
-            name="experience.answers.with_experience_one"
+            name="experience.answers.with_experience_one.active"
             type="checkbox"
             label="Menos de 6 meses"
           />
           <FormController
-            name="experience.answers.with_experience_two"
+            name="experience.answers.with_experience_two.active"
             type="checkbox"
             label="1 año"
           />
           <FormController
-            name="experience.answers.with_experience_three"
+            name="experience.answers.with_experience_three.active"
             type="checkbox"
             label="2 años"
           />
           <FormController
-            name="experience.answers.with_experience_four"
+            name="experience.answers.with_experience_four.active"
             type="checkbox"
             label="3 años a más"
           />
@@ -51,27 +51,27 @@ export default function InputExperience() {
           <FormController
             type="checkbox"
             label="Realizó Voluntariado"
-            name="experience.answers.whitout_experience_one"
+            name="experience.answers.whitout_experience_one.active"
           />
           <FormController
             type="checkbox"
             label="Disponible para horario rotativos"
-            name="experience.answers.whitout_experience_two"
+            name="experience.answers.whitout_experience_two.active"
           />
           <FormController
             type="checkbox"
             label="Disponible para horas extras."
-            name="experience.answers.whitout_experience_three"
+            name="experience.answers.whitout_experience_three.active"
           />
           <FormController
             type="checkbox"
             label="Disponible para fines de semana."
-            name="experience.answers.whitout_experience_four"
+            name="experience.answers.whitout_experience_four.active"
           />
           <FormController
             type="checkbox"
             label="Disponible para viajar."
-            name="experience.answers.whitout_experience_five"
+            name="experience.answers.whitout_experience_five.active"
           />
         </FormGroup>
       </Grid>
