@@ -32,7 +32,7 @@ function InputTransport() {
           <RadioGroup
             row
             aria-label="hasTransport"
-            name="hasTransport"
+            name="transport.answers.hasTransport.value"
             value={value}
             onChange={(e) => onChange(e.target.value)}
           >

@@ -22,7 +22,7 @@ export const FILTER_BY = {
         receivedBonus: "received_extra_bonus",
         financialAssistanceAtHome: "financial_help_at_home",
     },
-    // salaryExpectations: "Expectativa salarial",
+    salary: "salary",
     education: "level_id",
     age: "edad",
     gender: "gender",

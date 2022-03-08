@@ -31,7 +31,7 @@ import {
 } from "react-hook-form";
 
 import { Context, defaultValues } from "../../context/AdvanceFilterContext";
-import { FILTER_BY } from "../../constants/Dashboard";
+import { buildQueryParams } from "../../utils/convert";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,6 +48,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-around",
   },
 }));
+
 
 const initialValues = {
   department_id: "",
@@ -70,9 +71,9 @@ export default function AccordionFilter({ apply }) {
 
   const onSubmit = (data) => {
     let newValue = { ...values };
-    console.log("dirtyFields",dirtyFields)
-    console.log("newValue",newValue)
-    console.log("data",data)
+    console.log("dirtyFields", dirtyFields)
+    console.log("data dormik", data)
+    console.log("values", newValue)
     // if (dirtyFields.residence) {
     //   if (data?.residence?.locations.length) {
     //     newValue.residence = {
@@ -119,39 +120,9 @@ export default function AccordionFilter({ apply }) {
 
   const updateQueryParams = (newValue) => {
     const newQueryParams = buildQueryParams(newValue)
-    setQueryParams(prevState => ({...prevState, ...newQueryParams}))
+    setQueryParams(prevState => ({ ...prevState, ...newQueryParams }))
   }
 
-  const buildQueryParams = (newValue) => {
-    const valueTemp = {...newValue}
-    // let queryParamsTemp = {gender:"",level_id:"",interest_rubro_id:"", experience:""}
-    let queryParamsTemp = {}
-    Object.keys(valueTemp).forEach((key) => {
-      if(key == "gender" || key == "education" || key == "rubro" || key== "experience"){
-        const queryParam = valueTemp[key]?.queryParam
-        const options = valueTemp[key]?.answers;
-          Object.keys(options).forEach((item) => {
-            const element = options[item]
-            if (element?.active) {
-              queryParamsTemp[queryParam] = `${queryParamsTemp[queryParam]? queryParamsTemp[queryParam] + ",":""}${element.value}`
-            }
-          })
-      }
-    })
-    // for (const key in valueTemp) {
-    //   if (Object.hasOwnProperty.call(valueTemp, key)) {
-    //     const element = valueTemp[key];
-    //     if(element.active){
-    //       queryParamsTemp[element.queryParam] = element.active
-    //     }
-
-        
-
-    //   }
-    // }
-    console.log("queryParamsTemp",queryParamsTemp)
-    return queryParamsTemp
-  }
 
   const valuesForm = methods.watch();
   return (

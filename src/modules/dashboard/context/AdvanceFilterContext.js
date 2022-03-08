@@ -1,5 +1,6 @@
 import React, { createContext, useState } from "react";
 import { FILTER_BY } from "../constants/Dashboard";
+import { buildQueryParams } from "../utils/convert";
 
 export const defaultValues = {
   residence: {
@@ -9,9 +10,10 @@ export const defaultValues = {
   },
   transport: {
     label: "Transporte",
-    queryParam:"easy_to_take_transport",
     active: false,
-    has_transport: "",
+    answers: {
+      has_transport: {active: false, label:"Transporte", value:"", queryParam:FILTER_BY.transport},
+    }
   },
   experience: {
     label: "Experiencia",
@@ -46,23 +48,28 @@ export const defaultValues = {
     label: "Laboral",
     active: false,
     answers: {
-      hasUnionSindicate: "",
-      quitHisJob: "",
-      workedAsOperator: "",
+      hasUnionSindicate: {active: false, label:"Perteneció a un Sindicato", value:"", queryParam:FILTER_BY.labor.hasUnionSindicate},
+      quitHisJob: {active: false, label:"Abandono un trabajo", value:"", queryParam:FILTER_BY.labor.quitHisJob},
+      workedAsOperator: {active: false, label:"Trabajo como operario", value:"", queryParam:FILTER_BY.labor.workedAsOperator},
     },
   },
   economy: {
     label: "Economía",
     active: false,
-    financialAssistanceAtHome: "",
-    ownHome: "",
-    receivedBonus: "",
+    answers: {
+      financialAssistanceAtHome: {active: false, label:"Ayuda Economicamente", value:"", queryParam:FILTER_BY.economy.financialAssistanceAtHome},
+      ownHome: {active: false, label:"Casa propia", value:"", queryParam:FILTER_BY.economy.ownHome},
+      receivedBonus: {active: false, label:"Percibió bonificacion extra", value:"", queryParam:FILTER_BY.economy.receivedBonus},
+    },
   },
   salaryExpectations: {
     label: "Expectativa salarial",
+    queryParam:FILTER_BY.salary,
     active: false,
-    from: "",
-    to: "",
+    answers:{
+      from: "",
+      to: "",
+    }
   },
   education: {
     label: "Educación",
@@ -80,9 +87,12 @@ export const defaultValues = {
   },
   age: {
     label: "Edad",
+    queryParam:FILTER_BY.age,
     active: false,
-    from: "",
-    to: "",
+    answers:{
+      from: "",
+      to: "",
+    }
   },
   gender: {
     label: "Género",
@@ -94,47 +104,48 @@ export const defaultValues = {
       other: {active: false, label:"Otro", value:3},
     },
   },
-  extra: {
+  extra: {//SE REPITE y no concuerda con los otros filtros checkbox
     label: "Preguntas adicionales",
     active: false,
+    queryParam:"question_aditional",
     answers: {
-      question_one: "",
-      question_two: "",
-      question_three: "",
-      question_four: "",
+      question_one: {active: false, label:"Viajaría al interior del pais", value:1},
+      question_two: {active: false, label:"Trabajar en horarios ratativos", value:2},
+      question_three: {active: false, label:"Trabajar horas extras", value:3},
+      question_four: {active: false, label:"Trabajar fines de semana", value:4},
     },
   },
   family: {
     label: "Familia",
     active: false,
     answers: {
-      hasChildren: "",
-      hasResponsabilityPerson: "",
-      liveAlone: "",
+      hasChildren: {active: false, label:"Tiene hijos", value:"", queryParam:FILTER_BY.family.hasChildren},
+      hasResponsabilityPerson: {active: false, label:"Tiene alguna persona bajo su responsabilidad", value:"", queryParam:FILTER_BY.family.hasResponsabilityPerson},
+      liveAlone: {active: false, label:"Vive solo/a", value:"", queryParam:FILTER_BY.family.liveAlone},
     },
   },
   health: {
     label: "Salud",
     active: false,
     answers: {
-      hasAllergies: "",
-      hasOperation: "",
-      hasProblemOfColumn: "",
-      hasDiabetes: "",
-      useGlasses: "",
-      hadCovid: "",
+      hasAllergies: {active: false, label:"Tiene alguna alergia", value:"", queryParam:FILTER_BY.health.hasAllergies},
+      hasOperation: {active: false, label:"Ha tenido alguna operación", value:"", queryParam:FILTER_BY.health.hasOperation},
+      hasProblemOfColumn: {active: false, label:"Tiene algun problema de columna", value:"", queryParam:FILTER_BY.health.hasProblemOfColumn},
+      hasDiabetes: {active: false, label:"Sufre diabetes", value:"", queryParam:FILTER_BY.health.hasDiabetes},
+      useGlasses: {active: false, label:"Usa lentes", value:"", queryParam:FILTER_BY.health.useGlasses},
+      hadCovid: {active: false, label:"Ha tenido COVID", value:"", queryParam:FILTER_BY.health.hadCovid},
     },
   },
   personal: {
     label: "Personal",
     active: false,
     answers: {
-      questionPersonalOne: "",
-      questionPersonalTwo: "",
-      questionPersonalThree: "",
-      questionPersonalFour: "",
-      questionPersonalFive: "",
-      questionPersonalSix: "",
+      questionPersonalOne: {active: false, label:"Pregunta personal 1", value:"", queryParam:FILTER_BY.personalQuestion.says_your_opinion},
+      questionPersonalTwo: {active: false, label:"Pregunta personal 2", value:"", queryParam:FILTER_BY.personalQuestion.person_in_charge},
+      questionPersonalThree: {active: false, label:"Pregunta personal 3", value:"", queryParam:FILTER_BY.personalQuestion.motivates_working_as_operator},
+      questionPersonalFour: {active: false, label:"Pregunta personal 4", value:"", queryParam:FILTER_BY.personalQuestion.change_your_mind},
+      questionPersonalFive: {active: false, label:"Pregunta personal 5", value:"", queryParam:FILTER_BY.personalQuestion.problems_with_your_bosses},
+      questionPersonalSix: {active: false, label:"Pregunta personal 6", value:"", queryParam:FILTER_BY.personalQuestion.teamwork},
     },
   },
 };
@@ -143,9 +154,13 @@ export default function AdvanceFilterContext({ children }) {
   const [values, setValues] = useState(defaultValues);
   const [queryParams, setQueryParams] = useState({});
 
-  const resetItem = (index) => {
+  const resetItem = (item) => {
     const newValues = { ...values };
-    newValues[index] = defaultValues[index];
+    if (item.key == "age" || item.key == "salaryExpectations") {
+      newValues[item.key] = defaultValues[item.key]
+    }else{
+      newValues[item.key].answers[item.option] = defaultValues[item.key].answers[item.option];
+    }
     setValues(newValues);
     updateQueryParams(newValues)
   };
@@ -153,20 +168,6 @@ export default function AdvanceFilterContext({ children }) {
   const updateQueryParams = (newValues) => {
     const newQueryParams = buildQueryParams(newValues)
     setQueryParams(newQueryParams)
-  }
-
-  const buildQueryParams = (newValues) => {
-    const valueTemp = {...newValues}
-    let queryParamsTemp = {};
-    for (const key in valueTemp) {
-      if (Object.hasOwnProperty.call(valueTemp, key)) {
-        const element = valueTemp[key];
-        if(element.active){
-          queryParamsTemp[element.queryParam] = element.active
-        }
-      }
-    }
-    return queryParamsTemp
   }
 
   return (

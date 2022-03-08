@@ -38,24 +38,33 @@ export default function OutlinedChips() {
     console.info("You clicked the Chip.");
   };
 
-  const render = Object.values(values).some((item) => item?.active);
-  if (!render) return null;
+  // const render = Object.values(values).some((item) => item?.active);
+  // if (!render) return null;
 
   let arrayLabel = [];
-  Object.keys(values).map((item) => {
-    if (item !== "residence" && item !== "transport") {
-      const options = values[item].answers;
-      console.log("options",options)
-      Object.keys(options).map((element) => {
+  const valueTemp = { ...values };
+  Object.keys(valueTemp).map((key) => {
+    const options = valueTemp[key]?.answers;
+    if (key == "gender" || key == "education" || key == "rubro" || key == "experience" || key == "extra") {
+      Object.keys(options).forEach((element) => {
         if (options[element].active) {
-          arrayLabel.push({filter: item, label: options[element].label})
+          arrayLabel.push({ key, option: element, label: options[element].label })
         }
       })
-    } else {
-      if (values[item].active) {
-        arrayLabel.push({filter: item, label:values[item].label})
+    }
+    else if (key == "labor" || key == "transport" || key == "economy" || key == "personal" || key == "health" || key == "family") {
+      Object.keys(options).forEach((element) => {
+        if (options[element].value) {
+          arrayLabel.push({ key, option: element, label: `${options[element].label}: ${options[element].value}` })
+        }
+      })
+    }
+    else if (key == "age" || key == "salaryExpectations") {
+      if(options.from != "" && options.to != ""){
+        arrayLabel.push({ key, option: key, label: `${valueTemp[key].label}: ${options.from} - ${options.to}` })
       }
     }
+
   })
 
 
