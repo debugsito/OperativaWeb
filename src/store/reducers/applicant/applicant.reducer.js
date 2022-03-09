@@ -2,7 +2,7 @@ import { ApplicantType } from "../../types/applicant";
 
 const initialState = {
     error: "",
-    publicationsAccount: "",
+    publicationsAccount: [],
     publicationSelected: "",
     fetch: {
         status: "idle",

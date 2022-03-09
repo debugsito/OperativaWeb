@@ -94,8 +94,8 @@ export default function ApplicantAccountItem(props) {
                     <img src={PizzaHut} className={classes.brandImg} alt=""/>
                 </div>
                 <h4>
-                    <span className={classes.title}>Motorizado - Delivery</span> <br/>
-                    <small className={classes.businessName}>Pizza Hut SAC</small>
+                    <span className={classes.title}>{data.publication.job_title}</span> <br/>
+                    <small className={classes.businessName}>{data.publication.company}</small>
                 </h4>
             </div>
             <div className={classes.bodyResultCard}>
@@ -104,7 +104,7 @@ export default function ApplicantAccountItem(props) {
                     {/*<span>30 de julio del 2021</span>*/}
                     <span>{formatDate(data.createdAt)}</span>
                 </div>
-                <div>Salario S/1800</div>
+                <div>Salario S/{data.publication.salary}</div>
             </div>
         </div>
     );

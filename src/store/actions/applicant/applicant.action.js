@@ -25,11 +25,11 @@ export const setStatus = (payload) => ({
 
 
 
-export const getPublicationAccount = () => {
+export const getPublicationAccount = (status = null) => {
   return async (dispatch) => {
     try {
-      const response = await service_Applicant.getApplicantPublication();
-      dispatch(setPublicationAccount(response.data));
+      const response = await service_Applicant.getApplicantPublication(status);
+      dispatch(setPublicationAccount(response.data.data));
       dispatch(setPublicationAccountError(null));
     } catch (error) {
       dispatch(setPublicationAccount([]));

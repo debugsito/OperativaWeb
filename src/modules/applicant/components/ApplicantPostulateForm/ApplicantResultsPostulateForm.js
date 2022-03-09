@@ -53,8 +53,8 @@ export default function ApplicantResultsPostulateForm(props) {
                     <img src={PizzaHut} className="brand-img" alt=""/>
                 </div>
                 <h4>
-                    <span className={classes.title}>Motorizado - Delivery</span> <br/>
-                    <small className={classes.businessName}>Pizza Hut SAC</small>
+                    <span className={classes.title}>{data.publication.job_title}</span> <br/>
+                    <small className={classes.businessName}>{data.publication.company}</small>
                 </h4>
             </div>
             <div className="body-result-card">
