@@ -51,18 +51,21 @@ export default function OutlinedChips() {
           arrayLabel.push({ key, option: element, label: options[element].label })
         }
       })
-    }
-    else if (key == "labor" || key == "transport" || key == "economy" || key == "personal" || key == "health" || key == "family") {
+    }else if (key == "labor" || key == "transport" || key == "economy" || key == "personal" || key == "health" || key == "family") {
       Object.keys(options).forEach((element) => {
         if (options[element].value) {
           arrayLabel.push({ key, option: element, label: `${options[element].label}: ${options[element].value}` })
         }
       })
-    }
-    else if (key == "age" || key == "salaryExpectations") {
+    }else if (key == "age" || key == "salaryExpectations") {
       if(options.from != "" && options.to != ""){
         arrayLabel.push({ key, option: key, label: `${valueTemp[key].label}: ${options.from} - ${options.to}` })
       }
+    }else if (key == "residence") {
+      options.forEach(item => {
+        arrayLabel.push({ key, option: item.district_id, label: `Residencia: ${item.label}` })
+      })
+      
     }
 
   })

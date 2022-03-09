@@ -29,10 +29,17 @@ export function buildQueryParams(data){
       else if (key == "age" || key == "salaryExpectations") {
         Object.keys(options).forEach((item) => {
           const element = options[item]
-          console.log("element",element)
           if (element) {
             queryParamsTemp[queryParam] = `${queryParamsTemp[queryParam] ? queryParamsTemp[queryParam] + "," : ""}${element}`
           }
+        })
+      }
+
+      else if (key == "residence") {
+        options.forEach(item => {
+          queryParamsTemp.district_id = `${queryParamsTemp.district_id ? queryParamsTemp.district_id + "," : ""}${item.district_id}`
+          queryParamsTemp.province_id = `${queryParamsTemp.province_id ? queryParamsTemp.province_id   + "," : ""}${item.province_id}`
+          queryParamsTemp.department_id = `${queryParamsTemp.department_id ? queryParamsTemp.department_id + "," : ""}${item.department_id}`
         })
       }
 

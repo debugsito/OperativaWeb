@@ -105,7 +105,6 @@ export default function TableListPostulants() {
   }, [])
   
   useEffect(() => {
-    console.log("values ha cambiado..", values)
     console.log("queryParams ha cambiado..", queryParams)
     dispatch(getPostulantsByPublicationId({ publication_id, params: { estado: POSTULANTS.current, page, size: rowsPerPage, ...queryParams} }));
   },[queryParams])

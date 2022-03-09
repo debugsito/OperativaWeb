@@ -6,7 +6,7 @@ export const defaultValues = {
   residence: {
     label: "Lugar de residencia",
     active: false,
-    locations: [],
+    answers: [],
   },
   transport: {
     label: "Transporte",
@@ -158,6 +158,10 @@ export default function AdvanceFilterContext({ children }) {
     const newValues = { ...values };
     if (item.key == "age" || item.key == "salaryExpectations") {
       newValues[item.key] = defaultValues[item.key]
+    }else if(item.key == "residence"){
+      const newResidence = {...values.residence}
+      const newLocation = newResidence.answers.filter(element => element.district_id != item.option)
+      console.log("newLocation", newLocation)
     }else{
       newValues[item.key].answers[item.option] = defaultValues[item.key].answers[item.option];
     }

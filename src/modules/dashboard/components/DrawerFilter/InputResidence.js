@@ -30,7 +30,7 @@ function InputResidence() {
     fieldState: { invalid, isTouched, isDirty },
     formState: { touchedFields, dirtyFields },
   } = useController({
-    name: "residence.locations",
+    name: "residence.answers",
     control: methods.control,
     defaultValues: [],
   });
