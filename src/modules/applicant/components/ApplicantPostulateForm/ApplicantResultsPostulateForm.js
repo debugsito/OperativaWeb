@@ -34,7 +34,7 @@ export default function ApplicantResultsPostulateForm(props) {
     const history = useHistory()
     const initRoute = SessionRoutes().initRoute;
     const selectItemResult = () => {
-        history.push(`${initRoute}/postulacion/aviso/${data.id}`);
+        history.push(`${initRoute}/postulacion/aviso/${data.publication.id}`);
     };
 
     const formatDate = (value) => {
@@ -63,7 +63,7 @@ export default function ApplicantResultsPostulateForm(props) {
                     {/*<span>30 de julio del 2021</span>*/}
                     <span>{formatDate(data.createdAt)}</span>
                 </div>
-                <div>Salario S/1800</div>
+                <div>Salario S/{data.publication.salary}</div>
             </div>
         </div>
     );

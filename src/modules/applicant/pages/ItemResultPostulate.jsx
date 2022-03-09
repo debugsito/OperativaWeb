@@ -49,8 +49,24 @@ const ItemResultPostulate = () => {
 
     const getAnuncio = async () => {
         const response = await service_Applicant.detallePublicacion(id);
-        setData(response.data.publication);
+        let pub = response.data.publication;
+        if(pub){
+            pub.description =  isJsonString(pub?.description) ? JSON.parse(pub?.description) : pub.description;
+            pub.description_text = ( Array.isArray(pub.description )? pub.description[0].children[0].text : '');
+            pub.requirements = isJsonString(pub?.requirements) ? JSON.parse(pub?.requirements): pub?.requirements;
+            console.log(pub);
+            setData(pub);
+        }
     };
+
+    const isJsonString = (str)=> {
+        try {
+            JSON.parse(str);
+        } catch (e) {
+            return false;
+        }
+        return true;
+    }
 
     const setBefore = () => {
         history.push(`${initRoute}/formulario-postular`)
@@ -90,13 +106,12 @@ const ItemResultPostulate = () => {
                                 <p><b>{data.job_title}</b></p>
                                 <div>
                                     <p><b>Categoría</b></p>
-                                    <p>Logítica - Distribución</p>
+                                    <p>{data?.rubro?.name}</p>
                                 </div>
                                 <div>
                                     <p><b>Descripción</b></p>
                                     <p>
-                                        Somos Pizza Hut, empresa americana con sede en Lima, San Miguel.
-                                        Nos encontramos en la búsqueda de MOTORIZADOS.
+                                        {data.description_text}
                                         <br/>
                                         Vacante Disponible: REPARTIDORES TIEMPO COMPLETO.
                                     </p>
