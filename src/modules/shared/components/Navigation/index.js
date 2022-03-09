@@ -54,9 +54,24 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     borderRadius: "0 10px 0 0"
   },
+  containerLogoPostulante: {
+    height: "64px",
+    background: "var(--principalColor)",
+    width: '100%',
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: "0 0 20px 0"
+  },
   rootToolbar: {
     padding: "0 1rem 0 0",
     color: "var(--paragraphColor)"
+  },
+  rootToolbarApplicant: {
+    color: "var(--paragraphColor)",
+    paddingLeft: '0',
+    paddingRight: '0',
+    backgroundColor: 'var(--smokeWhiteColor)'
   },
   containerInfo:{
     display:"flex",
@@ -77,7 +92,6 @@ export default function Navigation({ children }) {
   const hasDashboard = MenuRoutes().hasDashboard;
   const { user } = useSelector(state => state?.auth);
   const isSubjetBusiness = user.account.rol_usuario === "business" || user.account.rol_usuario === "muni"
-
   const [isLoading, setIsLoading] = React.useState(false);
 
   const handleSignOut = (event) => {
@@ -95,32 +109,39 @@ export default function Navigation({ children }) {
             position="fixed"
             className={classes.appBar}
           >
-            <Toolbar classes={{ root: classes.rootToolbar }}>
-              <Grid container justifyContent="space-between" alignItems="center" spacing={1}>
-                <Grid item>
-                  <Grid container spacing={2}>
+            {user.account.rol_usuario === 'postulante' ?
+                <Toolbar classes={{ root: classes.rootToolbarApplicant }}>
+                        <div className={classes.containerLogoPostulante}>
+                          <a href={session ? '/' : process.env.REACT_APP_PATH_LANDING} ><img src={logoSVG} alt="Operativa" /></a>
+                        </div>
+                </Toolbar>
+            :
+                <Toolbar classes={{ root: classes.rootToolbar }}>
+                  <Grid container justifyContent="space-between" alignItems="center" spacing={1}>
                     <Grid item>
-                      <div className={classes.containerLogo}>
-                        <a href={session ? '/' : process.env.REACT_APP_PATH_LANDING} ><img src={logoSVG} alt="Operativa" /></a>
-                      </div>
+                      <Grid container spacing={2}>
+                        <Grid item>
+                          <div className={classes.containerLogo}>
+                            <a href={session ? '/' : process.env.REACT_APP_PATH_LANDING} ><img src={logoSVG} alt="Operativa" /></a>
+                          </div>
+                        </Grid>
+                        {
+                            (hasDashboard && isSubjetBusiness) &&
+                            <Grid item className={classes.containerInfo}>
+                              <Typography variant='body2' className={classes.info}>{user.account.razon_social}</Typography>
+                              <Typography variant='body2' className={classes.info}>RUC: {user?.account?.user?.document_number}</Typography>
+                            </Grid>
+                        }
+                      </Grid>
                     </Grid>
                     {
-                      (hasDashboard && isSubjetBusiness) &&
-                      <Grid item className={classes.containerInfo}>
-                          <Typography variant='body2' className={classes.info}>{user.account.razon_social}</Typography>
-                          <Typography variant='body2' className={classes.info}>RUC: {user?.account?.user?.document_number}</Typography>
-                      </Grid>
+                        session &&
+                        <Grid item>
+                          <HamburgerMenu account={user.account} handleSignOut={handleSignOut} />
+                        </Grid>
                     }
                   </Grid>
-                </Grid>
-                {
-                  session &&
-                  <Grid item>
-                    <HamburgerMenu account={user.account} handleSignOut={handleSignOut} />
-                  </Grid>
-                }
-              </Grid>
-            </Toolbar>
+                </Toolbar>}
           </AppBar>
         </>
       }

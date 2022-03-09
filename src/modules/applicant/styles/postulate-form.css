@@ -1,0 +1,36 @@
+.title {
+    font-size: 1.6em;
+    margin: 0;
+    line-height: 1;
+    font-weight: 600;
+}
+
+.container-postulate-form {
+    background-color: #C4C4C4;
+    border-radius: 10px;
+    padding: 1rem .8rem;
+}
+.MuiOutlinedInput-root {
+    background-color: #fff;
+}
+.mb-2 {
+    margin-bottom: 1.4rem !important;
+}
+.container-result-postulate-form {
+    /*padding-top: ;*/
+}
+.container-detail-aviso {
+    background: #FFFFFF;
+    border-radius: 12px;
+    padding: 1rem 0.8rem;
+}
+
+.container-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.text-center {
+    text-align: center;
+}

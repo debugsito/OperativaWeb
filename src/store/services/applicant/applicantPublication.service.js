@@ -10,7 +10,22 @@ const setNotificacionPostulant = async () => {
     return response;
 }
 
+const publicationsSearch = async (data) => {
+    return await api.post('/publications/search', data);
+}
+
+const detallePublicacion = async (id) => {
+    return await api.get(`/publication/${id}`);
+}
+
+const sendApplication = async (id) => {
+    return await api.post(`/publication/${id}/apply`);
+}
+
 export default {
     getApplicantPublication,
-    setNotificacionPostulant
+    setNotificacionPostulant,
+    publicationsSearch,
+    detallePublicacion,
+    sendApplication,
 }

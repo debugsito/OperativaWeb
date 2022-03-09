@@ -8,6 +8,10 @@ import PrivateRoute from '../../../routers/PrivateRoute';
 import Applicant from '../pages/Applicant'
 import ShowPublication from '../pages/ShowPublication'
 import Profile from '../pages/ProfileTemp'
+import PostulateForm from '../pages/PostulateForm'
+import ItemResultPostulate from "../pages/ItemResultPostulate";
+import Applications from "../pages/Applications";
+import ApplicationDetail from "../pages/ApplicationDetail";
 
 const MyAccountRouter = () => {
     return (
@@ -28,6 +32,26 @@ const MyAccountRouter = () => {
                     exact
                     path={ApplicantRoutes[2]}
                     component={Profile} />
+                <PrivateRoute
+                    needSession
+                    exact
+                    path={ApplicantRoutes[3]}
+                    component={PostulateForm} />
+                <PrivateRoute
+                    needSession
+                    exact
+                    path={ApplicantRoutes[4]}
+                    component={ItemResultPostulate} />
+                <PrivateRoute
+                    needSession
+                    exact
+                    path={ApplicantRoutes[5]}
+                    component={Applications} />
+                <PrivateRoute
+                    needSession
+                    exact
+                    path={ApplicantRoutes[6]}
+                    component={ApplicationDetail} />
             </Switch>
         </>
     );
