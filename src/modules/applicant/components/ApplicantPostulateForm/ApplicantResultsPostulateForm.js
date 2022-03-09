@@ -18,23 +18,41 @@ const useStyles = makeStyles(theme => ({
     title: {
         fontWeight: 600
     },
+    statusProgreso: {
+        position: 'absolute',
+        top: '-.5rem',
+        left: '-.5rem',
+        background: '#B8EA71',
+        borderRadius: '100px',
+        padding: '4px 16px',
+    },
+    statusFinalizado: {
+        position: 'absolute',
+        top: '-.5rem',
+        left: '-.5rem',
+        background: '#AAAAAA',
+        borderRadius: '100px',
+        padding: '4px 16px',
+    },
     containerResult: {
         padding: '1.5rem 1rem 2rem',
         background: '#FFFFFF',
         boxShadow: '0px 4px 24px rgba(136, 166, 255, 0.05)',
         borderRadius: '12px',
         marginBottom: '1.5rem',
-        cursor: 'pointer'
+        cursor: 'pointer',
+        position: 'relative'
     }
 }));
 
 export default function ApplicantResultsPostulateForm(props) {
     const classes = useStyles();
     const {data} = props;
+    console.log(data);
     const history = useHistory()
     const initRoute = SessionRoutes().initRoute;
     const selectItemResult = () => {
-        history.push(`${initRoute}/postulacion/aviso/${data.publication.id}`);
+        history.push(`${initRoute}/postulaciones/detalle/${data.publication.id}`);
     };
 
     const formatDate = (value) => {
@@ -48,6 +66,10 @@ export default function ApplicantResultsPostulateForm(props) {
 
     return (
         <div className={classes.containerResult} onClick={selectItemResult}>
+            <div className={classes.statusProgreso}>
+                <span>Activo</span>
+            </div>
+        
             <div className="header-result-card">
                 <div>
                     <img src={PizzaHut} className="brand-img" alt=""/>
@@ -61,7 +83,7 @@ export default function ApplicantResultsPostulateForm(props) {
                 <div>
                     <CalendarTodayOutlined className={classes.calendarIcon}/>
                     {/*<span>30 de julio del 2021</span>*/}
-                    <span>{formatDate(data.createdAt)}</span>
+                    <span>{formatDate(data.publication.createdAt)}</span>
                 </div>
                 <div>Salario S/{data.publication.salary}</div>
             </div>
