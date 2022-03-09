@@ -5,7 +5,8 @@ import { Route, Switch } from 'react-router-dom';
 import HomeRoutes from './HomeRoutes';
 
 //Pages
-import Home from '../pages/Home';
+// import Home from '../pages/Home';
+import Home from '../pages/Home2';
 import Authenticate from '../pages/Authenticate';
 import AuthRedirect from '../pages/AuthRedirect';
 import Error from '../pages/Error';
