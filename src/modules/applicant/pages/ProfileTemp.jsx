@@ -217,15 +217,15 @@ const Profile = ({ history }) => {
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                    { profile &&
-                        <ApplicantWorkExperienceForm
-                            history={history}
-                            userData={normalize.workExperienceData(profile)}
-                            setStep={setStep}
-                            // handleSaveWorkExperience={handleSaveWorkExperience}
-                            // handleUpdateWorkExperience={(data) => setWorkExperience(data)} 
-                        />
-                    }
+                        { profile &&
+                            <ApplicantWorkExperienceForm
+                                history={history}
+                                userData={normalize.workExperienceData(profile)}
+                                setStep={setStep}
+                                // handleSaveWorkExperience={handleSaveWorkExperience}
+                                // handleUpdateWorkExperience={(data) => setWorkExperience(data)}
+                            />
+                        }
                     </AccordionDetails>
                 </Accordion>
                 <Accordion expanded={step === 5} onChange={(event, expanded) => areasOfInterest && setStep(expanded ? 5 : 0)}>
@@ -253,6 +253,10 @@ const Profile = ({ history }) => {
                         }
                     </AccordionDetails>
                 </Accordion>
+                {/*
+
+
+                */}
             </Grid>
         </Grid>
     )

@@ -9,6 +9,9 @@ import PropTypes from 'prop-types';
 // import styles from '../styles/applications.scss'
 import ApplicationInProgress from '../components/ApplicationInProgress/ApplicationInProgress';
 import CompletedApplication from "../components/CompletedApplication/CompletedApplication";
+import {closeIcon} from "../../shared/images";
+import {SessionRoutes} from "../../shared/libs/sessionRoutes";
+import {NavigateBefore} from "@material-ui/icons";
 
 const TABS = [{label: "EN PROCESO"}, {label: "FINALIZADO"}]
 
@@ -43,6 +46,12 @@ const useStyles = makeStyles((theme) => ({
 
 function TabPanel(props) {
     const {children, value, index, ...other} = props;
+    const initRoute = SessionRoutes().initRoute;
+    const history = useHistory()
+
+    const setBefore = () => {
+        history.push(`${initRoute}`)
+    };
 
     return (
         <div
@@ -79,13 +88,25 @@ const Applications = () => {
     const history = useHistory();
     const [valueTab, setValueTab] = React.useState(0);
     const classes = useStyles();
+    const initRoute = SessionRoutes().initRoute;
 
     const handleChange = (event, newValue) => {
         setValueTab(newValue);
     };
 
+    const setBefore = () => {
+        history.push(`${initRoute}`)
+    };
+
     return (
         <Container className="applicant-container">
+            <Grid container spacing={0}>
+                <Grid item xs={12} className="mb-2">
+                    <a className="btn-logout">
+                        <NavigateBefore onClick={setBefore}/>
+                    </a>
+                </Grid>
+            </Grid>
             <AppBar position="static" classes={{colorPrimary: classes.appBarColorPrimary}} className="Appbar-tabs">
                 <Tabs value={valueTab} onChange={handleChange} textColor="primary">
                     {

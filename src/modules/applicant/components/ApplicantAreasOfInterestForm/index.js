@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux"
 
-import { Grid, MenuItem } from '@material-ui/core'
-import { Select, Button, Snackbars, Modal, Typography } from "../../../shared/components";
+import {FormControl, FormHelperText, Grid, InputLabel, MenuItem, Select} from '@material-ui/core'
+import { Button, Snackbars, Modal, Typography } from "../../../shared/components";
 
 import { actions_Utils } from "../../../../store/actions";
 import { useForm } from "../../../hooks";
@@ -22,7 +22,6 @@ export default function Index({ userData, handleSaveAreasOfInterest }) {
     useEffect(() => {
         // console.log("userData", userData)
     })
-
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
@@ -93,7 +92,24 @@ export default function Index({ userData, handleSaveAreasOfInterest }) {
                 </Typography>
             </Grid>
             <Grid item xs={12} md={6}>
-                <Select
+                <FormControl variant="outlined" fullWidth error={errors.level_id ? true : false}>
+                    <InputLabel id="demo-simple-select-outlined-label">Nivel máximo alcanzado</InputLabel>
+                    <Select
+                        labelId="demo-simple-select-outlined-label"
+                        id="demo-simple-select-outlined"
+                        name="interest_rubro_id"
+                        value={values.interest_rubro_id}
+                        onChange={handleInputChange}
+                        error={errors.interest_rubro_id ? true : false}
+                        helperText={errors.interest_rubro_id}
+                    >
+                        {items.length > 0 && items.map(element =>
+                            <MenuItem key={element.id} value={element.id}>{element.name}</MenuItem>
+                        )}
+                    </Select>
+                    <FormHelperText>{errors.level_id}</FormHelperText>
+                </FormControl>
+                {/*<Select
                     label="Rubro"
                     name="interest_rubro_id"
                     value={values.interest_rubro_id}
@@ -105,7 +121,7 @@ export default function Index({ userData, handleSaveAreasOfInterest }) {
                         <MenuItem key={element.id} value={element.id}>{element.name}</MenuItem>
                     )}
 
-                </Select>
+                </Select>*/}
             </Grid>
             <Grid item xs={12} className="justify-center">
                 {/* <Button variant="outlined" size="large" onClick={() => history.push('/')}>Cancelar</Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; */}

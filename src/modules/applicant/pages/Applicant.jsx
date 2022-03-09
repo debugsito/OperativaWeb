@@ -17,6 +17,10 @@ import {setDisableNotificationOfApplicant} from "../../../store/actions/applican
 import '../styles/index.css'
 import {setUser, signOut} from "../../../store/actions/auth/auth.action";
 import {updateSearchWork} from "../../../store/services/auth/user.service";
+import {Chart, ArcElement} from 'chart.js'
+import {Doughnut} from 'react-chartjs-2';
+
+Chart.register(ArcElement);
 
 // console.log(AccessAlarm);
 // Task: Notification - Cada cierto tiempo el sistema debe recordarle que actualice su CV:
@@ -50,6 +54,11 @@ const useStyles = makeStyles(theme => ({
     },
     containerCardText: {
         height: '11rem'
+    },
+    applicantContainer: {
+        background: '#f7f7f7',
+        padding: '1rem',
+        paddingBottom: '5rem'
     }
 }))
 
@@ -73,6 +82,44 @@ const Applicant = () => {
     const {horizontal, vertical, open, message, severity} = notification;
 
     console.log(user);
+    console.log(user.account);
+
+    const dataCv = {
+        datasets: [
+            {
+                label: '# of Votes',
+                data: [user.account.cv_percent, 100 - user.account.cv_percent],
+                backgroundColor: [
+                    '#4E51FE',
+                    '#fff',
+                ],
+                borderColor: [
+                    '#4E51FE',
+                    '#fff',
+                ],
+                borderWidth: 1,
+            },
+        ],
+    };
+
+    const dataCuestionario = {
+        datasets: [
+            {
+                label: '# of Votes',
+                data: [user.account.questionnaire_percent, 100 - user.account.questionnaire_percent],
+                backgroundColor: [
+                    '#4E51FE',
+                    '#fff',
+                ],
+                borderColor: [
+                    '#4E51FE',
+                    '#fff',
+                ],
+                borderWidth: 1,
+            },
+        ],
+    };
+
 
     useEffect(() => {
         dispatch(getDocumentsType());
@@ -138,7 +185,7 @@ const Applicant = () => {
     };
 
     return (
-        <Container className="applicant-container">
+        <Container className={classes.applicantContainer}>
             <Grid container spacing={0}>
                 <Grid item xs={12} className="mb-2">
                     <div className="text-right">
@@ -222,11 +269,13 @@ const Applicant = () => {
                 <Grid item xs={4} className="pr-2 mt-4">
                     <div className="card-cv">
                         Tu CV
+                        <Doughnut data={dataCv}/>
                     </div>
                 </Grid>
                 <Grid item xs={4} className="pl-2 mt-4">
                     <div className="card-cv">
                         Cuestionario
+                        <Doughnut data={dataCuestionario}/>
                     </div>
                 </Grid>
 

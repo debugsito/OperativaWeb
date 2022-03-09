@@ -164,7 +164,7 @@ input:checked + .slider:before {
     background: #FFFFFF;
     box-shadow: 0 4px 24px rgba(136, 166, 255, 0.05);
     border-radius: 12px;
-    height: 6rem;
+    /*height: 6rem;*/
     padding: .7rem;
 }
 

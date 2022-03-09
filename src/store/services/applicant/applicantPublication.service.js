@@ -1,8 +1,11 @@
 import api from "../../../modules/shared/libs/api";
 
-const getApplicantPublication = async () => {
-    const response = await api.get('/publications/account');
-    return response;
+const getApplicantPublication = async (status = null) => {
+    let statusStr = '';
+    if (status) {
+        statusStr = `?status=${status}`;
+    }
+    return await api.get(`/publications/account${statusStr}`);
 }
 
 const setNotificacionPostulant = async () => {
