@@ -5,8 +5,9 @@ import { NavigateBefore } from "@material-ui/icons";
 import React, { useEffect } from "react";
 import ApplicantResultsPostulateForm from "../components/ApplicantPostulateForm/ApplicantResultsPostulateForm";
 import { useParams } from "react-router-dom";
-import { service_Applicant } from "../../../store/services";
 import ApplicantOptionForm from '../components/ApplicantOptionForm/index'
+import {useSelector, useDispatch} from "react-redux";
+import { getPublicationAccountById } from "../../../store/actions/applicant/applicant.action";
 
 const useStyles = makeStyles((theme) => ({
     // background: #f7f7f7;
@@ -23,10 +24,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ApplicationDetail = () => {
+    const dispatch = useDispatch();
     const classes = useStyles();
     const history = useHistory()
     const { id } = useParams();
-    const [data, setData] = React.useState({ publication: {} });
+    const {applicant: {publicationAccountSelected}} = useSelector(state => state);
     const initRoute = SessionRoutes().initRoute;
 
     useEffect(() => {
@@ -34,24 +36,8 @@ const ApplicationDetail = () => {
     }, []);
 
     const getAnuncio = async () => {
-        const response = await service_Applicant.detallePublicacion(id);
-        let pub = response.data.publication;
-        if (pub) {
-            pub.description = isJsonString(pub?.description) ? JSON.parse(pub?.description) : pub.description;
-            pub.description_text = (Array.isArray(pub.description) ? pub.description[0].children[0].text : '');
-            pub.requirements = isJsonString(pub?.requirements) ? JSON.parse(pub?.requirements) : pub?.requirements;
-            setData({ publication: pub });
-        }
+        dispatch(getPublicationAccountById(id));
     };
-
-    const isJsonString = (str) => {
-        try {
-            JSON.parse(str);
-        } catch (e) {
-            return false;
-        }
-        return true;
-    }
 
     const setBefore = () => {
         history.push(`${initRoute}/postulaciones`)
@@ -66,7 +52,7 @@ const ApplicationDetail = () => {
                     </a>
                 </Grid>
                 <Grid item xs={12}>
-                    <ApplicantResultsPostulateForm data={data} />
+                    <ApplicantResultsPostulateForm data={publicationAccountSelected} />
                     <h1> Felicitaciones ! </h1>
                     <p>Te encuentas en el proceso de selección, la empresa activará las tareas que deberás resolver. <br />
                     <br />

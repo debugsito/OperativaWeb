@@ -4,6 +4,7 @@ const initialState = {
     error: "",
     publicationsAccount: [],
     publicationSelected: "",
+    publicationAccountSelected : {},
     fetch: {
         status: "idle",
         message: null
@@ -35,6 +36,11 @@ const applicationReducer = (state = initialState, action) => {
             return {
                 ...state,
                 fetch: action.payload
+            }
+        case ApplicantType.SET_PUBLICATION_ACCOUNT_SELECTED:
+            return {
+                ...state,
+                publicationAccountSelected : action.payload
             }
         default:
             return state;

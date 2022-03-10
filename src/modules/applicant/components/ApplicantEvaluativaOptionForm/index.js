@@ -1,6 +1,6 @@
 import React from "react";
 import './index.css';
-import { Notifications, Email, Assignment } from '@material-ui/icons';
+import { Notifications } from '@material-ui/icons';
 import { useHistory } from "react-router-dom";
 import { SessionRoutes } from "../../../shared/libs/sessionRoutes";
 import { makeStyles } from "@material-ui/core";
@@ -36,7 +36,7 @@ const useStyles = makeStyles(theme => ({
     },
     containerResult: {
         padding: '1.5rem 1rem 2rem',
-        background: '#EE0202',
+        background: '#4E51FE',
         boxShadow: '0px 4px 24px rgba(136, 166, 255, 0.05)',
         borderRadius: '12px',
         marginBottom: '1.5rem',
@@ -59,24 +59,11 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function ApplicantOptionForm(props) {
+export default function ApplicantEvaluativaOptionForm(props) {
     const classes = useStyles();
-    const { title, content, route, id, icon } = props;
+    const { title, content,route,id} = props;
     const history = useHistory()
     const initRoute = SessionRoutes().initRoute;
-
-    const GetIcon = (icon) => {
-        if (icon == 'Email') {
-            return (
-                <Email style={{ color: 'white' }} />
-            )
-        }
-        if (icon == 'Assignment') {
-            return (
-                <Assignment style={{ color: 'white' }} />
-            )
-        }
-    }
 
 
     return (
@@ -87,11 +74,7 @@ export default function ApplicantOptionForm(props) {
 
             <div className="header-result-card">
                 <div className="header-title">
-
-                    {GetIcon(icon)}
                     <span style={{ color: 'white', marginLeft: '5px' }} className={classes.title}>{title}</span>
-
-
                 </div>
 
             </div>

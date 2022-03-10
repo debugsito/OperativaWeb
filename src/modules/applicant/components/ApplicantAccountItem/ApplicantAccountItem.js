@@ -69,7 +69,7 @@ export default function ApplicantAccountItem(props) {
     const history = useHistory()
     const initRoute = SessionRoutes().initRoute;
     const selectItemResult = () => {
-        history.push(`${initRoute}/postulaciones/detalle/${data.publication.id}`);
+        history.push(`${initRoute}/postulaciones/detalle/${data.id}`);
     };
 
     const formatDate = (value) => {

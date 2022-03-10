@@ -8,6 +8,10 @@ const getApplicantPublication = async (status = null) => {
     return await api.get(`/publications/account${statusStr}`);
 }
 
+const getApplicantPublicationById = async (id) => {
+    return await api.get(`/publications/account/${id}`)
+}
+
 const setNotificacionPostulant = async () => {
     const response = await api.post('/account/cancel_cv_notification');
     return response;
@@ -31,4 +35,5 @@ export default {
     publicationsSearch,
     detallePublicacion,
     sendApplication,
+    getApplicantPublicationById
 }

@@ -6,5 +6,8 @@ const ApplicantRoutes = [
     '/postulante/postulacion/aviso/:id',
     '/postulante/postulaciones',
     '/postulante/postulaciones/detalle/:id',
+    '/postulante/mensajes',
+    '/postulante/mensajes/detalle/:id',
+    '/postulante/evaluaciones'
 ];
 export default ApplicantRoutes;
