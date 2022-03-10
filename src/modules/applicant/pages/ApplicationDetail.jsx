@@ -6,6 +6,7 @@ import React, { useEffect } from "react";
 import ApplicantResultsPostulateForm from "../components/ApplicantPostulateForm/ApplicantResultsPostulateForm";
 import { useParams } from "react-router-dom";
 import { service_Applicant } from "../../../store/services";
+import ApplicantOptionForm from '../components/ApplicantOptionForm/index'
 
 const useStyles = makeStyles((theme) => ({
     // background: #f7f7f7;
@@ -70,6 +71,14 @@ const ApplicationDetail = () => {
                     <p>Te encuentas en el proceso de selección, la empresa activará las tareas que deberás resolver. <br />
                     <br />
                         Te recomendamos que estés atento todo el proceso. <span className={classes.spanText}>¡Éxitos!</span> </p>
+                </Grid>
+                <Grid item xs={12}>
+                    <ApplicantOptionForm title="Bandeja de mensajes"  icon="Email"
+                    content="Revisa y responde los mensajes del reclutador"
+                    />
+                    <ApplicantOptionForm title="Evaluaciones" icon="Assignment"
+                    content="Responde y asiste a las evaluaciones del proceso de selección."
+                    />
                 </Grid>
             </Grid>
         </Container>

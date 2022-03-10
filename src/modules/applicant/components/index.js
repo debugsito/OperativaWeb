@@ -8,3 +8,4 @@ export { default as ApplicantContactInformationForm } from './ApplicantContactIn
 export { default as ApplicantEducationForm } from './ApplicantEducationForm';
 export { default as ApplicantPersonalDataForm } from './ApplicantPersonalDataForm';
 export { default as ApplicantWorkExperienceForm } from './ApplicantWorkExperienceForm';
+export { default as ApplicantOptionForm} from './ApplicantOptionForm'
