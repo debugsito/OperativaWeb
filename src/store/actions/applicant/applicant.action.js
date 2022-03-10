@@ -33,6 +33,17 @@ export const setStatus = (payload) => ({
   payload
 });
 
+export const setApplicantMessages = (payload) => ({
+  type: ApplicantType.SET_APPLICANT_MESSAGES,
+  payload 
+})
+
+export const setApplicantMessageDetail = (payload) => ( {
+  type : ApplicantType.SET_APPLICANT_MESSAGE_DETAIL,
+  payload 
+})
+
+
 export const getPublicationSearch =  ( query) => {
   return async (dispatch) => {
     try {
@@ -120,3 +131,62 @@ export const getPublicationAccount = (status = null) => {
   };
 };
 
+
+
+export const getMessagesApplicant = (publicatio_account_id) => {
+  return async (dispatch) => {
+    try {
+      const response = await service_Applicant.getMessageByPublicationAccountId(publicatio_account_id);
+      console.log(response.data.data);
+      dispatch(setApplicantMessages(response.data.data.rows));
+      dispatch(setPublicationAccountError(null));
+    } catch (error) {
+      dispatch(setApplicantMessages([]));
+      if (!error.response) {
+        dispatch(setPublicationAccountError("Ha ocurrido un error interno"));
+
+      } else {
+        if (!error.response) {
+          dispatch(setPublicationAccountError("Ha ocurrido un error interno."));
+        } else {
+          if (error.response.status === 401) {
+            dispatch(setPublicationAccountError(error.response.data.message));
+          } else if (error.response.status === 409) {
+            dispatch(setPublicationAccountError("La cuenta ya existe. Por favor Iniciar sesión."));
+          } else {
+            dispatch(setPublicationAccountError("Ha ocurrido un error interno."));
+          };
+        }
+      }
+    }
+  };
+};
+
+
+export const getMessageDetailApplicant = (message_id) => {
+  return async (dispatch) => {
+    try {
+      const response = await service_Applicant.getMessageDetailById(message_id);
+      dispatch(setApplicantMessageDetail(response.data.data));
+      dispatch(setPublicationAccountError(null));
+    } catch (error) {
+      dispatch(setApplicantMessageDetail([]));
+      if (!error.response) {
+        dispatch(setPublicationAccountError("Ha ocurrido un error interno"));
+
+      } else {
+        if (!error.response) {
+          dispatch(setPublicationAccountError("Ha ocurrido un error interno."));
+        } else {
+          if (error.response.status === 401) {
+            dispatch(setPublicationAccountError(error.response.data.message));
+          } else if (error.response.status === 409) {
+            dispatch(setPublicationAccountError("La cuenta ya existe. Por favor Iniciar sesión."));
+          } else {
+            dispatch(setPublicationAccountError("Ha ocurrido un error interno."));
+          };
+        }
+      }
+    }
+  };
+};

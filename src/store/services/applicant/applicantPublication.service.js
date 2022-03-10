@@ -29,11 +29,26 @@ const sendApplication = async (id) => {
     return await api.post(`/publication/${id}/apply`);
 }
 
+const getMessageByPublicationAccountId = async ( publication_account_id) => {
+    return await api.get(`/messages/${publication_account_id}`);
+}
+
+const getMessageDetailById = async ( message_id) => {
+    return await api.get(`/messages-detail/${message_id}`);
+}
+
+const answeMessage = async ( message_id , data) => {
+    return await api.post(`/messages-detail/${message_id}`,data);
+}
+
 export default {
     getApplicantPublication,
     setNotificacionPostulant,
     publicationsSearch,
     detallePublicacion,
     sendApplication,
-    getApplicantPublicationById
+    getApplicantPublicationById,
+    getMessageByPublicationAccountId,
+    getMessageDetailById,
+    answeMessage
 }

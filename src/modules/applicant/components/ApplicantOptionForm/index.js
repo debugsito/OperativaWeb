@@ -78,9 +78,13 @@ export default function ApplicantOptionForm(props) {
         }
     }
 
+    const selectItemResult = ()=> {
+        history.push(route);
+    }
+
 
     return (
-        <div className={classes.containerResult} >
+        <div className={classes.containerResult}  onClick={selectItemResult}>
             <div className={classes.notification}>
                 <span className={classes.notificationIcon}><Notifications /></span>
             </div>

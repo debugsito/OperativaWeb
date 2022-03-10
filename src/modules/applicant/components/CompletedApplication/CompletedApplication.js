@@ -21,7 +21,7 @@ const CompletedApplication = () => {
             <Grid item xs={12} className="mb-2">
                 {
                     (publicationsAccount.map((item, i) => {
-                        return <ApplicantResultsPostulateForm data={item} key={item.id}
+                        return <ApplicantResultsPostulateForm data={item} key={item.id} status={item.estado}
                         />;
                     }))
                 }

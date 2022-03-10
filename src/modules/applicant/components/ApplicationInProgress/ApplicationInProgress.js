@@ -21,7 +21,7 @@ const ApplicationInProgress = () => {
             <Grid item xs={12} className="mb-2">
                 {
                     (publicationsAccount.map((item, i) => {
-                        return <ApplicantAccountItem data={item} key={item.id}
+                        return <ApplicantAccountItem data={item} key={item.id}  status={item.estado}
                         />;
                     }))
                 }

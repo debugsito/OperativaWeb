@@ -6,6 +6,8 @@ import {useHistory} from "react-router-dom";
 import {SessionRoutes} from "../../../shared/libs/sessionRoutes";
 import * as moment from 'moment';
 import {makeStyles} from "@material-ui/core";
+import ApplicantStatusSpan from "../ApplicantStatusSpan";
+
 
 const useStyles = makeStyles(theme => ({
     calendarIcon: {
@@ -18,22 +20,7 @@ const useStyles = makeStyles(theme => ({
     title: {
         fontWeight: 600
     },
-    statusProgreso: {
-        position: 'absolute',
-        top: '-.5rem',
-        left: '-.5rem',
-        background: '#B8EA71',
-        borderRadius: '100px',
-        padding: '4px 16px',
-    },
-    statusFinalizado: {
-        position: 'absolute',
-        top: '-.5rem',
-        left: '-.5rem',
-        background: '#AAAAAA',
-        borderRadius: '100px',
-        padding: '4px 16px',
-    },
+    
     containerResult: {
         padding: '1.5rem 1rem 2rem',
         background: '#FFFFFF',
@@ -47,7 +34,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function ApplicantResultsPostulateForm(props) {
     const classes = useStyles();
-    const {data, route} = props;
+    const {data, route , status = null} = props;
     const history = useHistory()
     const initRoute = SessionRoutes().initRoute;
     const selectItemResult = () => {
@@ -66,10 +53,7 @@ export default function ApplicantResultsPostulateForm(props) {
 
     return (
         <div className={classes.containerResult} onClick={selectItemResult}>
-            <div className={classes.statusProgreso}>
-                <span>Activo</span>
-            </div>
-        
+            <ApplicantStatusSpan status= {status}/>
             <div className="header-result-card">
                 <div>
                     <img src={PizzaHut} className="brand-img" alt=""/>
