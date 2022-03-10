@@ -13,7 +13,7 @@ const ApplicationInProgress = () => {
     }, []);
 
     const getPublicaciones = () => {
-        dispatch(getPublicationAccount(1));
+        dispatch(getPublicationAccount("1,2"));
     }
 
     return (

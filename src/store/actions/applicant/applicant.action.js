@@ -23,11 +23,45 @@ export const setPublicationAccountSelected = (payload) => ({
   payload
 })
 
+export const setPublicationSearch= (payload) => ({
+  type: ApplicantType.SET_PUBLICATIONS_SEARCH,
+  payload
+})
+
 export const setStatus = (payload) => ({
   type: ApplicantType.SET_STATUS,
   payload
 });
 
+export const getPublicationSearch =  ( query) => {
+  return async (dispatch) => {
+    try {
+      console.log(query)
+      const response = await service_Applicant.publicationsSearch(query);
+      dispatch(setPublicationSearch(response.data.publications));
+      dispatch(setPublicationAccountError(null));
+    } catch (error) {
+      dispatch(setPublicationSearch([]));
+      if (!error.response) {
+        dispatch(setPublicationAccountError("Ha ocurrido un error interno"));
+
+      } else {
+        if (!error.response) {
+          dispatch(setPublicationAccountError("Ha ocurrido un error interno."));
+        } else {
+          if (error.response.status === 401) {
+            dispatch(setPublicationAccountError(error.response.data.message));
+          } else if (error.response.status === 409) {
+            dispatch(setPublicationAccountError("La cuenta ya existe. Por favor Iniciar sesión."));
+          } else {
+            dispatch(setPublicationAccountError("Ha ocurrido un error interno."));
+          };
+        }
+      }
+    }
+  };
+}
+ 
 export const getPublicationAccountById = ( id) => {
   return async (dispatch) => {
     try {

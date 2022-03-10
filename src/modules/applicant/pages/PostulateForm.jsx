@@ -5,27 +5,29 @@ import {NavigateBefore} from '@material-ui/icons';
 import {SessionRoutes} from "../../shared/libs/sessionRoutes";
 import '../styles/postulate-form.css'
 import {AutocompleteTemp, Button, TextInput} from '../../shared/components';
-import ApplicantResultsPostulateForm from '../components/ApplicantPostulateForm/ApplicantResultsPostulateForm';
 import {itemsList} from '../../../store/services/utils.service';
 import {Select, FormControl, InputLabel} from '@material-ui/core';
 import {useForm} from "../../hooks";
 import * as moment from 'moment';
-import {service_Applicant} from "../../../store/services";
+import { useDispatch } from "react-redux";
+
+import { getPublicationSearch } from "../../../store/actions/applicant/applicant.action";
 
 const PostulateForm = () => {
     const history = useHistory()
     const initRoute = SessionRoutes().initRoute;
     const [hasResult, setHasResult] = useState(false);
     const [rubros, setRubros] = useState([]);
+    const dispatch = useDispatch();
     const [fechas, setFechas] = useState([
         {value: moment().format('YYYY-MM-DD 00:00:00'), name: 'Hoy'},
         {value: moment().subtract(1, 'days').format('YYYY-MM-DD 00:00:00'), name: 'Ayer'},
-        {value: moment().subtract(3, 'years').format('YYYY-MM-DD 00:00:00'), name: 'Últimos 3 días'},
+        {value: moment().subtract(3, 'days').format('YYYY-MM-DD 00:00:00'), name: 'Últimos 3 días'},
         {value: moment().subtract(7, 'days').format('YYYY-MM-DD 00:00:00'), name: 'Últimos 7 días'},
         {value: moment().subtract(15, 'days').format('YYYY-MM-DD 00:00:00'), name: 'Últimos 15 días'},
         {value: moment().subtract(30, 'days').format('YYYY-MM-DD 00:00:00'), name: 'Últimos 30 días'},
     ]);
-    const [results, setResults] = useState([]);
+    // const [results, setResults] = useState([]);
 
     const {
         values,
@@ -42,22 +44,18 @@ const PostulateForm = () => {
     });
 
     const handleSubmit = async () => {
-        const response = await service_Applicant.publicationsSearch({
-            'word_search': values.word_search,
-            'district_id': values.district.id,
-            'rubro_id': values.rubro_id,
-            'createdAt': values.createdAt,
-        });
-        setResults(response.data.publications);
-        setHasResult(true);
+        // console.log(values)
+        dispatch(getPublicationSearch({
+            'word_search': values?.word_search,
+            'district_id': values?.district?.id,
+            'rubro_id': values?.rubro_id,
+            'createdAt': values?.createdAt,
+        }))
+        history.push(`${initRoute}/formulario-postular/info`)
     }
 
     const setBefore = () => {
-        if (hasResult) {
-            setHasResult(false);
-        } else {
-            history.push(`${initRoute}/postulante`)
-        }
+        history.push(`${initRoute}/postulante`)
     };
 
     useEffect(() => {
@@ -78,8 +76,7 @@ const PostulateForm = () => {
                     </a>
                 </Grid>
                 <Grid item xs={12} className="mb-2">
-                    {!hasResult ?
-                        <div>
+                <div>
                             <Grid item xs={12} className="mb-2">
                                 <h4 className="title">Busca el trabajo que se adapte a tu perfil.</h4>
                             </Grid>
@@ -154,20 +151,6 @@ const PostulateForm = () => {
                                 </form>
                             </div>
                         </div>
-                        :
-                        <div className="container-result-postulate-form">
-                            <Grid item xs={12} className="mb-2">
-                                <h4 className="title">Resultados</h4>
-                            </Grid>
-                            <Grid item xs={12} className="mb-2">
-                                {
-                                    (results.map((item, i) => {
-                                        return <ApplicantResultsPostulateForm data={item} key={item.id}/>;
-                                    }))
-                                }
-                            </Grid>
-                        </div>
-                    }
                 </Grid>
             </Grid>
         </Container>

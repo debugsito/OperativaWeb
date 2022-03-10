@@ -13,7 +13,7 @@ const CompletedApplication = () => {
     }, []);
 
     const getPublicaciones = () => {
-        dispatch(getPublicationAccount(2));
+        dispatch(getPublicationAccount(3));
     }
 
     return (

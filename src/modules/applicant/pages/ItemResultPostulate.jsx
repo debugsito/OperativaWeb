@@ -69,7 +69,7 @@ const ItemResultPostulate = () => {
     }
 
     const setBefore = () => {
-        history.push(`${initRoute}/formulario-postular`)
+        history.push(`${initRoute}/formulario-postular/info`)
     };
 
     const handleOpen = async () => {

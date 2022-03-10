@@ -52,7 +52,7 @@ const ApplicationDetail = () => {
                     </a>
                 </Grid>
                 <Grid item xs={12}>
-                    <ApplicantResultsPostulateForm data={publicationAccountSelected} />
+                    <ApplicantResultsPostulateForm data={publicationAccountSelected} route={`${initRoute}/postulaciones/detalle/${publicationAccountSelected.id}`} />
                     <h1> Felicitaciones ! </h1>
                     <p>Te encuentas en el proceso de selección, la empresa activará las tareas que deberás resolver. <br />
                     <br />

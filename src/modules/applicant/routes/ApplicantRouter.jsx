@@ -12,6 +12,7 @@ import PostulateForm from '../pages/PostulateForm'
 import ItemResultPostulate from "../pages/ItemResultPostulate";
 import Applications from "../pages/Applications";
 import ApplicationDetail from "../pages/ApplicationDetail";
+import PostulateFormList from '../pages/PostulateFormList';
 
 const MyAccountRouter = () => {
     return (
@@ -52,6 +53,11 @@ const MyAccountRouter = () => {
                     exact
                     path={ApplicantRoutes[6]}
                     component={ApplicationDetail} />
+                 <PrivateRoute
+                    needSession
+                    exact
+                    path={ApplicantRoutes[7]}
+                    component={PostulateFormList} />
             </Switch>
         </>
     );

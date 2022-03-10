@@ -47,12 +47,12 @@ const useStyles = makeStyles(theme => ({
 
 export default function ApplicantResultsPostulateForm(props) {
     const classes = useStyles();
-    const {data} = props;
-    console.log(data);
+    const {data, route} = props;
     const history = useHistory()
     const initRoute = SessionRoutes().initRoute;
     const selectItemResult = () => {
-        history.push(`${initRoute}/postulaciones/detalle/${data.publication.id}`);
+        // console.log(route);
+        history.push(route);
     };
 
     const formatDate = (value) => {
