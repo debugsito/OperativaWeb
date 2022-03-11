@@ -13,3 +13,13 @@ export function messageError(text=""){
       message:`Ocurrio un error al guardar, inténtalo mas tarde. ${text}`
     }
 }
+
+export function messageErrorSelect(text=""){
+    return{
+      open:true,
+      severity:"error",
+      message:`Seleccione al menos un campo. ${text}`,
+      vertical: 'top',
+      horizontal: 'left',
+    }
+}

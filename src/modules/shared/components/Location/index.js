@@ -10,7 +10,7 @@ const initialValues = {
     district_id: "",
 }
 
-export default function Location({children}) {
+export default function Location({children, validateOnChange = true}) {
     const dispatch = useDispatch();
     const { departments, provinces, districts } = useSelector(state => state?.utils)
     const [districtsList, setDistrictsList] = useState([])
@@ -39,7 +39,7 @@ export default function Location({children}) {
         setErrors,
         handleInputChange,
         disabledButtonState,
-    } = useForm(initialValues, true, validate);
+    } = useForm(initialValues, validateOnChange, validate);
 
     useEffect(() => {
         dispatch(actions_Utils.getDepartments());

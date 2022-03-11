@@ -160,8 +160,8 @@ export default function AdvanceFilterContext({ children }) {
       newValues[item.key] = defaultValues[item.key]
     }else if(item.key == "residence"){
       const newResidence = {...values.residence}
-      const newLocation = newResidence.answers.filter(element => element.district_id != item.option)
-      console.log("newLocation", newLocation)
+      const newLocation = newResidence.answers.filter(element => element.key != item.option)
+      newValues[item.key].answers = [...newLocation]
     }else{
       newValues[item.key].answers[item.option] = defaultValues[item.key].answers[item.option];
     }

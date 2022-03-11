@@ -4,6 +4,7 @@ import { Context } from "../../context/AdvanceFilterContext";
 
 import Chip from "@material-ui/core/Chip";
 import { Typography } from "@material-ui/core";
+import { buildArrayLabels } from "../../utils/convert";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,39 +38,12 @@ export default function OutlinedChips() {
   const handleClick = () => {
     console.info("You clicked the Chip.");
   };
+  
 
   // const render = Object.values(values).some((item) => item?.active);
   // if (!render) return null;
 
-  let arrayLabel = [];
-  const valueTemp = { ...values };
-  Object.keys(valueTemp).map((key) => {
-    const options = valueTemp[key]?.answers;
-    if (key == "gender" || key == "education" || key == "rubro" || key == "experience" || key == "extra") {
-      Object.keys(options).forEach((element) => {
-        if (options[element].active) {
-          arrayLabel.push({ key, option: element, label: options[element].label })
-        }
-      })
-    }else if (key == "labor" || key == "transport" || key == "economy" || key == "personal" || key == "health" || key == "family") {
-      Object.keys(options).forEach((element) => {
-        if (options[element].value) {
-          arrayLabel.push({ key, option: element, label: `${options[element].label}: ${options[element].value}` })
-        }
-      })
-    }else if (key == "age" || key == "salaryExpectations") {
-      if(options.from != "" && options.to != ""){
-        arrayLabel.push({ key, option: key, label: `${valueTemp[key].label}: ${options.from} - ${options.to}` })
-      }
-    }else if (key == "residence") {
-      options.forEach(item => {
-        arrayLabel.push({ key, option: item.district_id, label: `Residencia: ${item.label}` })
-      })
-      
-    }
-
-  })
-
+  const arrayLabel = buildArrayLabels(values)
 
   return (
     <>

@@ -37,14 +37,49 @@ export function buildQueryParams(data){
 
       else if (key == "residence") {
         options.forEach(item => {
-          queryParamsTemp.district_id = `${queryParamsTemp.district_id ? queryParamsTemp.district_id + "," : ""}${item.district_id}`
-          queryParamsTemp.province_id = `${queryParamsTemp.province_id ? queryParamsTemp.province_id   + "," : ""}${item.province_id}`
-          queryParamsTemp.department_id = `${queryParamsTemp.department_id ? queryParamsTemp.department_id + "," : ""}${item.department_id}`
+          if(item.district_id){
+            queryParamsTemp.district_id = `${queryParamsTemp.district_id ? queryParamsTemp.district_id + "," : ""}${item.district_id}`
+          } 
+          if(item.province_id){
+            queryParamsTemp.province_id = `${queryParamsTemp.province_id ? queryParamsTemp.province_id   + "," : ""}${item.province_id}`
+          } 
+          if(item.department_id){
+            queryParamsTemp.department_id = `${queryParamsTemp.department_id ? queryParamsTemp.department_id + "," : ""}${item.department_id}`
+          } 
         })
       }
 
 
     })
-    console.log("queryParamsTemp", queryParamsTemp)
     return queryParamsTemp
+  }
+
+  export function buildArrayLabels(valueTemp){
+    let arrayLabel = [];
+
+    Object.keys(valueTemp).map((key) => {
+      const options = valueTemp[key]?.answers;
+      if (key == "gender" || key == "education" || key == "rubro" || key == "experience" || key == "extra") {
+        Object.keys(options).forEach((element) => {
+          if (options[element].active) {
+            arrayLabel.push({ key, option: element, label: options[element].label })
+          }
+        })
+      }else if (key == "labor" || key == "transport" || key == "economy" || key == "personal" || key == "health" || key == "family") {
+        Object.keys(options).forEach((element) => {
+          if (options[element].value) {
+            arrayLabel.push({ key, option: element, label: `${options[element].label}: ${options[element].value}` })
+          }
+        })
+      }else if (key == "age" || key == "salaryExpectations") {
+        if(options.from != "" && options.to != ""){
+          arrayLabel.push({ key, option: key, label: `${valueTemp[key].label}: ${options.from} - ${options.to}` })
+        }
+      }else if (key == "residence") {
+        options.forEach(item => {
+          arrayLabel.push({ key, option: item.key, label: `${item.district_id? "DISTRITO":(item.province_id? "PROVINCE": "DEPARTAMENTO")}: ${item.label}` })
+        })
+      }
+    })
+    return arrayLabel;
   }

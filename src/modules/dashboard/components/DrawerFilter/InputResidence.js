@@ -36,10 +36,10 @@ function InputResidence() {
   });
   const classes = useStyles();
   const [chipData, setChipData] = useState([]);
-  const [districtName, setDistrictName] = useState("");
+  const [location, setLocation] = useState({});
+  const [hasValue, setHasValue] = useState(true)
 
   const handleDelete = (chipToDelete) => () => {
-    console.log(chipToDelete);
     setChipData((currentArray) =>
       produce(currentArray, (draft) => {
         const index = draft.findIndex((chip) => chip.key === chipToDelete.key);
@@ -50,7 +50,7 @@ function InputResidence() {
   };
 
   return (
-    <Location>
+    <Location validateOnChange={false}>
       {(
         values,
         setValues,
@@ -68,27 +68,51 @@ function InputResidence() {
           const district = districtsList.find(
             (item) => item.id == e.target.value
           );
-          setDistrictName(district);
+          setLocation(district);
         };
-
+        const handleChangeSelectProvince = (e) => {
+          handleChangeProvinces(e);
+          const province = provincesList.find(
+            (item) => item.id == e.target.value
+          );
+          setLocation(province);
+        };
+        const handleChangeSelectDepartment = (e) => {
+          handleChangeDepartments(e);
+          const department = departments.find(
+            (item) => item.id == e.target.value
+          );
+          setLocation(department);
+        };
         const handleAddChip = () => {
+          if(!validate()){
+            setHasValue(false)
+            return
+          }
           const newChip = {
             ...values,
-            key: districtName.id,
-            label: districtName.name,
+            key: location.id,
+            label: location.name,
           };
           setChipData([...chipData, newChip]);
           setValues(initialValues);
           onChange([...chipData, newChip]);
+          setHasValue(true)
         };
+        function validate(){
+          return Object.values(values).some(item => item !== "")
+        }
         return (
           <Grid container spacing={3}>
+            {JSON.stringify(value)}
             <Grid item xs={12}>
               <Select
                 label="Departamento"
                 name="department_id"
                 value={values.department_id}
-                onChange={handleChangeDepartments}
+                error={!hasValue ? true : false}
+                helperText={!hasValue?"Seleccion un campo.": ""}
+                onChange={handleChangeSelectDepartment}
               >
                 {departments.length > 0 &&
                   departments.map((element) => (
@@ -104,7 +128,7 @@ function InputResidence() {
                 label="Provincia"
                 name="province_id"
                 value={values.province_id}
-                onChange={handleChangeProvinces}
+                onChange={handleChangeSelectProvince}
               >
                 {provincesList.length > 0 &&
                   provincesList.map((element) => (
@@ -135,7 +159,7 @@ function InputResidence() {
                 size="large"
                 variant="contained"
                 onClick={handleAddChip}
-                disabled={isCompleted}
+                // disabled={isCompleted}
               >
                 AGREGAR
               </Button>

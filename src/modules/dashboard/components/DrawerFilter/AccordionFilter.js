@@ -73,19 +73,16 @@ export default function AccordionFilter({ apply }) {
     let newValue = { ...values };
     let newData = { ...data };
     console.log("dirtyFields", dirtyFields)
-    console.log("data formik", data)
-    if (dirtyFields.residence && newValue.residence) {
-      console.log("values", newValue)
+    console.log("data", data)
+    console.log("values", newValue)
+    console.log("::::::::::::::::::::::::")
+    if (dirtyFields.residence) {
       if (data?.residence?.answers.length) {
         newData.residence.answers = [
           ...newValue.residence.answers,
           ...data.residence.answers,
         ]
       }
-      console.log("newData",newData) 
-      // else {
-      //   resetItem("residence");
-      // }
     }
     // if (dirtyFields.transport) {
     //   if (data?.transport?.has_transport) {
@@ -118,7 +115,7 @@ export default function AccordionFilter({ apply }) {
 
     apply();
     setValues(newData);
-    updateQueryParams(data)
+    updateQueryParams(newData)
   };
 
   const updateQueryParams = (newValue) => {
@@ -325,7 +322,7 @@ export default function AccordionFilter({ apply }) {
               variant="contained"
               color="secondary"
               type="submit"
-              onClick={onSubmit}
+              // onClick={onSubmit}
             >
               APLICAR
             </Button>
