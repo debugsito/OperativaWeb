@@ -37,17 +37,6 @@ import { ContextNotification } from "../../context/NotificationAlertContext";
 import { POSTULANTS } from "../../constants/Dashboard";
 import { messageSuccessful, messageError } from "../../utils/notification";
 
-function createData(
-  similarity,
-  fullname,
-  messages,
-  stateOfEvaluations,
-  actions,
-  data
-) {
-  return { similarity, fullname, messages, stateOfEvaluations, actions, data };
-}
-
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -91,14 +80,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const STATE_OF_EVALUATIONS = [
-  { text: "Preguntas", status: true },
-  { text: "Verificativa", status: false },
-  { text: "Médico", status: false },
-  { text: "Evaluativa", status: false },
-  { text: "Entrevista", status: false },
-]
-
 export default function TableListPostulants({ selected, setSelected, handleClickCheckbox, handleSelectAllClick }) {
   const classes = useStyles();
   const dispatch = useDispatch()
@@ -128,7 +109,13 @@ export default function TableListPostulants({ selected, setSelected, handleClick
         similarity: item.similarity,
         fullname: item.user.first_name + " " + item.user.last_name,
         messages: item.user.experience ? 2 : 0,
-        stateOfEvaluations: STATE_OF_EVALUATIONS,
+        stateOfEvaluations : [
+          { text: "Preguntas", status: item.technical_test },
+          { text: "Verificativa", status: item.verificativa },
+          { text: "Médico", status: item.medical_test },
+          { text: "Evaluativa", status: item.evaluativa },
+          { text: "Entrevista", status: item.interviewed },
+        ],
         data: item
       }))
       setPostulants(rows)
