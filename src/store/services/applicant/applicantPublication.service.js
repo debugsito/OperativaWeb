@@ -37,7 +37,7 @@ const getMessageDetailById = async ( message_id) => {
     return await api.get(`/messages-detail/${message_id}`);
 }
 
-const answeMessage = async ( message_id , data) => {
+const answerMessage = async ( message_id , data) => {
     return await api.post(`/messages-detail/${message_id}`,data);
 }
 
@@ -50,5 +50,5 @@ export default {
     getApplicantPublicationById,
     getMessageByPublicationAccountId,
     getMessageDetailById,
-    answeMessage
+    answerMessage
 }

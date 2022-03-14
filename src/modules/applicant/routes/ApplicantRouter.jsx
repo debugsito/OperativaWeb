@@ -14,6 +14,7 @@ import Applications from "../pages/Applications";
 import ApplicationDetail from "../pages/ApplicationDetail";
 import PostulateFormList from '../pages/PostulateFormList';
 import ApplicantMessages from '../pages/ApplicantMessages';
+import ApplicantMessageDetail from '../pages/ApplicantMessageDetail';
 
 const MyAccountRouter = () => {
     return (
@@ -54,16 +55,21 @@ const MyAccountRouter = () => {
                     exact
                     path={ApplicantRoutes[6]}
                     component={ApplicationDetail} />
-                 <PrivateRoute
+                <PrivateRoute
                     needSession
                     exact
                     path={ApplicantRoutes[7]}
                     component={PostulateFormList} />
-                     <PrivateRoute
+                <PrivateRoute
                     needSession
                     exact
                     path={ApplicantRoutes[8]}
                     component={ApplicantMessages} />
+                <PrivateRoute
+                    needSession
+                    exact
+                    path={ApplicantRoutes[9]}
+                    component={ApplicantMessageDetail} />
             </Switch>
         </>
     );
