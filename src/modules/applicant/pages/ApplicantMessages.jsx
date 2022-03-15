@@ -47,7 +47,7 @@ const ApplicantMessages = () => {
     const { publication_account_id } = useParams();
     const initRoute = SessionRoutes().initRoute;
     const { applicant: { messages } } = useSelector(state => state);
-  
+
 
     useEffect(() => {
         getMessages();
@@ -61,14 +61,14 @@ const ApplicantMessages = () => {
         history.push(`${initRoute}/postulaciones/detalle/${publication_account_id}`);
     };
 
-    const formatDate =(value) => {
+    const formatDate = (value) => {
         let date = new Date(value);
         let hours = date.getHours();
         let minutes = date.getMinutes();
         let ampm = hours >= 12 ? 'PM' : 'AM';
         hours = hours % 12;
         hours = hours ? hours : 12; // the hour '0' should be '12'
-        minutes = minutes < 10 ? '0'+minutes : minutes;
+        minutes = minutes < 10 ? '0' + minutes : minutes;
         let strTime = hours + ':' + minutes + ' ' + ampm;
         console.log(strTime)
         return strTime;
@@ -76,7 +76,7 @@ const ApplicantMessages = () => {
 
     const handleListItemClick = (event, message_id) => {
         history.push(`${initRoute}/mensajes/${publication_account_id}/detalle/${message_id}`);
-      };
+    };
 
     return (
         <>
@@ -93,7 +93,7 @@ const ApplicantMessages = () => {
                                 <div className="container-header">
                                     <h4 className="title">Bandeja de Mensajes</h4>
 
-                                    <IconButton aria-label="order" style={{color: '#7879F1'}}>
+                                    <IconButton aria-label="order" style={{ color: '#7879F1' }}>
                                         <ImportExport />
                                     </IconButton>
                                 </div>
@@ -108,11 +108,11 @@ const ApplicantMessages = () => {
                                 (messages.map((item, i) => {
                                     return <>
                                         <ListItem alignItems="flex-start" key="{item}"
-                                          onClick={(event) => handleListItemClick(event, item.id)}
+                                            onClick={(event) => handleListItemClick(event, item.id)}
                                         >
 
                                             <ListItemAvatar>
-                                                <Email />
+                                                {item?.message_detail[0]?.seen == 1 ? <Email /> : <Drafts />}
                                             </ListItemAvatar>
                                             <ListItemText
                                                 primary={item.user.fullname}
@@ -130,7 +130,7 @@ const ApplicantMessages = () => {
                                                     </React.Fragment>
                                                 }
                                             />
-                                              <Typography>
+                                            <Typography>
                                                 {formatDate(item?.message_detail[0]?.createdAt)}
                                             </Typography>
                                         </ListItem>

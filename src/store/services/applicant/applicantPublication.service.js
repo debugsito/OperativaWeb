@@ -49,6 +49,14 @@ const upateForm = async (data) => {
     return await api.post(`/form/answer/publication/account`,data);
 }
 
+const getInterview = async ( publication_account_id) => {   
+    return await api.get(`/publication_account_interview/${publication_account_id}`);
+}
+
+const getMedicalTest = async (publication_account_id) => {
+    return await api.get(`/publication_account_medical_test/${publication_account_id}`);
+}
+
 export default {
     getApplicantPublication,
     setNotificacionPostulant,
@@ -60,5 +68,7 @@ export default {
     getMessageDetailById,
     answerMessage,
     getFormsByPubAccount,
-    upateForm
+    upateForm,
+    getInterview,
+    getMedicalTest
 }

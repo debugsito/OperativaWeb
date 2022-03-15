@@ -48,6 +48,16 @@ export const setApplicantQuestions = (payload) =>( {
   payload
 })
 
+export const setApplicantInterview =(payload) => ({
+  type: ApplicantType.SET_APPLICANT_INTERVIEW,
+  payload
+})
+
+export const setApplicantMedicalTest =(payload)=> ({
+  type: ApplicantType.SET_APPLICANT_MEDICAL_TEST,
+  payload
+})
+
 
 export const getPublicationSearch =  ( query) => {
   return async (dispatch) => {
@@ -208,6 +218,70 @@ export const getApplicantQuestions = (publication_account_id) => {
       if (!error.response) {
         dispatch(setPublicationAccountError("Ha ocurrido un error interno"));
 
+      } else {
+        if (!error.response) {
+          dispatch(setPublicationAccountError("Ha ocurrido un error interno."));
+        } else {
+          if (error.response.status === 401) {
+            dispatch(setPublicationAccountError(error.response.data.message));
+          } else if (error.response.status === 409) {
+            dispatch(setPublicationAccountError("La cuenta ya existe. Por favor Iniciar sesión."));
+          } else {
+            dispatch(setPublicationAccountError("Ha ocurrido un error interno."));
+          };
+        }
+      }
+    }
+  }
+}
+
+
+export const getApplicantInterview = (publication_account_id)=> {
+  return async (dispatch) => {
+    try {
+      const response = await service_Applicant.getInterview(publication_account_id);
+      if(response.data && response.status==200){
+        dispatch(setApplicantInterview(response.data.data));
+      }else{
+        dispatch(setApplicantInterview({}));
+      }
+
+    } catch (error) {
+      dispatch(setApplicantInterview({}));
+      if (!error.response) {
+        dispatch(setPublicationAccountError("Ha ocurrido un error interno"));
+      } else {
+        if (!error.response) {
+          dispatch(setPublicationAccountError("Ha ocurrido un error interno."));
+        } else {
+          if (error.response.status === 401) {
+            dispatch(setPublicationAccountError(error.response.data.message));
+          } else if (error.response.status === 409) {
+            dispatch(setPublicationAccountError("La cuenta ya existe. Por favor Iniciar sesión."));
+          } else {
+            dispatch(setPublicationAccountError("Ha ocurrido un error interno."));
+          };
+        }
+      }
+    }
+  }
+}
+
+
+export const getApplicantMedicalTest= (publication_account_id)=> {
+  return async (dispatch) => {
+    try {
+      const response = await service_Applicant.getMedicalTest(publication_account_id);
+      if(response.data && response.status==200){
+        dispatch(setApplicantMedicalTest(response.data.data));
+      }else{
+        dispatch(setApplicantMedicalTest({}));
+      }
+
+    } catch (error) {
+      dispatch(setApplicantMedicalTest({}));
+      if (!error.response) {
+        dispatch(setPublicationAccountError("Ha ocurrido un error interno"));
       } else {
         if (!error.response) {
           dispatch(setPublicationAccountError("Ha ocurrido un error interno."));

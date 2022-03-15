@@ -43,6 +43,14 @@ const ApplicationDetail = () => {
         history.push(`${initRoute}/postulaciones`)
     };
 
+    const getEvalucacionesNotification = ()=> {
+        const {medical_test,interviewed,questions , verificativa, evaluativa} =publicationAccountSelected;
+        if(medical_test || interviewed || questions ||  verificativa || evaluativa){
+            return true;
+        }
+        return false
+    }
+
     return (
         <Container className={classes.container}>
             <Grid container spacing={0}>
@@ -64,12 +72,12 @@ const ApplicationDetail = () => {
                     <ApplicantOptionForm title="Bandeja de mensajes"  icon="Email"
                     content="Revisa y responde los mensajes del reclutador" 
                     route={`${initRoute}/mensajes/${publicationAccountSelected.id}`}
-                    color={'#EE0202'}
+                    color={'#EE0202'} notification = {publicationAccountSelected.unread_messages}
                     />
                     <ApplicantOptionForm title="Evaluaciones" icon="Assignment"
                     content="Responde y asiste a las evaluaciones del proceso de selección."
                     route={`${initRoute}/evaluaciones/${publicationAccountSelected.id}`}
-                    color={'#ED1D40'}
+                    color={'#ED1D40'} notification = {getEvalucacionesNotification}
                     />
                 </Grid>
             </Grid>

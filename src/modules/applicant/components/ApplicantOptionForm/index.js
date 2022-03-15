@@ -60,7 +60,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function ApplicantOptionForm(props) {
     const classes = useStyles();
-    const { title, content, route, id, icon , color } = props;
+    const { title, content, route, id, icon , color , notification} = props;
     const history = useHistory()
     const initRoute = SessionRoutes().initRoute;
 
@@ -85,7 +85,7 @@ export default function ApplicantOptionForm(props) {
     return (
         <div className={classes.containerResult}  onClick={selectItemResult} style={{ background: color}}>
             <div className={classes.notification}>
-                <span className={classes.notificationIcon}><Notifications /></span>
+                {notification ? <span className={classes.notificationIcon}><Notifications /></span> : <></>}
             </div>
 
             <div className="header-result-card">

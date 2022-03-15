@@ -26,6 +26,7 @@ const ApplicantEvaluations = () => {
     const classes = useStyles();
     const history = useHistory()
     const { publication_account_id } = useParams();
+    const { applicant: { publicationAccountSelected } } = useSelector(state => state);
     const initRoute = SessionRoutes().initRoute;
 
 
@@ -42,35 +43,49 @@ const ApplicantEvaluations = () => {
                     </a>
                 </Grid>
                 <Grid item xs={12} className="mb-2">
-                        <div className="container-result-postulate-form">
-                            <Grid item xs={12} className="mb-2">
-                                <div className="container-header">
-                                    <h4 className="title">Evaluaciones</h4>
-                                </div>
-                            </Grid>
+                    <div className="container-result-postulate-form">
+                        <Grid item xs={12} className="mb-2">
+                            <div className="container-header">
+                                <h4 className="title">Evaluaciones</h4>
+                            </div>
+                        </Grid>
 
-                        </div>
-                    </Grid>
+                    </div>
+                </Grid>
 
                 <Grid item xs={12}>
-                    <ApplicantOptionForm title="Preguntas"
+                    {publicationAccountSelected?.questions ? <ApplicantOptionForm title="Preguntas"
                         content="Evaluación de experiencia
                              Preguntas adicionales"
                         route={`${initRoute}/question/${publication_account_id}`}
                         color={'#4E51FE'}
-                    />
+                    /> : <></>}
 
-                    <ApplicantOptionForm title="Exámen médico"
+                    {publicationAccountSelected?.medical_test ? <ApplicantOptionForm title="Exámen médico"
                         content="Dirección de evaluación medica"
                         // route={`${initRoute}/mensajes/${publicationAccountSelected.id}`}
                         color={'#4E51FE'}
-                    />
+                        route={`${initRoute}/medital_test/${publication_account_id}`}
+                    /> : <></>}
 
-                    <ApplicantOptionForm title="Evaluativa"
+                    {publicationAccountSelected?.interviewed ? <ApplicantOptionForm title="Entrevista"
+                        content="Ver horario de entrevista"
+                        // route={`${initRoute}/mensajes/${publicationAccountSelected.id}`}
+                        color={'#4E51FE'}
+                        route={`${initRoute}/interview/${publication_account_id}`}
+                    /> : <></>}
+
+                    {publicationAccountSelected?.evaluativa ? <ApplicantOptionForm title="Evaluativa"
                         content="Resuelve el siguiente test psicológico"
                         // route={`${initRoute}/mensajes/${publicationAccountSelected.id}`}
                         color={'#4E51FE'}
-                    />
+                    /> : <></>}
+
+                    {publicationAccountSelected?.verificativa ? <ApplicantOptionForm title="Veficativa"
+                        content="Verificación de antecedentes personales"
+                        // route={`${initRoute}/mensajes/${publicationAccountSelected.id}`}
+                        color={'#4E51FE'}
+                    /> : <></>}
                 </Grid>
             </Grid>
         </Container>

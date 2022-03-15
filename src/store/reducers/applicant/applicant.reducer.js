@@ -9,6 +9,8 @@ const initialState = {
     messages : [],
     messageDetail : [],
     questions : [],
+    interview : {},
+    medical_test : {},
     fetch: {
         status: "idle",
         message: null
@@ -65,6 +67,16 @@ const applicationReducer = (state = initialState, action) => {
             return {
                 ...state,
                 questions : action.payload
+            }
+        case ApplicantType.SET_APPLICANT_MEDICAL_TEST:
+            return {
+                ...state,
+                medical_test : action.payload
+            }
+        case ApplicantType.SET_APPLICANT_INTERVIEW:
+            return {
+                ...state,
+                interview : action.payload
             }
         default:
             return state;
