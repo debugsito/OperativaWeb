@@ -36,7 +36,6 @@ const useStyles = makeStyles(theme => ({
     },
     containerResult: {
         padding: '1.5rem 1rem 2rem',
-        background: '#EE0202',
         boxShadow: '0px 4px 24px rgba(136, 166, 255, 0.05)',
         borderRadius: '12px',
         marginBottom: '1.5rem',
@@ -61,7 +60,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function ApplicantOptionForm(props) {
     const classes = useStyles();
-    const { title, content, route, id, icon } = props;
+    const { title, content, route, id, icon , color } = props;
     const history = useHistory()
     const initRoute = SessionRoutes().initRoute;
 
@@ -84,7 +83,7 @@ export default function ApplicantOptionForm(props) {
 
 
     return (
-        <div className={classes.containerResult}  onClick={selectItemResult}>
+        <div className={classes.containerResult}  onClick={selectItemResult} style={{ background: color}}>
             <div className={classes.notification}>
                 <span className={classes.notificationIcon}><Notifications /></span>
             </div>

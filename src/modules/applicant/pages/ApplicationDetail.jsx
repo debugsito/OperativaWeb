@@ -64,10 +64,12 @@ const ApplicationDetail = () => {
                     <ApplicantOptionForm title="Bandeja de mensajes"  icon="Email"
                     content="Revisa y responde los mensajes del reclutador" 
                     route={`${initRoute}/mensajes/${publicationAccountSelected.id}`}
-
+                    color={'#EE0202'}
                     />
                     <ApplicantOptionForm title="Evaluaciones" icon="Assignment"
                     content="Responde y asiste a las evaluaciones del proceso de selección."
+                    route={`${initRoute}/evaluaciones/${publicationAccountSelected.id}`}
+                    color={'#ED1D40'}
                     />
                 </Grid>
             </Grid>

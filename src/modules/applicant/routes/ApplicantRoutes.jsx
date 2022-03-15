@@ -9,6 +9,7 @@ const ApplicantRoutes = [
     '/postulante/formulario-postular/info',
     '/postulante/mensajes/:publication_account_id',
     '/postulante/mensajes/:publication_account_id/detalle/:message_id',
-    '/postulante/evaluaciones'
+    '/postulante/evaluaciones/:publication_account_id',
+    '/postulante/question/:publication_account_id'
 ];
 export default ApplicantRoutes;

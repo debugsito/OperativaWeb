@@ -180,10 +180,7 @@ const ApplicantMessageDetail = () => {
                                                         onChange={event => setMessage(event.target.value)}
                                                     />
                                                 </Grid> : <></>}
-
-
                                             </CardContent>
-
                                             {i == messageDetail.length - 1 ? <CardActions style={{ width: '100%' }}>
                                                 <Grid item xs={12}>
                                                     <Grid container spacing={0} direction='row' justifyContent="flex-end">
@@ -203,9 +200,7 @@ const ApplicantMessageDetail = () => {
                                 }))
                             }
                         </Grid> : <Grid item xs={12} className="mb-2">
-
                             <Card>
-
                                 <Grid item xs={12}  style={{ textAlign: 'center', margin: '30px' }}>
                                     <img src= {CheckSvg} alt="check"></img>
                                     <CardHeader style={{ textAlign: 'center' }} title={
@@ -237,16 +232,9 @@ const ApplicantMessageDetail = () => {
                                         </Grid>
                                     </CardActions>
                                 </Grid>
-
-
-
-
                             </Card>
-
                         </Grid>
                     }
-
-
                 </Grid>
             </Container>
         </>

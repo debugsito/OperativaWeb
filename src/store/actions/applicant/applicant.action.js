@@ -43,6 +43,11 @@ export const setApplicantMessageDetail = (payload) => ( {
   payload 
 })
 
+export const setApplicantQuestions = (payload) =>( {
+  type: ApplicantType.SET_APPLICANT_QUESTIONS,
+  payload
+})
+
 
 export const getPublicationSearch =  ( query) => {
   return async (dispatch) => {
@@ -102,7 +107,6 @@ export const getPublicationAccountById = ( id) => {
   };
 }
 
-
 export const getPublicationAccount = (status = null) => {
   return async (dispatch) => {
     try {
@@ -131,13 +135,11 @@ export const getPublicationAccount = (status = null) => {
   };
 };
 
-
-
-export const getMessagesApplicant = (publicatio_account_id) => {
+export const getMessagesApplicant = (publication_account_id) => {
   return async (dispatch) => {
     try {
-      const response = await service_Applicant.getMessageByPublicationAccountId(publicatio_account_id);
-      console.log(response.data.data);
+      const response = await service_Applicant.getMessageByPublicationAccountId(publication_account_id);
+      // console.log(response.data.data);
       dispatch(setApplicantMessages(response.data.data.rows));
       dispatch(setPublicationAccountError(null));
     } catch (error) {
@@ -161,7 +163,6 @@ export const getMessagesApplicant = (publicatio_account_id) => {
     }
   };
 };
-
 
 export const getMessageDetailApplicant = (message_id) => {
   return async (dispatch) => {
@@ -190,3 +191,36 @@ export const getMessageDetailApplicant = (message_id) => {
     }
   };
 };
+
+export const getApplicantQuestions = (publication_account_id) => {
+  return async (dispatch) => {
+    try {
+      const response = await service_Applicant.getFormsByPubAccount(publication_account_id);
+      if(response.data && response.data.publicationAccountForms && response.data.publicationAccountForms.length>0){
+        dispatch(setApplicantQuestions(response.data.publicationAccountForms[0]));
+      
+      }else{
+        dispatch(setApplicantQuestions([]));
+      }
+
+    } catch (error) {
+      dispatch(setApplicantQuestions([]));
+      if (!error.response) {
+        dispatch(setPublicationAccountError("Ha ocurrido un error interno"));
+
+      } else {
+        if (!error.response) {
+          dispatch(setPublicationAccountError("Ha ocurrido un error interno."));
+        } else {
+          if (error.response.status === 401) {
+            dispatch(setPublicationAccountError(error.response.data.message));
+          } else if (error.response.status === 409) {
+            dispatch(setPublicationAccountError("La cuenta ya existe. Por favor Iniciar sesión."));
+          } else {
+            dispatch(setPublicationAccountError("Ha ocurrido un error interno."));
+          };
+        }
+      }
+    }
+  }
+}

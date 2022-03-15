@@ -8,6 +8,7 @@ const initialState = {
     publicationsSearch: [],
     messages : [],
     messageDetail : [],
+    questions : [],
     fetch: {
         status: "idle",
         message: null
@@ -59,6 +60,11 @@ const applicationReducer = (state = initialState, action) => {
             return {
                 ...state,
                 messageDetail : action.payload
+            }
+        case ApplicantType.SET_APPLICANT_QUESTIONS:
+            return {
+                ...state,
+                questions : action.payload
             }
         default:
             return state;

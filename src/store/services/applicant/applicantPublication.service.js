@@ -41,6 +41,14 @@ const answerMessage = async ( message_id , data) => {
     return await api.post(`/messages-detail/${message_id}`,data);
 }
 
+const getFormsByPubAccount = async (publication_account_id) => {
+    return await api.get(`/form/assign/publication/${publication_account_id}`);
+}
+
+const upateForm = async (data) => {
+    return await api.post(`/form/answer/publication/account`,data);
+}
+
 export default {
     getApplicantPublication,
     setNotificacionPostulant,
@@ -50,5 +58,7 @@ export default {
     getApplicantPublicationById,
     getMessageByPublicationAccountId,
     getMessageDetailById,
-    answerMessage
+    answerMessage,
+    getFormsByPubAccount,
+    upateForm
 }
