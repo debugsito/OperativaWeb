@@ -120,7 +120,7 @@ const ApplicantMessageDetail = () => {
                             {
                                 (messageDetail.map((item, i) => {
                                     return <>
-                                        <Card className={classes.rootCard} key={item} >
+                                        <Card className={classes.rootCard} key={item.id} >
                                             <CardHeader className={classes.rootHeader}
                                                 title={
                                                     <React.Fragment>

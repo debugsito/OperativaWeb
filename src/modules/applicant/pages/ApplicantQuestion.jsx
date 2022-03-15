@@ -160,12 +160,12 @@ const ApplicantQuestion = () => {
                         </CardContent>
                         <CardActions >
                             <Grid item xs={12} container justifyContent="center" alignItems="center" >
-                                <nav class="carousel">
+                                <nav className="carousel">
 
                                     {questions?.form?.questions.map((item, i) => (
                                         <>
-                                            <input id={`carousel-item-${i}`} type="radio" name="carousel-dots" checked={(i == activeStep) ? true : false} />
-                                            <label for={`carousel-item-${i}`} key={i} onClick={event => goStep(i)} >Go to item {i}</label>
+                                            <input id={`carousel-item-${i}`} key={`carousel-input-${item.id}`} type="radio" name="carousel-dots" onChange={ event => goStep(i) }  checked={(i == activeStep) ? true : false} />
+                                            <label for={`carousel-item-${i}`} key = {`carousel-label-${item.id}`} onClick={event => goStep(i)} >Go to item {i}</label>
                                         </>
                                     ))}
                                 </nav>

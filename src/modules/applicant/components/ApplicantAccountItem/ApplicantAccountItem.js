@@ -75,12 +75,20 @@ export default function ApplicantAccountItem(props) {
         return '30 de julio del 2021';
     };
 
+    const getEvalucacionesNotification =()=> {
+        const {medical_test,interviewed,questions , verificativa, evaluativa} =data;
+        if(medical_test || interviewed || questions ||  verificativa || evaluativa){
+            return true;
+        }
+        return false
+    }
+
     return (
         <div className={classes.containerResult} onClick={selectItemResult}>
              <ApplicantStatusSpan status= {status}/>
-            <div className={classes.notification}>
+            {getEvalucacionesNotification () ?<div className={classes.notification}>
                 <span className={classes.notificationIcon}><Notifications /></span>
-            </div>
+            </div>: <></>}
             <div className={classes.headerResultCard}>
                 <div>
                     <img src={PizzaHut} className={classes.brandImg} alt="" />

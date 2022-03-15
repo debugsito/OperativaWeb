@@ -77,7 +77,7 @@ const ApplicationDetail = () => {
                     <ApplicantOptionForm title="Evaluaciones" icon="Assignment"
                     content="Responde y asiste a las evaluaciones del proceso de selección."
                     route={`${initRoute}/evaluaciones/${publicationAccountSelected.id}`}
-                    color={'#ED1D40'} notification = {getEvalucacionesNotification}
+                    color={'#ED1D40'} notification = {getEvalucacionesNotification()}
                     />
                 </Grid>
             </Grid>

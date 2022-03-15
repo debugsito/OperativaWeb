@@ -70,7 +70,6 @@ const ApplicantMessages = () => {
         hours = hours ? hours : 12; // the hour '0' should be '12'
         minutes = minutes < 10 ? '0' + minutes : minutes;
         let strTime = hours + ':' + minutes + ' ' + ampm;
-        console.log(strTime)
         return strTime;
     }
 
@@ -107,7 +106,7 @@ const ApplicantMessages = () => {
                             {
                                 (messages.map((item, i) => {
                                     return <>
-                                        <ListItem alignItems="flex-start" key="{item}"
+                                        <ListItem alignItems="flex-start" key={item.id}
                                             onClick={(event) => handleListItemClick(event, item.id)}
                                         >
 
