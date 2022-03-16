@@ -1,26 +1,26 @@
-import { Container, Dialog, Grid, makeStyles, Typography } from "@material-ui/core";
+import { Container, Grid, makeStyles, Typography } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import { SessionRoutes } from "../../shared/libs/sessionRoutes";
-import { NavigateBefore } from "@material-ui/icons";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getApplicantQuestions, setApplicantQuestions } from "../../../store/actions/applicant/applicant.action";
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepLabel from '@material-ui/core/StepLabel';
-import StepButton from '@material-ui/core/StepButton';
 import { Button } from "../../shared/components";
 import '../styles/postulate-form.css'
 import '../styles/dots.css'
 import CheckSvg from "../assets/images/check.svg"
-import Box from '@material-ui/core/Box'
 import { service_Applicant } from "../../../store/services"
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
 import TextField from '@material-ui/core/TextField';
 import CardActions from '@material-ui/core/CardActions';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import Checkbox from '@material-ui/core/Checkbox'
+import FormGroup from '@material-ui/core/FormGroup';
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -55,8 +55,6 @@ const ApplicantQuestion = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
 
-
-
     useEffect(() => {
         getPreguntas();
     }, []);
@@ -70,16 +68,27 @@ const ApplicantQuestion = () => {
     };
 
     const sendForm = async () => {
-        let value = questions?.form?.questions.map(e => {
-            return {
-                question_field_id: e.question_fields[0].id,
-                assign_form_publication_account_id: questions.id,
-                value: (e.question_fields[0].answers.length == 0) ? '' : e.question_fields[0].answers[0].value
+        let data = []
+        questions?.form?.questions.forEach(e => {
+            const { question_fields } = e;
+            question_fields.forEach(o => {
+                let value = '';
+                if (o.field_type_id == 1) {
+                    value = (o.answers.length == 0) ? '' : o.answers[0].value
+                }
+                if (o.field_type_id == 2 || o.field_type_id == 3) {
+                    value = (o.answers.length == 0) ? 'false' : o.answers[0].value
+                }
+                data.push({
+                    question_field_id: o.id,
+                    assign_form_publication_account_id: questions.id,
+                    value: value
+                });
+            })
 
-            }
         })
         try {
-            const response = await service_Applicant.upateForm(value);
+            const response = await service_Applicant.upateForm(data);
             if (response.status == 200) {
                 setSuccess(true)
             }
@@ -106,17 +115,128 @@ const ApplicantQuestion = () => {
     }
 
     const getValue = () => {
-
         let value = (questions?.form?.questions[activeStep]?.question_fields[0].answers.length > 0) ?
             questions?.form?.questions[activeStep]?.question_fields[0].answers[0].value
             : ''
         return value;
     }
 
+    const getCheckValue = (id) => {
+        let selectedQuestion = questions?.form?.questions[activeStep]
+        const { question_fields } = selectedQuestion;
+        let curretQuestionField = question_fields[id];
+        if (curretQuestionField.answers.length > 0) {
+            return curretQuestionField.answers[0].value == 'true';
+
+        } else {
+            return false;
+        }
+    }
+
+    const editCheckValue = (id, value) => {
+        let selectedQuestion = questions?.form?.questions[activeStep]
+        const { question_fields } = selectedQuestion;
+        let curretQuestionField = question_fields[id];
+        const { answers } = curretQuestionField;
+        if (answers.length > 0) {
+            answers[0].value = value.toString()
+        } else {
+            answers.push({
+                value: value.toString()
+            })
+        }
+        dispatch(setApplicantQuestions(questions))
+    }
+
+    const getRadioValue = () => {
+        let selectedQuestion = questions?.form?.questions[activeStep];
+        const { question_fields } = selectedQuestion;
+        let value = '';
+        question_fields.forEach(e => {
+            const { answers } = e;
+            if (answers.length > 0 && answers && answers[0].value == "true") {
+                value = e.text;
+            }
+        })
+        value = (value) ? value : '';
+        return value;
+    }
+
+    const editRadioValue = (value) => {
+        let selectedQuestion = questions?.form?.questions[activeStep];
+        const { question_fields } = selectedQuestion;
+        question_fields.forEach(e => {
+            const { answers } = e;
+            let setValue = "false";
+            if (e.text == value) {
+                setValue = "true";
+            }
+            if (answers.length > 0) {
+                answers[0].value = setValue
+            } else {
+                answers.push({
+                    value: setValue
+                })
+            }
+        })
+        dispatch(setApplicantQuestions(questions))
+
+    }
+
+
+    const buildQuestion = () => {
+        let selectedQuestion = questions?.form?.questions[activeStep];
+        const { question_type_id, question_fields } = selectedQuestion;
+        switch (question_type_id) {
+            case 1:
+
+                return <>
+
+                    <TextField style={{ width: '100%' }}
+                        id="outlined-multiline-static"
+                        label="Ingresa su respuesta"
+                        multiline
+                        value={getValue()}
+                        onChange={event => editValue(event.target.value)}
+                        rows={4}
+                        variant="outlined"
+                    />
+                </>
+
+            case 2:
+                return (
+                    <FormControl component="fieldset">
+                        <RadioGroup aria-label="" name="radio" value={getRadioValue()} onChange={event => editRadioValue(event.target.value)}>
+                            {
+                                question_fields.map((item, i) => (
+                                    <FormControlLabel key={`radio-${item.id}`} value={item?.text} control={<Radio />} label={item?.text} />
+                                ))
+                            }
+                        </RadioGroup>
+                    </FormControl>
+                );
+
+            case 3:
+                return (
+                    <FormControl component="fieldset">
+                        <FormGroup>
+                            {question_fields.map((item, i) => (
+                                <FormControlLabel key={`check-${item.id}`}
+                                    control={<Checkbox checked={getCheckValue(i)} name={item?.text} onChange={event => editCheckValue(i, event.target.checked)} />}
+                                    label={item?.text}
+                                />))}
+                        </FormGroup>
+                    </FormControl>
+                )
+            default:
+                return <></>
+        }
+    }
+
     return (
         <>
             {!success ? <Container className={classes.container}>
-                {questions?.form?.questions.length > 0 ? <Grid container spacing={0}  style={{marginTop :'20px'}}>
+                {questions?.form?.questions.length > 0 ? <Grid container spacing={0} style={{ marginTop: '20px' }}>
                     <Card style={{ width: '100%' }}>
                         <CardHeader
                             title={
@@ -145,16 +265,7 @@ const ApplicantQuestion = () => {
 
                         <CardContent>
                             <Grid item xs={12} >
-                                <TextField style={{ width: '100%' }}
-                                    id="outlined-multiline-static"
-                                    label="Ingresa su respuesta"
-                                    multiline
-                                    value={getValue()}
-                                    onChange={event => editValue(event.target.value)}
-                                    rows={4}
-                                    variant="outlined"
-                                />
-
+                                {buildQuestion()}
                             </Grid>
 
                         </CardContent>
@@ -164,8 +275,8 @@ const ApplicantQuestion = () => {
 
                                     {questions?.form?.questions.map((item, i) => (
                                         <>
-                                            <input id={`carousel-item-${i}`} key={`carousel-input-${item.id}`} type="radio" name="carousel-dots" onChange={ event => goStep(i) }  checked={(i == activeStep) ? true : false} />
-                                            <label for={`carousel-item-${i}`} key = {`carousel-label-${item.id}`} onClick={event => goStep(i)} >Go to item {i}</label>
+                                            <input id={`carousel-item-${i}`} key={`carousel-input-${item.id}`} type="radio" name="carousel-dots" onChange={event => goStep(i)} checked={(i == activeStep) ? true : false} />
+                                            <label for={`carousel-item-${i}`} key={`carousel-label-${item.id}`} onClick={event => goStep(i)} >Go to item {i}</label>
                                         </>
                                     ))}
                                 </nav>
@@ -193,8 +304,8 @@ const ApplicantQuestion = () => {
                 </Grid> : <></>}
             </Container> :
                 <Container className={classes.container}>
-                    <Grid item xs={12} className="mb-2" style={{marginTop :'20px'}}>
-                        <Grid container spacing={0}   justifyContent="center">
+                    <Grid item xs={12} className="mb-2" style={{ marginTop: '20px' }}>
+                        <Grid container spacing={0} justifyContent="center">
                             <Card >
                                 <Grid item xs={12} style={{ textAlign: 'center', margin: '30px' }}>
                                     <img src={CheckSvg} alt="check"></img>
