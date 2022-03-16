@@ -130,7 +130,7 @@ const ApplicantMessageDetail = () => {
                                                             className={classes.messageBody}
                                                             color="textPrimary"
                                                         >
-                                                            De: {item?.fromUser?.fullname}
+                                                            De: {item?.fromUser?.user?.fullname}
                                                         </Typography>
                                                         <Typography
                                                             component="span"
@@ -147,7 +147,7 @@ const ApplicantMessageDetail = () => {
                                                             className={classes.messageBody}
                                                             color="textPrimary"
                                                         >
-                                                            Para: {item?.toUser?.fullname}
+                                                            Para: {item?.toUser?.user?.fullname}
                                                         </Typography>
 
                                                         <Typography

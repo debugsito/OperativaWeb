@@ -1,18 +1,16 @@
 import React, {useState, useEffect} from "react";
-import {useSelector, useDispatch} from "react-redux";
-import {Redirect, useHistory} from "react-router-dom";
+import { useHistory} from "react-router-dom";
 import {Container, Grid, AppBar, Box, makeStyles} from "@material-ui/core";
-import {Button, Modal, SnackbarsAlert, TextCustom, Typography} from "../../shared/components";
+import { Typography} from "../../shared/components";
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import PropTypes from 'prop-types';
-// import styles from '../styles/applications.scss'
 import ApplicationInProgress from '../components/ApplicationInProgress/ApplicationInProgress';
 import CompletedApplication from "../components/CompletedApplication/CompletedApplication";
-import {closeIcon} from "../../shared/images";
+
 import {SessionRoutes} from "../../shared/libs/sessionRoutes";
 import {NavigateBefore} from "@material-ui/icons";
-
+import { useParams } from "react-router-dom";
 const TABS = [{label: "EN PROCESO"}, {label: "FINALIZADO"}]
 
 const useStyles = makeStyles((theme) => ({
@@ -48,11 +46,6 @@ function TabPanel(props) {
     const {children, value, index, ...other} = props;
     const initRoute = SessionRoutes().initRoute;
     const history = useHistory()
-
-    const setBefore = () => {
-        history.push(`${initRoute}`)
-    };
-
     return (
         <div
             role="tabpanel"
@@ -84,11 +77,17 @@ function a11yProps(index) {
 }
 
 const Applications = () => {
-    const dispatch = useDispatch();
     const history = useHistory();
-    const [valueTab, setValueTab] = React.useState(0);
     const classes = useStyles();
+    const { option } = useParams();
+    const [valueTab, setValueTab] = useState();
     const initRoute = SessionRoutes().initRoute;
+
+
+    useEffect(() => {
+        if(option) setValueTab(Number(option));
+        else setValueTab(0);
+    }, []);
 
     const handleChange = (event, newValue) => {
         setValueTab(newValue);

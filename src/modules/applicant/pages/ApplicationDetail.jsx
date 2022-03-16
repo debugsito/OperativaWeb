@@ -62,7 +62,7 @@ const ApplicationDetail = () => {
                 <Grid item xs={12}>
                     <ApplicantResultsPostulateForm data={publicationAccountSelected} 
                     status = {publicationAccountSelected?.estado}
-                    route={`${initRoute}/postulaciones/detalle/${publicationAccountSelected.id}`} />
+                    route={`${initRoute}/postulacion/detalle/${publicationAccountSelected.id}/1`} />
                     <h1> Felicitaciones ! </h1>
                     <p>Te encuentas en el proceso de selección, la empresa activará las tareas que deberás resolver. <br />
                     <br />

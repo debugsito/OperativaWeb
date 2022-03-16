@@ -1,26 +1,27 @@
-import React, {useState, useEffect} from "react";
-import {useSelector, useDispatch} from "react-redux";
-import {Redirect, useHistory} from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Redirect, useHistory } from "react-router-dom";
 //Components
-import {Container, Grid, makeStyles} from "@material-ui/core";
-import {Button, Modal, SnackbarsAlert, TextCustom, Typography} from "../../shared/components";
+import { Container, Grid, makeStyles } from "@material-ui/core";
+import { Button, Modal, SnackbarsAlert, TextCustom, Typography } from "../../shared/components";
 
 //imgs
-import {closeIcon, ImagePostular, ImageCandidato} from "../../shared/images";
+import { closeIcon, ImagePostular, ImageCandidato } from "../../shared/images";
 
 //Utils
-import {getNameById} from "../../shared/utils";
-import {SessionRoutes} from "../../shared/libs/sessionRoutes";
-import {getDocumentsType} from "../../../store/actions/utils/utils.action";
-import {getProfileOfApplicant} from "../../../store/actions/dashboard/dashboard.middleware";
-import {setDisableNotificationOfApplicant} from "../../../store/actions/applicant/applicant.midleware";
+import { getNameById } from "../../shared/utils";
+import { SessionRoutes } from "../../shared/libs/sessionRoutes";
+import { getDocumentsType } from "../../../store/actions/utils/utils.action";
+import { getProfileOfApplicant } from "../../../store/actions/dashboard/dashboard.middleware";
+import { setDisableNotificationOfApplicant } from "../../../store/actions/applicant/applicant.midleware";
 import '../styles/index.css'
-import {setUser, signOut} from "../../../store/actions/auth/auth.action";
-import {updateSearchWork} from "../../../store/services/auth/user.service";
-import {Chart, ArcElement} from 'chart.js'
-import {Doughnut} from 'react-chartjs-2';
+import { setUser, signOut } from "../../../store/actions/auth/auth.action";
+import { updateSearchWork } from "../../../store/services/auth/user.service";
+import { Chart, ArcElement } from 'chart.js'
+import { Doughnut } from 'react-chartjs-2';
 
 Chart.register(ArcElement);
+// var originalDoughnutDraw = Chart.controllers.doughnut.prototype.draw;
 
 // console.log(AccessAlarm);
 // Task: Notification - Cada cierto tiempo el sistema debe recordarle que actualice su CV:
@@ -68,8 +69,8 @@ const Applicant = () => {
     const classes = useStyles()
     const initRoute = SessionRoutes().initRoute;
     // const routes = [{name: "Mis postulaciones", to: `${initRoute}`}];
-    const {applicantProfile} = useSelector(state => state?.dashboard);
-    const {auth: {user}, utils: {documentsType}} = useSelector(state => state);
+    const { applicantProfile } = useSelector(state => state?.dashboard);
+    const { auth: { user }, utils: { documentsType } } = useSelector(state => state);
     const [searchWork, setsearchWork] = useState(false);
     const [openModal, setOpenModal] = useState(false);
     const [notification, setNotification] = useState({
@@ -79,58 +80,63 @@ const Applicant = () => {
         horizontal: 'right',
         severity: "info"
     })
-    const {horizontal, vertical, open, message, severity} = notification;
+
+    const { horizontal, vertical, open, message, severity } = notification;
 
     console.log(user);
     console.log(user.account);
 
     const dataCv = {
+        labels: ["Completado", "No Completado"],
         datasets: [
             {
                 label: '# of Votes',
                 data: [user.account.cv_percent, 100 - user.account.cv_percent],
                 backgroundColor: [
                     '#4E51FE',
-                    '#fff',
+                    '#EAEAEA',
                 ],
                 borderColor: [
                     '#4E51FE',
-                    '#fff',
+                    '#EAEAEA',
                 ],
                 borderWidth: 1,
             },
         ],
+        text: user.account.cv_percent + "%"
     };
 
     const dataCuestionario = {
+        labels: ["Completado", "No Completado"],
         datasets: [
             {
                 label: '# of Votes',
                 data: [user.account.questionnaire_percent, 100 - user.account.questionnaire_percent],
                 backgroundColor: [
                     '#4E51FE',
-                    '#fff',
+                    '#EAEAEA',
                 ],
                 borderColor: [
                     '#4E51FE',
-                    '#fff',
+                    '#EAEAEA',
                 ],
                 borderWidth: 1,
             },
         ],
+        ext: user.account.questionnaire_percent + "%"
     };
 
 
     useEffect(() => {
         dispatch(getDocumentsType());
-        dispatch(getProfileOfApplicant({postulant_id: user.account.id}));
+        dispatch(getProfileOfApplicant({ postulant_id: user.account.id }));
         showNotification();
         loadSearchWork();
     }, [])
 
     function showNotification() {
         if (user.account.cv_update) {
-            setNotification({...notification, open: true})
+            setNotification({ ...notification, open: true })
         }
     }
 
@@ -139,7 +145,7 @@ const Applicant = () => {
     }
 
     const handleClose = () => {
-        setNotification({...notification, open: false})
+        setNotification({ ...notification, open: false })
         dispatch(setDisableNotificationOfApplicant())
     }
 
@@ -164,7 +170,7 @@ const Applicant = () => {
     const logout = (event) => {
         event.preventDefault();
         dispatch(signOut());
-        return <Redirect to="/"/>
+        return <Redirect to="/" />
     };
 
     const goToPostulateForm = (event) => {
@@ -177,7 +183,7 @@ const Applicant = () => {
     };
 
     const handleSearchWorkChange = async (event) => {
-        const response = await updateSearchWork({search_work: !searchWork});
+        const response = await updateSearchWork({ search_work: !searchWork });
         const newObj = JSON.parse(JSON.stringify(user));
         newObj.account.search_work = !searchWork;
         dispatch(setUser(newObj));
@@ -191,7 +197,7 @@ const Applicant = () => {
                     <div className="text-right">
                         <a className="btn-logout" onClick={logout}>
                             Cerrar Sesión
-                            <img src={closeIcon} alt="Cierra Sesión"/>
+                            <img src={closeIcon} alt="Cierra Sesión" />
                         </a>
                     </div>
                 </Grid>
@@ -211,9 +217,9 @@ const Applicant = () => {
                                 <span>Inactivo</span>
                                 <label className="switch">
                                     <input type="checkbox"
-                                           checked={searchWork}
-                                           onChange={handleSearchWorkChange}/>
-                                    <span className="slider round"/>
+                                        checked={searchWork}
+                                        onChange={handleSearchWorkChange} />
+                                    <span className="slider round" />
                                 </label>
                                 <span>Activo</span>
                             </div>
@@ -226,7 +232,7 @@ const Applicant = () => {
                 <Grid item xs={12} onClick={goToPostulateForm}>
                     <div className="card-home mt-4">
                         <Grid item xs={4} className="fl">
-                            <img src={ImagePostular} className="" alt=""/>
+                            <img src={ImagePostular} className="" alt="" />
                         </Grid>
                         <Grid item xs={5} className="fl pl-1">
                             <div>
@@ -243,7 +249,7 @@ const Applicant = () => {
                 <Grid item xs={12} onClick={goToCandidate}>
                     <div className="card-home mt-4">
                         <Grid item xs={4} className="fl">
-                            <img src={ImageCandidato} className="" alt=""/>
+                            <img src={ImageCandidato} className="" alt="" />
                         </Grid>
                         <Grid item xs={5} className="fl pl-1">
                             <div>
@@ -267,15 +273,21 @@ const Applicant = () => {
                     </div>
                 </Grid>
                 <Grid item xs={4} className="pr-2 mt-4">
-                    <div className="card-cv">
-                        Tu CV
-                        <Doughnut data={dataCv}/>
+                    <div className="card-cv"  style={{ position: 'relative' }}>
+                        <span><b>Tu CV</b></span>
+                        <Doughnut data={dataCv} />
+                        <div style={{ position: 'absolute', width: '100%', top: '50%', left: 0, textAlign: 'center' }}>
+                            <span><b>{user.account.cv_percent} %</b></span> 
+                        </div>
                     </div>
                 </Grid>
                 <Grid item xs={4} className="pl-2 mt-4">
-                    <div className="card-cv">
-                        Cuestionario
-                        <Doughnut data={dataCuestionario}/>
+                    <div className="card-cv" style={{ position: 'relative', textAlign:'center' }}>
+                    <span><b>Cuestionario</b></span> 
+                        <Doughnut data={dataCuestionario} />
+                        <div style={{ position: 'absolute', width: '100%', top: '50%', left: 0, textAlign: 'center' }}>
+                            <span><b>{user.account.questionnaire_percent} %</b></span> 
+                        </div>
                     </div>
                 </Grid>
 
@@ -360,12 +372,12 @@ const Applicant = () => {
                     <Typography variant="body2">Te tomará solo 8 minutos colocar tus <TextCustom color="secondary">datos
                         actualizados</TextCustom>, para que las empresas contacten contigo.</Typography>
                     <Button variant="contained" size="large"
-                            onClick={() => history.push(`${initRoute}/mi-perfil`)}>Empezar</Button>
+                        onClick={() => history.push(`${initRoute}/mi-perfil`)}>Empezar</Button>
                 </div>
             </Modal>
             <SnackbarsAlert
                 open={open}
-                anchorOrigin={{vertical, horizontal}}
+                anchorOrigin={{ vertical, horizontal }}
                 message={message}
                 handleClose={handleClose}
                 severity={severity}

@@ -19,6 +19,7 @@ import ApplicantEvaluations from '../pages/ApplicantEvaluations';
 import ApplicantQuestion from '../pages/ApplicantQuestion'
 import ApplicantMedicalTest from '../pages/ApplicantMedicalTest'
 import ApplicantInterview from '../pages/ApplicantInterview';
+import ApplicantPublicationDetail from '../pages/ApplicantPublicationDetail';
 
 const MyAccountRouter = () => {
     return (
@@ -94,6 +95,11 @@ const MyAccountRouter = () => {
                     exact
                     path={ApplicantRoutes[13]}
                     component={ApplicantMedicalTest} />
+                <PrivateRoute
+                    needSession
+                    exact
+                    path={ApplicantRoutes[14]}
+                    component={ApplicantPublicationDetail} />
             </Switch>
         </>
     );

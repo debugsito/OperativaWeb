@@ -114,7 +114,7 @@ const ApplicantMessages = () => {
                                                 {item?.message_detail[0]?.seen == 1 ? <Email /> : <Drafts />}
                                             </ListItemAvatar>
                                             <ListItemText
-                                                primary={item.user.fullname}
+                                                primary={item.account.user.fullname}
                                                 secondary={
                                                     <React.Fragment>
                                                         <Typography

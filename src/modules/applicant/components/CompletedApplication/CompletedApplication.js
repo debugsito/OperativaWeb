@@ -3,11 +3,12 @@ import {Grid} from "@material-ui/core";
 import ApplicantResultsPostulateForm from "../ApplicantPostulateForm/ApplicantResultsPostulateForm";
 import {useSelector, useDispatch} from "react-redux";
 import { getPublicationAccount } from "../../../../store/actions/applicant/applicant.action";
+import { SessionRoutes } from "../../../shared/libs/sessionRoutes";
 
 const CompletedApplication = () => {
     const dispatch = useDispatch();
     const {applicant: {publicationsAccount}} = useSelector(state => state);
-    // const [results, setResults] = useState([{id: 200, name: 'ABC'}]);
+    const initRoute = SessionRoutes().initRoute;
     useEffect(() => {
         getPublicaciones();
     }, []);
@@ -21,7 +22,11 @@ const CompletedApplication = () => {
             <Grid item xs={12} className="mb-2">
                 {
                     (publicationsAccount.map((item, i) => {
-                        return <ApplicantResultsPostulateForm data={item} key={item.id} status={item.estado}
+                        return <ApplicantResultsPostulateForm 
+                        data={item} 
+                        key={item.id} 
+                        status={item.estado}
+                        route={`${initRoute}/postulacion/detalle/${item.id}/2`} 
                         />;
                     }))
                 }
