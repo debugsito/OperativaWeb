@@ -44,8 +44,6 @@ const useStyles = makeStyles((theme) => ({
 
 function TabPanel(props) {
     const {children, value, index, ...other} = props;
-    const initRoute = SessionRoutes().initRoute;
-    const history = useHistory()
     return (
         <div
             role="tabpanel"
