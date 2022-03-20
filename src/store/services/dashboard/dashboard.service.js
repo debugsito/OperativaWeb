@@ -89,6 +89,13 @@ const getReportByPostulantId = async (params) => {
   return response;
 };
 
+const saveMedicalTestByPublicationId = async (body) => {
+  const response = await api.get(
+    `/publication_medical_test`,body
+  );
+  return response;
+};
+
 export default {
   getJobs,
   getPublications,
@@ -103,4 +110,5 @@ export default {
   hireApplicant,
   getHistory,
   getReportByPostulantId,
+  saveMedicalTestByPublicationId,
 };

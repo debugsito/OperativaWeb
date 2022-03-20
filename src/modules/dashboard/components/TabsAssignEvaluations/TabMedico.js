@@ -2,6 +2,7 @@ import React from 'react'
 import { useForm, useFieldArray, Controller } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from "yup";
+import { useSelector } from "react-redux";
 
 import { Grid, makeStyles } from "@material-ui/core";
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -27,12 +28,14 @@ const initialValues = {
     name: "",
     address: "",
     reference: "",
-    recomendation: ""
+    recomendation: "",
+    file: [],
 }
 
 
 export default function TabMedico({ nextTab, backTab }) {
-    const classes = useStyles()
+    const classes = useStyles();
+    const { postulantsSelected } = useSelector(state => state?.dashboard)
     const validationSchema = Yup.object().shape({
         addresses: Yup.array().of(
             Yup.object().shape({
@@ -44,7 +47,7 @@ export default function TabMedico({ nextTab, backTab }) {
         ),
     });
 
-    const { control, handleSubmit, reset, trigger, formState: { errors, isSubmitting } } = useForm({
+    const { control, handleSubmit, reset, trigger, setValue, getValues, formState: { errors, isSubmitting } } = useForm({
         mode: "onChange",
         resolver: yupResolver(validationSchema),
         defaultValues: {
@@ -69,13 +72,17 @@ export default function TabMedico({ nextTab, backTab }) {
         remove(index)
     }
 
-    const onSubmit = async(data) => {
-        await sleep(3000)
-        // console.log(data);
+    const handleChangeFile = (index, _event) => {
+        setValue(`addresses[${index}].file`, _event.target.files[0])
+        // setValue(`addresses[${index}].filename`, _event.target.files[0].name)
+        // getValues();
     }
 
-    const sleep = (delay) =>
-    new Promise(resolve => setTimeout(resolve, delay));
+    const onSubmit = async (data) => {
+        const dataTemp = data.addresses
+        const body = dataTemp.map(item => ({...item, publication_account_id:postulantsSelected[0]}))
+        console.log("body", body);
+    }
 
     return (
         <div>
@@ -154,19 +161,38 @@ export default function TabMedico({ nextTab, backTab }) {
                                 />
                             </Grid>
                             <Grid item xs={8}>
-                                <TextInput
-                                    fullWidth
-                                    name="file"
-                                    label="Subir archivo"
-                                    type="file"
-                                    InputLabelProps={{
-                                        shrink: true
+                                <Controller
+                                    control={control}
+                                    name={`addresses.${index}.file`}
+                                    defaultValue=""
+                                    render={({ field }) => {
+                                        return (
+                                            <TextInput
+                                                fullWidth
+                                                {...field}
+                                                label="Subir archivo"
+                                                type="file"
+                                                onChange={(e) => handleChangeFile(index, e)}
+                                                value={field.value.filename}
+                                                InputLabelProps={{
+                                                    shrink: true
+                                                }}
+                                            />
+                                        )
                                     }}
                                 />
+
                             </Grid>
                         </Grid>
                     </div>
                 ))
+                // <TextInput
+                //     fullWidth
+                //     {...field}
+                //     label="Recomendaciones para el examén"
+                //     error={!!errors?.addresses?.[index]?.recomendation}
+                //     helperText={errors?.addresses?.[index]?.recomendation?.message}
+                // />
             }
             <div className={classes.buttonAdd}>
                 <Button color="secondary" size="large" onClick={handleAddAddress}> + AÑADIR DIRECCION</Button>
@@ -180,7 +206,7 @@ export default function TabMedico({ nextTab, backTab }) {
                         <Button variant="outlined" size="large" onClick={() => reset()}>LIMPIAR</Button>
                     </Grid>
                     <Grid item>
-                        <Button variant="contained" size="large" onClick={handleSubmit(onSubmit)}>{isSubmitting?"GUARDANDO...":"GUARDAR"}</Button>
+                        <Button variant="contained" size="large" onClick={handleSubmit(onSubmit)}>{isSubmitting ? "GUARDANDO..." : "GUARDAR"}</Button>
                     </Grid>
                     <Grid item>
                         <Button variant="outlined" size="large" onClick={nextTab}>CONTINUAR</Button>

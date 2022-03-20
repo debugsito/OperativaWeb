@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { InputAdornment, Grid, MenuItem, makeStyles } from "@material-ui/core";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory, useLocation, useParams } from "react-router-dom";
 import AdvanceFilter from "../components/AdvanceFilter";
 import {
   ApplicantsTabs,
@@ -31,6 +31,10 @@ import SearchIcon from "@material-ui/icons/Search";
 import ProviderFilter from "../context/AdvanceFilterContext";
 import ProviderNotification from "../context/NotificationAlertContext";
 
+//Redux actions
+import { useDispatch } from "react-redux";
+import { setPostulantSelected } from "../../../store/actions/dashboard/dashboard.action";
+
 const TAB = {
   POSTULANT: 0,
   POSTULANT_IN_PROCESS: 1,
@@ -57,12 +61,14 @@ export default function JobPositionCreatedPage() {
   const [openModal, setOpenModal] = useState(false);
   const [openModalFill, setOpenModalFill] = useState(false);
   const [openDrawer, setOpenDrawer] = useState(false);
+  const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
+  const params = useParams()
   const initRoute = SessionRoutes().initRoute;
   const routes = [
     { name: "Inicio", to: `${initRoute}` },
-    { name: "Postulantes", to: `${initRoute}/publicacion/180/lista-de-postulantes` },
+    { name: "Postulantes", to: `${initRoute}/publicacion/${params.publication_id}/lista-de-postulantes` },
   ];
 
   const handleChange = (newValue) => {
@@ -118,6 +124,10 @@ export default function JobPositionCreatedPage() {
   const handleOpenDrawer = () => {
     setOpenDrawer(true);
   };
+
+  const handleClickAssignEvaluations = () => {
+    dispatch(setPostulantSelected(selected))
+  }
 
   return (
     <ProviderFilter>
@@ -244,7 +254,9 @@ export default function JobPositionCreatedPage() {
                       size="large"
                       variant="contained"
                       component={Link}
-                      to={`${initRoute}/asignar-evaluaciones`}
+                      to={`${initRoute}/publicacion/${params.publication_id}/asignar-evaluaciones`}
+                      onClick={handleClickAssignEvaluations}
+                      disabled={selected.length != 1}
                     >
                       ASIGNAR EVALUACIONES
                     </Button>

@@ -10,6 +10,7 @@ const initialState = {
     postHistory: [],
     publicationsInfo: {},
     publicationSelected: "",
+    postulantsSelected: "",
     postulantsByPublicationId: {},
     postulantsByPublicationIdError: "",
     applicantProfile: null,
@@ -61,6 +62,11 @@ const dashboardReducer = (state = initialState, action) => {
             return {
                 ...state,
                 publicationSelected: action.payload,
+            };
+        case dashboardType.SET_POSTULANTS_SELECTED:
+            return {
+                ...state,
+                postulantsSelected: action.payload,
             };
         case dashboardType.SET_POSTULANTS_BY_PUBLICATION_ID:
             return {

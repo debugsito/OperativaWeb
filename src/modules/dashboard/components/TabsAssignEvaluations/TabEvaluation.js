@@ -176,7 +176,10 @@ export default function TabEvaluation({ nextTab }) {
     });
     return result;
   };
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (e, data) => {
+    console.log("event",e)
+    console.log(data)
+  };
   return (
     <div>
       {/* {JSON.stringify(values)} */}
@@ -316,7 +319,7 @@ export default function TabEvaluation({ nextTab }) {
                 </Button>
               </Grid>
               <Grid item>
-                <Button variant="contained" size="large" onClick={nextTab}>
+                <Button variant="contained" size="large" onClick={onSubmit}>
                   Guardar
                 </Button>
               </Grid>
