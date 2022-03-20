@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useSelector } from "react-redux";
 import { FormControl, FormGroup, Grid, makeStyles } from "@material-ui/core";
 import {
@@ -11,9 +11,12 @@ import { MedalInfo, DialogMessageSentEvaluativa } from "../";
 
 //images
 import { WarningIcon } from "../../images";
-
 //services
 import serviceDashboard from "../../../../store/services/dashboard/dashboard.service";
+//Context
+import { ContextNotification } from "../../context/NotificationAlertContext";
+//Constans
+import { messageSuccessful, messageError } from "../../utils/notification";
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -51,6 +54,7 @@ const OPTIONS = {
 
 export default function TabVerificativa({ nextTab, backTab }) {
   const classes = useStyles();
+  const { notification, setNotification } = useContext(ContextNotification);
   const { postulantsSelected } = useSelector(state => state?.dashboard)
   const [openDialog, setOpenDialog] = useState(false);
   const [values, setValues] = React.useState(initialValues);
@@ -60,14 +64,19 @@ export default function TabVerificativa({ nextTab, backTab }) {
   };
 
   const handleSaveAndNext = () => {
-    const body = []
     const options = getOptionsOfForm()
-    
-    postulantsSelected.forEach(item => ({
-
-    }))
-    
-    // nextTab()
+    const body = {
+      publication_account_ids:postulantsSelected,
+      options,
+      question:values.question
+    }
+    serviceDashboard.saveFormEvaluativa(body)
+    .then(resp => {
+      setNotification({ ...notification, ...messageSuccessful() })
+      nextTab()
+    }).catch(error => {
+      setNotification({ ...notification, ...messageError() });
+    })
   }
 
   function getOptionsOfForm(){

@@ -101,10 +101,9 @@ export default function TabMedico({ nextTab, backTab }) {
                 return service_Dashboard.saveMedicalTest(body)
             }).then(response => {
                 setNotification({ ...notification, ...messageSuccessful() })
-
+                nextTab()
             }).catch(error => {
                 setNotification({ ...notification, ...messageError() });
-                nextTab()
             })
         }else{
             body.image_url=""

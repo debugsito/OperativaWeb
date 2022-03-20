@@ -1,13 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { useSelector } from "react-redux";
 import { FormControl, FormGroup, Grid, makeStyles } from "@material-ui/core";
 import { Button, Checkbox, TextInput, Typography } from "../../../shared/components";
 import { MedalInfo, DialogMessageSentEvaluativa } from "../";
 
 //images
 import { ClientIcon, WarningIcon } from "../../images";
-
 //services
 import serviceDashboard from "../../../../store/services/dashboard/dashboard.service";
+//Context
+import { ContextNotification } from "../../context/NotificationAlertContext";
+//Constans
+import { messageSuccessful, messageError } from "../../utils/notification";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -43,7 +47,7 @@ const useStyles = makeStyles(theme => ({
     buttons: {
         marginTop: "2rem"
     },
-    cleanLink:{
+    cleanLink: {
         textDecoration: 'none',
         color: "inherit"
     }
@@ -55,26 +59,28 @@ const initialValues = {
     veri_antecendentes_penales: false,
     veri_antecendentes_policiales: false,
     veri_historial_crediticio: false,
-    veri_contact:false,
-    question:""
-  }
-  
-  const OPTIONS = {
-    0:"Verificación domiciliaria",
-    1:"Antecedentes penales",
-    2:"Antecedentes policiales",
-    3:"Historial crediticio",
-    4:"Deseo ser contactado para un servicio de verificación especial",
-  }
+    veri_contact: false,
+    question: ""
+}
+
+const OPTIONS = {
+    0: "Verificación domiciliaria",
+    1: "Antecedentes penales",
+    2: "Antecedentes policiales",
+    3: "Historial crediticio",
+    4: "Deseo ser contactado para un servicio de verificación especial",
+}
 
 export default function TabVerificativa({ nextTab, backTab }) {
     const classes = useStyles()
+    const { notification, setNotification } = useContext(ContextNotification);
+    const { postulantsSelected } = useSelector(state => state?.dashboard)
     const [showForm, setShowForm] = useState(false)
     const [openDialog, setOpenDialog] = useState(false)
     const [values, setValues] = React.useState(initialValues);
 
     const handleChange = (event) => {
-      setValues({ ...values, [event.target.name]: event.target.checked });
+        setValues({ ...values, [event.target.name]: event.target.checked });
     };
 
     const goVerification = () => {
@@ -82,12 +88,39 @@ export default function TabVerificativa({ nextTab, backTab }) {
     }
 
     const handleNextTab = () => {
-        if(showForm){
-            setOpenDialog(true)
-        }else{
-            
+        if (!hasValue()) {
             nextTab()
+        } else {
+            const options = getOptionsOfForm()
+            const body = {
+                publication_account_ids: postulantsSelected,
+                options,
+                question: values.question
+            }
+            serviceDashboard.saveFormVerificativa(body)
+                .then(resp => {
+                    setNotification({ ...notification, ...messageSuccessful() })
+                    if (showForm) {
+                        setOpenDialog(true)
+                    }
+                }).catch(error => {
+                    setNotification({ ...notification, ...messageError() });
+                })
         }
+    }
+
+    const hasValue = () => {
+        return Object.values(values).some(item => item === true || (typeof item == "string" && item != ""))
+    }
+
+    function getOptionsOfForm() {
+        let options = []
+        Object.values(values).forEach((item, index) => {
+            if (item === true) {
+                options.push(OPTIONS[index])
+            }
+        })
+        return options
     }
 
     return (
@@ -100,10 +133,10 @@ export default function TabVerificativa({ nextTab, backTab }) {
                             <Typography variant="h6"><b>Soy cliente nuevo</b></Typography>
                         </div>
                         <a href="https://plataforma.verificativa.com/login" target="_blank" rel="noopener noreferrer" className={classes.cleanLink}>
-                        <div className={classes.card}>
-                            <img src={ClientIcon} alt="icono" />
-                            <Typography variant="h6"><b>Ya soy cliente</b></Typography>
-                        </div>
+                            <div className={classes.card}>
+                                <img src={ClientIcon} alt="icono" />
+                                <Typography variant="h6"><b>Ya soy cliente</b></Typography>
+                            </div>
                         </a>
                     </div>
                     :
@@ -127,10 +160,10 @@ export default function TabVerificativa({ nextTab, backTab }) {
                             <Grid item xs={12}>
                                 <FormControl component="div">
                                     <FormGroup>
-                                        <Checkbox label="Verificación domiciliaria" name="veri_domiciliaria" />
-                                        <Checkbox label="Antecedentes penales" name="veri_antecendentes_penales" checked={values.veri_domiciliaria} onChange={handleChange}/>
-                                        <Checkbox label="Antecedentes policiales" name="veri_antecendentes_policiales" checked={values.veri_domiciliaria} onChange={handleChange}/>
-                                        <Checkbox label="Historial crediticio" name="veri_historial_crediticio" checked={values.veri_domiciliaria} onChange={handleChange}/>
+                                        <Checkbox label="Verificación domiciliaria" name="veri_domiciliaria" checked={values.veri_domiciliaria} onChange={handleChange} />
+                                        <Checkbox label="Antecedentes penales" name="veri_antecendentes_penales" checked={values.veri_antecendentes_penales} onChange={handleChange} />
+                                        <Checkbox label="Antecedentes policiales" name="veri_antecendentes_policiales" checked={values.veri_antecendentes_policiales} onChange={handleChange} />
+                                        <Checkbox label="Historial crediticio" name="veri_historial_crediticio" checked={values.veri_historial_crediticio} onChange={handleChange} />
                                         <Checkbox label="Deseo ser contactado para un servicio de verificación especial" name="veri_contact" checked={values.veri_contact} onChange={handleChange} />
                                     </FormGroup>
                                     {/* <FormHelperText>Be careful</FormHelperText> */}
@@ -142,7 +175,7 @@ export default function TabVerificativa({ nextTab, backTab }) {
                                     name="question"
                                     label="Escribe tu consulta o duda sobre este servicio"
                                     value={values.question}
-                                    onChange={(e) => setValues({ ...values, [e.target.name]: e.target.value})}
+                                    onChange={(e) => setValues({ ...values, [e.target.name]: e.target.value })}
                                 />
                             </Grid>
 
@@ -161,7 +194,7 @@ export default function TabVerificativa({ nextTab, backTab }) {
                 </Grid>
             </div>
 
-            <DialogMessageSentEvaluativa open={openDialog} onClose={() => setOpenDialog(false)} nextTab={nextTab} title="Verificativa"/>
+            <DialogMessageSentEvaluativa open={openDialog} onClose={() => setOpenDialog(false)} nextTab={nextTab} title="Verificativa" />
         </div>
     )
 }
