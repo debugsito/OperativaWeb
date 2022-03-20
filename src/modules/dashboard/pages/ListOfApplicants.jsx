@@ -76,6 +76,7 @@ export default function JobPositionCreatedPage() {
   };
 
   const handleClickCheckbox = (event, id) => {
+    console.log("postulants",id)
     const selectedIndex = selected.indexOf(id);
     let newSelected = [];
 
@@ -256,7 +257,7 @@ export default function JobPositionCreatedPage() {
                       component={Link}
                       to={`${initRoute}/publicacion/${params.publication_id}/asignar-evaluaciones`}
                       onClick={handleClickAssignEvaluations}
-                      disabled={selected.length != 1}
+                      disabled={selected.length < 1}
                     >
                       ASIGNAR EVALUACIONES
                     </Button>

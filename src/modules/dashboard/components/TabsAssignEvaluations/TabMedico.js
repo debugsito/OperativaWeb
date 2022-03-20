@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useForm, useFieldArray, Controller } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from "yup";
@@ -7,6 +7,15 @@ import { useSelector } from "react-redux";
 import { Grid, makeStyles } from "@material-ui/core";
 import DeleteIcon from '@material-ui/icons/Delete';
 import { Button, Typography, TextInput } from "../../../shared/components";
+
+//Services
+import {service_Resources, service_Dashboard} from "../../../../store/services";
+
+//Context
+import { ContextNotification } from "../../context/NotificationAlertContext";
+
+//Constans
+import { messageSuccessful, messageError } from "../../utils/notification";
 
 const useStyles = makeStyles(theme => ({
     buttons: {
@@ -29,13 +38,13 @@ const initialValues = {
     address: "",
     reference: "",
     recomendation: "",
-    file: [],
+    file: "",
 }
-
 
 export default function TabMedico({ nextTab, backTab }) {
     const classes = useStyles();
     const { postulantsSelected } = useSelector(state => state?.dashboard)
+    const { notification, setNotification } = useContext(ContextNotification);
     const validationSchema = Yup.object().shape({
         addresses: Yup.array().of(
             Yup.object().shape({
@@ -47,7 +56,7 @@ export default function TabMedico({ nextTab, backTab }) {
         ),
     });
 
-    const { control, handleSubmit, reset, trigger, setValue, getValues, formState: { errors, isSubmitting } } = useForm({
+    const { control, handleSubmit, reset, trigger, setValue, formState: { errors, isSubmitting } } = useForm({
         mode: "onChange",
         resolver: yupResolver(validationSchema),
         defaultValues: {
@@ -74,14 +83,40 @@ export default function TabMedico({ nextTab, backTab }) {
 
     const handleChangeFile = (index, _event) => {
         setValue(`addresses[${index}].file`, _event.target.files[0])
-        // setValue(`addresses[${index}].filename`, _event.target.files[0].name)
-        // getValues();
     }
 
     const onSubmit = async (data) => {
-        const dataTemp = data.addresses
-        const body = dataTemp.map(item => ({...item, publication_account_id:postulantsSelected[0]}))
-        console.log("body", body);
+        const formData = new FormData();
+        const dataTemp = data.addresses[0]
+        let body = {
+            ...dataTemp,
+            publication_account_ids:postulantsSelected,
+        }
+        if(dataTemp.file){//SI TIENE IMAGEN
+            formData.append("image", dataTemp.file)
+            service_Resources.saveImage(formData)
+            .then(resp => {
+                delete body.file;
+                body.image_url = resp.data.image_url
+                return service_Dashboard.saveMedicalTest(body)
+            }).then(response => {
+                setNotification({ ...notification, ...messageSuccessful() })
+
+            }).catch(error => {
+                setNotification({ ...notification, ...messageError() });
+                nextTab()
+            })
+        }else{
+            body.image_url=""
+            service_Dashboard.saveMedicalTest(body)
+            .then(resp => {
+                setNotification({ ...notification, ...messageSuccessful() })
+                nextTab()
+            })
+            .catch(error => {
+                setNotification({ ...notification, ...messageError() })
+            })
+        }
     }
 
     return (
@@ -186,17 +221,10 @@ export default function TabMedico({ nextTab, backTab }) {
                         </Grid>
                     </div>
                 ))
-                // <TextInput
-                //     fullWidth
-                //     {...field}
-                //     label="Recomendaciones para el examén"
-                //     error={!!errors?.addresses?.[index]?.recomendation}
-                //     helperText={errors?.addresses?.[index]?.recomendation?.message}
-                // />
             }
-            <div className={classes.buttonAdd}>
+            {/* <div className={classes.buttonAdd}>
                 <Button color="secondary" size="large" onClick={handleAddAddress}> + AÑADIR DIRECCION</Button>
-            </div>
+            </div> */}
             <div className={classes.buttons}>
                 <Grid container spacing={2} justifyContent="flex-end">
                     <Grid item>

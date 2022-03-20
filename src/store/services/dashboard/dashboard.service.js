@@ -89,9 +89,23 @@ const getReportByPostulantId = async (params) => {
   return response;
 };
 
-const saveMedicalTestByPublicationId = async (body) => {
-  const response = await api.get(
+const saveMedicalTest= async (body) => {
+  const response = await api.post(
     `/publication_medical_test`,body
+  );
+  return response;
+}
+;
+const saveFormVerificativa = async (body) => {
+  const response = await api.post(
+    `/publication_verificativas`,body
+  );
+  return response;
+};
+
+const saveFormEvaluativa = async (body) => {
+  const response = await api.post(
+    `/publication_evaluativas`,body
   );
   return response;
 };
@@ -110,5 +124,7 @@ export default {
   hireApplicant,
   getHistory,
   getReportByPostulantId,
-  saveMedicalTestByPublicationId,
+  saveMedicalTest,
+  saveFormVerificativa,
+  saveFormEvaluativa
 };

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Grid, makeStyles } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 
@@ -8,6 +8,9 @@ import { SessionRoutes } from '../../shared/libs/sessionRoutes';
 
 //Images, icons
 import { PreviewImageYtImg } from "../images";
+
+//Context
+import ProviderNotification from "../context/NotificationAlertContext";
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -39,37 +42,39 @@ export default function AssignEvaluations() {
     }
 
     return (
-        <Container>
-            <Grid container spacing={3} justifyContent="center">
-                <Grid item xs={12}>
-                    <Breadcrumbs routes={routes} />
-                </Grid>
-                <Grid item xs={12}>
-                    <Grid container>
-                        <Grid item xs={9}>
-                            <TitlePage
-                                description="A continuacion, asignar evaluaciones a tus postulantes"
-                                handleClick={() => history.goBack()}
-                            >
-                                Motorizados
-                            </TitlePage>
-                        </Grid>
-                        <Grid item xs={3}>
-                            <div className={classes.video}>
-                                <Typography variant="subtitle">VER VIDEO EXPLICATIVO</Typography>
-                                <div className={classes.previewVideoButton} onClick={handleOpenVideo}>
-                                    <img src={PreviewImageYtImg} alt="preview" />
+        <ProviderNotification>
+            <Container>
+                <Grid container spacing={3} justifyContent="center">
+                    <Grid item xs={12}>
+                        <Breadcrumbs routes={routes} />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Grid container>
+                            <Grid item xs={9}>
+                                <TitlePage
+                                    description="A continuacion, asignar evaluaciones a tus postulantes"
+                                    handleClick={() => history.goBack()}
+                                >
+                                    Motorizados
+                                </TitlePage>
+                            </Grid>
+                            <Grid item xs={3}>
+                                <div className={classes.video}>
+                                    <Typography variant="subtitle">VER VIDEO EXPLICATIVO</Typography>
+                                    <div className={classes.previewVideoButton} onClick={handleOpenVideo}>
+                                        <img src={PreviewImageYtImg} alt="preview" />
+                                    </div>
                                 </div>
-                            </div>
-                            
+
+                            </Grid>
                         </Grid>
                     </Grid>
+                    <Grid item xs={12}>
+                        <TabsAssignEvaluations />
+                    </Grid>
                 </Grid>
-                <Grid item xs={12}>
-                    <TabsAssignEvaluations />
-                </Grid>
-            </Grid>
-            <VideoPlayer openVideo={openVideo} onClose={() => setOpenVideo(false)} url="https://www.youtube.com/watch?v=E6JTH9Q40A8" />
-        </Container>
+                <VideoPlayer openVideo={openVideo} onClose={() => setOpenVideo(false)} url="https://www.youtube.com/watch?v=E6JTH9Q40A8" />
+            </Container>
+        </ProviderNotification>
     )
 }
