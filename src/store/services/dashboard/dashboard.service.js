@@ -110,6 +110,13 @@ const saveFormEvaluativa = async (body) => {
   return response;
 };
 
+const saveFormInterview = async (body) => {
+  const response = await api.post(
+    `/publication_interview`,body
+  );
+  return response;
+};
+
 export default {
   getJobs,
   getPublications,
@@ -126,5 +133,6 @@ export default {
   getReportByPostulantId,
   saveMedicalTest,
   saveFormVerificativa,
-  saveFormEvaluativa
+  saveFormEvaluativa,
+  saveFormInterview
 };

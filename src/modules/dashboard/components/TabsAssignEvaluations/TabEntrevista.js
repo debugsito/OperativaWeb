@@ -5,6 +5,8 @@ import { MedalInfo, TableInterviewSchedule } from "../";
 
 //images
 import { WarningIcon } from "../../images";
+//Services
+import { service_Dashboard } from "../../../../store/services";
 
 const useStyles = makeStyles(theme => ({
     form: {
@@ -26,6 +28,11 @@ const useStyles = makeStyles(theme => ({
 
 export default function TabVerificativa({ nextTab, backTab }) {
     const classes = useStyles()
+    const [interviews, setInterviews] = useState([]);
+
+    const handleSaveInterviews = () => {
+        console.log("interviews",interviews)
+    }
 
     return (
         <div>
@@ -47,7 +54,7 @@ export default function TabVerificativa({ nextTab, backTab }) {
                         <Typography variant="h6">La entrevista será:</Typography>
                     </Grid>
                     <Grid item xs={12}>
-                        <TableInterviewSchedule />
+                        <TableInterviewSchedule setInterviews={setInterviews} interviews={interviews}/>
                     </Grid>
 
                 </Grid>
@@ -60,7 +67,7 @@ export default function TabVerificativa({ nextTab, backTab }) {
                         <Button variant="outlined" size="large" onClick={backTab}>REGRESAR</Button>
                     </Grid>
                     <Grid item>
-                        <Button variant="contained" size="large" onClick={nextTab}>CONTINUAR</Button>
+                        <Button variant="contained" size="large" onClick={handleSaveInterviews}>Guardar</Button>
                     </Grid>
                 </Grid>
             </div>

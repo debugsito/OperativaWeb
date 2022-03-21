@@ -1,11 +1,15 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { DateTime } from "luxon";
+import { useSelector } from "react-redux";
 import { FormControlLabel, Grid, Table, TableBody, TableCell, TableContainer, TableRow, RadioGroup, makeStyles, Paper } from "@material-ui/core";
 import { stableSort, getComparator } from "../../../shared/utils/table.utils";
 import { Radio, TablePagination, TextInput, Typography } from "../../../shared/components";
 import { DialogSendMessages } from "../";
 import { DialogImbox } from "../";
 import EnhancedTableHead from "./CustomEnhancedTableHead";
+
+//services
+import { service_Applicant } from "../../../../store/services";
 
 import { produce } from "immer";
 
@@ -40,34 +44,39 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function Index() {
+export default function Index({interviews, setInterviews}) {
     const classes = useStyles();
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [order, setOrder] = useState("asc");
     const [orderBy, setOrderBy] = useState("");
-    const [interviews, setInterviews] = useState([createData("", "", "", "", { id: "" })]);
 
     const [openModal, setOpenModal] = useState(false)
     const [openImbox, setOpenImbox] = useState(false)
+    const [data, setData] = useState([])
+    const { postulantsSelected } = useSelector(state => state?.dashboard)
 
     const dateMin = DateTime.utc().toFormat("yyyy-LL-dd HH:mm")
 
     useEffect(() => {
-        const rows = DATA_INTERVIEWS.map(item => {
-            return (createData(
-                item?.type_meet,
-                item?.fullName,
-                "",//URL
-                "",//DATE
-                { id: item.id }
-            )
-            )
-        })
+        const rows = DATA_INTERVIEWS.map(item => ({
+            type_meet:item.type_meet,
+            fullName:item.fullName,
+            url:item.url,
+            date:"",
+            data:item
+        }))
         setInterviews(rows)
     }, [])
 
-    
+    // useEffect(() => {
+    //     let data = []
+    //     postulantsSelected.forEach(item => {
+    //         service_Applicant.getApplicantPublication(item).then(resp => {
+    //             data.push()
+    //         })
+    //     })
+    // },[])
 
     const isSelectAll = useMemo(() => {
         console.log("ejecuntado isSelectAll")
