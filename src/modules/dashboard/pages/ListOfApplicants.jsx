@@ -32,7 +32,7 @@ import ProviderFilter from "../context/AdvanceFilterContext";
 import ProviderNotification from "../context/NotificationAlertContext";
 
 //Redux actions
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setPostulantSelected } from "../../../store/actions/dashboard/dashboard.action";
 
 const TAB = {
@@ -55,6 +55,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function JobPositionCreatedPage() {
   const classes = useStyles();
+  const { postulantsByPublicationId } = useSelector(state => state?.dashboard)
   const [value, setValue] = useState(TAB.POSTULANT);
   const [selected, setSelected] = useState([]);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -127,7 +128,20 @@ export default function JobPositionCreatedPage() {
   };
 
   const handleClickAssignEvaluations = () => {
-    dispatch(setPostulantSelected(selected))
+    const data = []
+    postulantsByPublicationId.rows.forEach(postulant => {
+      selected.forEach(selected_id => {
+        if(postulant.id == selected_id){
+          data.push({id:postulant.id, user: {fullname: postulant.user.fullname, account_id: postulant.user.account_id}})
+        }
+      })
+    })
+    const postulantsSelected = {
+      ids:selected,
+      data
+    }
+    
+    dispatch(setPostulantSelected(postulantsSelected))
   }
 
   return (

@@ -66,7 +66,7 @@ export default function TabVerificativa({ nextTab, backTab }) {
   const handleSaveAndNext = () => {
     const options = getOptionsOfForm()
     const body = {
-      publication_account_ids:postulantsSelected,
+      publication_account_ids:postulantsSelected.ids,
       options,
       question:values.question
     }

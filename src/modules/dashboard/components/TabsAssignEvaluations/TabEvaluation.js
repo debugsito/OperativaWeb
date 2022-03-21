@@ -1,14 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import axios from "axios";
 import { Grid, makeStyles } from "@material-ui/core";
-import { Button, Typography, SnackbarsAlert } from "../../../shared/components";
+import { Button, Typography } from "../../../shared/components";
 import { FormAddQuestion, DialogQuestion } from "../";
 import NewFormAddQuestion from "../FormAddQuestion/new";
-import { produce } from "immer";
-import FormController from "../../../shared/formControllers/index";
 import { useForm, FormProvider } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import * as Yup from "yup";
+
+//Constant
+import { QUESTION_TYPE, FIELD_TYPE, FORM_TYPE } from "../../constants/Dashboard";
+//Services
+import { service_Dashboard } from "../../../../store/services";
+//Context
+import { ContextNotification } from "../../context/NotificationAlertContext";
+//Constans
+import { messageSuccessful, messageError } from "../../utils/notification";
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -43,7 +53,18 @@ const initialValues = [
   },
 ];
 const validationSchema = Yup.object().shape({
-  evaluation: Yup.string().required("Este campo es requerido"),
+  evaluation: Yup.array().of(
+    Yup.object().shape({
+      question: Yup.string().required("Este campo es requerido"),
+      type_question: Yup.string().required("Este campo es requerido"),
+      options: Yup.array().of(
+        Yup.object().shape({
+          answer: Yup.string().required("Este campo es requerido"),
+          correct: Yup.boolean(),
+        })
+      ),
+    })
+  ),
   extra: Yup.array().of(
     Yup.object().shape({
       question: Yup.string().required("Este campo es requerido"),
@@ -59,6 +80,9 @@ const validationSchema = Yup.object().shape({
 });
 
 export default function TabEvaluation({ nextTab }) {
+  const { publication_id } = useParams();
+  const { postulantsSelected } = useSelector(state => state?.dashboard)
+  const { notification, setNotification } = useContext(ContextNotification);
   const classes = useStyles();
   const [showInfo, setShowInfo] = useState(true);
   const [openModal, setOpenModal] = useState(false);
@@ -70,92 +94,15 @@ export default function TabEvaluation({ nextTab }) {
       evaluation: initialValues,
       extra: initialValues,
     },
-    // resolver: yupResolver(validationSchema),
+    resolver: yupResolver(validationSchema),
   });
 
-  const [notification, setNotification] = useState({
-    open: false,
-    message: `Para agregar otra pregunta, rellene los campos`,
-    vertical: "top",
-    horizontal: "right",
-    severity: "warning",
-  });
-
-  const { horizontal, vertical, open, message, severity } = notification;
-  const watchAll = formMethods.watch();
-  console.log(watchAll);
-  useEffect(() => {
-    const index = values.length - 1;
-    if (values[index].type_question === "answer-multiple") {
-      console.log("eleji pregunta multiple");
-    }
-  }, [values]);
-
-  const addValues = () => {
-    if (validate(values)) {
-      setValues((currentValue) => [
-        ...currentValue,
-        {
-          question: "",
-          type_question: "",
-        },
-      ]);
-    } else {
-      setNotification({ ...notification, open: true });
-    }
-  };
-
-  const addFields = () => {
-    if (validate(fields)) {
-      setFields((currentValue) => [
-        ...currentValue,
-        {
-          question: "",
-          type_question: "",
-        },
-      ]);
-    } else {
-      setNotification({ ...notification, open: true });
-    }
-  };
-
-  const handleValues = (e, index) => {
-    setValues((currentValue) =>
-      produce(currentValue, (v) => {
-        v[index][e.target.name] = e.target.value;
-      })
-    );
-  };
-
-  const handleFields = (e, index) => {
-    setFields((currentValue) =>
-      produce(currentValue, (v) => {
-        v[index][e.target.name] = e.target.value;
-      })
-    );
-  };
-
-  const deletedValues = (index) => {
-    if (index === 0) {
-      //Tiene un solo elemento
-      setValues(initialValues);
-    } else {
-      const newValues = [...values];
-      newValues.splice(index, 1);
-      setValues(newValues);
-    }
-  };
-
-  const deletedFields = (index) => {
-    if (index === 0) {
-      //Tiene un solo elemento
-      setFields(initialValues);
-    } else {
-      const newfields = [...fields];
-      newfields.splice(index, 1);
-      setFields(fields);
-    }
-  };
+  // useEffect(() => {
+  //   const index = values.length - 1;
+  //   if (values[index].type_question === "answer-multiple") {
+  //     console.log("eleji pregunta multiple");
+  //   }
+  // }, [values]);
 
   const saveQuestions = () => {
     setValues(initialValues);
@@ -164,25 +111,88 @@ export default function TabEvaluation({ nextTab }) {
   };
 
   const cleanForm = () => {
-    setFields(initialValues);
-    setValues(initialValues);
+    formMethods.reset()
   };
 
-  const validate = (array) => {
-    let result;
-    array.map((item) => {
-      result = Object.values(item).every((x) => x != "");
-      if (!result) return;
-    });
-    return result;
+  // const validate = async() => {
+  //   const evaluationTemp = formMethods.getValues("evaluation");
+  //   const extraTemp = formMethods.getValues("extra");
+  // }
+
+  // const validate = (array) => {
+  //   let result;
+  //   array.map((item) => {
+  //     result = Object.values(item).every((x) => x != "");
+  //     if (!result) return;
+  //   });
+  //   return result;
+  // };
+  const onSubmit = async (data) => {
+    const body_evaluation = {
+      name: "Preguntas",
+      type_form: FORM_TYPE.evaluation,
+      questions: buildBodyOfQuestion(data.evaluation)
+    }
+    const body_extra = {
+      name: "Preguntas",
+      type_form: FORM_TYPE.question_aditional,
+      questions: buildBodyOfQuestion(data.extra)
+    }
+    const body_main = {
+      body_evaluation,
+      body_extra
+    }
+    let promises = [];
+    let array_assign = [];
+    for (const key in body_main) {
+      const body = body_main[key];
+      promises.push(service_Dashboard.saveFormQuestion(body))
+    }
+    axios.all(promises).then(axios.spread((...responses) => {
+      responses.forEach(res => {
+        postulantsSelected.data.forEach(item => {
+          const body = {
+            form_id:res.data.id,
+            publication_id,
+            account_id:item.user.account_id
+          }
+          array_assign.push(body)
+        })
+      })
+      return service_Dashboard.assignFormAPostulant(array_assign)
+    }))
+    .then(resp => {
+      setNotification({ ...notification, ...messageSuccessful() })
+      nextTab()
+    })
+    .catch(error => {
+      setNotification({ ...notification, ...messageError() });
+    })
   };
-  const onSubmit = async (e, data) => {
-    console.log("event",e)
-    console.log(data)
-  };
+
+  function buildBodyOfQuestion(array) {
+    let bodyQuestion = {};
+    let question = [];
+    let options = [];
+    array.forEach(item => {
+      item.options.forEach(option => {
+        options.push(
+          {
+            text: option.answer,
+            field_type_id: item.type_question == "answer-closed" ? FIELD_TYPE.radiobutton : FIELD_TYPE.text
+          })
+      })
+      bodyQuestion.question_type_id = item.type_question == "answer-closed" ? QUESTION_TYPE.closed : QUESTION_TYPE.open;
+      bodyQuestion.text = item.question;
+      bodyQuestion.question_fields = options
+      question.push(bodyQuestion)
+      options = []
+      bodyQuestion = {}
+    })
+    return question
+  }
   return (
     <div>
-      {/* {JSON.stringify(values)} */}
       {showInfo && (
         <div className={classes.form}>
           <Grid container spacing={3}>
@@ -234,10 +244,7 @@ export default function TabEvaluation({ nextTab }) {
       )}
       {!showInfo && (
         <FormProvider {...formMethods}>
-          <form
-            className={classes.form}
-            onSubmit={formMethods.handleSubmit(onSubmit)}
-          >
+          <form className={classes.form}>
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <Typography variant="h6" color="secondary">
@@ -251,25 +258,10 @@ export default function TabEvaluation({ nextTab }) {
                     name="evaluation"
                     setNotification={setNotification}
                     notification={notification}
+                    errors={formMethods.formState.errors}
                   />
-                  {/* {values.map((item, index) => (
-                    <FormAddQuestion
-                      key={index}
-                      index={index}
-                      values={item}
-                      handleChange={handleValues}
-                      length={values.length}
-                      deletedValues={deletedValues}
-                    />
-                  ))} */}
                 </Grid>
               </Grid>
-              {/* <Grid item xs={3}>
-                <Button color="secondary" size="large" onClick={addValues}>
-                  {" "}
-                  + AÑADIR PREGUNTA
-                </Button>
-              </Grid> */}
             </Grid>
           </form>
           <div className={classes.form}>
@@ -281,45 +273,26 @@ export default function TabEvaluation({ nextTab }) {
               </Grid>
               <Grid item xs={12}>
                 <Grid container spacing={3}>
-                  {/* {fields.map((item, index) => (
-                    <FormAddQuestion
-                      key={index}
-                      index={index}
-                      values={item}
-                      handleChange={handleFields}
-                      deletedValues={deletedFields}
-                    />
-                  ))} */}
                   <NewFormAddQuestion
                     control={formMethods.control}
                     name="extra"
                     setNotification={setNotification}
                     notification={notification}
+                    errors={formMethods.formState.errors}
                   />
                 </Grid>
               </Grid>
-              {/* <Grid item xs={3}>
-                <Button color="secondary" size="large" onClick={addFields}>
-                  {" "}
-                  + AÑADIR PREGUNTA
-                </Button>
-              </Grid> */}
             </Grid>
           </div>
           <div className={classes.buttons}>
             <Grid container spacing={2} justifyContent="flex-end">
-              <Grid item>
-                <Button variant="outlined" size="large">
-                  CANCELAR
-                </Button>
-              </Grid>
               <Grid item>
                 <Button variant="outlined" size="large" onClick={cleanForm}>
                   Limpiar
                 </Button>
               </Grid>
               <Grid item>
-                <Button variant="contained" size="large" onClick={onSubmit}>
+                <Button variant="contained" size="large" onClick={formMethods.handleSubmit(onSubmit)}>
                   Guardar
                 </Button>
               </Grid>
@@ -337,15 +310,6 @@ export default function TabEvaluation({ nextTab }) {
         onClose={() => setOpenModal(false)}
         saveQuestion={saveQuestions}
         length={values.length}
-      />
-      <SnackbarsAlert
-        open={open}
-        anchorOrigin={{ vertical, horizontal }}
-        message={message}
-        handleClose={() => setNotification({ ...notification, open: false })}
-        onClose={() => setNotification({ ...notification, open: false })}
-        severity={severity}
-        autoHideDuration={5000}
       />
     </div>
   );

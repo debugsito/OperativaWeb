@@ -90,7 +90,7 @@ export default function TabMedico({ nextTab, backTab }) {
         const dataTemp = data.addresses[0]
         let body = {
             ...dataTemp,
-            publication_account_ids:postulantsSelected,
+            publication_account_ids:postulantsSelected.ids,
         }
         if(dataTemp.file){//SI TIENE IMAGEN
             formData.append("image", dataTemp.file)

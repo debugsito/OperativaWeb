@@ -70,6 +70,7 @@ export default function ApplicantsTabs({ onChangeTab, tabValue, ...props }) {
             message={message}
             handleClose={() => setNotification({ ...notification, open: false })}
             severity={severity}
+            autoHideDuration={5000}
           />
         </>
         //   </div>

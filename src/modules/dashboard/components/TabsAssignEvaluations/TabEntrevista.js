@@ -56,10 +56,8 @@ export default function TabVerificativa({ nextTab, backTab }) {
                     <Grid item xs={12}>
                         <TableInterviewSchedule setInterviews={setInterviews} interviews={interviews}/>
                     </Grid>
-
                 </Grid>
             </div>
-
 
             <div className={classes.buttons}>
                 <Grid container spacing={2} justifyContent="flex-end">
@@ -71,9 +69,6 @@ export default function TabVerificativa({ nextTab, backTab }) {
                     </Grid>
                 </Grid>
             </div>
-
-
-
         </div>
     )
 }

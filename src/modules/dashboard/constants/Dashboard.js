@@ -5,6 +5,23 @@ export const POSTULANTS = {
     hired: 3,
 }
 
+export const QUESTION_TYPE = {
+    open:1,
+    closed:2,
+    multiple:3
+}
+
+export const FIELD_TYPE = {
+    text:1,
+    radiobutton:2,
+    checkbox:3
+}
+
+export const FORM_TYPE = {
+    evaluation:1,
+    question_aditional:2,
+}
+
 export const ROWS_PER_PAGE = 10
 
 export const FILTER_BY = {

@@ -93,7 +93,7 @@ export default function TabVerificativa({ nextTab, backTab }) {
         } else {
             const options = getOptionsOfForm()
             const body = {
-                publication_account_ids: postulantsSelected,
+                publication_account_ids: postulantsSelected.ids,
                 options,
                 question: values.question
             }

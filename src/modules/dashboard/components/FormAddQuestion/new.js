@@ -6,8 +6,8 @@ import FormController from "../../../shared/formControllers";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Options from "./Options";
 
-const New = ({ control, name, setNotification, notification }) => {
-  const { fields, append, remove, insert } = useFieldArray({
+const New = ({ control, name, setNotification, notification, errors }) => {
+  const { fields, append, remove, insert,  } = useFieldArray({
     control,
     name,
   });
@@ -30,6 +30,8 @@ const New = ({ control, name, setNotification, notification }) => {
               control={control}
               variant="outlined"
               label="Ingresa pregunta"
+              error={!!errors?.[name]?.[index]?.question}
+              helperText={errors?.[name]?.[index]?.question?.message}
               fullWidth
             />
           </Grid>
@@ -39,6 +41,8 @@ const New = ({ control, name, setNotification, notification }) => {
               name={`${name}.${index}.type_question`}
               label="Tipo de respuesta"
               control={control}
+              error={!!errors?.[name]?.[index]?.type_question}
+              helperText={errors?.[name]?.[index]?.type_question?.message}
               items={[
                 {
                   value: "answer-open",
