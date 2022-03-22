@@ -205,7 +205,7 @@ export default function JobPositionCreatedPage() {
                     </IconButton>
                     <InputBase
                       sx={{ ml: 1, flex: 1 }}
-                      placeholder="Buscar por nombre, experiencia o palabra clave"
+                      placeholder="Buscar por nombre"
                       fullWidth
                     />
                   </Paper>

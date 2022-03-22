@@ -133,6 +133,11 @@ const sendMessage = async (params, body) => {
   return response;
 };
 
+const getMessages = async (params) => {
+  const response = await api.get(`/messages/${params.publication_account_id}`);
+  return response;
+};
+
 export default {
   getJobs,
   getPublications,
@@ -153,5 +158,6 @@ export default {
   saveFormInterview,
   saveFormQuestion,
   assignFormAPostulant,
-  sendMessage
+  sendMessage,
+  getMessages
 };

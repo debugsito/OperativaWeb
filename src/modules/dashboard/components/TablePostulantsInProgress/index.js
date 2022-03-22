@@ -37,6 +37,9 @@ import { ContextNotification } from "../../context/NotificationAlertContext";
 import { POSTULANTS } from "../../constants/Dashboard";
 import { messageSuccessful, messageError } from "../../utils/notification";
 
+//actions
+import { setPostulantSelected } from "../../../../store/actions/dashboard/dashboard.action";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -108,7 +111,7 @@ export default function TableListPostulants({ selected, setSelected, handleClick
       const rows = postulantsByPublicationId?.rows?.map(item => ({
         similarity: item.similarity,
         fullname: item.user.first_name + " " + item.user.last_name,
-        messages: item.user.experience ? 2 : 0,
+        messages: item.all_messages,
         stateOfEvaluations : [
           { text: "Preguntas", status: item.technical_test },
           { text: "Verificativa", status: item.verificativa },
@@ -163,6 +166,13 @@ export default function TableListPostulants({ selected, setSelected, handleClick
     .catch(error => {
       setNotification({ ...notification, ...messageError() })
     })
+  }
+
+  const handleGetMessage = (id, totalMessages) => {
+    if(totalMessages > 0){
+      dispatch(setPostulantSelected([id]))
+      setOpenImbox(true)
+    }
   }
 
   // const emptyRows = rowsPerPage - Math.min(rowsPerPage, postulants?.length - page * rowsPerPage);
@@ -256,7 +266,7 @@ export default function TableListPostulants({ selected, setSelected, handleClick
                                 color={
                                   row.messages === 0 ? "default" : "inherit"
                                 }
-                                onClick={() => setOpenImbox(true)}
+                                onClick={() => handleGetMessage(row.data.id, row.messages)}
                               >
                                 <EmailIcon />
                               </IconButton>
