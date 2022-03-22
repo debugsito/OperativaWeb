@@ -14,7 +14,6 @@ const useStyles = makeStyles(theme => ({
 
 export default function Index({ data, ...props }) {
     const classes = useStyles();
-    console.log("data",data)
 
     return (
         <>

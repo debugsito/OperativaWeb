@@ -22,7 +22,6 @@ export const logIn = (user) => {
 };
 
 export const loginAs = (body) => {
-    console.log("entrando a middlware...")
     return async (dispatch) => new Promise(async (resolve, reject) => {
         try {
             await service_Auth.loginAs(body);

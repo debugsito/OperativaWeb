@@ -22,6 +22,11 @@ export const FORM_TYPE = {
     question_aditional:2,
 }
 
+export const MEET_TYPE = {
+    virtual:"1",
+    presencial:"2",
+}
+
 export const ROWS_PER_PAGE = 10
 
 export const FILTER_BY = {

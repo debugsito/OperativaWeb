@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Grid, makeStyles } from "@material-ui/core";
 import { Button, Typography } from "../../../shared/components";
 import { MedalInfo, TableInterviewSchedule } from "../";
@@ -7,6 +7,10 @@ import { MedalInfo, TableInterviewSchedule } from "../";
 import { WarningIcon } from "../../images";
 //Services
 import { service_Dashboard } from "../../../../store/services";
+//Context
+import { ContextNotification } from "../../context/NotificationAlertContext";
+//Utils
+import { messageSuccessful, messageError } from "../../utils/notification";
 
 const useStyles = makeStyles(theme => ({
     form: {
@@ -29,9 +33,15 @@ const useStyles = makeStyles(theme => ({
 export default function TabVerificativa({ nextTab, backTab }) {
     const classes = useStyles()
     const [interviews, setInterviews] = useState([]);
+    const { notification, setNotification } = useContext(ContextNotification);
 
     const handleSaveInterviews = () => {
-        console.log("interviews",interviews)
+        service_Dashboard.saveFormInterview(interviews)
+        .then(resp => {
+            setNotification({ ...notification, ...messageSuccessful() })
+        }).catch(err => {
+            setNotification({ ...notification, ...messageError() });
+        })
     }
 
     return (

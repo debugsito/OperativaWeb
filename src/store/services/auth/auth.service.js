@@ -16,7 +16,6 @@ const logIn = async (body) => {
 }
 
 const loginAs = async (body) => {
-    console.log("making request...")
     const response = await api.post('/login-as', body);
     return response;
 }

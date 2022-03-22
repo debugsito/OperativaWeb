@@ -1,5 +1,4 @@
 export default (name, data) => {
-    console.log("data", data)
     return ({
         chart: {
             plotBackgroundColor: null,

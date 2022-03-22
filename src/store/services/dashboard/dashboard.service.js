@@ -21,7 +21,6 @@ const updatePublication = async (params) => {
 };
 
 const savePublication = async (body) => {
-  console.log("body",body)
   const response = await api.post(`/publication`, body);
   return response;
 };
@@ -111,16 +110,12 @@ const saveFormEvaluativa = async (body) => {
 };
 
 const saveFormInterview = async (body) => {
-  const response = await api.post(
-    `/publication_interview`,body
-  );
+  const response = await api.post(`/publication_interview`,body);
   return response;
 };
 
 const saveFormQuestion = async (body) => {
-  const response = await api.post(
-    `/form`,body
-  );
+  const response = await api.post(`/form`,body);
   return response;
 };
 

@@ -72,10 +72,6 @@ export default function AccordionFilter({ apply }) {
   const onSubmit = (data) => {
     let newValue = { ...values };
     let newData = { ...data };
-    console.log("dirtyFields", dirtyFields)
-    console.log("data", data)
-    console.log("values", newValue)
-    console.log("::::::::::::::::::::::::")
     if (dirtyFields.residence) {
       if (data?.residence?.answers.length) {
         newData.residence.answers = [

@@ -10,6 +10,8 @@ import EnhancedTableHead from "./CustomEnhancedTableHead";
 
 //services
 import { service_Applicant } from "../../../../store/services";
+//constans
+import { MEET_TYPE } from "../../constants/Dashboard";
 
 import { produce } from "immer";
 
@@ -59,30 +61,16 @@ export default function Index({interviews, setInterviews}) {
     const dateMin = DateTime.utc().toFormat("yyyy-LL-dd HH:mm")
 
     useEffect(() => {
-        const rows = DATA_INTERVIEWS.map(item => ({
-            type_meet:item.type_meet,
-            fullName:item.fullName,
-            url:item.url,
-            date:"",
-            data:item
+        const rows = postulantsSelected.data.map(item => ({
+            publication_account_id:item.id,
+            virtual:"",
+            interviewer:item.user.fullname,
+            url_interview:"",
+            interview_date:"",
+            data:{id:item.id},
         }))
         setInterviews(rows)
     }, [])
-
-    // useEffect(() => {
-    //     let data = []
-    //     postulantsSelected.forEach(item => {
-    //         service_Applicant.getApplicantPublication(item).then(resp => {
-    //             data.push()
-    //         })
-    //     })
-    // },[])
-
-    const isSelectAll = useMemo(() => {
-        console.log("ejecuntado isSelectAll")
-        
-        return true
-    }, [interviews])
 
     const handleOnChange = (e, index) => {
         setInterviews(currentValue => produce(currentValue, (v) => {
@@ -98,12 +86,12 @@ export default function Index({interviews, setInterviews}) {
 
     const handleSelectAllClick = (e) => {
         const {name, checked} = e.target
-        const type_meet= checked? name: ""
-
+        const virtual= checked? MEET_TYPE[name]: ""
+        
         const interviewsTemp = [...interviews]
         let newArray = []
         for (let index = 0; index < interviewsTemp.length; index++) {
-            const newInterview = { ...interviewsTemp[index], ["type_meet"]: type_meet }
+            const newInterview = { ...interviewsTemp[index], ["virtual"]: virtual }
             newArray = [...newArray, newInterview]
         }
         setInterviews(newArray)
@@ -161,25 +149,25 @@ export default function Index({interviews, setInterviews}) {
                                                 key={row.data.id}
                                             >
                                                 <TableCell padding="normal" align="left" width="25%">
-                                                    <RadioGroup aria-label="tipo de reunión" classes={{ root: classes.rootRadioGroup }} name="type_meet" value={interviews[index].type_meet} onChange={(e) => handleOnChange(e, index)}>
-                                                        <FormControlLabel value="virtual" control={<Radio />} label="Virtual" />
-                                                        <FormControlLabel value="presencial" control={<Radio />} label="Presencial" />
+                                                    <RadioGroup aria-label="tipo de reunión" classes={{ root: classes.rootRadioGroup }} name="virtual" value={interviews[index].virtual} onChange={(e) => handleOnChange(e, index)}>
+                                                        <FormControlLabel value="1" control={<Radio />} label="Virtual" />
+                                                        <FormControlLabel value="2" control={<Radio />} label="Presencial" />
                                                     </RadioGroup>
                                                 </TableCell>
                                                 <TableCell id={labelId} scope="row" padding="none" width="20%">
-                                                    <Typography variant="body2">{row.fullName}</Typography>
+                                                    <Typography variant="body2">{row.interviewer}</Typography>
                                                 </TableCell>
                                                 <TableCell id={labelId} scope="row" padding="normal" width="30%">
-                                                    <TextInput name="url" size="small" fullWidth onChange={(e) => handleOnChange(e, index)} value={interviews[index].url} />
+                                                    <TextInput name="url_interview" size="small" fullWidth onChange={(e) => handleOnChange(e, index)} value={interviews[index].url} />
                                                 </TableCell>
                                                 <TableCell id={labelId} scope="row" padding="normal" width="25%">
                                                     <TextInput
                                                         fullWidth
                                                         type="datetime-local"
-                                                        name="date"
+                                                        name="interview_date"
                                                         size="small"
                                                         onChange={(e) => handleOnChange(e, index)}
-                                                        value={interviews[index].date}
+                                                        value={interviews[index].interview_date}
                                                         InputLabelProps={{
                                                             shrink: true,
                                                         }}
