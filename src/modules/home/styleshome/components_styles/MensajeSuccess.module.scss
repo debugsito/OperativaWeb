@@ -1,0 +1,36 @@
+@import "../mixins";
+
+.background {
+    width: 100%;
+    margin: 0 auto;
+    padding-bottom: 6rem;
+    position: relative;
+    .image {
+        width: 40vw;
+        position: relative;
+        left: 50%;
+    }
+}
+
+.main {
+    position: absolute;
+    top: 0;
+    padding-top: 5rem;
+    h1 {
+        margin: 0;
+    }
+}
+
+.text {
+    margin-top: 1rem;
+    width: 50%;
+}
+
+@include mediaTablet(){
+    .background {
+        height: 100vh;
+    }
+    .text {
+        width: 100%;
+    }
+}

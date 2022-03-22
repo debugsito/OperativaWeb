@@ -1,0 +1,34 @@
+@import "../colors";
+@import "../variables";
+
+.containerStep{
+    width: 100%;
+    height: 22vh;
+    background: $background_primary;
+    color: #fff;
+    .content{
+        margin: 0 auto;
+        width: $width_desktop;
+        .button{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        h4{
+            margin: 0 auto 0.5em;
+        }
+        .progress{
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-gap: 0.5rem;
+        }
+    }
+}
+
+.active{
+    border: 4px solid #FFFFFF;
+}
+
+.inactive{
+    border: 4px solid rgba(255, 255, 255, 0.4);
+}

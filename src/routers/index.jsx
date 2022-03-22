@@ -10,15 +10,18 @@ import OperativaModule from '../modules';
 import ScrollToTopRouter from './ScrollTopRouter';
 
 //Global Sidebar
-import { Navigation } from "../modules/shared/components";
+// import { Navigation } from "../modules/shared/components";
+
+
+
 
 const AppRouter = () => {
   return (
     <BrowserRouter>
-      <Navigation>
+      {/* <Navigation> */}
         <ScrollToTopRouter />
         <Route to={OperativaModule.moduleRouter.pathBase} component={OperativaModule.moduleRouter.componentRouter} />
-      </Navigation>
+      {/* </Navigation> */}
     </BrowserRouter>
   );
 };

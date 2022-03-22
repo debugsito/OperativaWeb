@@ -1,0 +1,18 @@
+.container-accordion, .accordion-main {
+	.accordion {
+		border-radius: 8px 8px 8px 8px;
+		.accordion-item {
+			border-radius: 8px 8px 8px 8px;
+			text-align: left;
+			h2 {
+				button {
+					border-radius: 8px 8px 8px 8px;
+					color: black;
+					font-family: "Poppins";
+					font-weight: bold;
+					font-size: 1.2rem;
+				}
+			}
+		}
+	}
+}

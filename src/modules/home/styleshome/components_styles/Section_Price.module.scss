@@ -1,0 +1,47 @@
+@import "../variables";
+@import "../colors";
+@import "../mixins";
+
+.container {
+  width: 100%;
+  background: #f1f2f5;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  padding: 6em 6em;
+  width: 100%;
+  align-content: center;
+}
+
+.p {
+  text-align: center;
+}
+
+.cards {
+  display: flex;
+  text-align: center;
+
+  justify-content: center;
+}
+
+// .cards{
+//     display: grid;
+//     grid-template-columns: 1fr 1fr 1fr;
+//     grid-gap: 1.5em;
+// }
+
+@include mediaMovil() {
+  .content {
+    width: $width_movil;
+  }
+
+  .cards {
+    width: 90vw;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    overflow-x: scroll;
+    padding-left: 0%;
+  }
+}
