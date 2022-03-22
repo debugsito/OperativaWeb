@@ -126,6 +126,13 @@ const assignFormAPostulant = async (body) => {
   return response;
 };
 
+const sendMessage = async (params, body) => {
+  const response = await api.post(
+    `/messages/${params.publication_account_id}`,body
+  );
+  return response;
+};
+
 export default {
   getJobs,
   getPublications,
@@ -145,5 +152,6 @@ export default {
   saveFormEvaluativa,
   saveFormInterview,
   saveFormQuestion,
-  assignFormAPostulant
+  assignFormAPostulant,
+  sendMessage
 };

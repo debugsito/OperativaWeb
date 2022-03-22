@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { InputAdornment, Grid, MenuItem, makeStyles } from "@material-ui/core";
 import { useHistory, useLocation, useParams } from "react-router-dom";
@@ -72,6 +72,10 @@ export default function JobPositionCreatedPage() {
     { name: "Postulantes", to: `${initRoute}/publicacion/${params.publication_id}/lista-de-postulantes` },
   ];
 
+  useEffect(() => {
+    dispatch(setPostulantSelected({}))
+  },[])
+
   const handleChange = (newValue) => {
     setValue(newValue);
   };
@@ -95,15 +99,18 @@ export default function JobPositionCreatedPage() {
     }
 
     setSelected(newSelected);
+    dispatch(setPostulantSelected(newSelected))
   };
 
   const handleSelectAllClick = (event, postulants) => {
     if (event.target.checked) {
       const newSelecteds = postulants.map((n) => n.data.id);
       setSelected(newSelecteds);
+      dispatch(setPostulantSelected(newSelecteds))
       return;
     }
     setSelected([]);
+    dispatch(setPostulantSelected([]))
   };
 
   const handleToggle = (event) => {
