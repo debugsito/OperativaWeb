@@ -1,7 +1,7 @@
 import React from "react";
 
 //router
-import { Route, Switch } from "react-router-dom";
+import { Switch } from "react-router-dom";
 import HomeRoutes from "./HomeRoutes";
 
 //Pages
@@ -13,7 +13,7 @@ import Empresa from "../pages/empresa";
 import Municipalidad from "../pages/municipalidad";
 import TerminosCondiciones from "../pages/terminos-y-condiciones";
 import RecuperarPasword from "../pages/recuperar-password";
-// import Authenticate from '../pages/Authenticate';
+import Authenticate from '../pages/Authenticate';
 import AuthRedirect from "../pages/AuthRedirect";
 import Error from "../pages/Error";
 
@@ -33,6 +33,9 @@ const MyAccountRouter = () => {
         <PrivateRoute exact path={HomeRoutes[4]} component={Municipalidad} />
         <PrivateRoute exact path={HomeRoutes[5]} component={TerminosCondiciones} />
         <PrivateRoute exact path={HomeRoutes[6]} component={RecuperarPasword} />
+        <PrivateRoute exact path={HomeRoutes[7]} component={Authenticate} />
+        <PrivateRoute exact path={HomeRoutes[8]} component={Authenticate} />
+        <PrivateRoute exact path={HomeRoutes[9]} component={Authenticate} />
       </Switch>
     </>
   );

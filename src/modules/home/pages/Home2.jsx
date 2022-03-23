@@ -16,8 +16,11 @@ import styles from "../styleshome/components_styles/Home.module.scss";
 //images
 import regpost from "../images2/section-regpost/regpost.png";
 import wbussines from "../images2/section-regpost/wbussines.png";
+//React-redux
+import { useDispatch } from "react-redux";
+import { resetStore } from "../../../store/actions/global";
 
-const ENTITY = {
+const BUSSINES = {
   title: "¿Cómo optimizamos la selección de operarios?",
   content: "Selecciona personal operario en 3 simples pasos:",
   image: wbussines,
@@ -61,6 +64,11 @@ const POSTULANT = {
 
 export default function Index(props) {
   const [tab, setTab] = useState("postulant");
+  const dispatch = useDispatch()
+    
+    useState(() => {
+        dispatch(resetStore())
+    },[])
 
   return (
     <div className={styles.container}>
@@ -73,7 +81,7 @@ export default function Index(props) {
         {tab === "postulant" ? (
           <SectionRegApplicant data={POSTULANT} />
         ) : (
-          <SectionRegApplicant data={ENTITY} />
+          <SectionRegApplicant data={BUSSINES} />
         )}
         <CarrouselMuni />
         {tab === "business" && <SectionPrice />}

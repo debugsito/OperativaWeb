@@ -2,6 +2,8 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from "yup";
+import { useDispatch } from "react-redux";
+import { logIn } from "../../../../store/actions/auth/auth.middleware";
 
 import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row'
@@ -9,6 +11,7 @@ import Col from 'react-bootstrap/Col'
 import Button from "../Button";
 
 export default function FormLogin({ closeModal }) {
+    const dispatch = useDispatch();
     const validationSchema = Yup.object().shape({
         email: Yup.string()
             .required('Email es requerido')
@@ -23,7 +26,8 @@ export default function FormLogin({ closeModal }) {
 
     const onSubmit = (data) => {
         console.log(data)
-        closeModal()
+        dispatch(logIn(data));
+        // closeModal()
     }
 
     return (
