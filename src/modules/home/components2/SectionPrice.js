@@ -5,141 +5,170 @@ import style from "../styleshome/components_styles/Section_Price.module.scss";
 
 const CARDS_DATA = [
   {
-    plan: "Prueba gratuita",
-
+    plan: "Free",
+    price: "S/ 0",
+    recommended: false,
     features: [
       {
-        description: "Crear Publicación",
+        description: "Crear hasta 100 publicaciones",
         check: true,
-      },
-      {
-        description: "Crea avisos confidenciales",
-        check: true,
-      },
-      {
-        description:
-          "Aumenta el alcance de tu publicación con el multiposting a nuestros socios estratégicos",
-        check: true,
-      },
-      {
-        description:
-          "Accede a la lista de postulantes preproesados por nuestra IA",
-        check: true,
-      },
-
-      {
+    },
+    {
+      description: "Accede una lista de 200 postulantes preprocesadas por IA",
+      check: true,
+  },
+    {
         description: "Revisa CV's y datos del postulante",
         check: true,
+    },
+    {
+      description: "Accede a datos de contacto",
+      check: true,
+  },
+
+    {
+        description: "Crea/elimina usuarios",
+        check: false,
+    },
+
+    {
+        description: "Avisos confidenciales",
+        check: false,
+    },
+    {
+      description: "Acceso a proceso de selección avanzado",
+      check: false,
+  },
+  {
+    description: "Acceso a multiposting de publicación",
+    check: false,
+  },
+    ]
+  },
+  {
+      plan: "Emprendedor",
+      price: "S/ 2500 más IGV",
+      recommended: false,
+      features: [
+          {
+              description: "Crear hasta 2 publicaciones",
+              check: true,
+          },
+          {
+            description: "Accede una lista de 10 postulantes preprocesadas por IA",
+            check: true,
+        },
+          {
+              description: "Revisa CV's y datos del postulante",
+              check: true,
+          },
+          {
+            description: "Accede a datos de contacto",
+            check: true,
+        },
+
+          {
+              description: "Crea/elimina usuarios",
+              check: true,
+          },
+
+          {
+              description: "Avisos confidenciales",
+              check: true,
+          },
+          {
+            description: "Acceso a proceso de selección avanzado",
+            check: true,
+        },
+        {
+          description: "Acceso a multiposting de publicación",
+          check: true,
+        },
+
+      ]
+  },
+  {
+      plan: "Empresa",
+      price: "S/ 3800 más IGV",
+      recommended: false,
+      features: [
+        {
+          description: "Crear hasta 10 publicaciones",
+          check: true,
       },
       {
-        description:
-          "Realiza un proceso de selección con Ev. de experiencia, Ev.psicológica, verificación, entrevistas entre otros",
+        description: "Accede una lista de 50 postulantes preprocesadas por IA",
         check: true,
+    },
+      {
+          description: "Revisa CV's y datos del postulante",
+          check: true,
       },
       {
-        description: "Accede a analitica de tu proceso de selección",
+        description: "Accede a datos de contacto",
         check: true,
+    },
+
+      {
+          description: "Crea/elimina usuarios",
+          check: true,
       },
 
       {
-        description: "Crea/elimina usuarios para tu empresa",
-        check: true,
+          description: "Avisos confidenciales",
+          check: true,
       },
-    ],
+      {
+        description: "Acceso a proceso de selección avanzado",
+        check: true,
+    },
+    {
+      description: "Acceso a multiposting de publicación",
+      check: true,
+    },
+      ]
   },
-  // {
-  //     plan: "Básico",
-  //     price: "300.00",
-  //     recommended: false,
-  //     features: [
-  //         {
-  //             description: "Crear Publicación",
-  //             check: true,
-  //         },
-  //         {
-  //             description: "Revisa CV's y datos del postulante",
-  //             check: true,
-  //         },
-  //         {
-  //             description: "Accede a la lista de postulantes",
-  //             check: false,
-  //         },
-  //         {
-  //             description: "Crea/elimina usuarios",
-  //             check: false,
-  //         },
-  //         {
-  //             description: "Accede a datos de contacto",
-  //             check: false,
-  //         },
-  //         {
-  //             description: "Avisos confidenciales",
-  //             check: false,
-  //         },
-  //     ]
-  // },
-  // {
-  //     plan: "Standart",
-  //     price: "540.00",
-  //     recommended: true,
-  //     features: [
-  //         {
-  //             description: "Crear Publicación",
-  //             check: true,
-  //         },
-  //         {
-  //             description: "Revisa CV's y datos del postulante",
-  //             check: true,
-  //         },
-  //         {
-  //             description: "Accede a la lista de postulantes",
-  //             check: false,
-  //         },
-  //         {
-  //             description: "Crea/elimina usuarios",
-  //             check: false,
-  //         },
-  //         {
-  //             description: "Accede a datos de contacto",
-  //             check: false,
-  //         },
-  //         {
-  //             description: "Avisos confidenciales",
-  //             check: false,
-  //         },
-  //     ]
-  // },
-  // {
-  //     plan: "Plan Anual",
-  //     price: "800.00",
-  //     recommended: false,
-  //     features: [
-  //         {
-  //             description: "Crear Publicación",
-  //             check: true,
-  //         },
-  //         {
-  //             description: "Revisa CV's y datos del postulante",
-  //             check: true,
-  //         },
-  //         {
-  //             description: "Accede a la lista de postulantes",
-  //             check: false,
-  //         },
-  //         {
-  //             description: "Crea/elimina usuarios",
-  //             check: false,
-  //         },
-  //         {
-  //             description: "Accede a datos de contacto",
-  //             check: false,
-  //         },
-  //         {
-  //             description: "Avisos confidenciales",
-  //             check: false,
-  //         },
-  //     ]
-  // },
+  {
+      plan: "Corporativo",
+      price: "Contácta a un asesor",
+      recommended: true,
+      features: [
+        {
+          description: "Crear hasta 100 publicaciones",
+          check: true,
+      },
+      {
+        description: "Accede una lista de 200 postulantes preprocesadas por IA",
+        check: true,
+    },
+      {
+          description: "Revisa CV's y datos del postulante",
+          check: true,
+      },
+      {
+        description: "Accede a datos de contacto",
+        check: true,
+    },
+
+      {
+          description: "Crea/elimina usuarios",
+          check: true,
+      },
+
+      {
+          description: "Avisos confidenciales",
+          check: true,
+      },
+      {
+        description: "Acceso a proceso de selección avanzado",
+        check: true,
+    },
+    {
+      description: "Acceso a multiposting de publicación",
+      check: true,
+    },
+      ]
+  },
 ];
 
 export default function SectionPrice(props) {
@@ -148,19 +177,19 @@ export default function SectionPrice(props) {
       <div className={style.content}>
         <div className={style.p}>
           <Title>¿Qué planes ofrecemos?</Title>
-          <p variant="dark">
+          {/* <p variant="dark">
             Prueba la plataforma en demo y coméntanos tu experiencia.
             <br></br>
             <b>
               Suscríbete ahora y sé parte de la primera plataforma digital
               inteligente de reclutamiento.
             </b>
-          </p>
+          </p> */}
         </div>
-        {/* <SubTitle variant="dark">
+        <h3 variant="dark">
           Suscríbete ahora y sé parte de la primera plataforma digital
           inteligente de reclutamiento.
-        </SubTitle> */}
+        </h3>
         <div className={style.cards}>
           {CARDS_DATA.map((item, index) => (
             <Card key={index} {...item} />

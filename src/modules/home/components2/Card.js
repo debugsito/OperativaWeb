@@ -13,34 +13,37 @@ export default function Card({ key, plan, price, features, recommended }) {
   const router = useHistory()
 
   return (
-    <div className={style.containerCard} key={key}>
-      {recommended && (
-        <div className={style.recommended}>
-          <SubTitle variant="light">RECOMENDADO</SubTitle>
-        </div>
-      )}
-      <div className={style.card}>
-        {/* <SubTitle variant="dark">{plan}</SubTitle> */}
-        <h2 className={`${style.textNumber} mt-0 mb-0`}>DEMO</h2>
-        {/* <h3 className={`${style.igv} mt-2`}>DEMO</h3> */}
-        <p>No se requiere tarjeta de crédito, no hay periodo de prueba</p>
-        {features.map((item) => (
-          <div className="display-flex">
-            <img src={item.check ? CheckIcon : BadIcon} alt="" />
-            <p className="m-1">{item.description}</p>
-          </div>
-        ))}
-        <div className="justify-center m-3">
-          <Button variant="info"
-          						onClick={() => router.push("/registro")}
+    // <div className={style.containerCard} key={key}>
+    //   {recommended && (
+    //     <div className={style.recommended}>
+    //       <SubTitle variant="light">RECOMENDADO</SubTitle>
+    //     </div>
+    //   )}
+    //   <div className={style.card}>
+    //     <SubTitle variant="dark">{plan}</SubTitle> 
+    //     <h2 className={`${style.textNumber} mt-0 mb-0`}>DEMO</h2> 
+    //      <h3 className={`${style.igv} mt-2`}>DEMO</h3> 
+    //     <p>No se requiere tarjeta de crédito, no hay periodo de prueba</p> 
+    //      {features.map((item) => (
+    //       <div className="display-flex">
+    //         <img src={item.check ? CheckIcon : BadIcon} alt="" />
+    //         <p className="m-1">{item.description}</p>
+    //       </div>
+    //     ))}
+    //     <div className="justify-center m-3">
+    //       <Button variant="info"
+    //       						onClick={() => router.push("/registro")}
 
-          >Empezar ahora</Button>
-        </div>
-        {/* <div className={style.card}>
+    //       >Empezar ahora</Button>
+    //     </div> 
+
+
+
+        <div className={style.card}>
                 <SubTitle variant="dark">{plan}</SubTitle>
-                <h2 className={`${style.textNumber} mt-0 mb-0`}>S/ {price}</h2>
-                <h3 className={`${style.igv} mt-2`}>+IGV</h3>
-                <p>No se requiere tarjeta de crédito, no hay periodo de prueba</p>
+                <h5 className={`${style.textNumber} mt-0 mb-0`}> {price}</h5>
+                {/* <h5 className={`${style.igv} mt-2`}>+IGV</h5> */}
+                {/* <p>No se requiere tarjeta de crédito, no hay periodo de prueba</p> */}
                 {
                     features.map(item => (
                         <div className="display-flex">
@@ -50,9 +53,12 @@ export default function Card({ key, plan, price, features, recommended }) {
                     ))
                 }
                 <div className="justify-center m-3">
-                    <Button variant="info">Empezar ahora</Button>
-                </div> */}
+                    <Button variant="info"
+                    onClick={() => router.push("/registro/empresa")}
+                    >Empezar ahora</Button>
+                </div>
       </div>
-    </div>
+    
+    
   );
 }
