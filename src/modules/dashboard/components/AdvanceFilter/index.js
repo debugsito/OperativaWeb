@@ -31,18 +31,6 @@ export default function OutlinedChips() {
   const classes = useStyles();
   const { values, resetItem } = useContext(Context);
 
-  const handleDelete = (index) => {
-    console.info("You clicked the delete icon.");
-  };
-
-  const handleClick = () => {
-    console.info("You clicked the Chip.");
-  };
-  
-
-  // const render = Object.values(values).some((item) => item?.active);
-  // if (!render) return null;
-
   const arrayLabel = buildArrayLabels(values)
 
   return (
@@ -60,18 +48,6 @@ export default function OutlinedChips() {
             );
           })
         }
-        {/* {Object.keys(values).map((item, index) => {
-          if (!values[item].active) {
-            return null;
-          }
-          return (
-            <StyleChip
-              key={index}
-              label={values[item].label}
-              onDelete={() => resetItem(item)}
-            />
-          );
-        })} */}
       </div>
     </>
   );
