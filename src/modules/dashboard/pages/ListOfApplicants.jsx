@@ -276,7 +276,10 @@ export default function JobPositionCreatedPage() {
                       size="large"
                       variant="contained"
                       component={Link}
-                      to={`${initRoute}/publicacion/${params.publication_id}/asignar-evaluaciones`}
+                      to={{
+                        pathname: `${initRoute}/publicacion/${params.publication_id}/asignar-evaluaciones`,
+                        state: {title:location?.state?.title}
+                      }}
                       onClick={handleClickAssignEvaluations}
                       disabled={selected.length < 1}
                     >
