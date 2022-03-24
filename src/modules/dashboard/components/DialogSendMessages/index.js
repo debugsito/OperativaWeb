@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 
 import { Button, Dialog, Typography, TextInput } from "../../../shared/components";
@@ -14,23 +14,13 @@ import { service_Dashboard } from "../../../../store/services";
 import { ContextNotification } from "../../context/NotificationAlertContext";
 //Constans
 import { messageError } from "../../utils/notification";
+import { DEFAULT_VALUES_MESSAGE, MESSAGE_STATUS } from "../../constants/Dashboard";
+//Actions
+import { setMessageStatus } from "../../../../store/actions/dashboard/dashboard.action";
 
 const initialValues = {
     subject: "",
     body: "",
-};
-
-const dafaultValues = {
-    subject: "Gracias por postular",
-    body: `Hola Postulante,
- 
-Nuestro departamento de Recursos Humanos te agradece  por habernos permitido contar con tu participación en el proceso de selección, estamos conscientes del valioso espacio de tiempo que nos has brindado para poder conocerte y comprender tus intereses y aspiraciones. Lamentablemente en esta oportunidad no podrás ser considerada para la siguiente etapa.
-    
-Te agradecemos por haber participado en el proceso, deseándote muchos éxitos en el desarrollo de tus actividades.
-     
-Saludos,
-    
-La empresa`,
 };
 
 const useStyles = makeStyles(theme => ({
@@ -42,6 +32,7 @@ const useStyles = makeStyles(theme => ({
 export default function Index({ fill = false, ...props }) {
     const maxLength = 650;
     const classes = useStyles();
+    const dispatch = useDispatch()
     const [openModalSuccess, setOpenModalSuccess] = useState(false)
     const { postulantsSelected } = useSelector(state => state?.dashboard)
     const { notification, setNotification } = useContext(ContextNotification);
@@ -61,13 +52,15 @@ export default function Index({ fill = false, ...props }) {
             return Object.values(temp).every(x => x == "")
     }
     
+    const defaultValues = fill ? DEFAULT_VALUES_MESSAGE : initialValues;
+
     const {
         values,
         errors,
         setErrors,
         handleInputChange,
         disabledButtonState,
-    } = useForm(fill ? dafaultValues : initialValues, true, validate);
+    } = useForm(defaultValues, true, validate);
 
     const handleSendMessage = () => {
         let promises = []
@@ -77,6 +70,7 @@ export default function Index({ fill = false, ...props }) {
         axios.all(promises).then(axios.spread((...responses) => {
             props.onClose()
             setOpenModalSuccess(true)
+            dispatch(setMessageStatus(MESSAGE_STATUS.success))
         }))
         .catch(error => {
             setNotification({ ...notification, ...messageError() });
@@ -111,7 +105,7 @@ export default function Index({ fill = false, ...props }) {
                                         <TextInput
                                             fullWidth
                                             name="body"
-                                            label="Escribre un mensaje"
+                                            label="Escribe un mensaje"
                                             multiline
                                             rows={8}
                                             value={values.body}

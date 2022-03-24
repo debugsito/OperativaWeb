@@ -24,6 +24,7 @@ const initialState = {
     },
     error: "",
     status: 'idle',
+    sent_message:{status:'idle', cod:"00"}
 };
 
 const dashboardReducer = (state = initialState, action) => {
@@ -117,6 +118,11 @@ const dashboardReducer = (state = initialState, action) => {
             return {
                 ...state,
                 requestState: action.payload,
+            };
+        case dashboardType.SET_MESSAGE_STATUS:
+            return {
+                ...state,
+                sent_message: action.payload,
             };
         default:
             return state;

@@ -81,7 +81,6 @@ export default function JobPositionCreatedPage() {
   };
 
   const handleClickCheckbox = (event, id) => {
-    console.log("postulants",id)
     const selectedIndex = selected.indexOf(id);
     let newSelected = [];
 
@@ -314,8 +313,6 @@ export default function JobPositionCreatedPage() {
             openDrawer={openDrawer}
             handleClose={() => setOpenDrawer(false)}
           />
-
-
         </Container>
       </ProviderNotification>
     </ProviderFilter>

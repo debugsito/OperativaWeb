@@ -70,6 +70,11 @@ export const setErrorFetch = (payload) => ({
   payload
 });
 
+export const setMessageStatus = (payload) => ({
+  type: dashboardType.SET_MESSAGE_STATUS,
+  payload
+});
+
 export const getJobsInfo = (params) => {
   return async (dispatch) => {
     try {

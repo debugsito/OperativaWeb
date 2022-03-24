@@ -34,7 +34,7 @@ import { service_Dashboard } from "../../../../store/services";
 
 //Context || conts
 import { ContextNotification } from "../../context/NotificationAlertContext";
-import { POSTULANTS } from "../../constants/Dashboard";
+import { POSTULANTS, MESSAGE_STATUS } from "../../constants/Dashboard";
 import { messageSuccessful, messageError } from "../../utils/notification";
 
 //actions
@@ -86,14 +86,13 @@ const useStyles = makeStyles((theme) => ({
 export default function TableListPostulants({ selected, setSelected, handleClickCheckbox, handleSelectAllClick }) {
   const classes = useStyles();
   const dispatch = useDispatch()
-  const { postulantsByPublicationId, publicationSelected } = useSelector(state => state?.dashboard)
+  const { postulantsByPublicationId, sent_message } = useSelector(state => state?.dashboard)
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("");
   // const [selected, setSelected] = useState([]);
   const [postulants, setPostulants] = useState([]);
-  //[createData("", "", "", [], [], { id: "" })]
   const [openModal, setOpenModal] = useState(false)
   const [openImbox, setOpenImbox] = useState(false)
 
@@ -105,6 +104,13 @@ export default function TableListPostulants({ selected, setSelected, handleClick
   useEffect(() => {
     dispatch(getPostulantsByPublicationId({ publication_id, params: { estado: POSTULANTS.inProgress, page, size: rowsPerPage } }))
   }, [])
+
+  useEffect(() => {
+    console.log("sent_message",sent_message)
+    if(sent_message.status === MESSAGE_STATUS.success.status)
+    console.log("actualizando tabla ....")
+      dispatch(getPostulantsByPublicationId({ publication_id, params: { estado: POSTULANTS.inProgress, page, size: rowsPerPage } }))
+  }, [sent_message])
 
   useEffect(() => {
     if (postulantsByPublicationId.rows) {
