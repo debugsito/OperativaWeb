@@ -21,7 +21,7 @@ import { updateSearchWork } from "../../../store/services/auth/user.service";
 import { Chart, ArcElement } from 'chart.js'
 import { Doughnut } from 'react-chartjs-2';
 import ApplicantLevelComponent from "../components/ApplicantLevelComponent/index"
-import {arrowWhite} from "../../shared/images/postulant/index"
+import { arrowWhite } from "../../shared/images/postulant/index"
 
 Chart.register(ArcElement);
 // var originalDoughnutDraw = Chart.controllers.doughnut.prototype.draw;
@@ -178,7 +178,7 @@ const Applicant = () => {
     };
 
     const gotoCazatrabajo = (event) => {
-        if(user?.account?.job_hunting_account) history.push(`${initRoute}/cazatrabajo/detalle`);
+        if (user?.account?.job_hunting_account) history.push(`${initRoute}/cazatrabajo/detalle`);
         else history.push(`${initRoute}/cazatrabajo`);
     }
 
@@ -208,7 +208,7 @@ const Applicant = () => {
                 <Grid item xs={6} className="pr-2">
                     <div className="container-user-information" style={{ position: 'relative' }}>
 
-                        <div style={user?.account?.job_hunting_account ? { width: '50%'}: {}}>
+                        <div style={user?.account?.job_hunting_account ? { width: '50%' } : {}}>
                             <h4 className="home-title">{user?.account?.user?.fullname}</h4>
                             <p>{`${getNameById(documentsType.documents, user.account.user.document_id)} ${user?.account?.user?.document_number}`}</p>
                         </div>
@@ -228,23 +228,23 @@ const Applicant = () => {
                                 backgroundposition: 'center center'
                             }
                             }
-                           
-                        > <h3 style={{color:' white', fontWeigth: 'bold',fontSize: '18px'}}> El juego del <br/>cazatrabajo</h3></div>
-                        <div className="row-card ">
-                            <h6 style={{ fontSize: '11px' }} className="home-title">Búsqueda de trabajo</h6>
+
+                        > <h3 style={{ color: ' white', fontWeigth: 'bold', fontSize: '18px' }}> El juego del <br />cazatrabajo</h3></div>
+                        <div className="row-card">
+                            <h6 style={{ fontSize: '15px' }} className="home-title">Búsqueda de trabajo</h6>
                             <div className="container-switch">
-                                <span>Inactivo</span>
+                                <b><span>Inactivo</span></b>
                                 <label className="switch">
                                     <input type="checkbox"
                                         checked={searchWork}
                                         onChange={handleSearchWorkChange} />
                                     <span className="slider round" />
                                 </label>
-                                <span>Activo</span>
+                                <b><span>Activo</span></b>
                             </div>
-                            <p className="small-text-config">
-                                <small>Informa a los reclutadores si estás buscando trabajo.</small>
-                            </p>
+                            <span className="small-text-config">
+                                Informa a los reclutadores si estás buscando trabajo.
+                            </span>
 
                         </div>
                     </div>

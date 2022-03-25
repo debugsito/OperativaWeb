@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
 const ApplicantLevelComponent= (props) =>{
     const classes = useStyles();
     const { job_hunting_account } = props;
-    const size = 95;
+    const size = 85;
 
     const getImageByLevel = (level_id) => {
         switch (level_id) {
@@ -43,7 +43,7 @@ const ApplicantLevelComponent= (props) =>{
                 </div>
                 <div className="container-level">
                     {getImageByLevel(job_hunting_account?.level?.id)}
-                    <span>Nivel {job_hunting_account?.level?.name}</span>
+                    <span className="level-text">Nivel {job_hunting_account?.level?.name}</span>
                 </div>
             </div> : <></>
         }
