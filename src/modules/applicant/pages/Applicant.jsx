@@ -286,7 +286,7 @@ const Applicant = () => {
                         </Grid>
                     </div>
                 </Grid>
-                <Grid item xs={4} className="mt-4">
+                <Grid item xs={4} className="mt-4 pr-2">
                     <div>
                         <h4 className="home-title">Este es tu avance</h4>
                         <p>
