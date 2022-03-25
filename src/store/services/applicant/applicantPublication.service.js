@@ -57,6 +57,22 @@ const getMedicalTest = async (publication_account_id) => {
     return await api.get(`/publication_account_medical_test/${publication_account_id}`);
 }
 
+const getJobHutingActions  = async () => {
+    return await api.get(`/job_huntings/actions`);
+}
+
+const getJobHuntingAccount = async () => {
+    return await api.get(`/job_huntings/account`);
+}
+
+const storeJobHutingAccount = async () => {
+    return await api.post(`/job_huntings/account`);
+}
+
+const completeAssingFormAccont  = async (id)=> {
+    return await api.post(`/form/assign/publication/account/complete/${id}`);
+}
+
 export default {
     getApplicantPublication,
     setNotificacionPostulant,
@@ -70,5 +86,9 @@ export default {
     getFormsByPubAccount,
     upateForm,
     getInterview,
-    getMedicalTest
+    getMedicalTest,
+    getJobHutingActions,
+    getJobHuntingAccount,
+    storeJobHutingAccount,
+    completeAssingFormAccont
 }

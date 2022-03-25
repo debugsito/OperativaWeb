@@ -6,9 +6,11 @@ const initialState = {
     publicationSelected: "",
     publicationAccountSelected: {},
     publicationsSearch: [],
+    applicantJobHuntingActions : [],
     messages : [],
     messageDetail : [],
     questions : [],
+    selectedQuestion : {},
     interview : {},
     medical_test : {},
     fetch: {
@@ -77,6 +79,16 @@ const applicationReducer = (state = initialState, action) => {
             return {
                 ...state,
                 interview : action.payload
+            }
+        case ApplicantType.SET_APPLICANT_JOB_HUNTING_ACTIONS :
+            return {
+                ...state,
+                applicantJobHuntingActions: action.payload
+            }
+        case ApplicantType.SET_APPLICANT_SELECTED_QUESTION:
+            return {
+                ...state,
+                selectedQuestion : action.payload
             }
         default:
             return state;

@@ -7,6 +7,7 @@ import { Button, Modal, SnackbarsAlert, TextCustom, Typography } from "../../sha
 
 //imgs
 import { closeIcon, ImagePostular, ImageCandidato } from "../../shared/images";
+import { caza2 } from '../../shared/images/postulant'
 
 //Utils
 import { getNameById } from "../../shared/utils";
@@ -19,6 +20,8 @@ import { setUser, signOut } from "../../../store/actions/auth/auth.action";
 import { updateSearchWork } from "../../../store/services/auth/user.service";
 import { Chart, ArcElement } from 'chart.js'
 import { Doughnut } from 'react-chartjs-2';
+import ApplicantLevelComponent from "../components/ApplicantLevelComponent/index"
+import {arrowWhite} from "../../shared/images/postulant/index"
 
 Chart.register(ArcElement);
 // var originalDoughnutDraw = Chart.controllers.doughnut.prototype.draw;
@@ -82,9 +85,6 @@ const Applicant = () => {
     })
 
     const { horizontal, vertical, open, message, severity } = notification;
-
-    console.log(user);
-    console.log(user.account);
 
     const dataCv = {
         labels: ["Completado", "No Completado"],
@@ -177,6 +177,10 @@ const Applicant = () => {
         history.push(`${initRoute}/formulario-postular`);
     };
 
+    const gotoCazatrabajo = (event) => {
+        if(user?.account?.job_hunting_account) history.push(`${initRoute}/cazatrabajo/detalle`);
+        else history.push(`${initRoute}/cazatrabajo`);
+    }
 
     const goToCandidate = (event) => {
         history.push(`${initRoute}/postulaciones`);
@@ -202,17 +206,32 @@ const Applicant = () => {
                     </div>
                 </Grid>
                 <Grid item xs={6} className="pr-2">
-                    <div className="container-user-information">
-                        <div>
+                    <div className="container-user-information" style={{ position: 'relative' }}>
+
+                        <div style={user?.account?.job_hunting_account ? { width: '50%'}: {}}>
                             <h4 className="home-title">{user?.account?.user?.fullname}</h4>
                             <p>{`${getNameById(documentsType.documents, user.account.user.document_id)} ${user?.account?.user?.document_number}`}</p>
                         </div>
+                        <ApplicantLevelComponent
+                            style={{ position: 'absolute' }}
+                            job_hunting_account={user?.account?.job_hunting_account} />
                     </div>
                 </Grid>
-                <Grid item xs={6} className="pl-2">
-                    <div className="container-work">
-                        <div>
-                            <h4 className="home-title mb-1">Búsqueda de trabajo</h4>
+                <Grid container xs={6} className="pl-2">
+
+                    <div className="container-card">
+                        <div className="row-card" onClick={gotoCazatrabajo}
+                            style={{
+                                backgroundImage: `url(${caza2})`,
+                                backgroundSize: 'cover',                     /* <------ */
+                                backgroundRepeat: 'no-repeat',
+                                backgroundposition: 'center center'
+                            }
+                            }
+                           
+                        > <h3 style={{color:' white', fontWeigth: 'bold',fontSize: '18px'}}> El juego del <br/>cazatrabajo</h3></div>
+                        <div className="row-card ">
+                            <h6 style={{ fontSize: '11px' }} className="home-title">Búsqueda de trabajo</h6>
                             <div className="container-switch">
                                 <span>Inactivo</span>
                                 <label className="switch">
@@ -223,11 +242,13 @@ const Applicant = () => {
                                 </label>
                                 <span>Activo</span>
                             </div>
-                            <p className="text-left">
+                            <p className="small-text-config">
                                 <small>Informa a los reclutadores si estás buscando trabajo.</small>
                             </p>
+
                         </div>
                     </div>
+
                 </Grid>
                 <Grid item xs={12} onClick={goToPostulateForm}>
                     <div className="card-home mt-4">
@@ -242,7 +263,8 @@ const Applicant = () => {
                                 </p>
                             </div>
                         </Grid>
-                        <Grid item xs={3} className="fl">
+                        <Grid item xs={3} className="fl pl-1">
+                            <img src={arrowWhite} alt="" width="50" height="50" />
                         </Grid>
                     </div>
                 </Grid>
@@ -259,7 +281,8 @@ const Applicant = () => {
                                 </p>
                             </div>
                         </Grid>
-                        <Grid item xs={3} className="fl">
+                        <Grid item xs={3} className="fl pl-1">
+                            <img src={arrowWhite} alt="" width="50" height="50" />
                         </Grid>
                     </div>
                 </Grid>
@@ -273,20 +296,20 @@ const Applicant = () => {
                     </div>
                 </Grid>
                 <Grid item xs={4} className="pr-2 mt-4">
-                    <div className="card-cv"  style={{ position: 'relative' }}>
+                    <div className="card-cv" style={{ position: 'relative' }}>
                         <span><b>Tu CV</b></span>
                         <Doughnut data={dataCv} />
                         <div style={{ position: 'absolute', width: '100%', top: '50%', left: 0, textAlign: 'center' }}>
-                            <span><b>{user.account.cv_percent} %</b></span> 
+                            <span><b>{user.account.cv_percent} %</b></span>
                         </div>
                     </div>
                 </Grid>
                 <Grid item xs={4} className="pl-2 mt-4">
-                    <div className="card-cv" style={{ position: 'relative', textAlign:'center' }}>
-                    <span><b>Cuestionario</b></span> 
+                    <div className="card-cv" style={{ position: 'relative', textAlign: 'center' }}>
+                        <span><b>Cuestionario</b></span>
                         <Doughnut data={dataCuestionario} />
                         <div style={{ position: 'absolute', width: '100%', top: '50%', left: 0, textAlign: 'center' }}>
-                            <span><b>{user.account.questionnaire_percent} %</b></span> 
+                            <span><b>{user.account.questionnaire_percent} %</b></span>
                         </div>
                     </div>
                 </Grid>
@@ -382,7 +405,7 @@ const Applicant = () => {
                 handleClose={handleClose}
                 severity={severity}
             />
-        </Container>
+        </Container >
     )
 }
 

@@ -11,7 +11,9 @@ import CompletedApplication from "../components/CompletedApplication/CompletedAp
 import {SessionRoutes} from "../../shared/libs/sessionRoutes";
 import {NavigateBefore} from "@material-ui/icons";
 import { useParams } from "react-router-dom";
+import { arrow } from '../../shared/images/postulant/index'
 const TABS = [{label: "EN PROCESO"}, {label: "FINALIZADO"}]
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -99,9 +101,7 @@ const Applications = () => {
         <Container className="applicant-container">
             <Grid container spacing={0}>
                 <Grid item xs={12} className="mb-2">
-                    <a className="btn-logout">
-                        <NavigateBefore onClick={setBefore}/>
-                    </a>
+                <img src={arrow} alt="" onClick={setBefore} />
                 </Grid>
             </Grid>
             <AppBar position="static" classes={{colorPrimary: classes.appBarColorPrimary}} className="Appbar-tabs">

@@ -4,7 +4,7 @@ import { SessionRoutes } from "../../shared/libs/sessionRoutes";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getApplicantQuestions, setApplicantQuestions } from "../../../store/actions/applicant/applicant.action";
+import { setApplicantSelectedQuestion } from "../../../store/actions/applicant/applicant.action";
 import { Button } from "../../shared/components";
 import '../styles/postulate-form.css'
 import '../styles/dots.css'
@@ -21,6 +21,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Checkbox from '@material-ui/core/Checkbox'
 import FormGroup from '@material-ui/core/FormGroup';
+import { arrow } from '../../shared/images/postulant';
+import { getAccount } from '../../../store/actions/auth/auth.middleware'
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -34,7 +36,22 @@ const useStyles = makeStyles((theme) => ({
     titleHeader: {
         color: '#5D5FEF'
     },
-
+    applicantContainer: {
+        background: '#f7f7f7',
+        padding: '1rem',
+    },
+    headerQuestion: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        width: '100%'
+    },
+    headerQuestionTitle: {
+        width: '100%',
+        textAlign: 'center',
+        alignItems: 'center',
+        flexDirection: 'column'
+    }
 }));
 
 const ApplicantQuestion = () => {
@@ -43,7 +60,8 @@ const ApplicantQuestion = () => {
     const history = useHistory()
     const { publication_account_id } = useParams();
     const initRoute = SessionRoutes().initRoute;
-    const { applicant: { questions } } = useSelector(state => state);
+    const { applicant: { selectedQuestion: questions } } = useSelector(state => state);
+
     const [activeStep, setActiveStep] = useState(0);
     const [success, setSuccess] = useState(false);
 
@@ -55,16 +73,8 @@ const ApplicantQuestion = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
 
-    useEffect(() => {
-        getPreguntas();
-    }, []);
-
-    const getPreguntas = async () => {
-        dispatch(getApplicantQuestions(publication_account_id))
-    }
-
     const setBefore = () => {
-        history.push(`${initRoute}/evaluaciones/${publication_account_id}`)
+        history.push(`${initRoute}/question/list/${publication_account_id}`)
     };
 
     const sendForm = async () => {
@@ -90,7 +100,12 @@ const ApplicantQuestion = () => {
         try {
             const response = await service_Applicant.upateForm(data);
             if (response.status == 200) {
-                setSuccess(true)
+                const completeReponse = await service_Applicant.completeAssingFormAccont(questions.id);
+                if(completeReponse.status ==200){
+                    console.log(completeReponse);
+                    dispatch(getAccount())
+                    setSuccess(true)
+                }
             }
         } catch (error) {
             console.log(error)
@@ -111,7 +126,7 @@ const ApplicantQuestion = () => {
             questionAnswer = Object.assign(questionAnswer, { value: value })
 
         }
-        dispatch(setApplicantQuestions(questions))
+        dispatch(setApplicantSelectedQuestion(questions))
     }
 
     const getValue = () => {
@@ -145,7 +160,7 @@ const ApplicantQuestion = () => {
                 value: value.toString()
             })
         }
-        dispatch(setApplicantQuestions(questions))
+        dispatch(setApplicantSelectedQuestion(questions))
     }
 
     const getRadioValue = () => {
@@ -179,8 +194,19 @@ const ApplicantQuestion = () => {
                 })
             }
         })
-        dispatch(setApplicantQuestions(questions))
+        dispatch(setApplicantSelectedQuestion(questions))
 
+    }
+
+    const getTitle = () => {
+        switch (questions?.form_type) {
+            case 1:
+                return <h3>Preguntas adicionales</h3>;
+            case 2:
+                return <h3>Preguntas de evaluación de experiencia</h3>
+            default:
+                return <></>
+        }
     }
 
 
@@ -235,114 +261,126 @@ const ApplicantQuestion = () => {
 
     return (
         <>
-            {!success ? <Container className={classes.container}>
-                {questions?.form?.questions.length > 0 ? <Grid container spacing={0} style={{ marginTop: '20px' }}>
-                    <Card style={{ width: '100%' }}>
-                        <CardHeader
-                            title={
-                                <React.Fragment>
-                                    <Typography
-                                        variant="h6"
-                                        letiant="body2"
-                                        className={classes.titleHeader}
-                                        color="textPrimary"
-                                    >
-                                        Pregunta {`${activeStep + 1}/${questions?.form?.questions?.length}`}
-                                    </Typography>
-
-                                    <Typography
-                                        component="span"
-                                        letiant="body2"
-                                        color="textPrimary"
-                                    >
-                                        {questions?.form?.questions[activeStep].text}
-                                    </Typography>
-
-                                </React.Fragment>}
-                        >
-
-                        </CardHeader>
-
-                        <CardContent>
-                            <Grid item xs={12} >
-                                {buildQuestion()}
-                            </Grid>
-
-                        </CardContent>
-                        <CardActions >
-                            <Grid item xs={12} container justifyContent="center" alignItems="center" >
-                                <nav className="carousel">
-
-                                    {questions?.form?.questions.map((item, i) => (
-                                        <>
-                                            <input id={`carousel-item-${i}`} key={`carousel-input-${item.id}`} type="radio" name="carousel-dots" onChange={event => goStep(i)} checked={(i == activeStep) ? true : false} />
-                                            <label for={`carousel-item-${i}`} key={`carousel-label-${item.id}`} onClick={event => goStep(i)} >Go to item {i}</label>
-                                        </>
-                                    ))}
-                                </nav>
-                            </Grid>
-                        </CardActions>
-
-                    </Card>
-
-                    <Grid item xs={12} style={{ padding: '20px' }}>
-                        <Grid container spacing={2} >
-                            <Grid container xs spacing={0} >
-                                <Button style={{ width: '100%' }} variant="outlined" onClick={setBefore}>CANCELAR</Button>
-
-                            </Grid>
-                            <Grid container xs spacing={0} >
-                                {activeStep + 1 == questions?.form?.questions.length ? <Button style={{ width: '100%' }} variant="contained" onClick={sendForm}>ENVIAR</Button>
-                                    : <Button style={{ width: '100%' }} variant="contained" onClick={handleNext}>CONTINUAR</Button>
-                                }
-                            </Grid>
-
-                        </Grid>
+            <Container className={classes.applicantContainer}>
+                <Grid container spacing={0}>
+                    <Grid item xs={12} className={classes.headerQuestion}>
+                        <img src={arrow} alt="" onClick={setBefore} />
+                        <div className={classes.headerQuestionTitle}>
+                            <h3> {getTitle()}</h3>
+                        </div>
                     </Grid>
+                    <Grid container spacing={0}>
+                        {!success ? <Container className={classes.container}>
+                            {questions?.form?.questions.length > 0 ? <Grid container spacing={0} style={{ marginTop: '20px' }}>
+                                <Card style={{ width: '100%' }}>
+                                    <CardHeader
+                                        title={
+                                            <React.Fragment>
+                                                <Typography
+                                                    variant="h6"
+                                                    letiant="body2"
+                                                    className={classes.titleHeader}
+                                                    color="textPrimary"
+                                                >
+                                                    Pregunta {`${activeStep + 1}/${questions?.form?.questions?.length}`}
+                                                </Typography>
 
+                                                <Typography
+                                                    component="span"
+                                                    letiant="body2"
+                                                    color="textPrimary"
+                                                >
+                                                    {questions?.form?.questions[activeStep].text}
+                                                </Typography>
 
-                </Grid> : <></>}
-            </Container> :
-                <Container className={classes.container}>
-                    <Grid item xs={12} className="mb-2" style={{ marginTop: '20px' }}>
-                        <Grid container spacing={0} justifyContent="center">
-                            <Card >
-                                <Grid item xs={12} style={{ textAlign: 'center', margin: '30px' }}>
-                                    <img src={CheckSvg} alt="check"></img>
-                                    <CardHeader style={{ textAlign: 'center' }} title={
-                                        <React.Fragment>
-                                            <Typography
-                                                variant="h4"
-                                                component="h4"
-                                                color="textPrimary"
-                                            >
-                                                Respuestas Enviadas
-                                            </Typography>
-                                        </React.Fragment>
-                                    } />
+                                            </React.Fragment>}
+                                    >
 
-                                    <CardContent style={{ textAlign: 'center' }}>
+                                    </CardHeader>
+
+                                    <CardContent>
                                         <Grid item xs={12} >
-                                            <Typography variant="body2" color="textSecondary" component="p">
-
-                                                Tus respuestas fueron enviadas con éxito, pronto tendras noticias del reclutador.
-                                            </Typography>
-
+                                            {buildQuestion()}
                                         </Grid>
+
                                     </CardContent>
-                                    <CardActions>
-                                        <Grid item xs={12}>
-                                            <Grid container spacing={0} direction='row' justifyContent="center">
-                                                <Button variant="contained" size="large" onClick={setBefore}>Cerrar</Button>
-                                            </Grid>
+                                    <CardActions >
+                                        <Grid item xs={12} container justifyContent="center" alignItems="center" >
+                                            <nav className="carousel">
+
+                                                {questions?.form?.questions.map((item, i) => (
+                                                    <>
+                                                        <input id={`carousel-item-${i}`} key={`carousel-input-${item.id}`} type="radio" name="carousel-dots" onChange={event => goStep(i)} checked={(i == activeStep) ? true : false} />
+                                                        <label for={`carousel-item-${i}`} key={`carousel-label-${item.id}`} onClick={event => goStep(i)} >Go to item {i}</label>
+                                                    </>
+                                                ))}
+                                            </nav>
                                         </Grid>
                                     </CardActions>
+
+                                </Card>
+
+                                <Grid item xs={12} style={{ padding: '20px' }}>
+                                    <Grid container spacing={2} >
+                                        <Grid container xs spacing={0} >
+                                            <Button style={{ width: '100%' }} variant="outlined" onClick={setBefore}>CANCELAR</Button>
+
+                                        </Grid>
+                                        <Grid container xs spacing={0} >
+                                            {activeStep + 1 == questions?.form?.questions.length ? <Button style={{ width: '100%' }} variant="contained" onClick={sendForm}>ENVIAR</Button>
+                                                : <Button style={{ width: '100%' }} variant="contained" onClick={handleNext}>CONTINUAR</Button>
+                                            }
+                                        </Grid>
+
+                                    </Grid>
                                 </Grid>
-                            </Card>
-                        </Grid>
+
+
+                            </Grid> : <></>}
+                        </Container> :
+                            <Container className={classes.container}>
+                                <Grid item xs={12} className="mb-2" style={{ marginTop: '20px' }}>
+                                    <Grid container spacing={0} justifyContent="center">
+                                        <Card >
+                                            <Grid item xs={12} style={{ textAlign: 'center', margin: '30px' }}>
+                                                <img src={CheckSvg} alt="check"></img>
+                                                <CardHeader style={{ textAlign: 'center' }} title={
+                                                    <React.Fragment>
+                                                        <Typography
+                                                            variant="h4"
+                                                            component="h4"
+                                                            color="textPrimary"
+                                                        >
+                                                            Respuestas Enviadas
+                                                        </Typography>
+                                                    </React.Fragment>
+                                                } />
+
+                                                <CardContent style={{ textAlign: 'center' }}>
+                                                    <Grid item xs={12} >
+                                                        <Typography variant="body2" color="textSecondary" component="p">
+
+                                                            Tus respuestas fueron enviadas con éxito, pronto tendras noticias del reclutador.
+                                                        </Typography>
+
+                                                    </Grid>
+                                                </CardContent>
+                                                <CardActions>
+                                                    <Grid item xs={12}>
+                                                        <Grid container spacing={0} direction='row' justifyContent="center">
+                                                            <Button variant="contained" size="large" onClick={setBefore}>Cerrar</Button>
+                                                        </Grid>
+                                                    </Grid>
+                                                </CardActions>
+                                            </Grid>
+                                        </Card>
+                                    </Grid>
+                                </Grid>
+                            </Container>
+                        }
                     </Grid>
-                </Container>
-            }
+                </Grid>
+            </Container>
         </>
     )
 

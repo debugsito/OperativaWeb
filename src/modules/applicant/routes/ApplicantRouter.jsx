@@ -20,6 +20,9 @@ import ApplicantQuestion from '../pages/ApplicantQuestion'
 import ApplicantMedicalTest from '../pages/ApplicantMedicalTest'
 import ApplicantInterview from '../pages/ApplicantInterview';
 import ApplicantPublicationDetail from '../pages/ApplicantPublicationDetail';
+import ApplicantJobHuntingDetail from '../pages/ApplicantJobHuntingDetail';
+import ApplicantJobHunting from '../pages/ApplicantJobHunting';
+import ApplicantQuestionList from '../pages/ApplicantQuestionList';
 
 const MyAccountRouter = () => {
     return (
@@ -100,6 +103,21 @@ const MyAccountRouter = () => {
                     exact
                     path={ApplicantRoutes[14]}
                     component={ApplicantPublicationDetail} />
+                <PrivateRoute
+                    needSession
+                    exact
+                    path={ApplicantRoutes[15]}
+                    component={ApplicantJobHuntingDetail} />
+                <PrivateRoute
+                    needSession
+                    exact
+                    path={ApplicantRoutes[16]}
+                    component={ApplicantJobHunting} />
+                <PrivateRoute
+                    needSession
+                    exact
+                    path={ApplicantRoutes[17]}
+                    component={ApplicantQuestionList} />
             </Switch>
         </>
     );

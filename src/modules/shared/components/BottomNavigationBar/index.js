@@ -2,19 +2,23 @@ import {makeStyles} from '@material-ui/core';
 import {Home, AccountCircle, Widgets} from '@material-ui/icons';
 import {useHistory} from "react-router-dom";
 import {SessionRoutes} from "../../libs/sessionRoutes";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
     toolbar: {
         position: 'fixed',
         bottom: '.5rem',
         width: '100%',
-        padding: '0 .5rem'
+        padding: '0 .5rem',
         // margin: '0 .5rem'
     },
     containerToolbar: {
         borderRadius: '20px',
         backgroundColor: 'var(--titleColor)',
         padding: '.5rem 2rem'
+    },
+    playing : {
+        backgroundColor : "#5D5FEF"
     },
     containerToolbarIcon: {
         display: 'flex',
@@ -34,6 +38,7 @@ const BottomNavigationBar = () => {
     const classes = useStyles();
     const history = useHistory()
     const initRoute = SessionRoutes().initRoute;
+    const { auth: { user } } = useSelector(state => state);
 
     const goToPostulaciones = (event) => {
         history.push(`${initRoute}/postulaciones`);
@@ -50,7 +55,7 @@ const BottomNavigationBar = () => {
     return (
         <>
             <div className={classes.toolbar}>
-                <div className={classes.containerToolbar}>
+                <div className={`${classes.containerToolbar} ${user?.account?.job_hunting_account? classes.playing: ''}`}>
                     <div className={classes.containerToolbarIcon}>
                         <a onClick={goToHome} className={classes.iconsToolbar}>
                             <Home/>

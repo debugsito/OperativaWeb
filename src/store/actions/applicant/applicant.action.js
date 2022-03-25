@@ -19,11 +19,11 @@ export const setPublicationSelected = (payload) => ({
 });
 
 export const setPublicationAccountSelected = (payload) => ({
-  type : ApplicantType.SET_PUBLICATION_ACCOUNT_SELECTED,
+  type: ApplicantType.SET_PUBLICATION_ACCOUNT_SELECTED,
   payload
 })
 
-export const setPublicationSearch= (payload) => ({
+export const setPublicationSearch = (payload) => ({
   type: ApplicantType.SET_PUBLICATIONS_SEARCH,
   payload
 })
@@ -35,31 +35,41 @@ export const setStatus = (payload) => ({
 
 export const setApplicantMessages = (payload) => ({
   type: ApplicantType.SET_APPLICANT_MESSAGES,
-  payload 
+  payload
 })
 
-export const setApplicantMessageDetail = (payload) => ( {
-  type : ApplicantType.SET_APPLICANT_MESSAGE_DETAIL,
-  payload 
+export const setApplicantMessageDetail = (payload) => ({
+  type: ApplicantType.SET_APPLICANT_MESSAGE_DETAIL,
+  payload
 })
 
-export const setApplicantQuestions = (payload) =>( {
+export const setApplicantQuestions = (payload) => ({
   type: ApplicantType.SET_APPLICANT_QUESTIONS,
   payload
 })
 
-export const setApplicantInterview =(payload) => ({
+export const setApplicantInterview = (payload) => ({
   type: ApplicantType.SET_APPLICANT_INTERVIEW,
   payload
 })
 
-export const setApplicantMedicalTest =(payload)=> ({
+export const setApplicantMedicalTest = (payload) => ({
   type: ApplicantType.SET_APPLICANT_MEDICAL_TEST,
   payload
 })
 
+export const setApplicantJobHuntingActions = (payload) => ({
+  type: ApplicantType.SET_APPLICANT_JOB_HUNTING_ACTIONS,
+  payload
+})
 
-export const getPublicationSearch =  ( query) => {
+export const setApplicantSelectedQuestion = (payload) => ({
+  type : ApplicantType.SET_APPLICANT_SELECTED_QUESTION,
+  payload
+})
+
+
+export const getPublicationSearch = (query) => {
   return async (dispatch) => {
     try {
       console.log(query)
@@ -87,8 +97,8 @@ export const getPublicationSearch =  ( query) => {
     }
   };
 }
- 
-export const getPublicationAccountById = ( id) => {
+
+export const getPublicationAccountById = (id) => {
   return async (dispatch) => {
     try {
       const response = await service_Applicant.getApplicantPublicationById(id);
@@ -206,10 +216,10 @@ export const getApplicantQuestions = (publication_account_id) => {
   return async (dispatch) => {
     try {
       const response = await service_Applicant.getFormsByPubAccount(publication_account_id);
-      if(response.data && response.data.publicationAccountForms && response.data.publicationAccountForms.length>0){
-        dispatch(setApplicantQuestions(response.data.publicationAccountForms[0]));
-      
-      }else{
+      if (response.data && response.data.publicationAccountForms && response.data.publicationAccountForms.length > 0) {
+        dispatch(setApplicantQuestions(response.data.publicationAccountForms));
+
+      } else {
         dispatch(setApplicantQuestions([]));
       }
 
@@ -233,16 +243,15 @@ export const getApplicantQuestions = (publication_account_id) => {
       }
     }
   }
-}
+};
 
-
-export const getApplicantInterview = (publication_account_id)=> {
+export const getApplicantInterview = (publication_account_id) => {
   return async (dispatch) => {
     try {
       const response = await service_Applicant.getInterview(publication_account_id);
-      if(response.data && response.status==200){
+      if (response.data && response.status == 200) {
         dispatch(setApplicantInterview(response.data.data));
-      }else{
+      } else {
         dispatch(setApplicantInterview({}));
       }
 
@@ -265,16 +274,15 @@ export const getApplicantInterview = (publication_account_id)=> {
       }
     }
   }
-}
+};
 
-
-export const getApplicantMedicalTest= (publication_account_id)=> {
+export const getApplicantMedicalTest = (publication_account_id) => {
   return async (dispatch) => {
     try {
       const response = await service_Applicant.getMedicalTest(publication_account_id);
-      if(response.data && response.status==200){
+      if (response.data && response.status == 200) {
         dispatch(setApplicantMedicalTest(response.data.data));
-      }else{
+      } else {
         dispatch(setApplicantMedicalTest({}));
       }
 
@@ -297,4 +305,36 @@ export const getApplicantMedicalTest= (publication_account_id)=> {
       }
     }
   }
+};
+
+export const getApplicantJobHuntingActions = () => {
+  return async (dispatch) => {
+    try {
+      const response = await service_Applicant.getJobHutingActions();
+      if (response.data && response.status == 200) {
+        dispatch(setApplicantJobHuntingActions(response.data.data));
+      } else {
+        dispatch(setApplicantJobHuntingActions([]));
+      }
+
+    } catch (error) {
+      dispatch(setApplicantJobHuntingActions([]));
+      if (!error.response) {
+        dispatch(setPublicationAccountError("Ha ocurrido un error interno"));
+      } else {
+        if (!error.response) {
+          dispatch(setPublicationAccountError("Ha ocurrido un error interno."));
+        } else {
+          if (error.response.status === 401) {
+            dispatch(setPublicationAccountError(error.response.data.message));
+          } else if (error.response.status === 409) {
+            dispatch(setPublicationAccountError("La cuenta ya existe. Por favor Iniciar sesión."));
+          } else {
+            dispatch(setPublicationAccountError("Ha ocurrido un error interno."));
+          };
+        }
+      }
+    }
+  }
 }
+

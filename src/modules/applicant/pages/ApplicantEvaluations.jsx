@@ -57,7 +57,7 @@ const ApplicantEvaluations = () => {
                     {publicationAccountSelected?.questions ? <ApplicantOptionForm title="Preguntas"
                         content="Evaluación de experiencia
                              Preguntas adicionales"
-                        route={`${initRoute}/question/${publication_account_id}`}
+                        route={`${initRoute}/question/list/${publication_account_id}`}
                         color={'#4E51FE'}
                     /> : <></>}
 

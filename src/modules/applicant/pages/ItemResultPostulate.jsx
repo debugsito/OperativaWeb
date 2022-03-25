@@ -1,14 +1,17 @@
-import {Container, Dialog, Grid, makeStyles, Typography} from "@material-ui/core";
-import {NavigateBefore} from "@material-ui/icons";
-import React, {useEffect} from "react";
-import {SessionRoutes} from "../../shared/libs/sessionRoutes";
-import {useHistory} from "react-router-dom";
-import {Button} from "../../shared/components";
+import { Container, Dialog, Grid, makeStyles, Typography } from "@material-ui/core";
+import { NavigateBefore } from "@material-ui/icons";
+import React, { useEffect } from "react";
+import { SessionRoutes } from "../../shared/libs/sessionRoutes";
+import { useHistory } from "react-router-dom";
+import { Button } from "../../shared/components";
 import '../styles/postulate-form.css';
 import MuiDialogContent from '@material-ui/core/DialogContent';
-import {withStyles} from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
 import { useParams } from "react-router-dom";
-import {service_Applicant} from "../../../store/services";
+import { service_Applicant } from "../../../store/services";
+import { useSelector, useDispatch } from "react-redux";
+import { getAccount } from '../../../store/actions/auth/auth.middleware'
+
 
 function rand() {
     return Math.round(Math.random() * 20) - 10;
@@ -34,6 +37,7 @@ const useStyles = makeStyles(theme => ({
 
 
 const ItemResultPostulate = () => {
+    const dispatch = useDispatch();
     const classes = useStyles();
     const history = useHistory()
     const initRoute = SessionRoutes().initRoute;
@@ -50,16 +54,16 @@ const ItemResultPostulate = () => {
     const getAnuncio = async () => {
         const response = await service_Applicant.detallePublicacion(id);
         let pub = response.data.publication;
-        if(pub){
-            pub.description =  isJsonString(pub?.description) ? JSON.parse(pub?.description) : pub.description;
-            pub.description_text = ( Array.isArray(pub.description )? pub.description[0].children[0].text : '');
-            pub.requirements = isJsonString(pub?.requirements) ? JSON.parse(pub?.requirements): pub?.requirements;
+        if (pub) {
+            pub.description = isJsonString(pub?.description) ? JSON.parse(pub?.description) : pub.description;
+            pub.description_text = (Array.isArray(pub.description) ? pub.description[0].children[0].text : '');
+            pub.requirements = isJsonString(pub?.requirements) ? JSON.parse(pub?.requirements) : pub?.requirements;
             console.log(pub);
             setData(pub);
         }
     };
 
-    const isJsonString = (str)=> {
+    const isJsonString = (str) => {
         try {
             JSON.parse(str);
         } catch (e) {
@@ -74,7 +78,9 @@ const ItemResultPostulate = () => {
 
     const handleOpen = async () => {
         const response = await service_Applicant.sendApplication(id);
-        console.log(response);
+        if (response.status == 200) {
+            dispatch(getAccount())
+        }
         setOpen(true);
     };
 
@@ -88,7 +94,7 @@ const ItemResultPostulate = () => {
                 <Grid container spacing={0}>
                     <Grid item xs={12} className="mb-2">
                         <a className="btn-logout">
-                            <NavigateBefore onClick={setBefore}/>
+                            <NavigateBefore onClick={setBefore} />
                         </a>
                     </Grid>
                     <Grid item xs={12} className="mb-2">
@@ -97,7 +103,7 @@ const ItemResultPostulate = () => {
                                 <div className="container-header">
                                     <h4 className="title">Detalles del aviso</h4>
                                     <Button variant="contained" color="secondary" size="large"
-                                            onClick={handleOpen}>
+                                        onClick={handleOpen}>
                                         Postular
                                     </Button>
                                 </div>
@@ -112,7 +118,7 @@ const ItemResultPostulate = () => {
                                     <p><b>Descripción</b></p>
                                     <p>
                                         {data.description_text}
-                                        <br/>
+                                        <br />
                                         Vacante Disponible: REPARTIDORES TIEMPO COMPLETO.
                                     </p>
                                 </div>
@@ -123,8 +129,8 @@ const ItemResultPostulate = () => {
             </Container>
 
             <Dialog onClose={handleClose} aria-labelledby="signin-dialog" open={open}
-                    fullWidth
-                    maxWidth="xs"
+                fullWidth
+                maxWidth="xs"
             >
                 <MuiDialogContent dividers>
                     <Text variant="subtitle1">Postulación enviada</Text>

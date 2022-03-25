@@ -1,0 +1,51 @@
+.container-points {
+    background: #fff;
+    border-radius: 50%;
+    width: 62px;
+    height: 62px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    background-color: #FFE70D;
+    position: absolute;
+    top: -45px;
+    left: 40px;
+    font-weight: bold;
+    z-index: 10;
+    font-size: 12px;
+}
+.container-level{
+    position: absolute;
+    background: #fff;
+    border-radius: 12px;
+    padding: 0.5rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: black;
+    background-color: #FFFFFF;
+    width: 110px;
+    height: 140px;
+    z-index: 2;
+}
+
+.container-level img{
+    padding-top: 5px;
+}
+
+.container-base-level{
+    position: absolute;
+    top: 25%;
+    left: 90%;
+    right: 0;
+    margin-left: -50px;
+}
+
+@media only screen and (max-width: 600px) {
+    .container-base-level {
+        left: 75%;
+    }
+  }

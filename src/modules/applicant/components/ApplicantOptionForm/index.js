@@ -4,7 +4,7 @@ import { Notifications, Email, Assignment } from '@material-ui/icons';
 import { useHistory } from "react-router-dom";
 import { SessionRoutes } from "../../../shared/libs/sessionRoutes";
 import { makeStyles } from "@material-ui/core";
-
+import { arrowWhite2 } from '../../../shared/images/postulant/index'
 
 
 const useStyles = makeStyles(theme => ({
@@ -47,6 +47,11 @@ const useStyles = makeStyles(theme => ({
         top: '.5rem',
         right: '.5rem',
     },
+    arrow: {
+        position: 'absolute',
+        bottom: '.5rem',
+        right: '.5rem',
+    },
     notificationIcon: {
         display: 'block',
         width: '36px',
@@ -60,7 +65,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function ApplicantOptionForm(props) {
     const classes = useStyles();
-    const { title, content, route, id, icon , color , notification} = props;
+    const { title, content, route, id, icon, color, notification } = props;
     const history = useHistory()
     const initRoute = SessionRoutes().initRoute;
 
@@ -77,15 +82,21 @@ export default function ApplicantOptionForm(props) {
         }
     }
 
-    const selectItemResult = ()=> {
-        history.push(route);
+    const selectItemResult = () => {
+        if (route) {
+            history.push(route);
+        }
     }
 
 
     return (
-        <div className={classes.containerResult}  onClick={selectItemResult} style={{ background: color}}>
+        <div className={classes.containerResult} onClick={selectItemResult} style={{ background: color }}>
             <div className={classes.notification}>
                 {notification ? <span className={classes.notificationIcon}><Notifications /></span> : <></>}
+            </div>
+
+            <div className={classes.arrow}>
+                 <img src={arrowWhite2} alt=""></img>
             </div>
 
             <div className="header-result-card">

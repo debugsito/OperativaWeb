@@ -14,5 +14,8 @@ const ApplicantRoutes = [
     '/postulante/interview/:publication_account_id',
     '/postulante/medital_test/:publication_account_id',
     '/postulante/postulacion/detalle/:publication_account_id(\\d+)/:back(\\d+)',
+    '/postulante/cazatrabajo/detalle',
+    '/postulante/cazatrabajo',
+    '/postulante/question/list/:publication_account_id'
 ];
 export default ApplicantRoutes;
