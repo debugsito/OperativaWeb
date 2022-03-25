@@ -87,7 +87,7 @@ const ApplicantJobHuntingDetail = () => {
                     </Grid>
                 </Grid>
 
-                <Grid item xs={12} className="mb-2 body-job-hunting-detail">
+                <Grid item xs={12} className="mt-3 body-job-hunting-detail">
                     <TableContainer component={Paper}>
                         <Table className={classes.table} aria-label="simple table">
                             <TableHead className="table-head">
