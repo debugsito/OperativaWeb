@@ -11,14 +11,14 @@ export default function InputGender() {
           <FormController
             type="checkbox"
             label="Masculino"
-            name="gender.answers.male"
+            name="gender.answers.male.active"
           />
           <FormController
             type="checkbox"
             label="Femenino"
-            name="gender.answers.female"
+            name="gender.answers.female.active"
           />
-          <FormController type="checkbox" label="Otro" name="gender.other" />
+          <FormController type="checkbox" label="Otro" name="gender.answers.other.active" />
         </FormGroup>
       </Grid>
     </Grid>

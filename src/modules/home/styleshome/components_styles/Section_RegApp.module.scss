@@ -1,0 +1,58 @@
+@import "../variables";
+@import "../colors";
+@import "../mixins";
+
+.container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 5em;
+  margin-top: 5rem;
+  .content {
+    margin: 0 auto;
+    padding: 2em auto;
+    width: $width_desktop;
+    display: flex;
+
+    .sideOne {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: left;
+      width: 70%;
+    }
+
+    .sideTwo {
+      height: 300px;
+      width: 50%;
+      position: relative;
+
+      .regpost {
+        img {
+          width: 100%;
+        }
+        position: absolute;
+        top: 0px;
+        right: 0;
+      }
+    }
+  }
+}
+
+@include mediaMovil() {
+  .Section_RegApp_container__2X8VD {
+    height: 80vh;
+  }
+
+  .container {
+    .content {
+      width: $width_desktop;
+      .sideTwo {
+        display: none;
+      }
+      .sideOne {
+        width: 100%;
+      }
+    }
+  }
+}

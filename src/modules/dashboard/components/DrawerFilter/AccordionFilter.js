@@ -29,7 +29,10 @@ import {
   useFormContext,
   useFormState,
 } from "react-hook-form";
+
 import { Context, defaultValues } from "../../context/AdvanceFilterContext";
+import { buildQueryParams } from "../../utils/convert";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -46,6 +49,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 const initialValues = {
   department_id: "",
   province_id: "",
@@ -55,63 +59,67 @@ const initialValues = {
 
 export default function AccordionFilter({ apply }) {
   const classes = useStyles();
-  const { values, resetItem, setValues } = useContext(Context);
-  // const { values, setValues, handleInputChange } = useForm(
-  //   initialValues,
-  //   false,
-  //   false
-  // );
+  const { values, resetItem, setValues, queryParams, setQueryParams } = useContext(Context);
   const methods = useForm({ mode: "onSubmit", defaultValues: values });
   const { dirtyFields } = useFormState({
     control: methods.control,
   });
+
   const resetForm = () => {
     setValues(defaultValues);
   };
+
   const onSubmit = (data) => {
-    const newValue = { ...values };
-
+    let newValue = { ...values };
+    let newData = { ...data };
     if (dirtyFields.residence) {
-      if (data?.residence?.locations.length) {
-        newValue.residence = {
-          ...data.residence,
-          active: true,
-        };
-      } else {
-        resetItem("residence");
+      if (data?.residence?.answers.length) {
+        newData.residence.answers = [
+          ...newValue.residence.answers,
+          ...data.residence.answers,
+        ]
       }
     }
-    if (dirtyFields.transport) {
-      if (data?.transport?.has_transport) {
-        newValue.transport = {
-          ...data.transport,
-          active: true,
-        };
-      } else {
-        resetItem("transport");
-      }
-    }
-    Object.keys(data).forEach((item) => {
-      if (item !== "residence" && item !== "transport") {
-        if (dirtyFields[item]) {
-          const valid = Object.values(data[item].answers).some(
-            (value) => value
-          );
-          if (valid) {
-            newValue[item] = {
-              ...data[item],
-              active: true,
-            };
-          } else {
-            resetItem(item);
-          }
-        }
-      }
-    });
+    // if (dirtyFields.transport) {
+    //   if (data?.transport?.has_transport) {
+    //     newValue.transport = {
+    //       ...data.transport,
+    //       active: true,
+    //     };
+    //   } else {
+    //     resetItem("transport");
+    //   }
+    // }
+    // Object.keys(data).forEach((item) => {
+    //   if (item !== "residence" && item !== "transport") {
+    //     if (dirtyFields[item]) {
+    //       const valid = Object.values(data[item].answers).some(
+    //         (value) => value.active
+    //       );
+    //       console.log("valid",valid)
+    //       if (valid) {
+    //         newValue[item] = {
+    //           ...data[item],
+    //           active: true,
+    //         };
+    //       } else {
+    //         resetItem(item);
+    //       }
+    //     }
+    //   }
+    // });
 
-    setValues(newValue);
     apply();
+    setValues(newData);
+    updateQueryParams(newData)
   };
+
+  const updateQueryParams = (newValue) => {
+    const newQueryParams = buildQueryParams(newValue)
+    setQueryParams(prevState => ({ ...prevState, ...newQueryParams }))
+  }
+
+
   const valuesForm = methods.watch();
   return (
     <div className={classes.root}>
@@ -310,7 +318,7 @@ export default function AccordionFilter({ apply }) {
               variant="contained"
               color="secondary"
               type="submit"
-              onClick={onSubmit}
+              // onClick={onSubmit}
             >
               APLICAR
             </Button>

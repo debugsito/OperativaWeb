@@ -37,6 +37,7 @@ import {
   MenuList,
   TablePagination,
   Typography,
+  LinkRouter
 } from "../../../shared/components";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -72,6 +73,8 @@ function createData(
   createdAt,
   applicants,
   state,
+  cv_read,
+  cv_not_read,
   actions,
   data
 ) {
@@ -82,6 +85,8 @@ function createData(
     createdAt,
     applicants,
     state,
+    cv_read,
+    cv_not_read,
     actions,
     data,
   };
@@ -307,11 +312,11 @@ const useStyles = makeStyles((theme) => ({
   link: {
     textDecoration: "underline",
     cursor: "pointer",
+    color:"#000",
   },
 }));
 
 export default function OpenPositionsTable() {
-  // console.log("Actualizando tabla")
   const classes = useStyles();
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("");
@@ -320,7 +325,7 @@ export default function OpenPositionsTable() {
   const [dense, setDense] = useState(false);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [publications, setPublications] = useState([
-    createData("", "", "", DateTime.local().toFormat("DDD"), 0, false, [], {
+    createData("", "", "", DateTime.local().toFormat("DDD"), 0, false, "", "", [], {
       id: "",
     }),
   ]);
@@ -353,7 +358,9 @@ export default function OpenPositionsTable() {
           publication.expiration_date
             ? publication.expiration_date
             : publication.from_date
-        ).toMillis() > DateTime.local().toMillis(), //como se si esta activo
+        ).toMillis() > DateTime.local().toMillis(), //como se si esta activo,
+        publication.count_cv_read,
+        publication.count_cv_not_read,
         [
           {
             id: "edit",
@@ -429,8 +436,6 @@ export default function OpenPositionsTable() {
     Math.min(rowsPerPage, publications?.length - page * rowsPerPage);
 
   const executeAction = (event, action, publication) => {
-    console.log("publication", publication);
-    console.log("event", event);
     event.preventDefault();
     dispatch(setPublicationSelected(publication));
     if (action === "edit") history.push(`${initRoute}/editar-empleo`);
@@ -441,9 +446,9 @@ export default function OpenPositionsTable() {
 
   const goToPostulants = (publication) => {
     dispatch(setPublicationSelected(publication));
-    // history.push({ pathname: `${initRoute}/postulantes` })
     history.push({
       pathname: `${initRoute}/publicacion/${publication.data.id}/lista-de-postulantes`,
+      state: {createBy:publication.createBy,title:publication.title}
     });
   };
 
@@ -479,7 +484,6 @@ export default function OpenPositionsTable() {
                   .map((row, index) => {
                     const isItemSelected = isSelected(row.data.id);
                     const labelId = `enhanced-table-checkbox-${index}`;
-                    console.log("row", row);
                     return (
                       <TableRow
                         hover
@@ -550,12 +554,14 @@ export default function OpenPositionsTable() {
                           </div>
                         </TableCell>
                         <TableCell align="left">
-                          <Typography variant="body1">10 Leídos</Typography>
-                          <Typography variant="body1">
-                            <u>
-                              <b>30 por leer</b>
-                            </u>
-                          </Typography>
+                          <Typography variant="body1">{row.cv_read} Leídos</Typography>
+                          <LinkRouter
+                            className={classes.link}  
+                            to={`/publicacion/${row.data.id}/lista-de-postulantes`}
+                            state={{createBy:row.createBy,title:row.title}}
+                          >
+                            <b>{row.cv_not_read} por leer</b>
+                          </LinkRouter>
                         </TableCell>
                         <TableCell align="left">
                           <Chip

@@ -1,0 +1,45 @@
+.display-flex{
+    display: flex;
+}
+
+.justify-center{
+    display: flex;
+    justify-content: center;
+}
+.justify-start{
+    display: flex;
+    justify-content: flex-start;
+}
+.justify-end{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.text-skyBlue{
+    color: #46A9D4;
+}
+
+.text-center{
+    text-align: center;
+}
+
+.text-gray{
+    color: #343843;
+}
+
+.text-error{
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 0.875em;
+    color: #dc3545;
+}
+
+.text-justify{
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.container-form{
+    background: #fff;
+    padding: 2em 6em;
+}

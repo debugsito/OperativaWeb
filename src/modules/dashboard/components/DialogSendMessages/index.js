@@ -1,18 +1,28 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { useSelector } from "react-redux";
+import axios from "axios";
+
 import { Button, Dialog, Typography, TextInput } from "../../../shared/components";
 import { Grid, makeStyles } from '@material-ui/core';
 import DialogContent from '@material-ui/core/DialogContent';
-import { useForm } from "../../../hooks";
 import { DialogMessageSent } from "../";
+import { useForm } from "../../../hooks";
+
+//services
+import { service_Dashboard } from "../../../../store/services";
+//Context
+import { ContextNotification } from "../../context/NotificationAlertContext";
+//Constans
+import { messageError } from "../../utils/notification";
 
 const initialValues = {
     subject: "",
-    message: "",
+    body: "",
 };
 
 const dafaultValues = {
     subject: "Gracias por postular",
-    message: `Hola Postulante,
+    body: `Hola Postulante,
  
 Nuestro departamento de Recursos Humanos te agradece  por habernos permitido contar con tu participación en el proceso de selección, estamos conscientes del valioso espacio de tiempo que nos has brindado para poder conocerte y comprender tus intereses y aspiraciones. Lamentablemente en esta oportunidad no podrás ser considerada para la siguiente etapa.
     
@@ -30,16 +40,18 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default function Index({ fill = false, ...props }) {
-    const classes = useStyles();
     const maxLength = 650;
+    const classes = useStyles();
     const [openModalSuccess, setOpenModalSuccess] = useState(false)
+    const { postulantsSelected } = useSelector(state => state?.dashboard)
+    const { notification, setNotification } = useContext(ContextNotification);
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
         if ('subject' in fieldValues)
             temp.subject = fieldValues.subject ? "" : "El campo es requerido."
-        if ('message' in fieldValues)
-            temp.message = fieldValues.message ? (fieldValues.message.length < maxLength ? "" : "El campo tiene mucho texto") : "El campo es requerido."
+        if ('body' in fieldValues)
+            temp.body = fieldValues.body ? (fieldValues.body.length < maxLength ? "" : "El campo tiene mucho texto") : "El campo es requerido."
 
         setErrors({
             ...temp
@@ -56,6 +68,20 @@ export default function Index({ fill = false, ...props }) {
         handleInputChange,
         disabledButtonState,
     } = useForm(fill ? dafaultValues : initialValues, true, validate);
+
+    const handleSendMessage = () => {
+        let promises = []
+        postulantsSelected.forEach(item => {
+            promises.push(service_Dashboard.sendMessage({publication_account_id:item},values))
+        })
+        axios.all(promises).then(axios.spread((...responses) => {
+            props.onClose()
+            setOpenModalSuccess(true)
+        }))
+        .catch(error => {
+            setNotification({ ...notification, ...messageError() });
+        })
+    }
 
     return (
         <>
@@ -84,24 +110,24 @@ export default function Index({ fill = false, ...props }) {
                                     <Grid item xs={12}>
                                         <TextInput
                                             fullWidth
-                                            name="message"
+                                            name="body"
                                             label="Escribre un mensaje"
                                             multiline
                                             rows={8}
-                                            value={values.message}
+                                            value={values.body}
                                             onChange={handleInputChange}
-                                            error={errors.message ? true : false}
-                                            helperText={errors.message}
+                                            error={errors.body ? true : false}
+                                            helperText={errors.body}
                                         />
                                         <Grid item xs={12} className="justify-end">
-                                            <Typography variant="caption">{`${values.message.length}/${maxLength} caracteres`}</Typography>
+                                            <Typography variant="caption">{`${values.body.length}/${maxLength} caracteres`}</Typography>
                                         </Grid>
                                     </Grid>
                                 </Grid>
                             </Grid>
                             <Grid item xs={12} className="justify-end">
                                 <Button variant="outlined" size="large" onClick={props.onClose}>CANCELAR</Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <Button variant="contained" size="large" disabled={disabledButtonState} onClick={() => setOpenModalSuccess(true)}>ENVIAR</Button>
+                                <Button variant="contained" size="large" disabled={disabledButtonState} onClick={handleSendMessage}>ENVIAR</Button>
                             </Grid>
 
                         </Grid>

@@ -11,27 +11,32 @@ export default function InputRubro({ values, handleInputChange }) {
           <FormController
             type="checkbox"
             label="Produccion y Operaciones"
-            name="rubro.answers.rubro_production"
+            name="rubro.answers.rubro_production.active"
           />
           <FormController
             type="checkbox"
             label="Mantenimiento y Limpieza"
-            name="rubro.answers.rubro_maintenance"
+            name="rubro.answers.rubro_maintenance.active"
           />
           <FormController
             type="checkbox"
             label="Call center y Ventas"
-            name="rubro.answers.rubro_call_center"
+            name="rubro.answers.rubro_call_center.active"
           />
           <FormController
             type="checkbox"
             label="Motorizados y Courier"
-            name="rubro.answers.rubro_motorizados"
+            name="rubro.answers.rubro_motorizados.active"
           />
           <FormController
             type="checkbox"
             label="Construccion y Obras"
-            name="rubro.answers.rubro_construction"
+            name="rubro.answers.rubro_construction.active"
+          />
+          <FormController
+            type="checkbox"
+            label="Almacén y transporte"
+            name="rubro.answers.rubro_almacen.active"
           />
         </FormGroup>
       </Grid>

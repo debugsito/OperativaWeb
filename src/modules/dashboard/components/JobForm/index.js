@@ -47,8 +47,6 @@ export default function JobForm({
   initRoute,
   isEditing = null,
 }) {
-  console.log("initialValues",initialValues)
-  console.log("isEditing",isEditing)
   const classes = useStyles();
   const history = useHistory();
   const dispatch = useDispatch();
@@ -197,7 +195,7 @@ export default function JobForm({
   const goForward = () => history.push(initRoute);
 
   const handleClickSave = () => {
-
+    
     if (!disabledButtonState) {
       let valuesTemp = { ...values };
       valuesTemp.description = JSON.stringify(values.description);
@@ -205,11 +203,11 @@ export default function JobForm({
       valuesTemp.benefits = JSON.stringify(values.benefits);
       valuesTemp.publicationHidden = publicationHidden;
       if (isEditing) {
-        const params = {
+        const body = {
           publication_id: initialValues.id,
           body: { status: 1, ...valuesTemp, a_tratar: isActiveSalary },
         };
-        dispatch(updatePublication(params));
+        dispatch(updatePublication(body));
         goForward();
       } else {
         dispatch(savePublication({ ...valuesTemp, a_tratar: isActiveSalary }));

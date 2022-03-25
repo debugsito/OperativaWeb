@@ -1,0 +1,16 @@
+.container-tabs{
+    width: 100%;
+    .nav-tabs{
+        display: flex;
+        grid-auto-flow: column;
+        flex-wrap: wrap;
+        .nav-item{
+            background-color: #F1F2F5;
+            button{
+                &.active{
+                    border-top: 3px solid #E20613;
+                }
+            }
+        }
+    }
+}

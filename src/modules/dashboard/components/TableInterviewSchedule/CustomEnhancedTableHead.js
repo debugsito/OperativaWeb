@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
         fontSize: 16,
         fontWeight: 500
     },
-    rootRadioGroup:{
+    rootRadioGroup: {
         flexDirection: "row"
     }
 }));
@@ -56,7 +56,7 @@ function CustomEnhancedTableHead({ order, orderBy, onRequestSort, headCells, onS
                                     onChange={onSelectAllClick}
                                     name="presencial"
                                 />
-                                
+
                                 {/* <RadioGroup aria-label="tipo de reunión" onChange={onSelectAllClick} classes={{ root: classes.rootRadioGroup }}>
                                     <FormControlLabel value="virtual" control={<Radio />} label="Virtual" />
                                     <FormControlLabel value="presencial" control={<Radio />} label="Presencial" />

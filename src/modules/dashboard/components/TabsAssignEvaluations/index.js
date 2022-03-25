@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { AppBar, Tabs, Tab, makeStyles } from "@material-ui/core";
-import { TabPanel } from "../../../shared/components";
+import { TabPanel, SnackbarsAlert } from "../../../shared/components";
 import TabEvaluation from "./TabEvaluation";
 import TabVerificativa from "./TabVerificativa";
 import TabMedico from "./TabMedico";
 import TabEvaluativa from "./TabEvaluativa";
 import TabEntrevista from "./TabEntrevista";
+
+//Context
+import { ContextNotification } from "../../context/NotificationAlertContext";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,9 +27,11 @@ const useStyles = makeStyles((theme) => ({
   selected: {},
 }));
 
-export default function ApplicantsTabs(props) {
+export default function ApplicantsTabs() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
+  const { notification, setNotification } = useContext(ContextNotification)
+  const { horizontal, vertical, open, message, severity } = notification;
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -95,6 +100,13 @@ export default function ApplicantsTabs(props) {
       <TabPanel value={value} index={4}>
         <TabEntrevista backTab={backTab} />
       </TabPanel>
+      <SnackbarsAlert
+        open={open}
+        anchorOrigin={{ vertical, horizontal }}
+        message={message}
+        handleClose={() => setNotification({ ...notification, open: false })}
+        severity={severity}
+      />
     </>
     //   </div>
   );

@@ -14,22 +14,22 @@ export default function InputRubro({ values, handleInputChange }) {
           <FormController
             type="checkbox"
             label="Viajaría al interior del país"
-            name="extra.answers.question_one"
+            name="extra.answers.question_one.active"
           />
           <FormController
             type="checkbox"
             label="Trabajar en horarios rotativos"
-            name="extra.answers.question_two"
+            name="extra.answers.question_two.active"
           />
           <FormController
             type="checkbox"
             label="Trabajar horas extras"
-            name="extra.answers.question_three"
+            name="extra.answers.question_three.active"
           />
           <FormController
             type="checkbox"
             label="Trabajar fines de semana?"
-            name="extra.answers.question_four"
+            name="extra.answers.question_four.active"
           />
         </FormGroup>
       </Grid>

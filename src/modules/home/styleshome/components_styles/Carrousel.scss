@@ -1,0 +1,99 @@
+@import "../variables";
+@import "../colors";
+@import "../mixins";
+
+.container-main {
+  width: 120%;
+  height: 10rem;
+  background-color: #4e51fe;
+  border-radius: 10px;
+  padding: 1rem 1rem 18rem 7rem;
+  color: white;
+}
+
+.container-blue {
+  width: 65%;
+}
+
+.container-content {
+  display: grid;
+  grid-template-columns: 30% 70%;
+  align-items: center;
+  justify-items: end;
+  gap: 8px;
+}
+
+.contentOne {
+  font-size: 170px;
+  font-weight: 650;
+}
+
+.contentTwo {
+  display: flex;
+  flex-direction: column;
+}
+
+.h1 {
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 0px;
+}
+
+p {
+  margin-block-start: 1em;
+  padding: 1px;
+}
+
+.next-icon {
+  position: relative;
+  left: 100%;
+}
+
+.prev-icon {
+  position: relative;
+  right: 70%;
+}
+
+.carousel-indicators {
+  top: 220px;
+  display: flex;
+  right: 7rem;
+}
+
+.carousel-indicators [data-bs-target] {
+  height: 9px;
+  width: 9px;
+  border-radius: 50%;
+  background-color: #f6b206;
+  margin-right: 8px;
+  margin-left: 8px;
+}
+
+@include mediaMovil() {
+  .container-main {
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+  }
+
+  .container-blue {
+    width: 100%;
+  }
+  .container-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .next-icon {
+    left: 15%;
+  }
+
+  .prev-icon {
+    right: 15%;
+  }
+
+  .carousel-indicators {
+    top: 250px;
+    right: 0;
+  }
+}

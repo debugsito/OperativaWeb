@@ -1,0 +1,37 @@
+@import "../mixins";
+
+
+.card{
+    background: #fff;
+    padding: 2em 6em;
+    margin: 1rem 0;
+}
+.delete{
+    display: flex;
+    justify-content: flex-end;
+}
+.append{
+    margin-top: 2rem;
+    display: flex;
+    justify-content: flex-end;
+}
+.text{
+    cursor: pointer;
+    color: #46A9D4;
+    font-size: 1.1em;
+}
+
+.containerForm{
+    background: #fff;
+    padding: 2em 6em;
+}
+
+@include mediaTablet(){
+    .containerForm{
+        padding: 2em 1em;
+    }
+
+    .card{
+        padding: 2em 1em;
+    }
+}

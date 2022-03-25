@@ -10,11 +10,19 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-export default function CustomLink({ children, to, ...props }) {
+export default function CustomLink({ children, to, state=null, ...props }) {
     const initRoute = SessionRoutes().initRoute
     const classes = useStyles()
+    const url = `${initRoute}${to}`; 
+    let data = url
+    if(state){
+        data = {
+            pathname: url,
+            state: state
+        }
+    }
     return (
-        <Link className={classes.link} to={`${initRoute}${to}`} {...props}>
+        <Link className={classes.link} to={data} {...props}>
             {children}
         </Link>
     );

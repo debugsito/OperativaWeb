@@ -3,8 +3,10 @@ import { Button, EnhancedTableToolbar, Typography } from "../../../shared/compon
 import { Tooltip, IconButton } from "@material-ui/core";
 import SendIcon from '@material-ui/icons/Send';
 import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
+import RemoveCircleIcon from "@material-ui/icons/RemoveCircle";
+import PlaylistAddCheckIcon from "@material-ui/icons/PlaylistAddCheck";
 
-export default function EnhancedTableToolbarCustom(props) {
+export default function EnhancedTableToolbarCustom({handleSelectPostulant, handleDismissPostulant, ...props}) {
 
 
     return (
@@ -13,16 +15,18 @@ export default function EnhancedTableToolbarCustom(props) {
                 <Button
                     variant="contained"
                     color="default"
-                    endIcon={<SendIcon />}
+                    endIcon={<PlaylistAddCheckIcon />}
+                    onClick={handleSelectPostulant}
                 >
-                    Enviar Mensaje
+                    Seleccionar
                 </Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <Button
                     variant="contained"
                     color="default"
-                    endIcon={<AssignmentTurnedInIcon />}
+                    endIcon={<RemoveCircleIcon />}
+                    onClick={handleDismissPostulant}
                 >
-                    ASIGNAR EVALUACION
+                    Descartar
                 </Button>
             </div>
             {/* <div className="align-items-center">

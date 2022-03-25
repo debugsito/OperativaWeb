@@ -9,7 +9,7 @@ export default function InputPersonal() {
       <Grid item xs={12}>
         <FormController
           type="radioButtons"
-          name="personal.answers.questionPersonalOne"
+          name="personal.answers.questionPersonalOne.value"
           title="1. ¿Si no está contento con una situación puede decirlo?"
           items={[
             { value: "Si", label: "Si" },
@@ -20,7 +20,7 @@ export default function InputPersonal() {
       <Grid item xs={12}>
         <FormController
           type="radioButtons"
-          name="personal.answers.questionPersonalTwo"
+          name="personal.answers.questionPersonalTwo.value"
           title="2. ¿Se considera una persona responsable?"
           items={[
             { value: "Si", label: "Si" },
@@ -31,7 +31,7 @@ export default function InputPersonal() {
       <Grid item xs={12}>
         <FormController
           type="radioButtons"
-          name="personal.answers.questionPersonalThree"
+          name="personal.answers.questionPersonalThree.value"
           title="3. ¿Le motiva trabajar como operario?"
           items={[
             { value: "Si", label: "Si" },
@@ -42,7 +42,7 @@ export default function InputPersonal() {
       <Grid item xs={12}>
         <FormController
           type="radioButtons"
-          name="personal.answers.questionPersonalFour"
+          name="personal.answers.questionPersonalFour.value"
           title="4. ¿Cuanto toma decisiones suele cambiar de parecer a cada momento?"
           items={[
             { value: "Si", label: "Si" },
@@ -53,7 +53,7 @@ export default function InputPersonal() {
       <Grid item xs={12}>
         <FormController
           type="radioButtons"
-          name="personal.answers.questionPersonalFive"
+          name="personal.answers.questionPersonalFive.value"
           title="5. ¿Tuvo problemas alguna vez con compañeros o jefes?"
           items={[
             { value: "Si", label: "Si" },
@@ -64,7 +64,7 @@ export default function InputPersonal() {
       <Grid item xs={12}>
         <FormController
           type="radioButtons"
-          name="personal.answers.questionPersonalSix"
+          name="personal.answers.questionPersonalSix.value"
           title="6. ¿Prefiere trabajar solo o en grupo?"
           items={[
             { value: "Si", label: "Si" },

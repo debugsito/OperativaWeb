@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   Grid,
   Table,
@@ -20,7 +20,7 @@ import {
   Typography,
   TablePagination,
 } from "../../../shared/components";
-// import EnhancedTableToolbar from "./EnhancedTableToolbar";
+import EnhancedTableToolbar from "./EnhancedTableToolbar";
 import { DialogSendMessages } from "../";
 import { DialogImbox } from "../";
 import { useParams } from "react-router-dom";
@@ -29,21 +29,16 @@ import { getPostulantsByPublicationId } from "../../../../store/actions/dashboar
 //Images,icon
 import IconButton from "@material-ui/core/IconButton";
 import EmailIcon from "@material-ui/icons/Email";
-import RemoveCircleIcon from "@material-ui/icons/RemoveCircle";
-import PlaylistAddCheckIcon from "@material-ui/icons/PlaylistAddCheck";
 import { DoneIcon, AlertIcon } from "../../images";
 import { service_Dashboard } from "../../../../store/services";
 
-function createData(
-  similarity,
-  fullname,
-  messages,
-  stateOfEvaluations,
-  actions,
-  data
-) {
-  return { similarity, fullname, messages, stateOfEvaluations, actions, data };
-}
+//Context || conts
+import { ContextNotification } from "../../context/NotificationAlertContext";
+import { POSTULANTS } from "../../constants/Dashboard";
+import { messageSuccessful, messageError } from "../../utils/notification";
+
+//actions
+import { setPostulantSelected } from "../../../../store/actions/dashboard/dashboard.action";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -88,17 +83,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const STATE_OF_EVALUATIONS = [
-  { text: "Preguntas", status: true },
-  { text: "Verificativa", status: false },
-  { text: "Médico", status: false },
-  { text: "Evaluativa", status: false },
-  { text: "Entrevista", status: false },
-]
-
-const ACTIONS = [{ id: "finalizar", label: "Pasar a Finalista" }, { id: "descartar", label: "Descartar postulante" }]
-
-export default function TableListPostulants({ selected, handleClickCheckbox, handleSelectAllClick }) {
+export default function TableListPostulants({ selected, setSelected, handleClickCheckbox, handleSelectAllClick }) {
   const classes = useStyles();
   const dispatch = useDispatch()
   const { postulantsByPublicationId, publicationSelected } = useSelector(state => state?.dashboard)
@@ -112,10 +97,13 @@ export default function TableListPostulants({ selected, handleClickCheckbox, han
   const [openModal, setOpenModal] = useState(false)
   const [openImbox, setOpenImbox] = useState(false)
 
-  const publication_id = publicationSelected.data.id;
+  // const publication_id = publicationSelected.data.id;
+  const { publication_id } = useParams();
+
+  const { notification, setNotification} = useContext(ContextNotification)
 
   useEffect(() => {
-    dispatch(getPostulantsByPublicationId({ publication_id, params: { estado: 2, page, size: rowsPerPage } })) //EN DURO
+    dispatch(getPostulantsByPublicationId({ publication_id, params: { estado: POSTULANTS.inProgress, page, size: rowsPerPage } }))
   }, [])
 
   useEffect(() => {
@@ -123,49 +111,69 @@ export default function TableListPostulants({ selected, handleClickCheckbox, han
       const rows = postulantsByPublicationId?.rows?.map(item => ({
         similarity: item.similarity,
         fullname: item.user.first_name + " " + item.user.last_name,
-        messages: item.user.experience ? 2 : 0,
-        stateOfEvaluations: STATE_OF_EVALUATIONS,
+        messages: item.all_messages,
+        stateOfEvaluations : [
+          { text: "Preguntas", status: item.technical_test },
+          { text: "Verificativa", status: item.verificativa },
+          { text: "Médico", status: item.medical_test },
+          { text: "Evaluativa", status: item.evaluativa },
+          { text: "Entrevista", status: item.interviewed },
+        ],
         data: item
       }))
       setPostulants(rows)
     }
   }, [postulantsByPublicationId.rows])
 
-  useEffect(() => {
-    if (postulantsByPublicationId.count > 1) {
-      const rows = postulantsByPublicationId?.data?.map((item) => {
-        return createData(
-          item?.similarity,
-          item?.user?.first_name + " " + item?.user?.last_name,
-          item?.user?.experience ? 2 : 0, //Messages
-          STATE_OF_EVALUATIONS,
-          [
-            { id: "finalizar", label: "Pasar a Finalista" },
-            { id: "descartar", label: "Descartar postulante" },
-          ],
-          item
-        );
-      });
-      setPostulants(rows);
-    }
-  }, [postulantsByPublicationId]);
-
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
-    dispatch(getPostulantsByPublicationId({ publication_id,  params: { estado: 2, page: newPage, size: rowsPerPage } }));
+    dispatch(getPostulantsByPublicationId({ publication_id, params: { estado: POSTULANTS.inProgress, page: newPage, size: rowsPerPage } }));
   };
 
   const handleChangeRowsPerPage = (event) => {
     const rowsPerPageTemp = parseInt(event.target.value, 10)
     setRowsPerPage(rowsPerPageTemp);
     setPage(0);
-    dispatch(getPostulantsByPublicationId({ publication_id, params: { estado: 2, page, size: rowsPerPageTemp } }));
+    dispatch(getPostulantsByPublicationId({ publication_id, params: { estado: POSTULANTS.inProgress, page, size: rowsPerPageTemp } }));
   };
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
   };
+
+  const handleSelectPostulant = () => {
+    const body = selected.map(item => ({publication_account_id: item}))
+    service_Dashboard.hireApplicant(body,publication_id)
+    .then(() => {
+      setSelected([]);
+      dispatch(getPostulantsByPublicationId({ publication_id, params: { estado: POSTULANTS.inProgress, page, size: rowsPerPage } }))
+      setNotification({ ...notification, ...messageSuccessful("Dirigase a la pestaña FINALISTA") })
+    })
+    .catch(error => {
+      setNotification({ ...notification, ...messageError() })
+    })
+  }
+
+  const handleDismissPostulant = () => {
+    const body = selected.map(item => ({publication_account_id: item}))
+    service_Dashboard.denyApplicant(body,publication_id)
+    .then(() => {
+      setSelected([]);
+      dispatch(getPostulantsByPublicationId({ publication_id, params: { estado: POSTULANTS.inProgress, page, size: rowsPerPage } }))
+      setNotification({ ...notification, ...messageSuccessful("Dirigase a la pestaña DESCARTADO") })
+    })
+    .catch(error => {
+      setNotification({ ...notification, ...messageError() })
+    })
+  }
+
+  const handleGetMessage = (id, totalMessages) => {
+    if(totalMessages > 0){
+      dispatch(setPostulantSelected([id]))
+      setOpenImbox(true)
+    }
+  }
 
   // const emptyRows = rowsPerPage - Math.min(rowsPerPage, postulants?.length - page * rowsPerPage);
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, postulants?.length);
@@ -174,9 +182,13 @@ export default function TableListPostulants({ selected, handleClickCheckbox, han
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        {/* {selected?.length > 0 && (
-                    <EnhancedTableToolbar numSelected={selected?.length} />
-                )} */}
+        {selected?.length > 0 && (
+          <EnhancedTableToolbar 
+            numSelected={selected?.length} 
+            handleSelectPostulant={handleSelectPostulant}
+            handleDismissPostulant={handleDismissPostulant}
+          />
+        )}
         <TableContainer>
           <Table
             className={classes.table}
@@ -254,7 +266,7 @@ export default function TableListPostulants({ selected, handleClickCheckbox, han
                                 color={
                                   row.messages === 0 ? "default" : "inherit"
                                 }
-                                onClick={() => setOpenImbox(true)}
+                                onClick={() => handleGetMessage(row.data.id, row.messages)}
                               >
                                 <EmailIcon />
                               </IconButton>
@@ -281,25 +293,6 @@ export default function TableListPostulants({ selected, handleClickCheckbox, han
                               </div>
                             ))}
                           </div>
-                        </Grid>
-                      </TableCell>
-                      <TableCell id={labelId} scope="row" padding="normal">
-                        <Grid item xs={12}>
-                          {ACTIONS.map((item) => (
-                            <ToolTip title={item.label}>
-                              <IconButton
-                                aria-label="delete"
-                                key={item.id}
-                                color="inherit"
-                              >
-                                {item.id === "finalizar" ? (
-                                  <PlaylistAddCheckIcon />
-                                ) : (
-                                  <RemoveCircleIcon />
-                                )}
-                              </IconButton>
-                            </ToolTip>
-                          ))}
                         </Grid>
                       </TableCell>
                     </TableRow>
@@ -359,5 +352,4 @@ const headCells = [
     disablePadding: false,
     label: "Estado de las evaluaciones",
   },
-  { id: "actions", numeric: false, disablePadding: false, label: "Acciones" },
 ];

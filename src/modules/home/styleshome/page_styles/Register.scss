@@ -1,0 +1,54 @@
+@import "../variables";
+@import "../mixins";
+@import "../colors";
+
+.background{
+    width: 100%;
+    height: 55vh;
+    margin: 0 auto;
+    background-image: url("/images/page-register/register-bg.webp");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: right top;
+}
+
+.cards{
+    position: relative;
+    top: -10vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 1em;
+    .item{
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: #fff;
+        padding: 4rem 0;
+        box-shadow: 0px 5px 15px -6px rgba(213, 216, 223, 0.5);
+        border-radius: 10px;
+        h3{
+            margin: 0.2em 0 0 0 ;
+        };
+        &:hover {
+            background: $color_secondary;
+            h3{
+                color: #fff;
+            }
+        }
+    }
+}
+
+@include mediaTablet(){
+    .background{
+        background-image: none;
+        height: 100%;
+    }
+    .cards{
+        top: 0;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-gap: 1em;
+    }
+}
+

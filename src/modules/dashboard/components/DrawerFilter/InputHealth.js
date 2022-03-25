@@ -15,7 +15,7 @@ export default function InputHealth({ values, handleInputChange }) {
       <Grid item xs={12}>
         <FormController
           type="radioButtons"
-          name="health.answers.hasAllergies"
+          name="health.answers.hasAllergies.value"
           title="1. ¿Tiene alguna alergia?"
           items={[
             { value: "Si", label: "Si" },
@@ -26,7 +26,7 @@ export default function InputHealth({ values, handleInputChange }) {
       <Grid item xs={12}>
         <FormController
           type="radioButtons"
-          name="health.answers.hasOperation"
+          name="health.answers.hasOperation.value"
           title="2. ¿Ha tenido alguna operacion?"
           items={[
             { value: "Si", label: "Si" },
@@ -37,7 +37,7 @@ export default function InputHealth({ values, handleInputChange }) {
       <Grid item xs={12}>
         <FormController
           type="radioButtons"
-          name="health.answers.hasProblemOfColumn"
+          name="health.answers.hasProblemOfColumn.value"
           title="3. ¿Tiene algun problema de columna?"
           items={[
             { value: "Si", label: "Si" },
@@ -48,7 +48,7 @@ export default function InputHealth({ values, handleInputChange }) {
       <Grid item xs={12}>
         <FormController
           type="radioButtons"
-          name="health.answers.hasDiabetes"
+          name="health.answers.hasDiabetes.value"
           title="4. ¿Sufre de diabetes?"
           items={[
             { value: "Si", label: "Si" },
@@ -59,7 +59,7 @@ export default function InputHealth({ values, handleInputChange }) {
       <Grid item xs={12}>
         <FormController
           type="radioButtons"
-          name="health.answers.useGlasses"
+          name="health.answers.useGlasses.value"
           title="5. ¿Usa lentes?"
           items={[
             { value: "Si", label: "Si" },
@@ -70,7 +70,7 @@ export default function InputHealth({ values, handleInputChange }) {
       <Grid item xs={12}>
         <FormController
           type="radioButtons"
-          name="health.answers.hadCovid"
+          name="health.answers.hadCovid.value"
           title="6. ¿Ha tenido COVID-19?"
           items={[
             { value: "Si", label: "Si" },

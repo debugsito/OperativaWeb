@@ -21,7 +21,7 @@ export default function InputLabor({ values, handleInputChange }) {
       <Grid item xs={12}>
         <FormController
           type="radioButtons"
-          name="labor.answers.workedAsOperator"
+          name="labor.answers.workedAsOperator.value"
           title="1. ¿Trabajo camo operario?"
           items={[
             { value: "Si", label: "Si" },
@@ -39,7 +39,7 @@ export default function InputLabor({ values, handleInputChange }) {
       <Grid item xs={12}>
         <FormController
           type="radioButtons"
-          name="labor.answers.quitHisJob"
+          name="labor.answers.quitHisJob.value"
           title="2. Abandonó un trabajo porque no le gustaba."
           items={[
             { value: "Si", label: "Si" },
@@ -63,7 +63,7 @@ export default function InputLabor({ values, handleInputChange }) {
       <Grid item xs={12}>
         <FormController
           type="radioButtons"
-          name="labor.answers.hasUnionSindicate"
+          name="labor.answers.hasUnionSindicate.value"
           title="3. Perteneció a un sindicato."
           items={[
             { value: "Si", label: "Si" },

@@ -4,6 +4,7 @@ import { Context } from "../../context/AdvanceFilterContext";
 
 import Chip from "@material-ui/core/Chip";
 import { Typography } from "@material-ui/core";
+import { buildArrayLabels } from "../../utils/convert";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,7 +30,7 @@ const StyleChip = withStyles({
 export default function OutlinedChips() {
   const classes = useStyles();
   const { values, resetItem } = useContext(Context);
-  
+
   const handleDelete = (index) => {
     console.info("You clicked the delete icon.");
   };
@@ -37,13 +38,29 @@ export default function OutlinedChips() {
   const handleClick = () => {
     console.info("You clicked the Chip.");
   };
-  const render = Object.values(values).some((item) => item.active);
-  if (!render) return null;
+  
+
+  // const render = Object.values(values).some((item) => item?.active);
+  // if (!render) return null;
+
+  const arrayLabel = buildArrayLabels(values)
+
   return (
     <>
       <Typography variant="h6">Filtrando por:</Typography>
       <div className={classes.root}>
-        {Object.keys(values).map((item, index) => {
+        {
+          arrayLabel.map((item, index) => {
+            return (
+              <StyleChip
+                key={index}
+                label={item.label}
+                onDelete={() => resetItem(item)}
+              />
+            );
+          })
+        }
+        {/* {Object.keys(values).map((item, index) => {
           if (!values[item].active) {
             return null;
           }
@@ -54,7 +71,7 @@ export default function OutlinedChips() {
               onDelete={() => resetItem(item)}
             />
           );
-        })}
+        })} */}
       </div>
     </>
   );

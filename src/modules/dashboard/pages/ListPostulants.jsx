@@ -53,7 +53,6 @@ export default function Listpostulants({ history }) {
     { name: "Postulantes", to: `${initRoute}/postulantes` },
   ];
   const [rows, setRows] = useState([]);
-  console.log("rows", rows);
   useEffect(() => {
     dispatch(actions_Utils.getDistricts);
   }, []);

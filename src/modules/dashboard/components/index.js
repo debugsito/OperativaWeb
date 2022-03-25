@@ -17,6 +17,8 @@ export { default as FormStrategicContacts } from './FormStrategicContacts';
 export { default as DialogInfoPremium } from './DialogInfoPremium';
 export { default as TableListPostulants } from './TableListPostulants';
 export { default as TablePostulantsInProgress } from './TablePostulantsInProgress';
+export { default as TableHiredApplicants } from './TableHiredApplicants';
+export { default as TableRejectedPostulants } from './TableRejectedPostulants';
 export { default as DialogSendMessages } from './DialogSendMessages';
 export { default as DialogImbox } from './DialogImbox';
 export { default as DialogMessageSent } from './DialogMessageSent';

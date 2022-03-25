@@ -15,7 +15,7 @@ export default function InputFamily() {
       <Grid item xs={12}>
         <FormController
           type="radioButtons"
-          name="family.answers.hasChildren"
+          name="family.answers.hasChildren.value"
           title="1. ¿Tiene hijos?"
           items={[
             { value: "Si", label: "Si" },
@@ -26,7 +26,7 @@ export default function InputFamily() {
       <Grid item xs={12}>
         <FormController
           type="radioButtons"
-          name="family.answers.hasResponsabilityPerson"
+          name="family.answers.hasResponsabilityPerson.value"
           title="2. ¿Tiene alguna persona bajo su responsabilidad?"
           items={[
             { value: "Si", label: "Si" },
@@ -37,7 +37,7 @@ export default function InputFamily() {
       <Grid item xs={12}>
         <FormController
           type="radioButtons"
-          name="family.answers.liveAlone"
+          name="family.answers.liveAlone.value"
           title="3. Vive solo/a."
           items={[
             { value: "Si", label: "Si" },

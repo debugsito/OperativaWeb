@@ -35,6 +35,11 @@ export const setPublicationSelected = (payload) => ({
   payload
 });
 
+export const setPostulantSelected = (payload) => ({
+  type: dashboardType.SET_POSTULANTS_SELECTED,
+  payload
+});
+
 export const setHistory = (payload) => ({
   type: dashboardType.SET_HISTORY_OF_PUBLICATIONS,
   payload

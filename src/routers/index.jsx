@@ -14,6 +14,9 @@ import { Navigation } from "../modules/shared/components";
 import BottomNavigationBar from "../modules/shared/components/BottomNavigationBar";
 import {useSelector} from "react-redux";
 
+
+
+
 const AppRouter = () => {
     const { user } = useSelector(state => state?.auth);
     console.log(user.account);

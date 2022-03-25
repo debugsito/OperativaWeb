@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from "react-redux";
+import { DateTime } from "luxon";
 import { Grid, Table, TableBody, TableCell, TableContainer, TableRow, makeStyles, Paper } from "@material-ui/core";
 import { stableSort, getComparator } from "../../../shared/utils/table.utils";
 import { Checkbox, EnhancedTableHead, TablePagination, Typography } from "../../../shared/components";
 import { DialogSeeMessage, DialogImbox, DialogSendMessages } from "../";
 
-const DATA_MESSAGES = [
-    { id: 123, subject: "Agradecimiento", message: "Gracias por la respuesta, espero poder participar en procesos de selección a futuro.", createdAt: "8:17pm" },
-    { id: 323, subject: "Disponibilidad", message: "Muchas gracias por el mensaje, tengo disponibilidad inmediata para el puesto de motorizado", createdAt: "15 agosto" },
-    { id: 146, subject: "Disponibilidad", message: "Muchas gracias por el mensaje, tengo disponibilidad inmediata para el puesto de motorizado", createdAt: "15 agosto" },
-    { id: 156, subject: "Disponibilidad", message: "Muchas gracias por el mensaje, tengo disponibilidad inmediata para el puesto de motorizado", createdAt: "15 agosto" },
-    { id: 176, subject: "Disponibilidad", message: "Muchas gracias por el mensaje, tengo disponibilidad inmediata para el puesto de motorizado", createdAt: "15 agosto" },
-]
+//services
+import { service_Dashboard } from "../../../../store/services";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -40,6 +37,12 @@ const useStyles = makeStyles((theme) => ({
     },
     row:{
         cursor:"pointer",
+    },
+    textMessage:{
+        width: "25rem",
+        whiteSpace: "nowrap",
+        textOverflow: "ellipsis",
+        overflow: "hidden",
     }
 }));
 
@@ -51,21 +54,24 @@ export default function Index() {
     const [orderBy, setOrderBy] = useState("");
     const [selected, setSelected] = useState([]);
     const [messages, setMessages] = useState([createData("", "", "", "", "")]);
+    const { postulantsSelected } = useSelector(state => state?.dashboard)
 
     const [openModal, setOpenModal] = useState(false)
     const [openImbox, setOpenImbox] = useState(false)
     const [message, setMessage] = useState({state:false,subject:"", text:""})
 
     useEffect(() => {
-        const rows = DATA_MESSAGES.map(item => {
-            return createData(
-                item?.subject,
-                item?.message,
-                item?.createdAt,
-                item?.id,
-            )
+        service_Dashboard.getMessages({publication_account_id:postulantsSelected[0]}).then(resp => {
+            const rows = resp.data.data.rows.map(item => {
+                return {
+                    subject:item.subject,
+                    message:item.message_detail[0].body,
+                    date:DateTime.fromISO(item.createdAt).toFormat("dd LLL"),
+                    id:item.id,
+                }
+            })
+            setMessages(rows)
         })
-        setMessages(rows)
     }, [])
 
     const handleClickCheckbox = (event, id) => {
@@ -118,7 +124,6 @@ export default function Index() {
         rowsPerPage - Math.min(rowsPerPage, messages?.length - page * rowsPerPage);
 
     const handleShowMessage = (row) => {
-        console.log(row)
         setMessage({state:true, subject: row.subject, message:row.message})
     }
 
@@ -175,10 +180,8 @@ export default function Index() {
                                                         <Typography variant="body2">Fwd:{row.subject}</Typography>
                                                     </Grid>
                                                 </TableCell>
-                                                <TableCell id={labelId} scope="row" padding="none" width="70%">
-                                                    <div className="text-message">
-                                                        <Typography variant="body2">{row.message}</Typography>
-                                                    </div>
+                                                <TableCell id={labelId} scope="row" padding="none" width="50%">
+                                                    <Typography variant="body2" className={classes.textMessage}>{row.message}</Typography>
                                                 </TableCell>
                                                 <TableCell id={labelId} scope="row" padding="none" width="10%">
                                                     <Grid item xs={12} >

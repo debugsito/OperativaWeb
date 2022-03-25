@@ -28,8 +28,11 @@ import { getPostulantsByPublicationId } from "../../../../store/actions/dashboar
 import { actions_Utils } from "../../../../store/actions";
 import { service_Dashboard } from "../../../../store/services"
 
-//context
+//context || const
 import { Context } from "../../context/AdvanceFilterContext";
+import { ContextNotification } from "../../context/NotificationAlertContext";
+import { POSTULANTS } from "../../constants/Dashboard";
+import { messageSuccessful, messageError } from "../../utils/notification";
 
 //Images,icon
 import TodayIcon from "@material-ui/icons/Today";
@@ -80,22 +83,12 @@ export default function TableListPostulants() {
   const dispatch = useDispatch();
   const { publicationSelected, postulantsByPublicationId } = useSelector((state) => state?.dashboard);
   const { departments, provinces, districts } = useSelector(state => state?.utils)
+
+  const { values, queryParams } = useContext(Context);
+  const { notification, setNotification } = useContext(ContextNotification);
+  
   // const publication_id = publicationSelected.data.id;
   const { publication_id } = useParams();
-  const { values } = useContext(Context);
-
-  console.log("Context",values)
-
-  const [notification, setNotification] = useState({
-    open: false,
-    message: "",
-    vertical: 'top',
-    horizontal: 'right',
-    severity: "success"
-  })
-
-  const { horizontal, vertical, open, message, severity } = notification;
-
 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -103,14 +96,18 @@ export default function TableListPostulants() {
   const [orderBy, setOrderBy] = useState("");
   const [selected, setSelected] = useState([]);
   const [postulants, setPostulants] = useState([]);
-  //[createData("", "", "", "", "", "", "", "", { id: "" })]
 
   useEffect(() => {
-    dispatch(getPostulantsByPublicationId({ publication_id, params: { page, size: rowsPerPage} }));
     dispatch(actions_Utils.getDepartments());
     dispatch(actions_Utils.getProvinces());
     dispatch(actions_Utils.getDistricts());
+    dispatch(getPostulantsByPublicationId({ publication_id, params: { estado: POSTULANTS.current, page, size: rowsPerPage} }));
   }, [])
+  
+  useEffect(() => {
+    console.log("queryParams ha cambiado..", queryParams)
+    dispatch(getPostulantsByPublicationId({ publication_id, params: { estado: POSTULANTS.current, page, size: rowsPerPage, ...queryParams} }));
+  },[queryParams])
 
   useEffect(() => {
     if (postulantsByPublicationId.rows) {
@@ -153,17 +150,15 @@ export default function TableListPostulants() {
   };
 
   const handleChangePage = (event, newPage) => {
-    const pagination = `page=${newPage}&size=${rowsPerPage}`
     setPage(newPage);
-    dispatch(getPostulantsByPublicationId({ publication_id, query: pagination }));
+    dispatch(getPostulantsByPublicationId({ publication_id, params: { estado: POSTULANTS.current, page: newPage, size: rowsPerPage } }));
   };
 
   const handleChangeRowsPerPage = (event) => {
     const rowsPerPageTemp = parseInt(event.target.value, 10)
-    const pagination = `page=${0}&size=${rowsPerPageTemp}`
     setRowsPerPage(rowsPerPageTemp);
     setPage(0);
-    dispatch(getPostulantsByPublicationId({ publication_id, query: pagination }));
+    dispatch(getPostulantsByPublicationId({ publication_id, params: { estado: POSTULANTS.current, page: 0, size: rowsPerPageTemp } }));
   };
 
   const handleClickCheckbox = (event, id) => {
@@ -203,10 +198,12 @@ export default function TableListPostulants() {
     ))
     service_Dashboard.selectApplicant(body, publication_id)
       .then(() => {
-        setNotification({ ...notification, open: true, message: "Se guardo correctamente los datos. Puede verificar dirigiendose a la pestaña: En Proceso" })
+        setSelected([]);
+        dispatch(getPostulantsByPublicationId({ publication_id, params: { estado: POSTULANTS.current, page, size: rowsPerPage} }));
+        setNotification({ ...notification, ...messageSuccessful("Dirigase a la pestaña: EN PROCESO") })
       })
       .catch(error => {
-        setNotification({ ...notification, open: true, severity: "error", message: "Ocurrio un error al guardar, intentalos mas tarde." })
+        setNotification({ ...notification, ...messageError() })
       })
 
   }
@@ -359,13 +356,6 @@ export default function TableListPostulants() {
           hideNextButton
         />
       </Paper>
-      <SnackbarsAlert
-        open={open}
-        anchorOrigin={{ vertical, horizontal }}
-        message={message}
-        handleClose={() => setNotification({...notification,open:false})}
-        severity={severity}
-      />
     </div>
   );
 }

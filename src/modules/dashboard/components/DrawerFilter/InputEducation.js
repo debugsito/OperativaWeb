@@ -11,37 +11,37 @@ export default function InputEducation() {
           <FormController
             type="checkbox"
             label="Sin Estudios"
-            name="education.answers.whitout_education"
+            name="education.answers.whitout_education.active"
           />
           <FormController
             type="checkbox"
             label="Primaria incompleta"
-            name="education.answers.education_primary_incomplete"
+            name="education.answers.education_primary_incomplete.active"
           />
           <FormController
             type="checkbox"
             label="Primaria completa"
-            name="education.answers.education_primary_complete"
+            name="education.answers.education_primary_complete.active"
           />
           <FormController
             type="checkbox"
             label="Secundaria incompleta"
-            name="education.answers.education_secundary_incomplete"
+            name="education.answers.education_secundary_incomplete.active"
           />
           <FormController
             type="checkbox"
             label="Secundaria completa"
-            name="education.answers.education_secundary_complete"
+            name="education.answers.education_secundary_complete.active"
           />
           <FormController
             type="checkbox"
             label="Técnico superior incompleto"
-            name="education.answers.education_tecnic_incomplete"
+            name="education.answers.education_tecnic_incomplete.active"
           />
           <FormController
             type="checkbox"
             label="Técnico superior completo"
-            name="education.answers.education_tecnic_complete"
+            name="education.answers.education_tecnic_complete.active"
           />
         </FormGroup>
       </Grid>

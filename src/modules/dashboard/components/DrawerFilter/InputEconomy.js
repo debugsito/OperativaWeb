@@ -21,7 +21,7 @@ export default function InputEconomy() {
       <Grid item xs={12}>
         <FormController
           type="radioButtons"
-          name="economy.answers.ownHome"
+          name="economy.answers.ownHome.value"
           title="1. La vivienda del postulante es propia:"
           items={[
             { value: "Si", label: "Si" },
@@ -39,7 +39,7 @@ export default function InputEconomy() {
       <Grid item xs={12}>
         <FormController
           type="radioButtons"
-          name="economy.answers.receivedBonus"
+          name="economy.answers.receivedBonus.value"
           title="2. Percibió bonificación extra."
           items={[
             { value: "Si", label: "Si" },
@@ -57,7 +57,7 @@ export default function InputEconomy() {
       <Grid item xs={12}>
         <FormController
           type="radioButtons"
-          name="economy.answers.financialAssistanceAtHome"
+          name="economy.answers.financialAssistanceAtHome.value"
           title="3. Ayuda económicamente en su hogar."
           items={[
             { value: "Si", label: "Si" },

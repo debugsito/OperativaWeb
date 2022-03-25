@@ -88,6 +88,56 @@ const getReportByPostulantId = async (params) => {
   return response;
 };
 
+const saveMedicalTest= async (body) => {
+  const response = await api.post(
+    `/publication_medical_test`,body
+  );
+  return response;
+}
+;
+const saveFormVerificativa = async (body) => {
+  const response = await api.post(
+    `/publication_verificativas`,body
+  );
+  return response;
+};
+
+const saveFormEvaluativa = async (body) => {
+  const response = await api.post(
+    `/publication_evaluativas`,body
+  );
+  return response;
+};
+
+const saveFormInterview = async (body) => {
+  const response = await api.post(`/publication_interview`,body);
+  return response;
+};
+
+const saveFormQuestion = async (body) => {
+  const response = await api.post(`/form`,body);
+  return response;
+};
+
+const assignFormAPostulant = async (body) => {
+  const response = await api.post(
+    `/form/assign/publication/account`,body
+  );
+  return response;
+};
+
+const sendMessage = async (params, body) => {
+  const response = await api.post(
+    `/messages/${params.publication_account_id}`,body
+  );
+  return response;
+};
+
+const getMessages = async (params) => {
+  const response = await api.get(`/messages/${params.publication_account_id}`);
+  return response;
+};
+
 export default {
   getJobs,
   getPublications,
@@ -102,4 +152,12 @@ export default {
   hireApplicant,
   getHistory,
   getReportByPostulantId,
+  saveMedicalTest,
+  saveFormVerificativa,
+  saveFormEvaluativa,
+  saveFormInterview,
+  saveFormQuestion,
+  assignFormAPostulant,
+  sendMessage,
+  getMessages
 };
