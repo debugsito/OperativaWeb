@@ -5,7 +5,7 @@ import { Button, Checkbox, TextInput, Typography } from "../../../shared/compone
 import { MedalInfo, DialogMessageSentEvaluativa } from "../";
 
 //images
-import { ClientIcon, WarningIcon } from "../../images";
+import { ClientIcon, WarningIcon, VerificativaIcon } from "../../images";
 //services
 import serviceDashboard from "../../../../store/services/dashboard/dashboard.service";
 //Context
@@ -25,13 +25,17 @@ const useStyles = makeStyles(theme => ({
     card: {
         padding: "4rem",
         boxShadow: "0px 5px 15px -6px rgba(213, 216, 223, 0.5)",
-        bordeRadius: "10px",
+        bordeRadius: "15px",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
         background: "#fff",
         cursor: "pointer",
+        '&:hover': {
+            background:"#343843",
+            color:"#fff"
+        }    
     },
     form: {
         background: "#fff",
@@ -129,12 +133,12 @@ export default function TabVerificativa({ nextTab, backTab }) {
                 !showForm ?
                     <div className={classes.root}>
                         <div className={classes.card} onClick={goVerification}>
-                            <img src={ClientIcon} alt="icono" />
+                            <img src={ClientIcon} alt="Soy cliente" />
                             <Typography variant="h6"><b>Soy cliente nuevo</b></Typography>
                         </div>
                         <a href="https://plataforma.verificativa.com/login" target="_blank" rel="noopener noreferrer" className={classes.cleanLink}>
                             <div className={classes.card}>
-                                <img src={ClientIcon} alt="icono" />
+                                <img src={VerificativaIcon} alt="Verificativa" />
                                 <Typography variant="h6"><b>Ya soy cliente</b></Typography>
                             </div>
                         </a>
