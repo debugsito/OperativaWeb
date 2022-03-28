@@ -3,7 +3,7 @@ import {
     departmentsList, documentsTypeList, genderList,
     itemsList, jobLevelsList, jobRolesList, providerList,
     districtsList, listDistrictsLima, provincesList, specialtiesList, withdrawalReasonsList,
-    getPeriods, getRubrosOp, listDistrictsByText
+    getPeriods, getRubrosOp, listDistrictsByText, getInstitutes, getOngs, getUniversities
 } from "../../services/utils.service.temp";
 import { utilsType } from "../../types/utils";
 
@@ -452,11 +452,82 @@ const getItemsOp = () => {
     }
 }
 
+const setInstitutes = (payload) => ({
+    type: utilsType.SET_INSTITUTES,
+    payload
+})
+const getListInstitutes = () => {
+    return async (dispatch) => {
+        try {
+            const response = await getInstitutes();
+            dispatch(setInstitutes(response.institutes));
+            dispatch(setError(null));
+        } catch (error) {
+            if (!error.response) {
+                dispatch(setError("Ha ocurrido un error interno."));
+            } else {
+                if (error.response.status === 401) {
+                    dispatch(setError(error.response.data.message));
+                } else {
+                    dispatch(setError("Ha ocurrido un error interno."));
+                };
+            }
+        }
+    }
+}
+const setUniversities = (payload) => ({
+    type: utilsType.SET_UNIVERSITIES,
+    payload
+})
+const getListUniversities = () => {
+    return async (dispatch) => {
+        try {
+            const response = await getUniversities();
+            dispatch(setUniversities(response.universities));
+            dispatch(setError(null));
+        } catch (error) {
+            if (!error.response) {
+                dispatch(setError("Ha ocurrido un error interno."));
+            } else {
+                if (error.response.status === 401) {
+                    dispatch(setError(error.response.data.message));
+                } else {
+                    dispatch(setError("Ha ocurrido un error interno."));
+                };
+            }
+        }
+    }
+}
+const setOngs = (payload) => ({
+    type: utilsType.SET_ONGS,
+    payload
+})
+const getListOngs = () => {
+    return async (dispatch) => {
+        try {
+            const response = await getOngs();
+            console.log(response)
+            dispatch(setOngs(response.ongs));
+            dispatch(setError(null));
+        } catch (error) {
+            if (!error.response) {
+                dispatch(setError("Ha ocurrido un error interno."));
+            } else {
+                if (error.response.status === 401) {
+                    dispatch(setError(error.response.data.message));
+                } else {
+                    dispatch(setError("Ha ocurrido un error interno."));
+                };
+            }
+        }
+    }
+}
+
 export {
     getWithdrawalReasons, setWithdrawalReasons, getItems, setItems,
     getAreas, setAreas, getJobRoles, setJobRoles, getJobLevels, setJobLevels,
     getProviders, getGender, setGender, getSpecialties, setSpecialties, getAcademicLevels, setAcademicLevels,
     getDistricts, getDistrictsLima, getDistrictsByText, getProvinces, setProvinces, getDepartments, setDepartments,
     getCivilStatuses, setCivilStatuses, getDocumentsType, setDocumentsType, setError, getAllPeriods,
-    getRubrosOp, getItemsOp
+    getRubrosOp, getItemsOp, getListInstitutes, getListUniversities, getListOngs
 }

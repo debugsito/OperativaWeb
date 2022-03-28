@@ -9,7 +9,6 @@ const useStyles = makeStyles(theme => ({
     paper: {
         padding: "3rem"
     },
-
     rootAppBar: {
         boxShadow: "none"
     },

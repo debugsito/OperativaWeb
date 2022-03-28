@@ -44,6 +44,10 @@ export default function FormRedes(props) {
         return encodeURIComponent(text)
     }
 
+    const handleCopy = (e) => {
+        navigator.clipboard.writeText(value.url)
+    }
+
     return (
         <div className={classes.container}>
             <Grid container spacing={2}>
@@ -89,7 +93,7 @@ export default function FormRedes(props) {
                     />
                 </Grid>
                 <Grid item xs={12}>
-                    <Button variant="contained" size="large">COPIAR LINK</Button>
+                    <Button variant="contained" size="large" onClick={handleCopy}>COPIAR LINK</Button>
                 </Grid>
 
             </Grid>
