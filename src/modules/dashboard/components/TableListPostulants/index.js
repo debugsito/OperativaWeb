@@ -105,7 +105,6 @@ export default function TableListPostulants() {
   }, [])
   
   useEffect(() => {
-    console.log("queryParams ha cambiado..", queryParams)
     dispatch(getPostulantsByPublicationId({ publication_id, params: { estado: POSTULANTS.current, page, size: rowsPerPage, ...queryParams} }));
   },[queryParams])
 
@@ -119,7 +118,7 @@ export default function TableListPostulants() {
           createdAt: DateTime.fromISO(item.createdAt).toFormat("dd LLL yyyy"),
           education: item.user.level_name ? item.user.level_name : "-",
           resident: `${getDepartmentById(item?.user?.department_id)}, ${getProvinceById(item?.user?.province_id)}, ${getDistrictById(item?.user?.district_id)}`,
-          source: "Multiposting",
+          source: item.multiposting?"Multiposting":"-",
           stateCv: item.user.experience,
           data: item,
         };
@@ -278,7 +277,7 @@ export default function TableListPostulants() {
                       >
                         <Grid item xs={12}>
                           <LinkRouter
-                            to={`/lista-de-postulantes/${row.data.user_id}/perfil`}
+                            to={`/lista-de-postulantes/${row.data.user.account_id}/perfil`}
                           >
                             <b>{row.fullname}</b>
                           </LinkRouter>

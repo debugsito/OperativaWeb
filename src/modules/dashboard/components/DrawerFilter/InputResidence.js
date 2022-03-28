@@ -104,7 +104,6 @@ function InputResidence() {
         }
         return (
           <Grid container spacing={3}>
-            {JSON.stringify(value)}
             <Grid item xs={12}>
               <Select
                 label="Departamento"

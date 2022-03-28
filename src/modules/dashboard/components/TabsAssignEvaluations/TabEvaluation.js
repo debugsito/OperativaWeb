@@ -57,27 +57,27 @@ const validationSchema = Yup.object().shape({
     Yup.object().shape({
       question: Yup.string().required("Este campo es requerido"),
       type_question: Yup.string().required("Este campo es requerido"),
-      options: Yup.array().of(
-        Yup.object().shape({
-          answer: Yup.string().required("Este campo es requerido"),
-          correct: Yup.boolean(),
-        })
-      ),
-    })
-  ),
+      // options: Yup.array().of(
+      //   Yup.object().shape({
+      //     answer: Yup.string().required("Este campo es requerido"),
+      //     correct: Yup.boolean(),
+      //   })
+      // ),
+    }).notRequired(),
+  ).notRequired(),
   extra: Yup.array().of(
     Yup.object().shape({
       question: Yup.string().required("Este campo es requerido"),
       type_question: Yup.string().required("Este campo es requerido"),
-      options: Yup.array().of(
-        Yup.object().shape({
-          answer: Yup.string().required("Este campo es requerido"),
-          correct: Yup.boolean(),
-        })
-      ),
-    })
-  ),
-});
+      // options: Yup.array().of(
+      //   Yup.object().shape({
+      //     answer: Yup.string().required("Este campo es requerido"),
+      //     correct: Yup.boolean(),
+      //   })
+      // ),
+    }).notRequired(),
+  ).notRequired(),
+}).notRequired();
 
 export default function TabEvaluation({ nextTab }) {
   const { publication_id } = useParams();
@@ -94,15 +94,8 @@ export default function TabEvaluation({ nextTab }) {
       evaluation: initialValues,
       extra: initialValues,
     },
-    resolver: yupResolver(validationSchema),
+    // resolver: yupResolver(validationSchema),
   });
-
-  // useEffect(() => {
-  //   const index = values.length - 1;
-  //   if (values[index].type_question === "answer-multiple") {
-  //     console.log("eleji pregunta multiple");
-  //   }
-  // }, [values]);
 
   const saveQuestions = () => {
     setValues(initialValues);
@@ -114,20 +107,31 @@ export default function TabEvaluation({ nextTab }) {
     formMethods.reset()
   };
 
-  // const validate = async() => {
-  //   const evaluationTemp = formMethods.getValues("evaluation");
-  //   const extraTemp = formMethods.getValues("extra");
-  // }
+  const isEmpty = () => {
+    let state = {evaluation:false, extra: false};
+    const valuesForm = formMethods.getValues();
+    const {evaluation, extra} = valuesForm;
+    evaluation.forEach(item => {
+      if(!item.question && !item.type_question){
+        state.evaluation = true; 
+      }
+    })
 
-  // const validate = (array) => {
-  //   let result;
-  //   array.map((item) => {
-  //     result = Object.values(item).every((x) => x != "");
-  //     if (!result) return;
-  //   });
-  //   return result;
-  // };
+    extra.forEach(item => {
+      if(!item.question && !item.type_question){
+        state.extra = true; 
+      }
+    })
+    console.log("state",state)
+    return state
+  }
+
   const onSubmit = async (data) => {
+    
+    if(isEmpty().evaluation && isEmpty().extra){
+      nextTab()
+      return;
+    }
     const body_evaluation = {
       name: "Preguntas",
       type_form: FORM_TYPE.evaluation,

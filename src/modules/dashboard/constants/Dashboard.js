@@ -27,6 +27,26 @@ export const MEET_TYPE = {
     presencial:"2",
 }
 
+export const MESSAGE_STATUS = {
+    idle:{status:"idle",cod:"00"},
+    sending:{status:"sending",cod:"01"},
+    success:{status:"success",cod:"02"},
+    error:{status:"error",cod:"03"},
+}
+
+export const DEFAULT_VALUES_MESSAGE = {
+    subject: "Gracias por postular",
+    body: `Hola Postulante,
+ 
+Nuestro departamento de Recursos Humanos te agradece  por habernos permitido contar con tu participación en el proceso de selección, estamos conscientes del valioso espacio de tiempo que nos has brindado para poder conocerte y comprender tus intereses y aspiraciones. Lamentablemente en esta oportunidad no podrás ser considerada para la siguiente etapa.
+    
+Te agradecemos por haber participado en el proceso, deseándote muchos éxitos en el desarrollo de tus actividades.
+     
+Saludos,
+    
+La empresa`,
+};
+
 export const ROWS_PER_PAGE = 10
 
 export const FILTER_BY = {

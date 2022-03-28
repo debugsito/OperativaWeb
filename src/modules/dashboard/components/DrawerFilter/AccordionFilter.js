@@ -80,34 +80,6 @@ export default function AccordionFilter({ apply }) {
         ]
       }
     }
-    // if (dirtyFields.transport) {
-    //   if (data?.transport?.has_transport) {
-    //     newValue.transport = {
-    //       ...data.transport,
-    //       active: true,
-    //     };
-    //   } else {
-    //     resetItem("transport");
-    //   }
-    // }
-    // Object.keys(data).forEach((item) => {
-    //   if (item !== "residence" && item !== "transport") {
-    //     if (dirtyFields[item]) {
-    //       const valid = Object.values(data[item].answers).some(
-    //         (value) => value.active
-    //       );
-    //       console.log("valid",valid)
-    //       if (valid) {
-    //         newValue[item] = {
-    //           ...data[item],
-    //           active: true,
-    //         };
-    //       } else {
-    //         resetItem(item);
-    //       }
-    //     }
-    //   }
-    // });
 
     apply();
     setValues(newData);

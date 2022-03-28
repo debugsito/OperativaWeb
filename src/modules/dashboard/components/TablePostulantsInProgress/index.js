@@ -20,6 +20,7 @@ import {
   Typography,
   TablePagination,
 } from "../../../shared/components";
+import { SessionRoutes } from "../../../shared/libs/sessionRoutes";
 import EnhancedTableToolbar from "./EnhancedTableToolbar";
 import { DialogSendMessages } from "../";
 import { DialogImbox } from "../";
@@ -34,7 +35,7 @@ import { service_Dashboard } from "../../../../store/services";
 
 //Context || conts
 import { ContextNotification } from "../../context/NotificationAlertContext";
-import { POSTULANTS } from "../../constants/Dashboard";
+import { POSTULANTS, MESSAGE_STATUS } from "../../constants/Dashboard";
 import { messageSuccessful, messageError } from "../../utils/notification";
 
 //actions
@@ -86,14 +87,14 @@ const useStyles = makeStyles((theme) => ({
 export default function TableListPostulants({ selected, setSelected, handleClickCheckbox, handleSelectAllClick }) {
   const classes = useStyles();
   const dispatch = useDispatch()
-  const { postulantsByPublicationId, publicationSelected } = useSelector(state => state?.dashboard)
+  const { postulantsByPublicationId, sent_message } = useSelector(state => state?.dashboard)
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("");
+  const initRoute = SessionRoutes().initRoute;
   // const [selected, setSelected] = useState([]);
   const [postulants, setPostulants] = useState([]);
-  //[createData("", "", "", [], [], { id: "" })]
   const [openModal, setOpenModal] = useState(false)
   const [openImbox, setOpenImbox] = useState(false)
 
@@ -105,6 +106,11 @@ export default function TableListPostulants({ selected, setSelected, handleClick
   useEffect(() => {
     dispatch(getPostulantsByPublicationId({ publication_id, params: { estado: POSTULANTS.inProgress, page, size: rowsPerPage } }))
   }, [])
+
+  useEffect(() => {
+    if(sent_message.status === MESSAGE_STATUS.success.status)
+      dispatch(getPostulantsByPublicationId({ publication_id, params: { estado: POSTULANTS.inProgress, page, size: rowsPerPage } }))
+  }, [sent_message])
 
   useEffect(() => {
     if (postulantsByPublicationId.rows) {
@@ -244,11 +250,16 @@ export default function TableListPostulants({ selected, setSelected, handleClick
                         align="left"
                       >
                         <Grid item xs={12}>
-                          <LinkRouter
-                            to={`/lista-de-postulantes/${row.data.user_id}/perfil`}
+                          {/* <LinkRouter 
+                          to={`/lista-de-postulantes/${row.data.user_id}/perfil`}
+                          to={{
+                            pathname: `${initRoute}/lista-de-postulantes/${row.data.user.account_id}/perfil`,
+                            state: {publication_id}
+                          }}
                           >
                             <b>{row.fullname}</b>
-                          </LinkRouter>
+                          </LinkRouter> */}
+                            <b>{row.fullname}</b>
                         </Grid>
                       </TableCell>
                       <TableCell id={labelId} scope="row" padding="none">

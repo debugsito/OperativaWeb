@@ -117,3 +117,16 @@ export const getRubrosOp = async () => {
     const response = await api.get('/rubrosOp');
     return response;
 }
+
+export const getUniversities = async () => {
+    const response = await api.get('/universities');
+    return response.data;
+}
+export const getInstitutes = async () => {
+    const response = await api.get('/institutes');
+    return response.data;
+}
+export const getOngs = async () => {
+    const response = await api.get('/ongs');
+    return response.data;
+}

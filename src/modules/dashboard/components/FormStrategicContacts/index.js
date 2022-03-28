@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Grid, MenuItem, makeStyles, ListItemText } from "@material-ui/core";
 import { Button, Checkbox, Select, TextInput, Typography } from "../../../shared/components";
 import { DialogInfoPremium } from "../";
@@ -9,6 +9,7 @@ import { useHistory } from "react-router-dom";
 //Redux actions
 import { useDispatch, useSelector } from "react-redux";
 import { actions_Utils } from "../../../../store/actions";
+// import { actions_Utils } from "../../../../store/actions";
 import { useForm } from "../../../hooks";
 
 const useStyles = makeStyles(theme => ({
@@ -62,13 +63,19 @@ export default function Index() {
     const classes = useStyles()
     const dispatch = useDispatch();
     const [openDialog, setOpenDialog] = useState(false)
-    const { departments} = useSelector(state => state?.utils)
+    const { departments, universities, institutes, ongs} = useSelector(state => state?.utils)
     const [chipData, setChipData] = useState([]);
     const [location, setLocation] = useState({
         department_id: "",
         province_id: "",
         district_id: "",
     })
+
+    useEffect(() => {
+        dispatch(actions_Utils.getListUniversities());
+        dispatch(actions_Utils.getListOngs());
+        dispatch(actions_Utils.getListInstitutes());
+    }, [])
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
@@ -155,7 +162,7 @@ export default function Index() {
                             onChange={handleInputChange}
                             renderValue={(selected) => {
                                 let newArray = []
-                                const arrayTemp = [...DATA_ONGS]
+                                const arrayTemp = [...ongs]
                                 for (const ong_id of selected) {
                                     const element = arrayTemp.find(ong => ong.id == ong_id)
                                     newArray.push(element.name)
@@ -164,7 +171,7 @@ export default function Index() {
                             }
                             }
                         >
-                            {DATA_ONGS.map(element =>
+                            {ongs.map(element =>
                                 <MenuItem key={element.id} value={element.id}>
                                     <Checkbox checked={values.ongs.indexOf(element.id) > -1} />
                                     <ListItemText primary={element.name} />
@@ -182,7 +189,7 @@ export default function Index() {
                             onChange={handleInputChange}
                             renderValue={(selected) => {
                                 let newArray = []
-                                const arrayTemp = [...DATA_INSTITUTES]
+                                const arrayTemp = [...institutes]
                                 for (const institute_id of selected) {
                                     const element = arrayTemp.find(institute => institute.id == institute_id)
                                     newArray.push(element.name)
@@ -191,7 +198,7 @@ export default function Index() {
                             }
                             }
                         >
-                            {DATA_INSTITUTES.map(element =>
+                            {institutes.map(element =>
                                 <MenuItem key={element.id} value={element.id}>
                                     <Checkbox checked={values.institutes.indexOf(element.id) > -1} />
                                     <ListItemText primary={element.name} />
@@ -209,7 +216,7 @@ export default function Index() {
                             onChange={handleInputChange}
                             renderValue={(selected) => {
                                 let newArray = []
-                                const arrayTemp = [...DATA_INSTITUTES]
+                                const arrayTemp = [...universities]
                                 for (const university_id of selected) {
                                     const element = arrayTemp.find(university => university.id == university_id)
                                     newArray.push(element.name)
@@ -218,7 +225,7 @@ export default function Index() {
                             }
                             }
                         >
-                            {DATA_UNIVERSITY.map(element =>
+                            {universities.map(element =>
                                 <MenuItem key={element.id} value={element.id}>
                                     <Checkbox checked={values.universities.indexOf(element.id) > -1} />
                                     <ListItemText primary={element.name} />

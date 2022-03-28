@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { Grid, makeStyles } from "@material-ui/core";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 import { TabsAssignEvaluations } from "../components";
 import { Breadcrumbs, Container, Typography, TitlePage, VideoPlayer } from "../../shared/components";
@@ -31,6 +31,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default function AssignEvaluations() {
+    const location = useLocation();
     const classes = useStyles();
     const history = useHistory()
     const initRoute = SessionRoutes().initRoute;
@@ -55,7 +56,7 @@ export default function AssignEvaluations() {
                                     description="A continuacion, asignar evaluaciones a tus postulantes"
                                     handleClick={() => history.goBack()}
                                 >
-                                    Motorizados
+                                    {location?.state?.title}
                                 </TitlePage>
                             </Grid>
                             <Grid item xs={3}>

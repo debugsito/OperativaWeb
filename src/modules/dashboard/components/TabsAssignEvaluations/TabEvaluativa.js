@@ -45,11 +45,9 @@ const initialValues = {
 }
 
 const OPTIONS = {
-  0:"Verificación domiciliaria",
-  1:"Antecedentes penales",
-  2:"Antecedentes policiales",
-  3:"Historial crediticio",
-  4:"Deseo ser contactado para un servicio de verificación especial",
+  0:"Test de integridad y honestidad – nivel Operario",
+  1:"Test psicológico",
+  2:"Test personalizado",
 }
 
 export default function TabVerificativa({ nextTab, backTab }) {
@@ -119,37 +117,24 @@ export default function TabVerificativa({ nextTab, backTab }) {
             <FormControl component="div">
               <FormGroup>
                 <Checkbox
-                  label="Verificación domiciliaria"
-                  name="veri_domiciliaria"
+                  label="Test de integridad y honestidad – nivel Operario"
+                  name="test_integridad"
                   checked={values.veri_domiciliaria}
                   onChange={handleChange}
                 />
                 <Checkbox
-                  label="Antecedentes penales"
-                  name="veri_antecendentes_penales"
+                  label="Test psicológico"
+                  name="test_psicologico"
                   checked={values.veri_antecendentes_penales}
                   onChange={handleChange}
                 />
                 <Checkbox
-                  label="Antecedentes policiales"
-                  name="veri_antecendentes_policiales"
+                  label="Test personalizado"
+                  name="test_personalizado"
                   checked={values.veri_antecendentes_policiales}
                   onChange={handleChange}
                 />
-                <Checkbox
-                  label="Historial crediticio"
-                  name="veri_historial_crediticio"
-                  checked={values.veri_historial_crediticio}
-                  onChange={handleChange}
-                />
-                <Checkbox
-                  label="Deseo ser contactado para un servicio de verificación especial"
-                  name="veri_contact"
-                  checked={values.veri_contact}
-                  onChange={handleChange}
-                />
               </FormGroup>
-              {/* <FormHelperText>Be careful</FormHelperText> */}
             </FormControl>
           </Grid>
           <Grid item xs={12}>
