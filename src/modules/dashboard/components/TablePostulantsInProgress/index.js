@@ -20,6 +20,7 @@ import {
   Typography,
   TablePagination,
 } from "../../../shared/components";
+import { SessionRoutes } from "../../../shared/libs/sessionRoutes";
 import EnhancedTableToolbar from "./EnhancedTableToolbar";
 import { DialogSendMessages } from "../";
 import { DialogImbox } from "../";
@@ -91,6 +92,7 @@ export default function TableListPostulants({ selected, setSelected, handleClick
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("");
+  const initRoute = SessionRoutes().initRoute;
   // const [selected, setSelected] = useState([]);
   const [postulants, setPostulants] = useState([]);
   const [openModal, setOpenModal] = useState(false)
@@ -106,9 +108,7 @@ export default function TableListPostulants({ selected, setSelected, handleClick
   }, [])
 
   useEffect(() => {
-    console.log("sent_message",sent_message)
     if(sent_message.status === MESSAGE_STATUS.success.status)
-    console.log("actualizando tabla ....")
       dispatch(getPostulantsByPublicationId({ publication_id, params: { estado: POSTULANTS.inProgress, page, size: rowsPerPage } }))
   }, [sent_message])
 
@@ -250,11 +250,16 @@ export default function TableListPostulants({ selected, setSelected, handleClick
                         align="left"
                       >
                         <Grid item xs={12}>
-                          <LinkRouter
-                            to={`/lista-de-postulantes/${row.data.user_id}/perfil`}
+                          {/* <LinkRouter 
+                          to={`/lista-de-postulantes/${row.data.user_id}/perfil`}
+                          to={{
+                            pathname: `${initRoute}/lista-de-postulantes/${row.data.user.account_id}/perfil`,
+                            state: {publication_id}
+                          }}
                           >
                             <b>{row.fullname}</b>
-                          </LinkRouter>
+                          </LinkRouter> */}
+                            <b>{row.fullname}</b>
                         </Grid>
                       </TableCell>
                       <TableCell id={labelId} scope="row" padding="none">

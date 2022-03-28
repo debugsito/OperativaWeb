@@ -37,7 +37,6 @@ export default function AssignEvaluations() {
     const initRoute = SessionRoutes().initRoute;
     const routes = [{ name: "Inicio", to: `${initRoute}` }, { name: "Postulantes", to: `${initRoute}/publicacion/:publication_id/lista-de-postulantes` }];
     const [openVideo, setOpenVideo] = useState(false)
-    console.log("location",location)
 
     const handleOpenVideo = () => {
         setOpenVideo(true)

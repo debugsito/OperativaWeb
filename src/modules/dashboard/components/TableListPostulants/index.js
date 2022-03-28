@@ -105,7 +105,6 @@ export default function TableListPostulants() {
   }, [])
   
   useEffect(() => {
-    console.log("queryParams ha cambiado..", queryParams)
     dispatch(getPostulantsByPublicationId({ publication_id, params: { estado: POSTULANTS.current, page, size: rowsPerPage, ...queryParams} }));
   },[queryParams])
 
@@ -278,7 +277,7 @@ export default function TableListPostulants() {
                       >
                         <Grid item xs={12}>
                           <LinkRouter
-                            to={`/lista-de-postulantes/${row.data.user_id}/perfil`}
+                            to={`/lista-de-postulantes/${row.data.user.account_id}/perfil`}
                           >
                             <b>{row.fullname}</b>
                           </LinkRouter>
