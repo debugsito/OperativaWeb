@@ -118,7 +118,7 @@ export default function TableListPostulants() {
           createdAt: DateTime.fromISO(item.createdAt).toFormat("dd LLL yyyy"),
           education: item.user.level_name ? item.user.level_name : "-",
           resident: `${getDepartmentById(item?.user?.department_id)}, ${getProvinceById(item?.user?.province_id)}, ${getDistrictById(item?.user?.district_id)}`,
-          source: "Multiposting",
+          source: item.multiposting?"Multiposting":"-",
           stateCv: item.user.experience,
           data: item,
         };
