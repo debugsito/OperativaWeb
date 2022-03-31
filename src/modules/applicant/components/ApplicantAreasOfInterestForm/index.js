@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux"
 
-import {FormControl, FormHelperText, Grid, InputLabel, MenuItem, Select} from '@material-ui/core'
+import { FormControl, FormHelperText, Grid, InputLabel, MenuItem, Select } from '@material-ui/core'
 import { Button, Snackbars, Modal, Typography } from "../../../shared/components";
 
 import { actions_Utils } from "../../../../store/actions";
@@ -62,8 +62,15 @@ export default function Index({ userData, handleSaveAreasOfInterest }) {
     }
 
     const handleSaveOption = () => {
-        handleSaveAreasOfInterest(values)
-        setOpenModal(false)
+        if (!disabledButtonState) {
+            handleSaveAreasOfInterest(values)
+        } else {
+            validate();
+            setOpenAlert(true)
+            return
+        }
+       
+        // setOpenModal(false)
     }
 
     const bodyModal = (
@@ -123,9 +130,13 @@ export default function Index({ userData, handleSaveAreasOfInterest }) {
 
                 </Select>*/}
             </Grid>
-            <Grid item xs={12} className="justify-center">
-                {/* <Button variant="outlined" size="large" onClick={() => history.push('/')}>Cancelar</Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; */}
+            {/* <Button variant="outlined" size="large" onClick={() => history.push('/')}>Cancelar</Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; */}
+            {/* <Grid item xs={12} className="justify-center">
                 <Button variant="contained" size="large" onClick={handleClickFinish}>Finalizar</Button>
+            </Grid> */}
+
+            <Grid item xs={12} md={12} className="justify-end">
+                <Button variant="contained" size="large" onClick={handleSaveOption}>Continuar</Button>
             </Grid>
 
             <Modal open={openModal} handleCloseModal={() => setOpenModal(false)} >

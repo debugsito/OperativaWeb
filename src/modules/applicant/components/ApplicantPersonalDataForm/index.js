@@ -22,7 +22,6 @@ const defaultValues = {
 
 
 const ApplicantContactInformationForm = React.memo(({ user, handleSavePersonalData }) => {
-    console.log("user", user)
     // console.log("ApplicantContactInformationForm", user)
     // #region 
     let initialValues = user ? user : defaultValues;

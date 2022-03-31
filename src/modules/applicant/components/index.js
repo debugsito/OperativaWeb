@@ -10,3 +10,4 @@ export { default as ApplicantPersonalDataForm } from './ApplicantPersonalDataFor
 export { default as ApplicantWorkExperienceForm } from './ApplicantWorkExperienceForm';
 export { default as ApplicantOptionForm} from './ApplicantOptionForm'
 export { default as ApplicantEvaluativaOptionForm} from './ApplicantEvaluativaOptionForm'
+export {default as ApplicantQuestionnaire} from './ApplicnatQuestionnaire';

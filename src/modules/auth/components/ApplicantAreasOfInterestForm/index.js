@@ -56,16 +56,22 @@ export default function Index({ userData, handleSaveAreasOfInterest }) {
     }
 
     const handleSaveOption = () => {
-        handleSaveAreasOfInterest(values)
+        if (!disabledButtonState) {
+            handleSaveAreasOfInterest(values)
+        } else {
+            validate();
+            setOpenAlert(true)
+            return
+        }
     }
 
     const bodyModal = (
-        <Grid container spacing={3} direction="column" justify="center" alignItems="center">
+        <Grid container spacing={3} direction="column" justifyContent="center" alignItems="center">
             <Grid item xs={12}>
                 <Typography variant="body1">La creación de tu CV se ha realizado con éxito. ¿Deseas guardar tu CV?</Typography>
             </Grid>
             <Grid item xs={12}>
-                <Grid container spacing={3} justify="center">
+                <Grid container spacing={3} justifyContent="center">
                     <Grid item xs={6}>
                         <Button variant="outlined" onClick={() => setOpenModal(false)}>CANCELAR</Button>
                     </Grid>
@@ -99,9 +105,11 @@ export default function Index({ userData, handleSaveAreasOfInterest }) {
 
                 </Select>
             </Grid>
-            <Grid item xs={12} className="justify-center">
-                {/* <Button variant="outlined" size="large" onClick={() => history.push('/')}>Cancelar</Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; */}
+            {/* <Grid item xs={12} className="justify-center">
                 <Button variant="contained" size="large" onClick={handleClickFinish}>Finalizar</Button>
+            </Grid> */}
+              <Grid item xs={12} md={12} className="justify-end">
+                <Button variant="contained" size="large" onClick={handleSaveOption}>Continuar</Button>
             </Grid>
 
             <Modal open={openModal} handleCloseModal={() => setOpenModal(false)} >

@@ -25,7 +25,7 @@ const ShowPublication  = () => {
                         <Breadcrumbs routes={routes} />
                     </Grid>
                     <Grid item xs={12}>
-                    <Grid container justify="center">
+                    <Grid container justifyContent="center">
                         <Grid item xs={11} sm={10}>
                             <Paper className={classes.paper}>
                                 <ShowPosition />
