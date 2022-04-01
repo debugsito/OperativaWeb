@@ -15,6 +15,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import * as moment from 'moment';
+import { arrow } from '../../shared/images/postulant/index'
 
 const useStyles = makeStyles((theme) => ({
     applicantContainer: {
@@ -59,9 +60,7 @@ const ApplicantJobHuntingDetail = () => {
         <Container className={classes.applicantContainer}>
             <Grid container spacing={0}>
                 <Grid item xs={12} className="mb-2">
-                    <a className="btn-logout">
-                        <NavigateBefore onClick={setBefore} />
-                    </a>
+                    <img src={arrow} alt="" onClick={setBefore} />
 
                 </Grid>
                 <Grid item xs={12} className="mb-2 header-job-hunting-detail"
@@ -70,19 +69,18 @@ const ApplicantJobHuntingDetail = () => {
                     <Grid item xs={8} style={{
                         fontSize: '18px',
                         marginTop: '10px',
-                        marginLeft: '8%'
                     }}>
                         <p>
                             <b>{user?.account?.user?.first_name}</b>
                             <br />
-                            esta es tu puntaje
+                            este es tu puntaje
                             <br />
                             a la fecha :
                         </p>
                     </Grid>
-                    <Grid item xs={4}   className="applicant-level-detail" >
+                    <Grid item xs={4} className="applicant-level-detail" >
                         <ApplicantLevelComponent
-                           
+
                             job_hunting_account={user?.account?.job_hunting_account} />
                     </Grid>
                 </Grid>
