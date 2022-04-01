@@ -143,7 +143,7 @@ const PostulateForm = () => {
                                         </Select>
                                     </FormControl>
                                 </Grid>
-                                <Grid item xs={12} className="mb-2">
+                                <Grid item xs={12} className="mb-2 grid-button">
                                     <Button fullWidth variant="contained" color="secondary" size="large" className="buttonSearch"
                                         onClick={handleSubmit}>
                                         Buscar
