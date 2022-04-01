@@ -12,6 +12,7 @@
 .body-result-card {
     display: flex;
     flex-direction: row;
+    width: 90%;
     justify-content: space-between;
 }
 .calendar-icon {

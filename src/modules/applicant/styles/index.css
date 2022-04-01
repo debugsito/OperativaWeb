@@ -240,3 +240,30 @@ input:checked + .slider:before {
     display: flex;
     flex-direction: row;
   }
+
+
+
+@media screen and (min-width: 768px) {
+    .card-cv {
+       height: 100% !important;
+       text-align: center;
+       justify-content: center;
+       align-items: center;
+       display: flex;
+       flex-direction: column;
+    }
+    canvas {
+        height: 85% !important;
+        width: 65% !important;
+    }
+    /* .cv-grid-start {
+       
+        justify-content: start !important;
+        display: flex  !important;
+    }
+    .cv-grid-end {
+       
+        justify-content: end !important;
+        display: flex  !important;
+    } */
+  }

@@ -299,19 +299,19 @@ const Applicant = () => {
                         </p>
                     </div>
                 </Grid>
-                <Grid item xs={4} className="pr-2 mt-4">
+                <Grid item xs={4} className="pr-2 mt-4 cv-grid-end">
                     <div className="card-cv" style={{ position: 'relative',textAlign: 'center' }}>
                         <span className="span-flex"><b>Tu CV</b></span>
-                        <Doughnut data={dataCv} />
+                        <Doughnut className="donut" data={dataCv} />
                         <div style={{ position: 'absolute', width: '100%', top: '50%', left: 0, textAlign: 'center' }}>
                             <span><b>{user.account.cv_percent} %</b></span>
                         </div>
                     </div>
                 </Grid>
-                <Grid item xs={4} className="pr-2 mt-4">
+                <Grid item xs={4} className="pr-2 mt-4 cv-grid-start">
                     <div className="card-cv" style={{ position: 'relative', textAlign: 'center' }}>
                         <span className="span-flex"><b>Cuestionario</b></span>
-                        <Doughnut data={dataCuestionario} />
+                        <Doughnut  className="donut" data={dataCuestionario} />
                         <div style={{ position: 'absolute', width: '100%', top: '50%', left: 0, textAlign: 'center' }}>
                             <span><b>{user.account.questionnaire_percent} %</b></span>
                         </div>

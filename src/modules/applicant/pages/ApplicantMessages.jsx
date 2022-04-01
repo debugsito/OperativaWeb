@@ -13,7 +13,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import IconButton from '@material-ui/core/IconButton'
-
+import { arrow } from '../../shared/images/postulant/index'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -82,9 +82,7 @@ const ApplicantMessages = () => {
             <Container className={classes.container}>
                 <Grid container spacing={0}>
                     <Grid item xs={12} className="mb-2">
-                        <a className="btn-logout">
-                            <NavigateBefore onClick={setBefore} />
-                        </a>
+                        <img src={arrow} alt="" onClick={setBefore} />
                     </Grid>
                     <Grid item xs={12} className="mb-2">
                         <div className="container-result-postulate-form">
@@ -102,41 +100,46 @@ const ApplicantMessages = () => {
                     </Grid>
 
                     <Grid item xs={12} className="mb-2">
-                        <List className={classes.root} >
-                            {
-                                (messages.map((item, i) => {
-                                    return <>
-                                        <ListItem alignItems="flex-start" key={item.id}
-                                            onClick={(event) => handleListItemClick(event, item.id)}
-                                        >
 
-                                            <ListItemAvatar>
-                                                {item?.message_detail[0]?.seen == 1 ? <Email /> : <Drafts />}
-                                            </ListItemAvatar>
-                                            <ListItemText
-                                                primary={item.account.user.fullname}
-                                                secondary={
-                                                    <React.Fragment>
-                                                        <Typography
-                                                            component="span"
-                                                            letiant="body2"
-                                                            className={classes.messageBody}
-                                                            color="textPrimary"
-                                                        >
-                                                            {item.subject}
-                                                        </Typography>
-                                                        {item?.message_detail[0]?.body.slice(0, 20)}...
-                                                    </React.Fragment>
-                                                }
-                                            />
-                                            <Typography>
-                                                {formatDate(item?.message_detail[0]?.createdAt)}
-                                            </Typography>
-                                        </ListItem>
-                                    </>
-                                }))
-                            }
-                        </List>
+                        {messages.length > 0 ?
+                            <List className={classes.root} >
+                                {
+                                    (messages.map((item, i) => {
+                                        return <>
+                                            <ListItem alignItems="flex-start" key={item.id}
+                                                onClick={(event) => handleListItemClick(event, item.id)}
+                                            >
+
+                                                <ListItemAvatar>
+                                                    {item?.message_detail[0]?.seen == 1 ? <Email /> : <Drafts />}
+                                                </ListItemAvatar>
+                                                <ListItemText
+                                                    primary={item.account.user.fullname}
+                                                    secondary={
+                                                        <React.Fragment>
+                                                            <Typography
+                                                                component="span"
+                                                                letiant="body2"
+                                                                className={classes.messageBody}
+                                                                color="textPrimary"
+                                                            >
+                                                                {item.subject}
+                                                            </Typography>
+                                                            {item?.message_detail[0]?.body.slice(0, 20)}...
+                                                        </React.Fragment>
+                                                    }
+                                                />
+                                                <Typography>
+                                                    {formatDate(item?.message_detail[0]?.createdAt)}
+                                                </Typography>
+                                            </ListItem>
+                                        </>
+                                    }))
+                                }
+                            </List> : <>
+                               <span>No tiene mensajes</span>
+                            </>
+                        }
 
                     </Grid>
 
