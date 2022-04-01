@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 import '../styles/postulate-form.css';
 import { useParams } from "react-router-dom";
 import { service_Applicant } from "../../../store/services";
-
+import { arrow } from '../../shared/images/postulant/index'
 function rand() {
     return Math.round(Math.random() * 20) - 10;
 }
@@ -26,7 +26,8 @@ const useStyles = makeStyles(theme => ({
     applicantContainer: {
         background: '#f7f7f7',
         padding: '1rem',
-    },
+        paddingBottom: '5rem'
+    }
 }));
 
 
@@ -76,9 +77,7 @@ const ApplicantPublicationDetail = () => {
             <Container className={classes.applicantContainer}>
                 <Grid container spacing={0}>
                     <Grid item xs={12} className="mb-2">
-                        <a className="btn-logout">
-                            <NavigateBefore onClick={setBefore} />
-                        </a>
+                        <img src={arrow} alt="" onClick={setBefore} />
                     </Grid>
                     <Grid item xs={12} className="mb-2">
                         <div className="container-result-postulate-form">

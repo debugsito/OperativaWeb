@@ -11,7 +11,13 @@ import { useParams } from "react-router-dom";
 import { service_Applicant } from "../../../store/services";
 import { useSelector, useDispatch } from "react-redux";
 import { getAccount } from '../../../store/actions/auth/auth.middleware'
-
+import { arrow } from '../../shared/images/postulant/index'
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import CardHeader from '@material-ui/core/CardHeader';
+import TextField from '@material-ui/core/TextField';
+import CardActions from '@material-ui/core/CardActions';
+import CheckSvg from "../assets/images/check.svg"
 
 function rand() {
     return Math.round(Math.random() * 20) - 10;
@@ -93,9 +99,7 @@ const ItemResultPostulate = () => {
             <Container className={classes.applicantContainer}>
                 <Grid container spacing={0}>
                     <Grid item xs={12} className="mb-2">
-                        <a className="btn-logout">
-                            <NavigateBefore onClick={setBefore} />
-                        </a>
+                        <img src={arrow} alt="" onClick={setBefore} />
                     </Grid>
                     <Grid item xs={12} className="mb-2">
                         <div className="container-result-postulate-form">
@@ -130,14 +134,46 @@ const ItemResultPostulate = () => {
 
             <Dialog onClose={handleClose} aria-labelledby="signin-dialog" open={open}
                 fullWidth
-                maxWidth="xs"
+                // maxWidth="xs"
             >
-                <MuiDialogContent dividers>
-                    <Text variant="subtitle1">Postulación enviada</Text>
-                    <p>Tu mensaje fue enviado con éxito al reclutador</p>
-                    <div className="text-center">
-                        <Button variant="contained" size="large" onClick={handleClose}>Cerrar</Button>
-                    </div>
+                <MuiDialogContent>
+                    <Grid container spacing={0} justifyContent="center">
+                        
+                            <Grid item xs={12} style={{ textAlign: 'center', padding:'2px' }}>
+                                <img src={CheckSvg} alt="check"
+                                width="83" heigth="86"
+                                ></img>
+                                <CardHeader style={{ textAlign: 'center' }} title={
+                                    <React.Fragment>
+                                        <Typography
+                                            variant="h6"
+                                            component="h6"
+                                            color="textPrimary"
+                                        >
+                                            Postulación Enviada
+                                        </Typography>
+                                    </React.Fragment>
+                                } />
+
+                                <CardContent style={{ textAlign: 'center' }}>
+                                    <Grid item xs={12} >
+                                        <Typography variant="body2" color="textSecondary" component="p">
+
+                                           Tu mensaje fue enviado con éxio al reclutador
+                                        </Typography>
+
+                                    </Grid>
+                                </CardContent>
+                                <CardActions>
+                                    <Grid item xs={12}>
+                                        <Grid container spacing={0} direction='row' justifyContent="center">
+                                            <Button variant="contained" size="large" onClick={handleClose}>Cerrar</Button>
+                                        </Grid>
+                                    </Grid>
+                                </CardActions>
+                            </Grid>
+                      
+                    </Grid>
                 </MuiDialogContent>
             </Dialog>
         </>

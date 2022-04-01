@@ -6,17 +6,19 @@ import React, { useEffect } from "react";
 import ApplicantResultsPostulateForm from "../components/ApplicantPostulateForm/ApplicantResultsPostulateForm";
 import { useParams } from "react-router-dom";
 import ApplicantOptionForm from '../components/ApplicantOptionForm/index'
-import {useSelector, useDispatch} from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { getPublicationAccountById } from "../../../store/actions/applicant/applicant.action";
+import { arrow } from '../../shared/images/postulant/index'
 
 const useStyles = makeStyles((theme) => ({
     // background: #f7f7f7;
     // padding: 1rem;
-    container: {
+    applicantContainer: {
         background: '#f7f7f7',
         padding: '1rem',
+        paddingBottom: '5rem'
     },
-    spanText : {
+    spanText: {
         fontWeight: 'bold',
         fontSize: '1.5em'
     }
@@ -28,7 +30,7 @@ const ApplicationDetail = () => {
     const classes = useStyles();
     const history = useHistory()
     const { id } = useParams();
-    const {applicant: {publicationAccountSelected}} = useSelector(state => state);
+    const { applicant: { publicationAccountSelected } } = useSelector(state => state);
     const initRoute = SessionRoutes().initRoute;
 
     useEffect(() => {
@@ -43,41 +45,39 @@ const ApplicationDetail = () => {
         history.push(`${initRoute}/postulaciones`)
     };
 
-    const getEvalucacionesNotification = ()=> {
-        const {medical_test,interviewed,questions , verificativa, evaluativa} =publicationAccountSelected;
-        if(medical_test || interviewed || questions ||  verificativa || evaluativa){
+    const getEvalucacionesNotification = () => {
+        const { medical_test, interviewed, questions, verificativa, evaluativa } = publicationAccountSelected;
+        if (medical_test || interviewed || questions || verificativa || evaluativa) {
             return true;
         }
         return false
     }
 
     return (
-        <Container className={classes.container}>
+        <Container className={classes.applicantContainer}>
             <Grid container spacing={0}>
                 <Grid item xs={12} className="mb-2">
-                    <a className="btn-logout">
-                        <NavigateBefore onClick={setBefore} />
-                    </a>
+                    <img src={arrow} alt="" onClick={setBefore} />
                 </Grid>
                 <Grid item xs={12}>
-                    <ApplicantResultsPostulateForm data={publicationAccountSelected} 
-                    status = {publicationAccountSelected?.estado}
-                    route={`${initRoute}/postulacion/detalle/${publicationAccountSelected.id}/1`} />
+                    <ApplicantResultsPostulateForm data={publicationAccountSelected}
+                        status={publicationAccountSelected?.estado}
+                        route={`${initRoute}/postulacion/detalle/${publicationAccountSelected.id}/1`} />
                     <h1> Felicitaciones ! </h1>
                     <p>Te encuentas en el proceso de selección, la empresa activará las tareas que deberás resolver. <br />
-                    <br />
+                        <br />
                         Te recomendamos que estés atento todo el proceso. <span className={classes.spanText}>¡Éxitos!</span> </p>
                 </Grid>
                 <Grid item xs={12}>
-                    <ApplicantOptionForm title="Bandeja de mensajes"  icon="Email"
-                    content="Revisa y responde los mensajes del reclutador" 
-                    route={`${initRoute}/mensajes/${publicationAccountSelected.id}`}
-                    color={'#EE0202'} notification = {publicationAccountSelected.unread_messages}
+                    <ApplicantOptionForm title="Bandeja de mensajes" icon="Email"
+                        content="Revisa y responde los mensajes del reclutador"
+                        route={`${initRoute}/mensajes/${publicationAccountSelected.id}`}
+                        color={'#EE0202'} notification={publicationAccountSelected.unread_messages}
                     />
                     <ApplicantOptionForm title="Evaluaciones" icon="Assignment"
-                    content="Responde y asiste a las evaluaciones del proceso de selección."
-                    route={`${initRoute}/evaluaciones/${publicationAccountSelected.id}`}
-                    color={'#ED1D40'} notification = {getEvalucacionesNotification()}
+                        content="Responde y asiste a las evaluaciones del proceso de selección."
+                        route={`${initRoute}/evaluaciones/${publicationAccountSelected.id}`}
+                        color={'#ED1D40'} notification={getEvalucacionesNotification()}
                     />
                 </Grid>
             </Grid>

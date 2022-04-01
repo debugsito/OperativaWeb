@@ -1,18 +1,18 @@
-import React, {useState, useEffect} from "react";
-import { useHistory} from "react-router-dom";
-import {Container, Grid, AppBar, Box, makeStyles} from "@material-ui/core";
-import { Typography} from "../../shared/components";
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import { Container, Grid, AppBar, Box, makeStyles } from "@material-ui/core";
+import { Typography } from "../../shared/components";
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import PropTypes from 'prop-types';
 import ApplicationInProgress from '../components/ApplicationInProgress/ApplicationInProgress';
 import CompletedApplication from "../components/CompletedApplication/CompletedApplication";
 
-import {SessionRoutes} from "../../shared/libs/sessionRoutes";
-import {NavigateBefore} from "@material-ui/icons";
+import { SessionRoutes } from "../../shared/libs/sessionRoutes";
+import { NavigateBefore } from "@material-ui/icons";
 import { useParams } from "react-router-dom";
 import { arrow } from '../../shared/images/postulant/index'
-const TABS = [{label: "EN PROCESO"}, {label: "FINALIZADO"}]
+const TABS = [{ label: "EN PROCESO" }, { label: "FINALIZADO" }]
 
 
 const useStyles = makeStyles((theme) => ({
@@ -40,12 +40,17 @@ const useStyles = makeStyles((theme) => ({
         '.MuiTab-wrapper': {
             'font-weight': 'bold !important'
         }
+    },
+    applicantContainer: {
+        background: '#f7f7f7',
+        padding: '1rem',
+        paddingBottom: '5rem'
     }
     // fin
 }));
 
 function TabPanel(props) {
-    const {children, value, index, ...other} = props;
+    const { children, value, index, ...other } = props;
     return (
         <div
             role="tabpanel"
@@ -85,7 +90,7 @@ const Applications = () => {
 
 
     useEffect(() => {
-        if(option) setValueTab(Number(option));
+        if (option) setValueTab(Number(option));
         else setValueTab(0);
     }, []);
 
@@ -98,13 +103,13 @@ const Applications = () => {
     };
 
     return (
-        <Container className="applicant-container">
+        <Container className={classes.applicantContainer}>
             <Grid container spacing={0}>
                 <Grid item xs={12} className="mb-2">
-                <img src={arrow} alt="" onClick={setBefore} />
+                    <img src={arrow} alt="" onClick={setBefore} />
                 </Grid>
             </Grid>
-            <AppBar position="static" classes={{colorPrimary: classes.appBarColorPrimary}} className="Appbar-tabs">
+            <AppBar position="static" classes={{ colorPrimary: classes.appBarColorPrimary }} className="Appbar-tabs">
                 <Tabs value={valueTab} onChange={handleChange} textColor="primary">
                     {
                         TABS.map((item, index) => (
@@ -125,10 +130,10 @@ const Applications = () => {
             </AppBar>
             <Grid>
                 <TabPanel value={valueTab} index={0} key={0}>
-                    <ApplicationInProgress/>
+                    <ApplicationInProgress />
                 </TabPanel>
                 <TabPanel value={valueTab} index={1} key={1}>
-                    <CompletedApplication/>
+                    <CompletedApplication />
                 </TabPanel>
             </Grid>
         </Container>
