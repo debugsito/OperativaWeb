@@ -21,7 +21,7 @@ import { updateSearchWork } from "../../../store/services/auth/user.service";
 import { Chart, ArcElement } from 'chart.js'
 import { Doughnut } from 'react-chartjs-2';
 import ApplicantLevelComponent from "../components/ApplicantLevelComponent/index"
-import { arrowWhite } from "../../shared/images/postulant/index"
+import { arrowWhite, deseoPostular,soyCandidato } from "../../shared/images/postulant/index"
 
 Chart.register(ArcElement);
 // var originalDoughnutDraw = Chart.controllers.doughnut.prototype.draw;
@@ -229,9 +229,13 @@ const Applicant = () => {
                             }
                             }
 
-                        > <h3 style={{ color: ' white', fontWeigth: 'bold', fontSize: '18px' }}> El juego del <br />cazatrabajo</h3></div>
-                        <div className="row-card">
-                            <h6 style={{ fontSize: '15px' }} className="home-title">Búsqueda de trabajo</h6>
+                        >
+                            <div className="shadowLayer">
+                                <h3  class="titleLayer" style={{ color: ' white', fontWeigth: 'bold', fontSize: '18px', zIndex:'2' }}> El juego del <br />cazatrabajo</h3>
+                            </div>
+                        </div>
+                        <div className="row-card search-work">
+                            <h6 style={{ fontSize: '12.5px' }} className="home-title">Búsqueda de trabajo</h6>
                             <div className="container-switch">
                                 <b><span>Inactivo</span></b>
                                 <label className="switch">
@@ -253,7 +257,7 @@ const Applicant = () => {
                 <Grid item xs={12} onClick={goToPostulateForm}>
                     <div className="card-home mt-4">
                         <Grid item xs={4} className="fl">
-                            <img src={ImagePostular} className="" alt="" />
+                            <img class="imageApplicant" src={deseoPostular} className="" alt="" />
                         </Grid>
                         <Grid item xs={5} className="fl pl-1">
                             <div>
@@ -271,7 +275,7 @@ const Applicant = () => {
                 <Grid item xs={12} onClick={goToCandidate}>
                     <div className="card-home mt-4">
                         <Grid item xs={4} className="fl">
-                            <img src={ImageCandidato} className="" alt="" />
+                            <img class="imageApplicant" src={soyCandidato} className="" alt="" />
                         </Grid>
                         <Grid item xs={5} className="fl pl-1">
                             <div>
@@ -296,17 +300,17 @@ const Applicant = () => {
                     </div>
                 </Grid>
                 <Grid item xs={4} className="pr-2 mt-4">
-                    <div className="card-cv" style={{ position: 'relative' }}>
-                        <span><b>Tu CV</b></span>
+                    <div className="card-cv" style={{ position: 'relative',textAlign: 'center' }}>
+                        <span className="span-flex"><b>Tu CV</b></span>
                         <Doughnut data={dataCv} />
                         <div style={{ position: 'absolute', width: '100%', top: '50%', left: 0, textAlign: 'center' }}>
                             <span><b>{user.account.cv_percent} %</b></span>
                         </div>
                     </div>
                 </Grid>
-                <Grid item xs={4} className="pl-2 mt-4">
+                <Grid item xs={4} className="pr-2 mt-4">
                     <div className="card-cv" style={{ position: 'relative', textAlign: 'center' }}>
-                        <span><b>Cuestionario</b></span>
+                        <span className="span-flex"><b>Cuestionario</b></span>
                         <Doughnut data={dataCuestionario} />
                         <div style={{ position: 'absolute', width: '100%', top: '50%', left: 0, textAlign: 'center' }}>
                             <span><b>{user.account.questionnaire_percent} %</b></span>

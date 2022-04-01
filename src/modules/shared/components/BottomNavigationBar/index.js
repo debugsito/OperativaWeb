@@ -3,6 +3,7 @@ import {Home, AccountCircle, Widgets} from '@material-ui/icons';
 import {useHistory} from "react-router-dom";
 import {SessionRoutes} from "../../libs/sessionRoutes";
 import { useSelector } from "react-redux";
+import './index.css'
 
 const useStyles = makeStyles((theme) => ({
     toolbar: {
@@ -54,7 +55,7 @@ const BottomNavigationBar = () => {
 
     return (
         <>
-            <div className={classes.toolbar}>
+            <div className={`${classes.toolbar} toolbarCondition`} >
                 <div className={`${classes.containerToolbar} ${user?.account?.job_hunting_account? classes.playing: ''}`}>
                     <div className={classes.containerToolbarIcon}>
                         <a onClick={goToHome} className={classes.iconsToolbar}>
