@@ -256,14 +256,5 @@ input:checked + .slider:before {
         height: 85% !important;
         width: 65% !important;
     }
-    /* .cv-grid-start {
-       
-        justify-content: start !important;
-        display: flex  !important;
-    }
-    .cv-grid-end {
-       
-        justify-content: end !important;
-        display: flex  !important;
-    } */
   }
+
