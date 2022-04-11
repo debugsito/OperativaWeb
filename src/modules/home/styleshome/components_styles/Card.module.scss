@@ -11,7 +11,7 @@
   cursor: pointer;
   background: $color_white;
   padding: 1em;
-  margin-top: 2em;
+  margin-top: 3em;
   box-shadow: 0px 5px 15px -6px rgba(213, 216, 223, 0.5);
   border-radius: 20px;
   z-index: 2;
@@ -41,17 +41,34 @@
   color: #fff;
   z-index: -1;
   border-radius: 10px 10px 0px 0px;
+  
 
   h3 {
     margin: 0;
   }
 }
 
+h5 {
+  margin: 0;
+}
+h6 {
+  margin: 0;
+}
+.textcomment{
+  font-weight: 500;
+}
 .textNumber {
   color: #5e60fd;
   font-weight: 800;
-  font-size: 1.8em;
-  text-align: center;
+  font-size: 2.8em;
+  text-align: left;
+}
+.textNumber2 {
+  color: #5e60fd;
+  font-weight: 500;
+  font-size: 0.8em;
+  text-align: left;
+  margin-bottom: 3rem;
 }
 
 .igv {

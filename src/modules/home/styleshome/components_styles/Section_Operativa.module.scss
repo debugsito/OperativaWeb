@@ -10,18 +10,20 @@
 
 .content {
   width: $width_desktop;
-  height: 85vh;
+  height: 100vh;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   background: #f6f7f8;
+  margin-top: 50px;
 
   .financed {
     .logos {
       display: flex;
       flex-wrap: wrap;
       grid-gap: 1.2rem;
+      
       margin-bottom: 1vh;
       align-items: center;
     }

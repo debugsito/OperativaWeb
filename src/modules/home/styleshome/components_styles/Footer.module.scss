@@ -49,7 +49,10 @@
 }
 .TwoColumB {
 	min-width: 50%;
-	padding-top: 2.5rem;
+	padding-top: 0rem;
+	display: flex;
+    flex-wrap: wrap;
+    
 }
 .redesMovil {
 	display: none;
@@ -62,11 +65,13 @@
 		grid-gap: 1rem;
 		}
 
-		.redes {
+	.redes {
 			display: none;
-			
 			}
-	}
+	.TwoColumB {
+				
+				padding-top: 0rem;
+			}
 
-
+		}
 

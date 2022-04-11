@@ -6,15 +6,18 @@ import style from "../styleshome/components_styles/Section_Price.module.scss";
 const CARDS_DATA = [
   {
     plan: "Free",
+    textcost :"Costo por aviso",
     price: "S/ 0",
+    comment:"Publicando hasta 2 avisos, Cada aviso te muestra hasta 20 postulantes procesados por IA.",
+    price2: "Precio mes S/ 0",
     recommended: false,
     features: [
       {
-        description: "Crear hasta 100 publicaciones",
+        description: "Crear hasta 2 publicaciones",
         check: true,
     },
     {
-      description: "Accede una lista de 200 postulantes preprocesadas por IA",
+      description: "Accede una lista de hasta 20 postulantes preprocesadas por IA",
       check: true,
   },
     {
@@ -47,15 +50,18 @@ const CARDS_DATA = [
   },
   {
       plan: "Emprendedor",
-      price: "S/ 2500 más IGV",
+      textcost :"Costo promedio por aviso",
+      price: "S/ 250.00",
+      comment:"Publicando hasta 10 avisos, Cada aviso te muestra hasta 50 postulantes procesados por IA.",
+      price2: "Precio mes S/ 2500 más IGV",
       recommended: false,
       features: [
           {
-              description: "Crear hasta 2 publicaciones",
+              description: "Crear hasta 10 publicaciones",
               check: true,
           },
           {
-            description: "Accede una lista de 10 postulantes preprocesadas por IA",
+            description: "Accede una lista de hasta 50 postulantes preprocesadas por IA",
             check: true,
         },
           {
@@ -82,22 +88,25 @@ const CARDS_DATA = [
         },
         {
           description: "Acceso a multiposting de publicación",
-          check: true,
+          check: false,
         },
 
       ]
   },
   {
       plan: "Empresa",
-      price: "S/ 3800 más IGV",
-      recommended: false,
+      textcost :"Costo promedio por aviso",
+      price: "S/ 160.00",
+      comment:"Publicando hasta 20 avisos, Cada aviso te muestra hasta 120 postulantes procesados por IA.",
+      price2: "Precio mes S/ 3200 más IGV",
+      recommended: true,
       features: [
         {
-          description: "Crear hasta 10 publicaciones",
+          description: "Crear hasta 20 publicaciones",
           check: true,
       },
       {
-        description: "Accede una lista de 50 postulantes preprocesadas por IA",
+        description: "Accede una lista de 120 postulantes preprocesadas por IA",
         check: true,
     },
       {
@@ -131,14 +140,15 @@ const CARDS_DATA = [
   {
       plan: "Corporativo",
       price: "Contácta a un asesor",
-      recommended: true,
+      comment:"Para publicaciones de 100 avisos a más, Cada aviso te muestra hasta 200 postulantes procesados por IA.",
+      recommended: false,
       features: [
         {
-          description: "Crear hasta 100 publicaciones",
+          description: "Crea más de 100 publicaciones al mes",
           check: true,
       },
       {
-        description: "Accede una lista de 200 postulantes preprocesadas por IA",
+        description: "Accede una lista de hasta 200 postulantes preprocesadas por IA",
         check: true,
     },
       {

@@ -84,9 +84,9 @@ export default function Sectiontab({ tab, setTab }) {
                 <div className={style.image}>
                   <img className={style.img} src={item.img} />
                 </div>
-                {/* <div className={style.circle}>
+                <div className={style.circle}>
                   <img src={Circle} />
-                </div> */}
+                </div>
               </div>
             </Tab>
           ))}
