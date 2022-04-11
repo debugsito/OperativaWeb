@@ -102,12 +102,12 @@ export default function CorporationDataForm({ handleRegisterCompleted, goToPrevi
 
     return (
         <>
-            <Grid item xs={12} justify="center">
+            <Grid item xs={12} justifyContent="center">
                 <Typography variant="h6" component="h6" className="title-color">
                     {accountType === "municipality" ? "DATOS DE LA MUNICIPALIDAD" : "DATOS DE LA EMPRESA"}
                 </Typography>
             </Grid>
-            <Grid item xs={12} justify="center">
+            <Grid item xs={12} justifyContent="center">
                 <TextInput
                     fullWidth
                     name="razon_social"
@@ -118,7 +118,7 @@ export default function CorporationDataForm({ handleRegisterCompleted, goToPrevi
                     helperText={errors.razon_social}
                 />
             </Grid>
-            <Grid item xs={12} justify="center">
+            <Grid item xs={12} justifyContent="center">
                 <TextInput
                     fullWidth
                     name="document_number"
@@ -132,7 +132,7 @@ export default function CorporationDataForm({ handleRegisterCompleted, goToPrevi
             </Grid>
             {
                 accountType === "municipality" &&
-                <Grid item xs={12} justify="center">
+                <Grid item xs={12} justifyContent="center">
                     <Autocomplete
                         label="Distrito"
                         name="district_id"
@@ -143,7 +143,7 @@ export default function CorporationDataForm({ handleRegisterCompleted, goToPrevi
                     />
                 </Grid>
             }
-            <Grid item xs={12} justify="center">
+            <Grid item xs={12} justifyContent="center">
                 <TextInput
                     fullWidth
                     name="phone"

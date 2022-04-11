@@ -11,17 +11,24 @@ import ScrollToTopRouter from './ScrollTopRouter';
 
 //Global Sidebar
 import { Navigation } from "../modules/shared/components";
+import BottomNavigationBar from "../modules/shared/components/BottomNavigationBar";
+import {useSelector} from "react-redux";
 
 
 
 
 const AppRouter = () => {
-  return (
+    const { user } = useSelector(state => state?.auth);
+    console.log(user.account);
+    return (
     <BrowserRouter>
       <Navigation>
         <ScrollToTopRouter />
         <Route to={OperativaModule.moduleRouter.pathBase} component={OperativaModule.moduleRouter.componentRouter} />
       </Navigation>
+        {user.account.rol_usuario === 'postulante' &&
+            <BottomNavigationBar />
+        }
     </BrowserRouter>
   );
 };

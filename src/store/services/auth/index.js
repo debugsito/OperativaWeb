@@ -1,5 +1,5 @@
 import { changePassword, changePasswordFromDashboard, logIn, loginAs, recoverPassword } from "./auth.service"
-import { updateAccount, getAccount } from "./user.service"
+import { updateAccount, getAccount, updateSearchWork } from "./user.service"
 
 export default {
     changePassword,
@@ -7,6 +7,7 @@ export default {
     recoverPassword,
     updateAccount,
     getAccount,
+    updateSearchWork,
     changePasswordFromDashboard,
     loginAs,
 }

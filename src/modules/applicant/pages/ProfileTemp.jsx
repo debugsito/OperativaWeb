@@ -4,7 +4,14 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 //componentes
-import { ApplicantContactInformationForm, ApplicantEducationForm, ApplicantPersonalDataForm, ApplicantWorkExperienceForm, ApplicantAreasOfInterestForm } from '../components';
+import {
+    ApplicantContactInformationForm,
+    ApplicantEducationForm,
+    ApplicantPersonalDataForm,
+    ApplicantWorkExperienceForm,
+    ApplicantAreasOfInterestForm,
+    ApplicantQuestionnaire
+} from '../components';
 import { Accordion, AccordionDetails, AccordionSummary, Grid, Typography, makeStyles } from '@material-ui/core';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
@@ -15,7 +22,7 @@ import { Button, Modal, LinearProgress } from '../../shared/components';
 import { service_ApplicantProfile } from '../../../store/services';
 import { getProfileOfApplicant } from "../../../store/actions/dashboard/dashboard.middleware";
 import { getAccount } from "../../../store/actions/auth/auth.middleware";
-import { numberOneSVG, numberTwoSVG, numberThreeSVG, numberFourSVG, numberFiveSVG } from '../../shared/images/postulant';
+import { numberOneSVG, numberTwoSVG, numberThreeSVG, numberFourSVG, numberFiveSVG, numberSixSVG } from '../../shared/images/postulant';
 
 //UTILS
 import { getOS } from '../../shared/utils';
@@ -23,13 +30,13 @@ import { normalize } from '../../shared/utils/postulantForm.utils';
 
 
 const useStyle = makeStyles(theme => ({
-    expandIcon:{
+    expandIcon: {
         color: "var(--paragraphColor)",
-        '&$expanded':{
+        '&$expanded': {
             transform: "rotate(360deg)"
         },
     },
-    expanded:{},
+    expanded: {},
 }))
 
 const Profile = ({ history }) => {
@@ -44,22 +51,22 @@ const Profile = ({ history }) => {
 
     const [personalData, setPersonalData] = useState()
     const [contactInformation, setContactInformation] = useState()
-
     const [education, setEducation] = useState()
     const [areasOfInterest, setAreasOfInterest] = useState()
     const [hasExperience, setHasExperience] = useState()
+    const [questionnaire, setQuestionnaire] = useState()
 
     useEffect(() => {
-        // dispatch(getProfileOfApplicant({postulant_id:user.account.id}))
-    },[])
-    
+        dispatch(getProfileOfApplicant({postulant_id:user.account.id}))
+    }, [])
+
     useEffect(() => {
-        if(applicantProfile){
+        if (applicantProfile) {
             const workExperience_temp = normalize.workExperienceData(applicantProfile)
             setProfile(applicantProfile)
             setWorkExperience(workExperience_temp)
         }
-    },[applicantProfile])
+    }, [applicantProfile])
 
     const handleSavePersonalData = async (data) => {
         if (data) {
@@ -80,7 +87,7 @@ const Profile = ({ history }) => {
 
     const handleSaveContactInformation = async (data) => {
         if (data) {
-            const dataTemp = {...data}
+            const dataTemp = { ...data }
             dataTemp.operating_system = getOS()
             // saveApplicantProfile('contactInformation', dataTemp)
             setContactInformation(dataTemp)
@@ -88,6 +95,7 @@ const Profile = ({ history }) => {
             try {
                 const response = await service_ApplicantProfile.applicantPersonalDataRegister(dataTemp);
                 if (response.status === 200) {
+                    dispatch(getAccount())
                     setStep(3)
                 }
             } catch (error) {
@@ -112,16 +120,31 @@ const Profile = ({ history }) => {
     }
 
     const handleSaveAreasOfInterest = async (data) => {
-        let body = {id:profile.id ,...data}
-            try {
-                const response = await service_ApplicantProfile.applicantPersonalDataRegister(body);
-                if (response.status === 200) {
-                    setStep(6) //Mostrar Datos completados con éxito
-                }
-            } catch (error) {
-
+        let body = { id: profile.id, ...data }
+        setAreasOfInterest(data)
+        try {
+            const response = await service_ApplicantProfile.applicantPersonalDataRegister(body);
+            if (response.status === 200) {
+                dispatch(getAccount())
+                setStep(6) //Mostrar Datos completados con éxito
             }
-        
+        } catch (error) {
+
+        }
+    }
+
+    const handleSaveQuestionnaire = async (data) => {
+        let body = { id: profile.id, ...data }
+        setQuestionnaire(data);
+        try {
+            const response = await service_ApplicantProfile.applicantPersonalDataRegister(body);
+            if (response.status === 200) {
+                dispatch(getAccount())
+                setStep(7) //Mostrar Datos completados con éxito
+            }
+        } catch (error) {
+
+        }
     }
 
     const saveApplicantProfile = (property, value) => {
@@ -129,26 +152,26 @@ const Profile = ({ history }) => {
     };
 
     const expandIcon = (validation, selectedStep) => (
-        validation ? 
-            <CheckCircleIcon /> : 
+        validation ?
+            <CheckCircleIcon /> :
             (
-                step === selectedStep ? 
-                <ExpandLessIcon style={{ color: "var(--secondaryButtonColor)" }} /> : 
-                <ChevronRightIcon style={{ color: "var(--paragraphColor)" }} />
+                step === selectedStep ?
+                    <ExpandLessIcon style={{ color: "var(--secondaryButtonColor)" }} /> :
+                    <ChevronRightIcon style={{ color: "var(--paragraphColor)" }} />
             )
     )
 
     return (
         <Grid container justify="center" alignItems="center" style={{ padding: 20 }}>
             <Grid item xs={12} md={12} lg={12}>
-                <LinearProgress variant="determinate" value={(step - 1) * 20} />
+                <LinearProgress variant="determinate" value={(step - 1) * 16.67} />
             </Grid>
             <Grid item xs={12} md={12} lg={12}>
                 <Accordion expanded={step === 1} onChange={(event, expanded) => personalData && setStep(expanded ? 1 : 0)}>
                     <AccordionSummary
-                            classes={{
+                        classes={{
                             expanded: classes.expanded,
-                            expandIcon:classes.expandIcon,
+                            expandIcon: classes.expandIcon,
                         }}
                         aria-controls="panel1a-content"
                         expandIcon={expandIcon(personalData, 1)}
@@ -167,7 +190,7 @@ const Profile = ({ history }) => {
                     <AccordionSummary
                         classes={{
                             expanded: classes.expanded,
-                            expandIcon:classes.expandIcon,
+                            expandIcon: classes.expandIcon,
                         }}
                         expandIcon={expandIcon(contactInformation, 2)}
                         aria-controls="panel2a-content"
@@ -179,14 +202,14 @@ const Profile = ({ history }) => {
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                        { profile && <ApplicantContactInformationForm user={normalize.contactData(profile)} handleSaveContactInformation={handleSaveContactInformation} />}
+                        {profile && <ApplicantContactInformationForm user={normalize.contactData(profile)} handleSaveContactInformation={handleSaveContactInformation} />}
                     </AccordionDetails>
                 </Accordion>
                 <Accordion expanded={step === 3} onChange={(event, expanded) => education && setStep(expanded ? 3 : 0)}>
                     <AccordionSummary
                         classes={{
                             expanded: classes.expanded,
-                            expandIcon:classes.expandIcon,
+                            expandIcon: classes.expandIcon,
                         }}
                         expandIcon={expandIcon(education, 3)}
                         aria-controls="panel2a-content"
@@ -205,7 +228,7 @@ const Profile = ({ history }) => {
                     <AccordionSummary
                         classes={{
                             expanded: classes.expanded,
-                            expandIcon:classes.expandIcon,
+                            expandIcon: classes.expandIcon,
                         }}
                         expandIcon={expandIcon(workExperience, 4)}
                         aria-controls="panel2a-content"
@@ -217,22 +240,22 @@ const Profile = ({ history }) => {
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                    { profile &&
-                        <ApplicantWorkExperienceForm
-                            history={history}
-                            userData={normalize.workExperienceData(profile)}
-                            setStep={setStep}
+                        {profile &&
+                            <ApplicantWorkExperienceForm
+                                history={history}
+                                userData={normalize.workExperienceData(profile)}
+                                setStep={setStep}
                             // handleSaveWorkExperience={handleSaveWorkExperience}
-                            // handleUpdateWorkExperience={(data) => setWorkExperience(data)} 
-                        />
-                    }
+                            // handleUpdateWorkExperience={(data) => setWorkExperience(data)}
+                            />
+                        }
                     </AccordionDetails>
                 </Accordion>
                 <Accordion expanded={step === 5} onChange={(event, expanded) => areasOfInterest && setStep(expanded ? 5 : 0)}>
                     <AccordionSummary
                         classes={{
                             expanded: classes.expanded,
-                            expandIcon:classes.expandIcon,
+                            expandIcon: classes.expandIcon,
                         }}
                         expandIcon={expandIcon(areasOfInterest, 5)}
                         aria-controls="panel2a-content"
@@ -252,6 +275,36 @@ const Profile = ({ history }) => {
                             />
                         }
                     </AccordionDetails>
+                </Accordion>
+                <Accordion expanded={step === 6} onChange={(event, expanded) => questionnaire && setStep(expanded ? 6 : 0)} >
+
+                    <AccordionSummary
+                        classes={{
+                            expanded: classes.expanded,
+                            expandIcon: classes.expandIcon,
+                        }}
+                        expandIcon={expandIcon(questionnaire, 6)}
+                        aria-controls="panel2a-content"
+                        id="panel2a-header"
+                    >
+                        <Typography className="applicant-profile__accordion-header" variant="button" gutterBottom>
+                            <img src={numberSixSVG} alt="Sexto paso" width="24" height="25" />
+                            Questionario de posicionamiento
+                        </Typography>
+                    </AccordionSummary>
+
+                    <AccordionDetails>
+                        {
+                            profile &&
+                            <ApplicantQuestionnaire
+                                user={normalize.questionnaireData(profile)}
+                                handleSaveQuestionnaire={handleSaveQuestionnaire}
+                            />
+                        }
+                    </AccordionDetails>
+
+
+
                 </Accordion>
             </Grid>
         </Grid>

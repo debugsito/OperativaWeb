@@ -67,12 +67,12 @@ export default function RepresentativeDataForm() {
     return (
 
         <>
-            <Grid item xs={12} justify="center">
+            <Grid item xs={12} justifyContent="center">
                 <Typography variant="h6" component="h6">
                     DATOS DEL REPRESENTANTE
                 </Typography>
             </Grid>
-            <Grid item xs={12} justify="center">
+            <Grid item xs={12} justifyContent="center">
                 <TextInput
                     fullWidth
                     name="first_name"
@@ -83,7 +83,7 @@ export default function RepresentativeDataForm() {
                     helperText={errors.first_name}
                 />
             </Grid>
-            <Grid item xs={12} justify="center">
+            <Grid item xs={12} justifyContent="center">
                 <TextInput
                     fullWidth
                     name="last_name"
@@ -94,7 +94,7 @@ export default function RepresentativeDataForm() {
                     helperText={errors.last_name}
                 />
             </Grid>
-            <Grid item xs={12} justify="center">
+            <Grid item xs={12} justifyContent="center">
                 <TextInput
                     fullWidth
                     name="email"
@@ -105,7 +105,7 @@ export default function RepresentativeDataForm() {
                     helperText={errors.email}
                 />
             </Grid>
-            <Grid item xs={12} justify="center">
+            <Grid item xs={12} justifyContent="center">
                 <TextInput
                     fullWidth
                     name="cargo_input"
@@ -116,7 +116,7 @@ export default function RepresentativeDataForm() {
                     helperText={errors.cargo_input}
                 />
             </Grid>
-            <Grid item xs={12} justify="center">
+            <Grid item xs={12} justifyContent="center">
                 <TextInput
                     fullWidth
                     name="area_input"

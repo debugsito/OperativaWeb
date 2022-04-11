@@ -121,6 +121,7 @@ export const getProfileOfApplicant = (body) => {
   return async (dispatch) => {
     try {
       const response = await service_Dashboard.getProfileOfApplicantById(body);
+      console.log(response.data.profile)
       dispatch(setProfileOfApplicant(response.data.profile));
       dispatch(setProfileApplicantError(null)); //control de errores
     } catch (error) {
