@@ -75,6 +75,11 @@ export const setMessageStatus = (payload) => ({
   payload
 });
 
+export const setApplicantName =(payload) => ({
+  type: dashboardType.SET_APPLICANT_NAME,
+  payload
+})
+
 export const getJobsInfo = (params) => {
   return async (dispatch) => {
     try {

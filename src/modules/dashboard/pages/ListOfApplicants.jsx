@@ -26,14 +26,14 @@ import IconButton from "@material-ui/core/IconButton";
 import TuneIcon from "@material-ui/icons/Tune";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import SearchIcon from "@material-ui/icons/Search";
-
+import ClearIcon from '@material-ui/icons/Clear'
 //Context
 import ProviderFilter from "../context/AdvanceFilterContext";
 import ProviderNotification from "../context/NotificationAlertContext";
 
 //Redux actions
 import { useDispatch, useSelector } from "react-redux";
-import { setPostulantSelected } from "../../../store/actions/dashboard/dashboard.action";
+import { setPostulantSelected, setApplicantName } from "../../../store/actions/dashboard/dashboard.action";
 
 const TAB = {
   POSTULANT: 0,
@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function JobPositionCreatedPage() {
   const classes = useStyles();
-  const { postulantsByPublicationId } = useSelector(state => state?.dashboard)
+  const { postulantsByPublicationId, name } = useSelector(state => state?.dashboard)
   const [value, setValue] = useState(TAB.POSTULANT);
   const [selected, setSelected] = useState([]);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -74,7 +74,7 @@ export default function JobPositionCreatedPage() {
 
   useEffect(() => {
     dispatch(setPostulantSelected({}))
-  },[])
+  }, [])
 
   const handleChange = (newValue) => {
     setValue(newValue);
@@ -133,20 +133,28 @@ export default function JobPositionCreatedPage() {
     setOpenDrawer(true);
   };
 
+  const handleSearchUserByName = (name) => {
+    dispatch(setApplicantName(name))
+  }
+
+  const clearSearchUserByName = () => {
+    dispatch(setApplicantName(''))
+  }
+
   const handleClickAssignEvaluations = () => {
     const data = []
     postulantsByPublicationId.rows.forEach(postulant => {
       selected.forEach(selected_id => {
-        if(postulant.id == selected_id){
-          data.push({id:postulant.id, user: {fullname: postulant.user.fullname, account_id: postulant.user.account_id}})
+        if (postulant.id == selected_id) {
+          data.push({ id: postulant.id, user: { fullname: postulant.user.fullname, account_id: postulant.user.account_id } })
         }
       })
     })
     const postulantsSelected = {
-      ids:selected,
+      ids: selected,
       data
     }
-    
+
     dispatch(setPostulantSelected(postulantsSelected))
   }
 
@@ -154,7 +162,7 @@ export default function JobPositionCreatedPage() {
     <ProviderFilter>
       <ProviderNotification>
         <Container>
-          <Grid container spacing={3} justifyContent="center">
+          <Grid container spacing={3}>
             <Grid item xs={12}>
               <Breadcrumbs routes={routes} />
             </Grid>
@@ -195,20 +203,32 @@ export default function JobPositionCreatedPage() {
                 </li>
               </ul>
             </Grid>
+
+            <Grid item xs={4} justify="flex-start">
+              <Paper className={classes.searchField}>
+                <IconButton type="submit" aria-label="search">
+                  <SearchIcon />
+                </IconButton>
+                <InputBase
+                  sx={{ ml: 1, flex: 1 }}
+                  placeholder="Buscar por nombre"
+                  fullWidth
+                  value={name}
+                  onChange={(e) => { handleSearchUserByName(e.target.value) }}
+                />
+                {name != '' ? <IconButton aria-label="search"
+                  onClick={clearSearchUserByName}
+                >
+                  <ClearIcon />
+                </IconButton> : <></>}
+
+              </Paper>
+            </Grid>
+
+
             {value === TAB.POSTULANT && (
               <>
-                <Grid item xs={4}>
-                  <Paper className={classes.searchField}>
-                    <IconButton type="submit" aria-label="search">
-                      <SearchIcon />
-                    </IconButton>
-                    <InputBase
-                      sx={{ ml: 1, flex: 1 }}
-                      placeholder="Buscar por nombre"
-                      fullWidth
-                    />
-                  </Paper>
-                </Grid>
+
                 <Grid item xs={8} className="justify-end">
                   <Button
                     startIcon={<TuneIcon />}
@@ -277,7 +297,7 @@ export default function JobPositionCreatedPage() {
                       component={Link}
                       to={{
                         pathname: `${initRoute}/publicacion/${params.publication_id}/asignar-evaluaciones`,
-                        state: {title:location?.state?.title}
+                        state: { title: location?.state?.title }
                       }}
                       onClick={handleClickAssignEvaluations}
                       disabled={selected.length < 1}

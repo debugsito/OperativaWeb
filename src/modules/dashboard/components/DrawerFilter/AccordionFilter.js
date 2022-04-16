@@ -87,7 +87,9 @@ export default function AccordionFilter({ apply }) {
   };
 
   const updateQueryParams = (newValue) => {
+    console.log(newValue);
     const newQueryParams = buildQueryParams(newValue)
+    console.log(newQueryParams);
     setQueryParams(prevState => ({ ...prevState, ...newQueryParams }))
   }
 

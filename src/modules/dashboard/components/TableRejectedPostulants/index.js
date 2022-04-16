@@ -76,7 +76,7 @@ const useStyles = makeStyles((theme) => ({
 export default function TableListPostulants() {
   const classes = useStyles();
   const dispatch = useDispatch()
-  const { postulantsByPublicationId, publicationSelected } = useSelector(state => state?.dashboard)
+  const { postulantsByPublicationId, publicationSelected, name } = useSelector(state => state?.dashboard)
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [order, setOrder] = useState("asc");
@@ -94,13 +94,24 @@ export default function TableListPostulants() {
   }, [])
 
   useEffect(() => {
+    if (name && name != '') {
+      const query = {
+        name: name
+      }
+      dispatch(getPostulantsByPublicationId({ publication_id, params: { estado: POSTULANTS.rejected, page, size: rowsPerPage, ...query } }))
+    } else {
+      dispatch(getPostulantsByPublicationId({ publication_id, params: { estado: POSTULANTS.rejected, page, size: rowsPerPage } }))
+    }
+  }, [name])
+
+  useEffect(() => {
     if (postulantsByPublicationId.rows) {
       const rows = postulantsByPublicationId?.rows?.map(item => ({
         similarity: item?.similarity,
-          fullname: item.user.fullname,
-          createdAt: DateTime.fromISO(item.createdAt).toFormat("dd LLL yyyy"),
-          status: item.estado == POSTULANTS.rejected? "RECHAZADO": "--",
-          data: item,
+        fullname: item.user.fullname,
+        createdAt: DateTime.fromISO(item.createdAt).toFormat("dd LLL yyyy"),
+        status: item.estado == POSTULANTS.rejected ? "RECHAZADO" : "--",
+        data: item,
       }))
       setPostulants(rows)
     }

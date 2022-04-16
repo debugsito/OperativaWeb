@@ -87,7 +87,7 @@ const useStyles = makeStyles((theme) => ({
 export default function TableListPostulants({ selected, setSelected, handleClickCheckbox, handleSelectAllClick }) {
   const classes = useStyles();
   const dispatch = useDispatch()
-  const { postulantsByPublicationId, sent_message } = useSelector(state => state?.dashboard)
+  const { postulantsByPublicationId, sent_message, name } = useSelector(state => state?.dashboard)
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [order, setOrder] = useState("asc");
@@ -101,16 +101,27 @@ export default function TableListPostulants({ selected, setSelected, handleClick
   // const publication_id = publicationSelected.data.id;
   const { publication_id } = useParams();
 
-  const { notification, setNotification} = useContext(ContextNotification)
+  const { notification, setNotification } = useContext(ContextNotification)
 
   useEffect(() => {
     dispatch(getPostulantsByPublicationId({ publication_id, params: { estado: POSTULANTS.inProgress, page, size: rowsPerPage } }))
   }, [])
 
   useEffect(() => {
-    if(sent_message.status === MESSAGE_STATUS.success.status)
+    if (sent_message.status === MESSAGE_STATUS.success.status)
       dispatch(getPostulantsByPublicationId({ publication_id, params: { estado: POSTULANTS.inProgress, page, size: rowsPerPage } }))
   }, [sent_message])
+
+  useEffect(() => {
+    if (name && name != '') {
+      const query = {
+        name: name
+      }
+      dispatch(getPostulantsByPublicationId({ publication_id, params: { estado: POSTULANTS.inProgress, page, size: rowsPerPage, ...query } }))
+    } else {
+      dispatch(getPostulantsByPublicationId({ publication_id, params: { estado: POSTULANTS.inProgress, page, size: rowsPerPage } }))
+    }
+  }, [name])
 
   useEffect(() => {
     if (postulantsByPublicationId.rows) {
@@ -118,7 +129,7 @@ export default function TableListPostulants({ selected, setSelected, handleClick
         similarity: item.similarity,
         fullname: item.user.first_name + " " + item.user.last_name,
         messages: item.all_messages,
-        stateOfEvaluations : [
+        stateOfEvaluations: [
           { text: "Preguntas", status: item.technical_test },
           { text: "Verificativa", status: item.verificativa },
           { text: "Médico", status: item.medical_test },
@@ -149,33 +160,33 @@ export default function TableListPostulants({ selected, setSelected, handleClick
   };
 
   const handleSelectPostulant = () => {
-    const body = selected.map(item => ({publication_account_id: item}))
-    service_Dashboard.hireApplicant(body,publication_id)
-    .then(() => {
-      setSelected([]);
-      dispatch(getPostulantsByPublicationId({ publication_id, params: { estado: POSTULANTS.inProgress, page, size: rowsPerPage } }))
-      setNotification({ ...notification, ...messageSuccessful("Dirigase a la pestaña FINALISTA") })
-    })
-    .catch(error => {
-      setNotification({ ...notification, ...messageError() })
-    })
+    const body = selected.map(item => ({ publication_account_id: item }))
+    service_Dashboard.hireApplicant(body, publication_id)
+      .then(() => {
+        setSelected([]);
+        dispatch(getPostulantsByPublicationId({ publication_id, params: { estado: POSTULANTS.inProgress, page, size: rowsPerPage } }))
+        setNotification({ ...notification, ...messageSuccessful("Dirigase a la pestaña FINALISTA") })
+      })
+      .catch(error => {
+        setNotification({ ...notification, ...messageError() })
+      })
   }
 
   const handleDismissPostulant = () => {
-    const body = selected.map(item => ({publication_account_id: item}))
-    service_Dashboard.denyApplicant(body,publication_id)
-    .then(() => {
-      setSelected([]);
-      dispatch(getPostulantsByPublicationId({ publication_id, params: { estado: POSTULANTS.inProgress, page, size: rowsPerPage } }))
-      setNotification({ ...notification, ...messageSuccessful("Dirigase a la pestaña DESCARTADO") })
-    })
-    .catch(error => {
-      setNotification({ ...notification, ...messageError() })
-    })
+    const body = selected.map(item => ({ publication_account_id: item }))
+    service_Dashboard.denyApplicant(body, publication_id)
+      .then(() => {
+        setSelected([]);
+        dispatch(getPostulantsByPublicationId({ publication_id, params: { estado: POSTULANTS.inProgress, page, size: rowsPerPage } }))
+        setNotification({ ...notification, ...messageSuccessful("Dirigase a la pestaña DESCARTADO") })
+      })
+      .catch(error => {
+        setNotification({ ...notification, ...messageError() })
+      })
   }
 
   const handleGetMessage = (id, totalMessages) => {
-    if(totalMessages > 0){
+    if (totalMessages > 0) {
       dispatch(setPostulantSelected([id]))
       setOpenImbox(true)
     }
@@ -189,8 +200,8 @@ export default function TableListPostulants({ selected, setSelected, handleClick
     <div className={classes.root}>
       <Paper className={classes.paper}>
         {selected?.length > 0 && (
-          <EnhancedTableToolbar 
-            numSelected={selected?.length} 
+          <EnhancedTableToolbar
+            numSelected={selected?.length}
             handleSelectPostulant={handleSelectPostulant}
             handleDismissPostulant={handleDismissPostulant}
           />
@@ -259,7 +270,7 @@ export default function TableListPostulants({ selected, setSelected, handleClick
                           >
                             <b>{row.fullname}</b>
                           </LinkRouter> */}
-                            <b>{row.fullname}</b>
+                          <b>{row.fullname}</b>
                         </Grid>
                       </TableCell>
                       <TableCell id={labelId} scope="row" padding="none">

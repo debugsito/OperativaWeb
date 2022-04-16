@@ -16,6 +16,7 @@ const initialState = {
     applicantProfile: null,
     applicantProfileError: "",
     reportByPostulantId: [],
+    name: '',
     job_position: {
         id: null
     },
@@ -124,6 +125,11 @@ const dashboardReducer = (state = initialState, action) => {
                 ...state,
                 sent_message: action.payload,
             };
+        case dashboardType.SET_APPLICANT_NAME:
+            return {
+                ...state,
+                name : action.payload
+            }
         default:
             return state;
     }

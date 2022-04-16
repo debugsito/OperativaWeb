@@ -81,12 +81,12 @@ const useStyles = makeStyles((theme) => ({
 export default function TableListPostulants() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const { publicationSelected, postulantsByPublicationId } = useSelector((state) => state?.dashboard);
+  const { publicationSelected, postulantsByPublicationId, name } = useSelector((state) => state?.dashboard);
   const { departments, provinces, districts } = useSelector(state => state?.utils)
 
   const { values, queryParams } = useContext(Context);
   const { notification, setNotification } = useContext(ContextNotification);
-  
+
   // const publication_id = publicationSelected.data.id;
   const { publication_id } = useParams();
 
@@ -101,12 +101,20 @@ export default function TableListPostulants() {
     dispatch(actions_Utils.getDepartments());
     dispatch(actions_Utils.getProvinces());
     dispatch(actions_Utils.getDistricts());
-    dispatch(getPostulantsByPublicationId({ publication_id, params: { estado: POSTULANTS.current, page, size: rowsPerPage} }));
+    dispatch(getPostulantsByPublicationId({ publication_id, params: { estado: POSTULANTS.current, page, size: rowsPerPage } }));
   }, [])
-  
+
   useEffect(() => {
-    dispatch(getPostulantsByPublicationId({ publication_id, params: { estado: POSTULANTS.current, page, size: rowsPerPage, ...queryParams} }));
-  },[queryParams])
+    if (name && name != '') {
+      const dataQuery = {
+        ...queryParams,
+        name: name
+      }
+      dispatch(getPostulantsByPublicationId({ publication_id, params: { estado: POSTULANTS.current, page, size: rowsPerPage, ...dataQuery } }));
+    } else {
+      dispatch(getPostulantsByPublicationId({ publication_id, params: { estado: POSTULANTS.current, page, size: rowsPerPage, ...queryParams } }));
+    }
+  }, [queryParams, name])
 
   useEffect(() => {
     if (postulantsByPublicationId.rows) {
@@ -118,7 +126,7 @@ export default function TableListPostulants() {
           createdAt: DateTime.fromISO(item.createdAt).toFormat("dd LLL yyyy"),
           education: item.user.level_name ? item.user.level_name : "-",
           resident: `${getDepartmentById(item?.user?.department_id)}, ${getProvinceById(item?.user?.province_id)}, ${getDistrictById(item?.user?.district_id)}`,
-          source: item.multiposting?"Multiposting":"-",
+          source: item.multiposting ? "Multiposting" : "-",
           stateCv: item.user.experience,
           data: item,
         };
@@ -198,7 +206,7 @@ export default function TableListPostulants() {
     service_Dashboard.selectApplicant(body, publication_id)
       .then(() => {
         setSelected([]);
-        dispatch(getPostulantsByPublicationId({ publication_id, params: { estado: POSTULANTS.current, page, size: rowsPerPage} }));
+        dispatch(getPostulantsByPublicationId({ publication_id, params: { estado: POSTULANTS.current, page, size: rowsPerPage } }));
         setNotification({ ...notification, ...messageSuccessful("Dirigase a la pestaña: EN PROCESO") })
       })
       .catch(error => {

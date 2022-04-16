@@ -33,11 +33,11 @@
     color : #E3A514
 }
 
-li {
+.body-text li {
     margin-bottom: 10px;
 }
   
-li:last-child {
+.body-text li:last-child {
     margin-bottom: 0px;
 }
 
