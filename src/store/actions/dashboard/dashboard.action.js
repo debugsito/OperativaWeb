@@ -80,6 +80,16 @@ export const setApplicantName =(payload) => ({
   payload
 })
 
+export const setQueryParams = (payload) => ({
+  type: dashboardType.SET_QUERYPARAMS,
+  payload
+})
+
+export const setValues = (payload)=> ({
+  type: dashboardType.SET_DASHBOARD_VALUE,
+  payload
+})
+
 export const getJobsInfo = (params) => {
   return async (dispatch) => {
     try {

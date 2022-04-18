@@ -1,6 +1,8 @@
 import React, { createContext, useState } from "react";
 import { FILTER_BY } from "../constants/Dashboard";
 import { buildQueryParams } from "../utils/convert";
+import { useDispatch, useSelector } from "react-redux";
+import {setQueryParams,setValues} from '../../../store/actions/dashboard/dashboard.action'
 
 export const defaultValues = {
   residence: {
@@ -99,8 +101,8 @@ export const defaultValues = {
     active: false,
     queryParam:FILTER_BY.gender,
     answers: {
-      male: {active: false, label:"Femenino", value:1},
-      female: {active: false, label:"Masculino", value:2},
+      male: {active: false, label:"Masculino", value:1},
+      female: {active: false, label:"Femenino", value:2},
       other: {active: false, label:"Otro", value:3},
     },
   },
@@ -151,8 +153,10 @@ export const defaultValues = {
 };
 export const Context = createContext({});
 export default function AdvanceFilterContext({ children }) {
-  const [values, setValues] = useState(defaultValues);
-  const [queryParams, setQueryParams] = useState({});
+  const dispatch = useDispatch()
+  // const [values, setValues] = useState(defaultValues);
+  const { queryParams,values} = useSelector((state) => state?.dashboard)
+  // const [queryParams, setQueryParams] = useState({});
 
   const resetItem = (item) => {
     const newValues = { ...values };
@@ -163,16 +167,20 @@ export default function AdvanceFilterContext({ children }) {
       const newLocation = newResidence.answers.filter(element => element.key != item.option)
       newValues[item.key].answers = [...newLocation]
     }else{
-      newValues[item.key].answers[item.option] = defaultValues[item.key].answers[item.option];
+      newValues[item.key].answers[item.option] = defaultValues[item.key].answers[item.option]
     }
-    setValues(newValues);
+    dispatch(setValues(newValues))
+    // setValues(newValues)
     updateQueryParams(newValues)
   };
 
   const updateQueryParams = (newValues) => {
     const newQueryParams = buildQueryParams(newValues)
-    setQueryParams(newQueryParams)
+    dispatch(setQueryParams(newQueryParams))
   }
+  // const localSetQueryParams = (values)=> {
+  //   dispatch(setQueryParams(values))
+  // }
 
   return (
     <Context.Provider

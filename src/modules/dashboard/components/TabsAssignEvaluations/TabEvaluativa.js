@@ -36,11 +36,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const initialValues = {
-  veri_domiciliaria: false,
-  veri_antecendentes_penales: false,
-  veri_antecendentes_policiales: false,
-  veri_historial_crediticio: false,
-  veri_contact:false,
+  test_integridad: false,
+  test_psicologico: false,
+  test_personalizado: false,
   question:""
 }
 
@@ -55,9 +53,10 @@ export default function TabVerificativa({ nextTab, backTab }) {
   const { notification, setNotification } = useContext(ContextNotification);
   const { postulantsSelected } = useSelector(state => state?.dashboard)
   const [openDialog, setOpenDialog] = useState(false);
-  const [values, setValues] = React.useState(initialValues);
+  const [values, setValues] = useState(initialValues);
 
   const handleChange = (event) => {
+    console.log(event)
     setValues({ ...values, [event.target.name]: event.target.checked });
   };
 
@@ -119,19 +118,19 @@ export default function TabVerificativa({ nextTab, backTab }) {
                 <Checkbox
                   label="Test de integridad y honestidad – nivel Operario"
                   name="test_integridad"
-                  checked={values.veri_domiciliaria}
+                  checked={values.test_integridad}
                   onChange={handleChange}
                 />
                 <Checkbox
                   label="Test psicológico"
                   name="test_psicologico"
-                  checked={values.veri_antecendentes_penales}
+                  checked={values.test_psicologico}
                   onChange={handleChange}
                 />
                 <Checkbox
                   label="Test personalizado"
                   name="test_personalizado"
-                  checked={values.veri_antecendentes_policiales}
+                  checked={values.test_personalizado}
                   onChange={handleChange}
                 />
               </FormGroup>

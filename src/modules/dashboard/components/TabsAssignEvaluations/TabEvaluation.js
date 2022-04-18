@@ -224,14 +224,14 @@ export default function TabEvaluation({ nextTab }) {
                     </li>
                   </ul>
                 </Grid>
-                <Grid item xs={12}>
+                {/* <Grid item xs={12}>
                   <Typography variant="body1">
                     Si tienes las preguntas cerradas y respuestas en un
                     documento de Excel o CVS, podrás cargar tu documento en la
                     opción <b>IMPORTAR</b>, la correción se realiza
                     automáticamente.
                   </Typography>
-                </Grid>
+                </Grid> */}
                 <Grid item xs={12}>
                   <Button
                     variant="contained"

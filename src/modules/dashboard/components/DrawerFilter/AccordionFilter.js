@@ -32,6 +32,8 @@ import {
 
 import { Context, defaultValues } from "../../context/AdvanceFilterContext";
 import { buildQueryParams } from "../../utils/convert";
+import {setQueryParams,setValues} from '../../../../store/actions/dashboard/dashboard.action'
+import { useDispatch, useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -59,14 +61,17 @@ const initialValues = {
 
 export default function AccordionFilter({ apply }) {
   const classes = useStyles();
-  const { values, resetItem, setValues, queryParams, setQueryParams } = useContext(Context);
+  const dispatch = useDispatch();
+  const { resetItem} = useContext(Context);
+  const { queryParams,values} = useSelector((state) => state?.dashboard);
   const methods = useForm({ mode: "onSubmit", defaultValues: values });
   const { dirtyFields } = useFormState({
     control: methods.control,
   });
 
   const resetForm = () => {
-    setValues(defaultValues);
+    // setValues(defaultValues);
+    dispatch(setValues(defaultValues));
   };
 
   const onSubmit = (data) => {
@@ -82,15 +87,15 @@ export default function AccordionFilter({ apply }) {
     }
 
     apply();
-    setValues(newData);
+    dispatch(setValues(newData));
+    // setValues(newData);
     updateQueryParams(newData)
   };
 
   const updateQueryParams = (newValue) => {
-    console.log(newValue);
     const newQueryParams = buildQueryParams(newValue)
-    console.log(newQueryParams);
-    setQueryParams(prevState => ({ ...prevState, ...newQueryParams }))
+    dispatch(setQueryParams({...queryParams,...newQueryParams}))
+    // setQueryParams(prevState => ({ ...prevState, ...newQueryParams }))
   }
 
 

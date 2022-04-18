@@ -26,12 +26,12 @@ export default function InputEducation() {
           <FormController
             type="checkbox"
             label="Secundaria incompleta"
-            name="education.answers.education_secundary_incomplete.active"
+            name="education.answers.education_secondary_incomplete.active"
           />
           <FormController
             type="checkbox"
             label="Secundaria completa"
-            name="education.answers.education_secundary_complete.active"
+            name="education.answers.education_secondary_complete.active"
           />
           <FormController
             type="checkbox"

@@ -1,4 +1,5 @@
 import { dashboardType } from "../../types/dashboard";
+import { DEFAULT_FILTER_VALUES } from "../../../modules/dashboard/constants/Dashboard";
 
 const initialState = {
     jobsInfo: {
@@ -16,6 +17,8 @@ const initialState = {
     applicantProfile: null,
     applicantProfileError: "",
     reportByPostulantId: [],
+    queryParams : {},
+    values: DEFAULT_FILTER_VALUES,
     name: '',
     job_position: {
         id: null
@@ -129,6 +132,16 @@ const dashboardReducer = (state = initialState, action) => {
             return {
                 ...state,
                 name : action.payload
+            }
+        case dashboardType.SET_QUERYPARAMS:
+            return {
+                ...state,
+                queryParams : action.payload
+            }
+        case dashboardType.SET_DASHBOARD_VALUE:
+            return {
+                ...state,
+                values: action.payload
             }
         default:
             return state;
