@@ -126,7 +126,19 @@ export default function TableListPostulants() {
           createdAt: DateTime.fromISO(item.user.updatedAt).toFormat("dd LLL yyyy"),
           education: item.user.level_name ? item.user.level_name : "-",
           resident: `${getDepartmentById(item?.user?.department_id)}, ${getProvinceById(item?.user?.province_id)}, ${getDistrictById(item?.user?.district_id)}`,
-          source: item.multiposting ? "Multiposting" : "-",
+          manually : item.manually,
+          source: ()=> {
+              switch(item?.manually) {
+                  case 0: 
+                    return 'DB'
+                  case 1 :
+                    return 'DIRECTO'
+                  case 2 :
+                    return 'MULTIPOSTING'
+                  default :
+                    return ''
+              }
+          },
           stateCv: item.cv_read,
           data: item,
         };
@@ -324,7 +336,7 @@ export default function TableListPostulants() {
                       <TableCell id={labelId} scope="row" padding="none">
                         <Grid item xs={12}>
                           <Typography variant="body2" component="span">
-                            {row.source}
+                            {row.source()}
                           </Typography>
                         </Grid>
                       </TableCell>
