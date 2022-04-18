@@ -57,6 +57,7 @@ const ApplicantCv = () => {
     const index = data?.findIndex(item => item.user.account_id == postulant_id)
     const { publication_id } = data[index]
     const publication_account_id = data[index].id;
+    const body = [{ publication_account_id }]
 
     const routes = [
         { name: "Incio", to: `${initRoute}` },
@@ -64,8 +65,9 @@ const ApplicantCv = () => {
         { name: "CV", to: `${initRoute}/lista-de-postulantes/${postulant_id}/perfil` }
     ];
 
-    useEffect(() => {
+    useEffect(async () => {
         if (postulant_id) {
+            const response = await service_Dashboard.markCvRead(body);
             dispatch(getProfileOfApplicant({ postulant_id }))
         }
     }, [postulant_id])
@@ -82,7 +84,7 @@ const ApplicantCv = () => {
         history.push(`${initRoute}/lista-de-postulantes/${account_id}/perfil`)
     }
 
-    const body = [{ publication_account_id }]
+   
     const handleSelectPostulant = () => {
         service_Dashboard.selectApplicant(body, publication_id)
             .then(() => {

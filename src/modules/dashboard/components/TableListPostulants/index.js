@@ -123,11 +123,11 @@ export default function TableListPostulants() {
           similarity: item?.similarity,
           fullname: item.user.fullname,
           experience: item.user.experience ? "Si" : "No",
-          createdAt: DateTime.fromISO(item.createdAt).toFormat("dd LLL yyyy"),
+          createdAt: DateTime.fromISO(item.user.updatedAt).toFormat("dd LLL yyyy"),
           education: item.user.level_name ? item.user.level_name : "-",
           resident: `${getDepartmentById(item?.user?.department_id)}, ${getProvinceById(item?.user?.province_id)}, ${getDistrictById(item?.user?.district_id)}`,
           source: item.multiposting ? "Multiposting" : "-",
-          stateCv: item.user.experience,
+          stateCv: item.cv_read,
           data: item,
         };
       });
@@ -197,12 +197,13 @@ export default function TableListPostulants() {
     setSelected([]);
   };
 
-  const sendPostulantAProcess = () => {
+  const sendPostulantAProcess = async () => {
     const body = selected.map(item => (
       {
         publication_account_id: item
       }
     ))
+    const response = await service_Dashboard.markCvRead(body);
     service_Dashboard.selectApplicant(body, publication_id)
       .then(() => {
         setSelected([]);

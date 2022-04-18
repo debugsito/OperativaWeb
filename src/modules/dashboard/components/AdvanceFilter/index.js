@@ -36,10 +36,7 @@ export default function OutlinedChips() {
 
 
   useEffect(() => {
-    console.log("entro aqui")
-    console.log(values);
     let data = buildArrayLabels(values);
-    console.log(data)
     setArrayLabel(data)
   }, [values])
 

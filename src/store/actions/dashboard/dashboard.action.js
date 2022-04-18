@@ -211,6 +211,16 @@ export const getPostulantsByPublicationId = (params) => {
   };
 };
 
+// export const setReadCv = (body) => {
+//   return async ( dispatch) => {
+//     try{
+//       const response = await service_Dashboard.markCvRead(body);
+//     }catch(error){
+//       console.log(error);
+//     }
+//   }
+// }
+
 export const setProfileApplicantError = (payload) => ({
   type: dashboardType.SET_PROFILE_OF_APPLICANT_ERROR,
   payload

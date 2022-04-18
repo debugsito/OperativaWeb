@@ -138,6 +138,13 @@ const getMessages = async (params) => {
   return response;
 };
 
+const markCvRead = async ( body ) => {
+  const response = await api.post(
+    `publication/account/read_cv`,body
+  );
+  return response;
+}
+
 export default {
   getJobs,
   getPublications,
@@ -159,5 +166,6 @@ export default {
   saveFormQuestion,
   assignFormAPostulant,
   sendMessage,
-  getMessages
+  getMessages,
+  markCvRead
 };
