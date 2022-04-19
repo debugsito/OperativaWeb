@@ -145,7 +145,13 @@ const markCvRead = async ( body ) => {
   return response;
 }
 
+const getPublicationGlobal = async (title) => {
+  const response = await api.get(`/status/${title}`);
+  return response;
+}
+
 export default {
+  getPublicationGlobal,
   getJobs,
   getPublications,
   updatePublication,

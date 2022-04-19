@@ -73,8 +73,7 @@ export default function Index(props) {
   return (
    
     <div className={styles.container}>
-      <h1>hola</h1>
-      {/* <Navbar setTab={setTab} />
+      <Navbar setTab={setTab} />
       <SectionBanner />
       <SectionOperativa />
       <SectionTab setTab={setTab} tab={tab} />
@@ -89,7 +88,7 @@ export default function Index(props) {
         {tab === "business" && <SectionPrice />}
         {tab === "business" ? <SectionDemoteam /> : <SectionFAQ />}
       </div>
-      <Footer /> */}
+      <Footer />
     </div>
   );
 }
