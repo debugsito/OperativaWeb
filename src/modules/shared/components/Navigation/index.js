@@ -100,9 +100,11 @@ export default function Navigation({ children }) {
     return <Redirect to="/" />
   }
 
+  const condition = (location.pathname !== "/" && !location.pathname.includes('publication-multiposting'))
+  
   return (
     <div className={classes.root}>
-      {location.pathname !== "/" &&
+      { condition &&
         <>
           <CssBaseline />
           <AppBar
@@ -141,7 +143,9 @@ export default function Navigation({ children }) {
                         </Grid>
                     }
                   </Grid>
-                </Toolbar>}
+                </Toolbar>
+                
+                }
           </AppBar>
         </>
       }
@@ -152,7 +156,7 @@ export default function Navigation({ children }) {
         </Hidden>
       }
       <main className={classes.content}>
-        <div className={`${location.pathname !== "/" ? classes.toolbar : ''}`} />
+        <div className={`${condition ? classes.toolbar : ''}`} />
         {children}
         <Backdrop
           open={isLoading}

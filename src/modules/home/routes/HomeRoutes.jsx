@@ -10,6 +10,7 @@ const HomeRoutes = [
   "/callbackFacebook",
   "/callbackGoogle",
   "/callbackFacebookError",
-  "/callbackGoogleError"
+  "/callbackGoogleError",
+  "/publication-multiposting/:title"
 ];
 export default HomeRoutes;

@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
+import { useSelector } from "react-redux";
 import { Grid, makeStyles } from "@material-ui/core";
 import { Button, TextInput, Typography, LinkRouter } from "../../../shared/components";
+import { service_Applicant } from "../../../../store/services";
 
 import { FbIcon, InIcon, TwIcon, MailIcon } from "../../images";
 
@@ -33,12 +35,12 @@ const useStyles = makeStyles(theme => ({
 
 export default function FormRedes(props) {
     const classes = useStyles()
-    const [value] = useState({
+    const { job_position } = useSelector(state => state.dashboard)
+    const [value,setValue] = useState({
         url:"https://www.verificativa.com/blog/salario-emocional-5-claves-para-fidelizar-al-talento",
         title: "Vacante disponible"
     })
-
-    const twitterEncoder = encoder(`${value.title} ${value.url}`)
+    const [twitterEncoder,setTwitterEncoder] = useState('')
 
     function encoder(text) {
         return encodeURIComponent(text)
@@ -47,6 +49,24 @@ export default function FormRedes(props) {
     const handleCopy = (e) => {
         navigator.clipboard.writeText(value.url)
     }
+
+    useEffect(async () => {
+        if(job_position?.id){
+            const response = await service_Applicant.detallePublicacion(job_position?.id)
+            let pub = response.data.publication
+            if(pub) {
+                let url = window.location.protocol + "//" + window.location.host+"/publication/"+pub?.title_key
+                // let url = 'https://www.operativa.pe/'+pub?.title_key
+                let title = "Vacante disponible"
+                setValue({
+                    url : url,
+                    title: title
+                })
+                setTwitterEncoder(encoder(`${value.title} ${value.url}`))
+            }
+        }
+
+    },[job_position]);
 
     return (
         <div className={classes.container}>

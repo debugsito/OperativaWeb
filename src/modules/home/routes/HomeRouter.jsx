@@ -15,6 +15,7 @@ import TerminosCondiciones from "../pages/terminos-y-condiciones";
 import RecuperarPasword from "../pages/recuperar-password";
 import Authenticate from '../pages/Authenticate';
 import AuthRedirect from "../pages/AuthRedirect";
+import PublicationGlobal  from "../pages/PublicationGlobal";
 import Error from "../pages/Error";
 
 //PrivateRoute
@@ -36,6 +37,7 @@ const MyAccountRouter = () => {
         <PrivateRoute exact path={HomeRoutes[7]} component={Authenticate} />
         <PrivateRoute exact path={HomeRoutes[8]} component={Authenticate} />
         <PrivateRoute exact path={HomeRoutes[9]} component={Authenticate} />
+        <PrivateRoute exact path={HomeRoutes[12]} component={PublicationGlobal} />
       </Switch>
     </>
   );

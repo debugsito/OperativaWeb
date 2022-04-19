@@ -36,7 +36,7 @@ export default function JobPositionCreatedPage() {
         
         return () => {
           clearInterval(timer);
-          dispatch(setPublicationId(null))
+        //   dispatch(setPublicationId(null))
           dispatch(setStatus("idle"))
         };
       }, []);
