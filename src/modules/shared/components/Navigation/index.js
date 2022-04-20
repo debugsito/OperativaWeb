@@ -100,6 +100,7 @@ export default function Navigation({ children }) {
     return <Redirect to="/" />
   }
 
+  const global = !location.pathname.includes('publication-multiposting');
   const condition = (location.pathname !== "/" && !location.pathname.includes('publication-multiposting'))
   
   return (
@@ -150,7 +151,7 @@ export default function Navigation({ children }) {
         </>
       }
       {
-        hasDashboard &&
+        hasDashboard && global &&
         <Hidden smDown>
           <NavigationDrawer />
         </Hidden>

@@ -9,12 +9,13 @@ const PrivateRoute = ({
     needSession,
     needAccountType,
     type,
+    global,
     ...params
 }) => {
     const hasSession = AppSession.get();
     const initRoute = SessionRoutes().initRoute;
     const routeType = SessionRoutes().routeType;
-    const isPath = routeType && params.location.pathname.includes(routeType);
+    const isPath = global || (routeType && params.location.pathname.includes(routeType));
     // si el usuario tiene sesion
     // verificar si el path es del tipo de session
     // no puede entrar al home, login, registro, olvido contrasena 
@@ -28,10 +29,11 @@ const PrivateRoute = ({
             render={(props) => {
                 // if (needAccountType)
                 //     return accountType ? <Route {...params} component={component} /> : <Redirect to="/" />
-
                 if (hasSession) {
+                  
                     return isPath ? <Component {...props} /> : <Redirect to={initRoute} />
                 } else {
+                    console.log("entro no tiene sesion")
                     // return !needSession ? <Component {...props} /> : window.location.href = process.env.REACT_APP_PATH_LANDING
                     return !needSession ? <Component {...props} /> : <Redirect to="/" />
                 }

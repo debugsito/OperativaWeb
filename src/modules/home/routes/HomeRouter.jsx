@@ -37,7 +37,7 @@ const MyAccountRouter = () => {
         <PrivateRoute exact path={HomeRoutes[7]} component={Authenticate} />
         <PrivateRoute exact path={HomeRoutes[8]} component={Authenticate} />
         <PrivateRoute exact path={HomeRoutes[9]} component={Authenticate} />
-        <PrivateRoute exact path={HomeRoutes[12]} component={PublicationGlobal} />
+        <PrivateRoute exact global={true} path={HomeRoutes[12]} component={PublicationGlobal} />
       </Switch>
     </>
   );

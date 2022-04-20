@@ -25,9 +25,8 @@ export default function FormLogin({ closeModal }) {
     });
 
     const onSubmit = (data) => {
-        console.log(data)
         dispatch(logIn(data));
-        // closeModal()
+        closeModal()
     }
 
     return (
