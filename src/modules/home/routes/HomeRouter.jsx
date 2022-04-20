@@ -17,6 +17,7 @@ import Authenticate from '../pages/Authenticate';
 import AuthRedirect from "../pages/AuthRedirect";
 import PublicationGlobal  from "../pages/PublicationGlobal";
 import Error from "../pages/Error";
+import FinishCV from "../pages/FinishCV";
 
 //PrivateRoute
 import PrivateRoute from "../../../routers/PrivateRoute";
@@ -38,6 +39,7 @@ const MyAccountRouter = () => {
         <PrivateRoute exact path={HomeRoutes[8]} component={Authenticate} />
         <PrivateRoute exact path={HomeRoutes[9]} component={Authenticate} />
         <PrivateRoute exact global={true} path={HomeRoutes[12]} component={PublicationGlobal} />
+        <PrivateRoute exact path={HomeRoutes[14]} component={FinishCV} />
       </Switch>
     </>
   );
