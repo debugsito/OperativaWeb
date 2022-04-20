@@ -37,7 +37,7 @@ export default function FinishCV(props) {
         <MensajeSuccess content={content} title={<TitleSuccess />}>
             <Row  xs={6} md={3}>
                 <Col xs={6} sm={6} md={2}>
-                    <Button variant="primary" type="button" onClick={() => router.push("/finish-cv-status")}>Sigamos</Button>
+                    <Button variant="primary" type="button" onClick={() => router.push("/registro/postulante/finish-cv-status")}>Sigamos</Button>
                 </Col>
                 <Col xs={6} sm={6} >
                     <ButtonGoForward text={"Lo haré luego"} url={'/'} />

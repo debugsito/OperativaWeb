@@ -1,5 +1,6 @@
-import { useState } from "react";
- 
+import React,{ useState,useEffect } from "react";
+
+import { useDispatch, useSelector } from 'react-redux';
  import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -19,11 +20,26 @@ import Title from '../components2/Title';
 
 import IconBusiness from "../images2/page-register/icon-business-sm.svg";
 import styles from "../styleshome/components_styles/Forms.module.scss";
+import { setUserError, applicantSignUp } from '../../../store/actions/auth/auth.action';
+import { isEmail } from '../../shared/libs/validators';
+
+const initialValue = {
+    value: '',
+    error: false,
+    helperText: '',
+    show: false,
+    checked: false
+}
+
 
 export default function Municipality(props) {
 
     const [step, setStep] = useState(0)
     const router = useHistory()
+    const dispatch = useDispatch();
+    const [hasError, setHasError] = useState('');
+    const { error, signUpSucces } = useSelector((state) => state?.auth);
+    
 
     const validationSchema = Yup.object().shape({
         email: Yup.string()
@@ -45,9 +61,24 @@ export default function Municipality(props) {
         resolver: yupResolver(validationSchema)
     });
 
+
+    useEffect(() => {
+        if(signUpSucces){
+            setStep(1)
+        }
+
+    },[signUpSucces])
+
+
     const onSubmit = (data) => {
-        console.log(data)
-        setStep(1)
+        if(data){
+            const body = {
+                email: data.email,
+                password: data.password,
+                term_condi: data.isChecked === true ? 1 : 0
+            }
+            dispatch(applicantSignUp(body));
+        }
     }
 
     const content = <>
@@ -138,7 +169,7 @@ export default function Municipality(props) {
             {
                 step === 1 &&
                 <MensajeSuccess content={content} title={<TitleSuccess />}>
-                    <Button variant="primary" type="button" onClick={() => router.push("/rellenar-cv")}>Empezar</Button>
+                    <Button variant="primary" type="button" onClick={() => router.push("/registro/postulante/rellenar-cv")}>Empezar</Button>
                 </MensajeSuccess>
             }
         </Container>

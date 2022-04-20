@@ -84,6 +84,18 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+const NoHeaderRoutes = [
+  "/registro",
+  "/registro/postulante",
+  "/registro/empresa",
+  "/registro/municipalidad",
+  "/terminos-y-condiciones",
+  "/publication-multiposting/:title",
+  '/registro/postulante/rellenar-cv',
+  '/registro/postulante/finish-cv',
+  '/registro/postulante/finish-cv-status'
+]
+
 export default function Navigation({ children }) {
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -100,12 +112,13 @@ export default function Navigation({ children }) {
     return <Redirect to="/" />
   }
 
-  const global = !location.pathname.includes('publication-multiposting');
-  const condition = (location.pathname !== "/" && !location.pathname.includes('publication-multiposting'))
-  
+  const condition = (location.pathname !== "/")
+  const noHeader =  NoHeaderRoutes.includes(location.pathname);
+  console.log(noHeader)
+
   return (
     <div className={classes.root}>
-      { condition &&
+      { condition && !noHeader &&
         <>
           <CssBaseline />
           <AppBar
@@ -151,13 +164,13 @@ export default function Navigation({ children }) {
         </>
       }
       {
-        hasDashboard && global &&
+        hasDashboard && !noHeader &&
         <Hidden smDown>
           <NavigationDrawer />
         </Hidden>
       }
       <main className={classes.content}>
-        <div className={`${condition ? classes.toolbar : ''}`} />
+        <div className={`${condition && !noHeader ? classes.toolbar : ''}`} />
         {children}
         <Backdrop
           open={isLoading}

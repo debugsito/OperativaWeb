@@ -12,8 +12,8 @@ const HomeRoutes = [
   "/callbackFacebookError",
   "/callbackGoogleError",
   "/publication-multiposting/:title",
-  '/rellenar-cv',
-  '/finish-cv',
-  '/finish-cv-status'
+  '/registro/postulante/rellenar-cv',
+  '/registro/postulante/finish-cv',
+  '/registro/postulante/finish-cv-status'
 ];
 export default HomeRoutes;

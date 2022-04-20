@@ -17,7 +17,7 @@ export default function Container({ children, navbar = false, menu = false, heig
     return (
         <div className={`${styles.container} ${_HEIGHT[height]}`}>
             {
-                navbar && <Navbar menu={menu} />
+                navbar && <><Navbar menu={menu} /></>
             }
             {
                 step && <SectionStep content={step} />
