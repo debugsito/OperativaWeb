@@ -21,6 +21,7 @@ export default function CVDigital(props) {
     const router = useHistory()
     const classes = useStyles()
     return (
+        
         <Container navbar>
             <Grid container spacing={4} style={{ marginTop: '2rem' }}>
                 <Grid item xs={12}>
