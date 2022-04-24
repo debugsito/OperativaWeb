@@ -66,8 +66,8 @@ export const normalize = {
                 name_inst: data_temp?.name_inst,
                 from_year: data_temp?.from_year,
                 endYear: "2020", // En duro
-                speciality_id: data_temp?.field_id,
-                otherSpeciality: data_temp?.field_id === 28 ? data_temp.field_other : null, //28 === OTHERS
+                speciality_id: data_temp?.speciality_id,
+                otherSpeciality: data_temp?.speciality_id === 28 ? data_temp.field_other : null, //28 === OTHERS
             }
         }
     },

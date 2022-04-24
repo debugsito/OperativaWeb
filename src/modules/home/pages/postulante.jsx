@@ -169,7 +169,7 @@ export default function Municipality(props) {
             {
                 step === 1 &&
                 <MensajeSuccess content={content} title={<TitleSuccess />}>
-                    <Button variant="primary" type="button" onClick={() => router.push("/registro/postulante/rellenar-cv")}>Empezar</Button>
+                    <Button variant="primary" type="button" onClick={() => router.push("/registro/postulante/datos-personales")}>Empezar</Button>
                 </MensajeSuccess>
             }
         </Container>

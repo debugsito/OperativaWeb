@@ -91,9 +91,12 @@ const NoHeaderRoutes = [
   "/registro/municipalidad",
   "/terminos-y-condiciones",
   "/publication-multiposting/:title",
-  '/registro/postulante/rellenar-cv',
+  '/registro/postulante/datos-personales',
   '/registro/postulante/finish-cv',
-  '/registro/postulante/finish-cv-status'
+  '/registro/postulante/finish-cv-status',
+  '/registro/postulante/educacion',
+  '/registro/postulante/experiencia-laboral',
+  '/registro/postulante/cuestionario',
 ]
 
 export default function Navigation({ children }) {

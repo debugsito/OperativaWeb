@@ -19,7 +19,9 @@ import PublicationGlobal  from "../pages/PublicationGlobal";
 import Error from "../pages/Error";
 import FinishCV from "../pages/FinishCV";
 import FinishCVStatus from "../pages/FinishCVStatus";
-import CVDigital from "../pages/CVDigital";
+import PersonalInformation from "../pages/PersonalInformation";
+import Education from "../pages/Education";
+import WorkExperience from "../pages/WorkExperience";
 
 //PrivateRoute
 import PrivateRoute from "../../../routers/PrivateRoute";
@@ -41,9 +43,11 @@ const MyAccountRouter = () => {
         <PrivateRoute exact path={HomeRoutes[8]} component={Authenticate} />
         <PrivateRoute exact path={HomeRoutes[9]} component={Authenticate} />
         <PrivateRoute exact global={true} path={HomeRoutes[12]} component={PublicationGlobal} />
-        <PrivateRoute exact global={true} path={HomeRoutes[13]} component={CVDigital} />
+        <PrivateRoute exact global={true} path={HomeRoutes[13]} component={PersonalInformation} />
         <PrivateRoute exact global={true} path={HomeRoutes[14]} component={FinishCV} />
         <PrivateRoute exact global={true} path={HomeRoutes[15]} component={FinishCVStatus} />
+        <PrivateRoute exact global={true} path={HomeRoutes[16]} component={Education} />
+        <PrivateRoute exact global={true} path={HomeRoutes[17]} component={WorkExperience} />
       </Switch>
     </>
   );
