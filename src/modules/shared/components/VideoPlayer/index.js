@@ -48,7 +48,7 @@ const VideoPlayer = ({ openVideo, onClose, url="https://www.youtube.com/watch?v=
             allowfullscreen='allowfullscreen'
                 // width="640" height="360"
                 style={{ width: "100%", height: "100%" }}
-                src={`http://www.youtube.com/embed/${youTubeGetID(url)}`}
+                src={`https://www.youtube.com/embed/${youTubeGetID(url)}`}
                 frameborder="0">
             </iframe>
             <div className={classes.closeButton} onClick={onClose}>X</div>
