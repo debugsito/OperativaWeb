@@ -37,7 +37,7 @@ export const getNameById = (array = [], id) => {
 }
 
 export const getGenderById = (gender_id) => {
-    if (gender_id || gender_id === 0) {
+    if (!gender_id || gender_id === 0) {
         return "No específico"
     } else {
         const gender = GENDER.filter(item => item.id === gender_id)
