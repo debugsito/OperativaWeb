@@ -2,8 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Divider, FormControl, FormControlLabel, FormHelperText, FormLabel, Grid, InputLabel, MenuItem, RadioGroup, Select, Typography } from '@material-ui/core';
 import { Radio } from '../../../shared/components';
-import { areasList, getAccount, specialtiesList } from '../../../../store/services/utils.service';
-import WithExperienceComponent from './WithExperienceComponent';
+import { areasList, getAccount } from '../../../../store/services/utils.service';
 import WithoutExperienceComponent from './WithoutExperienceComponent';
 import WorkExperienceListComponent from "./WorkExperienceListComponent";
 import { makeStyles } from "@material-ui/core/styles";

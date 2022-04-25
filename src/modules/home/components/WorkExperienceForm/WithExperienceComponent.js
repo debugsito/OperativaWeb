@@ -10,7 +10,6 @@ import {
     RadioGroup,
     Select,
     Typography,
-    Paper,
     Accordion,
     AccordionSummary,
     AccordionDetails

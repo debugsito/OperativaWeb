@@ -22,6 +22,7 @@ import FinishCVStatus from "../pages/FinishCVStatus";
 import PersonalInformation from "../pages/PersonalInformation";
 import Education from "../pages/Education";
 import WorkExperience from "../pages/WorkExperience";
+import Questionnaire from "../pages/Questionnaire";
 
 //PrivateRoute
 import PrivateRoute from "../../../routers/PrivateRoute";
@@ -48,6 +49,7 @@ const MyAccountRouter = () => {
         <PrivateRoute exact global={true} path={HomeRoutes[15]} component={FinishCVStatus} />
         <PrivateRoute exact global={true} path={HomeRoutes[16]} component={Education} />
         <PrivateRoute exact global={true} path={HomeRoutes[17]} component={WorkExperience} />
+        <PrivateRoute exact global={true} path={HomeRoutes[18]} component={Questionnaire} />
       </Switch>
     </>
   );

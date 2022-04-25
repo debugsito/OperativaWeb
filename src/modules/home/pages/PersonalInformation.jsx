@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from "react-router-dom";
-import { Grid, Paper } from "@material-ui/core";
+import { Grid, Paper,Snackbar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from '../components2/Container';
 import { setUser, signOut } from '../../../store/actions/auth/auth.action';
@@ -95,9 +95,14 @@ export default function PersonalInformation(props) {
                         </Grid>
                     </Grid>
                 </Grid>
-
             </Grid>
-           
+            <Snackbar
+                anchorOrigin={{ vertical, horizontal }}
+                open={open} autoHideDuration={6000} onClose={handleCloseAlert}>
+                <Alert onClose={handleCloseAlert} severity="error">
+                    {error}
+                </Alert>
+            </Snackbar>
         </Container>
     )
 

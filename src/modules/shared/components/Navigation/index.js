@@ -117,7 +117,6 @@ export default function Navigation({ children }) {
 
   const condition = (location.pathname !== "/")
   const noHeader =  NoHeaderRoutes.includes(location.pathname);
-  console.log(noHeader)
 
   return (
     <div className={classes.root}>

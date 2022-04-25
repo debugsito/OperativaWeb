@@ -1,7 +1,7 @@
 import React from 'react'
 import WithExperienceComponent from "./WithExperienceComponent"
 
-export default function Workexperiencelistcomponent({ workExperienceList, handleSaveWithExperience, handleAddWorkExperience, handleDeleteWorkExperience, handleUpdateWorkExperience }) {
+export default function Workexperiencelistcomponent({ workExperienceList, handleSaveWithExperience, handleAddWorkExperience, handleDeleteWorkExperience, handleUpdateWorkExperience,setOption }) {
     return (
         <>
             {
@@ -16,6 +16,7 @@ export default function Workexperiencelistcomponent({ workExperienceList, handle
                             length={workExperienceList.length}
                             key={index}
                             user={workExperience}
+                            setOption = {setOption}
                         />
                     </>
                 )
