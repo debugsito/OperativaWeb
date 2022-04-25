@@ -70,7 +70,7 @@ export default function TabVerificativa({ nextTab, backTab }) {
     serviceDashboard.saveFormEvaluativa(body)
     .then(resp => {
       setNotification({ ...notification, ...messageSuccessful() })
-      nextTab()
+      setOpenDialog(true)
     }).catch(error => {
       setNotification({ ...notification, ...messageError() });
     })
