@@ -55,16 +55,17 @@ export default function FormRedes(props) {
             const response = await service_Applicant.detallePublicacion(job_position?.id)
             let pub = response.data.publication
             if(pub) {
-                let url = window.location.protocol + "//" + window.location.host+"/publication/"+pub?.title_key
+                let url = window.location.protocol + "//" + window.location.host+"/publication-multiposting/"+pub?.title_key
                 // let url = 'https://www.operativa.pe/'+pub?.title_key
                 let title = "Vacante disponible"
                 setValue({
                     url : url,
                     title: title
                 })
-                setTwitterEncoder(encoder(`${value.title} ${value.url}`))
+                setTwitterEncoder(encoder(`${title} \n ${url}`))
             }
         }
+        console.log(twitterEncoder)
 
     },[job_position]);
 
