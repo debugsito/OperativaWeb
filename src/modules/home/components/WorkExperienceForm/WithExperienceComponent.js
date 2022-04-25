@@ -37,7 +37,7 @@ const defaultValues = {
     commitmentDegree: "",
     workingRelationship: "",
     withdrawalReason: "",
-
+    hasWork: false
 }
 
 const useStyle = makeStyles(theme => ({
@@ -72,6 +72,7 @@ export default function WithExperienceComponent({ handleDeleteWorkExperience, ha
     const [openAlert, setOpenAlert] = useState(false)
     const classes = useStyle()
     const [openModal, setOpenModal] = useState(false)
+
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
@@ -121,8 +122,8 @@ export default function WithExperienceComponent({ handleDeleteWorkExperience, ha
     const [rubros, setRubros] = useState([]);
     const [jobLevels, setJobLevels] = useState([]);
     const [withdrawalReasons, setWithdrawalReasons] = useState([]);
-    const [hasWork, setHasWork] = useState(false);
     const [expanded, setExpanded] = useState(true);
+    const [hasWork, setHasWork] = useState(values.hasWork);
 
     useEffect(() => {
         getRubros();
@@ -149,15 +150,25 @@ export default function WithExperienceComponent({ handleDeleteWorkExperience, ha
         setWithdrawalReasons(response?.attritions);
     }
 
-    const handleChangeCheckbox = (e) => {
-        setHasWork(prevState => !prevState)
+    // const handleChangeCheckbox = (e) => {
+    //     setHasWork(prevState => !prevState)
+    //     setErrors({})
+    //     if (e.target.checked) {
+    //         setValues({ ...values, finishDate: null, withdrawalReason: null })
+    //     } else {
+    //         setValues({ ...values, finishDate: "", withdrawalReason: "" })
+    //     }
+    // }
+
+    useEffect(() => {
         setErrors({})
-        if (e.target.checked) {
+        setHasWork(values.hasWork)
+        if (values.hasWork) {
             setValues({ ...values, finishDate: null, withdrawalReason: null })
         } else {
             setValues({ ...values, finishDate: "", withdrawalReason: "" })
         }
-    }
+    }, [values.hasWork]);
 
     const handleCloseAlert = () => {
         setOpenAlert(false)
@@ -221,7 +232,7 @@ export default function WithExperienceComponent({ handleDeleteWorkExperience, ha
 
     const handleChange = () => {
         setExpanded(!expanded);
-      };
+    };
 
     return (
         <>
@@ -277,8 +288,8 @@ export default function WithExperienceComponent({ handleDeleteWorkExperience, ha
                                                         </Typography>
                                                     }
                                                     name="hasWork"
-                                                    checked={hasWork}
-                                                    onChange={(e) => handleChangeCheckbox(e)}
+                                                    checked={values.hasWork}
+                                                    onChange={handleInputChange}
                                                 />
                                             </FormControl>
                                         </Grid>

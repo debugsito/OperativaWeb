@@ -135,7 +135,7 @@ export default function EducationComponent({ handleDeleteEducation, handleUpdate
         const value = values.speciality_id
         if (value == SPECIALITY.OTHERS) { //otros = 28
             setShowOtherSpeciality(true)
-            setValues({ ...values, otherSpeciality: "" })
+            setValues({ ...values })
         } else {
             setShowOtherSpeciality(false)
             setErrors({ ...errors, otherSpeciality: "" })

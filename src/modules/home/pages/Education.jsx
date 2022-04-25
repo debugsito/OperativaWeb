@@ -11,6 +11,7 @@ import { setUser, signOut } from '../../../store/actions/auth/auth.action';
 import { service_ApplicantProfile } from '../../../store/services';
 import { EducationForm } from '../components'
 import MuiAlert from '@material-ui/lab/Alert';
+import { getAccount } from "../../../store/actions/auth/auth.middleware";
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -40,14 +41,23 @@ export default function Education(props) {
         if (data) {
             saveApplicantProfile('education', data);
             setEducation(data);
-            // try {
-            //     const response = await service_ApplicantProfile.applicantEducationRegister(data);
-            //     if (response.status === 200) {
-            //         // setStep(4)
-            //     }
-            // } catch (error) {
-            //     // MensajeError(error.response.data.message);
-            // }
+          
+            try {
+                const response = await service_ApplicantProfile.applicantEducationsResgister(data);
+                
+                if (response.status === 200) {
+                    saveApplicantProfile('education', response.data);
+                    dispatch(getAccount())
+                    goTo(option)
+                }
+                else {
+                    setOpen(true);
+                    setError("Ocurrion un error")
+                }
+            } catch (error) {
+                setOpen(true);
+                setError(error?.response?.data?.message)
+            }
         }
     }
 
@@ -59,9 +69,18 @@ export default function Education(props) {
         setOpen(false)
     }
 
+    const goTo =(optionParam)  => {
+        if (optionParam == 1) {
+            router.push('/registro/postulante/finish-cv')
+        }
+        if (optionParam == 2) {
+            router.push('/registro/postulante/experiencia-laboral')
+        }
+    }
+
     return (
 
-        <Container navbar>
+        <Container navbar navProgress progress={50} title={"Educación"}>
             <Grid container spacing={4} style={{ marginTop: '2rem' }}>
                 <Grid item xs={12}>
                     <Grid container justify="center">

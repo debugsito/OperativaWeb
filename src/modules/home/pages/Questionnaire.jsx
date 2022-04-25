@@ -2,13 +2,14 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from "react-router-dom";
-import { Grid, Paper,Snackbar } from "@material-ui/core";
+import { Grid, Paper, Snackbar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from '../components2/Container';
 import { setUser, signOut } from '../../../store/actions/auth/auth.action';
 import { service_ApplicantProfile } from '../../../store/services';
 import { QuestionnaireForm } from '../components'
 import MuiAlert from '@material-ui/lab/Alert';
+import { getAccount } from "../../../store/actions/auth/auth.middleware";
 
 
 const useStyles = makeStyles(theme => ({
@@ -25,7 +26,7 @@ function Alert(props) {
 }
 
 
-export default function Questionnaire (props) {
+export default function Questionnaire(props) {
     const dispatch = useDispatch();
     const router = useHistory()
     const classes = useStyles()
@@ -36,15 +37,24 @@ export default function Questionnaire (props) {
     const [error, setError] = useState();
 
     const handleSaveQuestionnaire = async (data) => {
-        if(data){
+        if (data) {
             saveApplicantProfile('questionnaire', data)
             setQuestionnaire(data)
-            // try {
-            //     const response = await service_ApplicantProfile.applicantPersonalDataRegister(data);
-              
-            // } catch (error) {
-    
-            // }
+
+            try {
+                const response = await service_ApplicantProfile.applicantPersonalDataRegister(data);
+                if (response.status === 200) {
+                    dispatch(getAccount())
+                    router.push('/')
+                }else{
+                    setOpen(true);
+                    setError("Ocurrion un error")
+                }
+
+            } catch (error) {
+                setOpen(true);
+                setError(error?.response?.data?.message)
+            }
         }
     }
 
@@ -60,7 +70,7 @@ export default function Questionnaire (props) {
 
     return (
 
-        <Container navbar>
+        <Container navbar navProgress progress={100} title={"Cuestionario de posicionamiento"} >
             <Grid container spacing={4} style={{ marginTop: '2rem' }}>
                 <Grid item xs={12}>
                     <Grid container justify="center">

@@ -9,9 +9,8 @@ import { setUser, signOut } from '../../../store/actions/auth/auth.action';
 import { service_ApplicantProfile } from '../../../store/services';
 import { PersonalDataForm } from '../components'
 import MuiAlert from '@material-ui/lab/Alert';
-
-
-
+import { getOS } from '../../shared/utils';
+import { getAccount } from "../../../store/actions/auth/auth.middleware";
 const useStyles = makeStyles(theme => ({
     paper: {
         padding: "3rem"
@@ -38,25 +37,21 @@ export default function PersonalInformation(props) {
 
     const handleSavePersonalData = async (data) => {
         if (data) {
-            // saveApplicantProfile('personalData', data)
-            // setPersonalData(data)
+            const dataTemp = {...data}
+            dataTemp.operating_system = getOS()
+            saveApplicantProfile('personalData', dataTemp)
+            setPersonalData(dataTemp)
             try {
-                // const response = await service_ApplicantProfile.applicantPersonalDataRegister(data);
-                // if (response.status === 200) {
-                //     if(option==1){
-
-                //     }
-                // }
-
-                if (option == 1) {
+                const response = await service_ApplicantProfile.applicantPersonalDataRegister(dataTemp);
+                if (response.status === 200) {
+                    dispatch(getAccount())
+                    goTo(option)
+                }else{
+                    console.log(response)
                 }
-                if (option == 2) {
-
-                }
-
             } catch (error) {
                 setOpen(true);
-                setError(error.response.data.message)
+                setError(error?.response?.message)
                 // MensajeError(error.response.data.message);
             }
         }
@@ -70,10 +65,19 @@ export default function PersonalInformation(props) {
         setOpen(false)
     }
 
+    const goTo =(optionParam)  => {
+        if (optionParam == 1) {
+            router.push('/registro/postulante/finish-cv')
+        }
+        if (optionParam == 2) {
+            router.push('/registro/postulante/educacion')
+        }
+    }
+
 
     return (
 
-        <Container navbar>
+        <Container navbar navProgress progress={25} title={"Datos personales y de contacto"}>
             <Grid container spacing={4} style={{ marginTop: '2rem' }}>
                 <Grid item xs={12}>
                     <Grid container justify="center">

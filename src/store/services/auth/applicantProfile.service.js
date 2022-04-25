@@ -12,6 +12,11 @@ const applicantEducationRegister = async (body) => {
     return response;
 }
 
+const applicantEducationsResgister = async (body) => {
+    const response = await api.post('/educations/',body);
+    return response
+}
+
 // Registrar la información de Trabajo del Usuario
 const applicantWithExperienceRegister = async (body) => {
     const response = await api.post('/job/', body)
@@ -28,5 +33,6 @@ export default {
     applicantPersonalDataRegister, 
     applicantEducationRegister, 
     applicantWithExperienceRegister, 
-    applicantWithoutExperienceRegister 
+    applicantWithoutExperienceRegister,
+    applicantEducationsResgister
 }

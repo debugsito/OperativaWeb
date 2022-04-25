@@ -40,9 +40,9 @@ export default function EducationForm({ userData = initialValues, handleSaveEduc
 
     const classes = useStyle()
 
-    useEffect(() => {
-        console.log(userData)
-    }, [userData])
+    // useEffect(() => {
+    //     console.log(userData)
+    // }, [userData])
 
 
     const handleAddEducation = () => {

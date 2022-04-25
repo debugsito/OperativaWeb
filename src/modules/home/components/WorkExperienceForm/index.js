@@ -1,8 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
-import { Divider, FormControl, FormControlLabel, FormHelperText, FormLabel, Grid, InputLabel, MenuItem, RadioGroup, Select, Typography } from '@material-ui/core';
+import { FormControl, FormControlLabel, Grid, RadioGroup } from '@material-ui/core';
 import { Radio } from '../../../shared/components';
-import { areasList, getAccount } from '../../../../store/services/utils.service';
 import WithoutExperienceComponent from './WithoutExperienceComponent';
 import WorkExperienceListComponent from "./WorkExperienceListComponent";
 import { makeStyles } from "@material-ui/core/styles";
@@ -20,13 +19,10 @@ const defaultValues = {
     commitmentDegree: "",
     workingRelationship: "",
     withdrawalReason: "",
+    hasWork: false
 
 }
 const initialValues = [defaultValues]
-
-// border: 1px solid #C8C8C8;
-// box-sizing: border-box;
-// border-radius: 10px;
 
 const useStyles = makeStyles(theme => ({
     controlStyle: {
@@ -44,7 +40,6 @@ export default function WorkExperienceForm({ userData = initialValues, handleSav
 
     useEffect(() => {
         setHasExperience({ ...hasExperience, value: Array.isArray(userData) ? 'withExperience' : (userData?.interest_area_id ? 'withoutExperience' : '') });
-        getAccount();
     }, [userData])
 
     const handleCheckBox = (value = hasExperience.value) => {
@@ -57,20 +52,28 @@ export default function WorkExperienceForm({ userData = initialValues, handleSav
     const handleSaveWithExperience = async () => {
         const body = userData.map(data => ({
             name_inst: data.company,
+            company : data.company,
             district_id: data.district_id,
             rubro_id: parseInt(data.rubro_id),
             job_level_id: parseInt(data.position),
+            postion: data.position,
             from_year: data.startDate,
             to_year: data.finishDate,
-            buss_travel: 1, // EN DURO
-            distan_home: 0, // EN DURO
+            startDate :  data.startDate,
+            finishDate : data.finishDate,
             hour_rate: parseInt(data.weeklyHours),
+            weeklyHours : data.weeklyHours,
             job_sati: parseInt(data.workingRelationship),
+            workingRelationship : data.workingRelationship,
             monthly_income: parseInt(data.monthlyIncome),
+            monthlyIncome : data.monthlyIncome,
             over_time: parseInt(data.hasExtraHours),
-            work_bal_life: 0, // EN DURO
+            hasExtraHours : data.hasExtraHours,
             job_invol: parseInt(data.commitmentDegree),
+            commitmentDegree : data.commitmentDegree,
             attrition: parseInt(data.withdrawalReason),
+            withdrawalReason : data.withdrawalReason,
+            hasWork: data.hasWork,
         }))
 
         handleSaveWorkExperience(body, hasExperience);
@@ -118,7 +121,7 @@ export default function WorkExperienceForm({ userData = initialValues, handleSav
                     history={history}
                     user={userData}
                     handleFinish={handleSaveWithoutExperience}
-                    setOption = {setOption}
+                    setOption={setOption}
                 />}
             {hasExperience.value === "withExperience" &&
                 <WorkExperienceListComponent
@@ -127,7 +130,7 @@ export default function WorkExperienceForm({ userData = initialValues, handleSav
                     handleAddWorkExperience={handleAddWorkExperience}
                     handleDeleteWorkExperience={handleDeleteWorkExperience}
                     handleUpdateWorkExperience={handleUpdateWorkExperienceTemp}
-                    setOption = {setOption}
+                    setOption={setOption}
                 // disabledButton={disabledButton}
                 />
             }
