@@ -25,6 +25,7 @@ const defaultValues = {
     commitmentDegree: "",
     workingRelationship: "",
     withdrawalReason: "",
+    hasWork: false
 
 }
 
@@ -38,28 +39,35 @@ export default function ApplicantWorkExperienceForm({ userData = initialValues, 
         setHasExperience({ value: value, error: !value })
         if (value == "withExperience") {
             setWorkExperience(initialValues)
-            // handleUpdateWorkExperience(initialValues)
+            //handleUpdateWorkExperience(initialValues)
         }
     }
 
     const handleSaveExperience = async () => {
         const body = workExperience.map(data => ({
-            id: data?.id,
             name_inst: data.company,
-            district_id: data.district.id,
+            company : data.company,
+            district_id: data.district_id,
             rubro_id: parseInt(data.rubro_id),
             job_level_id: parseInt(data.position),
+            postion: data.position,
             from_year: data.startDate,
             to_year: data.finishDate,
-            buss_travel: 1, // EN DURO
-            distan_home: 0, // EN DURO
+            startDate :  data.startDate,
+            finishDate : data.finishDate,
             hour_rate: parseInt(data.weeklyHours),
+            weeklyHours : data.weeklyHours,
             job_sati: parseInt(data.workingRelationship),
+            workingRelationship : data.workingRelationship,
             monthly_income: parseInt(data.monthlyIncome),
+            monthlyIncome : data.monthlyIncome,
             over_time: parseInt(data.hasExtraHours),
-            work_bal_life: 0, // EN DURO
+            hasExtraHours : data.hasExtraHours,
             job_invol: parseInt(data.commitmentDegree),
+            commitmentDegree : data.commitmentDegree,
             attrition: parseInt(data.withdrawalReason),
+            withdrawalReason : data.withdrawalReason,
+            hasWork: data.hasWork,
         }))
 
         handleSaveWorkExperience(body, hasExperience);

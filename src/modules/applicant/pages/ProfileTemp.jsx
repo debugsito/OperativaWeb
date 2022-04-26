@@ -106,11 +106,12 @@ const Profile = ({ history }) => {
 
     const handleSaveEducation = async (data) => {
         if (data) {
-            saveApplicantProfile('education', data);
+            // saveApplicantProfile('education', data);
             setEducation(data);
             try {
                 const response = await service_ApplicantProfile.applicantEducationRegister(data);
                 if (response.status === 200) {
+                    dispatch(getAccount())
                     setStep(4)
                 }
             } catch (error) {
