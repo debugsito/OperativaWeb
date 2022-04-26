@@ -39,24 +39,29 @@ export default function WorkExperience(props) {
     const [hasExperience, setHasExperience] = useState()
 
 
+    const saveHasExperience = async (data) => {
+        try {
+            await service_ApplicantProfile.applicantPersonalDataRegister(data);
+
+        } catch (error) {
+            console.log(error?.data?.message)
+        }
+
+    }
+
 
     const handleSaveWorkExperience = async (data, hasExperience) => {
         if (data) {
             setHasExperience(hasExperience.value)
             setWorkExperience(data);
             saveApplicantProfile('workExperience', data);
+            let dataTemp = hasExperience.value === "withExperience" ? Object.assign({}, { hasExperience: 1 }) : Object.assign({}, { hasExperience: 0 })
+            await saveHasExperience(dataTemp);
 
             if (hasExperience.value === "withExperience") {
                 try {
                     const responseWork = await service_ApplicantProfile.applicantWithExperienceRegister(data);
-                    if (responseWork.status === 200) {
-                        dispatch(getAccount())
-                        goTo(option)
-                    }
-                    else {
-                        setOpen(true);
-                        setError("Ocurrio un error")
-                    }
+                    responseNextOperation(responseWork)
                 } catch (error) {
                     setOpen(true);
                     setError(error?.response?.data?.errorMessage)
@@ -64,20 +69,24 @@ export default function WorkExperience(props) {
             } else {
                 try {
                     const response = await service_ApplicantProfile.applicantPersonalDataRegister(data);
-                    if (response.status === 200) {
-                        goTo(option)
-                    }
-                    else {
-                        dispatch(getAccount())
-                        setOpen(true);
-                        setError("Ocurrio un error")
-                    }
+                    responseNextOperation(response)
                 } catch (error) {
                     setOpen(true);
                     setError(error?.response?.data?.message)
                 }
 
             }
+        }
+    }
+
+    const responseNextOperation = (response) => {
+        if (response.status === 200) {
+            dispatch(getAccount())
+            goTo(option)
+        }
+        else {
+            setOpen(true);
+            setError("Ocurrio un error")
         }
     }
 

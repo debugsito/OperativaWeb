@@ -17,11 +17,13 @@ import Container from '../components2/Container';
 import MensajeSuccess from '../components2/MensajeSuccess';
 import SubTitle from '../components2/SubTitle';
 import Title from '../components2/Title';
+import { Snackbar } from "@material-ui/core";
 
 import IconBusiness from "../images2/page-register/icon-business-sm.svg";
 import styles from "../styleshome/components_styles/Forms.module.scss";
 import { setUserError, applicantSignUp } from '../../../store/actions/auth/auth.action';
 import { isEmail } from '../../shared/libs/validators';
+import MuiAlert from '@material-ui/lab/Alert';
 
 const initialValue = {
     value: '',
@@ -29,6 +31,12 @@ const initialValue = {
     helperText: '',
     show: false,
     checked: false
+}
+const vertical = 'top'
+const horizontal = 'right'
+
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
 
@@ -39,6 +47,7 @@ export default function Municipality(props) {
     const dispatch = useDispatch();
     const [hasError, setHasError] = useState('');
     const { error, signUpSucces } = useSelector((state) => state?.auth);
+    const [open, setOpen] = useState(false);
     
 
     const validationSchema = Yup.object().shape({
@@ -69,6 +78,14 @@ export default function Municipality(props) {
 
     },[signUpSucces])
 
+    useEffect(() => {
+
+        if(error){
+            setOpen(true)
+        }
+        
+    },[error])
+
 
     const onSubmit = (data) => {
         if(data){
@@ -79,6 +96,10 @@ export default function Municipality(props) {
             }
             dispatch(applicantSignUp(body));
         }
+    }
+
+    const handleCloseAlert = () => {
+        setOpen(false)
     }
 
     const content = <>
@@ -172,6 +193,13 @@ export default function Municipality(props) {
                     <Button variant="primary" type="button" onClick={() => router.push("/registro/postulante/datos-personales")}>Empezar</Button>
                 </MensajeSuccess>
             }
+               <Snackbar
+                anchorOrigin={{ vertical, horizontal }}
+                open={open} autoHideDuration={6000} onClose={handleCloseAlert}>
+                <Alert onClose={handleCloseAlert} severity="error">
+                    {error}
+                </Alert>
+            </Snackbar>
         </Container>
     )
 }

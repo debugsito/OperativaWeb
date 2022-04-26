@@ -103,7 +103,6 @@ export default function WithExperienceComponent({ handleDeleteWorkExperience, ha
             if ('withdrawalReason' in fieldValues)
                 temp.withdrawalReason = fieldValues.withdrawalReason ? "" : "El campo es requerido."
         }
-
         setErrors({ ...temp })
 
         if (fieldValues === values)
@@ -150,25 +149,19 @@ export default function WithExperienceComponent({ handleDeleteWorkExperience, ha
         setWithdrawalReasons(response?.attritions);
     }
 
-    // const handleChangeCheckbox = (e) => {
-    //     setHasWork(prevState => !prevState)
-    //     setErrors({})
-    //     if (e.target.checked) {
-    //         setValues({ ...values, finishDate: null, withdrawalReason: null })
-    //     } else {
-    //         setValues({ ...values, finishDate: "", withdrawalReason: "" })
-    //     }
-    // }
-
-    useEffect(() => {
+    const handleChangeCheckbox = (e) => {
+        setHasWork(prevState => !prevState)
         setErrors({})
-        setHasWork(values.hasWork)
-        if (values.hasWork) {
+        if (e.target.checked) {
             setValues({ ...values, finishDate: null, withdrawalReason: null })
         } else {
             setValues({ ...values, finishDate: "", withdrawalReason: "" })
         }
-    }, [values.hasWork]);
+    }
+
+    useEffect(() => {
+        setValues({ ...values, hasWork: hasWork })
+    }, [hasWork]);
 
     const handleCloseAlert = () => {
         setOpenAlert(false)
@@ -289,7 +282,7 @@ export default function WithExperienceComponent({ handleDeleteWorkExperience, ha
                                                     }
                                                     name="hasWork"
                                                     checked={values.hasWork}
-                                                    onChange={handleInputChange}
+                                                    onChange={handleChangeCheckbox}
                                                 />
                                             </FormControl>
                                         </Grid>

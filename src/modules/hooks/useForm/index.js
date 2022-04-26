@@ -6,7 +6,7 @@ export function useForm(initialValues, validateOnChange = false, validate) {
     const [errors, setErrors] = useState({});
 
     const disabledButtonState = useMemo(() => {
-        const validValues = Object.values(values).every((x) => x != "") //|| x != false
+        const validValues = Object.values(values).every((x) => x != "" || x!=null) //|| x != false
         const validErrors = Object.values(errors).every((x) => x == "")
         if (validValues && validErrors) return false
         else return true

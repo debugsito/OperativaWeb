@@ -31,7 +31,7 @@ const initialState = {
         },
     },
     applicantSignUp: null,
-    error: false,
+    error: null,
     accountType: '',
     signUpSucces: null,
     showLoading: false

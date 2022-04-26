@@ -14,7 +14,7 @@ export default function ButtonGoBack(props) {
         onClick={() => router.goBack()}
         >
             <img src={IconBack} alt="Volver" />
-            <h6>Volver</h6>
+            <p>Volver</p>
         </div>
     )
 }
