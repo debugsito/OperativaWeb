@@ -20,8 +20,8 @@ import { setUser, signOut } from "../../../store/actions/auth/auth.action";
 import { updateSearchWork } from "../../../store/services/auth/user.service";
 import { Chart, ArcElement } from 'chart.js'
 import { Doughnut } from 'react-chartjs-2';
-import ApplicantLevelComponent from "../components/ApplicantLevelComponent/index"
-import { arrowWhite, deseoPostular,soyCandidato } from "../../shared/images/postulant/index"
+import ApplicantLevelComponent2 from "../components/ApplicantLevelComponent2/index"
+import { arrowWhite, deseoPostular, soyCandidato } from "../../shared/images/postulant/index"
 
 Chart.register(ArcElement);
 // var originalDoughnutDraw = Chart.controllers.doughnut.prototype.draw;
@@ -206,7 +206,7 @@ const Applicant = () => {
                     </div>
                 </Grid>
                 <Grid item xs={6} className="pr-2">
-                    <div className="container-user-information" style={{ position: 'relative' }}>
+                    {/* <div className="container-user-information" style={{ position: 'relative' }}>
 
                         <div style={user?.account?.job_hunting_account ? { width: '50%' } : {}}>
                             <h4 className="home-title">{user?.account?.user?.fullname}</h4>
@@ -215,6 +215,20 @@ const Applicant = () => {
                         <ApplicantLevelComponent
                             style={{ position: 'absolute' }}
                             job_hunting_account={user?.account?.job_hunting_account} />
+                    </div> */}
+                    <div className="container-card">
+                        <div className="row-card">
+                            <div className="container-user-information">
+                                <h4 className="home-title">{user?.account?.user?.fullname}</h4>
+                                <p>{`${getNameById(documentsType.documents, user.account.user.document_id)} ${user?.account?.user?.document_number}`}</p>
+                            </div>
+                        </div>
+                        <div className="row-card">
+                            <ApplicantLevelComponent2
+                                job_hunting_account={user?.account?.job_hunting_account} />
+
+                        </div>
+
                     </div>
                 </Grid>
                 <Grid container xs={6} className="pl-2">
@@ -231,7 +245,7 @@ const Applicant = () => {
 
                         >
                             <div className="shadowLayer">
-                                <h3  class="titleLayer" style={{ color: ' white', fontWeigth: 'bold', fontSize: '18px', zIndex:'2' }}> El juego del <br />cazatrabajo</h3>
+                                <h3 class="titleLayer" style={{ color: ' white', fontWeigth: 'bold', fontSize: '18px', zIndex: '2' }}> El juego del <br />cazatrabajo</h3>
                             </div>
                         </div>
                         <div className="row-card search-work">
@@ -300,7 +314,7 @@ const Applicant = () => {
                     </div>
                 </Grid>
                 <Grid item xs={4} className="pr-2 mt-4 cv-grid-end">
-                    <div className="card-cv" style={{ position: 'relative',textAlign: 'center' }}>
+                    <div className="card-cv" style={{ position: 'relative', textAlign: 'center' }}>
                         <span className="span-flex"><b>Tu CV</b></span>
                         <Doughnut className="donut" data={dataCv} />
                         <div style={{ position: 'absolute', width: '100%', top: '50%', left: 0, textAlign: 'center' }}>
@@ -311,7 +325,7 @@ const Applicant = () => {
                 <Grid item xs={4} className="pr-2 mt-4 cv-grid-start">
                     <div className="card-cv" style={{ position: 'relative', textAlign: 'center' }}>
                         <span className="span-flex"><b>Cuestionario</b></span>
-                        <Doughnut  className="donut" data={dataCuestionario} />
+                        <Doughnut className="donut" data={dataCuestionario} />
                         <div style={{ position: 'absolute', width: '100%', top: '50%', left: 0, textAlign: 'center' }}>
                             <span><b>{user.account.questionnaire_percent} %</b></span>
                         </div>
