@@ -77,12 +77,12 @@ const PostulateForm = () => {
                     <img src={arrow} alt="" onClick={setBefore} />
                 </Grid>
                 <Grid item xs={12} className="mb-2">
-                    <div>
+                    <div className="container-principal">
                         <Grid item xs={12} className="mb-2">
                             <h4 className="title">Busca el trabajo que se adapte a tu perfil.</h4>
                         </Grid>
                         <div className="container-postulate-form">
-                            <form>
+                            <form className="form-postulante-form">
                                 <Grid item xs={12} className="mb-2">
                                     <TextInput
                                         fullWidth

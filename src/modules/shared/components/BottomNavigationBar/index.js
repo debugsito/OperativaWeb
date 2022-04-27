@@ -1,8 +1,9 @@
-import {makeStyles} from '@material-ui/core';
-import {Home, AccountCircle, Widgets} from '@material-ui/icons';
-import {useHistory} from "react-router-dom";
-import {SessionRoutes} from "../../libs/sessionRoutes";
+import { makeStyles } from '@material-ui/core';
+import { Home, AccountCircle, Widgets } from '@material-ui/icons';
+import { useHistory } from "react-router-dom";
+import { SessionRoutes } from "../../libs/sessionRoutes";
 import { useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
 import './index.css'
 
 const useStyles = makeStyles((theme) => ({
@@ -18,8 +19,8 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: 'var(--titleColor)',
         padding: '.5rem 2rem'
     },
-    playing : {
-        backgroundColor : "#5D5FEF"
+    playing: {
+        backgroundColor: "#5D5FEF"
     },
     containerToolbarIcon: {
         display: 'flex',
@@ -40,6 +41,31 @@ const BottomNavigationBar = () => {
     const history = useHistory()
     const initRoute = SessionRoutes().initRoute;
     const { auth: { user } } = useSelector(state => state);
+    const [show, setShow] = useState(true);
+    const [lastScrollY, setLastScrollY] = useState(0);
+
+    const controlNavbar = () => {
+        if (typeof window !== 'undefined') {
+            if (window.scrollY > lastScrollY) {
+                setShow(false);
+            } else {
+                setShow(true);
+            }
+            setLastScrollY(window.scrollY);
+        }
+    };
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            window.addEventListener('scroll', controlNavbar);
+
+            // cleanup function
+            return () => {
+                window.removeEventListener('scroll', controlNavbar);
+            };
+        }
+    }, [lastScrollY]);
+
 
     const goToPostulaciones = (event) => {
         history.push(`${initRoute}/postulaciones`);
@@ -55,24 +81,24 @@ const BottomNavigationBar = () => {
 
     return (
         <>
-            <div className={`${classes.toolbar} toolbarCondition`} >
-                <div className={`${classes.containerToolbar} ${user?.account?.job_hunting_account? classes.playing: ''}`}>
+            {show && <div className={`${classes.toolbar} toolbarCondition`} >
+                <div className={`${classes.containerToolbar} ${user?.account?.job_hunting_account ? classes.playing : ''}`}>
                     <div className={classes.containerToolbarIcon}>
                         <a onClick={goToHome} className={classes.iconsToolbar}>
-                            <Home/>
+                            <Home />
                             <p>Inicio</p>
                         </a>
                         <a onClick={goToPostulaciones} className={classes.iconsToolbar}>
-                            <Widgets/>
+                            <Widgets />
                             <p>Mis Postulaciones</p>
                         </a>
                         <a onClick={goToProfile} className={classes.iconsToolbar}>
-                            <AccountCircle/>
+                            <AccountCircle />
                             <p>Mi CV</p>
                         </a>
                     </div>
                 </div>
-            </div>
+            </div>}
         </>
     );
 };

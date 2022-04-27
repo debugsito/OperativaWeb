@@ -41,8 +41,7 @@
     border-radius: 10px !important;
 }
 .buttonSearch{
-    box-shadow: 0px 2px 10px 0px #00000033;
- 
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2) !important;
 }
 
 
@@ -54,7 +53,13 @@
         justify-content: center;
         align-items: center;
     }
-    .buttonSearch{
-        width: 50% !important;
+    .container-postulate-form{
+        width: 50%;
+    }
+    .container-principal{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
   }
