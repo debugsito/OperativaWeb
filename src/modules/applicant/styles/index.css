@@ -203,12 +203,12 @@ input:checked + .slider:before {
     flex-direction: column;
 }
 .shadowLayer{
-    /* width:100%;
+    width:100%;
     height:100%;
     border-radius: 12px;
     background-color: rgba(0, 0, 0, 0.2);;
     z-index: initial;
-    position: relative; */
+    position: relative;
 }
 
 .small-text-config {
@@ -260,8 +260,8 @@ input:checked + .slider:before {
        flex-direction: column;
     }
     canvas {
-        height: 85% !important;
-        width: 65% !important;
+        height: 75% !important;
+        width: 40% !important;
     }
   }
 
