@@ -45,9 +45,10 @@ export default function ApplicantWorkExperienceForm({ userData = initialValues, 
 
     const handleSaveExperience = async () => {
         const body = workExperience.map(data => ({
+            id: data?.id,
             name_inst: data.company,
             company : data.company,
-            district_id: data.district_id,
+            district_id: data?.district?.id,
             rubro_id: parseInt(data.rubro_id),
             job_level_id: parseInt(data.position),
             postion: data.position,
@@ -69,7 +70,7 @@ export default function ApplicantWorkExperienceForm({ userData = initialValues, 
             withdrawalReason : data.withdrawalReason,
             hasWork: data.hasWork,
         }))
-
+        //console.log(body)
         handleSaveWorkExperience(body, hasExperience);
     }
 
@@ -106,8 +107,20 @@ export default function ApplicantWorkExperienceForm({ userData = initialValues, 
         setWorkExperience(userDataTemp)
     }
 
+    const saveHasExperience = async (data) => {
+        try {
+            await service_ApplicantProfile.applicantPersonalDataRegister(data);
+
+        } catch (error) {
+            console.log(error?.data?.message)
+        }
+
+    }
+
     const handleSaveWorkExperience = async (data, hasExperience) => {
         if (data) {
+            let dataTemp = hasExperience.value === "withExperience" ? Object.assign({}, { hasExperience: 1 }) : Object.assign({}, { hasExperience: 0 })
+            await saveHasExperience(dataTemp);
             if (hasExperience.value === "withExperience") {
                 try {
                     const responseEducation = await service_ApplicantProfile.applicantWithExperienceRegister(data);

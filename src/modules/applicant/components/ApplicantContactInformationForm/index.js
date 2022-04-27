@@ -84,7 +84,7 @@ export default function ApplicantPersonalDataForm({ user, handleSaveContactInfor
     }, [baseDistricts])
 
     useEffect(() => {
-        if (values.department_id !== "") {
+        if (values.department_id !== "" || values.department_id != null) {
             if (values.department_id === DEPARTMENT.CALLAO) {
                 const e = { target: { name: "", value: "" } }
                 e.target.name = "province_id"
