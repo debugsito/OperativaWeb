@@ -2,8 +2,9 @@ import React, {useState} from 'react';
 import { useDispatch } from "react-redux";
 import { Container, Grid } from "@material-ui/core";
 import { Breadcrumbs, Button, Modal, Typography } from "../../shared/components";
-import { UsersTable, SearchForm } from "../components";
+import { UsersTable, SearchForm ,UsersTabs } from "../components";
 import { loginAs } from "../../../store/actions/auth/auth.middleware";
+import { AppBar, Tabs, Tab, makeStyles } from '@material-ui/core';
 
 const routes = [{ name: "USUARIOS", to: "/admin" }];
 
@@ -11,11 +12,16 @@ export default function Users() {
   const dispatch = useDispatch()
   const [openModal, setOpenModal] = useState(false)
   const [accountId, setAccountId] = useState(null)
+  const [value, setValue] = useState(0);
 
   const hanldleLoginAs = async () => {
     await dispatch(loginAs(accountId))
     window.location.reload();
   }
+
+  const handleChange = (newValue) => {
+    setValue(newValue);
+  };
 
   return (
     <Container className="dashboard-container">
@@ -32,7 +38,15 @@ export default function Users() {
               <SearchForm />
             </Grid>
             <Grid item xs={12}>
-              <UsersTable setOpenModal={setOpenModal} setAccountId={setAccountId}/>
+              <UsersTabs
+                onChangeTab={handleChange}
+                tabValue={value}
+                setOpenModal={setOpenModal} 
+                setAccountId={setAccountId}
+              />
+
+              
+              {/* <UsersTable setOpenModal={setOpenModal} setAccountId={setAccountId}/> */}
             </Grid>
             <Modal open={openModal} handleCloseModal={() => setOpenModal(false)}>
                   <h3 id="simple-modal-title">¿Está seguro de entrar como este usuario seleccionado?</h3>

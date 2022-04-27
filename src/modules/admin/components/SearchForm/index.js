@@ -12,7 +12,7 @@ import { TextInput } from "../../../shared/components";
 import { setQuery } from "../../../../store/actions/admin/admin.action";
 import { getUsers } from "../../../../store/actions/admin/admin.midleware";
 
-const options = [{ key: "last_name", value: 'Apellido' }, { key: "first_name", value: 'Nombre' }, { key: "role", value: 'Rol' }, { key: "document_number", value: 'Dni' }];
+const options = [{ key: "last_name", value: 'Apellido' }, { key: "first_name", value: 'Nombre' }, { key: "document_number", value: 'Dni' }];
 const MESSAGE = ["Ingrese apellido", "Ingrese nombre", "Municipalidad, Empresa o Administrador", "Ingrese DNI"]
 
 const useStyles = makeStyles((theme) => ({
@@ -32,11 +32,7 @@ export default function SearchForm() {
     const [chipData, setChipData] = React.useState([])
 
     useEffect(() => {
-        if (chipData.length > 0) {
-            const query = getUrl()
-            dispatch(getUsers(query))
-
-        }
+        const query = getUrl()
     }, [chipData])
 
     const handleChange = (e) => {
