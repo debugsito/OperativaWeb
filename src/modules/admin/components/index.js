@@ -6,3 +6,4 @@ export { default as UsersTabs } from './UsersTabs';
 export { default as TableAdmin } from './TableAdmin'
 export { default as TableApplicant } from './TableApplicant'
 export { default as TableCompanyMuni } from './TableCompanyMuni'
+export { default as TablePartner }  from './TablePartner'

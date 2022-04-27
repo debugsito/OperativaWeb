@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { AppBar, Tabs, Tab, makeStyles } from '@material-ui/core';
 import { TabPanel, SnackbarsAlert } from "../../../shared/components";
-import { TableAdmin, TableApplicant, TableCompanyMuni } from "../";
+import { TableAdmin, TableApplicant, TableCompanyMuni , TablePartner } from "../";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -44,8 +44,9 @@ export default function UsersTabs({ onChangeTab, tabValue, setOpenModal, setAcco
                     classes={{ root: classes.rootTabs }}
                 >
                     <Tab classes={{ root: classes.rootTab, selected: classes.selected }} label="Administradores" {...a11yProps(0)} />
-                    <Tab classes={{ root: classes.rootTab, selected: classes.selected }} label="Empresas y Municipalidades" {...a11yProps(1)} />
+                    <Tab classes={{ root: classes.rootTab, selected: classes.selected }} label="Empresa" {...a11yProps(1)} />
                     <Tab classes={{ root: classes.rootTab, selected: classes.selected }} label="Postulantes" {...a11yProps(2)} />
+                    <Tab classes={{ root: classes.rootTab, selected: classes.selected }} label="Socio Estatégico" {...a11yProps(3)} />
                 </Tabs>
             </AppBar>
             <TabPanel value={tabValue} index={0} padding={0}>
@@ -59,6 +60,10 @@ export default function UsersTabs({ onChangeTab, tabValue, setOpenModal, setAcco
             <TabPanel value={tabValue} index={2} padding={0}>
                 <TableApplicant setOpenModal={setOpenModal} setAccountId={setAccountId}
                 ></TableApplicant>
+            </TabPanel>
+            <TabPanel value={tabValue} index={3} padding={0}>
+                <TablePartner setOpenModal={setOpenModal} setAccountId={setAccountId}
+                ></TablePartner>
             </TabPanel>
         </>
 
