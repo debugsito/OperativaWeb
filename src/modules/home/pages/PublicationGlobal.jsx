@@ -82,9 +82,9 @@ export default function PublicationGlobal() {
         <Container>
             <Helmet>
                 <meta charSet="utf-8" />
-                <title>{publication.job_title ? publication.job_title : 'Empleo'}</title>
+                {/* <title>{publication.job_title ? publication.job_title : 'Empleo'}</title> */}
                 <meta name="description" content="Publicacion empleo" />
-                <meta property="og:title" content={publication.job_title} />
+                {/* <meta property="og:title" content={publication.job_title} /> */}
                 <meta property="og:image" content={ofertaLaboral} />
                 <meta name="image" content={ofertaLaboral} />
             </Helmet>
