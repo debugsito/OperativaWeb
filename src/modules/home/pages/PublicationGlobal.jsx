@@ -11,6 +11,9 @@ import { convertStringToObject } from "../../shared/utils"
 import AppSession from '../../shared/libs/session/AppSession';
 import { useSelector } from "react-redux";
 import LoginModal from "../components2/LoginModal";
+import { Helmet } from "react-helmet";
+import { ofertaLaboral } from "../images2";
+
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -64,19 +67,27 @@ export default function PublicationGlobal() {
         }
     }
 
-    const postApply = ()=> {
+    const postApply = () => {
         console.log("postular");
     }
 
-    useEffect(()=> {
+    useEffect(() => {
         if (user?.account?.user && hasSession) {
             postApply()
         }
-    },[user])
+    }, [user])
 
 
     return (
         <Container>
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>{publication.job_title ? publication.job_title : 'Empleo'}</title>
+                <meta name="description" content="Publicacion empleo" />
+                <meta property="og:title" content={publication.job_title} />
+                <meta property="og:image" content={ofertaLaboral} />
+                <meta name="image" content={ofertaLaboral} />
+            </Helmet>
             <Grid container spacing={4}>
                 <Grid item xs={12}>
                     <Breadcrumbs routes={routes} />
