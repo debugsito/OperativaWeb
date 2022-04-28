@@ -17,16 +17,16 @@ export default function FormRepresentante({ handleClickNext }) {
     const router = useHistory();
 
     const validationSchema = Yup.object().shape({
-        name: Yup.string()
+        first_name: Yup.string()
             .required('Nombre es requerido'),
-        lastname: Yup.string()
+        last_name: Yup.string()
             .required('Apellidos es requerido'),
         email: Yup.string()
             .required('Email es requerido')
             .email('Ingrese un email correcto'),
-        job: Yup.string()
+        cargo_input: Yup.string()
             .required('Cargo es requerido'),
-        area: Yup.string()
+        area_input: Yup.string()
             .required('Area es requerido'),
     });
 
@@ -35,7 +35,7 @@ export default function FormRepresentante({ handleClickNext }) {
     });
 
     const onSubmit = (data) => {
-        console.log(data)
+        // console.log(data)
         handleClickNext(data)
     }
 
@@ -46,9 +46,9 @@ export default function FormRepresentante({ handleClickNext }) {
                 <Row className="mt-3">
                     <Form.Group controlId="formGridName">
                         <FloatingLabel label="Nombre">
-                            <Form.Control type="text" placeholder="Nombre" {...register("name")} isInvalid={!!errors.name} />
+                            <Form.Control type="text" placeholder="Nombre" {...register("first_name")} isInvalid={!!errors.first_name} />
                             <Form.Control.Feedback type="invalid">
-                                {errors.name?.message}
+                                {errors.first_name?.message}
                             </Form.Control.Feedback>
                         </FloatingLabel>
                     </Form.Group>
@@ -56,9 +56,9 @@ export default function FormRepresentante({ handleClickNext }) {
                 <Row className="mt-3">
                     <Form.Group controlId="formGridLastName">
                         <FloatingLabel label="Apellidos">
-                            <Form.Control type="text" placeholder="Apellidos" {...register("lastname")} isInvalid={!!errors.lastname} />
+                            <Form.Control type="text" placeholder="Apellidos" {...register("last_name")} isInvalid={!!errors.last_name} />
                             <Form.Control.Feedback type="invalid">
-                                {errors.lastname?.message}
+                                {errors.last_name?.message}
                             </Form.Control.Feedback>
                         </FloatingLabel>
                     </Form.Group>
@@ -77,9 +77,9 @@ export default function FormRepresentante({ handleClickNext }) {
                 <Row className="mt-3">
                     <Form.Group controlId="formGridCargo">
                         <FloatingLabel label="Cargo">
-                            <Form.Control type="text" placeholder="Cargo" {...register("job")} isInvalid={!!errors.job} />
+                            <Form.Control type="text" placeholder="Cargo" {...register("cargo_input")} isInvalid={!!errors.cargo_input} />
                             <Form.Control.Feedback type="invalid">
-                                {errors.job?.message}
+                                {errors.cargo_input?.message}
                             </Form.Control.Feedback>
                         </FloatingLabel>
                     </Form.Group>
@@ -87,9 +87,9 @@ export default function FormRepresentante({ handleClickNext }) {
                 <Row className="mt-3">
                     <Form.Group controlId="formGridArea">
                         <FloatingLabel label="Área">
-                            <Form.Control type="text" placeholder="Área" {...register("area")} isInvalid={!!errors.area} />
+                            <Form.Control type="text" placeholder="Área" {...register("area_input")} isInvalid={!!errors.area_input} />
                             <Form.Control.Feedback type="invalid">
-                                {errors.area?.message}
+                                {errors.area_input?.message}
                             </Form.Control.Feedback>
                         </FloatingLabel>
                     </Form.Group>
@@ -97,7 +97,7 @@ export default function FormRepresentante({ handleClickNext }) {
                 <Row className="mt-5">
                     <Col xs={6} sm={6} md={{ span: 3, offset: 6 }}>
                         <Button variant="light" type="button"
-                                onClick={() => router.goBack()}
+                            onClick={() => router.goBack()}
 
                         >
                             Cancelar

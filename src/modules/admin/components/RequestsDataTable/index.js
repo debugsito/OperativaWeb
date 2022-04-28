@@ -39,7 +39,14 @@ export default function DataTable() {
       }
     },
     { field: 'email', headerName: 'Correo', sortable: false, width: 160 },
-    { field: 'updatedAt', headerName: 'Fecha', width: 120, valueGetter: (params) => DateTime.fromISO(params.value).toFormat("yyyy-LL-dd") }, // moment(params.value).format("YYYY-MM-DD")
+    { field: 'updatedAt', headerName: 'Fecha', width: 120, valueGetter: (params) => DateTime.fromISO(params.value).toFormat("yyyy-LL-dd") },
+    {
+      field: 'plan', headerName: 'Solicitud', width: 120, valueGetter: (params) => {
+        const { plan } = params.row.user;
+        if(plan) return plan.name 
+        return ''
+      }
+    },
     {
       field: 'action', headerName: 'Accion', width: 100, sortable: false, renderCell: (params) => {
         const { id } = params.row

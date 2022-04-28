@@ -3,7 +3,8 @@ import {
     departmentsList, documentsTypeList, genderList,
     itemsList, jobLevelsList, jobRolesList, providerList,
     districtsList, listDistrictsLima, provincesList, specialtiesList, withdrawalReasonsList,
-    getPeriods, getRubrosOp, listDistrictsByText, getInstitutes, getOngs, getUniversities
+    getPeriods, getRubrosOp, listDistrictsByText, getInstitutes, getOngs, getUniversities,
+    getPlans
 } from "../../services/utils.service.temp";
 import { utilsType } from "../../types/utils";
 
@@ -498,6 +499,32 @@ const getListUniversities = () => {
         }
     }
 }
+const setPlans = (payload) => ({
+    type: utilsType.SET_PLANS,
+    payload
+})
+
+const getListPlans = ()=> {
+    return async (dispatch) => {
+        try {
+            const response = await getPlans();
+            dispatch(setPlans(response.plans));
+            dispatch(setError(null));
+        } catch (error) {
+            if (!error.response) {
+                dispatch(setError("Ha ocurrido un error interno."));
+            } else {
+                if (error.response.status === 401) {
+                    dispatch(setError(error.response.data.message));
+                } else {
+                    dispatch(setError("Ha ocurrido un error interno."));
+                };
+            }
+        }
+    }
+}
+
+
 const setOngs = (payload) => ({
     type: utilsType.SET_ONGS,
     payload
@@ -529,5 +556,6 @@ export {
     getProviders, getGender, setGender, getSpecialties, setSpecialties, getAcademicLevels, setAcademicLevels,
     getDistricts, getDistrictsLima, getDistrictsByText, getProvinces, setProvinces, getDepartments, setDepartments,
     getCivilStatuses, setCivilStatuses, getDocumentsType, setDocumentsType, setError, getAllPeriods,
-    getRubrosOp, getItemsOp, getListInstitutes, getListUniversities, getListOngs
+    getRubrosOp, getItemsOp, getListInstitutes, getListUniversities, getListOngs,
+    getListPlans
 }

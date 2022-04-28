@@ -130,3 +130,8 @@ export const getOngs = async () => {
     const response = await api.get('/ongs');
     return response.data;
 }
+
+export const getPlans = async () => {
+    const response = await api.get('/plans');
+    return response.data;
+}

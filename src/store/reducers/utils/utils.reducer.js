@@ -19,9 +19,10 @@ const initialState = {
     account: {},
     periods: [],
     rubrosOp: [],
-    universities:[],
-    institutes:[],
-    ongs:[],
+    universities: [],
+    institutes: [],
+    plans: [],
+    ongs: [],
     error: ''
 };
 
@@ -142,6 +143,12 @@ const utilsReducer = (state = initialState, action) => {
                 ...state,
                 ongs: action.payload
             }
+        case utilsType.SET_PLANS:
+            return {
+                ...state,
+                plans: action.payload
+            }
+
         default:
             return state;
     }

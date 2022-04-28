@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { useDispatch } from "react-redux";
-import { Container, Grid } from "@material-ui/core";
-import { Breadcrumbs, Button, Modal, Typography } from "../../shared/components";
+import {  Grid } from "@material-ui/core";
+import { Breadcrumbs, Button, Modal, Typography ,Container} from "../../shared/components";
 import { UsersTable, SearchForm ,UsersTabs } from "../components";
 import { loginAs } from "../../../store/actions/auth/auth.middleware";
 import { AppBar, Tabs, Tab, makeStyles } from '@material-ui/core';
@@ -24,7 +24,7 @@ export default function Users() {
   };
 
   return (
-    <Container className="dashboard-container">
+    <Container >
       <Grid container spacing={0}>
         <Grid item xs={12}>
           <Breadcrumbs routes={routes} />
