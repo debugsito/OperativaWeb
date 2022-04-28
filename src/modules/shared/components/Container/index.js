@@ -10,7 +10,7 @@ const useStyles = makeStyles(theme => ({
         position: "relative",
         padding: "2rem",
         background: "#FAFBFF",
-        zIndex: 1,
+        // zIndex: 99,
     },
     imageTop: {
         position: "absolute",

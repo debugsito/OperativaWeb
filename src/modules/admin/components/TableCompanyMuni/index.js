@@ -25,7 +25,8 @@ const headCells = [
     { id: "area", numeric: false, disablePadding: false, label: "Área" },
     { id: "lastName", numeric: false, disablePadding: false, label: "Apellidos" },
     { id: "name", numeric: false, disablePadding: false, label: "Nombre" },
-    { id: "document", numeric: false, disablePadding: false, label: "N° Documento" },
+    { id: "document", numeric: false, disablePadding: false, label: "RUC" },
+    { id: "plan", numeric: false, disablePadding: false, label: "Plan" },
 ];
 
 
@@ -37,9 +38,10 @@ function createData(
     lastName,
     firstName,
     document,
-    data
+    data,
+    plan
 ) {
-    return { action, role, account, area, lastName, firstName, document, data };
+    return { action, role, account, area, lastName, firstName, document, data,plan };
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -81,7 +83,7 @@ export default function TableCompanyMuni({ setOpenModal, setAccountId }){
 
     const { listUsers, usersTable } = useSelector(state => state?.admin);
     const dispatch = useDispatch();
-    const rolequery = `&role=empresa,municipalidad`;
+    const rolequery = `&role=empresa`;
 
     useEffect(() => {
         const query = `page=${page}&size=${rowsPerPage}${rolequery}`
@@ -109,7 +111,8 @@ export default function TableCompanyMuni({ setOpenModal, setAccountId }){
                     user.user?.last_name,
                     user.user?.first_name,
                     user.user?.document_number,
-                    user
+                    user,
+                    user?.user?.plan?.name
                 )
                 )
             })
@@ -262,6 +265,16 @@ export default function TableCompanyMuni({ setOpenModal, setAccountId }){
                                                         >
                                                             <Grid item xs={12}>
                                                                 <Typography variant="body1" component="span">{row.document}</Typography>
+                                                            </Grid>
+                                                        </TableCell>
+                                                        <TableCell
+                                                            component="th"
+                                                            id={labelId}
+                                                            scope="row"
+                                                            padding="none"
+                                                        >
+                                                            <Grid item xs={12}>
+                                                                <Typography variant="body1" component="span">{row.plan}</Typography>
                                                             </Grid>
                                                         </TableCell>
                                                     </TableRow>

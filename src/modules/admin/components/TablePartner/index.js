@@ -25,7 +25,7 @@ const headCells = [
     { id: "area", numeric: false, disablePadding: false, label: "Área" },
     { id: "lastName", numeric: false, disablePadding: false, label: "Apellidos" },
     { id: "name", numeric: false, disablePadding: false, label: "Nombre" },
-    { id: "document", numeric: false, disablePadding: false, label: "N° Documento" },
+    { id: "document", numeric: false, disablePadding: false, label: "RUC" },
 ];
 
 
