@@ -239,7 +239,9 @@ const Applicant = () => {
                                 backgroundImage: `url(${caza2})`,
                                 backgroundSize: 'cover',                     /* <------ */
                                 backgroundRepeat: 'no-repeat',
-                                backgroundposition: 'center center'
+                                backgroundposition: 'center center',
+                                filter: 'drop-shadow(-1px 1px 8px #FED253)',
+                                backgroundColor: '#ffbe0f'
                             }
                             }
 
