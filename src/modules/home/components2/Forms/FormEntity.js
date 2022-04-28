@@ -16,7 +16,7 @@ import { useHistory } from "react-router-dom";
 import { actions_Utils } from '../../../../store/actions';
 
 export default function FormEntity({ handleClickNext, entity }) {
-    const { utils: { items, plans } } = useSelector(state => state);
+    const { utils: { items, plans, districtsLima } } = useSelector(state => state);
     const router = useHistory();
     const dispatch = useDispatch();
 
@@ -51,6 +51,7 @@ export default function FormEntity({ handleClickNext, entity }) {
     useEffect(() => {
         dispatch(actions_Utils.getItems())
         dispatch(actions_Utils.getListPlans())
+        dispatch(actions_Utils.getDistrictsLima())
     }, [])
 
     const terminosAndConditions = <a href="/terminos-y-condiciones" target="_blank" className="text-skyBlue">Acepto los Terminos & Condiciones y la Politica de privacidad</a>
@@ -117,7 +118,11 @@ export default function FormEntity({ handleClickNext, entity }) {
                         <Row className="mt-3">
                             <Form.Group controlId="formGridDistrict">
                                 <FloatingLabel label="Distrito">
-                                    <Form.Control type="text" placeholder="Distrito" {...register("district_id")} isInvalid={!!errors.district_id} />
+                                    <Form.Select placeholder="Distrito" {...register("district_id")} isInvalid={!!errors.district_id} >
+                                        {districtsLima.length > 0 && districtsLima.map(element =>
+                                            <option key={element.id} value={element.id}>{element.name}</option>
+                                        )}
+                                    </Form.Select>
                                     <Form.Control.Feedback type="invalid">
                                         {errors.district_id?.message}
                                     </Form.Control.Feedback>

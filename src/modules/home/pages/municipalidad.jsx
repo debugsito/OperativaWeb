@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
  
  import { useHistory } from "react-router-dom";
 import Container from '../components2//Container';
@@ -11,18 +11,58 @@ import Title from '../components2//Title';
 import Button from '../components2//Button';
 
 import IconBusiness from "../images2/page-register/icon-business-sm.svg";
+import MuiAlert from '@material-ui/lab/Alert';
+import { Snackbar } from "@material-ui/core";
+import service_MunicipalitySignUp from "../../../store/services/auth/municipalitySignUp.service";
 
 // import styles from "../styleshome/components_styles/Empresa.module.scss";
+
+
+const vertical = 'top'
+const horizontal = 'right'
+
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
 
 export default function Municipality(props) {
     const [step, setStep] = useState(0)
     const [data, setData] = useState({})
+    const [error,setError] = useState(null)
+    const [open, setOpen] = useState(false);
     const router = useHistory()
 
     const handleClickNext = (values) => {
         setStep(statePrev => statePrev + 1)
-        setData({ ...data, values })
+        setData({ ...data, ...values })
     }
+
+    const handleFinish = async (values) => {
+        const body = { ...values, ...data }
+        try {
+            let response = await service_MunicipalitySignUp(JSON.stringify(body))
+            if (response.data) {
+                setStep(statePrev => statePrev + 1)
+            }
+        } catch (error) {
+            if (error.response.status === 401) {
+                setError(error.response.data.message);
+            } else {
+                setError("Ha ocurrido un error interno.");
+            };
+        }
+    }
+
+    const handleCloseAlert = () => {
+        setOpen(false)
+    }
+
+    useEffect(() => {
+        if(error){
+            setOpen(true)
+        }
+    },[error])
 
     const content = <>
         <p className="text-gray">
@@ -50,9 +90,16 @@ export default function Municipality(props) {
                         </div>
                         <p className="text-gray">Completa los siguientes campos para ser parte de Operativa.</p>
                         {step === 0 && <FormRepresentante handleClickNext={handleClickNext} />}
-                        {step === 1 && <FormEntity entity="municipalidad" handleClickNext={handleClickNext} />}
+                        {step === 1 && <FormEntity entity="municipalidad" handleClickNext={handleFinish} />}
                     </>
             }
+              <Snackbar
+                anchorOrigin={{ vertical, horizontal }}
+                open={open} autoHideDuration={6000} onClose={handleCloseAlert}>
+                <Alert onClose={handleCloseAlert} severity="error">
+                    {error}
+                </Alert>
+            </Snackbar>
 
         </Container>
     )
