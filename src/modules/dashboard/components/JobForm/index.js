@@ -11,12 +11,18 @@ import {
   FormHelperText,
   Paper,
   makeStyles,
+  Snackbar
 } from "@material-ui/core";
 
 import {
   updatePublication,
   savePublication,
 } from "../../../../store/actions/dashboard/dashboard.middleware";
+
+import {
+  setRequestState
+} from "../../../../store/actions/dashboard/dashboard.action"
+
 import {
   Button,
   Checkbox,
@@ -33,6 +39,15 @@ import { onlyNumbers } from "../../../shared/libs/validators";
 import { actions_Utils } from "../../../../store/actions";
 import { useForm } from "../../../hooks";
 import { WarningBlackIcon } from "../../images";
+import MuiAlert from '@material-ui/lab/Alert'
+
+const vertical = 'top'
+const horizontal = 'right'
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -52,19 +67,22 @@ export default function JobForm({
   const dispatch = useDispatch();
   const dateLocal = DateTime.local().toFormat("yyyy-LL-dd");
   const { departments, provinces, districts, rubrosOp, academicLevels, periods } = useSelector((state) => state?.utils);
+  const { requestState } = useSelector((state) => state?.dashboard)
   const [districtsList, setDistrictsList] = useState([]);
   const [provincesList, setProvincesList] = useState([]);
   const [publicationHidden, setPublicationHidden] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [openConfirmationModal, setOpenConfirmationModal] = useState(false);
   const [isActiveSalary, setIsActiveSalary] = useState(initialValues.a_tratar);
+  const [open, setOpen] = useState(false);
+  const [error, setError] = useState();
 
   const validate = (fieldValues = values) => {
     let temp = { ...errors };
     if ("job_title" in fieldValues)
       temp.job_title = fieldValues.job_title ? "" : "El campo es requerido.";
     if ("rubro_id" in fieldValues)
-      temp.rubro_id = fieldValues.rubro_id? "" : "El campo es requerido.";
+      temp.rubro_id = fieldValues.rubro_id ? "" : "El campo es requerido.";
     if ("description" in fieldValues)
       temp.description = fieldValues.description[0]?.children[0]?.text
         ? ""
@@ -168,14 +186,28 @@ export default function JobForm({
   }, [districts]);
 
   useEffect(() => {
-    if(isEditing){
+    if (isEditing) {
       setTypeOFContract()
 
     }
-  },[initialValues.type_contract])
+  }, [initialValues.type_contract])
 
-  function setTypeOFContract(){
-    
+  useEffect(() => {
+    if (requestState.success != null) {
+      if (requestState.success) {
+        history.push(`${initRoute}/empleo-registrado`);
+        dispatch(setRequestState({ success: null }));
+      } else {
+        setOpen(true)
+        let tmperror = requestState.message ? requestState.message : 'Ocurrio un error';
+        setError(tmperror);
+        dispatch(setRequestState({ success: null }));
+      }
+    }
+  }, [requestState])
+
+  function setTypeOFContract() {
+
   }
 
   const filterProvinces = () => {
@@ -195,7 +227,7 @@ export default function JobForm({
   const goForward = () => history.push(initRoute);
 
   const handleClickSave = () => {
-    
+
     if (!disabledButtonState) {
       let valuesTemp = { ...values };
       valuesTemp.description = JSON.stringify(values.description);
@@ -211,7 +243,7 @@ export default function JobForm({
         goForward();
       } else {
         dispatch(savePublication({ ...valuesTemp, a_tratar: isActiveSalary }));
-        history.push(`${initRoute}/empleo-registrado`);
+        setOpenConfirmationModal(false);
       }
     } else {
       validate();
@@ -254,6 +286,10 @@ export default function JobForm({
       setValues({ ...values, salary: "" });
     }
   };
+
+  const handleCloseAlert = () => {
+    setOpen(false)
+  }
 
   return (
     <div>
@@ -755,6 +791,13 @@ export default function JobForm({
           {/*  disabled={disabledButtonState} */}
         </Grid>
       </Grid>
+      <Snackbar
+        anchorOrigin={{ vertical, horizontal }}
+        open={open} autoHideDuration={6000} onClose={handleCloseAlert}>
+        <Alert onClose={handleCloseAlert} severity="error">
+          {error}
+        </Alert>
+      </Snackbar>
     </div>
   );
 }

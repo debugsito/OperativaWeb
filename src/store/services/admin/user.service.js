@@ -30,11 +30,23 @@ const getFileReport = async (params) => {
     return response;
 }
 
+const renewPlan = async (user_id,body)=> {
+    const response = await api.post(`/plan/renew/${user_id}`,body);
+    return response;
+}
+
+const editPlan = async (user_id,body)=> {
+    const response = await api.post(`/plan/edit/${user_id}`,body);
+    return response;
+}
+
 export default {
     getAccounts,
     acceptAccount,
     denyAccount,
     getReport,
     getFileReport,
-    getUsers
+    getUsers,
+    renewPlan,
+    editPlan
 }

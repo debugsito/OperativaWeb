@@ -69,7 +69,7 @@ export const savePublication = (body) => {
         dispatch(setRequestState({ success: false, message: "Ha ocurrido un error interno" }));
       } else {
         if (error.response.status === 409) {
-          dispatch(setRequestState({ success: false, message: error.response.data.message }));
+          dispatch(setRequestState({ success: false, message: error.response.data.errorMessage }));
         } else {
           dispatch(setRequestState({ success: false, message: "Ha ocurrido un error interno" }));
         };
