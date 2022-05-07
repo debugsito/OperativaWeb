@@ -16,6 +16,8 @@ import Box from '@material-ui/core/Box'
 import { service_Applicant } from "../../../store/services"
 import '../styles/postulate-form.css'
 import CheckSvg from "../assets/images/check.svg"
+import { arrow } from '../../shared/images/postulant/index'
+
 const useStyles = makeStyles((theme) => ({
     // background: #f7f7f7;
     // padding: 1rem;
@@ -100,9 +102,7 @@ const ApplicantMessageDetail = () => {
             <Container className={classes.container}>
                 <Grid container spacing={0}>
                     <Grid item xs={12} className="mb-2">
-                        <a className="btn-logout">
-                            <NavigateBefore onClick={setBefore} />
-                        </a>
+                        <img src={arrow} alt="" onClick={setBefore} />
                     </Grid>
                     <Grid item xs={12} className="mb-2">
                         <div className="container-result-postulate-form">
@@ -201,8 +201,8 @@ const ApplicantMessageDetail = () => {
                             }
                         </Grid> : <Grid item xs={12} className="mb-2">
                             <Card>
-                                <Grid item xs={12}  style={{ textAlign: 'center', margin: '30px' }}>
-                                    <img src= {CheckSvg} alt="check"></img>
+                                <Grid item xs={12} style={{ textAlign: 'center', margin: '30px' }}>
+                                    <img src={CheckSvg} alt="check"></img>
                                     <CardHeader style={{ textAlign: 'center' }} title={
                                         <React.Fragment>
                                             <Typography

@@ -6,6 +6,7 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import ApplicantOptionForm from '../components/ApplicantOptionForm/index'
+import { arrow } from '../../shared/images/postulant/index'
 
 const useStyles = makeStyles((theme) => ({
     // background: #f7f7f7;
@@ -38,9 +39,7 @@ const ApplicantEvaluations = () => {
         <Container className={classes.container}>
             <Grid container spacing={0}>
                 <Grid item xs={12} className="mb-2">
-                    <a className="btn-logout">
-                        <NavigateBefore onClick={setBefore} />
-                    </a>
+                    <img src={arrow} alt="" onClick={setBefore} />
                 </Grid>
                 <Grid item xs={12} className="mb-2">
                     <div className="container-result-postulate-form">
