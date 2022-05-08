@@ -77,8 +77,8 @@ export default function ApplicantAccountItem(props) {
     };
 
     const getEvalucacionesNotification = () => {
-        const { medical_test, interviewed, questions, verificativa, evaluativa } = data;
-        if (medical_test || interviewed || questions || verificativa || evaluativa) {
+        const { medical_test, interviewed, questions, verificativa, evaluativa,uncomplete_questions,unread_messages } = data;
+        if (uncomplete_questions || unread_messages) {
             return true;
         }
         return false

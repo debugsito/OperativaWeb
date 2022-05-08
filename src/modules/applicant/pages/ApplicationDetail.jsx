@@ -46,8 +46,8 @@ const ApplicationDetail = () => {
     };
 
     const getEvalucacionesNotification = () => {
-        const { medical_test, interviewed, questions, verificativa, evaluativa } = publicationAccountSelected;
-        if (medical_test || interviewed || questions || verificativa || evaluativa) {
+        const { medical_test, interviewed, questions, verificativa, evaluativa,uncomplete_questions } = publicationAccountSelected;
+        if (uncomplete_questions) {
             return true;
         }
         return false

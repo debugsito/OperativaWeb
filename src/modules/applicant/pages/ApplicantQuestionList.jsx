@@ -8,6 +8,7 @@ import { getApplicantQuestions } from "../../../store/actions/applicant/applican
 import ApplicantOptionForm from '../components/ApplicantOptionForm/index'
 import { useParams } from "react-router-dom";
 import { setApplicantSelectedQuestion } from '../../../store/actions/applicant/applicant.action'
+import { arrow } from '../../shared/images/postulant/index'
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -68,10 +69,8 @@ const ApplicantQuestionList = () => {
     return (
         <Container className={classes.container}>
             <Grid container spacing={0}>
-                <Grid item xs={12} className="mb-2">
-                    <a className="btn-logout">
-                        <NavigateBefore onClick={setBefore} />
-                    </a>
+            <Grid item xs={12} className="mb-2">
+                    <img src={arrow} alt="" onClick={setBefore} />
                 </Grid>
                 <Grid item xs={12} className="mb-2">
                     <div className="container-result-postulate-form">
