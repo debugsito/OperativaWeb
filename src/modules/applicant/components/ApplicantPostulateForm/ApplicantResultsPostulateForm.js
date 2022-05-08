@@ -29,7 +29,12 @@ const useStyles = makeStyles(theme => ({
         marginBottom: '1.5rem',
         cursor: 'pointer',
         position: 'relative'
-    }
+    },
+    brandImg: {
+        width: '4rem',
+        height: 'auto',
+        borderRadius:'50%'
+    },
 }));
 
 export default function ApplicantResultsPostulateForm(props) {
@@ -56,9 +61,15 @@ export default function ApplicantResultsPostulateForm(props) {
             <ApplicantStatusSpan status= {status}/>
             <div className="header-result-card">
                 <div>
-                    <img src={PizzaHut} className="brand-img" alt=""/>
+                    {/* <img src={PizzaHut} className="brand-img" alt=""/> */}
+                    {data?.publication?.account?.account_sup?.user?.image_url ?
+                        <img src={data?.publication?.account?.account_sup?.user?.image_url} className={classes.brandImg} alt="" />
+                        : data?.publication?.account?.user?.image_url ?
+                            <img src={data?.publication?.account?.user?.image_url} className={classes.brandImg} alt="" />
+                            : <></>
+                    }
                 </div>
-                <h4>
+                <h4 style={{marginLeft:'0.5rem'}}>
                     <span className={classes.title}>{data?.publication?.job_title}</span> <br/>
                     <small className={classes.businessName}>{data?.publication?.company}</small>
                 </h4>

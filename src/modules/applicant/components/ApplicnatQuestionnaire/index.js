@@ -34,6 +34,9 @@ const defaultValues = {
     was_part_of_a_union: null,
     wear_glasses: null,
     worked_as_an_operator: null,
+    shirt_size: null,
+    pants_size: null,
+    shoe_size: null,
 }
 
 
@@ -44,6 +47,7 @@ export default function ApplicantQuestionnaire({ user, handleSaveQuestionnaire }
     const dispatch = useDispatch()
     const [openAlert, setOpenAlert] = useState(false)
     const [openModal, setOpenModal] = useState(false)
+
 
 
 
@@ -478,6 +482,67 @@ export default function ApplicantQuestionnaire({ user, handleSaveQuestionnaire }
             </Grid>
 
             <div className="title-form">
+                <h3>Tallas</h3>
+            </div>
+            <Grid container spacing={3} style={{ padding: 10 }}>
+                <Grid item xs={12} md={12} >
+                    <Typography variant="body1" component="p" className="title-color">
+                        ¿Cual es su talla de camisa?
+                    </Typography>
+
+                    <FormControl component="fieldset" >
+                        <RadioGroup row aria-label="shirt_size"
+                            name="shirt_size"
+                            value={values.shirt_size} onChange={handleInputChange}
+                        >
+                            <FormControlLabel value="XS" control={<Radio />} label="XS" />
+                            <FormControlLabel value="S" control={<Radio />} label="S" />
+                            <FormControlLabel value="M" control={<Radio />} label="M" />
+                            <FormControlLabel value="L" control={<Radio />} label="L" />
+                            <FormControlLabel value="XL" control={<Radio />} label="XL" />
+                            <FormControlLabel value="XXL" control={<Radio />} label="XXL" />
+                        </RadioGroup>
+                    </FormControl>
+
+                </Grid>
+
+                <Grid item xs={12} md={12} >
+                    <Typography variant="body1" component="p" className="title-color">
+                        ¿Cual es su talla de pantalón?
+                    </Typography>
+
+                    <FormControl component="fieldset" >
+                        <RadioGroup row aria-label="pants_size"
+                            name="pants_size"
+                            value={values.pants_size} onChange={handleInputChange}
+                        >
+                            <FormControlLabel value="XS" control={<Radio />} label="XS" />
+                            <FormControlLabel value="S" control={<Radio />} label="S" />
+                            <FormControlLabel value="M" control={<Radio />} label="M" />
+                            <FormControlLabel value="L" control={<Radio />} label="L" />
+                            <FormControlLabel value="XL" control={<Radio />} label="XL" />
+                            <FormControlLabel value="XXL" control={<Radio />} label="XXL" />
+                        </RadioGroup>
+                    </FormControl>
+
+                </Grid>
+                <Grid item xs={12} md={6} >
+                    <Typography variant="body1" component="p" className="title-color">
+                        ¿Cual es su talla de zapato?
+                    </Typography>
+
+                    <TextInput
+                        fullWidth
+                        // label="Especifique su respuesta"
+                        name="shoe_size"
+                        value={values.shoe_size}
+                        onChange={handleInputChange}
+                    />
+
+                </Grid>
+
+            </Grid>
+            <div className="title-form">
                 <h3>Área personal</h3>
             </div>
 
@@ -489,8 +554,8 @@ export default function ApplicantQuestionnaire({ user, handleSaveQuestionnaire }
 
                     <FormControl component="fieldset" >
                         <RadioGroup row aria-label="says_your_opinion"
-                             name="says_your_opinion"
-                             value={values.says_your_opinion} onChange={handleInputChange}
+                            name="says_your_opinion"
+                            value={values.says_your_opinion} onChange={handleInputChange}
                         >
                             <FormControlLabel value="1" control={<Radio />} label="Sí" />
                             <FormControlLabel value="0" control={<Radio />} label="No" />
@@ -505,8 +570,8 @@ export default function ApplicantQuestionnaire({ user, handleSaveQuestionnaire }
 
                     <FormControl component="fieldset" >
                         <RadioGroup row aria-label="person_in_charge"
-                         name="person_in_charge"
-                         value={values.person_in_charge} onChange={handleInputChange}
+                            name="person_in_charge"
+                            value={values.person_in_charge} onChange={handleInputChange}
                         >
                             <FormControlLabel value="1" control={<Radio />} label="Sí" />
                             <FormControlLabel value="0" control={<Radio />} label="No" />
@@ -521,8 +586,8 @@ export default function ApplicantQuestionnaire({ user, handleSaveQuestionnaire }
 
                     <FormControl component="fieldset" >
                         <RadioGroup row aria-label="motivates_working_as_operator"
-                              name="motivates_working_as_operator"
-                              value={values.motivates_working_as_operator} onChange={handleInputChange}
+                            name="motivates_working_as_operator"
+                            value={values.motivates_working_as_operator} onChange={handleInputChange}
                         >
                             <FormControlLabel value="1" control={<Radio />} label="Sí" />
                             <FormControlLabel value="0" control={<Radio />} label="No" />
@@ -537,8 +602,8 @@ export default function ApplicantQuestionnaire({ user, handleSaveQuestionnaire }
 
                     <FormControl component="fieldset" >
                         <RadioGroup row aria-label="change_your_mind"
-                             name="change_your_mind"
-                             value={values.change_your_mind} onChange={handleInputChange}
+                            name="change_your_mind"
+                            value={values.change_your_mind} onChange={handleInputChange}
                         >
                             <FormControlLabel value="1" control={<Radio />} label="Sí" />
                             <FormControlLabel value="0" control={<Radio />} label="No" />
@@ -553,8 +618,8 @@ export default function ApplicantQuestionnaire({ user, handleSaveQuestionnaire }
 
                     <FormControl component="fieldset" >
                         <RadioGroup row aria-label="problems_with_your_bosses"
-                             name="problems_with_your_bosses"
-                             value={values.problems_with_your_bosses} onChange={handleInputChange}
+                            name="problems_with_your_bosses"
+                            value={values.problems_with_your_bosses} onChange={handleInputChange}
                         >
                             <FormControlLabel value="1" control={<Radio />} label="Sí" />
                             <FormControlLabel value="0" control={<Radio />} label="No" />
@@ -569,8 +634,8 @@ export default function ApplicantQuestionnaire({ user, handleSaveQuestionnaire }
 
                     <FormControl component="fieldset" >
                         <RadioGroup row aria-label="teamwork"
-                             name="teamwork"
-                             value={values.teamwork} onChange={handleInputChange}
+                            name="teamwork"
+                            value={values.teamwork} onChange={handleInputChange}
                         >
                             <FormControlLabel value="1" control={<Radio />} label="Solo" />
                             <FormControlLabel value="0" control={<Radio />} label="Grupo" />

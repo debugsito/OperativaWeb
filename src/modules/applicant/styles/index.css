@@ -153,6 +153,15 @@ input:checked + .slider:before {
 .mt-4 {
     margin-top: 2.5rem !important;
 }
+
+.mtt-1 {
+    margin-top: 1.5rem !important;
+}
+.mtt-3 {
+    margin-top: 3.5rem !important;
+}
+
+
 .mb-1 {
     margin-bottom: 1rem !important;
 }
@@ -183,7 +192,8 @@ input:checked + .slider:before {
     height: 100%;
     display: inline-flex;
     flex-wrap: wrap;
-    margin: 8px;
+    margin-top: 1rem;
+    /* margin: 8px; */
 
 }
 .container-card > div {

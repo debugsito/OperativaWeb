@@ -64,11 +64,12 @@ const ApplicantJobHuntingDetail = () => {
 
                 </Grid>
                 <Grid item xs={12} className="mb-2 header-job-hunting-detail"
-                    style={{ position: 'relative' }}
+                    style={{ display:'flex',flexDirection:'row',justifyContent:'center',marginRight:'3.5rem' }}
                 >
                     <Grid item xs={8} style={{
                         fontSize: '18px',
                         marginTop: '10px',
+                        marginRight:'1.5rem'
                     }}>
                         <p>
                             <b>{user?.account?.user?.first_name}</b>

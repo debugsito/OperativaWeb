@@ -30,7 +30,8 @@ const useStyles = makeStyles(theme => ({
     },
     brandImg: {
         width: '4rem',
-        height: 'auto'
+        height: 'auto',
+        borderRadius:'50%'
     },
     headerResultCard: {
         display: 'flex',
@@ -75,9 +76,9 @@ export default function ApplicantAccountItem(props) {
         return '30 de julio del 2021';
     };
 
-    const getEvalucacionesNotification =()=> {
-        const {medical_test,interviewed,questions , verificativa, evaluativa} =data;
-        if(medical_test || interviewed || questions ||  verificativa || evaluativa){
+    const getEvalucacionesNotification = () => {
+        const { medical_test, interviewed, questions, verificativa, evaluativa } = data;
+        if (medical_test || interviewed || questions || verificativa || evaluativa) {
             return true;
         }
         return false
@@ -85,15 +86,20 @@ export default function ApplicantAccountItem(props) {
 
     return (
         <div className={classes.containerResult} onClick={selectItemResult}>
-             <ApplicantStatusSpan status= {status}/>
-            {getEvalucacionesNotification () ?<div className={classes.notification}>
+            <ApplicantStatusSpan status={status} />
+            {getEvalucacionesNotification() ? <div className={classes.notification}>
                 <span className={classes.notificationIcon}><Notifications /></span>
-            </div>: <></>}
+            </div> : <></>}
             <div className={classes.headerResultCard}>
                 <div>
-                    <img src={PizzaHut} className={classes.brandImg} alt="" />
+                    {data?.publication?.account?.account_sup?.user?.image_url ?
+                        <img src={data?.publication?.account?.account_sup?.user?.image_url} className={classes.brandImg} alt="" />
+                        : data?.publication?.account?.user?.image_url ?
+                            <img src={data?.publication?.account?.user?.image_url} className={classes.brandImg} alt="" />
+                            : <></>
+                    }
                 </div>
-                <h4>
+                <h4 style={{marginLeft:'0.5rem'}}>
                     <span className={classes.title}>{data.publication.job_title}</span> <br />
                     <small className={classes.businessName}>{data.publication.company}</small>
                 </h4>

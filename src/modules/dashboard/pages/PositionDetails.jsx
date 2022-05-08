@@ -126,7 +126,7 @@ export default function ShowPositionDetail() {
                                     </Typography>
                                     <br />
                                     <RichText 
-                                        label="Funciones del puesto"
+                                        // label="Funciones del puesto"
                                         name="description"
                                         valueText={JSON.parse(publicationSelected.description)}
                                         readOnly
@@ -138,7 +138,7 @@ export default function ShowPositionDetail() {
                                     </Typography>
                                     <br />
                                     <RichText 
-                                        label="Requisitos del puesto"
+                                        // label="Requisitos del puesto"
                                         name="description"
                                         valueText={JSON.parse(publicationSelected.requirements)}
                                         readOnly
@@ -150,7 +150,7 @@ export default function ShowPositionDetail() {
                                     </Typography>
                                     <br />
                                     <RichText 
-                                        label="Beneficios"
+                                        // label="Beneficios"
                                         name="benefits"
                                         valueText={JSON.parse(publicationSelected.benefits)}
                                         readOnly

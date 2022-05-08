@@ -8,6 +8,7 @@ import { getPublicationAccount } from "../../../../store/actions/applicant/appli
 const ApplicationInProgress = () => {
     const dispatch = useDispatch();
     const {applicant: {publicationsAccount}} = useSelector(state => state);
+    console.log(publicationsAccount)
     useEffect(() => {
         getPublicaciones();
     }, []);

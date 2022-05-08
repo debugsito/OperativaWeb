@@ -205,25 +205,17 @@ const Applicant = () => {
                         </a>
                     </div>
                 </Grid>
-                <Grid item xs={6} className="pr-2">
-                    {/* <div className="container-user-information" style={{ position: 'relative' }}>
-
-                        <div style={user?.account?.job_hunting_account ? { width: '50%' } : {}}>
-                            <h4 className="home-title">{user?.account?.user?.fullname}</h4>
-                            <p>{`${getNameById(documentsType.documents, user.account.user.document_id)} ${user?.account?.user?.document_number}`}</p>
-                        </div>
-                        <ApplicantLevelComponent
-                            style={{ position: 'absolute' }}
-                            job_hunting_account={user?.account?.job_hunting_account} />
-                    </div> */}
+                <Grid item xs={6}>
                     <div className="container-card">
                         <div className="row-card">
+                           
                             <div className="container-user-information">
                                 <h4 className="home-title">{user?.account?.user?.fullname}</h4>
                                 <p>{`${getNameById(documentsType.documents, user.account.user.document_id)} ${user?.account?.user?.document_number}`}</p>
                             </div>
                         </div>
                         <div className="row-card">
+                      
                             <ApplicantLevelComponent2
                                 job_hunting_account={user?.account?.job_hunting_account} />
 
@@ -231,13 +223,12 @@ const Applicant = () => {
 
                     </div>
                 </Grid>
-                <Grid container xs={6} className="pl-2">
-
+                <Grid item xs={6}>
                     <div className="container-card">
                         <div className="row-card" onClick={gotoCazatrabajo}
                             style={{
                                 backgroundImage: `url(${caza2})`,
-                                backgroundSize: 'cover',                     /* <------ */
+                                backgroundSize: 'cover',                    
                                 backgroundRepeat: 'no-repeat',
                                 backgroundposition: 'center center',
                                 filter: 'drop-shadow(-1px 1px 8px #FED253)',
@@ -246,6 +237,7 @@ const Applicant = () => {
                             }
 
                         >
+                              
                             <div className="shadowLayer">
                                 <h3 class="titleLayer" style={{ color: ' white', fontWeigth: 'bold', fontSize: '18px', zIndex: '2' }}> El juego del <br />cazatrabajo</h3>
                             </div>
@@ -265,13 +257,14 @@ const Applicant = () => {
                             <span className="small-text-config">
                                 Informa a los reclutadores si estás buscando trabajo.
                             </span>
+                             
 
                         </div>
                     </div>
 
                 </Grid>
                 <Grid item xs={12} onClick={goToPostulateForm}>
-                    <div className="card-home mt-4">
+                    <div className="card-home mtt-3">
                         <Grid item xs={4} className="fl">
                             <img class="imageApplicant" src={deseoPostular} className="" alt="" />
                         </Grid>
@@ -289,7 +282,7 @@ const Applicant = () => {
                     </div>
                 </Grid>
                 <Grid item xs={12} onClick={goToCandidate}>
-                    <div className="card-home mt-4">
+                    <div className="card-home mtt-1">
                         <Grid item xs={4} className="fl">
                             <img class="imageApplicant" src={soyCandidato} className="" alt="" />
                         </Grid>
@@ -306,7 +299,7 @@ const Applicant = () => {
                         </Grid>
                     </div>
                 </Grid>
-                <Grid item xs={4} className="mt-4 pr-2">
+                <Grid item xs={4} className="mtt-1 pr-2">
                     <div>
                         <h4 className="home-title">Este es tu avance</h4>
                         <p>
@@ -315,7 +308,7 @@ const Applicant = () => {
                         </p>
                     </div>
                 </Grid>
-                <Grid item xs={4} className="pr-2 mt-4 cv-grid-end">
+                <Grid item xs={4} className="pr-2 mtt-1 cv-grid-end">
                     <div className="card-cv" style={{ position: 'relative', textAlign: 'center' }}>
                         <span className="span-flex"><b>Tu CV</b></span>
                         <Doughnut className="donut" data={dataCv} />
@@ -324,7 +317,7 @@ const Applicant = () => {
                         </div>
                     </div>
                 </Grid>
-                <Grid item xs={4} className="pr-2 mt-4 cv-grid-start">
+                <Grid item xs={4} className="pr-2 mtt-1 cv-grid-start">
                     <div className="card-cv" style={{ position: 'relative', textAlign: 'center' }}>
                         <span className="span-flex"><b>Cuestionario</b></span>
                         <Doughnut className="donut" data={dataCuestionario} />

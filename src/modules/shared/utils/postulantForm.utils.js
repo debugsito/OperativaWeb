@@ -132,6 +132,9 @@ export const normalize = {
             change_your_mind : data?.user?.change_your_mind!=null ? data?.user?.change_your_mind +"": null,
             problems_with_your_bosses : data?.user?.problems_with_your_bosses!=null ? data?.user?.problems_with_your_bosses+"" : null,
             teamwork : data?.user?.teamwork!=null ? data?.user?.teamwork +"" : null,
+            shirt_size : data?.user?.shirt_size!=null ?data?.user?.shirt_size+"": null,
+            pants_size : data?.user?.pants_size!=null ? data?.user?.pants_size+"": null,
+            shoe_size: data?.user?.shoe_size!=null ?data?.user?.shoe_size+"": null
         }
     }
 }
