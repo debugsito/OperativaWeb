@@ -68,6 +68,9 @@ export const FILTER_BY = {
     education: "level_id",
     age: "edad",
     gender: "gender",
+    shirt_size : "shirt_size",
+    pants_size: "pants_size",
+    shoe_size : "shoe_size",
     questionAditional: {
         rotating_schedule: "rotating_schedule",
         work_weekend: "work_weekend",
@@ -198,6 +201,41 @@ export const DEFAULT_FILTER_VALUES = {
         female: {active: false, label:"Femenino", value:2},
         other: {active: false, label:"Otro", value:3},
       },
+    },
+    shirt_size: {
+      label: "Talla Camisa",
+      active: false,
+      queryParam: FILTER_BY.shirt_size,
+      answers: {
+        XS: { active: false, label: "Camisa XS", value: 'XS' },
+        S: { active: false, label: "Camisa S", value: 'S' },
+        M: { active: false, label: "Camisa M", value: 'M' },
+        L: { active: false, label: "Camisa L", value: 'L' },
+        XL: { active: false, label: "Camisa XL", value: 'XL' },
+        XXL: { active: false, label: "Casmisa XXL", value: 'XXL' }
+      }
+    },
+    pants_size: {
+      label: "Talla Pantalon",
+      active: false,
+      queryParam: FILTER_BY.pants_size,
+      answers: {
+        XS: { active: false, label: "Pantalón XS", value: 'XS' },
+        S: { active: false, label: "Pantalón S", value: 'S' },
+        M: { active: false, label: "Pantalón M", value: 'M' },
+        L: { active: false, label: "Pantalón L", value: 'L' },
+        XL: { active: false, label: "Pantalón XL", value: 'XL' },
+        XXL: { active: false, label: "Pantalón XXL", value: 'XXL' }
+      }
+    },
+    shoe_size: {
+      label: "Talla Calzado",
+      queryParam: FILTER_BY.shoe_size,
+      active: false,
+      answers: {
+        from: "",
+        to: "",
+      }
     },
     extra: {//SE REPITE y no concuerda con los otros filtros checkbox
       label: "Preguntas adicionales",

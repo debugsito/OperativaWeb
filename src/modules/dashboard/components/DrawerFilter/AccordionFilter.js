@@ -23,6 +23,8 @@ import InputQuestionAditional from "./InputQuestionAditional";
 import InputFamily from "./InputFamily";
 import InputHealth from "./InputHealth";
 import InputPersonal from "./InputPersonal";
+import InputSizes from "./InputSizes";
+
 import {
   useForm,
   FormProvider,
@@ -32,7 +34,7 @@ import {
 
 import { Context, defaultValues } from "../../context/AdvanceFilterContext";
 import { buildQueryParams } from "../../utils/convert";
-import {setQueryParams,setValues} from '../../../../store/actions/dashboard/dashboard.action'
+import { setQueryParams, setValues } from '../../../../store/actions/dashboard/dashboard.action'
 import { useDispatch, useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
@@ -62,8 +64,8 @@ const initialValues = {
 export default function AccordionFilter({ apply }) {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const { resetItem} = useContext(Context);
-  const { queryParams,values} = useSelector((state) => state?.dashboard);
+  const { resetItem } = useContext(Context);
+  const { queryParams, values } = useSelector((state) => state?.dashboard);
   const methods = useForm({ mode: "onSubmit", defaultValues: values });
   const { dirtyFields } = useFormState({
     control: methods.control,
@@ -94,7 +96,7 @@ export default function AccordionFilter({ apply }) {
 
   const updateQueryParams = (newValue) => {
     const newQueryParams = buildQueryParams(newValue)
-    dispatch(setQueryParams({...queryParams,...newQueryParams}))
+    dispatch(setQueryParams({ ...queryParams, ...newQueryParams }))
     // setQueryParams(prevState => ({ ...prevState, ...newQueryParams }))
   }
 
@@ -271,6 +273,23 @@ export default function AccordionFilter({ apply }) {
               <InputHealth />
             </AccordionDetails>
           </Accordion>
+
+
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel2a-content"
+              id="panel2a-header"
+            >
+              <Typography className={classes.heading}>Talla</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <InputSizes />
+            </AccordionDetails>
+          </Accordion>
+
+
+
           <Accordion>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
@@ -297,7 +316,7 @@ export default function AccordionFilter({ apply }) {
               variant="contained"
               color="secondary"
               type="submit"
-              // onClick={onSubmit}
+            // onClick={onSubmit}
             >
               APLICAR
             </Button>

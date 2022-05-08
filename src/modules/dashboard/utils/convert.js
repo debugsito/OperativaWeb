@@ -10,7 +10,7 @@ export function buildQueryParams(data){
       const options = valueTemp[key]?.answers;
       const queryParam = valueTemp[key]?.queryParam
 
-      if (key == "gender" || key == "education" || key == "rubro" || key == "experience" || key == "extra") {
+      if (key == "gender" || key == "education" || key == "rubro" || key == "experience" || key == "extra" || key=="shirt_size" || key=="pants_size" ) {
         Object.keys(options).forEach((item) => {
           const element = options[item]
           if (element.active) {
@@ -26,7 +26,7 @@ export function buildQueryParams(data){
           }
         })
       }
-      else if (key == "age" || key == "salaryExpectations") {
+      else if (key == "age" || key == "salaryExpectations" || key=="shoe_size") {
         Object.keys(options).forEach((item) => {
           const element = options[item]
           if (element) {
@@ -59,7 +59,7 @@ export function buildQueryParams(data){
 
     Object.keys(valueTemp).map((key) => {
       const options = valueTemp[key]?.answers;
-      if (key == "gender" || key == "education" || key == "rubro" || key == "experience" || key == "extra") {
+      if (key == "gender" || key == "education" || key == "rubro" || key == "experience" || key == "extra" || key=="shirt_size" || key=="pants_size") {
         Object.keys(options).forEach((element) => {
           if (options[element].active) {
             arrayLabel.push({ key, option: element, label: options[element].label })
@@ -71,7 +71,7 @@ export function buildQueryParams(data){
             arrayLabel.push({ key, option: element, label: `${options[element].label}: ${options[element].value}` })
           }
         })
-      }else if (key == "age" || key == "salaryExpectations") {
+      }else if (key == "age" || key == "salaryExpectations" || key=="shoe_size") {
         if(options.from != "" && options.to != ""){
           arrayLabel.push({ key, option: key, label: `${valueTemp[key].label}: ${options.from} - ${options.to}` })
         }
