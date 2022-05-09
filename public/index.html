@@ -23,7 +23,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap" rel="stylesheet">
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
+
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -57,5 +57,32 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('service-worker.js').then(function(registration) {
+            // Registration was successful
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+          }, function(err) {
+            // registration failed :(
+            console.log('ServiceWorker registration failed: ', err);
+          });
+        });
+      }
+
+      // Inicializa deferredPrompt para su uso más tarde.
+      let deferredPrompt;
+
+      window.addEventListener('beforeinstallprompt', (e) => {
+        // Previene a la mini barra de información que aparezca en smartphones
+        e.preventDefault();
+        // Guarda el evento para que se dispare más tarde
+        deferredPrompt = e;
+        // Actualizar la IU para notificarle al usuario que se puede instalar tu PWA
+        // showInstallPromotion();
+        // De manera opcional, envía el evento de analíticos para saber si se mostró la promoción a a instalación del PWA
+        console.log(`'beforeinstallprompt' event was fired.`);
+      });
+    </script>
   </body>
 </html>
