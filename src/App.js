@@ -7,7 +7,7 @@ import AppRouter from './routers';
 
 function App() {
 
-   /* window.addEventListener('beforeinstallprompt',e=>{
+    window.addEventListener('beforeinstallprompt',e=>{
         // For older browsers
         e.preventDefault();
         console.log("Install Prompt fired");
@@ -18,10 +18,10 @@ function App() {
             return false;
         }
         // Set the state variable to make button visible
-        /!*this.setState({
+        /*this.setState({
             installButton:true
-        })*!/
-    })*/
+        })*/
+    })
 
     return (
         <AppRouter/>
