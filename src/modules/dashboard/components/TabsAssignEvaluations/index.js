@@ -73,15 +73,15 @@ export default function ApplicantsTabs() {
             label="Médico"
             {...a11yProps(2)}
           />
-          <Tab
+          {/* <Tab
             classes={{ root: classes.rootTab, selected: classes.selected }}
             label="Evaluativa"
             {...a11yProps(3)}
-          />
+          /> */}
           <Tab
             classes={{ root: classes.rootTab, selected: classes.selected }}
             label="Entrevista"
-            {...a11yProps(4)}
+            {...a11yProps(3)}
           />
         </Tabs>
       </AppBar>
@@ -94,10 +94,10 @@ export default function ApplicantsTabs() {
       <TabPanel value={value} index={2}>
         <TabMedico nextTab={nextTab} backTab={backTab} />
       </TabPanel>
-      <TabPanel value={value} index={3}>
+      {/* <TabPanel value={value} index={3}>
         <TabEvaluativa nextTab={nextTab} backTab={backTab} />
-      </TabPanel>
-      <TabPanel value={value} index={4}>
+      </TabPanel> */}
+      <TabPanel value={value} index={3}>
         <TabEntrevista backTab={backTab} />
       </TabPanel>
       <SnackbarsAlert

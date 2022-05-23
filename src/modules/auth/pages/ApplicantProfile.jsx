@@ -305,7 +305,7 @@ const ApplicantProfile = ({ history }) => {
                             >
                                 <Typography className="applicant-profile__accordion-header" variant="button" gutterBottom>
                                 <img src={numberSixSVG} alt="Sexto paso" width="24" height="25" />
-                                    Questionario de posicionamiento
+                                    Cuestionario de posicionamiento
                                 </Typography>
                             </AccordionSummary>
                             <AccordionDetails>

@@ -70,15 +70,15 @@ export default function Multiposting(props) {
                                 classes={{ indicator: classes.indicator }}
                             >
                                 <Tab classes={{root: classes.rootTab, selected: classes.selected}} label="Compartir en redes" {...a11yProps(0)} />
-                                <Tab classes={{root: classes.rootTab, selected: classes.selected}} label="Publicar en nuestra Red de Contactos Estratégicos" {...a11yProps(1)} />
+                                {/* <Tab classes={{root: classes.rootTab, selected: classes.selected}} label="Publicar en nuestra Red de Contactos Estratégicos" {...a11yProps(1)} /> */}
                             </Tabs>
                         </AppBar>
                         <TabPanel value={value} index={0}>
                             <FormRedes />
                         </TabPanel>
-                        <TabPanel value={value} index={1}>
+                        {/* <TabPanel value={value} index={1}>
                             <FormStrategicContacts />
-                        </TabPanel>
+                        </TabPanel> */}
                     </Paper>
                 </Grid>
             </Grid>

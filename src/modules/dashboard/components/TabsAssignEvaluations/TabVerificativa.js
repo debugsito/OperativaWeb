@@ -60,19 +60,21 @@ const useStyles = makeStyles(theme => ({
 
 const initialValues = {
     veri_domiciliaria: false,
-    veri_antecendentes_penales: false,
-    veri_antecendentes_policiales: false,
+    // veri_antecendentes_penales: false,
+    // veri_antecendentes_policiales: false,
     veri_historial_crediticio: false,
     veri_contact: false,
+    veri_personales: false,
     question: ""
 }
 
 const OPTIONS = {
     0: "Verificación domiciliaria",
-    1: "Antecedentes penales",
-    2: "Antecedentes policiales",
-    3: "Historial crediticio",
-    4: "Deseo ser contactado para un servicio de verificación especial",
+    // 1: "Antecedentes penales",
+    // 2: "Antecedentes policiales",
+    1: "Referencias personales",
+    2: "Historial crediticio",
+    3: "Deseo ser contactado para un servicio de verificación especial",
 }
 
 export default function TabVerificativa({ nextTab, backTab }) {
@@ -165,8 +167,9 @@ export default function TabVerificativa({ nextTab, backTab }) {
                                 <FormControl component="div">
                                     <FormGroup>
                                         <Checkbox label="Verificación domiciliaria" name="veri_domiciliaria" checked={values.veri_domiciliaria} onChange={handleChange} />
-                                        <Checkbox label="Antecedentes penales" name="veri_antecendentes_penales" checked={values.veri_antecendentes_penales} onChange={handleChange} />
-                                        <Checkbox label="Antecedentes policiales" name="veri_antecendentes_policiales" checked={values.veri_antecendentes_policiales} onChange={handleChange} />
+                                        {/* <Checkbox label="Antecedentes penales" name="veri_antecendentes_penales" checked={values.veri_antecendentes_penales} onChange={handleChange} />
+                                        <Checkbox label="Antecedentes policiales" name="veri_antecendentes_policiales" checked={values.veri_antecendentes_policiales} onChange={handleChange} /> */}
+                                        <Checkbox label="Referencias personales" name="veri_personales" checked={values.veri_personales} onChange={handleChange} />
                                         <Checkbox label="Historial crediticio" name="veri_historial_crediticio" checked={values.veri_historial_crediticio} onChange={handleChange} />
                                         <Checkbox label="Deseo ser contactado para un servicio de verificación especial" name="veri_contact" checked={values.veri_contact} onChange={handleChange} />
                                     </FormGroup>
