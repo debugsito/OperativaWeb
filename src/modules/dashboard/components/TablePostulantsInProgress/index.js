@@ -130,7 +130,7 @@ export default function TableListPostulants({ selected, setSelected, handleClick
         fullname: item.user.first_name + " " + item.user.last_name,
         messages: item.all_messages,
         stateOfEvaluations: [
-          { text: "Preguntas", status: item.technical_test },
+          { text: "Preguntas", status: item.questions },
           { text: "Verificativa", status: item.verificativa },
           { text: "Médico", status: item.medical_test },
           { text: "Evaluativa", status: item.evaluativa },

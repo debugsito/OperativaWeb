@@ -51,9 +51,9 @@ const ApplicantQuestionList = () => {
 
     const getTitle = (item) => {
         switch (item.form_type) {
-            case 1:
-                return <h3>Preguntas adicionales</h3>;
             case 2:
+                return <h3>Preguntas adicionales</h3>;
+            case 1:
                 return <h3>Preguntas de evaluación de experiencia</h3>
             default:
                 return <></>

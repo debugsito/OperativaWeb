@@ -30,6 +30,7 @@ import ClearIcon from '@material-ui/icons/Clear'
 //Context
 import ProviderFilter from "../context/AdvanceFilterContext";
 import ProviderNotification from "../context/NotificationAlertContext";
+import { service_Dashboard } from "../../../store/services";
 
 //Redux actions
 import { useDispatch, useSelector } from "react-redux";
@@ -158,6 +159,10 @@ export default function JobPositionCreatedPage() {
     dispatch(setPostulantSelected(postulantsSelected))
   }
 
+  const handleClickExportAnswers = async()=> {
+    await service_Dashboard.getAnswersQuestion(params.publication_id);
+  }
+
   return (
     <ProviderFilter>
       <ProviderNotification>
@@ -250,63 +255,79 @@ export default function JobPositionCreatedPage() {
             )}
 
             {value === TAB.POSTULANT_IN_PROCESS && (
-              <Grid item xs={12}>
-                <Grid container spacing={2} justify="flex-end">
-                  <Grid item>
-                    {selected.length > 0 ? (
-                      <div>
-                        <Button
-                          endIcon={<ExpandMoreIcon />}
-                          size="large"
-                          variant="outlined"
-                          aria-controls="menu-send-message"
-                          aria-haspopup="true"
-                          onClick={handleToggle}
-                        >
-                          ENVIAR MENSAJE
-                        </Button>
-                        <MenuList anchorEl={anchorEl} handleClose={handleClose}>
-                          <MenuItem
-                            onClick={() => handleOpenModal("dialog_empty")}
-                          >
-                            Personalizado
-                          </MenuItem>
-                          <MenuItem
-                            onClick={() => handleOpenModal("dialog_fill")}
-                          >
-                            De agradecimiento
-                          </MenuItem>
-                        </MenuList>
-                      </div>
-                    ) : (
-                      <ToolTip title="Seleccione uno o mas usuarios">
-                        <Button
-                          endIcon={<ExpandMoreIcon />}
-                          size="large"
-                          variant="outlined"
-                        >
-                          CONTACTAR
-                        </Button>
-                      </ToolTip>
-                    )}
-                  </Grid>
-                  <Grid item>
-                    <Button
-                      size="large"
-                      variant="contained"
-                      component={Link}
-                      to={{
-                        pathname: `${initRoute}/publicacion/${params.publication_id}/asignar-evaluaciones`,
-                        state: { title: location?.state?.title }
-                      }}
-                      onClick={handleClickAssignEvaluations}
-                      disabled={selected.length < 1}
-                    >
-                      ASIGNAR EVALUACIONES
-                    </Button>
+              <>
+                <Grid item xs={12}>
+                  <Grid container spacing={2} justify="flex-end">
+                    <Grid item>
+                      <Button
+                        size="large"
+                        variant="contained"
+                        component={Link}
+                        onClick={handleClickExportAnswers}
+                      >
+                      DESCARGAR RESPUESTAS DE EVALUACIÓN
+                      </Button>
+                    </Grid>
                   </Grid>
                 </Grid>
-              </Grid>
+                <Grid item xs={12}>
+                  <Grid container spacing={2} justify="flex-end">
+                    <Grid item>
+                      {selected.length > 0 ? (
+                        <div>
+                          <Button
+                            endIcon={<ExpandMoreIcon />}
+                            size="large"
+                            variant="outlined"
+                            aria-controls="menu-send-message"
+                            aria-haspopup="true"
+                            onClick={handleToggle}
+                          >
+                            ENVIAR MENSAJE
+                          </Button>
+                          <MenuList anchorEl={anchorEl} handleClose={handleClose}>
+                            <MenuItem
+                              onClick={() => handleOpenModal("dialog_empty")}
+                            >
+                              Personalizado
+                            </MenuItem>
+                            <MenuItem
+                              onClick={() => handleOpenModal("dialog_fill")}
+                            >
+                              De agradecimiento
+                            </MenuItem>
+                          </MenuList>
+                        </div>
+                      ) : (
+                        <ToolTip title="Seleccione uno o mas usuarios">
+                          <Button
+                            endIcon={<ExpandMoreIcon />}
+                            size="large"
+                            variant="outlined"
+                          >
+                            CONTACTAR
+                          </Button>
+                        </ToolTip>
+                      )}
+                    </Grid>
+                    <Grid item>
+                      <Button
+                        size="large"
+                        variant="contained"
+                        component={Link}
+                        to={{
+                          pathname: `${initRoute}/publicacion/${params.publication_id}/asignar-evaluaciones`,
+                          state: { title: location?.state?.title }
+                        }}
+                        onClick={handleClickAssignEvaluations}
+                        disabled={selected.length < 1}
+                      >
+                        ASIGNAR EVALUACIONES
+                      </Button>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </>
             )}
 
             <Grid item xs={12}>

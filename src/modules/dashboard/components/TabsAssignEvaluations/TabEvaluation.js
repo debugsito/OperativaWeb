@@ -134,12 +134,12 @@ export default function TabEvaluation({ nextTab }) {
     }
     const body_evaluation = {
       name: "Preguntas",
-      type_form: FORM_TYPE.evaluation,
+      form_type: FORM_TYPE.evaluation,
       questions: buildBodyOfQuestion(data.evaluation)
     }
     const body_extra = {
       name: "Preguntas",
-      type_form: FORM_TYPE.question_aditional,
+      form_type: FORM_TYPE.question_aditional,
       questions: buildBodyOfQuestion(data.extra)
     }
     const body_main = {

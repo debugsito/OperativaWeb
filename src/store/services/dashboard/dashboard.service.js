@@ -1,4 +1,5 @@
 import api from "../../../modules/shared/libs/api";
+import api_for_download from "../../../modules/shared/libs/api/service_dowload.api";
 
 const getJobs = async (params) => {
   const response = await api.get(
@@ -88,47 +89,47 @@ const getReportByPostulantId = async (params) => {
   return response;
 };
 
-const saveMedicalTest= async (body) => {
+const saveMedicalTest = async (body) => {
   const response = await api.post(
-    `/publication_medical_test`,body
+    `/publication_medical_test`, body
   );
   return response;
 }
-;
+  ;
 const saveFormVerificativa = async (body) => {
   const response = await api.post(
-    `/publication_verificativas`,body
+    `/publication_verificativas`, body
   );
   return response;
 };
 
 const saveFormEvaluativa = async (body) => {
   const response = await api.post(
-    `/publication_evaluativas`,body
+    `/publication_evaluativas`, body
   );
   return response;
 };
 
 const saveFormInterview = async (body) => {
-  const response = await api.post(`/publication_interview`,body);
+  const response = await api.post(`/publication_interview`, body);
   return response;
 };
 
 const saveFormQuestion = async (body) => {
-  const response = await api.post(`/form`,body);
+  const response = await api.post(`/form`, body);
   return response;
 };
 
 const assignFormAPostulant = async (body) => {
   const response = await api.post(
-    `/form/assign/publication/account`,body
+    `/form/assign/publication/account`, body
   );
   return response;
 };
 
 const sendMessage = async (params, body) => {
   const response = await api.post(
-    `/messages/${params.publication_account_id}`,body
+    `/messages/${params.publication_account_id}`, body
   );
   return response;
 };
@@ -138,15 +139,21 @@ const getMessages = async (params) => {
   return response;
 };
 
-const markCvRead = async ( body ) => {
+const markCvRead = async (body) => {
   const response = await api.post(
-    `publication/account/read_cv`,body
+    `publication/account/read_cv`, body
   );
   return response;
 }
 
 const getPublicationGlobal = async (title) => {
   const response = await api.get(`/status/${title}`);
+  return response;
+}
+
+const getAnswersQuestion = async (publication_id) => {
+
+  const response = await api_for_download.get(`/publication/${publication_id}/export_evaluations`);
   return response;
 }
 
@@ -173,5 +180,6 @@ export default {
   assignFormAPostulant,
   sendMessage,
   getMessages,
-  markCvRead
+  markCvRead,
+  getAnswersQuestion
 };
