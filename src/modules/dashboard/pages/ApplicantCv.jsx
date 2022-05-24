@@ -51,6 +51,7 @@ const ApplicantCv = () => {
     const initRoute = SessionRoutes().initRoute;
     const { notification, setNotification } = useContext(ContextNotification)
     const { applicantProfile, postulantsByPublicationId } = useSelector(state => state.dashboard);
+    console.log(applicantProfile)
     const { horizontal, vertical, open, message, severity } = notification;
 
     const data = postulantsByPublicationId?.rows
@@ -84,7 +85,7 @@ const ApplicantCv = () => {
         history.push(`${initRoute}/lista-de-postulantes/${account_id}/perfil`)
     }
 
-   
+
     const handleSelectPostulant = () => {
         service_Dashboard.selectApplicant(body, publication_id)
             .then(() => {
@@ -103,6 +104,18 @@ const ApplicantCv = () => {
             }).catch((error) => {
                 setNotification({ ...notification, ...messageError() })
             })
+
+    }
+
+    const getCovitTime = (time) => {
+        switch (time) {
+            case 1: return '2 semanas'
+            case 2: return 'Hace un mes'
+            case 3: return 'Hace 6 meses'
+            case 4: return 'Hace 1 año'
+            default: return ''
+        }
+
     }
 
     return (
@@ -140,40 +153,42 @@ const ApplicantCv = () => {
                                             <Grid item xs={12} className={`${classes.containerWhite} ${classes.colorSecondary}`}>
                                                 <Typography variant="h6"><b>Datos Personales</b></Typography>
                                             </Grid>
-                                            <Grid item xs={12}>
-                                                <Grid container spacing={2}>
-                                                    <Grid item xs={6}>
-                                                        <Typography variant="body1"><b>DNI:</b> {applicantProfile?.user?.document_number}</Typography>
-                                                    </Grid>
-                                                    <Grid item xs={6}>
-                                                        <Typography variant="body1"><b>Fecha de nacimiento:</b> {DateTime.fromISO(applicantProfile?.user?.birth_date).toFormat("yyyy-LL-dd")}</Typography>
-                                                    </Grid>
-                                                    <Grid item xs={6}>
-                                                        <Typography variant="body1"><b>Género:</b> {getGenderById(applicantProfile?.user?.gender)}</Typography>
-                                                    </Grid>
-                                                    <Grid item xs={6}>
-                                                        <Typography variant="body1"><b>Ciudad:</b> {`${applicantProfile?.user?.department?.name}/${applicantProfile?.user?.province?.name}/${applicantProfile?.user?.district?.name}`}</Typography>
-                                                    </Grid>
-                                                    <Grid item xs={6}>
-                                                        <Typography variant="body1"><b>Direccion:</b> {applicantProfile?.user?.address}</Typography>
-                                                    </Grid>
-                                                    <Grid item xs={6}>
-                                                        <Typography variant="body1"><b>Referencia:</b> --</Typography>
-                                                    </Grid>
-                                                    <Grid item xs={6}>
-                                                        <Typography variant="body1"><b>Teléfono:</b> {applicantProfile?.user?.phone}</Typography>
-                                                    </Grid>
-                                                    <Grid item xs={6}>
-                                                        <Typography variant="body1"><b>Email:</b> {applicantProfile?.email}</Typography>
-                                                    </Grid>
-                                                    <Grid item xs={6}>
-                                                        <Typography variant="body1"><b>Estado Civil:</b> {applicantProfile?.user?.civil?.name}</Typography>
-                                                    </Grid>
-                                                    <Grid item xs={6}>
-                                                        <Typography variant="body1"><b>Edad:</b> {applicantProfile?.user?.age}</Typography>
+                                            <div className={classes.containerWhite}>
+                                                <Grid item xs={12} >
+                                                    <Grid container spacing={2}>
+                                                        <Grid item xs={6}>
+                                                            <Typography variant="body1"><b>DNI:</b> {applicantProfile?.user?.document_number}</Typography>
+                                                        </Grid>
+                                                        <Grid item xs={6}>
+                                                            <Typography variant="body1"><b>Fecha de nacimiento:</b> {DateTime.fromISO(applicantProfile?.user?.birth_date).toFormat("yyyy-LL-dd")}</Typography>
+                                                        </Grid>
+                                                        <Grid item xs={6}>
+                                                            <Typography variant="body1"><b>Género:</b> {getGenderById(applicantProfile?.user?.gender)}</Typography>
+                                                        </Grid>
+                                                        <Grid item xs={6}>
+                                                            <Typography variant="body1"><b>Ciudad:</b> {`${applicantProfile?.user?.department?.name}/${applicantProfile?.user?.province?.name}/${applicantProfile?.user?.district?.name}`}</Typography>
+                                                        </Grid>
+                                                        <Grid item xs={6}>
+                                                            <Typography variant="body1"><b>Direccion:</b> {applicantProfile?.user?.address}</Typography>
+                                                        </Grid>
+                                                        <Grid item xs={6}>
+                                                            <Typography variant="body1"><b>Referencia:</b> --</Typography>
+                                                        </Grid>
+                                                        <Grid item xs={6}>
+                                                            <Typography variant="body1"><b>Teléfono:</b> {applicantProfile?.user?.phone}</Typography>
+                                                        </Grid>
+                                                        <Grid item xs={6}>
+                                                            <Typography variant="body1"><b>Email:</b> {applicantProfile?.email}</Typography>
+                                                        </Grid>
+                                                        <Grid item xs={6}>
+                                                            <Typography variant="body1"><b>Estado Civil:</b> {applicantProfile?.user?.civil?.name}</Typography>
+                                                        </Grid>
+                                                        <Grid item xs={6}>
+                                                            <Typography variant="body1"><b>Edad:</b> {applicantProfile?.user?.age}</Typography>
+                                                        </Grid>
                                                     </Grid>
                                                 </Grid>
-                                            </Grid>
+                                            </div>
                                             <Grid item xs={12} className={`${classes.containerWhite} ${classes.colorSecondary}`}>
                                                 <Typography variant="h6"><b>Experiencia laboral</b></Typography>
                                             </Grid>
@@ -248,6 +263,204 @@ const ApplicantCv = () => {
 
                                                 </Grid>
                                             </div>
+
+                                            <Grid item xs={12} className={`${classes.containerWhite} ${classes.colorSecondary}`}>
+                                                <Typography variant="h6"><b>Cuestionario</b></Typography>
+                                            </Grid>
+
+                                            <div className={classes.containerWhite}>
+                                                <Grid item xs={12}>
+                                                    <div className="title-form">
+                                                        <h3>Familia</h3>
+                                                    </div>
+                                                    <Grid container spacing={3} style={{ padding: 15 }}>
+                                                        <Grid container spacing={2}>
+                                                            <Grid item xs={12}>
+                                                                <Typography variant="subtitle1" ><b>Tiene hijos</b></Typography>
+                                                                <Typography variant="body2" >{applicantProfile?.user?.have_children ? "Si" : "No"}</Typography>
+                                                            </Grid>
+                                                            <Grid item xs={12}>
+                                                                <Typography variant="subtitle1" ><b>  Cuando usted trabaja ¿Quién le apoya con el cuidado de sus hijos? </b></Typography>
+                                                                <Typography variant="body2" >{applicantProfile?.user?.support_child_care}</Typography>
+                                                            </Grid>
+                                                            <Grid item xs={6}>
+                                                                <Typography variant="subtitle1" ><b>¿Tiene alguna persona bajo su responsabilidad?</b></Typography>
+                                                                <Typography variant="body2" >{applicantProfile?.user?.person_under_care ? "Si" : "No"}</Typography>
+                                                            </Grid>
+                                                            <Grid item xs={6}>
+                                                                <Typography variant="subtitle1" ><b>Especifique su respuesta</b></Typography>
+                                                                <Typography variant="body2" >{applicantProfile?.user?.person_under_care_text}</Typography>
+                                                            </Grid>
+                                                            <Grid item xs={12}>
+                                                                <Typography variant="subtitle1" ><b> ¿Vive solo/a?</b></Typography>
+                                                                <Typography variant="body2" >{applicantProfile?.user?.live_alone ? "Si" : "No"}</Typography>
+                                                            </Grid>
+                                                        </Grid>
+                                                    </Grid>
+
+                                                    <div className="title-form">
+                                                        <h3>Economía</h3>
+                                                    </div>
+                                                    <Grid container spacing={3} style={{ padding: 15 }}>
+
+                                                        <Grid container spacing={2}>
+                                                            <Grid item xs={12}>
+                                                                <Typography variant="subtitle1" ><b>  Su vivienda es:</b></Typography>
+                                                                <Typography variant="body2" >{applicantProfile?.user?.rented_or_own_house ? "Alquilada" : "Propia"}</Typography>
+                                                            </Grid>
+                                                            <Grid item xs={12}>
+                                                                <Typography variant="subtitle1" ><b> ¿Percibiste bonificaciones extras? </b></Typography>
+                                                                <Typography variant="body2" >{applicantProfile?.user?.received_extra_bonus ? "Si" : "No"}</Typography>
+                                                            </Grid>
+                                                            <Grid item xs={12}>
+                                                                <Typography variant="subtitle1" ><b>    ¿Ayuda economicamente en su hogar?</b></Typography>
+                                                                <Typography variant="body2" >{applicantProfile?.user?.financial_help_at_home ? "Si" : "No"}</Typography>
+                                                            </Grid>
+                                                        </Grid>
+                                                    </Grid>
+
+                                                    <div className="title-form">
+                                                        <h3>Ubicación</h3>
+                                                    </div>
+
+                                                    <Grid container spacing={3} style={{ padding: 15 }}>
+
+                                                        <Grid container spacing={2}>
+                                                            <Grid item xs={12}>
+                                                                <Typography variant="subtitle1" ><b>  ¿Le es fácil tomar un vehículo para dirigirse a su centro de labores u otros lugares?</b></Typography>
+                                                                <Typography variant="body2" >{applicantProfile?.user?.easy_to_take_transport ? "Si" : "No"}</Typography>
+                                                            </Grid>
+                                                        </Grid>
+                                                    </Grid>
+
+                                                    <div className="title-form">
+                                                        <h3>Laboral</h3>
+                                                    </div>
+
+                                                    <Grid container spacing={3} style={{ padding: 15 }}>
+
+                                                        <Grid container spacing={2}>
+                                                            <Grid item xs={12}>
+                                                                <Typography variant="subtitle1" ><b>   ¿Anteriormente, ha trabajado como operario?</b></Typography>
+                                                                <Typography variant="body2" >{applicantProfile?.user?.worked_as_an_operator ? "Si" : "No"}</Typography>
+                                                            </Grid>
+                                                            <Grid item xs={12}>
+                                                                <Typography variant="subtitle1" ><b>    ¿Alguna vez abandonó un trabajo porque no le gustaba?</b></Typography>
+                                                                <Typography variant="body2" >{applicantProfile?.user?.quit_because_dont_like ? "Si" : "No"}</Typography>
+                                                            </Grid>
+                                                            <Grid item xs={12}>
+                                                                <Typography variant="subtitle1" ><b> ¿Pertenecia a algún sindicato?</b></Typography>
+                                                                <Typography variant="body2" >{applicantProfile?.user?.was_part_of_a_union ? "Si" : "No"}</Typography>
+                                                            </Grid>
+                                                        </Grid>
+                                                    </Grid>
+
+                                                    <div className="title-form">
+                                                        <h3>Salud</h3>
+                                                    </div>
+
+                                                    <Grid container spacing={3} style={{ padding: 15 }}>
+
+                                                        <Grid container spacing={2}>
+                                                            <Grid item xs={12}>
+                                                                <Typography variant="subtitle1" ><b>¿Sufre de alguna alergía?</b></Typography>
+                                                                <Typography variant="body2" >{applicantProfile?.user?.have_allergy ? "Si" : "No"}</Typography>
+                                                            </Grid>
+                                                            <Grid item xs={6}>
+                                                                <Typography variant="subtitle1" ><b>¿Tiene alguna operación?</b></Typography>
+                                                                <Typography variant="body2" >{applicantProfile?.user?.have_any_operation ? "Si" : "No"}</Typography>
+                                                            </Grid>
+                                                            <Grid item xs={6}>
+                                                                <Typography variant="subtitle1" ><b> Especifique su respuesta</b></Typography>
+                                                                <Typography variant="body2" >{applicantProfile?.user?.have_any_operation_text}</Typography>
+                                                            </Grid>
+
+                                                            <Grid item xs={12}>
+                                                                <Typography variant="subtitle1" ><b>¿Has presentado problemas en la columna?</b></Typography>
+                                                                <Typography variant="body2" >{applicantProfile?.user?.spinal_problems ? "Si" : "No"}</Typography>
+                                                            </Grid>
+
+                                                            <Grid item xs={12}>
+                                                                <Typography variant="subtitle1" ><b> ¿Sufre de diabetes?</b></Typography>
+                                                                <Typography variant="body2" >{applicantProfile?.user?.diabetes ? "Si" : "No"}</Typography>
+                                                            </Grid>
+                                                            <Grid item xs={12}>
+                                                                <Typography variant="subtitle1" ><b> ¿Usa lentes?</b></Typography>
+                                                                <Typography variant="body2" >{applicantProfile?.user?.wear_glasses ? "Si" : "No"}</Typography>
+                                                            </Grid>
+                                                            <Grid item xs={6}>
+                                                                <Typography variant="subtitle1" ><b> ¿Has tenido Covid-19?</b></Typography>
+                                                                <Typography variant="body2" >{applicantProfile?.user?.had_covid ? "Si" : "No"}</Typography>
+                                                            </Grid>
+                                                            <Grid item xs={6}>
+                                                                <Typography variant="subtitle1" ><b> ¿Hace cuanto tiempo?</b></Typography>
+                                                                <Typography variant="body2" >{getCovitTime(applicantProfile?.user?.covid_time)}</Typography>
+                                                            </Grid>
+                                                        </Grid>
+                                                    </Grid>
+
+
+                                                    <div className="title-form">
+                                                        <h3>Tallas</h3>
+                                                    </div>
+
+                                                    <Grid container spacing={3} style={{ padding: 15 }}>
+
+                                                        <Grid container spacing={2}>
+                                                            <Grid item xs={12}>
+                                                                <Typography variant="subtitle1" ><b> ¿Cual es su talla de camisa?</b></Typography>
+                                                                <Typography variant="body2" >{applicantProfile?.user?.shirt_size}</Typography>
+                                                            </Grid>
+                                                            <Grid item xs={12}>
+                                                                <Typography variant="subtitle1" ><b>¿Cual es su talla de pantalón?</b></Typography>
+                                                                <Typography variant="body2" >{applicantProfile?.user?.pants_size}</Typography>
+                                                            </Grid>
+                                                            <Grid item xs={12}>
+                                                                <Typography variant="subtitle1" ><b>   ¿Cual es su talla de zapato?</b></Typography>
+                                                                <Typography variant="body2" >{applicantProfile?.user?.shoe_size}</Typography>
+                                                            </Grid>
+                                                        </Grid>
+                                                    </Grid>
+
+                                                    <div className="title-form">
+                                                        <h3>Área personal</h3>
+                                                    </div>
+
+                                                    <Grid container spacing={3} style={{ padding: 15 }}>
+
+                                                        <Grid container spacing={2}>
+                                                            <Grid item xs={12}>
+                                                                <Typography variant="subtitle1" ><b>   ¿Si uted no está contento con alguna situación suele decirlo?</b></Typography>
+                                                                <Typography variant="body2" >{applicantProfile?.user?.says_your_opinion ? 'Si' : 'No'}</Typography>
+                                                            </Grid>
+                                                            <Grid item xs={12}>
+                                                                <Typography variant="subtitle1" ><b>  ¿Se considera una persona responsable?</b></Typography>
+                                                                <Typography variant="body2" >{applicantProfile?.user?.person_in_charge ? 'Si' : 'No'}</Typography>
+                                                            </Grid>
+                                                            <Grid item xs={12}>
+                                                                <Typography variant="subtitle1" ><b>     ¿Le motivia trabajar como operario?</b></Typography>
+                                                                <Typography variant="body2" >{applicantProfile?.user?.motivates_working_as_operator ? 'Si' : 'No'}</Typography>
+                                                            </Grid>
+                                                            <Grid item xs={12}>
+                                                                <Typography variant="subtitle1" ><b>     ¿Cúando toma desiciones suele cambiar de parecer a cada momento?</b></Typography>
+                                                                <Typography variant="body2" >{applicantProfile?.user?.change_your_mind ? 'Si' : 'No'}</Typography>
+                                                            </Grid>
+                                                            <Grid item xs={12}>
+                                                                <Typography variant="subtitle1" ><b>       ¿Tuviste problemas alguna vez con compañeros o jefes?</b></Typography>
+                                                                <Typography variant="body2" >{applicantProfile?.user?.problems_with_your_bosses ? 'Si' : 'No'}</Typography>
+                                                            </Grid>
+                                                            <Grid item xs={12}>
+                                                                <Typography variant="subtitle1" ><b>  ¿Prefieres trabajar solo o en grupo?</b></Typography>
+                                                                <Typography variant="body2" >{applicantProfile?.user?.teamwork ? 'Solo' : 'Grupo'}</Typography>
+                                                            </Grid>
+                                                        </Grid>
+                                                    </Grid>
+
+
+                                                </Grid>
+                                            </div>
+
+
                                         </Grid>
                                     </div>
                                 </Grid>
