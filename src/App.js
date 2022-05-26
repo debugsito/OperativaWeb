@@ -3,12 +3,27 @@ import './assets/css/variables.css';
 import './assets/css/footerTable.css';
 import './index.css';
 import logoOperativa from './assets/images/operativa192.png';
+import {useSelector} from "react-redux";
 
 import AppRouter from './routers';
 
 function App() {
     const [installPrompt, setInstallPrompt] = useState(null)
     const [installButton, setInstallButton] = useState(false)
+    const { user } = useSelector(state => state?.auth);
+
+
+    const deviceType = () => {
+        const ua = navigator.userAgent;
+        if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) {
+            return "tablet";
+        }
+        else if (/Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(ua)) {
+            return "mobile";
+        }
+        return "desktop";
+    };
+    
 
     window.addEventListener('beforeinstallprompt', e => {
         // For older browsers
@@ -24,7 +39,10 @@ function App() {
         // if ((window.innerWidth <= 800) && (window.innerHeight <= 600)) {
         //     setInstallButton(true);
         // }
-        setInstallButton(true);
+        if(deviceType()=='mobile'){
+            setInstallButton(true);
+        }
+        
     });
 
     const installApp = async () => {
@@ -44,11 +62,11 @@ function App() {
 
     return (
         <>
-            {installButton &&
+            {user.account.rol_usuario === 'postulante' && installButton &&
                 <>
                     <div className="alert-install-pwa" onClick={installApp}>
                         <img src={logoOperativa} alt="Operativa"/>
-                        <span> Agrega Operativa a la pantalla principal</span>
+                        <span> Postulante! Operativa es mejor en App. Descarga Operativa en tu celular para tener una mejor experiencia.</span>
                     </div>
                 </>
             }

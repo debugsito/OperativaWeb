@@ -73,6 +73,10 @@ const completeAssingFormAccont  = async (id)=> {
     return await api.post(`/form/assign/publication/account/complete/${id}`);
 }
 
+const getPublicationAccountInterviews = async (publication_account_ids)=> {
+    return await api.get(`/publication_account_interviews?publication_account_id=${publication_account_ids}`)
+}
+
 export default {
     getApplicantPublication,
     setNotificacionPostulant,
@@ -90,5 +94,6 @@ export default {
     getJobHutingActions,
     getJobHuntingAccount,
     storeJobHutingAccount,
-    completeAssingFormAccont
+    completeAssingFormAccont,
+    getPublicationAccountInterviews
 }

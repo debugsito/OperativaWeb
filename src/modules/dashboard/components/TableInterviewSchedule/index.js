@@ -57,10 +57,20 @@ export default function Index({interviews, setInterviews}) {
     const [openImbox, setOpenImbox] = useState(false)
     const [data, setData] = useState([])
     const { postulantsSelected } = useSelector(state => state?.dashboard)
+    console.log(postulantsSelected)
 
     const dateMin = DateTime.utc().toFormat("yyyy-LL-dd HH:mm")
 
-    useEffect(() => {
+    useEffect(async () => {
+
+        let ids = postulantsSelected.ids.join(',');
+        let data = await  service_Applicant.getPublicationAccountInterviews(ids).then((obj)=> {
+            console.log(obj.data.data);
+
+        }, error=> {
+            console.log(error);
+        })
+
         const rows = postulantsSelected.data.map(item => ({
             publication_account_id:item.id,
             virtual:"",
@@ -70,7 +80,9 @@ export default function Index({interviews, setInterviews}) {
             data:{id:item.id},
         }))
         setInterviews(rows)
-    }, [])
+
+
+    }, [postulantsSelected])
 
     const handleOnChange = (e, index) => {
         setInterviews(currentValue => produce(currentValue, (v) => {

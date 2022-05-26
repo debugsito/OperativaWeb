@@ -20,7 +20,6 @@ const ApplicantLevelComponent2 = (props) => {
     const size = 50;
 
     const getImageByLevel = (level_id) => {
-        console.log(level_id)
         switch (level_id) {
             case 1:
                 return <img src={woodSvg} alt="" width={size} heigth={size}></img>;
