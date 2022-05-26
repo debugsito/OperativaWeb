@@ -133,7 +133,7 @@ export default function TableListPostulants({ selected, setSelected, handleClick
           { text: "Preguntas", status: item.questions },
           { text: "Verificativa", status: item.verificativa },
           { text: "Médico", status: item.medical_test },
-          { text: "Evaluativa", status: item.evaluativa },
+          // { text: "Evaluativa", status: item.evaluativa },
           { text: "Entrevista", status: item.interviewed },
         ],
         data: item
