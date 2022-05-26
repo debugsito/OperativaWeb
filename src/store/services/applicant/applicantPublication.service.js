@@ -77,6 +77,10 @@ const getPublicationAccountInterviews = async (publication_account_ids)=> {
     return await api.get(`/publication_account_interviews?publication_account_id=${publication_account_ids}`)
 }
 
+const getPublicationAccountMedicalTests = async ( publication_account_ids) => {
+    return await api.get(`/publication_account_medical_tests?publication_account_id=${publication_account_ids}`)
+}
+
 export default {
     getApplicantPublication,
     setNotificacionPostulant,
@@ -95,5 +99,6 @@ export default {
     getJobHuntingAccount,
     storeJobHutingAccount,
     completeAssingFormAccont,
-    getPublicationAccountInterviews
+    getPublicationAccountInterviews,
+    getPublicationAccountMedicalTests
 }

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext,useEffect,useState } from 'react'
 import { useForm, useFieldArray, Controller } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from "yup";
@@ -16,6 +16,9 @@ import { ContextNotification } from "../../context/NotificationAlertContext";
 
 //Constans
 import { messageSuccessful, messageError } from "../../utils/notification";
+//Services
+import { service_Applicant } from "../../../../store/services";
+import { produce } from "immer";
 
 const useStyles = makeStyles(theme => ({
     buttons: {
@@ -34,33 +37,50 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const initialValues = {
-    name: "",
-    address: "",
+    medical_center: "",
+    direction: "",
+    instructions: "",
     reference: "",
-    recomendation: "",
     file: "",
+    medical_date: null
 }
 
 export default function TabMedico({ nextTab, backTab }) {
     const classes = useStyles();
+    const [address,setAddress]= useState(initialValues);
     const { postulantsSelected } = useSelector(state => state?.dashboard)
     const { notification, setNotification } = useContext(ContextNotification);
     const validationSchema = Yup.object().shape({
         addresses: Yup.array().of(
             Yup.object().shape({
-                name: Yup.string().required('Campo requerido'),
-                address: Yup.string().required('Campo requerido'),
+                medical_center: Yup.string().required('Campo requerido'),
+                direction: Yup.string().required('Campo requerido'),
                 reference: Yup.string().required("Campo requerido"),
-                recomendation: Yup.string().required("Campo requerido"),
+                instructions: Yup.string().required("Campo requerido"),
             })
         ),
     });
+
+    useEffect(async () => {
+        let ids = postulantsSelected.ids.join(',');
+        await  service_Applicant.getPublicationAccountMedicalTests(ids).then((obj)=> {
+            let cache = obj.data.data;
+            console.log(cache);
+            if(cache.length> 0){
+                setAddress(cache[0]);
+                setValue('addresses',[cache[0]])
+            }
+        }, error=> {
+        })
+
+
+    },[postulantsSelected])
 
     const { control, handleSubmit, reset, trigger, setValue, formState: { errors, isSubmitting } } = useForm({
         mode: "onChange",
         resolver: yupResolver(validationSchema),
         defaultValues: {
-            addresses: [initialValues]
+            addresses: [address]
         }
     });
 
@@ -69,12 +89,18 @@ export default function TabMedico({ nextTab, backTab }) {
         name: "addresses"
     });
 
-    const handleAddAddress = async () => {
-        const length = fields.length - 1
-        const isValid = await trigger([`addresses.${length}.name`, `addresses.${length}.address`, `addresses.${length}.reference`, `addresses.${length}.recomendation`]);
-        if (isValid) {
-            append(initialValues)
-        }
+    // const handleAddAddress = async () => {
+    //     const length = fields.length - 1
+    //     const isValid = await trigger([`addresses.${length}.name`, `addresses.${length}.address`, `addresses.${length}.reference`, `addresses.${length}.recomendation`]);
+    //     if (isValid) {
+    //         append(initialValues)
+    //     }
+    // }
+
+    const handleOnChange = (e,key) => {
+        setAddress(currentValue => produce(currentValue, (v) => {
+            v[key] = e.target.value
+        }))
     }
 
     const handleRemoveAddress = (index) => {
@@ -139,14 +165,16 @@ export default function TabMedico({ nextTab, backTab }) {
                             <Grid item xs={12}>
                                 <Controller
                                     control={control}
-                                    name={`addresses.${index}.name`}
+                                    name={`addresses.${index}.medical_center`}
                                     render={({ field }) => (
                                         <TextInput
                                             {...field}
                                             fullWidth
                                             label="Nombre"
-                                            error={!!errors?.addresses?.[index]?.name}
-                                            helperText={errors?.addresses?.[index]?.name?.message}
+                                            // onChange={(e) => handleOnChange(e,'medical_center')}
+                                            // value={address.medical_center}
+                                            error={!!errors?.addresses?.[index]?.medical_center}
+                                            helperText={errors?.addresses?.[index]?.medical_center?.message}
                                         />
                                     )}
                                 />
@@ -154,14 +182,16 @@ export default function TabMedico({ nextTab, backTab }) {
                             <Grid item xs={12}>
                                 <Controller
                                     control={control}
-                                    name={`addresses.${index}.address`}
+                                    name={`addresses.${index}.direction`}
                                     render={({ field }) => (
                                         <TextInput
                                             fullWidth
                                             {...field}
                                             label="Dirección"
-                                            error={!!errors?.addresses?.[index]?.address}
-                                            helperText={errors?.addresses?.[index]?.address?.message} />
+                                            // onChange={(e) => handleOnChange(e,'direction')}
+                                            // value={address.direction}
+                                            error={!!errors?.addresses?.[index]?.direction}
+                                            helperText={errors?.addresses?.[index]?.direction?.message} />
                                     )}
                                 />
                             </Grid>
@@ -173,6 +203,8 @@ export default function TabMedico({ nextTab, backTab }) {
                                         <TextInput
                                             fullWidth
                                             {...field}
+                                            // onChange={(e) => handleOnChange(e,'reference')}
+                                            // value={address.reference}
                                             label="Referencia"
                                             error={!!errors?.addresses?.[index]?.reference}
                                             helperText={errors?.addresses?.[index]?.reference?.message} />
@@ -182,14 +214,16 @@ export default function TabMedico({ nextTab, backTab }) {
                             <Grid item xs={12}>
                                 <Controller
                                     control={control}
-                                    name={`addresses.${index}.recomendation`}
+                                    name={`addresses.${index}.instructions`}
                                     render={({ field }) => (
                                         <TextInput
                                             fullWidth
                                             {...field}
                                             label="Recomendaciones para el examén"
-                                            error={!!errors?.addresses?.[index]?.recomendation}
-                                            helperText={errors?.addresses?.[index]?.recomendation?.message}
+                                            // onChange={(e) => handleOnChange(e,'instructions')}
+                                            // value={address.instructions}
+                                            error={!!errors?.addresses?.[index]?.instructions}
+                                            helperText={errors?.addresses?.[index]?.instructions?.message}
                                         />
                                     )}
                                 />

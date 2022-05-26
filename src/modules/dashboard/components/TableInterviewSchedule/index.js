@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function Index({interviews, setInterviews}) {
+export default function Index({ interviews, setInterviews }) {
     const classes = useStyles();
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -57,28 +57,49 @@ export default function Index({interviews, setInterviews}) {
     const [openImbox, setOpenImbox] = useState(false)
     const [data, setData] = useState([])
     const { postulantsSelected } = useSelector(state => state?.dashboard)
-    console.log(postulantsSelected)
 
     const dateMin = DateTime.utc().toFormat("yyyy-LL-dd HH:mm")
 
     useEffect(async () => {
-
+        let rows = [];
         let ids = postulantsSelected.ids.join(',');
-        let data = await  service_Applicant.getPublicationAccountInterviews(ids).then((obj)=> {
-            console.log(obj.data.data);
+        await  service_Applicant.getPublicationAccountInterviews(ids).then((obj)=> {
+            let cache = obj.data.data;
+            rows = postulantsSelected.data.map(item =>{
+                let index = cache.findIndex(e=> e.publication_account_id== item.id)
+                if(index!=-1){
+                    let f = cache[index];
+                    return {
+                        id: f.id,
+                        publication_account_id:item.id,
+                        virtual: f.virtual.toString(),
+                        interviewer : item.user.fullname,
+                        url_interview: f.url_interview,
+                        interview_date: f.interview_date.replace(" ","T"),
+                        data:{id:item.id},
 
+                    }
+                }
+                return {
+                    publication_account_id:item.id,
+                    virtual:"",
+                    interviewer:item.user.fullname,
+                    url_interview:"",
+                    interview_date:"",
+                    data:{id:item.id},
+                }
+            })
         }, error=> {
             console.log(error);
+            rows = postulantsSelected.data.map(item => ({
+                publication_account_id:item.id,
+                virtual:"",
+                interviewer:item.user.fullname,
+                url_interview:"",
+                interview_date:"",
+                data:{id:item.id},
+            }))
         })
-
-        const rows = postulantsSelected.data.map(item => ({
-            publication_account_id:item.id,
-            virtual:"",
-            interviewer:item.user.fullname,
-            url_interview:"",
-            interview_date:"",
-            data:{id:item.id},
-        }))
         setInterviews(rows)
 
 
@@ -97,9 +118,9 @@ export default function Index({interviews, setInterviews}) {
     }
 
     const handleSelectAllClick = (e) => {
-        const {name, checked} = e.target
-        const virtual= checked? MEET_TYPE[name]: ""
-        
+        const { name, checked } = e.target
+        const virtual = checked ? MEET_TYPE[name] : ""
+
         const interviewsTemp = [...interviews]
         let newArray = []
         for (let index = 0; index < interviewsTemp.length; index++) {
@@ -170,7 +191,7 @@ export default function Index({interviews, setInterviews}) {
                                                     <Typography variant="body2">{row.interviewer}</Typography>
                                                 </TableCell>
                                                 <TableCell id={labelId} scope="row" padding="normal" width="30%">
-                                                    <TextInput name="url_interview" size="small" fullWidth onChange={(e) => handleOnChange(e, index)} value={interviews[index].url} />
+                                                    <TextInput name="url_interview" size="small" fullWidth onChange={(e) => handleOnChange(e, index)} value={interviews[index].url_interview} />
                                                 </TableCell>
                                                 <TableCell id={labelId} scope="row" padding="normal" width="25%">
                                                     <TextInput
@@ -216,7 +237,7 @@ export default function Index({interviews, setInterviews}) {
 }
 
 const headCells = [
-    { id: "type_meet", numeric: false, disablePadding: false, label: "Tipo de reunion", checkbox:true },
+    { id: "type_meet", numeric: false, disablePadding: false, label: "Tipo de reunion", checkbox: true },
     { id: "postulante", numeric: false, disablePadding: true, label: "Postulante" },
     { id: "url", numeric: false, disablePadding: false, label: "URL", },
     { id: "date", numeric: false, disablePadding: false, label: "Fecha y hora", },
