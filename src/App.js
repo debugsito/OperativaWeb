@@ -32,7 +32,6 @@ function App() {
         setInstallPrompt(e);
         // See if the app is already installed, in that case, do nothing
         if ((window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone === true) {
-            console.log("ACA estoy");
             return false;
         }
         // Set the state variable to make button visible
