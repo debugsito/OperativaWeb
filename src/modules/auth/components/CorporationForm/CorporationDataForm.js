@@ -44,7 +44,7 @@ export default function CorporationDataForm({ handleRegisterCompleted, goToPrevi
                 temp.district_id = fieldValues.district_id ? "" : "El campo es requerido."
         }
         if ('termsAndCondition' in fieldValues)
-            temp.termsAndCondition = fieldValues.termsAndCondition ? "" : "Acepte los términos y condiciones."
+            temp.termsAndCondition = fieldValues.termsAndCondition != false ? "" : "Acepte los términos y condiciones."
 
         setErrors({
             ...temp
@@ -102,12 +102,12 @@ export default function CorporationDataForm({ handleRegisterCompleted, goToPrevi
 
     return (
         <>
-            <Grid item xs={12} justify="center">
+            <Grid item xs={12} justifyContent="center">
                 <Typography variant="h6" component="h6" className="title-color">
                     {accountType === "municipality" ? "DATOS DE LA MUNICIPALIDAD" : "DATOS DE LA EMPRESA"}
                 </Typography>
             </Grid>
-            <Grid item xs={12} justify="center">
+            <Grid item xs={12} justifyContent="center">
                 <TextInput
                     fullWidth
                     name="razon_social"
@@ -118,7 +118,7 @@ export default function CorporationDataForm({ handleRegisterCompleted, goToPrevi
                     helperText={errors.razon_social}
                 />
             </Grid>
-            <Grid item xs={12} justify="center">
+            <Grid item xs={12} justifyContent="center">
                 <TextInput
                     fullWidth
                     name="document_number"
@@ -132,7 +132,7 @@ export default function CorporationDataForm({ handleRegisterCompleted, goToPrevi
             </Grid>
             {
                 accountType === "municipality" &&
-                <Grid item xs={12} justify="center">
+                <Grid item xs={12} justifyContent="center">
                     <Autocomplete
                         label="Distrito"
                         name="district_id"
@@ -143,7 +143,7 @@ export default function CorporationDataForm({ handleRegisterCompleted, goToPrevi
                     />
                 </Grid>
             }
-            <Grid item xs={12} justify="center">
+            <Grid item xs={12} justifyContent="center">
                 <TextInput
                     fullWidth
                     name="phone"
@@ -170,26 +170,10 @@ export default function CorporationDataForm({ handleRegisterCompleted, goToPrevi
                             <MenuItem key={element.id} value={element.id}>{element.name}</MenuItem>
                         )}
                     </Select>
-                    {/* <FormControl variant="outlined" fullWidth error={errors.interest_rubro_id ? true : false}>
-                        <InputLabel id="demo-simple-select-outlined-label">Rubro</InputLabel>
-                        <Select
-                            labelId="demo-simple-select-outlined-label"
-                            id="demo-simple-select-outlined"
-                            name="interest_rubro_id"
-                            value={values.interest_rubro_id || ''}
-                            onChange={handleInputChange}
-                            label="Rubro"
-                        >
-                            {rubros && rubros.map(element =>
-                                <MenuItem key={element.id} value={element.id}>{element.name}</MenuItem>
-                            )}
-                        </Select>
-                        <FormHelperText>{errors.interest_rubro_id}</FormHelperText>
-                    </FormControl> */}
                 </Grid>
             }
             <Grid item xs={12}>
-                <FormControl className="" variant="outlined" fullWidth error={errors.termsAndCondition ? true : false}>
+                <FormControl variant="outlined" fullWidth error={errors.termsAndCondition ? true : false}>
                     <Checkbox
                         label={
                             <Typography variant="body2" component="p">

@@ -2,10 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types';
 import { useHistory } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, Box, Container, Grid, Tab, Tabs, Typography } from '@material-ui/core';
+import { AppBar, Box, Grid, Tab, Tabs, Typography } from '@material-ui/core';
 
 import { RegisterPostulantTab } from "../components";
-import { Breadcrumbs } from "../../shared/components";
+import { Breadcrumbs,Container } from "../../shared/components";
 import { SessionRoutes } from "../../shared/libs/sessionRoutes";
 
 const useStyles = makeStyles((theme) => ({
@@ -60,7 +60,7 @@ export default function Billing(props) {
         setValue(newValue);
     };
     return (
-        <Container className="dashboard-container">
+        <Container >
             <Grid container spacing={2}>
                 <Grid item xs={12}>
                     <Breadcrumbs routes={routes} />

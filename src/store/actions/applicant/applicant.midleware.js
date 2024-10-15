@@ -22,3 +22,25 @@ export const setDisableNotificationOfApplicant = () => {
         }
     };
 };
+
+export const storeJobHuntingAccount = () => {
+    return async (dispatch) => {
+        try {
+            dispatch(setStatus({ status: "loading", message: null }))
+            await service_Applicant.storeJobHutingAccount();
+            dispatch(setStatus({ status: "success", message: null }))
+            dispatch(getAccount())
+        } catch (error) {
+            if (!error.response) {
+                dispatch(setStatus({ status: "failure", message: "Ha ocurrido un error interno." }))
+            } else {
+                if (error.response.status === 409) {
+                    dispatch(setStatus({ status: "failure", message: error.response.data.message }))
+                } else {
+                    dispatch(setStatus({ status: "failure", message: "Ha ocurrido un error interno." }))
+                };
+            }
+        }
+    };
+}
+

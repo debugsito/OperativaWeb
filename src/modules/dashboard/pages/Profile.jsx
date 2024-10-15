@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Alert } from "@material-ui/lab";
 import { useDispatch, useSelector } from 'react-redux';
-import { Container, Grid, Paper, makeStyles } from "@material-ui/core";
+import { Grid, Paper, makeStyles } from "@material-ui/core";
 
 import { EditProfileForm, ShowProfile } from "../components";
-import { Breadcrumbs } from "../../shared/components";
+import { Breadcrumbs, Container } from "../../shared/components";
 import { actions_Utils } from "../../../store/actions";
 import { updateAccount } from "../../../store/actions/auth/auth.action";
 
@@ -92,7 +92,7 @@ const Profile = () => {
     );
 
     return (
-        <Container className="dashboard-container">
+        <Container>
             <Grid container spacing={0}>
                 <Grid item xs={12}>
                     <Breadcrumbs routes={routes} />

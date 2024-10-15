@@ -12,3 +12,266 @@
     display: flex;
     align-items: center;
 }
+.text-right {
+    text-align: right;
+}
+.btn-logout {
+    text-decoration: none;
+    color: #000000;
+    font-weight: 600;
+    cursor: pointer;
+}
+.btn-logout img {
+    margin-left: .5rem;
+    margin-bottom: -0.2rem;
+}
+.container-user-information {
+    background: #E20613;
+    border-radius: 12px;
+    padding: .4rem;
+    color: #fff;
+    /* height: 11rem; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: start;
+    /* padding-left: 0.3rem;
+    padding-top: 0.3rem; */
+}
+.container-work {
+    background: #fff;
+    border-radius: 12px;
+    padding: .7rem;
+    color: #757575;
+    text-align: center;
+    height: 11rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.react-switch {
+    vertical-align: middle;
+    margin-left: 4px;
+}
+.mb-2 {
+    margin-bottom: 0.8rem !important;
+}
+.pr-2 {
+    padding-right: 0.5rem;
+}
+.pl-2 {
+    padding-left: 0.5rem;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 28px;
+    margin: 0 0.5rem;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 1px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #05c26b;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #05c26b;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+.container-switch {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    transform: scale(0.7);
+}
+.text-left {
+    text-align: left;
+}
+.home-title {
+    font-size: 1.6em;
+    margin: 0;
+    line-height: 1;
+}
+.card-home {
+    background: #FFFFFF;
+    box-shadow: 0px 4px 24px rgba(136, 166, 255, 0.05);
+    border-radius: 12px;
+    height: 11rem;
+    padding: .7rem;
+}
+.card-home img {
+    max-width: 100%;
+    margin-top: -1.4rem;
+    height: 12rem;
+}
+.mt-4 {
+    margin-top: 2.5rem !important;
+}
+
+.mtt-1 {
+    margin-top: 1.5rem !important;
+}
+.mtt-3 {
+    margin-top: 3.5rem !important;
+}
+
+
+.mb-1 {
+    margin-bottom: 1rem !important;
+}
+
+.fl {
+    float: left;
+}
+.pl-1 {
+    padding-left: 1.2rem;
+}
+.m-0 {
+    margin: 0;
+}
+.card-cv {
+    background: #FFFFFF;
+    box-shadow: 0 4px 24px rgba(136, 166, 255, 0.05);
+    border-radius: 12px;
+    /*height: 6rem;*/
+    padding: .7rem;
+}
+
+.px-2{
+    padding: 0 1rem;
+}
+
+.container-card{
+    width: 100%;
+    height: 100%;
+    display: inline-flex;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+    /* margin: 8px; */
+
+}
+.container-card > div {
+    margin: 2px;
+  }
+
+.row-card {
+    background-color: #FFFFFF ;
+    width: 100%;
+    height: 50%;
+    border-radius: 12px;
+    text-align: center;
+    /* padding: 0.3rem; */
+    justify-content: center;
+    color: #757575;
+    display: flex;
+    flex-direction: column;
+}
+.shadowLayer{
+    width:100%;
+    height:100%;
+    border-radius: 12px;
+    background-color: rgba(0, 0, 0, 0.2);;
+    z-index: initial;
+    position: relative;
+}
+
+.small-text-config {
+    font-size: 10px;
+    font-family: 'Poppins';
+    font-style: normal;
+}
+
+.search-work{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.titleLayer{
+    position: relative;
+    z-index: -1;
+    color: white;
+}
+
+
+
+@media only screen and (max-width: 375px) {
+    .home-title {
+      font-size: 14px;
+    }
+    .imageApplicant{
+        position: relative;
+    }
+  }
+
+  .span-flex {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+  }
+
+
+
+@media screen and (min-width: 768px) {
+    .card-cv {
+       height: 100% !important;
+       text-align: center;
+       justify-content: center;
+       align-items: center;
+       display: flex;
+       flex-direction: column;
+    }
+    canvas {
+        height: 75% !important;
+        width: 40% !important;
+    }
+  }
+

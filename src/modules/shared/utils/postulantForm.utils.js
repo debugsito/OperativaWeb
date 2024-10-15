@@ -66,8 +66,8 @@ export const normalize = {
                 name_inst: data_temp?.name_inst,
                 from_year: data_temp?.from_year,
                 endYear: "2020", // En duro
-                speciality_id: data_temp?.field_id,
-                otherSpeciality: data_temp?.field_id === 28 ? data_temp.field_other : null, //28 === OTHERS
+                speciality_id: data_temp?.speciality_id,
+                otherSpeciality: data_temp?.speciality_id === 28 ? data_temp.field_other : null, //28 === OTHERS
             }
         }
     },
@@ -102,6 +102,39 @@ export const normalize = {
     rubroOfinterestData(data) {
         return {
             interest_rubro_id: data?.user?.interest_rubro_id ? data?.user?.interest_rubro_id : ""
+        }
+    },
+    questionnaireData(data) {
+        return {
+            have_children : data?.user?.have_children!=null ? data?.user?.have_children +"" : null,
+            support_child_care : data?.user?.support_child_care!=null ? data?.user?.support_child_care+"" :null,
+            person_under_care : data?.user?.person_under_care!=null ? data?.user?.person_under_care +"" :null,
+            person_under_care_text : data?.user?.person_under_care_text!=null ? data?.user?.person_under_care_text : '',
+            live_alone : data?.user?.live_alone!=null ? data?.user?.live_alone +"": null,
+            rented_or_own_house : data?.user?.rented_or_own_house!=null ? data?.user?.rented_or_own_house+"" : null,
+            received_extra_bonus : data?.user?.received_extra_bonus!=null ? data?.user?.received_extra_bonus +"": null,
+            financial_help_at_home : data?.user?.financial_help_at_home!=null ? data?.user?.financial_help_at_home +"" : null,
+            easy_to_take_transport : data?.user?.easy_to_take_transport!=null ? data?.user?.easy_to_take_transport +"" : null,
+            worked_as_an_operator : data?.user?.worked_as_an_operator!=null ? data?.user?.worked_as_an_operator +"" : null,
+            quit_because_dont_like : data?.user?.quit_because_dont_like!=null ? data?.user?.quit_because_dont_like +"" : null,
+            was_part_of_a_union : data?.user?.was_part_of_a_union!=null ? data?.user?.was_part_of_a_union+"" : null,
+            have_allergy : data?.user?.have_allergy!=null ? data?.user?.have_allergy+"" : null,
+            have_any_operation : data?.user?.have_any_operation!=null ? data?.user?.have_any_operation+"" : null,
+            have_any_operation_text : data?.user?.have_any_operation_text!=null ? data?.user?.have_any_operation_text+"" : null,
+            spinal_problems : data?.user?.spinal_problems!=null ? data?.user?.spinal_problems+"" : null,
+            diabetes : data?.user?.diabetes!=null ? data?.user?.diabetes+"" : null,
+            wear_glasses : data?.user?.wear_glasses!=null ? data?.user?.wear_glasses+"": null,
+            had_covid : data?.user?.had_covid!=null ? data?.user?.had_covid+"" : null,
+            covid_time : data?.user?.covid_time!=null ? data?.user?.covid_time+"" : null,
+            says_your_opinion : data?.user?.says_your_opinion!=null ? data?.user?.says_your_opinion+"" : null,
+            person_in_charge : data?.user?.person_in_charge!=null ? data?.user?.person_in_charge+"" : null,
+            motivates_working_as_operator : data?.user?.motivates_working_as_operator!=null ? data?.user?.motivates_working_as_operator+"" : null,
+            change_your_mind : data?.user?.change_your_mind!=null ? data?.user?.change_your_mind +"": null,
+            problems_with_your_bosses : data?.user?.problems_with_your_bosses!=null ? data?.user?.problems_with_your_bosses+"" : null,
+            teamwork : data?.user?.teamwork!=null ? data?.user?.teamwork +"" : null,
+            shirt_size : data?.user?.shirt_size!=null ?data?.user?.shirt_size+"": null,
+            pants_size : data?.user?.pants_size!=null ? data?.user?.pants_size+"": null,
+            shoe_size: data?.user?.shoe_size!=null ?data?.user?.shoe_size+"": null
         }
     }
 }

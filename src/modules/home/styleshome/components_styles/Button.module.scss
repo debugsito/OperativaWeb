@@ -1,0 +1,47 @@
+@import "../colors";
+@import "../mixins";
+
+.btn{
+    color: #fff;
+    border-radius: 30px;
+    padding: 1em 2em;
+    letter-spacing: 0.02em;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 1.125em;
+    line-height: 24px;
+    border: 1px solid transparent;
+    cursor: pointer;
+}
+
+.primary{
+    @extend .btn;
+    background: $color_primary;
+}
+
+.secondary{
+    @extend .btn;
+    background-color: $color_secondary;
+}
+
+.info{
+    @extend .btn;
+    background-color: $color_info;
+}
+
+.light{
+    @extend .btn;
+    color:$color_secondary;
+    background: #fff;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    border-radius: 30px;
+}
+
+@include mediaMovil(){
+    .btn{
+        padding: 12px 20px;
+        min-width: 8em;
+    }
+}

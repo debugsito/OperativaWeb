@@ -10,6 +10,10 @@ const updateAccount = async (body) => {
     return response;
 }
 
+const updateSearchWork = async (body) => {
+    return await api.post('/account/search_work', body);
+}
+
 export {
-    updateAccount, getAccount
+    updateAccount, getAccount, updateSearchWork
 }

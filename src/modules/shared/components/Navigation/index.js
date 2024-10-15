@@ -24,7 +24,8 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    background: "var(--principalColor)"
+    background: "#fff",
+    boxShadow: "0px 1px 10px rgba(0, 0, 0, 0.1);",
   },
   menuButton: {
     marginRight: 36,
@@ -42,8 +43,61 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     flexGrow: 1,
+    height: '100vh',
   },
+  containerLogo: {
+    height: "64px",
+    background: "var(--principalColor)",
+    width: 230,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: "0 10px 0 0"
+  },
+  containerLogoPostulante: {
+    height: "64px",
+    background: "var(--principalColor)",
+    width: '100%',
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: "0 0 20px 0"
+  },
+  rootToolbar: {
+    padding: "0 1rem 0 0",
+    color: "var(--paragraphColor)"
+  },
+  rootToolbarApplicant: {
+    color: "var(--paragraphColor)",
+    paddingLeft: '0',
+    paddingRight: '0',
+    backgroundColor: 'var(--smokeWhiteColor)'
+  },
+  containerInfo:{
+    display:"flex",
+    flexDirection:"column",
+    justifyContent:"center"
+  },
+  info:{
+    fontWeight:500,
+    lineHeight:1.5
+  }
 }));
+
+const NoHeaderRoutes = [
+  "/registro",
+  "/registro/postulante",
+  "/registro/empresa",
+  "/registro/municipalidad",
+  "/terminos-y-condiciones",
+  "/publication-multiposting/:title",
+  '/registro/postulante/datos-personales',
+  '/registro/postulante/finish-cv',
+  '/registro/postulante/finish-cv-status',
+  '/registro/postulante/educacion',
+  '/registro/postulante/experiencia-laboral',
+  '/registro/postulante/cuestionario',
+]
 
 export default function Navigation({ children }) {
   const classes = useStyles();
@@ -52,10 +106,8 @@ export default function Navigation({ children }) {
   const session = AppSession.get();
   const hasDashboard = MenuRoutes().hasDashboard;
   const { user } = useSelector(state => state?.auth);
-
-  const [open, setOpen] = React.useState(false);
+  const isSubjetBusiness = user.account.rol_usuario === "business" || user.account.rol_usuario === "muni"
   const [isLoading, setIsLoading] = React.useState(false);
-
 
   const handleSignOut = (event) => {
     event.preventDefault();
@@ -63,43 +115,64 @@ export default function Navigation({ children }) {
     return <Redirect to="/" />
   }
 
+  const condition = (location.pathname !== "/")
+  const noHeader =  NoHeaderRoutes.includes(location.pathname);
+
   return (
     <div className={classes.root}>
-      { location.pathname !== "/" &&
+      { condition && !noHeader &&
         <>
           <CssBaseline />
           <AppBar
             position="fixed"
-            className={clsx(classes.appBar, {
-              [classes.appBarShift]: open,
-            })}
+            className={classes.appBar}
           >
-            <Toolbar>
-              <Grid container justify="space-between" alignItems="center" spacing={1}>
-                <Grid item>
-                  <Typography variant="h6" noWrap>
-                    <a href={session ? '/' : process.env.REACT_APP_PATH_LANDING} ><img src={logoSVG} alt="Operativa" /></a>
-                  </Typography>
-                </Grid>
-                {
-                  session &&
-                  <Grid item>
-                    <HamburgerMenu email={user.account.email} handleSignOut={handleSignOut} />
+            {user.account.rol_usuario === 'postulante' ?
+                <Toolbar classes={{ root: classes.rootToolbarApplicant }}>
+                        <div className={classes.containerLogoPostulante}>
+                          <a href={session ? '/' : process.env.REACT_APP_PATH_LANDING} ><img src={logoSVG} alt="Operativa" /></a>
+                        </div>
+                </Toolbar>
+            :
+                <Toolbar classes={{ root: classes.rootToolbar }}>
+                  <Grid container justifyContent="space-between" alignItems="center" spacing={1}>
+                    <Grid item>
+                      <Grid container spacing={2}>
+                        <Grid item>
+                          <div className={classes.containerLogo}>
+                            <a href={session ? '/' : process.env.REACT_APP_PATH_LANDING} ><img src={logoSVG} alt="Operativa" /></a>
+                          </div>
+                        </Grid>
+                        {
+                            (hasDashboard && isSubjetBusiness) &&
+                            <Grid item className={classes.containerInfo}>
+                              <Typography variant='body2' className={classes.info}>{user.account.razon_social}</Typography>
+                              <Typography variant='body2' className={classes.info}>RUC: {user?.account?.user?.document_number}</Typography>
+                            </Grid>
+                        }
+                      </Grid>
+                    </Grid>
+                    {
+                        session &&
+                        <Grid item>
+                          <HamburgerMenu account={user.account} handleSignOut={handleSignOut} />
+                        </Grid>
+                    }
                   </Grid>
+                </Toolbar>
+                
                 }
-              </Grid>
-            </Toolbar>
           </AppBar>
         </>
       }
       {
-        hasDashboard &&
+        hasDashboard && !noHeader &&
         <Hidden smDown>
           <NavigationDrawer />
         </Hidden>
       }
       <main className={classes.content}>
-        <div className={`${location.pathname !== "/" ? classes.toolbar : ''}`} />
+        <div className={`${condition && !noHeader ? classes.toolbar : ''}`} />
         {children}
         <Backdrop
           open={isLoading}

@@ -1,0 +1,11 @@
+@import "../mixins";
+.container{
+    background: #fff;
+    padding: 2em 6em;
+}
+
+@include mediaTablet(){
+    .container{
+        padding: 2em 1em;
+    }
+}

@@ -1,0 +1,34 @@
+@import "../variables";
+@import "../mixins";
+
+
+.bg-white {
+  background: #fff;
+}
+
+.heightVW{
+    height: 100vh;
+}
+
+.heightPorc {
+  height: 100%;
+}
+
+.container{
+    width: 100%;
+    // height: 100%;
+    background: #f9f9f9;
+    .content{
+        margin: 0 auto;
+        width: $width_desktop;
+
+    }
+}
+
+@include mediaTablet(){
+    .container{
+        .content{
+            width: $width_movil;
+        }
+    }
+}

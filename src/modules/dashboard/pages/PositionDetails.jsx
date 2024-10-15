@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react'
-import { Container,Divider, Grid, Typography } from "@material-ui/core";
+import { Divider, Grid, Typography } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import { DateTime } from "luxon";
 import { useDispatch, useSelector } from "react-redux";
 import { actions_Utils } from "../../../store/actions";
-import { Breadcrumbs, Button, RichText } from "../../shared/components";
+import { Breadcrumbs, Button, Container, RichText } from "../../shared/components";
 import { SessionRoutes } from '../../shared/libs/sessionRoutes';
 
 
@@ -30,7 +30,7 @@ export default function ShowPositionDetail() {
     }
 
     return (
-        <Container className="dashboard-container">
+        <Container>
             <Grid container spacing={3}>
                 <Grid item xs={12}>
                     <Breadcrumbs routes={routes} />
@@ -126,7 +126,7 @@ export default function ShowPositionDetail() {
                                     </Typography>
                                     <br />
                                     <RichText 
-                                        label="Funciones del puesto"
+                                        // label="Funciones del puesto"
                                         name="description"
                                         valueText={JSON.parse(publicationSelected.description)}
                                         readOnly
@@ -138,7 +138,7 @@ export default function ShowPositionDetail() {
                                     </Typography>
                                     <br />
                                     <RichText 
-                                        label="Requisitos del puesto"
+                                        // label="Requisitos del puesto"
                                         name="description"
                                         valueText={JSON.parse(publicationSelected.requirements)}
                                         readOnly
@@ -150,7 +150,7 @@ export default function ShowPositionDetail() {
                                     </Typography>
                                     <br />
                                     <RichText 
-                                        label="Beneficios"
+                                        // label="Beneficios"
                                         name="benefits"
                                         valueText={JSON.parse(publicationSelected.benefits)}
                                         readOnly

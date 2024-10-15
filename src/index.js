@@ -1,16 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import storeConfig from './store/store';
 
-const theme = createMuiTheme({
+const theme = createTheme({
   typography: {
     fontFamily: "var(--fontFamily)",
-  }
+  },
+
 })
 
 ReactDOM.render(

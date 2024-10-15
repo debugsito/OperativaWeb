@@ -1,0 +1,51 @@
+@import "../colors";
+@import "../variables";
+@import "../mixins";
+
+.container {
+  width: 100%;
+  background: $background_primary;
+  .content {
+    width: $width_desktop;
+    margin: 0 auto;
+    display: flex;
+  }
+}
+
+.columOne {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+  .sub {
+    font-size: 1.3rem;
+    color: white;
+    font-weight: 600;
+  }
+}
+
+.columTwo {
+  height: 515px;
+  width: 100%;
+  position: relative;
+
+  .man {
+    position: absolute;
+    top: -30px;
+    right: 0;
+  }
+  .circleOne {
+    position: absolute;
+    top: 0.1rem;
+    right: -5rem;
+  }
+}
+
+@include mediaMD() {
+  .container {
+    height: 70vh;
+  }
+  .columTwo {
+    display: none;
+  }
+}

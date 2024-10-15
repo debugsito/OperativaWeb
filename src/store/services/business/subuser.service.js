@@ -15,9 +15,15 @@ const deleteSubUser = async (body) => {
     return response;
 }
 
+const requestPlan = async ()=> {
+    const response = await api.post('/plan/request');
+    return response
+}
+
 
 export default {
     getSubUsers,
     createSubUser,
     deleteSubUser,
+    requestPlan
 }

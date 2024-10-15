@@ -1,0 +1,23 @@
+.container-result {
+    padding: 1.5rem 1rem 2rem;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 24px rgba(136, 166, 255, 0.05);
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+}
+.brand-img {
+    width: 4rem;
+    height: auto;
+}
+.header-result-card {
+    display: flex;
+    flex-direction: row;
+}
+.body-result-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.calendar-icon {
+    margin-bottom: -0.3rem;
+}

@@ -1,0 +1,50 @@
+@import "../variables";
+@import "../mixins";
+
+.container {
+  width: 100%;
+  background: #fff;
+  padding: 4em 0;
+  color: #212529;
+}
+
+.content {
+  margin: 0 auto;
+  width: $width_desktop;
+  position: relative;
+  text-align: center;
+  background-size: contain;
+  background-position: center top;
+}
+.img {
+  width: 100%;
+}
+.avatars {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-gap: 1em;
+}
+
+.avatar {
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+}
+
+.background {
+  position: absolute;
+  top: 0;
+}
+
+@include mediaMovil() {
+  .content {
+    width: $width_movil;
+  }
+
+  .avatars {
+    width: 90vw;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    overflow-x: scroll;
+  }
+}

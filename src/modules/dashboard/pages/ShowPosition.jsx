@@ -1,8 +1,8 @@
 import React from 'react'
 import { makeStyles } from "@material-ui/core/styles";
-import { Container, Grid, Paper } from "@material-ui/core";
+import { Grid, Paper } from "@material-ui/core";
 
-import { Breadcrumbs, Button} from "../../shared/components";
+import { Breadcrumbs, Container} from "../../shared/components";
 import { ShowPositionHistory, ReportChartHistory } from "../components";
 import { SessionRoutes } from "../../shared/libs/sessionRoutes";
 import { downloadBlackIcon } from "../images";
@@ -19,7 +19,7 @@ export default function ShowPositionPage() {
     const routes = [{ name: "HISTORIAL", to: `${initRoute}/historial-de-publicaciones` }, { name: "VER", to: `${initRoute}/ver-posicion` }];
 
     return (
-        <Container className="dashboard-container">
+        <Container>
             <Grid container spacing={2}>
                 <Grid item xs={12}>
                     <Breadcrumbs routes={routes} />

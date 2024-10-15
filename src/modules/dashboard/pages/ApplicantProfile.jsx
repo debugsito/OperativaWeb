@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { DateTime } from "luxon";
 import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Container, Divider, Grid, Typography, makeStyles } from "@material-ui/core";
+import { Divider, Grid, Typography, makeStyles } from "@material-ui/core";
 
-import { Button, Breadcrumbs, Modal } from '../../shared/components';
+import { Button, Breadcrumbs, Container, Modal } from '../../shared/components';
 import { checkCircleIcon, closeIcon, registeredIcon } from "../images";
 import { getProfileOfApplicant } from "../../../store/actions/dashboard/dashboard.middleware";
 import { SessionRoutes } from '../../shared/libs/sessionRoutes';
@@ -166,7 +166,7 @@ const ApplicantProfile = () => {
 
     return (
         <>
-            <Container className="dashboard-container">
+            <Container>
                 <div className={classes.header}>
                     <Grid container>
                         <Grid item xs={12}>

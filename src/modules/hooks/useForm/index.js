@@ -4,18 +4,9 @@ export function useForm(initialValues, validateOnChange = false, validate) {
 
     const [values, setValues] = useState(initialValues);
     const [errors, setErrors] = useState({});
-    // useEffect(() => {
-    //     if (handleDisabledButtonState) {
-    //         if (Object.values(values).every(x => (x != "" || x != false)) && Object.values(errors).every(x => x == "")) {
-    //             setDisabledButtonState(false)
-    //         } else {
-    //             setDisabledButtonState(true)
-    //         }
-    //     }
-    // }, [values])
 
     const disabledButtonState = useMemo(() => {
-        const validValues = Object.values(values).every((x) => x != "" || x != false)
+        const validValues = Object.values(values).every((x) => x != "" || x!=null) //|| x != false
         const validErrors = Object.values(errors).every((x) => x == "")
         if (validValues && validErrors) return false
         else return true
@@ -24,7 +15,6 @@ export function useForm(initialValues, validateOnChange = false, validate) {
 
     const handleInputChange = e => {
         const { type, name } = e.target
-
         const getValue = () => {
             if (type === "checkbox") {
                 return e.target.checked

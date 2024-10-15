@@ -1,6 +1,6 @@
-.MuiTypography-root {
+/* .MuiTypography-root {
   color: var(--paragraphColor) !important;
-}
+} */
 
 .MuiTypography-root.color-white {
   color: #ffffff !important;

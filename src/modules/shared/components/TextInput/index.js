@@ -5,6 +5,6 @@ import './index.css'
 
 export default function CustomTextInput({ children, ...props }) {
     return (
-        <TextField id="outlined-basic" variant="outlined" {...props} />
+        <TextField variant="outlined" {...props} />
     );
 };

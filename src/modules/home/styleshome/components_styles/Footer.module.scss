@@ -1,0 +1,77 @@
+@import "../variables";
+@import "../colors";
+@import "../mixins";
+
+.conteiner {
+	width: 100%;
+	background: $color_secondary;
+}
+
+.footer {
+	width: $width_desktop;
+	padding-top: 2rem;
+	margin: 0 auto;
+	color: $color_white;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.ico_inline {
+	display: flex;
+	align-items: center;
+}
+
+.redes {
+	padding-top: 2.5rem;
+	width: 8vw;
+	display: flex;
+	justify-content: space-between;
+}
+.OneColum {
+	flex-direction: column;
+	flex-basis: 20rem;
+	flex-grow: 2;
+	margin-left: 1rem;
+	margin-right: 3rem;
+}
+
+.TwoColum {
+	flex-basis: 0;
+	flex-grow: 999;
+	display: flex;
+	flex-wrap: wrap;
+	margin-left: 1rem;
+}
+
+.TwoColumA {
+	flex-basis: 20rem;
+	padding-top: 1rem;
+}
+.TwoColumB {
+	min-width: 50%;
+	padding-top: 0rem;
+	display: flex;
+    flex-wrap: wrap;
+    
+}
+.redesMovil {
+	display: none;
+}
+
+
+@include mediaMovil() {
+	.redesMovil {
+		display: flex;
+		grid-gap: 1rem;
+		}
+
+	.redes {
+			display: none;
+			}
+	.TwoColumB {
+				
+				padding-top: 0rem;
+			}
+
+		}
+

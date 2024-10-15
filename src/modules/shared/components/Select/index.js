@@ -6,10 +6,9 @@ export default function Index({ children, error, helperText, MenuItem, label, ..
 
     return (
         <FormControl variant="outlined" fullWidth error={error}>
-            <InputLabel id="demo-simple-select-outlined-label">{label}</InputLabel>
+            <InputLabel id={`select-${props.name}`}>{label}</InputLabel>
             <Select
-                labelId="demo-simple-select-outlined-label"
-                // id="demo-simple-select-outlined"
+                labelId={`select-${props.name}`}
                 label={label}
                 {...props}
 

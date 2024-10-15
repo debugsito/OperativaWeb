@@ -1,0 +1,82 @@
+@import "../colors";
+@import "../mixins";
+
+.containerCard {
+  position: relative;
+  z-index: 5;
+}
+
+.card {
+  scroll-snap-align: center;
+  cursor: pointer;
+  background: $color_white;
+  padding: 1em;
+  margin-top: 3em;
+  box-shadow: 0px 5px 15px -6px rgba(213, 216, 223, 0.5);
+  border-radius: 20px;
+  z-index: 2;
+  &:hover {
+    background: $color_info;
+    color: $color_white;
+    h3,
+    h2 {
+      color: $color_white;
+    }
+    h5 {
+      color: $color_white;
+    }
+    button {
+      background: $color_white;
+      color: $color_secondary;
+    }
+  }
+}
+
+.recommended {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  background: $color_secondary;
+  padding: 1em 1.2em 1em 1.2em;
+  color: #fff;
+  z-index: -1;
+  border-radius: 10px 10px 0px 0px;
+  
+
+  h3 {
+    margin: 0;
+  }
+}
+
+h5 {
+  margin: 0;
+}
+h6 {
+  margin: 0;
+}
+.textcomment{
+  font-weight: 500;
+}
+.textNumber {
+  color: #5e60fd;
+  font-weight: 800;
+  font-size: 2.8em;
+  text-align: left;
+}
+.textNumber2 {
+  color: #5e60fd;
+  font-weight: 500;
+  font-size: 0.8em;
+  text-align: left;
+  margin-bottom: 3rem;
+}
+
+.igv {
+  color: #717786;
+}
+
+@include mediaMovil() {
+  .card {
+    width: 100vw;
+  }
+}

@@ -9,4 +9,5 @@ export { default as highFiveSVG } from './highFive.svg';
 export { default as successSVG } from './success.svg';
 export { default as teamSVG } from './team.svg';
 export { default as filesSVG } from './files.svg';
+export { default as logoOperativa } from './files.svg';
 

@@ -1,0 +1,25 @@
+
+.header-job-hunting-detail{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.body-job-hunting-detail{
+    margin-top: 40px;
+}
+.table-head {
+    background-color:#DDDDDD ;
+    border-radius: 10px 10px 0px 0px;
+}
+.date-format{
+    width: 117px;
+}
+.MuiTableCell-root {
+    border-bottom: none !important;
+}
+
+.applicant-level-detail{
+    position:  absolute !important;
+    margin-left: 50% !important;
+}

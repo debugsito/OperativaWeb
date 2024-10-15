@@ -1,4 +1,5 @@
 import { dashboardType } from "../../types/dashboard";
+import { DEFAULT_FILTER_VALUES } from "../../../modules/dashboard/constants/Dashboard";
 
 const initialState = {
     jobsInfo: {
@@ -10,15 +11,24 @@ const initialState = {
     postHistory: [],
     publicationsInfo: {},
     publicationSelected: "",
+    postulantsSelected: "",
     postulantsByPublicationId: {},
     postulantsByPublicationIdError: "",
     applicantProfile: null,
     applicantProfileError: "",
     reportByPostulantId: [],
+    queryParams : {},
+    values: DEFAULT_FILTER_VALUES,
+    name: '',
+    job_position: {
+        id: null
+    },
     requestState: {
         success: null
     },
     error: "",
+    status: 'idle',
+    sent_message:{status:'idle', cod:"00"}
 };
 
 const dashboardReducer = (state = initialState, action) => {
@@ -58,6 +68,11 @@ const dashboardReducer = (state = initialState, action) => {
                 ...state,
                 publicationSelected: action.payload,
             };
+        case dashboardType.SET_POSTULANTS_SELECTED:
+            return {
+                ...state,
+                postulantsSelected: action.payload,
+            };
         case dashboardType.SET_POSTULANTS_BY_PUBLICATION_ID:
             return {
                 ...state,
@@ -88,6 +103,16 @@ const dashboardReducer = (state = initialState, action) => {
                 ...state,
                 reportByPostulantId: action.payload,
             };
+        case dashboardType.SET_PUBLICATION_ID:
+            return {
+                ...state,
+                job_position: { ...state.job_position, id: action.payload },
+            };
+        case dashboardType.SET_STATUS:
+            return {
+                ...state,
+                status: action.payload,
+            };
         case dashboardType.SET_ERROR_FETCH:
             return {
                 ...state,
@@ -98,6 +123,26 @@ const dashboardReducer = (state = initialState, action) => {
                 ...state,
                 requestState: action.payload,
             };
+        case dashboardType.SET_MESSAGE_STATUS:
+            return {
+                ...state,
+                sent_message: action.payload,
+            };
+        case dashboardType.SET_APPLICANT_NAME:
+            return {
+                ...state,
+                name : action.payload
+            }
+        case dashboardType.SET_QUERYPARAMS:
+            return {
+                ...state,
+                queryParams : action.payload
+            }
+        case dashboardType.SET_DASHBOARD_VALUE:
+            return {
+                ...state,
+                values: action.payload
+            }
         default:
             return state;
     }

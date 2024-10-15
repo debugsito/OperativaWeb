@@ -1,2 +1,22 @@
-const HomeRoutes = ['/', '/authenticate','/callbackFacebook','/callbackGoogle', '/callbackFacebookError', 'callbackGoogleError'];
+const HomeRoutes = [
+  "/",
+  "/registro",
+  "/registro/postulante",
+  "/registro/empresa",
+  "/registro/municipalidad",
+  "/terminos-y-condiciones",
+  "/recuperar-password",
+  "/authenticate",
+  "/callbackFacebook",
+  "/callbackGoogle",
+  "/callbackFacebookError",
+  "/callbackGoogleError",
+  "/publication-multiposting/:title",
+  '/registro/postulante/datos-personales',
+  '/registro/postulante/finish-cv',
+  '/registro/postulante/finish-cv-status',
+  '/registro/postulante/educacion',
+  '/registro/postulante/experiencia-laboral',
+  '/registro/postulante/cuestionario',
+];
 export default HomeRoutes;

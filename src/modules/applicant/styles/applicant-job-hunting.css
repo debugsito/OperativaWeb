@@ -1,0 +1,89 @@
+.header-cazatrabajo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+}
+.header-title-job{
+    width: 100%;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.cazatrabajo-text{
+    letter-spacing: 0.15px;
+    font-size: 15px;
+    line-height: 32px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+}
+.orange{
+    color: #F65858;
+}
+.purple {
+    color : #5D5FEF
+}
+
+.madera {
+    color : #A75260
+}
+.oro {
+    color : #E3A514
+}
+
+.body-text li {
+    margin-bottom: 10px;
+}
+  
+.body-text li:last-child {
+    margin-bottom: 0px;
+}
+
+.prize-div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    justify-content: start;
+    gap: 10px;
+    height: 10%;
+}
+
+.size-big {
+    font-size: 20px;
+    font-weight: bold;
+}
+.prizes{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.header {
+}
+.center {
+    margin-top: 20px;
+    justify-content: center !important;
+}
+.buttonJobHunting{
+        border-radius: 20px !important;
+        color: white !important;
+        background-color:#5D5FEF  !important ;
+        font-family: 'Poppins' !important;
+        font-style: normal !important;
+        font-size: 18px !important;
+        line-height: 24px !important;
+        text-transform: none !important;
+        font-weight: bold !important;
+    }
+
+.body-text{
+
+}

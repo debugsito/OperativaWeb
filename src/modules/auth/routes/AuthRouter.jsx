@@ -15,7 +15,6 @@ import RecoverPassword from '../pages/RecoverPassword';
 import NewPassword from '../pages/NewPassword';
 import TermsAndCodition from "../pages/TermsAndCodition";
 import PoliceOfPrivacity from "../pages/PoliceOfPrivacity";
-
 //Private router
 import PrivateRoute from '../../../routers/PrivateRoute';
 

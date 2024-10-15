@@ -1,54 +1,63 @@
-import React from 'react'
-import clsx from 'clsx';
+import React from "react";
+import clsx from "clsx";
 import { Link as LinkRouter } from "react-router-dom";
 import { MenuRoutes } from "../../libs/menuRoutes";
-import { Collapse, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, IconButton } from '@material-ui/core';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import AssignmentIcon from '@material-ui/icons/Assignment';
-import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
-import GroupIcon from '@material-ui/icons/Group';
-import MenuIcon from '@material-ui/icons/Menu';
-import HomeIcon from '@material-ui/icons/Home';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
-import SettingsIcon from '@material-ui/icons/Settings';
-import LockIcon from '@material-ui/icons/Lock';
-import WidgetsIcon from '@material-ui/icons/Widgets';
-import ListIcon from '@material-ui/icons/List';
-import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import {
+  Collapse,
+  Divider,
+  Drawer,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  IconButton,
+} from "@material-ui/core";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import AssignmentIcon from "@material-ui/icons/Assignment";
+import ArrowLeftIcon from "@material-ui/icons/ArrowLeft";
+import GroupIcon from "@material-ui/icons/Group";
+import MenuIcon from "@material-ui/icons/Menu";
+import HomeIcon from "@material-ui/icons/Home";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import InboxIcon from "@material-ui/icons/MoveToInbox";
+import ExpandLess from "@material-ui/icons/ExpandLess";
+import ExpandMore from "@material-ui/icons/ExpandMore";
+import SettingsIcon from "@material-ui/icons/Settings";
+import LockIcon from "@material-ui/icons/Lock";
+import WidgetsIcon from "@material-ui/icons/Widgets";
+import ListIcon from "@material-ui/icons/List";
+import AccountBoxIcon from "@material-ui/icons/AccountBox";
 
 const drawerWidth = 230;
 
 const getAvatarIcon = (name) => {
   switch (name) {
-    case 'Inicio':
-      return (<HomeIcon />);
-    case 'Mi perfil':
-      return (<AccountCircleIcon />);
-    case 'Usuarios':
-      return (<GroupIcon />);
-    case 'Solicitudes':
-      return <AssignmentIcon />
-    case 'Configuración':
-      return <SettingsIcon />
-    case 'Cambiar password':
-      return <LockIcon />
-    case 'Facturación':
-      return <WidgetsIcon />
-    case 'Historial':
-      return <AssignmentIcon />
-    case 'Mis postulaciones':
-      return <ListIcon />
-    case 'Mi currículum':
-      return <AccountBoxIcon />
+    case "Inicio":
+      return <HomeIcon />;
+    case "Mi perfil":
+      return <AccountCircleIcon />;
+    case "Usuarios":
+      return <GroupIcon />;
+    case "Solicitudes":
+      return <AssignmentIcon />;
+    case "Configuración":
+      return <SettingsIcon />;
+    case "Cambiar password":
+      return <LockIcon />;
+    case "Facturación":
+      return <WidgetsIcon />;
+    case "Historial":
+      return <AssignmentIcon />;
+    case "Mis postulaciones":
+      return <ListIcon />;
+    case "Mi currículum":
+      return <AccountBoxIcon />;
     default:
-      return (<InboxIcon />);
+      return <InboxIcon />;
   }
-}
+};
 
 const useStyles = makeStyles((theme) => ({
   drawer: {
@@ -58,29 +67,29 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerOpen: {
     width: drawerWidth,
-    transition: theme.transitions.create('width', {
+    transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
     backgroundColor: "#373737",
-    overflowX: 'hidden',
+    overflowX: "hidden",
   },
   drawerClose: {
-    transition: theme.transitions.create('width', {
+    transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
     backgroundColor: "#373737",
-    overflowX: 'hidden',
+    overflowX: "hidden",
     width: theme.spacing(7) + 1,
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up("sm")]: {
       width: theme.spacing(9) + 1,
     },
   },
   toolbar: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-end",
     padding: theme.spacing(0, 1),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
@@ -91,6 +100,18 @@ const useStyles = makeStyles((theme) => ({
   gutters: {
     color: "#fff",
     paddingRight: 0,
+    "&$selected": {
+      backgroundColor: "red",
+    },
+  },
+  activeTag: {
+    width: 8,
+    height: "100%",
+    backgroundColor: "#E20613",
+    position: "absolute",
+    left: 0,
+    borderTopRightRadius: 7,
+    borderBottomRightRadius: 7,
   },
 }));
 
@@ -105,15 +126,15 @@ export default function NavigationDrawer(props) {
 
   const handleListItemClick = (item, index) => {
     if (item.nestedList) {
-      setOpenNestedList(!openNestedList)
+      setOpenNestedList(!openNestedList);
     }
-    if (openNestedList) setOpenNestedList(false)
+    if (openNestedList) setOpenNestedList(false);
     setSelectedIndex(index);
-    setSelectedSubMenuIndex(null)
+    setSelectedSubMenuIndex(null);
   };
   const handleClickSubItem = (index) => {
     setSelectedSubMenuIndex(index);
-    setSelectedIndex(null)
+    setSelectedIndex(null);
   };
 
   const handleDrawerClose = () => {
@@ -123,35 +144,62 @@ export default function NavigationDrawer(props) {
   const navigation = menuList?.map((item, index) => {
     return (
       <>
-        <LinkRouter key={item.name} to={item.nestedList ? "#" : item.to} style={{ textDecoration: 'none' }}>
-          <ListItem button classes={{ gutters: classes.gutters }} key={item.name} selected={!item.nestedList && selectedIndex === index} onClick={() => handleListItemClick(item, index)}>
+        <LinkRouter
+          key={index}
+          to={item.nestedList ? "#" : item.to}
+          style={{ textDecoration: "none" }}
+        >
+          <ListItem
+            button
+            classes={{ gutters: classes.gutters }}
+            key={item.name}
+            selected={!item.nestedList && selectedIndex === index}
+            onClick={() => handleListItemClick(item, index)}
+          >
+            {!item.nestedList && selectedIndex === index && (
+              <div className={classes.activeTag} />
+            )}
             <ListItemIcon>{getAvatarIcon(item.name)}</ListItemIcon>
             <ListItemText primary={item.name} />
-            {(!item.nestedList && selectedIndex === index) && <ArrowLeftIcon />}
-            {item.nestedList && (openNestedList ? <ExpandLess /> : <ExpandMore />)} {/* Para los subItems */}
+            {!item.nestedList && selectedIndex === index && <ArrowLeftIcon />}
+            {item.nestedList &&
+              (openNestedList ? <ExpandLess /> : <ExpandMore />)}{" "}
+            {/* Para los subItems */}
           </ListItem>
         </LinkRouter>
-        {
-          item.nestedList && item.nestedList.map((element, index2) => (
-            <Collapse in={openNestedList} timeout="auto" unmountOnExit key={element.name}>
-              <LinkRouter key={element.name} to={element.to} style={{ textDecoration: 'none' }}>
+        {item.nestedList &&
+          item.nestedList.map((element, index2) => (
+            <Collapse
+              in={openNestedList}
+              timeout="auto"
+              unmountOnExit
+              key={index2}
+            >
+              <LinkRouter
+                key={element.name}
+                to={element.to}
+                style={{ textDecoration: "none" }}
+              >
                 <List component="div" disablePadding>
-                  <ListItem button selected={selectedSubMenuIndex === index2} className={classes.nested} onClick={() => handleClickSubItem(index2)}>
-                    <ListItemIcon>
-                      {getAvatarIcon(element.name)}
-                    </ListItemIcon>
+                  <ListItem
+                    button
+                    selected={selectedSubMenuIndex === index2}
+                    className={classes.nested}
+                    onClick={() => handleClickSubItem(index2)}
+                  >
+                    {!element.nestedList && selectedSubMenuIndex === index2 && (
+                      <div className={classes.activeTag} />
+                    )}
+                    <ListItemIcon>{getAvatarIcon(element.name)}</ListItemIcon>
                     <ListItemText primary={element.name} />
                   </ListItem>
                 </List>
               </LinkRouter>
             </Collapse>
-          ))
-
-        }
-
+          ))}
       </>
-    )
-  })
+    );
+  });
 
   return (
     <Drawer
@@ -169,7 +217,11 @@ export default function NavigationDrawer(props) {
     >
       <div className={classes.toolbar}>
         <IconButton onClick={handleDrawerClose}>
-          {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+          {theme.direction === "rtl" ? (
+            <ChevronRightIcon />
+          ) : (
+            <ChevronLeftIcon />
+          )}
         </IconButton>
       </div>
       <Divider />
@@ -178,11 +230,9 @@ export default function NavigationDrawer(props) {
           onMouseMove={() => setOpenDrawer(true)}
           onMouseLeave={() => setOpenDrawer(false)}
         >
-          {
-            navigation
-          }
+          {navigation}
         </List>
       </div>
     </Drawer>
-  )
+  );
 }

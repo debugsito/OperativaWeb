@@ -35,6 +35,11 @@ export const setPublicationSelected = (payload) => ({
   payload
 });
 
+export const setPostulantSelected = (payload) => ({
+  type: dashboardType.SET_POSTULANTS_SELECTED,
+  payload
+});
+
 export const setHistory = (payload) => ({
   type: dashboardType.SET_HISTORY_OF_PUBLICATIONS,
   payload
@@ -42,6 +47,16 @@ export const setHistory = (payload) => ({
 
 export const setReportByPostulantId = (payload) => ({
   type: dashboardType.SET_REPORT_BY_POSTULANT_ID,
+  payload
+});
+
+export const setPublicationId = (payload) => ({
+  type: dashboardType.SET_PUBLICATION_ID,
+  payload
+});
+
+export const setStatus = (payload) => ({
+  type: dashboardType.SET_STATUS,
   payload
 });
 
@@ -54,6 +69,26 @@ export const setErrorFetch = (payload) => ({
   type: dashboardType.SET_ERROR_FETCH,
   payload
 });
+
+export const setMessageStatus = (payload) => ({
+  type: dashboardType.SET_MESSAGE_STATUS,
+  payload
+});
+
+export const setApplicantName =(payload) => ({
+  type: dashboardType.SET_APPLICANT_NAME,
+  payload
+})
+
+export const setQueryParams = (payload) => ({
+  type: dashboardType.SET_QUERYPARAMS,
+  payload
+})
+
+export const setValues = (payload)=> ({
+  type: dashboardType.SET_DASHBOARD_VALUE,
+  payload
+})
 
 export const getJobsInfo = (params) => {
   return async (dispatch) => {
@@ -91,45 +126,6 @@ export const getPublicationsInfo = () => {
           dispatch(setPublicationsErrorInfo(error.response.data.message));
         } else {
           dispatch(setPublicationsErrorInfo("Ha ocurrido un error interno."));
-        };
-      }
-    }
-  };
-};
-
-export const updatePublication = (params) => {
-  return async (dispatch) => {
-    try {
-      const response = await service_Dashboard.updatePublication(params);
-      dispatch(setUpdatePublicationError(null)); //control de errores
-    } catch (error) {
-      if (!error.response) {
-        dispatch(setUpdatePublicationError("Ha ocurrido un error interno."));
-      } else {
-        if (error.response.status === 401) {
-          dispatch(setUpdatePublicationError(error.response.data.message));
-        } else {
-          dispatch(setUpdatePublicationError("Ha ocurrido un error interno."));
-        };
-      }
-    }
-  };
-};
-
-//esta en middleware (repetido)
-export const savePublication = (body) => {
-  return async (dispatch) => {
-    try {
-      const response = await service_Dashboard.savePublication(body);
-      dispatch(setSavePublicationError(null)); //control de errores
-    } catch (error) {
-      if (!error.response) {
-        dispatch(setSavePublicationError("Ha ocurrido un error interno.1"));
-      } else {
-        if (error.response.status === 409) {
-          dispatch(setSavePublicationError(error.response.data.message));
-        } else {
-          dispatch(setSavePublicationError("Ha ocurrido un error interno.2"));
         };
       }
     }
@@ -195,10 +191,10 @@ export const setPostulantsByPublicationId = (payload) => ({
   payload
 });
 
-export const getPostulantsByPublicationId = (body) => {
+export const getPostulantsByPublicationId = (params) => {
   return async (dispatch) => {
     try {
-      const response = await service_Dashboard.getPostulantsByPublicationId(body);
+      const response = await service_Dashboard.getPostulantsByPublicationId(params);
       dispatch(setPostulantsByPublicationId(response.data));
       dispatch(setPostulantsByPublicationIdError(null)); //control de errores
     } catch (error) {
@@ -214,6 +210,16 @@ export const getPostulantsByPublicationId = (body) => {
     }
   };
 };
+
+// export const setReadCv = (body) => {
+//   return async ( dispatch) => {
+//     try{
+//       const response = await service_Dashboard.markCvRead(body);
+//     }catch(error){
+//       console.log(error);
+//     }
+//   }
+// }
 
 export const setProfileApplicantError = (payload) => ({
   type: dashboardType.SET_PROFILE_OF_APPLICANT_ERROR,

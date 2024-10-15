@@ -1,0 +1,36 @@
+/* import bootstrap to set changes */
+// @import "node_modules/bootstrap/scss/bootstrap";
+$font-family-sans-serif: "Poppins", sans-serif;
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
+@import "node_modules/bootstrap/scss/mixins";
+
+//Accordion
+@import "./components_variables/accordion"; //variables
+@import "node_modules/bootstrap/scss/accordion";
+@import "node_modules/bootstrap/scss/transitions";
+
+//Forms
+$input-font-family:"Poppins", sans-serif;
+$form-select-font-family:"Poppins", sans-serif;
+
+@import "node_modules/bootstrap/scss/forms";
+@import "./components_variables/form";
+
+//Modal
+@import "node_modules/bootstrap/scss/modal";
+
+//Carousel
+$carousel-indicator-width: 30px;
+@import "node_modules/bootstrap/scss/carousel";
+
+//Navs & Tabs
+@import "./components_variables/tabs"; //variables
+@import "node_modules/bootstrap/scss/nav";
+
+// Container & Rows & Col
+@import "node_modules/bootstrap/scss/containers";
+@import "node_modules/bootstrap/scss/grid";
+@import "node_modules/bootstrap/scss/bootstrap-grid.scss";
+
+

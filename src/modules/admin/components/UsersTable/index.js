@@ -23,15 +23,8 @@ const headCells = [
         disablePadding: false,
         label: "Rol",
     },
-    // {
-    //     id: "account",
-    //     numeric: false,
-    //     disablePadding: false,
-    //     label: "Cuenta",
-    // },
     { id: "area", numeric: false, disablePadding: false, label: "Área" },
     { id: "lastName", numeric: false, disablePadding: false, label: "Apellidos" },
-    // { id: "motherLastName", numeric: false, disablePadding: false, label: "Apellido materno" },
     { id: "name", numeric: false, disablePadding: false, label: "Nombre" },
     { id: "document", numeric: false, disablePadding: false, label: "N° Documento" },
 ];

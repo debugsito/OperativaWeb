@@ -1,0 +1,65 @@
+.title {
+    font-size: 1.4em;
+    margin: 0;
+    line-height: 1;
+    font-weight: 600;
+}
+
+.container-postulate-form {
+    background-color: #C4C4C4;
+    border-radius: 10px;
+    padding: 1rem .8rem;
+}
+.MuiOutlinedInput-root {
+    background-color: #fff;
+}
+.mb-2 {
+    margin-bottom: 1.4rem !important;
+}
+.applicant-container{
+    background: '#f7f7f7';
+    padding: 1rem;
+    padding-bottom: 5rem
+}
+.container-detail-aviso {
+    background: #FFFFFF;
+    border-radius: 12px;
+    padding: 1rem 0.8rem;
+}
+
+.container-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.text-center {
+    text-align: center;
+}
+
+.MuiOutlinedInput-root {
+    border-radius: 10px !important;
+}
+.buttonSearch{
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2) !important;
+}
+
+
+
+@media screen and (min-width: 768px) {
+    .grid-button{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .container-postulate-form{
+        width: 50%;
+    }
+    .container-principal{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+  }
