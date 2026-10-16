@@ -174,10 +174,13 @@ export default function Footer(props) {
 					</div>
 				</div>
 			</div>
-			<p className={styles.razonSocial}>
-				© {new Date().getFullYear()} SOLUCIONES EN GESTION DE PERSONAL S.A.C. · RUC
-				20549306072 · Calle Alfonso Ugarte 235, Int. 102, Barranco, Lima
-			</p>
+			<div className={styles.razonSocial}>
+				<p>Operativa es un producto de:</p>
+				<p>
+					<b>SOLUCIONES EN GESTION DE PERSONAL S.A.C.</b>
+				</p>
+				<p>RUC 20549306072</p>
+			</div>
 		</div>
 	);
 }
